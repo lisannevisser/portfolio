@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 40" role="img" aria-label="Aqora">
+  <g fill="#111">
+    <circle cx="16" cy="20" r="10" fill="none" stroke="#111" stroke-width="2.5"/>
+    <line x1="22.5" y1="26.5" x2="28" y2="32" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="38" y="27" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="300" letter-spacing="4">AQORA</text>
+  </g>
+</svg>
