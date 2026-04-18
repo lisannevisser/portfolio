@@ -31,11 +31,17 @@ window.LV_DATA = {
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
 
-  // Drop PNGs in /images/logos/. Names match against entries in `clients`.
+  // SVG placeholder wordmarks. Swap with real brand files at the same paths.
   clientLogos: {
-    Funke: "images/logos/funke.png",
-    TikTok: "images/logos/tiktok.png",
-    feelinghale: "images/logos/feelinghale.png"
+    "Trusted Shops": "images/logos/trusted-shops.svg",
+    Cargoboard: "images/logos/cargoboard.svg",
+    Funke: "images/logos/funke.svg",
+    TikTok: "images/logos/tiktok.svg",
+    Canva: "images/logos/canva.svg",
+    Aqora: "images/logos/aqora.svg",
+    Autarc: "images/logos/autarc.svg",
+    feelinghale: "images/logos/feelinghale.svg",
+    "Dr. Vivien Karl": "images/logos/dr-vivien-karl.svg"
   },
 
   cases: [

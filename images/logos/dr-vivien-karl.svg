@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" role="img" aria-label="Dr. Vivien Karl">
+  <g fill="#111">
+    <text x="6" y="18" font-family="Helvetica, Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="2">DR.</text>
+    <line x1="6" y1="22" x2="32" y2="22" stroke="#111" stroke-width="1"/>
+    <text x="6" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="400">Vivien Karl</text>
+  </g>
+</svg>

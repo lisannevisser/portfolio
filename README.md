@@ -1,6 +1,6 @@
 # Lisanne Visser — Portfolio
 
-Static portfolio site. Three interactive design variants (Designer / Refined / Dev-friendly) with a live switcher, hash-routed pages, custom cursor, magnetic hover, tweaks panel, and a small easter egg (`yyy`).
+Static portfolio site. Two interactive design variants (Designer / Dev-friendly) with a live switcher, hash-routed pages, custom cursor, magnetic hover, tweaks panel, and a small easter egg (`yyy`).
 
 Pure HTML, CSS, and vanilla JavaScript — no build step.
 
@@ -18,7 +18,6 @@ index.html          single-page app with hash routes (#/, #/work, #/work/<slug>,
 css/
   shared.css        theme tokens, nav/footer/switcher/tweaks, responsive base
   v1.css            Designer — warm paper, Fraunces italic, hand-drawn scribbles
-  v2.css            Refined — Apple-like minimalism, violet-blue gradient accent
   v3.css            Dev-friendly — dark terminal grid, amber accent
 js/
   data.js           identity, case studies, reading list, side projects
