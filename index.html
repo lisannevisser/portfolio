@@ -12,7 +12,7 @@
     (function () {
       try {
         var v = localStorage.getItem("lv-variation") || "v1";
-        if (v !== "v1" && v !== "v2" && v !== "v3") v = "v1";
+        if (v !== "v1" && v !== "v3") v = "v1";
         document.documentElement.setAttribute("data-variation", v);
         var hue = localStorage.getItem("lv-hue");
         if (hue) document.documentElement.style.setProperty("--accent-hue", hue);
@@ -28,7 +28,6 @@
 
   <link rel="stylesheet" href="css/shared.css" />
   <link rel="stylesheet" href="css/v1.css" />
-  <link rel="stylesheet" href="css/v2.css" />
   <link rel="stylesheet" href="css/v3.css" />
 </head>
 <body>
@@ -43,7 +42,6 @@
   <!-- Variation switcher -->
   <div class="lv-switcher" role="tablist" aria-label="Design variation">
     <button type="button" data-variation="v1" role="tab">Designer</button>
-    <button type="button" data-variation="v2" role="tab">Refined</button>
     <button type="button" data-variation="v3" role="tab">Dev-friendly</button>
   </div>
 
@@ -176,127 +174,6 @@
         </section>
       </div>
 
-      <!-- V2 HOME ------------------------------------------------- -->
-      <div class="v2-only">
-        <section class="v2-hero lv-wrap">
-          <div class="lv-reveal" style="margin-bottom:2rem;">
-            <span class="v2-pill-row">
-              <span class="dot"></span>
-              Open to senior &amp; staff roles · Q3 2026
-              <span class="chip">v.2026</span>
-            </span>
-          </div>
-          <h1 class="v2-hero-title lv-reveal">
-            Evidence-backed design,<br/><em>end to end.</em>
-          </h1>
-          <p class="lv-lead lv-reveal" style="margin:2rem auto 0;max-width:52ch;">
-            I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to pixels to post-launch metrics.
-          </p>
-          <div class="lv-reveal" style="margin-top:2.5rem;display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
-            <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
-              <a href="#/work" class="lv-btn" data-cursor-label="Work →">See the work</a>
-            </span>
-            <a href="#/about" class="lv-btn is-ghost" data-cursor-label="About">About me</a>
-          </div>
-
-          <!-- Floating preview tiles -->
-          <div class="v2-hero-tiles lv-reveal">
-            <a href="#/work/pricing" class="v2-hero-tile offset-up" style="--case-hue:22;" data-cursor-label="Open">
-              <div class="company">Trusted Shops</div>
-              <div><div class="metric">+15%</div><div class="label">Revenue</div></div>
-            </a>
-            <a href="#/work/ai-workflow" class="v2-hero-tile offset-down" style="--case-hue:265;" data-cursor-label="Open">
-              <div class="company">Trusted Shops</div>
-              <div><div class="metric">−85%</div><div class="label">Cycle time</div></div>
-            </a>
-            <a href="#/work/research-culture" class="v2-hero-tile offset-up" style="--case-hue:150;" data-cursor-label="Open">
-              <div class="company">Trusted Shops</div>
-              <div><div class="metric">1.5×</div><div class="label">Target exceeded</div></div>
-            </a>
-          </div>
-        </section>
-
-        <!-- Client strip -->
-        <section class="v2-client-strip lv-wrap">
-          <div class="row">
-            <span class="lv-eyebrow" style="color:var(--ink-3);">Selected clients</span>
-            <span>Trusted Shops</span>
-            <span>Cargoboard</span>
-            <span>Funke</span>
-            <span>TikTok</span>
-            <span>Canva</span>
-            <span>Aqora</span>
-            <span>Autarc</span>
-            <span>feelinghale</span>
-          </div>
-        </section>
-
-        <!-- Selected work -->
-        <section class="lv-wrap" style="padding:clamp(4rem,9vw,8rem) 0;">
-          <div class="v2-section-head lv-reveal">
-            <div class="lv-eyebrow">Selected work</div>
-            <h2>Four projects, one <em>spine:</em> evidence over opinion.</h2>
-          </div>
-          <div class="v2-case-grid" id="v2-home-cases"><!-- filled by app.js --></div>
-        </section>
-
-        <!-- Credo tiles -->
-        <section class="lv-wrap" style="padding:clamp(3rem,7vw,6rem) 0;">
-          <div class="v2-section-head lv-reveal">
-            <div class="lv-eyebrow">How I work</div>
-            <h2>A short <em>operating manual.</em></h2>
-          </div>
-          <div class="v2-credo-grid">
-            <div class="v2-feature-card lv-reveal" style="--case-hue:22;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow" style="color:rgba(11,11,15,0.5);">Principle 01</div>
-              <div style="font-size:1.5rem;font-weight:600;margin-top:2.5rem;letter-spacing:-0.02em;">Research before pixels.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:200;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow" style="color:rgba(11,11,15,0.5);">Principle 02</div>
-              <div style="font-size:1.5rem;font-weight:600;margin-top:2.5rem;letter-spacing:-0.02em;">Measure what matters.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:265;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow" style="color:rgba(11,11,15,0.5);">Principle 03</div>
-              <div style="font-size:1.5rem;font-weight:600;margin-top:2.5rem;letter-spacing:-0.02em;">Ship the 80, refine the 20.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:150;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow" style="color:rgba(11,11,15,0.5);">Principle 04</div>
-              <div style="font-size:1.5rem;font-weight:600;margin-top:2.5rem;letter-spacing:-0.02em;">Systems outlive screens.</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Big pull quote -->
-        <section class="lv-wrap-narrow" style="padding:clamp(4rem,9vw,7rem) 0;text-align:center;">
-          <p class="lv-reveal" style="font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;letter-spacing:-0.02em;color:var(--ink);margin:0;">
-            "Individual tests win isolated battles.<br/>Only a <em style="background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">research culture</em> wins the war."
-          </p>
-          <div class="lv-reveal" style="margin-top:2rem;font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);">
-            From my proposal for continuous research, 2023
-          </div>
-        </section>
-
-        <!-- CTA glass -->
-        <section class="lv-wrap" style="padding:clamp(3rem,7vw,6rem) 0;">
-          <div class="v2-glass lv-reveal" style="padding:clamp(2.5rem,5vw,4.5rem);text-align:center;">
-            <div class="lv-eyebrow">Get in touch</div>
-            <h2 style="font-family:var(--font-body);font-size:clamp(2rem,4vw,3rem);margin:1rem 0 1.5rem;font-weight:600;letter-spacing:-0.02em;">
-              Something <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);">measurable?</em>
-            </h2>
-            <p class="lv-body" style="max-width:40ch;margin:0 auto 2rem;">
-              Whether it's a role, a research problem, or a design system to untangle — I'd love to hear about it.
-            </p>
-            <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
-              <a href="mailto:mail@lisannevisser.com" class="lv-btn" data-cursor-label="✉">mail@lisannevisser.com</a>
-            </span>
-          </div>
-        </section>
-      </div>
-
       <!-- V3 HOME ------------------------------------------------- -->
       <div class="v3-only">
         <section class="v3-hero lv-wrap">
@@ -411,15 +288,6 @@
         <div id="v1-work-cases"><!-- filled by app.js --></div>
       </div>
 
-      <!-- V2 WORK -->
-      <div class="v2-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="lv-eyebrow lv-reveal">Index · 4 projects</div>
-        <h1 class="lv-reveal" style="font-family:var(--font-body);font-size:clamp(3rem,7vw,5.5rem);font-weight:600;letter-spacing:-0.035em;margin:1rem 0 2rem;line-height:1.02;max-width:14ch;">
-          Everything I can <em style="font-family:var(--font-display);font-style:italic;font-weight:400;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">show you.</em>
-        </h1>
-        <div class="v2-case-grid" id="v2-work-cases" style="margin-top:4rem;"><!-- filled by app.js --></div>
-      </div>
-
       <!-- V3 WORK -->
       <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
         <div class="v3-kicker lv-reveal"><span>./work.index · 4 entries · sorted by order</span></div>
@@ -433,7 +301,6 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="case" hidden>
       <article class="v1-only lv-wrap" id="v1-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
-      <article class="v2-only lv-wrap" id="v2-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
       <article class="v3-only lv-wrap" id="v3-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
@@ -535,106 +402,6 @@
         </section>
       </div>
 
-      <!-- V2 ABOUT -->
-      <div class="v2-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <section style="text-align:center;margin-bottom:6rem;">
-          <div class="lv-eyebrow lv-reveal">About</div>
-          <h1 class="lv-reveal" style="font-family:var(--font-body);font-size:clamp(3rem,7vw,6rem);font-weight:600;letter-spacing:-0.035em;line-height:1.02;margin:1rem auto 2rem;max-width:16ch;">
-            Curious by training, <em style="font-family:var(--font-display);font-style:italic;font-weight:400;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">deliberate by habit.</em>
-          </h1>
-        </section>
-
-        <section class="v2-about-grid">
-          <div>
-            <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:56ch;">I didn't start in design — I started in curiosity. A communications degree, a first UX role at an agency, and a slow realisation that the questions I loved asking (why do people do what they do? what makes a product feel effortless?) were exactly the questions good design answers.</p>
-            <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:56ch;">Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. My spine is research and experimentation: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.</p>
-            <p class="lv-lead lv-reveal" style="max-width:56ch;">But the label 'growth designer' undersells it. The work that excites me is the full loop — from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterwards.</p>
-          </div>
-          <div class="v2-feature-card lv-reveal" style="--case-hue:265;aspect-ratio:4/5;">
-            <div class="v2-fc-bg"></div>
-            <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;">
-              <div class="lv-eyebrow">On the side</div>
-              <div>
-                <div style="font-family:var(--font-display);font-style:italic;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;max-width:18ch;">
-                  Teaching <button type="button" onclick="window.LV_easterEgg &amp;&amp; window.LV_easterEgg()" style="all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);" data-cursor-label="🧘">aerial yoga</button>, sketching weekly, reading ~30 books a year.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section style="margin-bottom:6rem;">
-          <div class="v2-section-head lv-reveal">
-            <div class="lv-eyebrow">The path</div>
-            <h2>From comms degree to senior IC.</h2>
-          </div>
-          <div class="lv-reveal v2-career-row">
-            <div class="lv-eyebrow">2022 — Now</div>
-            <div class="role">Senior Product Designer</div>
-            <div class="org">Trusted Shops</div>
-            <div class="note">Consumer trust, pricing, experimentation, research culture</div>
-          </div>
-          <div class="lv-reveal v2-career-row">
-            <div class="lv-eyebrow">2020 — 2022</div>
-            <div class="role">Product Designer</div>
-            <div class="org">Cargoboard</div>
-            <div class="note">B2B logistics, design system, IA redesign</div>
-          </div>
-          <div class="lv-reveal v2-career-row">
-            <div class="lv-eyebrow">2018 — 2020</div>
-            <div class="role">UX Designer</div>
-            <div class="org">Agency work</div>
-            <div class="note">Clients across retail, fintech, healthcare</div>
-          </div>
-        </section>
-
-        <section style="margin-bottom:6rem;">
-          <div class="v2-section-head lv-reveal">
-            <div class="lv-eyebrow">Toolkit</div>
-            <h2>Things I open <em>every day.</em></h2>
-          </div>
-          <div class="v2-tool-grid">
-            <div class="v2-tool lv-reveal">Figma</div>
-            <div class="v2-tool lv-reveal">Figma Make</div>
-            <div class="v2-tool lv-reveal">Claude</div>
-            <div class="v2-tool lv-reveal">Dovetail</div>
-            <div class="v2-tool lv-reveal">Clarity</div>
-            <div class="v2-tool lv-reveal">Notion</div>
-            <div class="v2-tool lv-reveal">Linear</div>
-            <div class="v2-tool lv-reveal">Miro</div>
-          </div>
-        </section>
-
-        <section>
-          <div class="v2-section-head lv-reveal">
-            <div class="lv-eyebrow">Principles</div>
-            <h2>What I actually argue for.</h2>
-          </div>
-          <div class="v2-credo-grid">
-            <div class="v2-feature-card lv-reveal" style="--case-hue:22;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow">01</div>
-              <div style="font-size:1.4rem;font-weight:600;margin-top:2rem;letter-spacing:-0.02em;">Research before pixels.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:200;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow">02</div>
-              <div style="font-size:1.4rem;font-weight:600;margin-top:2rem;letter-spacing:-0.02em;">Measure what matters.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:265;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow">03</div>
-              <div style="font-size:1.4rem;font-weight:600;margin-top:2rem;letter-spacing:-0.02em;">Ship the 80, refine the 20.</div>
-            </div>
-            <div class="v2-feature-card lv-reveal" style="--case-hue:150;">
-              <div class="v2-fc-bg"></div>
-              <div class="lv-eyebrow">04</div>
-              <div style="font-size:1.4rem;font-weight:600;margin-top:2rem;letter-spacing:-0.02em;">Systems outlive screens.</div>
-            </div>
-          </div>
-        </section>
-      </div>
-
       <!-- V3 ABOUT -->
       <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
         <div class="v3-kicker lv-reveal"><span>./about.md</span></div>
@@ -720,49 +487,6 @@
 
         <div style="margin-top:5rem;padding:3rem;background:var(--paper-2);border-radius:var(--radius-lg);text-align:center;border:1px solid var(--rule);">
           <div class="v1-hand" style="font-size:1.75rem;">ask me about any of these ↑</div>
-        </div>
-      </div>
-
-      <!-- V2 PLAYGROUND -->
-      <div class="v2-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="lv-eyebrow lv-reveal">Playground</div>
-        <h1 class="lv-reveal" style="font-family:var(--font-body);font-size:clamp(3rem,7vw,5.5rem);font-weight:600;letter-spacing:-0.035em;line-height:1.02;margin:1rem 0 2rem;max-width:16ch;">
-          Not everything needs <em style="font-family:var(--font-display);font-style:italic;font-weight:400;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">a KPI.</em>
-        </h1>
-        <p class="lv-lead lv-reveal" style="max-width:52ch;">
-          Sketchbook spreads, small brand projects, the aerial-yoga microsite, a slowly-growing shelf of read-and-underlined books. No outcomes — just practice.
-        </p>
-        <div class="v2-playground-grid">
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:50;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Drawings</div>
-            <div class="title">Sketchbook 2025</div>
-          </div>
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:330;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Brand</div>
-            <div class="title">Aerial Yoga site</div>
-          </div>
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:190;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Visual</div>
-            <div class="title">Canva kits</div>
-          </div>
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:100;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Notes</div>
-            <div class="title">Reading shelf</div>
-          </div>
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:22;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Type</div>
-            <div class="title">Type pairings</div>
-          </div>
-          <div class="v2-feature-card v2-playground-tile lv-reveal" style="--case-hue:265;" data-cursor-label="Peek">
-            <div class="v2-fc-bg"></div>
-            <div class="lv-eyebrow kind">Palettes</div>
-            <div class="title">Colour studies</div>
-          </div>
         </div>
       </div>
 

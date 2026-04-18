@@ -13,7 +13,8 @@
   // -------- Early bootstrap (inline head script already set data-variation,
   // but this re-applies persisted tweaks in case they weren't) ----------
   function bootstrapVars() {
-    const v = localStorage.getItem("lv-variation") || "v1";
+    let v = localStorage.getItem("lv-variation") || "v1";
+    if (v !== "v1" && v !== "v3") v = "v1";
     document.documentElement.setAttribute("data-variation", v);
     const hue = localStorage.getItem("lv-hue");
     if (hue !== null && hue !== "") {
@@ -51,7 +52,6 @@
     if (route.page === "case") {
       const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
       renderV1Case(c);
-      renderV2Case(c);
       renderV3Case(c);
     }
 
@@ -421,99 +421,6 @@
     renderScribbles();
   }
 
-  function renderV2Case(c) {
-    const root = $("#v2-case-body");
-    if (!root) return;
-    const idx = D.cases.findIndex((x) => x.slug === c.slug);
-    const next = D.cases[(idx + 1) % D.cases.length];
-
-    const storyHtml = c.story.map((s, i) => {
-      const kindLabel = s.kind === "result" ? "Outcome" : s.kind === "framework" ? "Framework" : s.kind === "flow" ? "Flow" : "Section";
-      let body = s.body ? `<p class="v2-story-p">${esc(s.body)}</p>` : "";
-      let extra = "";
-      if (s.kind === "framework" && s.items) {
-        extra = `<div class="v2-framework">${s.items.map((it) => `
-          <div class="v2-framework-row">
-            <span class="k">${esc(it.k)}</span>
-            <span class="v">${esc(it.v)}</span>
-            <span class="e">${esc(it.effect)}</span>
-          </div>`).join("")}</div>`;
-      } else if (s.kind === "flow" && s.items) {
-        const chips = s.items.map((it, j) => {
-          const last = j === s.items.length - 1
-            ? `<span class="v2-chip" style="padding:0.6rem 1rem;background:var(--accent);color:var(--paper);border-color:var(--accent);">${esc(it.to)}</span>`
-            : "";
-          return `<span class="v2-chip" style="padding:0.6rem 1rem;">${esc(it.from)}</span><span style="color:var(--accent);">→</span>${last}`;
-        }).join("");
-        extra = `<div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1rem;">${chips}</div>`;
-      }
-      return `
-        <section class="lv-reveal" style="margin-bottom:3rem;">
-          <div class="lv-eyebrow" style="color:var(--accent);">${String(i + 1).padStart(2, "0")} · ${kindLabel}</div>
-          <h2 class="v2-story-h" style="margin-top:0.75rem;">${esc(s.title)}</h2>
-          ${body}${extra}
-        </section>`;
-    }).join("");
-
-    const spyItems = c.story.map((s, i) =>
-      `<li${i === 0 ? ' class="is-current"' : ''}>${esc(s.title)}</li>`
-    ).join("");
-
-    root.innerHTML = `
-      <a href="#/work" class="lv-nav-link" data-cursor-label="← Back">← Index</a>
-
-      <header style="margin-top:2rem;text-align:center;max-width:900px;margin:2rem auto 0;">
-        <div class="lv-eyebrow lv-reveal">${esc(c.company)} · ${esc(c.year)} · ${esc(c.tags[0])}</div>
-        <h1 class="lv-reveal" style="font-family:var(--font-body);font-size:clamp(2.5rem,6vw,5rem);font-weight:600;letter-spacing:-0.035em;margin:1.5rem 0;line-height:1.03;">
-          ${esc(c.title)}
-        </h1>
-        <p class="lv-lead lv-reveal" style="margin:0 auto;max-width:52ch;">${esc(c.tldr)}</p>
-      </header>
-
-      <div class="lv-reveal" style="margin-top:3rem;aspect-ratio:21/9;border-radius:var(--radius-lg);background:radial-gradient(60% 80% at 30% 50%, oklch(0.88 0.14 ${c.coverPaletteHue}), oklch(0.76 0.16 ${c.coverPaletteHue + 30}));position:relative;overflow:hidden;">
-        <div class="v2-case-cover-label" style="top:1.5rem;right:1.5rem;">Hero</div>
-        <div style="position:absolute;left:2rem;bottom:2rem;font-family:var(--font-display);font-style:italic;font-size:clamp(3rem,6vw,5rem);color:rgba(11,11,15,0.85);line-height:1;">
-          ${esc(c.impact[0].value)}<span style="font-size:50%;"> · ${esc(c.impact[0].label)}</span>
-        </div>
-      </div>
-
-      <div class="v2-stat-row lv-reveal" style="margin-top:3rem;">
-        ${c.impact.map((i) => `
-          <div class="v2-stat-cell">
-            <div class="lv-eyebrow">${esc(i.label)}</div>
-            <div class="val">${esc(i.value)}</div>
-            <div class="note">${esc(i.note)}</div>
-          </div>`).join("")}
-      </div>
-
-      <div class="v2-meta-row-4 lv-reveal">
-        <div><div class="lv-eyebrow">Role</div><div class="val">${esc(c.role)}</div></div>
-        <div><div class="lv-eyebrow">Team</div><div class="val">${esc(c.team)}</div></div>
-        <div><div class="lv-eyebrow">Duration</div><div class="val">${esc(c.duration)}</div></div>
-        <div><div class="lv-eyebrow">Year</div><div class="val">${esc(c.year)}</div></div>
-      </div>
-
-      <div class="v2-case-story-grid">
-        <aside class="lv-reveal">
-          <nav class="v2-scroll-spy">
-            <div class="lv-eyebrow" style="margin-bottom:1rem;">Contents</div>
-            <ol>${spyItems}</ol>
-          </nav>
-        </aside>
-        <div>${storyHtml}</div>
-      </div>
-
-      <a href="#/work/${esc(next.slug)}" class="v2-feature-card lv-reveal" style="--case-hue:${next.coverPaletteHue};display:block;margin-top:5rem;text-decoration:none;color:inherit;">
-        <div class="v2-fc-bg"></div>
-        <div class="lv-eyebrow">Next →</div>
-        <h2 style="font-family:var(--font-body);font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:600;letter-spacing:-0.025em;margin-top:0.75rem;">${esc(next.title)}</h2>
-        <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);">
-          ${esc(next.company)} · ${esc(next.impact[0].value)} ${esc(next.impact[0].label.toLowerCase())}
-        </div>
-      </a>
-    `;
-  }
-
   function renderV3Case(c) {
     const root = $("#v3-case-body");
     if (!root) return;
@@ -636,42 +543,6 @@
           </div>
           <div class="v1-case-media" style="--case-hue:${c.coverPaletteHue};">
             <div class="v1-case-media-label">${esc(c.impact[0].value)} · ${esc(c.impact[0].label)}</div>
-          </div>
-        </a>
-      `).join("");
-    }
-
-    // V2 — Home case grid
-    const v2HomeList = $("#v2-home-cases");
-    if (v2HomeList) {
-      v2HomeList.innerHTML = D.cases.map((c) => `
-        <a href="#/work/${esc(c.slug)}" class="v2-case-tile lv-reveal" style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
-          <div class="v2-case-cover">
-            <div class="v2-case-cover-label">${esc(c.company)}</div>
-            <div class="big-metric">${esc(c.impact[0].value)}</div>
-          </div>
-          <div class="v2-case-meta">
-            <div class="lv-eyebrow">${esc(c.tags[0])} · ${esc(c.year)}</div>
-            <h3>${esc(c.title)}</h3>
-            <p>${esc(c.tldr)}</p>
-          </div>
-        </a>
-      `).join("");
-    }
-
-    // V2 — Work case grid (same markup)
-    const v2WorkList = $("#v2-work-cases");
-    if (v2WorkList) {
-      v2WorkList.innerHTML = D.cases.map((c) => `
-        <a href="#/work/${esc(c.slug)}" class="v2-case-tile lv-reveal" style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
-          <div class="v2-case-cover">
-            <div class="v2-case-cover-label">${esc(c.company)}</div>
-            <div class="big-metric">${esc(c.impact[0].value)}</div>
-          </div>
-          <div class="v2-case-meta">
-            <div class="lv-eyebrow">${esc(c.tags[0])} · ${esc(c.year)}</div>
-            <h3>${esc(c.title)}</h3>
-            <p>${esc(c.tldr)}</p>
           </div>
         </a>
       `).join("");

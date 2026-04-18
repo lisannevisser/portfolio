@@ -27,12 +27,8 @@ a { color: inherit; }
 ::selection { background: var(--ink); color: var(--paper); }
 
 /* Hide the inactive variation's render tree */
-[data-variation="v1"] .v2-only,
 [data-variation="v1"] .v3-only { display: none !important; }
-[data-variation="v2"] .v1-only,
-[data-variation="v2"] .v3-only { display: none !important; }
-[data-variation="v3"] .v1-only,
-[data-variation="v3"] .v2-only { display: none !important; }
+[data-variation="v3"] .v1-only { display: none !important; }
 
 /* -------- Theme primitives (CSS vars) -------- */
 :root {
@@ -42,7 +38,7 @@ a { color: inherit; }
   --t-med: 480ms;
   --t-slow: 900ms;
 
-  --accent-hue: 22;
+  --accent-hue: 300;
   --type-scale: 1;
   --scribble-density: 2;
 }
@@ -58,7 +54,7 @@ a { color: inherit; }
   --ink-2: #3d3a33;
   --ink-3: #6b665c;
   --rule: rgba(26, 24, 20, 0.14);
-  --accent: oklch(0.62 0.14 var(--accent-hue));
+  --accent: oklch(0.56 0.14 var(--accent-hue));
   --accent-soft: oklch(0.92 0.05 var(--accent-hue));
   --highlight: oklch(0.88 0.17 88);
 
@@ -73,32 +69,6 @@ a { color: inherit; }
 }
 
 /* ========================================================================
-   V2 — Refined (Apple-like). Crisp whitespace, violet accent, sprinkled serif.
-   ======================================================================== */
-[data-variation="v2"] {
-  --paper: #fbfbfc;
-  --paper-2: #f2f2f5;
-  --paper-3: #e9e9ee;
-  --ink: #0b0b0f;
-  --ink-2: #37373f;
-  --ink-3: #6b6b75;
-  --rule: rgba(11, 11, 15, 0.08);
-  --accent: oklch(0.58 0.18 265);
-  --accent-2: oklch(0.7 0.17 200);
-  --accent-soft: oklch(0.95 0.03 265);
-  --highlight: oklch(0.92 0.15 95);
-
-  --font-display: "Instrument Serif", "Times New Roman", serif;
-  --font-body: "Inter", "SF Pro Text", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-hand: "Caveat", cursive;
-
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-}
-
-/* ========================================================================
    V3 — Dev-friendly / Systems / Evidence
    ======================================================================== */
 [data-variation="v3"] {
@@ -109,10 +79,10 @@ a { color: inherit; }
   --ink-2: #c4c2b8;
   --ink-3: #8a8880;
   --rule: rgba(240, 239, 233, 0.14);
-  --accent: oklch(0.78 0.18 70);
+  --accent: oklch(0.76 0.17 300);
   --accent-2: oklch(0.75 0.14 180);
-  --accent-soft: oklch(0.3 0.08 70);
-  --highlight: oklch(0.78 0.18 70);
+  --accent-soft: oklch(0.3 0.08 300);
+  --highlight: oklch(0.76 0.17 300);
 
   --font-display: "Space Grotesk", "Helvetica Neue", sans-serif;
   --font-body: "Inter", -apple-system, sans-serif;
@@ -199,7 +169,6 @@ a { color: inherit; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   mix-blend-mode: multiply;
 }
-[data-variation="v2"] .lv-grain { opacity: 0.025; }
 [data-variation="v3"] .lv-grain { opacity: 0.08; mix-blend-mode: screen; }
 
 /* ==========================================================================
