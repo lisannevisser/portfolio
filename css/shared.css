@@ -1,0 +1,550 @@
+/* ==========================================================================
+   Shared foundation — two variations share this, each overrides with its own theme.
+   Variations: v1 (Designer — editorial/craft), v3 (Dev-friendly — systems/evidence)
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+a { color: inherit; }
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* Hide the inactive variation's render tree */
+[data-variation="v1"] .v2-only,
+[data-variation="v1"] .v3-only { display: none !important; }
+[data-variation="v2"] .v1-only,
+[data-variation="v2"] .v3-only { display: none !important; }
+[data-variation="v3"] .v1-only,
+[data-variation="v3"] .v2-only { display: none !important; }
+
+/* -------- Theme primitives (CSS vars) -------- */
+:root {
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-in-out: cubic-bezier(.7,0,.3,1);
+  --t-fast: 220ms;
+  --t-med: 480ms;
+  --t-slow: 900ms;
+
+  --accent-hue: 22;
+  --type-scale: 1;
+  --scribble-density: 2;
+}
+
+/* ========================================================================
+   V1 — Designer / Editorial / Craft
+   ======================================================================== */
+[data-variation="v1"] {
+  --paper: #f4efe6;
+  --paper-2: #ebe4d5;
+  --paper-3: #e0d6c2;
+  --ink: #1a1814;
+  --ink-2: #3d3a33;
+  --ink-3: #6b665c;
+  --rule: rgba(26, 24, 20, 0.14);
+  --accent: oklch(0.62 0.14 var(--accent-hue));
+  --accent-soft: oklch(0.92 0.05 var(--accent-hue));
+  --highlight: oklch(0.88 0.17 88);
+
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+}
+
+/* ========================================================================
+   V2 — Refined (Apple-like). Crisp whitespace, violet accent, sprinkled serif.
+   ======================================================================== */
+[data-variation="v2"] {
+  --paper: #fbfbfc;
+  --paper-2: #f2f2f5;
+  --paper-3: #e9e9ee;
+  --ink: #0b0b0f;
+  --ink-2: #37373f;
+  --ink-3: #6b6b75;
+  --rule: rgba(11, 11, 15, 0.08);
+  --accent: oklch(0.58 0.18 265);
+  --accent-2: oklch(0.7 0.17 200);
+  --accent-soft: oklch(0.95 0.03 265);
+  --highlight: oklch(0.92 0.15 95);
+
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-body: "Inter", "SF Pro Text", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-hand: "Caveat", cursive;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+}
+
+/* ========================================================================
+   V3 — Dev-friendly / Systems / Evidence
+   ======================================================================== */
+[data-variation="v3"] {
+  --paper: #0d0d0f;
+  --paper-2: #17171a;
+  --paper-3: #202025;
+  --ink: #f0efe9;
+  --ink-2: #c4c2b8;
+  --ink-3: #8a8880;
+  --rule: rgba(240, 239, 233, 0.14);
+  --accent: oklch(0.78 0.18 70);
+  --accent-2: oklch(0.75 0.14 180);
+  --accent-soft: oklch(0.3 0.08 70);
+  --highlight: oklch(0.78 0.18 70);
+
+  --font-display: "Space Grotesk", "Helvetica Neue", sans-serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-hand: "Caveat", cursive;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+}
+
+/* ==========================================================================
+   Type scale
+   ========================================================================== */
+.lv-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: calc(clamp(3rem, 8vw, 7.5rem) * var(--type-scale));
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.lv-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: calc(clamp(2rem, 5vw, 4rem) * var(--type-scale));
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.lv-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: calc(clamp(1.5rem, 3vw, 2.25rem) * var(--type-scale));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.lv-lead {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.lv-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.lv-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+
+/* ==========================================================================
+   Buttons / controls
+   ========================================================================== */
+.lv-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform var(--t-fast) var(--ease-out), background var(--t-fast), color var(--t-fast);
+  text-decoration: none;
+}
+.lv-btn:hover { transform: translateY(-1px); }
+.lv-btn.is-ghost {
+  background: transparent; color: var(--ink);
+}
+[data-variation="v3"] .lv-btn { border-radius: 3px; }
+
+/* ==========================================================================
+   Grain / paper texture
+   ========================================================================== */
+.lv-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 100;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+[data-variation="v2"] .lv-grain { opacity: 0.025; }
+[data-variation="v3"] .lv-grain { opacity: 0.08; mix-blend-mode: screen; }
+
+/* ==========================================================================
+   Scribble primitives — SVG wrappers, hand-drawn look
+   ========================================================================== */
+.lv-scribble {
+  position: absolute; pointer-events: none;
+  color: var(--accent);
+  stroke: currentColor; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.lv-scribble path {
+  stroke-dasharray: var(--len, 600);
+  stroke-dashoffset: var(--len, 600);
+  animation: scribble-in 1.2s var(--ease-out) forwards;
+  animation-delay: var(--delay, 0.3s);
+}
+@keyframes scribble-in {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ==========================================================================
+   Custom cursor
+   ========================================================================== */
+.lv-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  pointer-events: none; z-index: 9999;
+  transition: transform 80ms linear, width var(--t-fast) var(--ease-out),
+              height var(--t-fast) var(--ease-out),
+              background var(--t-fast);
+  mix-blend-mode: difference;
+}
+.lv-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 280ms var(--ease-out), width 280ms var(--ease-out), height 280ms var(--ease-out), border-color 280ms;
+  mix-blend-mode: difference;
+  border-color: var(--ink);
+}
+.lv-cursor-ring.is-hovering {
+  width: 64px; height: 64px;
+}
+.lv-cursor-ring.is-labelled::after {
+  content: attr(data-label);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+@media (max-width: 900px) { .lv-cursor, .lv-cursor-ring { display: none; } }
+
+/* ==========================================================================
+   Layout helpers
+   ========================================================================== */
+.lv-wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 3vw, 3rem); }
+.lv-wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 clamp(1.25rem, 3vw, 3rem); }
+
+.lv-divider {
+  border: none; border-top: 1px solid var(--rule); margin: 0;
+}
+
+.lv-reveal { opacity: 1; }
+
+/* ==========================================================================
+   Variation switcher
+   ========================================================================== */
+.lv-switcher {
+  position: fixed; top: 1rem; left: 50%; transform: translateX(-50%);
+  z-index: 9000;
+  display: flex; gap: 2px;
+  background: color-mix(in oklab, var(--paper-2) 90%, transparent);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 3px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.lv-switcher button {
+  border: none; background: transparent; color: var(--ink-2);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all var(--t-fast) var(--ease-out);
+  white-space: nowrap;
+}
+.lv-switcher button.is-active {
+  background: var(--ink); color: var(--paper);
+}
+.lv-switcher button:hover:not(.is-active) { color: var(--ink); }
+
+[data-variation="v3"] .lv-switcher {
+  background: var(--paper-2);
+  border-radius: 3px;
+}
+[data-variation="v3"] .lv-switcher button { border-radius: 2px; }
+
+@media (max-width: 500px) {
+  .lv-switcher { top: 0.5rem; padding: 3px; }
+  .lv-switcher button { padding: 0.35rem 0.6rem; font-size: 0.62rem; letter-spacing: 0.08em; }
+}
+
+/* ==========================================================================
+   Top nav
+   ========================================================================== */
+.lv-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in oklab, var(--paper) 85%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+}
+.lv-nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem clamp(1.25rem, 3vw, 3rem);
+  max-width: 1240px; margin: 0 auto;
+  gap: 1rem;
+}
+.lv-logo {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  flex-shrink: 0;
+}
+.lv-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: oklch(0.65 0.2 145);
+  box-shadow: 0 0 0 4px oklch(0.65 0.2 145 / 0.2);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.lv-nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.lv-nav-link {
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--ink-2); text-decoration: none;
+  transition: color var(--t-fast);
+  padding: 0.5rem 0;
+  position: relative;
+}
+.lv-nav-link:hover, .lv-nav-link.is-active { color: var(--ink); }
+.lv-nav-link.is-active::after {
+  content: "";
+  position: absolute; bottom: -2px; left: 0; right: 0; height: 1px;
+  background: var(--accent);
+}
+
+/* Mobile nav toggle */
+.lv-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  color: var(--ink);
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+}
+[data-variation="v3"] .lv-nav-toggle { border-radius: 3px; }
+
+.lv-nav-sheet {
+  display: none;
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  box-shadow: -20px 0 60px rgba(0,0,0,0.15);
+  z-index: 9200;
+  padding: 5rem 2rem 2rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  transform: translateX(100%);
+  transition: transform 320ms var(--ease-out);
+}
+.lv-nav-sheet.is-open { transform: translateX(0); display: flex; }
+.lv-nav-sheet a {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lv-nav-sheet .lv-btn { margin-top: 1.5rem; justify-content: center; }
+.lv-nav-sheet-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: transparent; border: none;
+  color: var(--ink); cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.lv-nav-scrim {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 9100;
+}
+.lv-nav-scrim.is-open { display: block; }
+
+@media (max-width: 1080px) {
+  .lv-nav-links { display: none; }
+  .lv-nav-toggle { display: inline-block; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.lv-footer {
+  border-top: 1px solid var(--rule);
+  padding: 4rem 0 2rem;
+  margin-top: 6rem;
+}
+.lv-footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+  max-width: 1240px; margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3vw, 3rem);
+}
+.lv-footer h4 {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--ink-3); margin: 0 0 1rem;
+}
+.lv-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.lv-footer a { color: var(--ink-2); text-decoration: none; font-size: 0.95rem; }
+.lv-footer a:hover { color: var(--ink); }
+.lv-footer-bottom {
+  max-width: 1240px; margin: 3rem auto 0;
+  padding: 1.5rem clamp(1.25rem, 3vw, 3rem) 0;
+  border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--ink-3); font-size: 0.8rem; font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .lv-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .lv-footer-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Tweaks panel
+   ========================================================================== */
+.lv-tweaks {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 9500;
+  width: 300px; max-width: calc(100vw - 2rem);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  padding: 1.25rem;
+  font-family: var(--font-body);
+  display: none;
+}
+.lv-tweaks.is-open { display: block; }
+.lv-tweaks h3 {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.14em; margin: 0 0 0.75rem; color: var(--ink-3);
+}
+.lv-tweak-row { margin-bottom: 0.9rem; }
+.lv-tweak-row label {
+  display: block; font-size: 0.82rem; color: var(--ink-2); margin-bottom: 0.35rem;
+}
+.lv-tweak-row input[type="range"] { width: 100%; }
+.lv-tweak-row select, .lv-tweak-row input[type="text"] {
+  width: 100%; padding: 0.4rem 0.6rem;
+  border: 1px solid var(--rule); border-radius: var(--radius-sm);
+  background: var(--paper-2); color: var(--ink); font-family: inherit;
+}
+.lv-hue-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.lv-hue-row button {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid transparent; cursor: pointer;
+}
+.lv-hue-row button.is-active { border-color: var(--ink); }
+
+.lv-tweaks-toggle {
+  position: fixed; bottom: 1rem; right: 1rem; z-index: 9499;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.lv-tweaks-toggle:hover { transform: translateY(-1px); color: var(--ink); }
+[data-variation="v3"] .lv-tweaks-toggle { border-radius: 4px; }
+
+@media (max-width: 500px) {
+  .lv-tweaks { right: 0.5rem; bottom: 4.25rem; width: calc(100vw - 1rem); }
+  .lv-tweaks-toggle { right: 0.5rem; bottom: 0.5rem; }
+}
+
+/* ==========================================================================
+   Magnetic helper
+   ========================================================================== */
+.lv-magnetic { display: inline-block; }
+
+/* ==========================================================================
+   Easter egg
+   ========================================================================== */
+body.lv-upside-down {
+  transform: rotate(180deg);
+  transition: transform 900ms var(--ease-in-out);
+  transform-origin: center center;
+}
+body:not(.lv-upside-down) {
+  transition: transform 900ms var(--ease-in-out);
+}
+.lv-toast {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  background: var(--ink); color: var(--paper);
+  padding: 1rem 1.5rem; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  z-index: 10000; pointer-events: none;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+@media (hover: none) {
+  .lv-cursor, .lv-cursor-ring { display: none; }
+  * { cursor: auto !important; }
+}
+html { cursor: none; }
+@media (max-width: 900px) { html { cursor: auto; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
