@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lisanne Visser — Senior Product Designer</title>
-  <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Cologne. Open to senior &amp; staff roles — Q3 2026." />
+  <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
   <meta name="theme-color" content="#faf7f1" />
 
   <!-- Flash-free variation bootstrap -->
@@ -39,8 +39,8 @@
   <div class="lv-cursor" aria-hidden="true"></div>
   <div class="lv-cursor-ring" aria-hidden="true"></div>
 
-  <!-- Variation switcher -->
-  <div class="lv-switcher" role="tablist" aria-label="Design variation">
+  <!-- Variation switcher — hidden. v3 lives in the DOM for later as an easter egg. -->
+  <div class="lv-switcher" role="tablist" aria-label="Design variation" style="display:none;" hidden>
     <button type="button" data-variation="v1" role="tab">Designer</button>
     <button type="button" data-variation="v3" role="tab">Dev-friendly</button>
   </div>
@@ -48,9 +48,8 @@
   <!-- Top nav -->
   <nav class="lv-nav">
     <div class="lv-nav-inner">
-      <a href="#/" class="lv-logo"><span class="lv-logo-dot"></span>lisanne.design</a>
+      <a href="#/" class="lv-logo">lisanne.design</a>
       <div class="lv-nav-links">
-        <a href="#/" class="lv-nav-link" data-route="home">Index</a>
         <a href="#/work" class="lv-nav-link" data-route="work">Work</a>
         <a href="#/about" class="lv-nav-link" data-route="about">About</a>
         <a href="#/playground" class="lv-nav-link" data-route="playground">Playground</a>
@@ -64,7 +63,6 @@
   <div class="lv-nav-scrim" aria-hidden="true"></div>
   <aside class="lv-nav-sheet" aria-label="Mobile navigation">
     <button class="lv-nav-sheet-close" type="button" aria-label="Close menu">Close ×</button>
-    <a href="#/">Index</a>
     <a href="#/work">Work</a>
     <a href="#/about">About</a>
     <a href="#/playground">Playground</a>
@@ -89,7 +87,7 @@
 
           <div style="position:relative;">
             <h1 class="v1-hero-display lv-reveal">
-              <span style="position:relative;display:inline-block;">Design that<span data-scribble="underline" data-delay="1.4" style="position:absolute;bottom:-0.3em;left:0.4em;width:70%;height:0.4em;"></span></span>
+              <span style="position:relative;display:inline-block;">Design that</span>
               <br/>
               <em style="position:relative;display:inline-block;">earns<span style="color:var(--ink);font-style:italic;"> its pixels.</span><span data-scribble="circle" data-delay="1.8" style="position:absolute;top:-15%;left:-5%;width:42%;height:130%;opacity:0.9;"></span></em>
             </h1>
@@ -104,12 +102,16 @@
             <p class="lv-lead lv-reveal" style="max-width:52ch;">
               I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to pixels to post-launch metrics.
             </p>
-            <div class="lv-reveal">
+            <div class="lv-reveal" style="position:relative;">
               <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
                 <a href="#/work" class="lv-btn" data-cursor-label="See →">
                   See the work
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
+              </span>
+              <span class="v1-annotate" style="right:100%;top:-10%;margin-right:0.75rem;transform:rotate(-8deg);white-space:nowrap;">
+                <span style="display:block;">start here</span>
+                <span data-scribble="arrow" data-delay="1.6" style="position:absolute;width:80px;height:30px;transform:rotate(20deg);right:-60%;top:60%;"></span>
               </span>
             </div>
           </div>
@@ -127,8 +129,8 @@
           <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.5rem;gap:1.5rem;flex-wrap:wrap;" class="lv-reveal">
             <div>
               <div class="lv-eyebrow">Selected work · 2022–2026</div>
-              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-display);font-style:italic;font-weight:400;">
-                Four projects, one spine:<br/>evidence over opinion.
+              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+                Four projects, one <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">spine<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>:<br/>evidence over opinion.
               </h2>
             </div>
             <a href="#/work" class="lv-nav-link" data-cursor-label="All →">All work →</a>
@@ -141,8 +143,8 @@
           <div class="v1-credo-grid lv-reveal" style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;">
             <div>
               <div class="lv-eyebrow">How I work</div>
-              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-display);font-style:italic;font-weight:400;">
-                A <em style="color:var(--accent);">four-line</em> credo.
+              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;position:relative;">
+                A <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">four-line<span data-scribble="asterisk" data-delay="0.4" style="position:absolute;top:-30%;right:-12%;width:24px;height:24px;"></span></em> credo.
               </h2>
               <p class="lv-body" style="margin-top:1.5rem;max-width:36ch;">
                 Fewer principles beat a longer list. These are the four I actually use to argue for decisions.
@@ -160,8 +162,8 @@
         <!-- CTA -->
         <section class="v1-section lv-wrap" style="text-align:center;padding:clamp(4rem,10vw,8rem) 0;">
           <div class="lv-reveal" style="position:relative;display:inline-block;">
-            <h2 class="lv-display" style="font-family:var(--font-display);font-style:italic;font-weight:300;">
-              Let's make<br/>something <em style="color:var(--accent);position:relative;font-style:italic;">measurable.<span data-scribble="underline" data-delay="0.8" style="position:absolute;bottom:-0.2em;left:0;width:100%;height:0.4em;"></span></em>
+            <h2 class="lv-display" style="font-family:var(--font-body);font-weight:600;letter-spacing:-0.04em;">
+              Let's make<br/>something <em style="color:var(--accent);position:relative;font-family:var(--font-display);font-style:italic;font-weight:400;">measurable.<span data-scribble="underline" data-delay="0.8" style="position:absolute;bottom:-0.2em;left:0;width:100%;height:0.4em;"></span></em>
             </h2>
           </div>
           <div style="margin-top:2.5rem;" class="lv-reveal">
@@ -209,7 +211,7 @@
 <span class="key">spine</span>:    "research + experimentation"
 <span class="key">shipped</span>:  "<span class="str">+15% revenue, 85% faster cycles, 1.5× research target</span>"
 <span class="key">since</span>:    2018
-<span class="key">based</span>:    "Cologne, Germany"
+<span class="key">based</span>:    "Berlin, Germany"
 <span class="key">state</span>:    "<span class="ok">● open to senior &amp; staff</span>"</pre>
           </div>
         </section>
@@ -314,7 +316,7 @@
         <section style="margin-bottom:6rem;">
           <div class="v1-meta-row" style="border-top:none;">
             <span>/ About</span>
-            <span>Based in Cologne, Germany</span>
+            <span>Based in Berlin, Germany</span>
           </div>
           <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;">
             Curious<br/>
@@ -328,8 +330,8 @@
           <div class="v1-about-grid" style="display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(2rem,5vw,5rem);margin-top:3rem;">
             <div>
               <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:58ch;">I didn't start in design — I started in curiosity. A communications degree, a first UX role at an agency, and a slow realisation that the questions I loved asking (why do people do what they do? what makes a product feel effortless?) were exactly the questions good design answers.</p>
-              <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:58ch;">Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. My spine is research and experimentation: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.</p>
-              <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:58ch;">But the label 'growth designer' undersells it. The work that excites me is the full loop — from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterwards.</p>
+              <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:58ch;">Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. I'm a generalist by choice — with a T-shaped spine in <em style="font-style:italic;color:var(--accent);">research and growth</em>. I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.</p>
+              <p class="lv-lead lv-reveal" style="margin-bottom:1.5rem;max-width:58ch;">Breadth is the point. The work that excites me is the full loop — from a fuzzy strategic question to shipped UI to measured outcome, with a design system, a research habit, and a sharper team left behind afterwards.</p>
               <p class="lv-lead lv-reveal" style="max-width:58ch;">
                 Outside of product work I teach <button type="button" onclick="window.LV_easterEgg &amp;&amp; window.LV_easterEgg()" style="all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);" data-cursor-label="try it">aerial yoga</button>, sketch weekly, and read more behavioural science than is strictly healthy.
               </p>
@@ -339,6 +341,71 @@
                 <div class="v1-hand">"upside down,<br/>a lot of the time"</div>
                 <div class="lv-eyebrow" style="margin-top:1rem;">Portrait · drop your own</div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- T-shape capability map -->
+        <section class="v1-section" style="margin-bottom:5rem;">
+          <div class="lv-reveal" style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;margin-bottom:2.5rem;">
+            <div>
+              <div class="lv-eyebrow">The shape of the work</div>
+              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+                Broad across the craft.<br/><em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">Deep</em> where it moves the needle.
+              </h2>
+            </div>
+            <p class="lv-body" style="max-width:48ch;align-self:end;">
+              Most problems don't sit neatly inside one discipline. I've made it my job to be fluent across the stack — and to go deep in the two places where depth compounds: <strong>research</strong> and <strong>growth</strong>. Below, literally.
+            </p>
+          </div>
+
+          <div class="lv-reveal v1-tshape" style="background:var(--paper-2);border-radius:var(--radius-lg);padding:clamp(2rem,5vw,3.5rem);border:1px solid var(--rule);">
+            <!-- Horizontal bar: breadth -->
+            <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;padding-bottom:2rem;border-bottom:2px dashed var(--rule);">
+              <span class="v1-chip">Product design</span>
+              <span class="v1-chip">Information architecture</span>
+              <span class="v1-chip">Design systems</span>
+              <span class="v1-chip">Visual &amp; brand</span>
+              <span class="v1-chip">Prototyping</span>
+              <span class="v1-chip">Design ops</span>
+              <span class="v1-chip">Workshop facilitation</span>
+              <span class="v1-chip">Mentoring</span>
+              <span class="v1-chip">A bit of front-end</span>
+            </div>
+
+            <!-- Vertical bar: depth -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem);margin-top:2.5rem;position:relative;">
+              <div style="position:absolute;left:50%;top:-2rem;width:2px;height:2rem;background:var(--accent);transform:translateX(-50%);" aria-hidden="true"></div>
+
+              <div style="padding:1.75rem;background:var(--paper);border-radius:var(--radius-md);border:1px solid var(--rule);">
+                <div class="lv-eyebrow" style="color:var(--accent);">Deep · № 01</div>
+                <h3 style="margin:0.5rem 0 0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.02em;font-size:clamp(1.35rem,2.3vw,1.75rem);">Research</h3>
+                <p class="lv-body" style="font-size:0.95rem;margin:0 0 1rem;">Continuous research programmes, survey design, qual interviews, heatmaps, Limbic Types segmentation, focus groups. The evidence layer that keeps teams honest.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+                  <span class="v1-chip" style="font-size:0.68rem;">1.5× research target</span>
+                  <span class="v1-chip" style="font-size:0.68rem;">First focus group in 25y</span>
+                  <span class="v1-chip" style="font-size:0.68rem;">First sociodemographic data</span>
+                </div>
+              </div>
+
+              <div style="padding:1.75rem;background:var(--paper);border-radius:var(--radius-md);border:1px solid var(--rule);">
+                <div class="lv-eyebrow" style="color:var(--accent);">Deep · № 02</div>
+                <h3 style="margin:0.5rem 0 0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.02em;font-size:clamp(1.35rem,2.3vw,1.75rem);">Growth &amp; experimentation</h3>
+                <p class="lv-body" style="font-size:0.95rem;margin:0 0 1rem;">Hypothesis design, A/B testing, pricing psychology, CLV-weighted decisions, conversion workflow redesign. Where research turns into numbers.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+                  <span class="v1-chip" style="font-size:0.68rem;">+15% revenue</span>
+                  <span class="v1-chip" style="font-size:0.68rem;">3/3 tests won · +20% each</span>
+                  <span class="v1-chip" style="font-size:0.68rem;">−85% cycle time</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tools / fluencies footnote -->
+            <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px dashed var(--rule);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:baseline;">
+              <div class="lv-eyebrow">Fluent in</div>
+              <p class="lv-body" style="font-size:0.9rem;margin:0;color:var(--ink-2);">
+                Figma &amp; Figma Make · design tokens · React &amp; Tailwind (reading, tweaking, prototyping) · Hotjar / Clarity · Optimizely · Notion · GitHub · a working vocabulary of analytics &amp; SQL · enough behavioural science to argue with economists.
+              </p>
             </div>
           </div>
         </section>
@@ -513,7 +580,7 @@
   <footer class="lv-footer">
     <div class="lv-footer-grid">
       <div>
-        <div class="lv-logo" style="margin-bottom:1rem;"><span class="lv-logo-dot"></span>lisanne.design</div>
+        <div class="lv-logo" style="margin-bottom:1rem;">lisanne.design</div>
         <p class="lv-body" style="max-width:30ch;color:var(--ink-3);">
           I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to pixels to post-launch metrics.
         </p>
@@ -521,7 +588,6 @@
       <div>
         <h4>Site</h4>
         <ul>
-          <li><a href="#/">Index</a></li>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/playground">Playground</a></li>
@@ -540,7 +606,7 @@
         <ul>
           <li style="color:var(--ink);">Open to senior &amp; staff roles · Q3 2026</li>
           <li><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a></li>
-          <li style="color:var(--ink-3);">Cologne, Germany</li>
+          <li style="color:var(--ink-3);">Berlin, Germany</li>
         </ul>
       </div>
     </div>

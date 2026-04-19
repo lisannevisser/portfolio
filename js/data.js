@@ -5,7 +5,7 @@ window.LV_DATA = {
     role: "Senior Product Designer",
     positioning:
       "Generalist product designer with a research & experimentation spine",
-    location: "Cologne, Germany",
+    location: "Berlin, Germany",
     email: "mail@lisannevisser.com",
     availability: "Open to senior & staff roles · Q3 2026",
     shortBio:
@@ -24,23 +24,23 @@ window.LV_DATA = {
   },
 
   career: [
-    { role: "Senior Product Designer", org: "Trusted Shops", period: "2022 — Now", city: "Cologne", note: "Consumer trust, pricing, experimentation, research culture" },
-    { role: "Product Designer", org: "Cargoboard", period: "2020 — 2022", city: "Cologne", note: "B2B logistics, design system, IA redesign" },
-    { role: "UX Designer", org: "Agency work", period: "2018 — 2020", city: "Cologne", note: "Clients across retail, fintech, healthcare" }
+    { role: "Senior Product Designer", org: "Trusted Shops", period: "2022 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
+    { role: "Product Designer", org: "Cargoboard", period: "2020 — 2022", city: "Berlin", note: "B2B logistics, design system, IA redesign" },
+    { role: "UX Designer", org: "Agency work", period: "2018 — 2020", city: "Berlin", note: "Clients across retail, fintech, healthcare" }
   ],
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
 
   // SVG placeholder wordmarks. Swap with real brand files at the same paths.
   clientLogos: {
-    "Trusted Shops": "images/logos/trusted-shops.svg",
-    Cargoboard: "images/logos/cargoboard.svg",
-    Funke: "images/logos/funke.svg",
-    TikTok: "images/logos/tiktok.svg",
+    "Trusted Shops": "images/logos/Trusted-Shops_Logo_black.svg",
+    Cargoboard: "images/logos/main_logo_color_black.svg",
+    Funke: "images/logos/Funke-Mediengruppe-Logo.png",
+    TikTok: "images/logos/TikTok-logo-RGB-Horizontal-black.png",
     Canva: "images/logos/canva.svg",
-    Aqora: "images/logos/aqora.svg",
+    Aqora: "images/logos/Wortmarke 1C.svg",
     Autarc: "images/logos/autarc.svg",
-    feelinghale: "images/logos/feelinghale.svg",
+    feelinghale: "images/logos/feelinghale-logo.svg",
     "Dr. Vivien Karl": "images/logos/dr-vivien-karl.svg"
   },
 

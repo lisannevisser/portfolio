@@ -267,7 +267,8 @@
     circle:    { d: "M 140 20 C 90 10 20 25 20 60 C 20 95 80 110 140 100 C 200 92 220 70 210 40 C 200 15 160 10 140 20 Z", vb: "0 0 230 120" },
     arrow:     { d: "M 6 30 C 40 10, 90 50, 140 20 L 130 10 M 140 20 L 128 30", vb: "0 0 150 40" },
     squiggle:  { d: "M 0 10 C 20 0, 40 20, 60 10 S 100 0, 120 10 S 160 20, 180 10", vb: "0 0 180 20" },
-    wave:      { d: "M 0 10 Q 15 0, 30 10 T 60 10 T 90 10 T 120 10", vb: "0 0 120 20" }
+    wave:      { d: "M 0 10 Q 15 0, 30 10 T 60 10 T 90 10 T 120 10", vb: "0 0 120 20" },
+    asterisk:  { d: "M 20 4 L 20 36 M 6 12 L 34 28 M 6 28 L 34 12 M 4 20 L 36 20", vb: "0 0 40 40" }
   };
 
   function renderScribbles() {
@@ -512,7 +513,7 @@
       v1HomeList.innerHTML = D.cases.map((c, i) => `
         <a href="#/work/${esc(c.slug)}" class="v1-case-card lv-reveal" style="text-decoration:none;color:inherit;" data-cursor-label="Open">
           <div>
-            <div class="v1-case-num">Case ${String(i + 1).padStart(2, "0")} / ${String(D.cases.length).padStart(2, "0")}</div>
+            <div class="v1-case-num">Case ${String(i + 1).padStart(2, "0")}</div>
             <h3 class="v1-case-title">${esc(c.title)}</h3>
             <p class="lv-body" style="max-width:52ch;margin-top:0.5rem;">${esc(c.tldr)}</p>
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
