@@ -52,7 +52,7 @@
       <div class="lv-nav-links">
         <a href="#/work" class="lv-nav-link" data-route="work">Work</a>
         <a href="#/about" class="lv-nav-link" data-route="about">About</a>
-        <a href="#/playground" class="lv-nav-link" data-route="playground">Playground</a>
+        <a href="#/playground" class="lv-nav-link" data-route="playground" hidden>Playground</a>
         <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="Email" style="padding:0.45rem 0.9rem;font-size:0.85rem;">Say hi</a>
       </div>
       <button class="lv-nav-toggle" type="button" aria-label="Open menu">Menu</button>
@@ -65,7 +65,7 @@
     <button class="lv-nav-sheet-close" type="button" aria-label="Close menu">Close ×</button>
     <a href="#/work">Work</a>
     <a href="#/about">About</a>
-    <a href="#/playground">Playground</a>
+    <a href="#/playground" hidden>Playground</a>
     <a href="mailto:mail@lisannevisser.com" class="lv-btn" style="display:inline-flex;">Say hi</a>
   </aside>
 
@@ -434,39 +434,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Reading + practice -->
-        <section class="v1-section v1-about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
-          <div class="lv-reveal">
-            <div class="lv-eyebrow">Reading now</div>
-            <ul class="v1-reading-list">
-              <li><span class="title">Thinking, Fast and Slow</span><span class="author">Kahneman</span></li>
-              <li><span class="title">Design is Storytelling</span><span class="author">Lupton</span></li>
-              <li><span class="title">Klara and the Sun</span><span class="author">Ishiguro</span></li>
-            </ul>
-          </div>
-          <div class="lv-reveal">
-            <div class="lv-eyebrow">Off-screen practice</div>
-            <ul class="v1-practice-list">
-              <li>
-                <div class="head"><span class="title">Aerial yoga teaching</span><span class="v1-chip" style="font-size:0.65rem;">Off-screen</span></div>
-                <p class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">Certified teacher. Weekly classes. Keeps me humble about balance, patience, and what 'effortless' actually costs to build.</p>
-              </li>
-              <li>
-                <div class="head"><span class="title">~30 books tracked in 2025</span><span class="v1-chip" style="font-size:0.65rem;">Input</span></div>
-                <p class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">Mix of design, behavioural science, and fiction. Currently: Thinking, Fast and Slow · Klara and the Sun · Design is Storytelling.</p>
-              </li>
-              <li>
-                <div class="head"><span class="title">Canva side work</span><span class="v1-chip" style="font-size:0.65rem;">Visual</span></div>
-                <p class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">Brand guidelines, pitch decks, social kits for small brands — a low-pressure way to stay sharp on visual systems outside of product.</p>
-              </li>
-              <li>
-                <div class="head"><span class="title">Sketchbook practice</span><span class="v1-chip" style="font-size:0.65rem;">Visual</span></div>
-                <p class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">Weekly portraits, still life, urban sketching. The hand-drawn scribbles you see around this portfolio are all mine.</p>
-              </li>
-            </ul>
-          </div>
-        </section>
       </div>
 
       <!-- V3 ABOUT -->
@@ -590,7 +557,7 @@
         <ul>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
-          <li><a href="#/playground">Playground</a></li>
+          <li hidden><a href="#/playground">Playground</a></li>
         </ul>
       </div>
       <div>
