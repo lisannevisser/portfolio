@@ -3,6 +3,15 @@
 Dieses Dokument hält fest, wie wir in diesem Projekt mit Git-Branches und
 Git-Worktrees arbeiten. Es wird zunächst manuell gepflegt.
 
+## Schreibstil (Copy auf der Seite)
+
+**Keine Em-Dashes (`—`) in der sichtbaren Copy.** Wirkt schnell
+AI-generiert. Stattdessen Gedankenstrich mit Leerzeichen (` - `),
+Komma, Doppelpunkt oder neuer Satz.
+
+Gilt für alles, was auf der Seite landet: Case-Study-Texte, About,
+Überschriften, Microcopy. In dieser CLAUDE.md selbst sind Em-Dashes ok.
+
 ## Wichtig: `main` ist live
 
 Die Seite läuft auf **GitHub Pages** aus dem `main`-Branch. Das heißt:
