@@ -409,11 +409,13 @@ a { color: inherit; }
   padding: 1.5rem clamp(1.25rem, 3vw, 3rem) 0;
   border-top: 1px solid var(--rule);
   display: flex; justify-content: space-between; align-items: center;
-  color: var(--ink-3); font-size: 0.8rem; font-family: var(--font-mono);
+  color: var(--ink-3); font-size: 13px; font-family: var(--font-mono);
   letter-spacing: 0.05em;
   gap: 1rem;
   flex-wrap: wrap;
 }
+.lv-footer-bottom a { color: inherit; font-size: inherit; font-family: inherit; }
+.lv-footer-bottom a:hover { color: var(--ink); }
 @media (max-width: 760px) {
   .lv-footer-grid { grid-template-columns: 1fr 1fr; }
 }
