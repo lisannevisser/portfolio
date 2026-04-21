@@ -59,9 +59,9 @@ window.LV_DATA = {
         { label: "Variants tested", value: "7", note: "across 2 rounds" },
         { label: "Churn impact", value: "0%", note: "no significant rise" }
       ],
-      tags: ["UX Research", "Behavioral Psychology", "A/B Testing", "Pricing"],
+      tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
-      tldr: "A €9.90 price point that nobody had ever questioned. I turned it into a pricing psychology experiment: 7 variants across 2 rounds, grounded in charm vs. prestige vs. round pricing theory. €12.00 won — not because it tested best, but because it tested best *with* CLV forecasting layered on top.",
+      tldr: "A price point that nobody had ever questioned, turned into a pricing psychology experiment: 7 variants across 2 rounds, grounded in charm vs. prestige vs. round pricing theory. €12.00 won, not because it tested best, but because it tested best with CLV forecasting layered on top.",
       story: [
         { kind: "section", title: "Situation", body: "Trusted Shops' buyer protection had been priced at €9.90 since launch. A number chosen without data, strategy, or user input. It was one of the company's core revenue drivers — and no one had systematically examined whether it was the right price." },
         { kind: "section", title: "Insight", body: "Pricing isn't a finance problem. It's a behavioural design problem. How a price is presented, structured, and framed shapes how people perceive value. I grounded the test in academic pricing psychology." },
@@ -90,9 +90,9 @@ window.LV_DATA = {
         { label: "Dev dependency", value: "0", note: "conversion tests fully self-serve" },
         { label: "Adoption", value: "Org-wide", note: "spread beyond my team" }
       ],
-      tags: ["Process innovation", "AI / Figma Make", "Design ops", "Systems"],
+      tags: ["Design Ops", "AI workflows", "End-to-end"],
       coverPaletteHue: 265,
-      tldr: "Conversion tests were stuck behind sprint cycles — two weeks minimum. When Figma Make shipped, I redesigned the whole workflow around it: design-system-aware templates, an 80% brand-compliance QA gate, and a post-win refinement loop. Two days from idea to test.",
+      tldr: "Conversion tests were stuck behind sprint cycles: two weeks minimum to launch. When Figma Make shipped in May '25, I redesigned the whole workflow around AB testing: design-system-aware templates, an 80% brand-compliance QA gate, and a post-win refinement loop. Our new setup: Two days from idea to test launch without any bottlenecks.",
       story: [
         { kind: "section", title: "The bottleneck", body: "Every conversion test ran the same chain: PM develops an idea, designer mocks it, developer implements it inside a sprint, test launches. That developer step owned the calendar. Minimum two weeks, often longer — for changes that were supposed to be lightweight." },
         { kind: "section", title: "The bet", body: "I'd been watching AI design tools for months. When Figma Make shipped in May 2025, I saw it immediately: if the design system was properly wired in, conversion managers could visualise ideas without a designer or developer in the loop. I tested it on release day." },
@@ -121,9 +121,9 @@ window.LV_DATA = {
         { label: "Projects shipped", value: "10+", note: "from my team alone" },
         { label: "Element tests won", value: "100%", note: "3/3 at +20% each" }
       ],
-      tags: ["Continuous research", "Change management", "Behavioural data"],
+      tags: ["Research ops", "Change management", "Behavioural data"],
       coverPaletteHue: 150,
-      tldr: "No dedicated researcher. No budget. Teams making decisions on gut feeling and running 'Frankenstein' conversion tests. I proposed a lean framework — one method a month, rotating topic — and in year one we hit 1.5× the target, ran the company's first focus group in 25 years, and collected its first sociodemographic user data.",
+      tldr: "No dedicated researcher. No budget. Teams making decisions on gut feeling and running 'Frankenstein' conversion tests. I proposed a lean framework: one method a month, rotating topics. In year one we hit 1.5× the target, collected the company's first sociodemographic user data, and ran the company's first focus group in 25 years.",
       story: [
         { kind: "section", title: "The starting state", body: "No heatmaps. No regular research. Teams siloed. Conversion managers implementing design ideas without a holistic UX concept for the pages they were optimising. The result was what I started calling 'Frankenstein design' — a patchwork of isolated wins that didn't add up to a coherent experience." },
         { kind: "section", title: "The framing", body: "Individual tests win isolated battles. Only a research culture wins the war. I proposed lean research: one project a month, one method at a time, topic chosen by current need. Not academic rigour for its own sake — a sustainable rhythm teams could actually maintain." },
@@ -141,20 +141,20 @@ window.LV_DATA = {
     {
       slug: "design-system",
       title: "A design system for a scaling logistics platform",
-      subtitle: "IA rework + modular UI + co-created rebrand",
+      subtitle: "Atomic design system + co-created rebrand",
       company: "Cargoboard",
       year: "2020 — 2022",
-      role: "Design systems lead",
-      team: "With brand team, engineers, product",
+      role: "Design systems lead · Rebrand co-creation",
+      team: "With the brand team and engineers; hired a print designer for the rebrand",
       duration: "18 months",
       impact: [
         { label: "Handoff time", value: "−60%", note: "design-to-dev after tokens" },
         { label: "Product surface", value: "Unified", note: "across 4 core flows" },
-        { label: "Support tickets", value: "Down", note: "on navigation issues" }
+        { label: "Rebrand", value: "Co-created", note: "with brand team" }
       ],
-      tags: ["Design system", "Information architecture", "B2B SaaS"],
+      tags: ["Design Lead", "Design system", "B2B SaaS"],
       coverPaletteHue: 200,
-      tldr: "Years of rapid growth had left the product with inconsistent patterns, fragmented navigation, and a visual language that no longer matched the company's ambitions. I led the design-system creation while redesigning the core IA — and co-created the visual rebrand alongside it.",
+      tldr: "Years of rapid growth had left the company with missing standards and no unified product design. I led the creation of a modular design system following atomic design principles — and co-created a visual rebrand with the brand team, hiring a print designer to cover print scope.",
       story: [
         { kind: "section", title: "Situation", body: "Years of organic sprawl. Inconsistent patterns, fragmented navigation, visual language that no longer represented the company's ambitions. Engineers were rebuilding the same components every sprint." },
         { kind: "section", title: "Approach", body: "Cross-functional effort spanning design, engineering, product, and brand. I led the system creation while simultaneously redesigning the core information architecture, and co-created the visual rebrand with the brand team." },
@@ -165,6 +165,27 @@ window.LV_DATA = {
           { k: "Brand", v: "Co-created", effect: "Visual rebrand in parallel" }
         ]},
         { kind: "result", title: "Outcome", body: "Significantly reduced design-to-development handoff time. Visual consistency across all product areas. The IA redesign improved task completion and reduced support tickets on navigation confusion." }
+      ]
+    },
+    {
+      slug: "website-relaunch",
+      title: "A 100-page website relaunch",
+      subtitle: "[Case study in progress]",
+      company: "Cargoboard",
+      year: "2020 — 2022",
+      role: "First designer · Website lead",
+      team: "With the marketing team; mentored a working student; hired a developer for marketing's own capacity",
+      duration: "TBD",
+      impact: [
+        { label: "Pages audited", value: "100+", note: "full content + IA review" },
+        { label: "Scope", value: "Audit → relaunch", note: "end-to-end" },
+        { label: "Marketing autonomy", value: "Enabled", note: "via dev hire" }
+      ],
+      tags: ["Team building", "Website relaunch", "IA"],
+      coverPaletteHue: 330,
+      tldr: "The company's marketing website had grown organically to 100+ pages with inconsistent structure, voice, and visual language. I led the audit, IA rework, and relaunch, working closely with the marketing team. As the company's first designer, I mentored a working student and hired a developer so marketing could iterate independently.",
+      story: [
+        { kind: "section", title: "In progress", body: "This case is being written. Short version: as Cargoboard's first designer, I led the audit and relaunch of a 100-page marketing site, paired with a rebrand rollout, while building the design function from zero." }
       ]
     }
   ],

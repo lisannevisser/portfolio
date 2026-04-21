@@ -535,7 +535,7 @@
       v1WorkList.innerHTML = D.cases.map((c, i) => `
         <a href="#/work/${esc(c.slug)}" class="v1-case-card lv-reveal" style="text-decoration:none;color:inherit;" data-cursor-label="Open">
           <div>
-            <div class="v1-case-num">${String(i + 1).padStart(2, "0")} — ${esc(c.company)} · ${esc(c.year)}</div>
+            <div class="v1-case-num">${String(i + 1).padStart(2, "0")} · ${esc(c.company)}, ${esc(c.year)}</div>
             <h3 class="v1-case-title">${esc(c.title)}</h3>
             <p class="lv-body" style="max-width:56ch;margin-top:0.5rem;">${esc(c.tldr)}</p>
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
