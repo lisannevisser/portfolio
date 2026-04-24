@@ -16,11 +16,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # Wir validieren nur HTML-Struktur, nicht CSS: der Nu HTML Checker kennt
+      # moderne CSS-Funktionen wie oklch() noch nicht und wirft False-Positives.
+      # Der portfolio/-Ordner enthält Figma-Exports, die nicht live sind.
       - name: Validate index.html
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
           root: .
-          match: 'index.html'
+          css: false
+          blacklist: portfolio
 
   # Prüft, ob alle Links in index.html auflösen (interne + externe).
   # Fängt tote interne Pfade (CSS, JS, Bilder) und kaputte externe Links.
