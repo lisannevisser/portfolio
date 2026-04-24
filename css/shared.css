@@ -424,6 +424,18 @@ a { color: inherit; }
 }
 
 /* ==========================================================================
+   Legal pages (Imprint, Privacy): two columns, collapses to one on mobile
+   ========================================================================== */
+.lv-legal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+@media (max-width: 720px) {
+  .lv-legal-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* ==========================================================================
    Tweaks panel
    ========================================================================== */
 .lv-tweaks {
