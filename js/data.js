@@ -213,6 +213,57 @@ window.LV_DATA = {
     ]
   },
 
+  posts: [
+    {
+      slug: "research-before-pixels",
+      title: "Research before pixels",
+      date: "2026-03-12",
+      dateLabel: "March 2026",
+      readingTime: "4 min",
+      tags: ["Research", "Process"],
+      excerpt: "Why I open every project with evidence instead of Figma, and how it changes what the team ships.",
+      body: [
+        "The fastest way to waste three sprints is to start in Figma. I've done it. The team ships something clean, well-spaced, visually tidy - and nobody uses it the way we imagined.",
+        "Research before pixels is not about writing a 40-page report before you open the file. It is a posture: the first question is always what do we actually know, and the second is what would we need to know to be wrong.",
+        "In practice that looks small. A 20-minute conversation with two customers. A Hotjar session of the current flow. A three-question survey on the checkout page. Nothing academic, nothing heavy. Just enough evidence to stop debating opinions.",
+        "The output is rarely a chart. It is a sharper brief. The team stops arguing about button colour and starts arguing about the right moment in the flow, the right label, the right default. The work gets smaller and the decisions get firmer.",
+        "Pixels are cheap once the question is right. Most of my best projects started with a one-page note that nobody looked at again. It did its job."
+      ]
+    },
+    {
+      slug: "80-percent-is-a-feature",
+      title: "80% is a feature, not a compromise",
+      date: "2026-02-04",
+      dateLabel: "February 2026",
+      readingTime: "3 min",
+      tags: ["Experimentation", "Design Ops"],
+      excerpt: "Shipping at 80% brand compliance made our conversion-test loop 7x faster. Here is the trade-off I had to defend.",
+      body: [
+        "When we redesigned the conversion-test workflow at Trusted Shops around Figma Make, one question kept coming back: are you ok with this not being pixel-perfect?",
+        "Short answer: yes, on purpose. An experiment that ships in two days at 80% beats an experiment that ships in two weeks at 100%. The cost of waiting is invisible, but it is real - every week of backlog is a week of compounding learning we are not getting.",
+        "The trick is to make the 80 explicit. A designer QA gate catches anything embarrassing. A template system bakes in the non-negotiables: type scale, spacing rhythm, CTA behaviour. Inside that fence, conversion managers can move fast without making the product feel broken.",
+        "Then the winning tests get refined to 100% before permanent rollout. The polish does not disappear - it just moves to the point where it actually matters.",
+        "The hardest part is not the design. It is convincing the team that conscious imprecision is a choice, not a slip."
+      ]
+    },
+    {
+      slug: "first-focus-group-in-25-years",
+      title: "Notes from the first focus group in 25 years",
+      date: "2025-11-18",
+      dateLabel: "November 2025",
+      readingTime: "5 min",
+      tags: ["Research ops", "Culture"],
+      excerpt: "What I learned running a method an organisation had not used since the 90s - and why I will do it again.",
+      body: [
+        "Running the first focus group in 25 years was not my idea of a bold research move. It was a pragmatic one: we had a trust question that surveys kept answering the same way, and we needed to hear people push back on each other, not on us.",
+        "The interesting part was not the method, it was the reaction inside the company. People were curious. Some were sceptical. A few were openly nervous about what six customers in a room might say out loud.",
+        "The output was not surprising - most insights echoed what the surveys had hinted at. But the weight was different. A quote in a deck moves a room. A percentage does not.",
+        "The lesson I took away is that a research practice is a portfolio, not a method. Surveys for breadth, heatmaps for behaviour, interviews for why, and every now and then a focus group for a texture you cannot get any other way.",
+        "I will run another one. Probably this year. Probably with less ceremony."
+      ]
+    }
+  ],
+
   playground: {
     v1: [
       { t: "Sketchbook 2025", kind: "drawings", hue: 50 },
