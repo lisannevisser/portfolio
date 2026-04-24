@@ -1,251 +1,256 @@
-# Worktree- und Branch-Struktur
+# Worktree and Branch Structure
 
-Dieses Dokument hält fest, wie wir in diesem Projekt mit Git-Branches und
-Git-Worktrees arbeiten. Es wird zunächst manuell gepflegt.
+This document records how we work with Git branches and Git worktrees in
+this project. For now it is maintained manually.
 
-## Schreibstil (Copy auf der Seite)
+## Writing Style (Copy on the Site)
 
-**Keine Em-Dashes (`—`) in der sichtbaren Copy.** Wirkt schnell
-AI-generiert. Stattdessen Gedankenstrich mit Leerzeichen (` - `),
-Komma, Doppelpunkt oder neuer Satz.
+**No em-dashes (`—`) in visible copy.** Reads as AI-generated quickly.
+Use a hyphen with spaces (` - `), a comma, a colon, or a new sentence
+instead.
 
-Gilt für alles, was auf der Seite landet: Case-Study-Texte, About,
-Überschriften, Microcopy. In dieser CLAUDE.md selbst sind Em-Dashes ok.
+Applies to anything that ends up on the site: case study text, About,
+headings, microcopy. Em-dashes are fine in this CLAUDE.md itself.
 
-## Wichtig: `main` ist live
+## Important: `main` is live
 
-Die Seite läuft auf **GitHub Pages** aus dem `main`-Branch. Das heißt:
-**alles, was nach `main` gemergt wird, ist ~30 Sekunden später live.**
-Es gibt kein Staging, keinen Zwischenschritt.
+The site runs on **GitHub Pages** from the `main` branch. That means:
+**anything merged into `main` is live ~30 seconds later.** There is no
+staging, no intermediate step.
 
-Daraus folgen zwei feste Regeln (unten im Detail):
+Two firm rules follow from this (details below):
 
-1. **CI muss grün sein**, bevor ein PR nach `main` mergt — passiert
-   automatisch über GitHub Actions (siehe "Automatisierter PR-Flow").
-2. **Rollback-Kommando griffbereit halten**, falls doch mal etwas kaputt ist.
+1. **CI must be green** before a PR merges into `main` — happens
+   automatically via GitHub Actions (see "Automated PR flow").
+2. **Keep the rollback command at the ready**, in case something does
+   break.
 
-## Grundidee
+## Core Idea
 
-- **Branch** = eine parallele Entwicklungslinie in Git (nur ein Eintrag,
-  kein eigener Ordner).
-- **Worktree** = ein zusätzlicher Ordner auf der Platte, in dem ein
-  bestimmter Branch ausgecheckt ist. So können mehrere Branches gleichzeitig
-  editiert werden, ohne `git checkout` im Hauptordner.
-- Wir nutzen Worktrees, damit **mehrere Claude-Sessions parallel** an
-  unterschiedlichen Features arbeiten können, ohne sich gegenseitig zu stören.
+- **Branch** = a parallel line of development in Git (just an entry, no
+  separate folder).
+- **Worktree** = an additional folder on disk where a specific branch is
+  checked out. This way several branches can be edited simultaneously
+  without `git checkout` in the main folder.
+- We use worktrees so that **multiple Claude sessions can work in
+  parallel** on different features without getting in each other's way.
 
-## Pfad-Konvention (Geschwister-Ordner)
+## Path Convention (Sibling Folders)
 
-Der Haupt-Checkout bleibt wie gehabt:
+The main checkout stays as is:
 
 ```
-/Users/lisannevisser/claude/2026-portfolio        ← main (Hauptrepo)
+/Users/lisannevisser/claude/2026-portfolio        ← main (main repo)
 ```
 
-Zusätzliche Worktrees landen **daneben**, mit dem Branchnamen im Ordnernamen
-(Slash → Bindestrich):
+Additional worktrees go **next to it**, with the branch name in the
+folder name (slash → hyphen):
 
 ```
 /Users/lisannevisser/claude/2026-portfolio-feature-about-redesign
 /Users/lisannevisser/claude/2026-portfolio-fix-nav-overflow
 ```
 
-Vorteile: `ls ~/claude` zeigt alle Worktrees auf einen Blick, und `cd ../…`
-reicht zum Wechseln.
+Benefits: `ls ~/claude` shows all worktrees at a glance, and `cd ../…`
+is enough to switch.
 
-## Branch-Konvention
+## Branch Convention
 
-`main` — produktiver Stand (= live). Nur über sauberen Merge updaten.
+`main` — production state (= live). Only update via clean merge.
 
-Alle anderen Branches tragen eine **Kategorie** als Präfix. Die Kategorie
-sagt auf einen Blick, *was* für eine Änderung das ist:
+All other branches carry a **category** as a prefix. The category tells
+you at a glance *what kind* of change it is:
 
-| Präfix         | Zweck                                      | Beispiel                      |
-| -------------- | ------------------------------------------ | ----------------------------- |
-| `feature/`     | Neue Dinge                                 | `feature/about-redesign`      |
-| `fix/`         | Kaputte Dinge reparieren                   | `fix/nav-overflow`            |
-| `style/`       | Design-Änderungen (CSS, Typo, Spacing)     | `style/case-study-spacing`    |
-| `refactor/`    | Code aufräumen, kein Verhaltenswechsel     | `refactor/router-split`       |
-| `chore/`       | Dependencies, Config, Kleinkram            | `chore/update-gitignore`      |
-| `docs/`        | README, Kommentare, diese CLAUDE.md        | `docs/worktree-structure`     |
-| `experiment/`  | Kreative Testideen — darf auch verworfen werden | `experiment/pixel-cursor`  |
+| Prefix         | Purpose                                      | Example                       |
+| -------------- | -------------------------------------------- | ----------------------------- |
+| `feature/`     | New things                                   | `feature/about-redesign`      |
+| `fix/`         | Repair broken things                         | `fix/nav-overflow`            |
+| `style/`       | Design changes (CSS, typography, spacing)    | `style/case-study-spacing`    |
+| `refactor/`    | Clean up code, no behavior change            | `refactor/router-split`       |
+| `chore/`       | Dependencies, config, small stuff            | `chore/update-gitignore`      |
+| `docs/`        | README, comments, this CLAUDE.md             | `docs/worktree-structure`     |
+| `experiment/`  | Creative test ideas — may also be discarded  | `experiment/pixel-cursor`     |
 
-Kurzname: kleingeschrieben, Worte mit `-` trennen. Knapp halten.
+Short name: lowercase, separate words with `-`. Keep it concise.
 
-### Branch vs. Worktree — wann lohnt sich ein eigener Ordner?
+### Branch vs. Worktree — when is a separate folder worth it?
 
-Die Kategorie steht **nur** im Branchnamen. Ein Worktree erbt den Namen,
-hat aber keine eigene Kategorie. Nicht jeder Branch braucht einen Worktree —
-hier eine Faustregel:
+The category is **only** in the branch name. A worktree inherits the
+name but has no category of its own. Not every branch needs a worktree —
+a rule of thumb:
 
-| Kategorie     | Worktree sinnvoll?                                        |
-| ------------- | --------------------------------------------------------- |
-| `feature/`    | Ja — oft länger offen, parallel zu anderem                |
-| `experiment/` | Ja — daneben rumspielen, nicht `main` blockieren          |
-| `fix/`        | Meistens ja, wenn der Fix > 5 Minuten dauert              |
-| `refactor/`   | Ja bei größerem Refactor, sonst nein                      |
-| `style/`      | Je nach Umfang                                            |
-| `chore/`      | Meistens nein — schnell im Hauptrepo, Lokal-Check, mergen |
-| `docs/`       | Meistens nein — gleiche Logik wie `chore/`                |
+| Category      | Worktree useful?                                              |
+| ------------- | ------------------------------------------------------------- |
+| `feature/`    | Yes — often open longer, parallel to other work               |
+| `experiment/` | Yes — play around next to it, don't block `main`              |
+| `fix/`        | Mostly yes, if the fix takes > 5 minutes                      |
+| `refactor/`   | Yes for a larger refactor, otherwise no                       |
+| `style/`      | Depends on scope                                              |
+| `chore/`      | Mostly no — quick in the main repo, local check, merge        |
+| `docs/`       | Mostly no — same logic as `chore/`                            |
 
-Für `experiment/`-Branches gilt außerdem: es ist **völlig ok, sie nicht zu
-mergen**. Wenn das Experiment nichts wird, Worktree + Branch einfach
-wegwerfen (siehe Aufräumen-Kommandos unten).
+For `experiment/` branches it also applies: it is **completely fine not
+to merge them**. If the experiment doesn't pan out, just throw away
+worktree + branch (see cleanup commands below).
 
-## Arbeitsablauf
+## Workflow
 
-1. Neuer Branch **von `main`** anlegen, Worktree optional daneben.
-2. Arbeit im Branch / Worktree erledigen, committen, pushen.
-3. PR öffnen (`gh pr create`) + Auto-Merge aktivieren
+1. Create new branch **from `main`**, worktree optional next to it.
+2. Do the work in the branch / worktree, commit, push.
+3. Open PR (`gh pr create`) + enable auto-merge
    (`gh pr merge --auto --squash`).
-4. CI läuft automatisch. Bei grün: Squash-Merge nach `main`, Branch wird
-   automatisch gelöscht, Seite ~30 s später live.
-5. Lokalen Worktree nach Merge mit `git worktree remove` aufräumen.
+4. CI runs automatically. On green: squash-merge into `main`, branch is
+   deleted automatically, site live ~30 s later.
+5. Clean up local worktree after merge with `git worktree remove`.
 
-## Automatisierter PR-Flow mit CI
+## Automated PR Flow with CI
 
-Seit 2026-04-24 läuft der Merge nach `main` automatisch über GitHub Actions
-und Auto-Merge. Kein manueller Klick mehr nötig.
+Since 2026-04-24 the merge into `main` runs automatically via GitHub
+Actions and auto-merge. No more manual click needed.
 
-### Was pro PR passiert
+### What happens per PR
 
-1. Claude legt Branch an, commited, pusht, öffnet PR mit Beschreibung.
-2. Claude aktiviert Auto-Merge: `gh pr merge --auto --squash`.
-3. **GitHub Actions** (`.github/workflows/ci.yml`) startet automatisch und
-   führt zwei Jobs aus:
-   - **HTML validation** — prüft `index.html` mit dem W3C Nu HTML Checker
-     (fängt kaputtes Markup, fehlende Tags, ungültige Attribute).
-   - **Link check** — prüft mit `lychee` alle Links in `index.html`
-     (intern + extern). Akzeptiert `403/429`, weil manche Seiten Bots blocken.
-4. Beide Checks grün → Auto-Merge greift → Squash-Merge nach `main` →
-   Branch wird automatisch gelöscht.
-5. GitHub Pages deployed ~30 s später die neue Version.
+1. Claude creates branch, commits, pushes, opens PR with description.
+2. Claude enables auto-merge: `gh pr merge --auto --squash`.
+3. **GitHub Actions** (`.github/workflows/ci.yml`) starts automatically
+   and runs two jobs:
+   - **HTML validation** — checks `index.html` with the W3C Nu HTML
+     Checker (catches broken markup, missing tags, invalid attributes).
+   - **Link check** — uses `lychee` to check all links in `index.html`
+     (internal + external). Accepts `403/429`, because some sites block
+     bots.
+4. Both checks green → auto-merge kicks in → squash-merge into `main` →
+   branch is deleted automatically.
+5. GitHub Pages deploys the new version ~30 s later.
 
-### Was CI nicht fängt
+### What CI does not catch
 
-- Visuelle Regressions (Layout verschoben, Farben falsch)
-- Content-Fehler (Tippfehler, falscher Text)
-- Laufzeit-JS-Fehler, die erst beim Interagieren auftreten
+- Visual regressions (layout shifted, wrong colors)
+- Content errors (typos, wrong text)
+- Runtime JS errors that only appear when interacting
 
-Dafür gibt es den **Rollback-Flow** (siehe unten) und optional den
-**Lokal-Check** (siehe weiter unten).
+For that there is the **rollback flow** (see below) and optionally the
+**local check** (see further below).
 
-### Einmaliges GitHub-Setup
+### One-time GitHub Setup
 
-Damit Auto-Merge wirklich sicher greift, muss GitHub zwei Dinge wissen.
-Diese zwei Einstellungen müssen **einmal** im Browser gesetzt werden
-und bleiben dann für alle zukünftigen PRs aktiv:
+For auto-merge to really kick in safely, GitHub needs to know two
+things. These two settings have to be set **once** in the browser and
+then stay active for all future PRs:
 
-**1. Branch-Protection auf `main`**
-GitHub → Repository Settings → Branches → "Add rule" (oder "Add ruleset"):
+**1. Branch protection on `main`**
+GitHub → Repository Settings → Branches → "Add rule" (or "Add ruleset"):
 - Branch name pattern: `main`
 - ✅ Require a pull request before merging
 - ✅ Require status checks to pass before merging
-  - Required checks auswählen: `HTML validation` und `Link check`
-    (erscheinen erst nach dem ersten CI-Lauf in der Liste)
+  - Select required checks: `HTML validation` and `Link check`
+    (only appear in the list after the first CI run)
   - ✅ Require branches to be up to date before merging
 
-**2. Auto-Merge erlauben**
+**2. Allow auto-merge**
 GitHub → Repository Settings → General → Pull Requests:
 - ✅ Allow auto-merge
 - ✅ Automatically delete head branches
 
-### Was ist GitHub Actions eigentlich?
+### What is GitHub Actions, actually?
 
-Kurz: ein Automatisierungs-System in GitHub. YAML-Dateien unter
-`.github/workflows/` beschreiben, was wann laufen soll. GitHub startet für
-jeden Lauf eine frische virtuelle Maschine ("Runner"), führt die Schritte
-aus, räumt sie danach weg. Kostenlos bis zu einem großzügigen Kontingent
-(für dein Portfolio irrelevant, du bist weit drunter).
+In short: an automation system in GitHub. YAML files under
+`.github/workflows/` describe what should run when. GitHub spins up a
+fresh virtual machine ("runner") for each run, executes the steps,
+tears it down afterwards. Free up to a generous quota (irrelevant for
+your portfolio, you're well below it).
 
-Begriffe:
-- **Workflow** — die YAML-Datei (bei uns `ci.yml`).
-- **Trigger** (`on:`) — wann der Workflow läuft (bei uns: `pull_request`).
-- **Job** — logische Einheit, läuft isoliert auf einer VM.
-- **Runner** — die VM (bei uns `ubuntu-latest`).
-- **Step** — einzelner Befehl oder Action innerhalb eines Jobs.
-- **Action** — vorgefertigter Baustein aus dem GitHub Marketplace, den man
-  wiederverwenden kann (z.B. `actions/checkout`, `lycheeverse/lychee-action`).
+Terms:
+- **Workflow** — the YAML file (in our case `ci.yml`).
+- **Trigger** (`on:`) — when the workflow runs (in our case:
+  `pull_request`).
+- **Job** — logical unit, runs isolated on a VM.
+- **Runner** — the VM (in our case `ubuntu-latest`).
+- **Step** — a single command or action within a job.
+- **Action** — prebuilt building block from the GitHub Marketplace
+  that you can reuse (e.g. `actions/checkout`,
+  `lycheeverse/lychee-action`).
 
-## Lokal-Check (optional)
+## Local Check (optional)
 
-Seit dem CI-Setup ist der Lokal-Check kein Pflicht-Schritt mehr. Er lohnt
-sich aber bei Änderungen, die CI **nicht** fängt:
+Since the CI setup, the local check is no longer a mandatory step. It
+is worth doing for changes that CI does **not** catch:
 
-- Visuelle Änderungen (Spacing, Farben, Layout, Responsive-Verhalten)
-- Content-Änderungen (Tippfehler erkennst du nur beim Lesen)
-- JS-Verhalten beim Interagieren (Klicks, Animationen, Tweaks)
+- Visual changes (spacing, colors, layout, responsive behavior)
+- Content changes (you only catch typos by reading)
+- JS behavior when interacting (clicks, animations, tweaks)
 
-Wenn du lokal schauen willst, im Worktree:
+If you want to look locally, in the worktree:
 
 ```sh
 python3 -m http.server 4322
-# dann http://localhost:4322 im Browser öffnen
+# then open http://localhost:4322 in the browser
 ```
 
-Kurze Check-Liste:
+Quick checklist:
 
-- Startseite lädt ohne Fehler (Browser-Konsole offen — rote Meldungen?).
-- Navigation funktioniert (`#/`, `#/work`, `#/about`, Case-Study).
-- Beide Design-Varianten (Designer / Dev-friendly) durchschalten.
-- Auf der Seite, die du geändert hast, explizit das neue Verhalten prüfen.
+- Home page loads without errors (browser console open — red messages?).
+- Navigation works (`#/`, `#/work`, `#/about`, case study).
+- Switch through both design variants (Designer / Dev-friendly).
+- On the page you changed, explicitly verify the new behavior.
 
-## Notfall: Rollback nach einem kaputten Merge
+## Emergency: Rollback after a broken merge
 
-Wenn nach einem Merge die Seite kaputt ist, im Hauptrepo (`main` ausgecheckt):
+If the site is broken after a merge, in the main repo (`main` checked
+out):
 
 ```sh
-git pull                     # sicherstellen, dass du den aktuellen Stand hast
-git revert -m 1 HEAD         # kehrt den letzten Merge-Commit um (neuer Commit)
-git push                     # pusht den Revert → Seite ist ~30 s später wieder ok
+git pull                     # make sure you have the current state
+git revert -m 1 HEAD         # reverts the last merge commit (new commit)
+git push                     # push the revert → site ok again ~30 s later
 ```
 
-Wichtig:
+Important:
 
-- `revert` **löscht nichts**, es erstellt nur einen Gegen-Commit. Historie
-  bleibt sauber, nichts geht verloren.
-- `-m 1` sagt Git, dass der Merge rückgängig gemacht werden soll (gegenüber
-  dem ersten Parent, also `main` vor dem Merge).
-- Falls der letzte Commit **kein** Merge war, reicht `git revert HEAD` ohne
-  `-m 1`.
+- `revert` **deletes nothing**, it just creates a counter-commit.
+  History stays clean, nothing is lost.
+- `-m 1` tells Git the merge should be reverted (against the first
+  parent, i.e. `main` before the merge).
+- If the last commit was **not** a merge, `git revert HEAD` without
+  `-m 1` is enough.
 
-Danach in Ruhe im Branch den Fehler fixen, Lokal-Check, erneut mergen.
+Then calmly fix the bug in the branch, local check, merge again.
 
-## Kommandos (Cheat Sheet)
+## Commands (Cheat Sheet)
 
-Aus dem Hauptrepo (`2026-portfolio`) ausführen.
+Run from the main repo (`2026-portfolio`).
 
-### Worktree + neuen Branch anlegen
+### Create worktree + new branch
 
 ```sh
 git worktree add ../2026-portfolio-feature-about-redesign -b feature/about-redesign main
 ```
 
-Das erstellt den Ordner, legt `feature/about-redesign` frisch von `main` an
-und checkt ihn dort aus.
+That creates the folder, branches `feature/about-redesign` fresh from
+`main`, and checks it out there.
 
-### Worktrees auflisten
+### List worktrees
 
 ```sh
 git worktree list
 ```
 
-### Nach dem Merge aufräumen
+### Cleanup after the merge
 
-Erst den Worktree entfernen, dann den Branch:
+First remove the worktree, then the branch:
 
 ```sh
 git worktree remove ../2026-portfolio-feature-about-redesign
 git branch -d feature/about-redesign
 ```
 
-Falls Git sich beschwert („not fully merged"), vorher sicherstellen, dass
-wirklich nach `main` gemergt wurde.
+If Git complains ("not fully merged"), make sure beforehand that it
+really was merged into `main`.
 
-## Aktuelle Worktrees / Branches
+## Current Worktrees / Branches
 
-<!-- Hier tragen wir manuell ein, was gerade offen ist. Beispiel:
-- `feature/about-redesign` → `../2026-portfolio-feature-about-redesign` — WIP Redesign About-Seite
+<!-- Manually note here what is currently open. Example:
+- `feature/about-redesign` → `../2026-portfolio-feature-about-redesign` — WIP redesign About page
 -->
 
-_(aktuell keine aktiven Worktrees neben `main`)_
+_(currently no active worktrees next to `main`)_
