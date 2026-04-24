@@ -1,0 +1,43 @@
+name: CI
+
+# Läuft bei jedem Pull Request nach main.
+# Wenn beide Jobs grün sind, darf der PR (mit Auto-Merge) nach main mergen.
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Prüft, ob index.html gültiges HTML ist (W3C-Validator via Nu HTML Checker).
+  # Fängt z.B. fehlende schließende Tags, ungültige Attribute, kaputte Struktur.
+  validate-html:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Validate index.html
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: .
+          match: 'index.html'
+
+  # Prüft, ob alle Links in index.html auflösen (interne + externe).
+  # Fängt tote interne Pfade (CSS, JS, Bilder) und kaputte externe Links.
+  # Akzeptiert 403/429, weil manche Seiten Bots blocken (Link ist trotzdem ok).
+  check-links:
+    name: Link check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200,204,301,302,308,403,429
+            index.html
+          fail: true

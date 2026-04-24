@@ -20,7 +20,8 @@ Es gibt kein Staging, keinen Zwischenschritt.
 
 Daraus folgen zwei feste Regeln (unten im Detail):
 
-1. **Vor jedem Merge lokal checken.**
+1. **CI muss grün sein**, bevor ein PR nach `main` mergt — passiert
+   automatisch über GitHub Actions (siehe "Automatisierter PR-Flow").
 2. **Rollback-Kommando griffbereit halten**, falls doch mal etwas kaputt ist.
 
 ## Grundidee
@@ -93,16 +94,88 @@ wegwerfen (siehe Aufräumen-Kommandos unten).
 
 ## Arbeitsablauf
 
-1. Neuer Branch **von `main`** anlegen, passender Worktree daneben.
-2. Arbeit im Worktree erledigen.
-3. **Lokal-Check** (siehe unten) — Pflicht, bevor `main` berührt wird.
-4. Merge nach `main`. PR ist **optional**: bei kleinen Sachen direkt mergen,
-   bei größeren lohnt sich ein PR, um später nochmal drüberzuschauen.
-5. Nach dem Merge: Branch **und** Worktree löschen.
+1. Neuer Branch **von `main`** anlegen, Worktree optional daneben.
+2. Arbeit im Branch / Worktree erledigen, committen, pushen.
+3. PR öffnen (`gh pr create`) + Auto-Merge aktivieren
+   (`gh pr merge --auto --squash`).
+4. CI läuft automatisch. Bei grün: Squash-Merge nach `main`, Branch wird
+   automatisch gelöscht, Seite ~30 s später live.
+5. Lokalen Worktree nach Merge mit `git worktree remove` aufräumen.
 
-## Lokal-Check (Pflicht vor jedem Merge)
+## Automatisierter PR-Flow mit CI
 
-Im Worktree des zu mergenden Branches:
+Seit 2026-04-24 läuft der Merge nach `main` automatisch über GitHub Actions
+und Auto-Merge. Kein manueller Klick mehr nötig.
+
+### Was pro PR passiert
+
+1. Claude legt Branch an, commited, pusht, öffnet PR mit Beschreibung.
+2. Claude aktiviert Auto-Merge: `gh pr merge --auto --squash`.
+3. **GitHub Actions** (`.github/workflows/ci.yml`) startet automatisch und
+   führt zwei Jobs aus:
+   - **HTML validation** — prüft `index.html` mit dem W3C Nu HTML Checker
+     (fängt kaputtes Markup, fehlende Tags, ungültige Attribute).
+   - **Link check** — prüft mit `lychee` alle Links in `index.html`
+     (intern + extern). Akzeptiert `403/429`, weil manche Seiten Bots blocken.
+4. Beide Checks grün → Auto-Merge greift → Squash-Merge nach `main` →
+   Branch wird automatisch gelöscht.
+5. GitHub Pages deployed ~30 s später die neue Version.
+
+### Was CI nicht fängt
+
+- Visuelle Regressions (Layout verschoben, Farben falsch)
+- Content-Fehler (Tippfehler, falscher Text)
+- Laufzeit-JS-Fehler, die erst beim Interagieren auftreten
+
+Dafür gibt es den **Rollback-Flow** (siehe unten) und optional den
+**Lokal-Check** (siehe weiter unten).
+
+### Einmaliges GitHub-Setup
+
+Damit Auto-Merge wirklich sicher greift, muss GitHub zwei Dinge wissen.
+Diese zwei Einstellungen müssen **einmal** im Browser gesetzt werden:
+
+**1. Branch-Protection auf `main`**
+GitHub → Repository Settings → Branches → "Add rule" (oder "Add ruleset"):
+- Branch name pattern: `main`
+- ✅ Require a pull request before merging
+- ✅ Require status checks to pass before merging
+  - Required checks auswählen: `HTML validation` und `Link check`
+    (erscheinen erst nach dem ersten CI-Lauf in der Liste)
+  - ✅ Require branches to be up to date before merging
+
+**2. Auto-Merge erlauben**
+GitHub → Repository Settings → General → Pull Requests:
+- ✅ Allow auto-merge
+- ✅ Automatically delete head branches
+
+### Was ist GitHub Actions eigentlich?
+
+Kurz: ein Automatisierungs-System in GitHub. YAML-Dateien unter
+`.github/workflows/` beschreiben, was wann laufen soll. GitHub startet für
+jeden Lauf eine frische virtuelle Maschine ("Runner"), führt die Schritte
+aus, räumt sie danach weg. Kostenlos bis zu einem großzügigen Kontingent
+(für dein Portfolio irrelevant, du bist weit drunter).
+
+Begriffe:
+- **Workflow** — die YAML-Datei (bei uns `ci.yml`).
+- **Trigger** (`on:`) — wann der Workflow läuft (bei uns: `pull_request`).
+- **Job** — logische Einheit, läuft isoliert auf einer VM.
+- **Runner** — die VM (bei uns `ubuntu-latest`).
+- **Step** — einzelner Befehl oder Action innerhalb eines Jobs.
+- **Action** — vorgefertigter Baustein aus dem GitHub Marketplace, den man
+  wiederverwenden kann (z.B. `actions/checkout`, `lycheeverse/lychee-action`).
+
+## Lokal-Check (optional)
+
+Seit dem CI-Setup ist der Lokal-Check kein Pflicht-Schritt mehr. Er lohnt
+sich aber bei Änderungen, die CI **nicht** fängt:
+
+- Visuelle Änderungen (Spacing, Farben, Layout, Responsive-Verhalten)
+- Content-Änderungen (Tippfehler erkennst du nur beim Lesen)
+- JS-Verhalten beim Interagieren (Klicks, Animationen, Tweaks)
+
+Wenn du lokal schauen willst, im Worktree:
 
 ```sh
 python3 -m http.server 4322
@@ -115,8 +188,6 @@ Kurze Check-Liste:
 - Navigation funktioniert (`#/`, `#/work`, `#/about`, Case-Study).
 - Beide Design-Varianten (Designer / Dev-friendly) durchschalten.
 - Auf der Seite, die du geändert hast, explizit das neue Verhalten prüfen.
-
-Erst wenn das sauber ist → mergen.
 
 ## Notfall: Rollback nach einem kaputten Merge
 
