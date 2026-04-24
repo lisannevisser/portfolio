@@ -538,6 +538,47 @@
     </section>
 
     <!-- ========================================================= -->
+    <!-- ROUTE: BLOG (list)                                          -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="blog" hidden>
+
+      <!-- V1 BLOG -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <div class="v1-meta-row" style="border-top:none;">
+          <span>/ Blog</span>
+          <span>Notes on the work</span>
+        </div>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:3rem;">
+          Thinking<br/>
+          <span style="position:relative;display:inline-block;">
+            <em>out loud.</em>
+            <span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.1em;left:0;width:100%;height:0.3em;"></span>
+          </span>
+        </h1>
+        <p class="lv-lead lv-reveal" style="max-width:52ch;margin-bottom:4rem;">
+          Short essays on research, experimentation, and the messy middle of shipping product. No cadence, no newsletter - just posts when something is worth writing down.
+        </p>
+        <div id="v1-blog-list"><!-- filled by app.js --></div>
+      </div>
+
+      <!-- V3 BLOG -->
+      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <div class="v3-kicker lv-reveal"><span>./blog.index</span></div>
+        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">Thinking <em>out loud.</em></h1>
+        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Short essays on research, experimentation, and the messy middle of shipping product. No cadence, no newsletter.</p>
+        <div id="v3-blog-list" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: POST (dynamic)                                       -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="post" hidden>
+      <article class="v1-only lv-wrap" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
+      <article class="v3-only lv-wrap" id="v3-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
+    </section>
+
+    <!-- ========================================================= -->
     <!-- ROUTE: IMPRINT                                              -->
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="imprint" hidden>
@@ -775,6 +816,7 @@
         <ul>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
+          <li><a href="#/blog">Blog</a></li>
           <li hidden><a href="#/playground">Playground</a></li>
         </ul>
       </div>

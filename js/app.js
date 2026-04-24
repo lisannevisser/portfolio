@@ -35,6 +35,7 @@
     if (!clean) return { page: "home" };
     const parts = clean.split("/");
     if (parts[0] === "work" && parts[1]) return { page: "case", slug: parts[1] };
+    if (parts[0] === "blog" && parts[1]) return { page: "post", slug: parts[1] };
     return { page: parts[0] || "home" };
   }
 
@@ -53,6 +54,15 @@
       const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
       renderV1Case(c);
       renderV3Case(c);
+    }
+
+    // Blog post: render selected post in both variation templates.
+    if (route.page === "post") {
+      const p = (D.posts || []).find((x) => x.slug === route.slug) || (D.posts || [])[0];
+      if (p) {
+        renderV1Post(p);
+        renderV3Post(p);
+      }
     }
 
     // Nav active state
@@ -504,6 +514,127 @@
   }
 
   // ========================================================================
+  // BLOG RENDERERS (list + post detail, v1 + v3)
+  // ========================================================================
+  function renderBlogLists() {
+    const posts = D.posts || [];
+
+    const v1List = $("#v1-blog-list");
+    if (v1List) {
+      v1List.innerHTML = posts.map((p, i) => `
+        <a href="#/blog/${esc(p.slug)}" class="lv-reveal v1-career-row" style="text-decoration:none;color:inherit;grid-template-columns:auto 1fr auto;gap:2rem;align-items:baseline;" data-cursor-label="Read">
+          <div class="period">${esc(p.dateLabel)}</div>
+          <div>
+            <div class="role" style="font-size:clamp(1.1rem,1.8vw,1.4rem);">${esc(p.title)}</div>
+            <div class="note" style="margin-top:0.4rem;max-width:62ch;">${esc(p.excerpt)}</div>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.75rem;">
+              ${p.tags.map((t) => `<span class="v1-chip" style="font-size:0.68rem;">${esc(t)}</span>`).join("")}
+            </div>
+          </div>
+          <div class="org" style="font-family:var(--font-mono);font-size:0.75rem;color:var(--ink-3);">${esc(p.readingTime)} →</div>
+        </a>
+      `).join("");
+    }
+
+    const v3List = $("#v3-blog-list");
+    if (v3List) {
+      v3List.innerHTML = posts.map((p, i) => `
+        <a href="#/blog/${esc(p.slug)}" class="v3-case-row lv-reveal" data-cursor-label="Read">
+          <div class="num">${String(i + 1).padStart(2, "0")}</div>
+          <div>
+            <h3>${esc(p.title)}</h3>
+            <div class="meta">${esc(p.dateLabel)} · ${esc(p.readingTime)} · ${p.tags.map(esc).join(" · ")}</div>
+          </div>
+          <div class="metric" style="font-size:clamp(0.8rem,1.2vw,1rem);font-family:var(--font-mono);">${esc(p.date)}</div>
+          <div class="metric-label">published</div>
+          <div class="arrow">→</div>
+        </a>
+      `).join("");
+    }
+  }
+
+  function renderV1Post(p) {
+    const root = $("#v1-post-body");
+    if (!root) return;
+    const posts = D.posts || [];
+    const idx = posts.findIndex((x) => x.slug === p.slug);
+    const next = posts[(idx + 1) % posts.length];
+
+    const bodyHtml = p.body.map((para) => `<p class="lv-lead lv-reveal" style="max-width:58ch;margin-bottom:1.5rem;">${esc(para)}</p>`).join("");
+
+    root.innerHTML = `
+      <a href="#/blog" class="lv-nav-link" data-cursor-label="← Back">← All posts</a>
+
+      <header style="margin-top:2rem;">
+        <div class="v1-meta-row" style="border-top:none;">
+          <span>${esc(p.dateLabel)}</span>
+          <span>${esc(p.readingTime)} read</span>
+        </div>
+        <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2rem,5vw,4rem);">
+          <em>${esc(p.title)}</em>
+        </h1>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
+          ${p.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
+        </div>
+      </header>
+
+      <div style="margin-top:3.5rem;max-width:62ch;">${bodyHtml}</div>
+
+      ${next && next.slug !== p.slug ? `
+        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding:3rem 0;border-top:1px solid var(--rule);">
+          <div class="lv-eyebrow">Next post →</div>
+          <h2 class="v1-case-title" style="margin-top:1rem;font-size:clamp(1.5rem,3vw,2.2rem);">${esc(next.title)}</h2>
+          <div style="margin-top:0.75rem;color:var(--ink-3);font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;">
+            ${esc(next.dateLabel)} · ${esc(next.readingTime)}
+          </div>
+        </a>` : ""}
+    `;
+    renderScribbles();
+  }
+
+  function renderV3Post(p) {
+    const root = $("#v3-post-body");
+    if (!root) return;
+    const posts = D.posts || [];
+    const idx = posts.findIndex((x) => x.slug === p.slug);
+    const next = posts[(idx + 1) % posts.length];
+
+    const bodyHtml = p.body.map((para) => `<p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">${esc(para)}</p>`).join("");
+
+    const idxNum = String(idx + 1).padStart(2, "0");
+    const total = String(posts.length).padStart(2, "0");
+
+    root.innerHTML = `
+      <a href="#/blog" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);text-decoration:none;letter-spacing:0.08em;" data-cursor-label="← Back">← ../blog</a>
+
+      <header style="margin-top:2rem;">
+        <div class="v3-kicker">
+          <span>POST / ${idxNum} / ${total}</span>
+          <span class="sep">◆</span>
+          <span>${esc(p.dateLabel)}</span>
+          <span class="sep">◆</span>
+          <span>${esc(p.readingTime)}</span>
+        </div>
+        <h1 class="v3-hero-title lv-reveal" style="font-size:clamp(1.75rem,5vw,3.75rem);margin-top:1.5rem;">${esc(p.title)}</h1>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem;">
+          ${p.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}
+        </div>
+      </header>
+
+      <div style="margin-top:4rem;max-width:64ch;">${bodyHtml}</div>
+
+      ${next && next.slug !== p.slug ? `
+        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:5rem;padding:2.5rem 0;border-top:2px solid var(--rule);text-decoration:none;color:inherit;">
+          <div class="v3-kicker"><span>→ next.post</span></div>
+          <h2 class="v3-hero-title" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-top:1rem;">${esc(next.title)}</h2>
+          <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent);">
+            ${esc(next.dateLabel)} · ${esc(next.readingTime)} →
+          </div>
+        </a>` : ""}
+    `;
+  }
+
+  // ========================================================================
   // DYNAMIC HOME + WORK CASE LISTS (injected so data is one source of truth)
   // ========================================================================
   function renderCaseLists() {
@@ -590,6 +721,7 @@
   // ========================================================================
   function boot() {
     renderCaseLists();
+    renderBlogLists();
     renderClientStrip();
     renderScribbles();
     initSwitcher();
