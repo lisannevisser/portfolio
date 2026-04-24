@@ -133,7 +133,8 @@ Dafür gibt es den **Rollback-Flow** (siehe unten) und optional den
 ### Einmaliges GitHub-Setup
 
 Damit Auto-Merge wirklich sicher greift, muss GitHub zwei Dinge wissen.
-Diese zwei Einstellungen müssen **einmal** im Browser gesetzt werden:
+Diese zwei Einstellungen müssen **einmal** im Browser gesetzt werden
+und bleiben dann für alle zukünftigen PRs aktiv:
 
 **1. Branch-Protection auf `main`**
 GitHub → Repository Settings → Branches → "Add rule" (oder "Add ruleset"):
