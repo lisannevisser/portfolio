@@ -470,6 +470,13 @@ a { color: inherit; }
   border: 2px solid transparent; cursor: pointer;
 }
 .lv-hue-row button.is-active { border-color: var(--ink); }
+.lv-hue-row button[data-hue="22"]  { background: oklch(0.62 0.15 22); }
+.lv-hue-row button[data-hue="88"]  { background: oklch(0.62 0.15 88); }
+.lv-hue-row button[data-hue="150"] { background: oklch(0.62 0.15 150); }
+.lv-hue-row button[data-hue="200"] { background: oklch(0.62 0.15 200); }
+.lv-hue-row button[data-hue="265"] { background: oklch(0.62 0.15 265); }
+.lv-hue-row button[data-hue="310"] { background: oklch(0.62 0.15 310); }
+.lv-hue-row button[data-hue="340"] { background: oklch(0.62 0.15 340); }
 
 .lv-tweaks-toggle {
   position: fixed; bottom: 1rem; right: 1rem; z-index: 9499;
