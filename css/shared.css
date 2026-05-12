@@ -538,3 +538,165 @@ html { cursor: none; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   Post body blocks (used by the blog post renderers in both variations)
+   - Reset all direct-child margins, then drive vertical rhythm from the
+     container so individual block styles don't fight the gap rule.
+   ========================================================================== */
+.lv-post-body { max-width: 64ch; }
+.lv-post-body > * { margin: 0; }
+.lv-post-body > * + * { margin-top: 1.5rem; }
+.lv-post-body > .lv-post-h2 + *,
+.lv-post-body > .lv-post-h3 + * { margin-top: 1rem; }
+.lv-post-body > * + .lv-post-h2 { margin-top: 3rem; }
+.lv-post-body > * + .lv-post-h3 { margin-top: 2.25rem; }
+.lv-post-body > * + .lv-post-figure,
+.lv-post-body > * + .lv-post-quote,
+.lv-post-body > * + .lv-post-callout { margin-top: 2.5rem; }
+.lv-post-body > .lv-post-figure + *,
+.lv-post-body > .lv-post-quote + *,
+.lv-post-body > .lv-post-callout + * { margin-top: 2.5rem; }
+
+/* Paragraph + lead */
+.lv-post-p { font-size: 1.05rem; line-height: 1.7; color: var(--ink-2); }
+.lv-post-p strong { color: var(--ink); font-weight: 600; }
+.lv-post-p em { font-style: italic; }
+.lv-post-lead {
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  line-height: 1.55; color: var(--ink);
+}
+[data-variation="v1"] .lv-post-lead {
+  font-family: var(--font-display); font-style: italic; font-weight: 300;
+  letter-spacing: -0.005em;
+}
+
+/* Headings */
+.lv-post-h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+[data-variation="v1"] .lv-post-h2 {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+}
+[data-variation="v3"] .lv-post-h2 {
+  font-family: var(--font-body); font-weight: 600;
+}
+.lv-post-h3 {
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.3; color: var(--ink);
+}
+[data-variation="v1"] .lv-post-h3 {
+  font-family: var(--font-body); font-weight: 600; letter-spacing: -0.01em;
+}
+[data-variation="v3"] .lv-post-h3 {
+  font-family: var(--font-mono); font-size: 0.82rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 400; color: var(--accent);
+}
+
+/* Pullquote */
+.lv-post-quote {
+  padding: 1.5rem 0 1.5rem 1.5rem;
+  border-left: 2px solid var(--accent);
+}
+.lv-post-quote p {
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.3;
+  color: var(--ink); margin: 0;
+}
+[data-variation="v1"] .lv-post-quote p {
+  font-family: var(--font-display); font-style: italic; font-weight: 300;
+  letter-spacing: -0.01em;
+}
+[data-variation="v3"] .lv-post-quote p {
+  font-family: var(--font-body); font-weight: 500; letter-spacing: -0.015em;
+}
+.lv-post-quote cite {
+  display: block; margin-top: 0.75rem;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.1em; color: var(--ink-3); font-style: normal;
+  text-transform: uppercase;
+}
+
+/* Lists */
+.lv-post-list {
+  font-size: 1.05rem; line-height: 1.7; color: var(--ink-2);
+  padding-left: 1.25rem;
+}
+.lv-post-list li { margin: 0 0 0.5rem; }
+.lv-post-list li::marker { color: var(--accent); }
+.lv-post-list li strong { color: var(--ink); font-weight: 600; }
+
+/* Figure (placeholder visual block; swap in real <img> later) */
+.lv-post-figure {
+  margin: 0;
+  --post-figure-hue: 200;
+}
+.lv-post-figure .frame {
+  aspect-ratio: 16 / 9;
+  background:
+    linear-gradient(135deg,
+      oklch(0.78 0.06 var(--post-figure-hue)) 0%,
+      oklch(0.62 0.12 var(--post-figure-hue)) 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+[data-variation="v1"] .lv-post-figure .frame { border-radius: var(--radius-lg); }
+[data-variation="v3"] .lv-post-figure .frame { border: 1px solid var(--rule); }
+.lv-post-figure .frame .label {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: oklch(1 0 0 / 0.7);
+}
+.lv-post-figure figcaption {
+  margin-top: 0.75rem; font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Callout */
+.lv-post-callout {
+  padding: 1.5rem 1.75rem;
+  background: var(--paper-2);
+  border-left: 3px solid var(--accent);
+}
+[data-variation="v1"] .lv-post-callout { border-radius: var(--radius-md); }
+[data-variation="v3"] .lv-post-callout {
+  border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+}
+.lv-post-callout-label {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 0.5rem;
+}
+.lv-post-callout p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--ink-2); }
+
+/* Divider */
+.lv-post-divider {
+  border: 0; height: 1px; background: var(--rule);
+  margin: 3rem auto; max-width: 4rem;
+  position: relative;
+}
+.lv-post-divider.has-symbol {
+  background: transparent; height: auto;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.85rem;
+  color: var(--ink-3); letter-spacing: 0.5em;
+}
+
+/* Code */
+.lv-post-code {
+  margin: 0; padding: 1.25rem 1.5rem;
+  background: var(--paper-2);
+  font-family: var(--font-mono); font-size: 0.85rem;
+  line-height: 1.6; color: var(--ink-2);
+  overflow-x: auto;
+}
+[data-variation="v1"] .lv-post-code { border-radius: var(--radius-md); }
+[data-variation="v3"] .lv-post-code { border: 1px solid var(--rule); }
+.lv-post-code .lang {
+  display: block; margin-bottom: 0.75rem;
+  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
