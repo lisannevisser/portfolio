@@ -215,6 +215,52 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "anatomy-of-a-long-form-post",
+      title: "Anatomy of a long-form post",
+      date: "2026-05-12",
+      dateLabel: "May 2026",
+      readingTime: "6 min",
+      tags: ["Writing", "Design system"],
+      excerpt: "A walk through every building block I use when a post needs more than paragraphs - headings, pull quotes, lists, figures, callouts, and code.",
+      body: [
+        { kind: "lead", text: "Most posts on this blog are five tight paragraphs and out. Some need more room to breathe: a few headings, a pull quote, a list, maybe a figure. This is the kitchen sink - every block type I use, laid out in one place so I can see them next to each other." },
+        { kind: "h2", text: "Why blocks beat blobs" },
+        { kind: "paragraph", text: "Writing a long post as one wall of paragraphs is fine until the reader starts skimming. The moment they skim, structure becomes the message. Headings give the page a skeleton. Pull quotes hold attention. Lists answer **how many** and **in what order**. A figure says **this is what it looked like**. The job of the block system is to make each of those moves cheap." },
+        { kind: "paragraph", text: "I want to be able to drop a heading in without thinking about CSS. I want a pull quote to feel different in v1 (italic display serif) and v3 (heavier sans, monospace caption), without me writing two versions. The data is one source of truth; the variation styles do the rest." },
+        { kind: "h3", text: "The block types, briefly" },
+        { kind: "list", style: "bullet", items: [
+          { title: "Lead.", text: "A bigger intro paragraph that signals the start of the piece." },
+          { title: "Heading 2 and 3.", text: "Section and subsection breaks - the page's skeleton." },
+          { title: "Paragraph.", text: "The default. Supports inline **bold** and *italic*." },
+          { title: "Pull quote.", text: "A claim the post is making, weighted to land." },
+          { title: "List.", text: "Bullet or numbered. Items can be plain or **title plus body**." },
+          { title: "Figure.", text: "A placeholder visual block today, real images later." },
+          { title: "Callout.", text: "A boxed aside for context, footnotes, or warnings." },
+          { title: "Divider.", text: "A short rule or a glyph to mark a beat change." },
+          { title: "Code.", text: "Monospaced block for snippets and config." }
+        ]},
+        { kind: "quote", text: "Structure is not decoration. It is the part of the writing that tells the reader where they are.", attribution: "Note to self" },
+        { kind: "h2", text: "What a figure looks like" },
+        { kind: "paragraph", text: "Right now the figure block renders a coloured placeholder so I can lay out posts before the visuals exist. When a real image is ready, the same block accepts a source and alt text and the placeholder goes away." },
+        { kind: "figure", hue: 265, label: "Figure placeholder", caption: "Fig. 1 - block layout preview, real image to follow." },
+        { kind: "h3", text: "Numbered list, when order matters" },
+        { kind: "list", style: "numbered", items: [
+          "Pick the smallest shape that fits the idea.",
+          "Write the post in one sitting, no blocks yet.",
+          "Pass two: add headings only.",
+          "Pass three: promote one sentence to a pull quote, add a list if you find yourself counting in prose.",
+          "Last pass: read it aloud."
+        ]},
+        { kind: "callout", label: "Note", text: "Callouts are for the thing that does not belong in the main flow but would be sad to lose. Definitions, footnotes, a polite warning. Use sparingly - one or two per post." },
+        { kind: "divider", symbol: "◆ ◆ ◆" },
+        { kind: "h2", text: "A code block, for the rare technical aside" },
+        { kind: "paragraph", text: "Not every post needs one, but design ops and tooling posts often do. The block keeps the type at monospace and gives the language a small label up top." },
+        { kind: "code", lang: "ts", code: "type Block =\n  | { kind: \"paragraph\"; text: string }\n  | { kind: \"h2\" | \"h3\"; text: string }\n  | { kind: \"quote\"; text: string; attribution?: string }\n  | { kind: \"list\"; style: \"bullet\" | \"numbered\"; items: Item[] }\n  | { kind: \"figure\"; hue?: number; label?: string; caption?: string }\n  | { kind: \"callout\"; label?: string; text: string }\n  | { kind: \"divider\"; symbol?: string }\n  | { kind: \"code\"; lang?: string; code: string };" },
+        { kind: "h2", text: "What's next" },
+        { kind: "paragraph", text: "Real images. A two-column layout for short side-by-sides. And, eventually, a way to embed a small interactive demo for the design-ops posts. None of that is urgent. The point of this kitchen-sink post is to make sure the foundation holds before the writing starts in earnest." }
+      ]
+    },
+    {
       slug: "chatgpt-chose-everyone",
       title: "ChatGPT chose everyone. Claude chose developers.",
       date: "2026-05-09",
