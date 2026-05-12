@@ -553,6 +553,77 @@
     }
   }
 
+  // Inline marks: **bold** and *italic*. Applied AFTER esc(), so we re-introduce
+  // a tightly-scoped set of tags. Keep this conservative.
+  function inlineMarks(text) {
+    return esc(text)
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<em>$2</em>");
+  }
+
+  // Render one post-body block. Strings are paragraphs (backward-compat).
+  // Objects dispatch on .kind.
+  function renderPostBlock(b) {
+    if (typeof b === "string") {
+      return `<p class="lv-post-p lv-reveal">${inlineMarks(b)}</p>`;
+    }
+    const kind = b.kind;
+    if (kind === "paragraph") {
+      return `<p class="lv-post-p lv-reveal">${inlineMarks(b.text || "")}</p>`;
+    }
+    if (kind === "lead") {
+      return `<p class="lv-post-lead lv-reveal">${inlineMarks(b.text || "")}</p>`;
+    }
+    if (kind === "h2") {
+      return `<h2 class="lv-post-h2 lv-reveal">${inlineMarks(b.text || "")}</h2>`;
+    }
+    if (kind === "h3") {
+      return `<h3 class="lv-post-h3 lv-reveal">${inlineMarks(b.text || "")}</h3>`;
+    }
+    if (kind === "quote") {
+      const cite = b.attribution
+        ? `<cite>${esc(b.attribution)}</cite>` : "";
+      return `<blockquote class="lv-post-quote lv-reveal"><p>${inlineMarks(b.text || "")}</p>${cite}</blockquote>`;
+    }
+    if (kind === "list") {
+      const tag = b.style === "numbered" ? "ol" : "ul";
+      const items = (b.items || []).map((it) => {
+        if (typeof it === "string") return `<li>${inlineMarks(it)}</li>`;
+        if (it && it.title) {
+          return `<li><strong>${inlineMarks(it.title)}</strong> ${inlineMarks(it.text || "")}</li>`;
+        }
+        return `<li>${inlineMarks((it && it.text) || "")}</li>`;
+      }).join("");
+      return `<${tag} class="lv-post-list lv-reveal">${items}</${tag}>`;
+    }
+    if (kind === "figure") {
+      const hue = Number.isFinite(b.hue) ? b.hue : 200;
+      const label = b.label ? `<span class="label">${esc(b.label)}</span>` : "";
+      const caption = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : "";
+      return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};"><div class="frame" role="img" aria-label="${esc(b.alt || b.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+    }
+    if (kind === "callout") {
+      const label = b.label ? `<div class="lv-post-callout-label">${esc(b.label)}</div>` : "";
+      return `<aside class="lv-post-callout lv-reveal">${label}<p>${inlineMarks(b.text || "")}</p></aside>`;
+    }
+    if (kind === "divider") {
+      if (b.symbol) {
+        return `<div class="lv-post-divider has-symbol lv-reveal" role="separator" aria-hidden="true">${esc(b.symbol)}</div>`;
+      }
+      return `<hr class="lv-post-divider lv-reveal" />`;
+    }
+    if (kind === "code") {
+      const lang = b.lang ? `<span class="lang">${esc(b.lang)}</span>` : "";
+      return `<pre class="lv-post-code lv-reveal">${lang}<code>${esc(b.code || "")}</code></pre>`;
+    }
+    // Unknown block: render as paragraph fallback.
+    return `<p class="lv-post-p lv-reveal">${inlineMarks(b.text || "")}</p>`;
+  }
+
+  function renderPostBody(blocks) {
+    return (blocks || []).map(renderPostBlock).join("\n");
+  }
+
   function renderV1Post(p) {
     const root = $("#v1-post-body");
     if (!root) return;
@@ -560,7 +631,7 @@
     const idx = posts.findIndex((x) => x.slug === p.slug);
     const next = posts[(idx + 1) % posts.length];
 
-    const bodyHtml = p.body.map((para) => `<p class="lv-lead lv-reveal" style="max-width:58ch;margin-bottom:1.5rem;">${esc(para)}</p>`).join("");
+    const bodyHtml = renderPostBody(p.body);
 
     root.innerHTML = `
       <a href="#/blog" class="lv-nav-link" data-cursor-label="← Back">← All posts</a>
@@ -578,7 +649,7 @@
         </div>
       </header>
 
-      <div style="margin-top:3.5rem;max-width:62ch;">${bodyHtml}</div>
+      <div class="lv-post-body" style="margin-top:3.5rem;">${bodyHtml}</div>
 
       ${next && next.slug !== p.slug ? `
         <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding:3rem 0;border-top:1px solid var(--rule);">
@@ -599,7 +670,7 @@
     const idx = posts.findIndex((x) => x.slug === p.slug);
     const next = posts[(idx + 1) % posts.length];
 
-    const bodyHtml = p.body.map((para) => `<p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">${esc(para)}</p>`).join("");
+    const bodyHtml = renderPostBody(p.body);
 
     const idxNum = String(idx + 1).padStart(2, "0");
     const total = String(posts.length).padStart(2, "0");
@@ -621,7 +692,7 @@
         </div>
       </header>
 
-      <div style="margin-top:4rem;max-width:64ch;">${bodyHtml}</div>
+      <div class="lv-post-body" style="margin-top:4rem;">${bodyHtml}</div>
 
       ${next && next.slug !== p.slug ? `
         <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:5rem;padding:2.5rem 0;border-top:2px solid var(--rule);text-decoration:none;color:inherit;">

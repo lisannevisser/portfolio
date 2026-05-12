@@ -22,10 +22,7 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..700;1,300..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300..700&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400..500&family=Caveat:wght@400..700&display=swap" rel="stylesheet" />
-
+  <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/shared.css" />
   <link rel="stylesheet" href="css/v1.css" />
   <link rel="stylesheet" href="css/v3.css" />
@@ -197,9 +194,9 @@
           <!-- Terminal card -->
           <div class="v3-terminal lv-reveal">
             <div class="v3-terminal-head">
-              <span class="dot" style="background:oklch(0.7 0.2 30);"></span>
-              <span class="dot" style="background:oklch(0.75 0.18 85);"></span>
-              <span class="dot" style="background:oklch(0.68 0.17 145);"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
               <span class="path">~/lisanne/about.yml</span>
             </div>
 <pre><span class="cmt"># what I do</span>
@@ -453,7 +450,7 @@
             <div><span class="label">focus_groups_run:</span> <span class="val">1 (first in 25y)</span></div>
             <div><span class="label">books_read_2025:</span> <span class="val">~30</span></div>
             <div><span class="label">aerial_yoga:</span> <span class="val">certified</span></div>
-            <div><span class="label">availability:</span> <span style="color:oklch(0.78 0.18 145);">● open</span></div>
+            <div><span class="label">availability:</span> <span class="is-online">● open</span></div>
           </div>
         </div>
 
@@ -711,11 +708,6 @@
               This site is hosted on GitHub Pages (GitHub Inc., USA). When you open it, your browser transmits technically necessary data: IP address, date and time, requested URL, referrer, browser, and operating system. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in stable operation). Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
             </p>
 
-            <div class="lv-eyebrow lv-reveal">Google Fonts</div>
-            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
-              Fonts are loaded from Google Fonts (Google Ireland Ltd.). In the process, your IP address is transmitted to Google. Legal basis: Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
-            </p>
-
             <div class="lv-eyebrow lv-reveal">YouTube embeds</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
               Some case studies embed videos from YouTube (Google Ireland Ltd.). I use the privacy-enhanced mode (youtube-nocookie.com), which means YouTube does not set cookies until you press play. Once you start a video, your IP address and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent through clicking play) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
@@ -762,11 +754,6 @@
             <div class="v3-story-head lv-reveal"><span>./server-logs</span></div>
             <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
               Hosted on GitHub Pages (GitHub Inc., USA). On request your browser transmits technically necessary data: IP, date, URL, referrer, browser, OS. Legal basis: Art. 6(1)(f) GDPR. Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./google-fonts</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Fonts are loaded from Google Fonts (Google Ireland Ltd.). Your IP is transmitted to Google in the process. Legal basis: Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
             </p>
 
             <div class="v3-story-head lv-reveal"><span>./youtube</span></div>
@@ -847,13 +834,13 @@
     <div class="lv-tweak-row">
       <label>Accent hue</label>
       <div class="lv-hue-row">
-        <button type="button" data-hue="22"  style="background:oklch(0.62 0.15 22);" title="Warm"></button>
-        <button type="button" data-hue="88"  style="background:oklch(0.62 0.15 88);" title="Citrine"></button>
-        <button type="button" data-hue="150" style="background:oklch(0.62 0.15 150);" title="Jade"></button>
-        <button type="button" data-hue="200" style="background:oklch(0.62 0.15 200);" title="Sea"></button>
-        <button type="button" data-hue="265" style="background:oklch(0.62 0.15 265);" title="Violet"></button>
-        <button type="button" data-hue="310" style="background:oklch(0.62 0.15 310);" title="Pastel"></button>
-        <button type="button" data-hue="340" style="background:oklch(0.62 0.15 340);" title="Rose"></button>
+        <button type="button" data-hue="22"  title="Warm"></button>
+        <button type="button" data-hue="88"  title="Citrine"></button>
+        <button type="button" data-hue="150" title="Jade"></button>
+        <button type="button" data-hue="200" title="Sea"></button>
+        <button type="button" data-hue="265" title="Violet"></button>
+        <button type="button" data-hue="310" title="Pastel"></button>
+        <button type="button" data-hue="340" title="Rose"></button>
       </div>
     </div>
     <div class="lv-tweak-row">

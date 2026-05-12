@@ -204,6 +204,10 @@
 [data-variation="v3"] .v3-terminal-head .dot {
   width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
 }
+[data-variation="v3"] .v3-terminal-head .dot:nth-child(1) { background: oklch(0.7 0.2 30); }
+[data-variation="v3"] .v3-terminal-head .dot:nth-child(2) { background: oklch(0.75 0.18 85); }
+[data-variation="v3"] .v3-terminal-head .dot:nth-child(3) { background: oklch(0.68 0.17 145); }
+[data-variation="v3"] .v3-stats-card .is-online { color: oklch(0.78 0.18 145); }
 [data-variation="v3"] .v3-terminal-head .path {
   margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem;
   color: var(--ink-3); letter-spacing: 0.1em;

@@ -215,6 +215,69 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "anatomy-of-a-long-form-post",
+      title: "Anatomy of a long-form post",
+      date: "2026-05-12",
+      dateLabel: "May 2026",
+      readingTime: "6 min",
+      tags: ["Writing", "Design system"],
+      excerpt: "A walk through every building block I use when a post needs more than paragraphs - headings, pull quotes, lists, figures, callouts, and code.",
+      body: [
+        { kind: "lead", text: "Most posts on this blog are five tight paragraphs and out. Some need more room to breathe: a few headings, a pull quote, a list, maybe a figure. This is the kitchen sink - every block type I use, laid out in one place so I can see them next to each other." },
+        { kind: "h2", text: "Why blocks beat blobs" },
+        { kind: "paragraph", text: "Writing a long post as one wall of paragraphs is fine until the reader starts skimming. The moment they skim, structure becomes the message. Headings give the page a skeleton. Pull quotes hold attention. Lists answer **how many** and **in what order**. A figure says **this is what it looked like**. The job of the block system is to make each of those moves cheap." },
+        { kind: "paragraph", text: "I want to be able to drop a heading in without thinking about CSS. I want a pull quote to feel different in v1 (italic display serif) and v3 (heavier sans, monospace caption), without me writing two versions. The data is one source of truth; the variation styles do the rest." },
+        { kind: "h3", text: "The block types, briefly" },
+        { kind: "list", style: "bullet", items: [
+          { title: "Lead.", text: "A bigger intro paragraph that signals the start of the piece." },
+          { title: "Heading 2 and 3.", text: "Section and subsection breaks - the page's skeleton." },
+          { title: "Paragraph.", text: "The default. Supports inline **bold** and *italic*." },
+          { title: "Pull quote.", text: "A claim the post is making, weighted to land." },
+          { title: "List.", text: "Bullet or numbered. Items can be plain or **title plus body**." },
+          { title: "Figure.", text: "A placeholder visual block today, real images later." },
+          { title: "Callout.", text: "A boxed aside for context, footnotes, or warnings." },
+          { title: "Divider.", text: "A short rule or a glyph to mark a beat change." },
+          { title: "Code.", text: "Monospaced block for snippets and config." }
+        ]},
+        { kind: "quote", text: "Structure is not decoration. It is the part of the writing that tells the reader where they are.", attribution: "Note to self" },
+        { kind: "h2", text: "What a figure looks like" },
+        { kind: "paragraph", text: "Right now the figure block renders a coloured placeholder so I can lay out posts before the visuals exist. When a real image is ready, the same block accepts a source and alt text and the placeholder goes away." },
+        { kind: "figure", hue: 265, label: "Figure placeholder", caption: "Fig. 1 - block layout preview, real image to follow." },
+        { kind: "h3", text: "Numbered list, when order matters" },
+        { kind: "list", style: "numbered", items: [
+          "Pick the smallest shape that fits the idea.",
+          "Write the post in one sitting, no blocks yet.",
+          "Pass two: add headings only.",
+          "Pass three: promote one sentence to a pull quote, add a list if you find yourself counting in prose.",
+          "Last pass: read it aloud."
+        ]},
+        { kind: "callout", label: "Note", text: "Callouts are for the thing that does not belong in the main flow but would be sad to lose. Definitions, footnotes, a polite warning. Use sparingly - one or two per post." },
+        { kind: "divider", symbol: "◆ ◆ ◆" },
+        { kind: "h2", text: "A code block, for the rare technical aside" },
+        { kind: "paragraph", text: "Not every post needs one, but design ops and tooling posts often do. The block keeps the type at monospace and gives the language a small label up top." },
+        { kind: "code", lang: "ts", code: "type Block =\n  | { kind: \"paragraph\"; text: string }\n  | { kind: \"h2\" | \"h3\"; text: string }\n  | { kind: \"quote\"; text: string; attribution?: string }\n  | { kind: \"list\"; style: \"bullet\" | \"numbered\"; items: Item[] }\n  | { kind: \"figure\"; hue?: number; label?: string; caption?: string }\n  | { kind: \"callout\"; label?: string; text: string }\n  | { kind: \"divider\"; symbol?: string }\n  | { kind: \"code\"; lang?: string; code: string };" },
+        { kind: "h2", text: "What's next" },
+        { kind: "paragraph", text: "Real images. A two-column layout for short side-by-sides. And, eventually, a way to embed a small interactive demo for the design-ops posts. None of that is urgent. The point of this kitchen-sink post is to make sure the foundation holds before the writing starts in earnest." }
+      ]
+    },
+    {
+      slug: "chatgpt-chose-everyone",
+      title: "ChatGPT chose everyone. Claude chose developers.",
+      date: "2026-05-09",
+      dateLabel: "May 2026",
+      readingTime: "4 min",
+      tags: ["Strategy", "Product"],
+      excerpt: "Why Anthropic picked the smaller user group on purpose, and how that bet compounded into one of the fastest-growing companies of the decade.",
+      body: [
+        "ChatGPT had every head start a product can ask for. A year of consumer mindshare ahead of Claude, household-name brand, the most-downloaded app of the decade. By early 2026 it still had over 900 million weekly users and around 25 billion dollars in annualised revenue. And yet Anthropic now runs ahead of it on revenue, with analysts beginning to talk about it as potentially one of the highest-revenue companies of the decade. The interesting question is how that happened in three years.",
+        "Anthropic did not just pick a niche. They picked a group of users whose work was already shaped by the technology they were building. Developers immediately understand what a language model can do. They write code that compounds into more value, and they are paid to adopt tools that make them faster. When the user group's job is already shaped by what you sell, the product-market fit is half-built before you start.",
+        "Everyone is the most expensive user group you can design for. When the brief is mass market, every decision becomes a compromise. Onboarding has to work for a teenager and a CFO. Guardrails have to be tuned for the median. Surface area has to keep getting wider. Optimising for everyone is a tax that nobody on the team feels until they try to ship. Anthropic skipped it. They built Claude Code: a tool for a developer writing code in a terminal, shaped exactly to that work. It went from launch to 2.5 billion dollars in annualised revenue in roughly a year, more than half of it from enterprise.",
+        "And then they kept earning the right to expand. The desktop client came after Claude Code, and then Cowork, both built for the people who work next to developers: product managers, designers, ops, support. The model underneath is the same. What sits on top is shaped differently for each role. A developer who pays for Claude brings it into the team. The team brings it into the company. A ten-seat engineering contract turns into a hundred seats across functions. That is the shape of developer-first B2B growth, and it is why roughly 80 percent of Anthropic's revenue comes from API and enterprise, and only around 10 to 15 percent from consumer subscriptions.",
+        "None of this would land without a model good enough to carry it. Claude Opus is an asset on its own. It shows up in Cursor and dozens of other products precisely because it is the strongest underlying model for the work developers care about. The ICP discipline and the model quality compound on each other. Neither alone would have been enough.",
+        "Growth is not the only metric a company should be judged by, and the long arc still has to deliver margins, retention, durability. But the lesson for product people here is plainer than people usually want it to be. Pick the user group whose work is already shaped by your technology, and earn the right to expand outward from there. The trajectory tends to reward that more than the comfortable answer of serving everyone at once."
+      ]
+    },
+    {
       slug: "research-before-pixels",
       title: "Research before pixels",
       date: "2026-03-12",
