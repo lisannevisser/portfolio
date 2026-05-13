@@ -1,0 +1,3 @@
+# Sites that 404 on bots but resolve fine in real browsers.
+# LinkedIn returns 404 to non-logged-in crawlers as anti-scraping.
+https://www\.linkedin\.com/.*
