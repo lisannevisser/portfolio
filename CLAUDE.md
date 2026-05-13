@@ -107,11 +107,26 @@ narrative quietly, not as bullet points or headings.
 - Gist in 60 seconds. Detail rewards deeper reading but isn't
   required for the takeaway.
 
-**Take-aways = reflection, not status report**
-- Not: "We are currently evaluating effectiveness using analytics."
-- Yes: "If I had insisted on pre-launch testing, we would have caught
-  X. The design system held up under Y. Next time I would push harder
-  on Z."
+**Limitations card at the bottom**
+End each case study with a scientific-paper style Limitations card,
+visually distinct from the regular sections. 3-5 short items, each
+naming a scope or validity caveat about the work:
+- Methodological constraints (e.g. "external user testing" — what was
+  validated by what method)
+- Sample / coverage limits (e.g. "desktop-first" — what got the
+  attention, what didn't)
+- Team / role scope (e.g. "solo design lead" — breadth vs depth)
+- Evidence still building (e.g. "post-launch metrics started after
+  launch, not before")
+
+The point is honest scoping of what the case study can and cannot
+claim. Each item is one short paragraph. Frame as scope, not
+complaint: "Decisions used internal proxies and the live launch as
+test phase" beats "we had no budget for testing".
+
+The limitations card replaces a separate take-aways paragraph; the
+forward-looking "next time I'd…" sentence belongs inside the relevant
+limitation item, not as its own block.
 
 ### Editing
 
