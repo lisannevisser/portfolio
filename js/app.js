@@ -368,15 +368,27 @@
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
-        const items = s.items.map((it) => `
+        const renderItems = (arr) => arr.map((it) => `
           <div class="v1-limitation-row">
             <h4>${esc(it.title)}</h4>
             <p>${esc(it.body)}</p>
           </div>`).join("");
-        return `
-          <section class="v1-limitations-card lv-reveal">
+        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const frontFace = `
+          <div class="v1-limitations-face is-front">
+            ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">↻ Opportunities</button>` : ""}
             <div class="v1-limitations-label">${esc(s.title || "Limitations")}</div>
-            <div class="v1-limitations-grid">${items}</div>
+            <div class="v1-limitations-grid">${renderItems(s.items)}</div>
+          </div>`;
+        const backFace = hasOpp ? `
+          <div class="v1-limitations-face is-back" aria-hidden="true">
+            <button class="v1-limitations-flip" type="button" aria-pressed="true">↻ Limitations</button>
+            <div class="v1-limitations-label">${esc(s.oppositeTitle || "Opportunities")}</div>
+            <div class="v1-limitations-grid">${renderItems(s.opportunities)}</div>
+          </div>` : "";
+        return `
+          <section class="v1-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+            <div class="v1-limitations-card-inner">${frontFace}${backFace}</div>
           </section>`;
       }
       const i = narrativeIdx++;
@@ -481,15 +493,27 @@
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
-        const items = s.items.map((it) => `
+        const renderItems = (arr) => arr.map((it) => `
           <div class="v3-limitation-row">
             <h4>${esc(it.title)}</h4>
             <p>${esc(it.body)}</p>
           </div>`).join("");
-        return `
-          <section class="v3-limitations-card lv-reveal">
+        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const frontFace = `
+          <div class="v3-limitations-face is-front">
+            ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">[ flip → opportunities ]</button>` : ""}
             <div class="v3-limitations-label">// ${esc(s.title || "Limitations")}</div>
-            <div class="v3-limitations-grid">${items}</div>
+            <div class="v3-limitations-grid">${renderItems(s.items)}</div>
+          </div>`;
+        const backFace = hasOpp ? `
+          <div class="v3-limitations-face is-back" aria-hidden="true">
+            <button class="v3-limitations-flip" type="button" aria-pressed="true">[ flip → limitations ]</button>
+            <div class="v3-limitations-label">// ${esc(s.oppositeTitle || "Opportunities")}</div>
+            <div class="v3-limitations-grid">${renderItems(s.opportunities)}</div>
+          </div>` : "";
+        return `
+          <section class="v3-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+            <div class="v3-limitations-card-inner">${frontFace}${backFace}</div>
           </section>`;
       }
       const i = narrativeIdx++;
@@ -844,6 +868,24 @@
   // ========================================================================
   // BOOT
   // ========================================================================
+  function initFlipCards() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-limitations-flip, .v3-limitations-flip");
+      if (!btn) return;
+      const card = btn.closest(".v1-limitations-card, .v3-limitations-card");
+      if (!card) return;
+      const flipped = card.classList.toggle("is-flipped");
+      card.querySelectorAll(".is-front, .is-back").forEach((face) => {
+        const isBack = face.classList.contains("is-back");
+        face.setAttribute("aria-hidden", String(isBack !== flipped));
+      });
+      card.querySelectorAll(".v1-limitations-flip, .v3-limitations-flip").forEach((b) => {
+        const onBack = b.closest(".is-back");
+        b.setAttribute("aria-pressed", String(onBack ? !flipped : flipped));
+      });
+    });
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
@@ -856,6 +898,7 @@
     initTweaks();
     initEasterEgg();
     initMobileNav();
+    initFlipCards();
     renderRoute();
   }
 
