@@ -367,6 +367,18 @@
         const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
+      if (s.kind === "limitations" && s.items) {
+        const items = s.items.map((it) => `
+          <div class="v1-limitation-row">
+            <h4>${esc(it.title)}</h4>
+            <p>${esc(it.body)}</p>
+          </div>`).join("");
+        return `
+          <section class="v1-limitations-card lv-reveal">
+            <div class="v1-limitations-label">${esc(s.title || "Limitations")}</div>
+            <div class="v1-limitations-grid">${items}</div>
+          </section>`;
+      }
       const i = narrativeIdx++;
       let body = s.body ? `<p>${esc(s.body)}</p>` : "";
       let extra = "";
@@ -435,7 +447,8 @@
           <div class="v1-sticky-nav">
             <div class="lv-eyebrow">Contents</div>
             <ol style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.5rem;">
-              ${c.story.filter((s) => s.kind !== "figure").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
+              ${c.story.filter((s) => s.kind !== "figure" && s.kind !== "limitations").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
+              ${c.story.some((s) => s.kind === "limitations") ? `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--rule);">↳ ${esc(c.story.find((s) => s.kind === "limitations").title || "Limitations")}</li>` : ""}
             </ol>
           </div>
         </aside>
@@ -466,6 +479,18 @@
         const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      }
+      if (s.kind === "limitations" && s.items) {
+        const items = s.items.map((it) => `
+          <div class="v3-limitation-row">
+            <h4>${esc(it.title)}</h4>
+            <p>${esc(it.body)}</p>
+          </div>`).join("");
+        return `
+          <section class="v3-limitations-card lv-reveal">
+            <div class="v3-limitations-label">// ${esc(s.title || "Limitations")}</div>
+            <div class="v3-limitations-grid">${items}</div>
+          </section>`;
       }
       const i = narrativeIdx++;
       const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span><span class="tag">${

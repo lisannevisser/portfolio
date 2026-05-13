@@ -227,6 +227,42 @@
   font-size: 0.95rem; color: var(--ink-2); line-height: 1.5;
 }
 
+[data-variation="v1"] .v1-limitations-card {
+  margin: 3.5rem 0 2rem;
+  padding: 2.25rem 2.5rem;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  border-top: 3px solid var(--accent);
+}
+[data-variation="v1"] .v1-limitations-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.75rem;
+}
+[data-variation="v1"] .v1-limitations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem 2.5rem;
+}
+[data-variation="v1"] .v1-limitation-row h4 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+[data-variation="v1"] .v1-limitation-row p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
 [data-variation="v1"] .v1-sticky-nav { position: sticky; top: 5rem; }
 
 [data-variation="v1"] .v1-career-row {
@@ -320,6 +356,8 @@
   [data-variation="v1"] .v1-impact-cell { border-right: none; border-bottom: 1px solid var(--rule); }
   [data-variation="v1"] .v1-impact-cell:last-child { border-bottom: none; }
   [data-variation="v1"] .v1-framework-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 1rem 1.25rem; }
+  [data-variation="v1"] .v1-limitations-card { padding: 1.75rem 1.5rem; }
+  [data-variation="v1"] .v1-limitations-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   [data-variation="v1"] .v1-career-row { grid-template-columns: 1fr; gap: 0.35rem; padding: 1.25rem 0; }
   [data-variation="v1"] .v1-credo li { grid-template-columns: auto 1fr; }
 }
