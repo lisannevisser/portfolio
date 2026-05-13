@@ -24,6 +24,8 @@
     if (ts) document.documentElement.style.setProperty("--type-scale", ts);
     const density = localStorage.getItem("lv-density");
     if (density) document.documentElement.style.setProperty("--scribble-density", density);
+    const cursor = localStorage.getItem("lv-cursor");
+    document.documentElement.setAttribute("data-cursor", cursor === "off" ? "off" : "on");
   }
   bootstrapVars();
 
@@ -137,6 +139,21 @@
       const target = e.target.closest("[data-cursor-label], a, button, .lv-magnetic");
       if (!target) return;
       ring.classList.remove("is-hovering", "is-labelled");
+    });
+  }
+
+  function initCursorToggle() {
+    const btn = $(".lv-cursor-toggle");
+    if (!btn) return;
+    const apply = (on) => {
+      document.documentElement.setAttribute("data-cursor", on ? "on" : "off");
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+    };
+    apply(localStorage.getItem("lv-cursor") !== "off");
+    btn.addEventListener("click", () => {
+      const nextOn = document.documentElement.getAttribute("data-cursor") === "off";
+      localStorage.setItem("lv-cursor", nextOn ? "on" : "off");
+      apply(nextOn);
     });
   }
 
@@ -797,6 +814,7 @@
     renderScribbles();
     initSwitcher();
     initCursor();
+    initCursorToggle();
     initMagnetic();
     initTweaks();
     initEasterEgg();
