@@ -128,6 +128,14 @@ The limitations card replaces a separate take-aways paragraph; the
 forward-looking "next time I'd…" sentence belongs inside the relevant
 limitation item, not as its own block.
 
+**Optional: Opportunities on the back.** The Limitations card can
+flip to a second face labelled "Opportunities" — short forward-looking
+ideas for how the work could be extended (mobile-native pass, public
+component library, experimentation layer, etc.). 3-5 items, 1-2
+sentences each, builds on the actual project (not random product
+ideas). Same item shape as limitations: title + body. Opt-in per case
+study by adding an `opportunities` array to the limitations block.
+
 ### Editing
 
 The polish pass. Drafting and editing are separate steps.
