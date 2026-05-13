@@ -176,25 +176,86 @@ window.LV_DATA = {
       ]
     },
     {
-      slug: "website-relaunch",
-      title: "A 100-page website relaunch",
-      subtitle: "Audit, IA rework, and rollout, as the company's first designer",
+      slug: "website-relaunch-a",
+      title: "Cargoboard website relaunch · chronological",
+      subtitle: "140+ pages, new brand, new IA, no research budget · draft A",
       company: "Cargoboard",
-      year: "2020 — 2022",
-      role: "First designer · Website lead",
-      team: "With the marketing team; mentored a working student; hired a developer for marketing's own capacity",
-      duration: "TBD",
+      year: "2022 - 2023",
+      role: "Lead designer · End-to-end",
+      team: "1 designer (me) · marketing manager · frontend engineer · graphic designer · student assistant · HR agency",
+      duration: "March 2022 - January 2023",
       impact: [
-        { label: "Pages audited", value: "100+", note: "full content + IA review" },
-        { label: "Scope", value: "Audit → relaunch", note: "end-to-end" },
-        { label: "Marketing autonomy", value: "Enabled", note: "via dev hire" }
+        { label: "Pages relaunched", value: "140+", note: "in under a year" },
+        { label: "External research", value: "€0", note: "three internal proxies instead" },
+        { label: "Design system", value: "Daily use", note: "across web, print, internal" }
       ],
-      tags: ["Team building", "Website relaunch", "IA"],
+      tags: ["Website relaunch", "Brand", "Design system", "IA"],
       coverPaletteHue: 330,
-      tldr: "The marketing site had grown organically to 100+ pages, with inconsistent structure, voice, and visual language. I led the audit, IA rework, and relaunch, working closely with the marketing team. As the company's first designer, I mentored a working student and hired a developer so marketing could iterate independently.",
+      tldr: "Cargoboard, a B2B logistics startup, needed a new brand and 140+ pages relaunched in under a year, on a small team and with no budget for external user research. I treated the design system as the lever - if every brand decision produced reusable scaffolding, later pages would compound on earlier work. Three streams ran in parallel (brand, illustration, IA); final pages came last. Live since January 2023; the system is the default for all internal and external work since.",
       story: [
-        { kind: "section", title: "In progress", body: "This case is being written. Short version: as Cargoboard's first designer, I led the audit and relaunch of a 100-page marketing site, paired with a rebrand rollout, while building the design function from scratch." },
-        { kind: "figure", hue: 330, label: "Sitemap · before audit", caption: "Fig. 1 - The site as we found it. 100+ pages, drift across categories, three different navigation patterns." }
+        { kind: "section", title: "Introduction", body: "Cargoboard is a German B2B logistics provider, founded in 2019. After three years of growth, the founders wanted a website that matched the company they had become. That meant a rebrand, a new IA, and 140+ pages shipping in under a year, on a small team, without budget for external research." },
+        { kind: "section", title: "Problem", body: "Four things had to be solved at once. The deeper problem underneath: there was no system. Every new page or asset restarted the design from zero. Without scaffolding, the timeline was impossible." },
+        { kind: "framework", title: "What had to change", items: [
+          { k: "Dated UI", v: "Inconsistent web and print", effect: "No common ground across surfaces" },
+          { k: "Performance", v: "Unmaintained stack", effect: "Slow site, especially under growth" },
+          { k: "No scaffolding", v: "No brand manual, no system", effect: "Every new asset restarted from zero" },
+          { k: "Brand fit", v: "Founders felt outdated", effect: "Modern, dynamic, trustworthy was the brief" }
+        ]},
+        { kind: "section", title: "Process", body: "I treated the design system as the lever, not the deliverable. Three streams ran in parallel: brand (with HR's culture workshops feeding it), illustration (built from scratch with accessibility in from day one), and IA (the navigation rebuild). Final page design came last. By then most decisions were already made." },
+        { kind: "figure", hue: 330, label: "Parallel streams", caption: "Fig. 1 - Three streams running in parallel: brand, illustration, IA. Final pages composed from the system afterwards." },
+        { kind: "section", title: "Brand design", body: "The primary red is core to Cargoboard's identity, so we kept it and extended it into a system of tints, tones, and shades we now call \"signature red\". Added blue (secondary) and green (tertiary) so the brand had somewhere to go beyond a single bright accent. The logo stayed almost the same with minor touch-ups; the wordmark can now be used stand-alone for a sleeker look. Illustrations and illustrative icons were built with accessibility on multiple background colors in mind from the start." },
+        { kind: "section", title: "Information architecture", body: "The original navigation hid most of the site. Even Cargoboard's own employees used Google to find their own pages. Operative pages like optional insurance were the hardest to reach, which was a real business risk. I drew on Nielsen Norman patterns and Information Architecture for the Web and Beyond (Rosenfeld, Morville, Arango, O'Reilly 2015), then worked with the SEO team on a link structure that served both users and search. We tested with a card sort workshop and tree-tested in UXtweak with users recruited from the live site. Both confirmed our direction and surfaced a few wording fixes." },
+        { kind: "section", title: "Design and handoff", body: "I wanted mobile-first. Management chose desktop-first because the majority of Cargoboard's customers are desktop users (only ~5% on tablet). The numbers held up, so I accepted desktop-first. To keep mobile from becoming an afterthought, I sketched mobile alongside every desktop wireframe, and only moved to final mobile design once desktop was locked. Engineering kept Wordpress + Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. That constraint pushed the design system to be more disciplined - every component had to be reproducible by someone who couldn't open Figma." },
+        { kind: "framework", title: "Testing without testers", items: [
+          { k: "Customer service", v: "As proxy", effect: "Marked as hypothesis, not evidence" },
+          { k: "Tree testing", v: "UXtweak, recruited from live site", effect: "Highest-cost decision tested before ship" },
+          { k: "Launch as test", v: "Hotjar, GA, recordings live with relaunch", effect: "Next-best, since pre-launch budget was declined" }
+        ]},
+        { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs. New pages now ship on top of it without a designer in the loop on every one, which was the whole point. No post-launch quantitative data was available at launch. The hypothesis: the new IA reduces support tickets about finding pages, and internal teams self-serve from the system. Both became measurable once analytics had a few months of data." },
+        { kind: "section", title: "What worked", body: "Treating the design system as the lever, not the deliverable. Every page since launch has compounded on the system; without that scaffolding, the project wouldn't have shipped." },
+        { kind: "section", title: "What was forced on us", body: "Launch as the testing phase. It worked because we had no alternative. Next time I would push harder for a small pre-launch testing budget. The first weeks after launch absorbed feedback that should have been caught earlier." },
+        { kind: "section", title: "What I would revisit", body: "Desktop-first was correct for the user base, but mobile needs a dedicated pass now. Designing in parallel kept mobile shippable, but \"shippable\" isn't \"good\"." }
+      ]
+    },
+    {
+      slug: "website-relaunch-b",
+      title: "Cargoboard website relaunch · thematic",
+      subtitle: "140+ pages, new brand, new IA, no research budget · draft B",
+      company: "Cargoboard",
+      year: "2022 - 2023",
+      role: "Lead designer · End-to-end",
+      team: "1 designer (me) · marketing manager · frontend engineer · graphic designer · student assistant · HR agency",
+      duration: "March 2022 - January 2023",
+      impact: [
+        { label: "Pages relaunched", value: "140+", note: "in under a year" },
+        { label: "External research", value: "€0", note: "three internal proxies instead" },
+        { label: "Design system", value: "Daily use", note: "across web, print, internal" }
+      ],
+      tags: ["Website relaunch", "Brand", "Design system", "IA"],
+      coverPaletteHue: 330,
+      tldr: "Cargoboard, three years in, needed a new brand and 140+ pages relaunched in under a year, on a small team and with no budget for external user research. The interesting question was not what the new site should look like - it was how to ship that much, that fast, without testing, and not have it fall apart on contact with users. I treated the design system as the lever, used three internal proxies instead of external research, and held mobile shippable inside a desktop-first call I did not fully own.",
+      story: [
+        { kind: "section", title: "The constraint", body: "Cargoboard is a German B2B logistics provider, three years in. The brand had grown organically, the site had not been maintained, and there was no system underneath any of it. The founders wanted a modern, dynamic, trustworthy site. The harder constraint underneath the brief: 140+ pages had to ship in under a year, on a small team, with no budget for external user research. The interesting question was not \"what should the new site look like\". It was: how do you ship that much, that fast, without testing, and not have it fall apart on contact with users?" },
+        { kind: "section", title: "Approach", body: "I treated the design system as the lever, not the deliverable. If every brand decision produced reusable scaffolding - tokens, components, illustration rules, IA patterns - later pages would compound on earlier work instead of restarting from zero. Without that, the timeline was impossible." },
+        { kind: "framework", title: "Three parallel streams", items: [
+          { k: "Brand", v: "Signature red plus blue and green", effect: "Kept core identity, gave brand somewhere to go" },
+          { k: "Illustration", v: "From scratch", effect: "Accessibility on multi-bg colors from day one" },
+          { k: "IA", v: "Rebuilt around tasks and SEO", effect: "Drew on NN/g and the Rosenfeld IA book" }
+        ]},
+        { kind: "figure", hue: 330, label: "Streams converging", caption: "Fig. 1 - Three streams running in parallel, final pages composed from the system afterwards." },
+        { kind: "section", title: "Testing without testers", body: "No external research budget. I used three proxies instead, with discipline about what each could and could not tell us." },
+        { kind: "framework", title: "Proxies for user research", items: [
+          { k: "Customer service", v: "Daily phone contact with users", effect: "Treated as hypothesis, not evidence" },
+          { k: "Tree testing", v: "UXtweak, live-site recruits", effect: "Used where guessing was too expensive" },
+          { k: "Launch as test", v: "Hotjar, GA, recordings", effect: "Next-best, since pre-launch budget was declined" }
+        ]},
+        { kind: "section", title: "Trade-offs I did not fully own", body: "Two calls where I did not get my first preference, and what I did instead." },
+        { kind: "section", title: "Desktop-first", body: "I wanted mobile-first. Management chose desktop-first because the majority of customers are desktop users (only ~5% on tablet). The numbers held up, so I accepted it. To keep mobile from becoming an afterthought, I sketched mobile alongside every desktop wireframe, and only finalised mobile once desktop was locked. Mobile shipped on time, on the new system." },
+        { kind: "section", title: "Wordpress, not a rebuild", body: "Engineering kept Wordpress + Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. The constraint pushed the design system to be more disciplined - every component had to be reproducible by someone who could not open Figma." },
+        { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs. New pages ship on top of it without a designer in the loop on every one, which was the whole point. No post-launch quantitative data was available at launch. The hypothesis: the new IA reduces support tickets about finding pages, and internal teams self-serve from the system. Both became measurable once analytics had a few months of data." },
+        { kind: "section", title: "The bet that paid off", body: "Treating the design system as the lever, not the deliverable. Every page in the year since launch has compounded on the system. Without that scaffolding, the project would still be in progress." },
+        { kind: "section", title: "The constraint I accepted under protest", body: "Launch as the testing phase. It worked because we had no alternative. Next time I would push harder for a small pre-launch testing budget. The first weeks after launch absorbed feedback that should have been caught earlier." },
+        { kind: "section", title: "The decision I would revisit", body: "Desktop-first was correct for the user base, but mobile needs a dedicated pass now. Designing in parallel kept mobile shippable, but \"shippable\" isn't \"good\"." }
       ]
     }
   ],
