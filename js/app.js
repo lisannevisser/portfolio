@@ -359,7 +359,15 @@
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
 
-    const storyHtml = c.story.map((s, i) => {
+    let narrativeIdx = 0;
+    const storyHtml = c.story.map((s) => {
+      if (s.kind === "figure") {
+        const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
+        const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
+        const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
+        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      }
+      const i = narrativeIdx++;
       let body = s.body ? `<p>${esc(s.body)}</p>` : "";
       let extra = "";
       if (s.kind === "framework" && s.items) {
@@ -381,7 +389,7 @@
       }
       return `
         <section class="v1-story-block lv-reveal">
-          <h3>${String(i + 1).padStart(2, "0")} — ${esc(s.title)}</h3>
+          <h3>${String(i + 1).padStart(2, "0")} - ${esc(s.title)}</h3>
           ${body}${extra}
         </section>`;
     }).join("");
@@ -427,12 +435,8 @@
           <div class="v1-sticky-nav">
             <div class="lv-eyebrow">Contents</div>
             <ol style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.5rem;">
-              ${c.story.map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
+              ${c.story.filter((s) => s.kind !== "figure").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
             </ol>
-            <div style="margin-top:2rem;" class="v1-hand">
-              "Proud of<br/>this one."
-              <span data-scribble="arrow" style="position:relative;display:block;width:100px;height:30px;margin-top:0.5rem;"></span>
-            </div>
           </div>
         </aside>
         <div>${storyHtml}</div>
@@ -455,7 +459,15 @@
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
 
-    const storyHtml = c.story.map((s, i) => {
+    let narrativeIdx = 0;
+    const storyHtml = c.story.map((s) => {
+      if (s.kind === "figure") {
+        const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
+        const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
+        const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
+        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      }
+      const i = narrativeIdx++;
       const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span><span class="tag">${
         s.kind === "result" ? "OUTCOME" : s.kind === "framework" ? "MATRIX" : s.kind === "flow" ? "FLOW" : "LOG"
       }</span></div>`;
