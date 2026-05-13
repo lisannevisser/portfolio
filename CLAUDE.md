@@ -5,12 +5,26 @@ this project. For now it is maintained manually.
 
 ## Writing Style (Copy on the Site)
 
-**No em-dashes (`—`) in visible copy.** Reads as AI-generated quickly.
+**No em-dashes (`—`) in body text.** Reads as AI-generated quickly.
 Use a hyphen with spaces (` - `), a comma, a colon, or a new sentence
 instead.
 
-Applies to anything that ends up on the site: case study text, About,
-headings, microcopy. Em-dashes are fine in this CLAUDE.md itself.
+Applies to anything narrative: case study text, About, headings,
+microcopy, blog posts.
+
+**Exception:** Years, date ranges, and career lines may keep em-dashes
+(e.g. `2022 — Now`, `2020 — 2022`, `2023 — ongoing`). Em-dashes are
+fine in this CLAUDE.md itself.
+
+**American English.** Stay consistent: `behavior` not `behaviour`,
+`optimize` not `optimise`, `center` not `centre`, `analyze` not
+`analyse`, `organization` not `organisation`, `color` not `colour`,
+`realization` not `realisation`, `skeptical` not `sceptical`, `rigor`
+not `rigour`.
+
+**Scribbles welcome.** Hand-notes, arrows, drawn annotations are part
+of the visual language. They can appear in cases, About, next to
+figures, or between sections when they add a small personal touch.
 
 ## Important: `main` is live
 
