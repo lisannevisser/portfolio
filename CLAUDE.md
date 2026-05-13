@@ -76,25 +76,30 @@ and how you would measure it.
   the proposed structure in UXtweak…"
 - Decision is the headline. Activity is the evidence.
 
-**Senior framing on constraints**
-When something diverged from the textbook, frame it as judgement
-exercised, not compromise endured:
-- What I wanted, and why
-- What was decided differently, and the business reason
-- How I mitigated my concerns
-- What I would revisit
+**Section granularity**
+Every heading needs more than a sentence to justify it. A one-line
+section reads as messy — merge it into the section before or after,
+or expand it. Most case studies need 5-7 sections, not 10+. More
+headings ≠ more structure; often it reads as fragmented.
 
-Avoid "going against my preference, management decided X" without
-the four points above. Reads as deference, not judgement.
+**Constraints stay in the background**
+Constraints shape decisions but shouldn't shape the case study's
+structure. Mention them briefly where the decision is discussed —
+don't give them their own section, framework, or take-away. The case
+study is about the work and what came out of it, not about what was
+missing or who didn't approve what.
 
-**Solution-oriented language on constraints.** Lead with what was
-done about the constraint, not what was done to you. Even when the
-constraint was real and unwelcome, the senior signal is agency, not
-grievance.
+When you do mention a constraint, frame as agency, not grievance:
 - Avoid: "what was forced on us", "the constraint I accepted under
-  protest", "we had no choice but to…", "despite our objections…"
-- Prefer: "working without X", "how I replaced X", "the workaround
-  that held up", "what we did instead"
+  protest", "we had no choice but to…", "going against my preference,
+  management decided X"
+- Prefer: "working without X", "how I replaced X", "what we did
+  instead", "the workaround that held up"
+
+For your own thinking while writing, the questions are still useful:
+what did I want, what was decided differently, how did I make it
+work, what would I revisit. But the answers should land in the
+narrative quietly, not as bullet points or headings.
 
 **Skimmable hierarchy**
 - "Project at a glance" at the top.
