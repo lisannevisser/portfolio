@@ -87,6 +87,15 @@ exercised, not compromise endured:
 Avoid "going against my preference, management decided X" without
 the four points above. Reads as deference, not judgement.
 
+**Solution-oriented language on constraints.** Lead with what was
+done about the constraint, not what was done to you. Even when the
+constraint was real and unwelcome, the senior signal is agency, not
+grievance.
+- Avoid: "what was forced on us", "the constraint I accepted under
+  protest", "we had no choice but to…", "despite our objections…"
+- Prefer: "working without X", "how I replaced X", "the workaround
+  that held up", "what we did instead"
+
 **Skimmable hierarchy**
 - "Project at a glance" at the top.
 - Every section starts with a one-sentence lead.
