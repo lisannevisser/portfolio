@@ -3,14 +3,116 @@
 This document records how we work with Git branches and Git worktrees in
 this project. For now it is maintained manually.
 
-## Writing Style (Copy on the Site)
+## Writing for the Site
 
-**No em-dashes (`—`) in visible copy.** Reads as AI-generated quickly.
-Use a hyphen with spaces (` - `), a comma, a colon, or a new sentence
-instead.
+Anything that ends up on the site: case study text, About, headings,
+microcopy. Three layers — voice, structure, editing. Em-dashes are
+fine in this CLAUDE.md itself, just not in copy that ends up on the
+site.
 
-Applies to anything that ends up on the site: case study text, About,
-headings, microcopy. Em-dashes are fine in this CLAUDE.md itself.
+### Tone & Voice
+
+How a sentence reads. Senior product designer talking to a peer, not
+marketing copy.
+
+**Person**
+- "I" for own decisions and reflections, "we" for team work. Don't
+  appropriate collaborative work; don't hide behind "we" when you
+  made the call.
+- Speak to the reader. No third person ("the designer decided...").
+
+**Register**
+- Plain language. No buzzwords ("leverage", "transformational",
+  "best-in-class").
+- Describe, don't sell. "We relaunched the site" > "We delivered a
+  transformational redesign".
+- Contractions are fine ("didn't", "wasn't").
+
+**Concreteness**
+- Name tools (Figma, UXtweak, Hotjar). Cite sources where it matters
+  (book + publisher + year).
+- Numbers where you have them ("140+ sites in under 1 year", "5%
+  tablet users").
+
+**Sentences**
+- Short to medium. Fact sentences direct.
+- Longer only when spelling out a trade-off or reasoning.
+- Parenthetical asides for side notes, not exclamation marks.
+
+**Narrative tension**
+- Welcome when the stakes are real and serve the judgement story. A
+  single, true tension beat that sets up a decision works ("Two weeks
+  before launch, X came back…").
+- Avoid manufactured stakes, cliffhangers ("read on to find out…"),
+  or vague "but then everything changed" beats.
+- Sparingly — one or two pressure points per case study, not every
+  section.
+
+**Don't**
+- No em-dashes (`—`). Reads as AI-generated. Use a hyphen with spaces
+  (` - `), a comma, a colon, or a new sentence.
+- No emojis as bullet markers. Reads as 2018-startup-deck, breaks the
+  "restraint = seniority" stance. Use plain bold labels.
+- No emojis in body text in general.
+- No superlatives without evidence.
+
+### Case Study Structure
+
+How a case study is assembled. About *what goes where*, not *how it
+reads*.
+
+**Project at a glance — top of the page**
+The existing role / team / tools / timeline block plus 1-2 sentences
+on what changed or what the impact was. The full outcome section can
+still come at the end, but scanners need an early signal of whether
+the case study is worth their time. Qualitative is fine if
+quantitative isn't available — pair it with the hypothesis you set up
+and how you would measure it.
+
+**Sections lead with the decision, not the activity**
+- Bad: "We did tree testing with UXtweak."
+- Better: "Top-bar navigation needed to survive both SEO link
+  structure and user mental models. After the workshop, I tree-tested
+  the proposed structure in UXtweak…"
+- Decision is the headline. Activity is the evidence.
+
+**Senior framing on constraints**
+When something diverged from the textbook, frame it as judgement
+exercised, not compromise endured:
+- What I wanted, and why
+- What was decided differently, and the business reason
+- How I mitigated my concerns
+- What I would revisit
+
+Avoid "going against my preference, management decided X" without
+the four points above. Reads as deference, not judgement.
+
+**Skimmable hierarchy**
+- "Project at a glance" at the top.
+- Every section starts with a one-sentence lead.
+- Gist in 60 seconds. Detail rewards deeper reading but isn't
+  required for the takeaway.
+
+**Take-aways = reflection, not status report**
+- Not: "We are currently evaluating effectiveness using analytics."
+- Yes: "If I had insisted on pre-launch testing, we would have caught
+  X. The design system held up under Y. Next time I would push harder
+  on Z."
+
+### Editing
+
+The polish pass. Drafting and editing are separate steps.
+
+- **Draft first, then edit.** Don't polish while writing.
+- **Cut pass.** For each sentence ask "if I delete this, is anything
+  lost?". If no, cut. Adverbs go first.
+- **Length discipline.** Wordiness is the default. Bias toward
+  shorter.
+- **Typo pass before publish.** Separate step, mandatory. Surface
+  errors read as no-final-read.
+- **Voice consistency pass.** Scan for textbook-y phrases that
+  drifted in ("reaccessed brand assets in accordance with…"). Put
+  them back in your normal voice.
 
 ## Important: `main` is live
 
