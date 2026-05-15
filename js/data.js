@@ -146,33 +146,46 @@ window.LV_DATA = {
     },
     {
       slug: "design-system",
-      title: "A design system for a scaling logistics platform",
-      subtitle: "Atomic design system plus a co-created rebrand",
+      title: "Cargoboard's rebrand and first design system",
+      subtitle: "Brand discovery to documented system, in 18 months",
       company: "Cargoboard",
-      year: "2020 — 2022",
-      role: "Design systems lead · Rebrand co-creation",
-      team: "With the brand team and engineers; hired a print designer for the rebrand",
+      year: "2021 - 2022",
+      role: "First designer · System lead",
+      team: "HR's company-culture workshops (with external agency) · 1 frontend engineer · 1 print designer (hired) · 1 student assistant",
       duration: "18 months",
       impact: [
-        { label: "Handoff time", value: "−60%", note: "design-to-dev after tokens" },
-        { label: "Product surface", value: "Unified", note: "across 4 core flows" },
-        { label: "Rebrand", value: "Co-created", note: "with brand team" }
+        { label: "Brand identity", value: "Refreshed", note: "from one accent red into a system" },
+        { label: "Design system", value: "First at the company", note: "tokens, components, illustration, docs" },
+        { label: "Adoption", value: "Org-wide", note: "default for web, print, and internal" }
       ],
-      tags: ["Design Lead", "Design system", "B2B SaaS"],
+      tags: ["Brand", "Design system", "Illustration", "Documentation"],
       coverPaletteHue: 200,
-      tldr: "Years of rapid growth had left the company with missing standards and no unified product design. I led the creation of a modular design system following atomic design principles, and co-created a visual rebrand with the brand team, hiring a print designer to cover print scope.",
+      tldr: "Cargoboard, three years in, had a brand that had grown organically and no design system to underpin it. I led the rebrand alongside HR's company-culture workshops and built the first design system the company had: tokens, components, illustration, and Zeroheight docs. The system has been the default for new work since, and the website relaunch (a separate case) was built on top of it.",
       story: [
-        { kind: "section", title: "Situation", body: "Years of organic sprawl. Inconsistent patterns, fragmented navigation, a visual language that no longer represented the company's ambitions. Engineers were rebuilding the same components every sprint." },
-        { kind: "figure", hue: 200, label: "Audit · component sprawl", caption: "Fig. 1 - The pre-system landscape: 40+ button variants, six navigation patterns, three different ways to render a table." },
-        { kind: "section", title: "Approach", body: "Cross-functional effort spanning design, engineering, product, and brand. I led the system creation, simultaneously redesigned the core information architecture, and co-created the visual rebrand with the brand team." },
-        { kind: "framework", title: "Activities", items: [
-          { k: "Audit", v: "Full product", effect: "Surface inconsistencies and patterns" },
-          { k: "IA", v: "User mental models", effect: "Rework navigation around real tasks" },
-          { k: "Tokens", v: "Ground up", effect: "Modular, themeable component library" },
-          { k: "Brand", v: "Co-created", effect: "Visual rebrand in parallel" }
-        ]},
-        { kind: "figure", hue: 200, label: "Component set · atoms to templates", caption: "Fig. 2 - The atomic component set as it shipped, from primitives up to page-level templates." },
-        { kind: "result", title: "Outcome", body: "Design-to-development handoff time dropped meaningfully. Visual consistency across all product areas. The IA redesign improved task completion and reduced support tickets on navigation confusion." }
+        { kind: "section", title: "Introduction", body: "Cargoboard is a German B2B logistics provider, founded in 2019. Three years in, the founders decided the brand no longer reflected the company. The existing visual identity had grown organically: a primary red, some print materials, a website built piecemeal. No brand manual, no component library, no consistent illustration style. The project was to refresh the brand and build the first design system the company had, so the website relaunch and all future work could compound on the system instead of restarting from scratch each time. I joined as the company's first designer when the work began." },
+        { kind: "section", title: "Brand discovery", body: "Cargoboard's founders knew the new brand needed to feel modern, dynamic, and trustworthy, but could not yet articulate what the company culture actually was. HR was already engaging an external agency for workshops on company values and employer branding. I joined those sessions as participant observation and ran additional interviews across departments to triangulate. The output was not a slide-deck brand bible. It was a working brief: what the brand stood for, what tone the copy should hit, what emotional register the visuals should land in. \"Friendly and young, yet not childish\" became a phrase we used a lot when reviewing design work, especially for illustration." },
+        { kind: "section", title: "Visual system", body: "We kept the existing primary red, core to Cargoboard's identity, and extended it from a single bright accent into a usable system: tints, tones, and shades that work across UI, print, and illustration. We call this \"signature red\". Blue (secondary) and green (tertiary) were added to balance the aggressiveness of the red and give the brand somewhere to go beyond a single colour. The logo stayed almost the same with minor touch-ups; the wordmark can now be used stand-alone for a sleeker look. Typography pairs a serif display face with a functional sans for body copy, with a tighter mono used sparingly for technical content like shipment IDs, dimensions, and prices." },
+        { kind: "figure", hue: 200, label: "Signature red · the new palette", caption: "Fig. 1 - The primary red extended into tints, tones, and shades, with blue and green as secondaries. Tokens at the bottom of the stack feed UI, print, and illustration." },
+        { kind: "section", title: "Illustration system", body: "There was no existing illustration language, only ad-hoc images from old marketing rounds. I built a new system from scratch with two constraints baked in from day one. First, accessibility: every illustration and illustrative icon had to read on multiple background colours, so the team would not relitigate contrast on every new piece. Second, keep it friendly and young but never childish, since logistics is a serious business. To make the system durable on a small team, I documented two paths for in-house creation: update old isometric illustrations into the new style (used sparingly to avoid retaining isometric drift), or build new ones from scratch in Adobe Illustrator or Figma. Both paths share the same primitives - squares, blobs, dotted patterns - so the visual language stays coherent regardless of who is drawing." },
+        { kind: "section", title: "Components and documentation", body: "The component library was built modular-first: tokens for colour, spacing, and typography sit underneath atomic components (buttons, inputs, chips), which compose into larger patterns (cards, forms, testimonials). Every component was designed against the brand constraints above, not bolted on afterwards. Documentation lives in Zeroheight, with usage notes for each component (when to use, when not, do and don't examples). For the website specifically, our frontend engineer mirrored the Figma components as custom Elementor templates so marketing, customer service, and operations could self-serve when adding new pages. A designer is not in the loop for every new page." },
+        { kind: "figure", hue: 200, label: "Component set · atoms to templates", caption: "Fig. 2 - Tokens underneath atomic components, composing up to page-level templates. Documented in Zeroheight; mirrored as custom Elementor templates for self-serve on the website." },
+        { kind: "result", title: "Outcome", body: "The brand has been in daily use across web, print, and internal docs since rollout. The design system is the default for new work, internal or external, and the illustration system has held up across product surfaces I never touched, which was the whole point: the system should outlive its designer. The website relaunch (a separate case) was built on top of the system: 140+ pages shipped in under a year because the foundation was already there." },
+        { kind: "limitations",
+          title: "Limitations",
+          oppositeTitle: "Opportunities",
+          items: [
+            { title: "First system, no precedent", body: "Built without a design-system reference inside the company. Some early decisions on token naming and component boundaries were revisited later; a senior design-system reviewer would have caught these earlier and saved revision work." },
+            { title: "Single architecture owner", body: "I owned all token and component decisions. The system depth was bottlenecked by one person's hours, and the bus factor is one." },
+            { title: "Coverage scope", body: "The system covered the surfaces needed for the rebrand and the website relaunch. Adjacent product surfaces (internal tools, partner portals) remained on legacy patterns and were out of scope for this phase." },
+            { title: "External validation", body: "Component usage and visual recognition were not tested with users outside the company. Decisions were grounded in best-practice references and internal feedback, not in studies with target customers." }
+          ],
+          opportunities: [
+            { title: "Tokens as a code API", body: "Tokens are documented in Zeroheight but not yet exported as JSON or JS for direct engineering consumption. A tokens-as-code layer would close the design-to-dev gap further and remove manual translation steps." },
+            { title: "Contribution model", body: "Currently a single maintainer. A lightweight contribution flow (RFC-style proposals, review criteria) would let other teams add to the system without bottlenecking on me, and would make ownership transferable." },
+            { title: "Cross-brand theming", body: "If Cargoboard adds sub-brands or partner co-brands, the system would need a theming layer. The token structure already supports this in principle, but a theme switcher has not been built." },
+            { title: "Quarterly health reviews", body: "A regular cadence (audit token usage, deprecate unused components, surface drift) keeps the system from rotting. Currently ad-hoc; a structured cadence would make it sustainable beyond me." }
+          ]
+        }
       ]
     },
     {
