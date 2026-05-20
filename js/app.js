@@ -431,7 +431,6 @@
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
           <em>${esc(c.title)}</em>
         </h1>
-        <p class="v1-pull lv-reveal">${esc(c.subtitle)}.</p>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.75rem;">
           ${c.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
         </div>
