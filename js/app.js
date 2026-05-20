@@ -379,12 +379,14 @@
             ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">↻ Opportunities</button>` : ""}
             <div class="v1-limitations-label">${esc(s.title || "Limitations")}</div>
             <div class="v1-limitations-grid">${renderItems(s.items)}</div>
+            ${s.subtitle ? `<p class="v1-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v1-limitations-face is-back" aria-hidden="true">
             <button class="v1-limitations-flip" type="button" aria-pressed="true">↻ Limitations</button>
             <div class="v1-limitations-label">${esc(s.oppositeTitle || "Opportunities")}</div>
             <div class="v1-limitations-grid">${renderItems(s.opportunities)}</div>
+            ${s.oppositeSubtitle ? `<p class="v1-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section class="v1-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
@@ -504,12 +506,14 @@
             ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">[ flip → opportunities ]</button>` : ""}
             <div class="v3-limitations-label">// ${esc(s.title || "Limitations")}</div>
             <div class="v3-limitations-grid">${renderItems(s.items)}</div>
+            ${s.subtitle ? `<p class="v3-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v3-limitations-face is-back" aria-hidden="true">
             <button class="v3-limitations-flip" type="button" aria-pressed="true">[ flip → limitations ]</button>
             <div class="v3-limitations-label">// ${esc(s.oppositeTitle || "Opportunities")}</div>
             <div class="v3-limitations-grid">${renderItems(s.opportunities)}</div>
+            ${s.oppositeSubtitle ? `<p class="v3-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section class="v3-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">

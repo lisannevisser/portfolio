@@ -250,6 +250,16 @@
   color: var(--ink-2);
   line-height: 1.6;
 }
+[data-variation="v3"] .v3-limitations-subtitle {
+  margin: 1.75rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  line-height: 1.7;
+  max-width: 70ch;
+}
 @media (prefers-reduced-motion: reduce) {
   [data-variation="v3"] .v3-limitations-card-inner { transition: none; }
 }
