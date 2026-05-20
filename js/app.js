@@ -353,6 +353,19 @@
       .replace(/'/g, "&#39;");
   }
 
+  // Impact cells display a label, a prominent value, and a short note.
+  // The big value must either contain a digit or stay short (<= 10 chars).
+  // If any cell violates that, the whole impact section is hidden so the
+  // hero block does not turn into a wall of prose.
+  function isImpactValueValid(v) {
+    if (typeof v !== "string" || !v) return false;
+    if (/\d/.test(v)) return true;
+    return v.length <= 10;
+  }
+  function shouldShowImpact(impact) {
+    return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
+  }
+
   function renderV1Case(c) {
     const root = $("#v1-case-body");
     if (!root) return;
@@ -440,6 +453,7 @@
         <div class="v1-case-media-label">Hero visual · ${esc(c.company)}</div>
       </div>
 
+      ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
         ${c.impact.map((i) => `
           <div class="v1-impact-cell">
@@ -447,7 +461,7 @@
             <div class="v1-impact-num">${esc(i.value)}</div>
             <div class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">${esc(i.note)}</div>
           </div>`).join("")}
-      </div>
+      </div>` : ""}
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:4rem;" class="lv-reveal v1-meta-3cols">
         <div><div class="lv-eyebrow">Role</div><div style="margin-top:0.5rem;">${esc(c.role)}</div></div>
@@ -570,6 +584,7 @@
         <div class="tags">${c.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}</div>
       </div>
 
+      ${shouldShowImpact(c.impact) ? `
       <div class="v3-impact-box lv-reveal">
         <div class="v3-kicker" style="margin-bottom:1.5rem;"><span>./impact</span></div>
         <div style="display:grid;gap:1.5rem;">
@@ -580,7 +595,7 @@
               <div class="val">${esc(i.value)}</div>
             </div>`).join("")}
         </div>
-      </div>
+      </div>` : ""}
 
       <div style="margin-top:5rem;">${storyHtml}</div>
 

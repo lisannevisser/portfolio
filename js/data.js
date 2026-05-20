@@ -155,7 +155,7 @@ window.LV_DATA = {
       duration: "18 months",
       impact: [
         { label: "Brand identity", value: "Refreshed", note: "extended palette, new typography pairing" },
-        { label: "Design system", value: "First at the company", note: "type, color, illustration, components, docs" },
+        { label: "Design system", value: "1st", note: "first at the company: type, color, illustration, components, docs" },
         { label: "Adoption", value: "Org-wide", note: "default for web, print, and internal" }
       ],
       tags: ["Brand", "Design system", "Illustration", "Typography"],
