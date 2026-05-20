@@ -353,6 +353,19 @@
       .replace(/'/g, "&#39;");
   }
 
+  // Impact cells display a label, a prominent value, and a short note.
+  // The big value must either contain a digit or stay short (<= 10 chars).
+  // If any cell violates that, the whole impact section is hidden so the
+  // hero block does not turn into a wall of prose.
+  function isImpactValueValid(v) {
+    if (typeof v !== "string" || !v) return false;
+    if (/\d/.test(v)) return true;
+    return v.length <= 10;
+  }
+  function shouldShowImpact(impact) {
+    return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
+  }
+
   function renderV1Case(c) {
     const root = $("#v1-case-body");
     if (!root) return;
@@ -366,6 +379,32 @@
         const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      }
+      if (s.kind === "limitations" && s.items) {
+        const renderItems = (arr) => arr.map((it) => `
+          <div class="v1-limitation-row">
+            <h4>${esc(it.title)}</h4>
+            <p>${esc(it.body)}</p>
+          </div>`).join("");
+        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const frontFace = `
+          <div class="v1-limitations-face is-front">
+            ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">↻ Opportunities</button>` : ""}
+            <div class="v1-limitations-label">${esc(s.title || "Limitations")}</div>
+            <div class="v1-limitations-grid">${renderItems(s.items)}</div>
+            ${s.subtitle ? `<p class="v1-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
+          </div>`;
+        const backFace = hasOpp ? `
+          <div class="v1-limitations-face is-back" aria-hidden="true">
+            <button class="v1-limitations-flip" type="button" aria-pressed="true">↻ Limitations</button>
+            <div class="v1-limitations-label">${esc(s.oppositeTitle || "Opportunities")}</div>
+            <div class="v1-limitations-grid">${renderItems(s.opportunities)}</div>
+            ${s.oppositeSubtitle ? `<p class="v1-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
+          </div>` : "";
+        return `
+          <section class="v1-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+            <div class="v1-limitations-card-inner">${frontFace}${backFace}</div>
+          </section>`;
       }
       const i = narrativeIdx++;
       let body = s.body ? `<p>${esc(s.body)}</p>` : "";
@@ -405,7 +444,6 @@
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
           <em>${esc(c.title)}</em>
         </h1>
-        <p class="v1-pull lv-reveal">${esc(c.subtitle)}.</p>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.75rem;">
           ${c.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
         </div>
@@ -415,6 +453,7 @@
         <div class="v1-case-media-label">Hero visual · ${esc(c.company)}</div>
       </div>
 
+      ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
         ${c.impact.map((i) => `
           <div class="v1-impact-cell">
@@ -422,7 +461,7 @@
             <div class="v1-impact-num">${esc(i.value)}</div>
             <div class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">${esc(i.note)}</div>
           </div>`).join("")}
-      </div>
+      </div>` : ""}
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:4rem;" class="lv-reveal v1-meta-3cols">
         <div><div class="lv-eyebrow">Role</div><div style="margin-top:0.5rem;">${esc(c.role)}</div></div>
@@ -435,7 +474,8 @@
           <div class="v1-sticky-nav">
             <div class="lv-eyebrow">Contents</div>
             <ol style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.5rem;">
-              ${c.story.filter((s) => s.kind !== "figure").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
+              ${c.story.filter((s) => s.kind !== "figure" && s.kind !== "limitations").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
+              ${c.story.some((s) => s.kind === "limitations") ? `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--rule);">↳ ${esc(c.story.find((s) => s.kind === "limitations").title || "Limitations")}</li>` : ""}
             </ol>
           </div>
         </aside>
@@ -466,6 +506,32 @@
         const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      }
+      if (s.kind === "limitations" && s.items) {
+        const renderItems = (arr) => arr.map((it) => `
+          <div class="v3-limitation-row">
+            <h4>${esc(it.title)}</h4>
+            <p>${esc(it.body)}</p>
+          </div>`).join("");
+        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const frontFace = `
+          <div class="v3-limitations-face is-front">
+            ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">[ flip → opportunities ]</button>` : ""}
+            <div class="v3-limitations-label">// ${esc(s.title || "Limitations")}</div>
+            <div class="v3-limitations-grid">${renderItems(s.items)}</div>
+            ${s.subtitle ? `<p class="v3-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
+          </div>`;
+        const backFace = hasOpp ? `
+          <div class="v3-limitations-face is-back" aria-hidden="true">
+            <button class="v3-limitations-flip" type="button" aria-pressed="true">[ flip → limitations ]</button>
+            <div class="v3-limitations-label">// ${esc(s.oppositeTitle || "Opportunities")}</div>
+            <div class="v3-limitations-grid">${renderItems(s.opportunities)}</div>
+            ${s.oppositeSubtitle ? `<p class="v3-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
+          </div>` : "";
+        return `
+          <section class="v3-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+            <div class="v3-limitations-card-inner">${frontFace}${backFace}</div>
+          </section>`;
       }
       const i = narrativeIdx++;
       const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span><span class="tag">${
@@ -518,6 +584,7 @@
         <div class="tags">${c.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}</div>
       </div>
 
+      ${shouldShowImpact(c.impact) ? `
       <div class="v3-impact-box lv-reveal">
         <div class="v3-kicker" style="margin-bottom:1.5rem;"><span>./impact</span></div>
         <div style="display:grid;gap:1.5rem;">
@@ -528,7 +595,7 @@
               <div class="val">${esc(i.value)}</div>
             </div>`).join("")}
         </div>
-      </div>
+      </div>` : ""}
 
       <div style="margin-top:5rem;">${storyHtml}</div>
 
@@ -819,6 +886,24 @@
   // ========================================================================
   // BOOT
   // ========================================================================
+  function initFlipCards() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-limitations-flip, .v3-limitations-flip");
+      if (!btn) return;
+      const card = btn.closest(".v1-limitations-card, .v3-limitations-card");
+      if (!card) return;
+      const flipped = card.classList.toggle("is-flipped");
+      card.querySelectorAll(".is-front, .is-back").forEach((face) => {
+        const isBack = face.classList.contains("is-back");
+        face.setAttribute("aria-hidden", String(isBack !== flipped));
+      });
+      card.querySelectorAll(".v1-limitations-flip, .v3-limitations-flip").forEach((b) => {
+        const onBack = b.closest(".is-back");
+        b.setAttribute("aria-pressed", String(onBack ? !flipped : flipped));
+      });
+    });
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
@@ -831,6 +916,7 @@
     initTweaks();
     initEasterEgg();
     initMobileNav();
+    initFlipCards();
     renderRoute();
   }
 

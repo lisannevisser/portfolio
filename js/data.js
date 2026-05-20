@@ -146,55 +146,92 @@ window.LV_DATA = {
     },
     {
       slug: "design-system",
-      title: "A design system for a scaling logistics platform",
-      subtitle: "Atomic design system plus a co-created rebrand",
+      title: "Cargoboard's rebrand and first design system",
+      subtitle: "Brand discovery, visual system, and the company's first design language",
       company: "Cargoboard",
-      year: "2020 — 2022",
-      role: "Design systems lead · Rebrand co-creation",
-      team: "With the brand team and engineers; hired a print designer for the rebrand",
+      year: "2021 - 2022",
+      role: "Product designer · System lead",
+      team: "2 collaborating designers during the brand audit · HR with an external agency for company-culture workshops · 1 frontend engineer · 1 print designer (hired) · 1 student assistant",
       duration: "18 months",
       impact: [
-        { label: "Handoff time", value: "−60%", note: "design-to-dev after tokens" },
-        { label: "Product surface", value: "Unified", note: "across 4 core flows" },
-        { label: "Rebrand", value: "Co-created", note: "with brand team" }
+        { label: "Brand identity", value: "Refreshed", note: "extended palette, new typography pairing" },
+        { label: "Design system", value: "1st", note: "first at the company: type, color, illustration, components, docs" },
+        { label: "Adoption", value: "Org-wide", note: "default for web, print, and internal" }
       ],
-      tags: ["Design Lead", "Design system", "B2B SaaS"],
+      tags: ["Brand", "Design system", "Illustration", "Typography"],
       coverPaletteHue: 200,
-      tldr: "Years of rapid growth had left the company with missing standards and no unified product design. I led the creation of a modular design system following atomic design principles, and co-created a visual rebrand with the brand team, hiring a print designer to cover print scope.",
+      tldr: "Cargoboard, three years in, had a brand that had grown organically and no design system to underpin it. We kicked off with a product audit in a team of three designers, ran brand discovery in parallel with HR's company-culture workshops, and translated the insights into a new visual system: extended palette around the existing red, a new two-typeface pairing (Mokoko and Graphie), and an illustration language built from scratch. I owned the system architecture end-to-end. The system has been the default for new work since.",
       story: [
-        { kind: "section", title: "Situation", body: "Years of organic sprawl. Inconsistent patterns, fragmented navigation, a visual language that no longer represented the company's ambitions. Engineers were rebuilding the same components every sprint." },
-        { kind: "figure", hue: 200, label: "Audit · component sprawl", caption: "Fig. 1 - The pre-system landscape: 40+ button variants, six navigation patterns, three different ways to render a table." },
-        { kind: "section", title: "Approach", body: "Cross-functional effort spanning design, engineering, product, and brand. I led the system creation, simultaneously redesigned the core information architecture, and co-created the visual rebrand with the brand team." },
-        { kind: "framework", title: "Activities", items: [
-          { k: "Audit", v: "Full product", effect: "Surface inconsistencies and patterns" },
-          { k: "IA", v: "User mental models", effect: "Rework navigation around real tasks" },
-          { k: "Tokens", v: "Ground up", effect: "Modular, themeable component library" },
-          { k: "Brand", v: "Co-created", effect: "Visual rebrand in parallel" }
-        ]},
-        { kind: "figure", hue: 200, label: "Component set · atoms to templates", caption: "Fig. 2 - The atomic component set as it shipped, from primitives up to page-level templates." },
-        { kind: "result", title: "Outcome", body: "Design-to-development handoff time dropped meaningfully. Visual consistency across all product areas. The IA redesign improved task completion and reduced support tickets on navigation confusion." }
+        { kind: "section", title: "Introduction", body: "Cargoboard is a German B2B logistics provider, founded in 2019. Three years in, the founders decided the brand no longer reflected the company. The visual identity had grown organically: a primary red, some print materials, a website built piecemeal. No brand manual, no component library, no consistent illustration style. On top of that, an unmaintained tech stack with performance issues and 140+ marketing pages to refresh in under a year. The project covered the rebrand and the first design system the company had: type, color, illustration, components, and documentation." },
+        { kind: "section", title: "Brand discovery", body: "We kicked off with a product audit. In a team of three designers, we reaccessed the existing brand assets and updated them in line with the old brand to surface what was working and what wasn't. To clarify who Cargoboard was, I ran employee interviews across departments to get at the cultural essence. In parallel, HR was running workshops with an external agency to translate company values and employer branding strategies into something the team could work with; I joined those sessions as participant observation. Mentally, founders and employees were already close on what the brand stood for - what was missing was the articulation. I took the insights from interviews, observations, and workshops and translated them into a visual identity the company could run with long-term." },
+        { kind: "section", title: "Visual system", body: "We kept the existing primary red, core to Cargoboard's identity, and extended it into softer tints, tones, and shades we now call \"signature red\". To balance the aggressiveness of the red, we added complementary split colors: blue as secondary, green as tertiary. In color psychology these convey trustworthiness and calmness, which directly served the brand brief. The full palette also includes a dark navy as neutral base, with lighter accent variants for red and blue. The logo stayed almost the same with minor touch-ups; the wordmark can now be used stand-alone, giving the brand a sleeker look. For typography, we replaced the former Source Sans Pro (which had been used for both display and body) with a two-typeface system: Mokoko as the display face and Graphie as the reading face. The company asked specifically for a separate display font for headline impact. Usage of both is governed by clearly defined type styles in the system." },
+        { kind: "figure", hue: 200, label: "Brand system · before and after", caption: "Fig. 1 - Typography moved from a single-face Source Sans Pro setup to a two-face system (Mokoko + Graphie). Palette extended from one accent red into a fuller system: signature red, blue secondary, green tertiary, dark navy base, lighter variants throughout." },
+        { kind: "section", title: "Illustration system", body: "There was no existing illustration language, only ad-hoc images from old marketing rounds. I built a new system from scratch with two constraints baked in from day one. First, accessibility: every illustration and illustrative icon had to read on multiple background colours, so the team would not relitigate contrast on every new piece. Second, the brief from brand discovery - friendly and young but never childish, since logistics is a serious business. To make the system durable on a small team, I documented two paths for in-house creation: update old isometric illustrations into the new style (used sparingly to avoid retaining isometric drift), or build new ones from scratch in Adobe Illustrator or Figma. Both paths share the same primitives - squares, blobs, dotted patterns - so the visual language stays coherent regardless of who is drawing." },
+        { kind: "section", title: "Components and documentation", body: "The component library was built modular-first: tokens for colour, spacing, and typography sit underneath atomic components (buttons, inputs, chips), which compose into larger patterns (cards, forms, testimonials). Every component was designed against the brand constraints above, not bolted on afterwards. Documentation lives in Zeroheight, with usage notes for each component (when to use, when not, do and don't examples). For the website specifically, our frontend engineer mirrored the Figma components as custom Elementor templates so marketing, customer service, and operations could self-serve when adding new pages. A designer is not in the loop for every new page." },
+        { kind: "figure", hue: 200, label: "Component set · atoms to templates", caption: "Fig. 2 - Tokens underneath atomic components, composing up to page-level templates. Documented in Zeroheight; mirrored as custom Elementor templates for self-serve on the website." },
+        { kind: "result", title: "Outcome", body: "The brand has been in daily use across web, print, and internal docs since rollout. The design system is the default for new work, internal or external, and the illustration system has held up across product surfaces I never touched, which was the whole point: the system should outlive its designer. The website relaunch (a separate case) was built on top of the system: 140+ pages shipped in under a year because the foundation was already there." },
+        { kind: "limitations",
+          title: "Limitations",
+          subtitle: "I learned in academia that it's considered good manners to critique your own work, no matter how good it is. Why stop there? Every solution brings room for more ideas. Flip the card to see some.",
+          oppositeTitle: "Opportunities",
+          oppositeSubtitle: "These are directions I'd pull if the project got another round. Some pair to a specific limitation, some are just headroom I noticed along the way. Flip back for the caveats.",
+          items: [
+            { title: "First system, no precedent", body: "Built without a design-system reference inside the company. Some early decisions on token naming and component boundaries were revisited later; a senior design-system reviewer would have caught these earlier and saved revision work." },
+            { title: "Solo on system architecture", body: "Brand audit was collaborative (team of three designers), but the system itself - tokens, component library, illustration rules, documentation - was a single-owner build. System depth was bottlenecked by one person's hours; bus factor of one." },
+            { title: "Coverage scope", body: "The system covered the surfaces needed for the rebrand and the website relaunch. Adjacent product surfaces (internal tools, partner portals) remained on legacy patterns and were out of scope for this phase." },
+            { title: "External validation", body: "Brand recognition and component usage were not tested with users outside the company. Decisions were grounded in best-practice references, color psychology, and internal feedback, not in studies with target customers." }
+          ],
+          opportunities: [
+            { title: "Tokens as a code API", body: "Tokens are documented in Zeroheight but not yet exported as JSON or JS for direct engineering consumption. A tokens-as-code layer would close the design-to-dev gap and remove manual translation steps." },
+            { title: "Contribution model", body: "Currently a single maintainer. A lightweight contribution flow (RFC-style proposals, review criteria) would let other teams add to the system without bottlenecking on me, and would make ownership transferable." },
+            { title: "Cross-brand theming", body: "If Cargoboard adds sub-brands or partner co-brands, the system would need a theming layer. The token structure supports this in principle (primary, secondary, neutral variants are already there), but a theme switcher has not been built." },
+            { title: "Quarterly health reviews", body: "A regular cadence (audit token usage, deprecate unused components, surface drift) keeps the system from rotting. Currently ad-hoc; a structured cadence would make it sustainable beyond me." }
+          ]
+        }
       ]
     },
     {
       slug: "website-relaunch",
-      title: "A 100-page website relaunch",
-      subtitle: "Audit, IA rework, and rollout, as the company's first designer",
+      title: "Cargoboard website relaunch",
+      subtitle: "140+ pages, new brand, new IA, end-to-end in under a year",
       company: "Cargoboard",
-      year: "2020 — 2022",
-      role: "First designer · Website lead",
-      team: "With the marketing team; mentored a working student; hired a developer for marketing's own capacity",
-      duration: "TBD",
+      year: "2022 - 2023",
+      role: "Lead designer · End-to-end",
+      team: "1 designer (me) · marketing manager · frontend engineer · graphic designer · student assistant · HR agency",
+      duration: "March 2022 - January 2023",
       impact: [
-        { label: "Pages audited", value: "100+", note: "full content + IA review" },
-        { label: "Scope", value: "Audit → relaunch", note: "end-to-end" },
-        { label: "Marketing autonomy", value: "Enabled", note: "via dev hire" }
+        { label: "Pages relaunched", value: "140+", note: "in under a year" },
+        { label: "Design system", value: "Daily use", note: "across web, print, internal" },
+        { label: "Scope", value: "End-to-end", note: "brand, IA, system, illustration" }
       ],
-      tags: ["Team building", "Website relaunch", "IA"],
+      tags: ["Website relaunch", "Brand", "Design system", "IA"],
       coverPaletteHue: 330,
-      tldr: "The marketing site had grown organically to 100+ pages, with inconsistent structure, voice, and visual language. I led the audit, IA rework, and relaunch, working closely with the marketing team. As the company's first designer, I mentored a working student and hired a developer so marketing could iterate independently.",
+      tldr: "Cargoboard, a B2B logistics startup, needed a new brand and 140+ pages relaunched in under a year. I treated the design system as the lever for everything else, so every brand decision compounded into the rest of the work. Three streams ran in parallel (brand, illustration, IA); final pages came last. Live since January 2023; the system has been the default for all internal and external work since.",
       story: [
-        { kind: "section", title: "In progress", body: "This case is being written. Short version: as Cargoboard's first designer, I led the audit and relaunch of a 100-page marketing site, paired with a rebrand rollout, while building the design function from scratch." },
-        { kind: "figure", hue: 330, label: "Sitemap · before audit", caption: "Fig. 1 - The site as we found it. 100+ pages, drift across categories, three different navigation patterns." }
+        { kind: "section", title: "Introduction", body: "Cargoboard is a German B2B logistics provider, founded in 2019. After three years of growth, the founders wanted a site that matched the company they had become: modern, dynamic, trustworthy. That meant a rebrand, a new IA, and 140+ pages relaunched in under a year. Underneath all of it, the deeper problem: there was no system. Every new page or asset restarted the design from zero." },
+        { kind: "section", title: "Brand design", body: "I treated the design system as the lever for the whole project. If every brand decision produced reusable scaffolding (tokens, components, illustration rules), later pages would compound on earlier work instead of restarting from zero. We kept the primary red, core to Cargoboard's identity, and extended it into a system of tints, tones, and shades we now call \"signature red\". Added blue (secondary) and green (tertiary) so the brand had somewhere to go beyond a single bright accent. The logo got minor touch-ups; the wordmark can now be used stand-alone for a sleeker look. Illustrations and illustrative icons were built with accessibility on multiple background colors in mind from day one, so the team did not have to keep relitigating contrast on every new piece." },
+        { kind: "figure", hue: 330, label: "Brand system · color and illustration", caption: "Fig. 1 - Signature red extended into tints, tones, and shades, with blue and green as secondaries. Illustration system built for accessibility across multiple backgrounds." },
+        { kind: "section", title: "Information architecture", body: "The original navigation hid most of the site. Even Cargoboard's own employees used Google to find their own pages, and operative pages like optional insurance were the hardest to reach. I drew on Nielsen Norman patterns and Information Architecture for the Web and Beyond (Rosenfeld, Morville, Arango, O'Reilly 2015), then worked with the SEO team on a link structure that served both users and search. We tested with a card sort workshop and tree-tested in UXtweak with users recruited from the live site. Both confirmed our direction and surfaced a few wording fixes that shipped into the final IA." },
+        { kind: "section", title: "Design and handoff", body: "Design started desktop-first, since roughly 95% of Cargoboard's customers are desktop users. Every desktop wireframe was sketched alongside its mobile equivalent, so mobile shipped on time, on the new system. The product owner wanted to stay on Wordpress and Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. That pushed the system to be more disciplined: every component had to be reproducible by someone who could not open Figma. Throughout the project I used the customer service team as a proxy for user knowledge I could not generate myself, treating their input as hypothesis rather than evidence so we did not confuse operations opinion with user need." },
+        { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs, and new pages now ship on top of it without a designer in the loop on every one. Treating the system as the lever, not the deliverable, was the bet that paid off: every page since launch has compounded on it, and the brand still feels coherent across surfaces I never touched. Tracking (Hotjar, GA, recordings) went live with the relaunch, and the hypotheses (reduced support tickets about finding pages, internal teams self-serving from the system) became measurable once analytics had a few months of data." },
+        { kind: "limitations",
+          title: "Limitations",
+          subtitle: "I learned in academia that it's considered good manners to critique your own work, no matter how good it is. Why stop there? Every solution brings room for more ideas. Flip the card to see some.",
+          oppositeTitle: "Opportunities",
+          oppositeSubtitle: "These are directions I'd pull if the project got another round. Some pair to a specific limitation, some are just headroom I noticed along the way. Flip back for the caveats.",
+          items: [
+            { title: "External user testing", body: "Decisions used internal proxies (the customer service team) and the live launch as test phase. User-impact claims are hypotheses validated post-launch, not via pre-launch testing with external participants. Next iteration would budget for at least a small pre-launch round." },
+            { title: "Desktop-first design", body: "Mobile shipped on the new system but received roughly 30% of dedicated design attention; \"shippable\" does not equal \"good\". A dedicated mobile pass is still pending, and the ~5% tablet share did not get a dedicated audit at all." },
+            { title: "Solo design lead", body: "I owned brand, system, and IA in parallel. Breadth came at the expense of depth in any single dimension; a larger design team would likely have produced more nuanced output per stream." },
+            { title: "Post-launch evidence", body: "Tracking went live with the relaunch, so effectiveness claims (the new IA reducing support tickets, internal teams self-serving from the system) became measurable only after the first months of real usage, not at launch." }
+          ],
+          opportunities: [
+            { title: "Mobile-native experience", body: "A dedicated mobile pass with native gestures, sticky CTAs, and offline support on the quoting flow would meaningfully improve mobile conversion. The 5% tablet share could get a focused audit at the same time." },
+            { title: "Continuous experimentation", body: "The new IA is a reasonable hypothesis but has not been A/B tested. A lightweight experimentation layer on top of the analytics already in place would let marketing test wording, layouts, and CTAs continuously." },
+            { title: "Public component library", body: "The internal design system could be published (Storybook or Zeroheight live) so partners and agencies producing co-branded materials work from the same source of truth. Reduces design drift at the edges of the brand." },
+            { title: "Brand-system maturity model", body: "A 12-month roadmap with quarterly check-ins on token usage, illustration consistency, and component adoption. Treats the system as a product with measurable health, not a one-time delivery." }
+          ]
+        }
       ]
     }
   ],
