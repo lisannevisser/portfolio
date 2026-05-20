@@ -9,11 +9,11 @@ window.LV_DATA = {
     email: "mail@lisannevisser.com",
     availability: "Open to senior & staff roles · Q3 2026",
     shortBio:
-      "I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to pixels to post-launch metrics.",
+      "I turn messy product problems into evidence-backed design. Research, experimentation, and systems thinking sit at the center of the work; I ship end-to-end, from discovery to pixels to post-launch metrics.",
     longBio: [
-      "I didn't start in design — I started in curiosity. A communications degree, a first UX role at an agency, and a slow realisation that the questions I loved asking (why do people do what they do? what makes a product feel effortless?) were exactly the questions good design answers.",
-      "Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. My spine is research and experimentation: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.",
-      "But the label 'growth designer' undersells it. The work that excites me is the full loop — from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterwards."
+      "I didn't start in design. I started in curiosity. A communications degree, a first UX role at an agency, and a slow realization that the questions I loved asking (why do people do what they do? what makes a product feel effortless?) were exactly the questions good design answers.",
+      "Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. Research and experimentation hold the work together: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.",
+      "The label 'growth designer' undersells it. The work that excites me is the full loop, from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterward."
     ],
     credo: [
       "Research before pixels",
@@ -48,7 +48,7 @@ window.LV_DATA = {
     {
       slug: "pricing",
       title: "A €9.90 guess → a €12.00 decision",
-      subtitle: "Turning an arbitrary price into a research-backed revenue driver",
+      subtitle: "Two rounds of pricing experiments on a number nobody had questioned",
       company: "Trusted Shops",
       year: "2024",
       role: "Research lead · Hypothesis design",
@@ -61,25 +61,27 @@ window.LV_DATA = {
       ],
       tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
-      tldr: "A price point that nobody had ever questioned, turned into a pricing psychology experiment: 7 variants across 2 rounds, grounded in charm vs. prestige vs. round pricing theory. €12.00 won, not because it tested best, but because it tested best with CLV forecasting layered on top.",
+      tldr: "Trusted Shops' buyer protection had been priced at €9.90 since launch, picked once and never tested. I designed two rounds of A/B tests with seven variants, each grounded in a different pricing-psychology principle. €15.99 won round one on revenue per user; €12.00 won round two once we layered customer-lifetime-value forecasting on top, and shipped as the new price.",
       story: [
-        { kind: "section", title: "Situation", body: "Trusted Shops' buyer protection had been priced at €9.90 since launch. A number chosen without data, strategy, or user input. It was one of the company's core revenue drivers — and no one had systematically examined whether it was the right price." },
-        { kind: "section", title: "Insight", body: "Pricing isn't a finance problem. It's a behavioural design problem. How a price is presented, structured, and framed shapes how people perceive value. I grounded the test in academic pricing psychology." },
-        { kind: "framework", title: "The hypothesis map", items: [
-          { k: "Charm / odd", v: "€15.99", effect: "Perceived as a deal" },
-          { k: "Prestige / even", v: "€12.00", effect: "Signals quality, simplicity" },
-          { k: "Round", v: "€10.00", effect: "Reduces cognitive friction" },
-          { k: "Appearance", v: "— visual —", effect: "How the number looks affects perceived magnitude" }
+        { kind: "section", title: "Situation", body: "Buyer protection had been priced at €9.90 since launch. A number picked without data, strategy, or user input. It is one of the company's core revenue drivers, and no one had systematically tested whether it was the right price." },
+        { kind: "figure", hue: 22, label: "Pricing UI · before", caption: "Fig. 1 - The buyer-protection upsell as it appeared at checkout, unchanged for years." },
+        { kind: "section", title: "Approach", body: "Price perception depends on how a number is written and framed, not only on the number itself. I used pricing-psychology research to design the variants instead of picking them by gut feel, and treated the project as an experiment rather than a price change." },
+        { kind: "framework", title: "Hypotheses", items: [
+          { k: "Charm / odd", v: "€15.99", effect: "Reads as a deal" },
+          { k: "Prestige / even", v: "€12.00", effect: "Reads as quality" },
+          { k: "Round", v: "€10.00", effect: "Lowest cognitive friction" },
+          { k: "Appearance", v: "visual treatment", effect: "How the number is rendered changes perceived size" }
         ]},
-        { kind: "section", title: "Method", body: "We ran a proper experiment. Seven variants between €10 and €15, each rooted in a specific psychological principle. Revenue per user as the north-star metric (not transaction rate — a higher price might convert slightly fewer but still generate more). Segmented by new vs returning, free-plan holders, and order amount from the referring shop." },
-        { kind: "result", title: "What won", body: "Round one: €15.99 won on revenue per user (99.9% win probability). Churn did not rise. Round two expanded the range to €20, layered a CLV forecast on top. €12.00 — one of my original hypotheses — won on long-term value." },
-        { kind: "section", title: "Ripple", body: "The project became the template. Research-backed, hypothesis-driven pricing is now the default at Trusted Shops. The Van Westendorp survey management declined on round one? It shipped in round three. We now run regular perception surveys — and they surfaced demand for a monthly tier and a lower-insurance tier that will shape the next wave." }
+        { kind: "section", title: "Method", body: "Seven variants between €10 and €15, each grounded in a specific psychological principle. Revenue per user as the primary metric, not transaction rate (a higher price can convert slightly fewer users and still produce more revenue). Results segmented by new vs. returning, free-plan holders, and order amount from the referring shop." },
+        { kind: "result", title: "Outcome", body: "Round one: €15.99 won on revenue per user (99.9% win probability). Churn did not rise. Round two extended the range to €20 and layered a CLV forecast on top. €12.00, one of the original hypotheses, won on long-term value and shipped as the new price." },
+        { kind: "figure", hue: 22, label: "Variants · ranked", caption: "Fig. 2 - Round-one variants ranked by revenue per user. Round two added a CLV layer and shifted the winner." },
+        { kind: "section", title: "Aftermath", body: "The setup became the template. Hypothesis-driven pricing is now the default approach for price changes at Trusted Shops. The Van Westendorp survey that management declined in round one shipped in round three and is now part of the standard kit. The latest round surfaced demand for a monthly tier and a lower-insurance tier, both on the roadmap for next year." }
       ]
     },
     {
       slug: "ai-workflow",
       title: "From 2 weeks to 2 days",
-      subtitle: "Redesigning the conversion-test workflow around AI",
+      subtitle: "Rebuilding the conversion-test workflow around AI design tools",
       company: "Trusted Shops",
       year: "2025",
       role: "Owner · End-to-end",
@@ -87,61 +89,65 @@ window.LV_DATA = {
       duration: "Ongoing since May 2025",
       impact: [
         { label: "Cycle time", value: "−85%", note: "2 weeks → 2 days" },
-        { label: "Dev dependency", value: "0", note: "conversion tests fully self-serve" },
+        { label: "Dev dependency", value: "0", note: "tests run without engineering" },
         { label: "Adoption", value: "Org-wide", note: "spread beyond my team" }
       ],
       tags: ["Design Ops", "AI workflows", "End-to-end"],
       coverPaletteHue: 265,
-      tldr: "Conversion tests were stuck behind sprint cycles: two weeks minimum to launch. When Figma Make shipped in May '25, I redesigned the whole workflow around AB testing: design-system-aware templates, an 80% brand-compliance QA gate, and a post-win refinement loop. Our new setup: Two days from idea to test launch without any bottlenecks.",
+      tldr: "Conversion tests were stuck behind sprint cycles, two weeks minimum to launch. When Figma Make shipped in May 2025, I redesigned the workflow around it: design-system-aware templates, an 80% brand-compliance QA gate, and a refinement loop for winning tests. We now go from idea to live test in two days.",
       story: [
-        { kind: "section", title: "The bottleneck", body: "Every conversion test ran the same chain: PM develops an idea, designer mocks it, developer implements it inside a sprint, test launches. That developer step owned the calendar. Minimum two weeks, often longer — for changes that were supposed to be lightweight." },
-        { kind: "section", title: "The bet", body: "I'd been watching AI design tools for months. When Figma Make shipped in May 2025, I saw it immediately: if the design system was properly wired in, conversion managers could visualise ideas without a designer or developer in the loop. I tested it on release day." },
-        { kind: "flow", title: "The new workflow", items: [
+        { kind: "section", title: "Bottleneck", body: "Every conversion test ran the same chain: PM develops an idea, designer mocks it, developer implements it inside a sprint, test launches. The developer step owned the calendar. Minimum two weeks, often longer, for changes that were supposed to be lightweight." },
+        { kind: "section", title: "Bet", body: "I had been watching AI design tools for a while. When Figma Make shipped in May 2025, I tested it on release day with one question: if our design system is wired in properly, can conversion managers visualize their own ideas without a designer or developer in the loop. The answer was close enough to yes to redesign the workflow around it." },
+        { kind: "figure", hue: 265, label: "Figma Make template · live page replica", caption: "Fig. 1 - A template baked with our design system. Conversion managers prompt inside it, designer QAs the output, the test ships." },
+        { kind: "flow", title: "Workflow", items: [
           { from: "Idea", to: "Figma Make (with DS)" },
           { from: "Figma Make", to: "Designer QA (80% brand rule)" },
           { from: "QA pass", to: "Test live" },
           { from: "Winning test", to: "Refine to 100% for rollout" }
         ]},
-        { kind: "section", title: "The 80/20 trade-off", body: "This was the key call. In experimentation, speed matters more than pixel perfection. Ship at 80% brand compliance (designer-QA'd, so nothing embarrassing goes out), then refine winners to 100% before permanent rollout. Conscious imprecision, bounded by a gate." },
-        { kind: "section", title: "The template system", body: "Rather than letting people generate a random version of a page per test, I built 100% replicas of live pages as Figma Make templates. Each template bakes in prompt instructions — automatic test naming, export conventions, role awareness. Only I manage templates; everyone else works inside them." },
-        { kind: "result", title: "The ripple", body: "PMs in other departments adopted Figma Make. Other designers adopted it. The templates became a single source of truth alongside our main Figma files. My role shifted from executing designs to designing the system around them." }
+        { kind: "section", title: "Trade-off", body: "In experimentation, speed of learning matters more than pixel perfection. We ship at 80% brand compliance after designer QA, so nothing embarrassing goes out, then refine winners to 100% before they roll out permanently. The 80 is a deliberate gate, not a compromise on craft." },
+        { kind: "section", title: "Templates", body: "Rather than letting people generate a random version of a page per test, I built 1:1 replicas of live pages as Figma Make templates. Each template bakes in prompt instructions: automatic test naming, export conventions, role awareness. Only I manage templates; everyone else works inside them." },
+        { kind: "figure", hue: 265, label: "Cycle · before / after", caption: "Fig. 2 - Test cycle, before and after. A two-week sprint dependency replaced by a 24-hour QA loop." },
+        { kind: "result", title: "Aftermath", body: "PMs in other departments picked up Figma Make. Other designers picked it up. The templates became a single source of truth alongside our main Figma files. My role shifted from executing designs to maintaining the system around them." }
       ]
     },
     {
       slug: "research-culture",
       title: "The first focus group in 25 years",
-      subtitle: "Building a continuous research practice from zero budget",
+      subtitle: "A continuous research practice, built from a zero-budget proposal",
       company: "Trusted Shops",
       year: "2023 — ongoing",
       role: "Research lead · Change management",
-      team: "With UX team lead, spreading outward",
+      team: "With the UX team lead, spreading outward",
       duration: "Year one hit 1.5× target",
       impact: [
         { label: "Target exceeded", value: "1.5×", note: "research methods / month" },
         { label: "Projects shipped", value: "10+", note: "from my team alone" },
         { label: "Element tests won", value: "100%", note: "3/3 at +20% each" }
       ],
-      tags: ["Research ops", "Change management", "Behavioural data"],
+      tags: ["Research ops", "Change management", "Behavioral data"],
       coverPaletteHue: 150,
-      tldr: "No dedicated researcher. No budget. Teams making decisions on gut feeling and running 'Frankenstein' conversion tests. I proposed a lean framework: one method a month, rotating topics. In year one we hit 1.5× the target, collected the company's first sociodemographic user data, and ran the company's first focus group in 25 years.",
+      tldr: "No dedicated researcher, no budget, teams making decisions on gut feeling and running disconnected conversion tests. I proposed a lean framework: one method a month, rotated by current need. In year one we hit 1.5× the target, collected the company's first sociodemographic user data, and ran the first focus group in 25 years.",
       story: [
-        { kind: "section", title: "The starting state", body: "No heatmaps. No regular research. Teams siloed. Conversion managers implementing design ideas without a holistic UX concept for the pages they were optimising. The result was what I started calling 'Frankenstein design' — a patchwork of isolated wins that didn't add up to a coherent experience." },
-        { kind: "section", title: "The framing", body: "Individual tests win isolated battles. Only a research culture wins the war. I proposed lean research: one project a month, one method at a time, topic chosen by current need. Not academic rigour for its own sake — a sustainable rhythm teams could actually maintain." },
-        { kind: "framework", title: "The cadence", items: [
+        { kind: "section", title: "Situation", body: "No heatmaps. No regular research. Teams siloed. Conversion managers implementing design ideas without a holistic UX concept for the pages they were optimizing. The result was a patchwork of isolated wins that did not add up to a coherent experience." },
+        { kind: "section", title: "Framing", body: "Individual tests win small fights. Only a research practice wins the larger one. I proposed a lean approach: one project a month, one method at a time, topic chosen by current need. Not academic rigor for its own sake, a sustainable rhythm teams could actually maintain." },
+        { kind: "framework", title: "Cadence", items: [
           { k: "Monthly survey", v: "385+ responses", effect: "Statistical significance on rotating topics" },
-          { k: "Heatmaps (Clarity)", v: "Always-on", effect: "Revealed dead-click issue on branded product names" },
-          { k: "Interviews", v: "As-needed", effect: "Anchored qualitative stories behind the numbers" },
-          { k: "Focus group", v: "First in 25 yrs", effect: "New qualitative depth on a trust topic" }
+          { k: "Heatmaps (Clarity)", v: "Always-on", effect: "Surfaced a dead-click issue on branded product names" },
+          { k: "Interviews", v: "As-needed", effect: "Qualitative stories behind the numbers" },
+          { k: "Focus group", v: "First in 25 yrs", effect: "Qualitative depth on a trust topic" }
         ]},
-        { kind: "section", title: "Evidence over assumption", body: "The organisation assumed its typical customer was around 50. Survey data showed they were significantly older. Existing personas from 2018 were stereotypical and outdated; the UX team preferred JTBD. I took a third route — a Limbic Types survey mapped to the actual user base, producing the company's first sociodemographic user data and a framework that explains behavioural differences by age better than any of our old personas." },
-        { kind: "result", title: "The payment-form proof", body: "Three individual element tests in one quarter — new Plus branding, a comparison table, a progress bar. Each delivered roughly +20%. All three won. The deliberate strategy: prove through data that holistic, user-centred design outperforms the Frankenstein approach. Each winning test made the case for the next one." },
-        { kind: "section", title: "The ripple", body: "The framework was later elevated out of our team to serve all consumer-facing teams. B2B teams adopted it. Other designers started running their own research. PMs now come to me proactively for research support. From 'the designer does some surveys' to an organisational capability." }
+        { kind: "figure", hue: 150, label: "Cadence · 12 months", caption: "Fig. 1 - A year of research, one method per month. Surveys form the backbone, heatmaps run continuously, interviews and focus groups slot in by topic." },
+        { kind: "section", title: "Evidence", body: "The organization assumed its typical customer was around 50. Survey data showed they were significantly older. The 2018 personas were stereotypical and outdated; the UX team preferred JTBD. I took a third route, a Limbic Types survey mapped to the actual user base, producing the first sociodemographic user data the company had ever collected." },
+        { kind: "figure", hue: 150, label: "Limbic Types · user mapping", caption: "Fig. 2 - The Limbic Types segmentation, mapped to our actual user base. Replaced the 2018 personas." },
+        { kind: "result", title: "Proof", body: "Three individual element tests in one quarter: new Plus branding, a comparison table, a progress bar. Each delivered roughly +20%. All three won. The deliberate goal: show through data that holistic, user-centered design outperforms the isolated approach. Each winning test made the case for the next one." },
+        { kind: "section", title: "Aftermath", body: "The framework was later elevated out of our team to serve all consumer-facing teams. B2B teams adopted it. Other designers started running their own research. PMs come to me proactively for research support. From 'the designer does some surveys' to an organizational capability." }
       ]
     },
     {
       slug: "design-system",
       title: "A design system for a scaling logistics platform",
-      subtitle: "Atomic design system + co-created rebrand",
+      subtitle: "Atomic design system plus a co-created rebrand",
       company: "Cargoboard",
       year: "2020 — 2022",
       role: "Design systems lead · Rebrand co-creation",
@@ -154,23 +160,25 @@ window.LV_DATA = {
       ],
       tags: ["Design Lead", "Design system", "B2B SaaS"],
       coverPaletteHue: 200,
-      tldr: "Years of rapid growth had left the company with missing standards and no unified product design. I led the creation of a modular design system following atomic design principles — and co-created a visual rebrand with the brand team, hiring a print designer to cover print scope.",
+      tldr: "Years of rapid growth had left the company with missing standards and no unified product design. I led the creation of a modular design system following atomic design principles, and co-created a visual rebrand with the brand team, hiring a print designer to cover print scope.",
       story: [
-        { kind: "section", title: "Situation", body: "Years of organic sprawl. Inconsistent patterns, fragmented navigation, visual language that no longer represented the company's ambitions. Engineers were rebuilding the same components every sprint." },
-        { kind: "section", title: "Approach", body: "Cross-functional effort spanning design, engineering, product, and brand. I led the system creation while simultaneously redesigning the core information architecture, and co-created the visual rebrand with the brand team." },
-        { kind: "framework", title: "Key activities", items: [
+        { kind: "section", title: "Situation", body: "Years of organic sprawl. Inconsistent patterns, fragmented navigation, a visual language that no longer represented the company's ambitions. Engineers were rebuilding the same components every sprint." },
+        { kind: "figure", hue: 200, label: "Audit · component sprawl", caption: "Fig. 1 - The pre-system landscape: 40+ button variants, six navigation patterns, three different ways to render a table." },
+        { kind: "section", title: "Approach", body: "Cross-functional effort spanning design, engineering, product, and brand. I led the system creation, simultaneously redesigned the core information architecture, and co-created the visual rebrand with the brand team." },
+        { kind: "framework", title: "Activities", items: [
           { k: "Audit", v: "Full product", effect: "Surface inconsistencies and patterns" },
           { k: "IA", v: "User mental models", effect: "Rework navigation around real tasks" },
           { k: "Tokens", v: "Ground up", effect: "Modular, themeable component library" },
           { k: "Brand", v: "Co-created", effect: "Visual rebrand in parallel" }
         ]},
-        { kind: "result", title: "Outcome", body: "Significantly reduced design-to-development handoff time. Visual consistency across all product areas. The IA redesign improved task completion and reduced support tickets on navigation confusion." }
+        { kind: "figure", hue: 200, label: "Component set · atoms to templates", caption: "Fig. 2 - The atomic component set as it shipped, from primitives up to page-level templates." },
+        { kind: "result", title: "Outcome", body: "Design-to-development handoff time dropped meaningfully. Visual consistency across all product areas. The IA redesign improved task completion and reduced support tickets on navigation confusion." }
       ]
     },
     {
       slug: "website-relaunch",
       title: "A 100-page website relaunch",
-      subtitle: "[Case study in progress]",
+      subtitle: "Audit, IA rework, and rollout, as the company's first designer",
       company: "Cargoboard",
       year: "2020 — 2022",
       role: "First designer · Website lead",
@@ -183,17 +191,18 @@ window.LV_DATA = {
       ],
       tags: ["Team building", "Website relaunch", "IA"],
       coverPaletteHue: 330,
-      tldr: "The company's marketing website had grown organically to 100+ pages with inconsistent structure, voice, and visual language. I led the audit, IA rework, and relaunch, working closely with the marketing team. As the company's first designer, I mentored a working student and hired a developer so marketing could iterate independently.",
+      tldr: "The marketing site had grown organically to 100+ pages, with inconsistent structure, voice, and visual language. I led the audit, IA rework, and relaunch, working closely with the marketing team. As the company's first designer, I mentored a working student and hired a developer so marketing could iterate independently.",
       story: [
-        { kind: "section", title: "In progress", body: "This case is being written. Short version: as Cargoboard's first designer, I led the audit and relaunch of a 100-page marketing site, paired with a rebrand rollout, while building the design function from zero." }
+        { kind: "section", title: "In progress", body: "This case is being written. Short version: as Cargoboard's first designer, I led the audit and relaunch of a 100-page marketing site, paired with a rebrand rollout, while building the design function from scratch." },
+        { kind: "figure", hue: 330, label: "Sitemap · before audit", caption: "Fig. 1 - The site as we found it. 100+ pages, drift across categories, three different navigation patterns." }
       ]
     }
   ],
 
   sideProjects: [
     { kind: "practice", title: "Aerial yoga teaching", detail: "Certified teacher. Weekly classes. Keeps me humble about balance, patience, and what 'effortless' actually costs to build.", tag: "Off-screen" },
-    { kind: "reading", title: "~30 books tracked in 2025", detail: "Mix of design, behavioural science, and fiction. Currently: Thinking, Fast and Slow · Klara and the Sun · Design is Storytelling.", tag: "Input" },
-    { kind: "making", title: "Canva side work", detail: "Brand guidelines, pitch decks, social kits for small brands — a low-pressure way to stay sharp on visual systems outside of product.", tag: "Visual" },
+    { kind: "reading", title: "~30 books tracked in 2025", detail: "Mix of design, behavioral science, and fiction. Currently: Thinking, Fast and Slow · Klara and the Sun · Design is Storytelling.", tag: "Input" },
+    { kind: "making", title: "Canva side work", detail: "Brand guidelines, pitch decks, social kits for small brands, a low-pressure way to stay sharp on visual systems outside of product.", tag: "Visual" },
     { kind: "making", title: "Sketchbook practice", detail: "Weekly portraits, still life, urban sketching. The hand-drawn scribbles you see around this portfolio are all mine.", tag: "Visual" }
   ],
 
@@ -241,7 +250,7 @@ window.LV_DATA = {
         ]},
         { kind: "quote", text: "Structure is not decoration. It is the part of the writing that tells the reader where they are.", attribution: "Note to self" },
         { kind: "h2", text: "What a figure looks like" },
-        { kind: "paragraph", text: "Right now the figure block renders a coloured placeholder so I can lay out posts before the visuals exist. When a real image is ready, the same block accepts a source and alt text and the placeholder goes away." },
+        { kind: "paragraph", text: "Right now the figure block renders a colored placeholder so I can lay out posts before the visuals exist. When a real image is ready, the same block accepts a source and alt text and the placeholder goes away." },
         { kind: "figure", hue: 265, label: "Figure placeholder", caption: "Fig. 1 - block layout preview, real image to follow." },
         { kind: "h3", text: "Numbered list, when order matters" },
         { kind: "list", style: "numbered", items: [
@@ -269,9 +278,9 @@ window.LV_DATA = {
       tags: ["Strategy", "Product"],
       excerpt: "Why Anthropic picked the smaller user group on purpose, and how that bet compounded into one of the fastest-growing companies of the decade.",
       body: [
-        "ChatGPT had every head start a product can ask for. A year of consumer mindshare ahead of Claude, household-name brand, the most-downloaded app of the decade. By early 2026 it still had over 900 million weekly users and around 25 billion dollars in annualised revenue. And yet Anthropic now runs ahead of it on revenue, with analysts beginning to talk about it as potentially one of the highest-revenue companies of the decade. The interesting question is how that happened in three years.",
+        "ChatGPT had every head start a product can ask for. A year of consumer mindshare ahead of Claude, household-name brand, the most-downloaded app of the decade. By early 2026 it still had over 900 million weekly users and around 25 billion dollars in annualized revenue. And yet Anthropic now runs ahead of it on revenue, with analysts beginning to talk about it as potentially one of the highest-revenue companies of the decade. The interesting question is how that happened in three years.",
         "Anthropic did not just pick a niche. They picked a group of users whose work was already shaped by the technology they were building. Developers immediately understand what a language model can do. They write code that compounds into more value, and they are paid to adopt tools that make them faster. When the user group's job is already shaped by what you sell, the product-market fit is half-built before you start.",
-        "Everyone is the most expensive user group you can design for. When the brief is mass market, every decision becomes a compromise. Onboarding has to work for a teenager and a CFO. Guardrails have to be tuned for the median. Surface area has to keep getting wider. Optimising for everyone is a tax that nobody on the team feels until they try to ship. Anthropic skipped it. They built Claude Code: a tool for a developer writing code in a terminal, shaped exactly to that work. It went from launch to 2.5 billion dollars in annualised revenue in roughly a year, more than half of it from enterprise.",
+        "Everyone is the most expensive user group you can design for. When the brief is mass market, every decision becomes a compromise. Onboarding has to work for a teenager and a CFO. Guardrails have to be tuned for the median. Surface area has to keep getting wider. Optimizing for everyone is a tax that nobody on the team feels until they try to ship. Anthropic skipped it. They built Claude Code: a tool for a developer writing code in a terminal, shaped exactly to that work. It went from launch to 2.5 billion dollars in annualized revenue in roughly a year, more than half of it from enterprise.",
         "And then they kept earning the right to expand. The desktop client came after Claude Code, and then Cowork, both built for the people who work next to developers: product managers, designers, ops, support. The model underneath is the same. What sits on top is shaped differently for each role. A developer who pays for Claude brings it into the team. The team brings it into the company. A ten-seat engineering contract turns into a hundred seats across functions. That is the shape of developer-first B2B growth, and it is why roughly 80 percent of Anthropic's revenue comes from API and enterprise, and only around 10 to 15 percent from consumer subscriptions.",
         "None of this would land without a model good enough to carry it. Claude Opus is an asset on its own. It shows up in Cursor and dozens of other products precisely because it is the strongest underlying model for the work developers care about. The ICP discipline and the model quality compound on each other. Neither alone would have been enough.",
         "Growth is not the only metric a company should be judged by, and the long arc still has to deliver margins, retention, durability. But the lesson for product people here is plainer than people usually want it to be. Pick the user group whose work is already shaped by your technology, and earn the right to expand outward from there. The trajectory tends to reward that more than the comfortable answer of serving everyone at once."
@@ -289,7 +298,7 @@ window.LV_DATA = {
         "The fastest way to waste three sprints is to start in Figma. I've done it. The team ships something clean, well-spaced, visually tidy - and nobody uses it the way we imagined.",
         "Research before pixels is not about writing a 40-page report before you open the file. It is a posture: the first question is always what do we actually know, and the second is what would we need to know to be wrong.",
         "In practice that looks small. A 20-minute conversation with two customers. A Hotjar session of the current flow. A three-question survey on the checkout page. Nothing academic, nothing heavy. Just enough evidence to stop debating opinions.",
-        "The output is rarely a chart. It is a sharper brief. The team stops arguing about button colour and starts arguing about the right moment in the flow, the right label, the right default. The work gets smaller and the decisions get firmer.",
+        "The output is rarely a chart. It is a sharper brief. The team stops arguing about button color and starts arguing about the right moment in the flow, the right label, the right default. The work gets smaller and the decisions get firmer.",
         "Pixels are cheap once the question is right. Most of my best projects started with a one-page note that nobody looked at again. It did its job."
       ]
     },
@@ -304,7 +313,7 @@ window.LV_DATA = {
       body: [
         "When we redesigned the conversion-test workflow at Trusted Shops around Figma Make, one question kept coming back: are you ok with this not being pixel-perfect?",
         "Short answer: yes, on purpose. An experiment that ships in two days at 80% beats an experiment that ships in two weeks at 100%. The cost of waiting is invisible, but it is real - every week of backlog is a week of compounding learning we are not getting.",
-        "The trick is to make the 80 explicit. A designer QA gate catches anything embarrassing. A template system bakes in the non-negotiables: type scale, spacing rhythm, CTA behaviour. Inside that fence, conversion managers can move fast without making the product feel broken.",
+        "The trick is to make the 80 explicit. A designer QA gate catches anything embarrassing. A template system bakes in the non-negotiables: type scale, spacing rhythm, CTA behavior. Inside that fence, conversion managers can move fast without making the product feel broken.",
         "Then the winning tests get refined to 100% before permanent rollout. The polish does not disappear - it just moves to the point where it actually matters.",
         "The hardest part is not the design. It is convincing the team that conscious imprecision is a choice, not a slip."
       ]
@@ -316,12 +325,12 @@ window.LV_DATA = {
       dateLabel: "November 2025",
       readingTime: "5 min",
       tags: ["Research ops", "Culture"],
-      excerpt: "What I learned running a method an organisation had not used since the 90s - and why I will do it again.",
+      excerpt: "What I learned running a method an organization had not used since the 90s, and why I will do it again.",
       body: [
         "Running the first focus group in 25 years was not my idea of a bold research move. It was a pragmatic one: we had a trust question that surveys kept answering the same way, and we needed to hear people push back on each other, not on us.",
-        "The interesting part was not the method, it was the reaction inside the company. People were curious. Some were sceptical. A few were openly nervous about what six customers in a room might say out loud.",
+        "The interesting part was not the method, it was the reaction inside the company. People were curious. Some were skeptical. A few were openly nervous about what six customers in a room might say out loud.",
         "The output was not surprising - most insights echoed what the surveys had hinted at. But the weight was different. A quote in a deck moves a room. A percentage does not.",
-        "The lesson I took away is that a research practice is a portfolio, not a method. Surveys for breadth, heatmaps for behaviour, interviews for why, and every now and then a focus group for a texture you cannot get any other way.",
+        "The lesson I took away is that a research practice is a portfolio, not a method. Surveys for breadth, heatmaps for behavior, interviews for why, and every now and then a focus group for a texture you cannot get any other way.",
         "I will run another one. Probably this year. Probably with less ceremony."
       ]
     }
@@ -334,7 +343,7 @@ window.LV_DATA = {
       { t: "Canva kits", kind: "visual", hue: 190 },
       { t: "Reading shelf", kind: "reading", hue: 100 },
       { t: "Type pairings file", kind: "type", hue: 20 },
-      { t: "Colour studies", kind: "palette", hue: 270 }
+      { t: "Color studies", kind: "palette", hue: 270 }
     ],
     v3: [
       { t: "Sketchbook 2025", kind: "drawings", count: "38 pages" },
@@ -342,7 +351,7 @@ window.LV_DATA = {
       { t: "Canva kits", kind: "visual", count: "3 clients" },
       { t: "Reading shelf", kind: "notes", count: "~30 books" },
       { t: "Type pairings", kind: "type", count: "open file" },
-      { t: "Colour studies", kind: "palette", count: "oklch only" }
+      { t: "Color studies", kind: "palette", count: "oklch only" }
     ]
   }
 };
