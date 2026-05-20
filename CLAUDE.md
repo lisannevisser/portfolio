@@ -69,6 +69,15 @@ the case study is worth their time. Qualitative is fine if
 quantitative isn't available — pair it with the hypothesis you set up
 and how you would measure it.
 
+**Impact cells: numbers or nothing**
+The big value in each impact cell must either contain a digit
+("+15%", "140+", "1st") or stay short and punchy ("Refreshed",
+"Org-wide", "Daily use"). If any cell's value has no digit and runs
+longer than ~10 characters, the entire impact section is hidden
+automatically (see `shouldShowImpact` in app.js). The big-number slot
+is for metrics, not sentences. Move sentence-length context into the
+note line underneath.
+
 **Sections lead with the decision, not the activity**
 - Bad: "We did tree testing with UXtweak."
 - Better: "Top-bar navigation needed to survive both SEO link
