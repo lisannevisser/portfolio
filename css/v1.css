@@ -185,23 +185,39 @@
   color: var(--ink);
 }
 
+/* Story block: number sits big and quiet above the title; the h2 carries the
+   confident italic display weight. Lead paragraph (first p after h2) gets the
+   bigger, italic display treatment so each section has a clear scan-then-read
+   rhythm. */
 [data-variation="v1"] .v1-story-block {
-  padding: 1.5rem 0; border-top: 1px dashed var(--rule);
+  padding: 2.5rem 0; position: relative;
 }
-[data-variation="v1"] .v1-story-block:first-child { border-top: none; padding-top: 0; }
-[data-variation="v1"] .v1-story-block h3 {
-  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--accent); margin: 0 0 0.6rem;
-  font-weight: 400;
+[data-variation="v1"] .v1-story-block:first-child { padding-top: 0; }
+[data-variation="v1"] .v1-story-block .lv-section-num {
+  display: block;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.16em; color: var(--accent);
+  margin: 0 0 0.85rem;
 }
-[data-variation="v1"] .v1-story-block h2 {
+[data-variation="v1"] .v1-story-block .lv-section-title {
   font-family: var(--font-display); font-style: italic; font-weight: 400;
-  font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.1; margin: 0 0 1rem;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  line-height: 1.05; letter-spacing: -0.02em;
+  margin: 0 0 1.25rem; color: var(--ink);
 }
-[data-variation="v1"] .v1-story-block p {
-  font-size: 1.08rem; line-height: 1.65; color: var(--ink-2); margin: 0;
-  max-width: 62ch;
+/* Lead paragraph: first p directly after the section title. Matches the
+   design prototype's base (regular) treatment — body font, slightly larger,
+   full ink color — instead of the italic display variant. */
+[data-variation="v1"] .v1-story-block .lv-section-title + p {
+  font-family: var(--font-body); font-style: normal; font-weight: 400;
+  font-size: 1.15rem; line-height: 1.55; letter-spacing: 0;
+  color: var(--ink); max-width: 60ch; margin: 0;
+}
+/* Follow-up paragraphs drop back to body. */
+[data-variation="v1"] .v1-story-block p + p {
+  font-family: var(--font-body); font-style: normal; font-weight: 400;
+  font-size: 1.02rem; line-height: 1.7; letter-spacing: 0;
+  color: var(--ink-2); margin: 1.25rem 0 0; max-width: 62ch;
 }
 
 [data-variation="v1"] .v1-framework {
@@ -248,7 +264,6 @@
   background: var(--paper-2);
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
-  border-top: 3px solid var(--accent);
 }
 [data-variation="v1"] .v1-limitations-face.is-back {
   position: absolute;
