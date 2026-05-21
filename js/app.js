@@ -53,9 +53,12 @@
 
     // Case study: fill every variation template with the selected slug.
     if (route.page === "case") {
+      flushTocFabCleanups();
       const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
       renderV1Case(c);
       renderV3Case(c);
+    } else {
+      flushTocFabCleanups();
     }
 
     // Blog post: render selected post in both variation templates.
@@ -353,6 +356,155 @@
       .replace(/'/g, "&#39;");
   }
 
+  // Stable id from a section title. Used as the scroll target for TOC entries.
+  function sectionId(prefix, title, i) {
+    const base = String(title || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 40);
+    return `${prefix}-${base || "section"}-${i}`;
+  }
+
+  // Build the list of TOC entries for a case. Figures don't get a row.
+  // Limitations gets a special row marked with the lim flag.
+  function buildTocEntries(c, prefix) {
+    const entries = [];
+    let n = 0;
+    c.story.forEach((s, i) => {
+      if (s.kind === "figure") return;
+      if (s.kind === "limitations") {
+        entries.push({
+          id: sectionId(prefix, s.title || "limitations", i),
+          num: "↳",
+          title: s.title || "Limitations",
+          lim: true
+        });
+        return;
+      }
+      n += 1;
+      entries.push({
+        id: sectionId(prefix, s.title, i),
+        num: String(n).padStart(2, "0"),
+        title: s.title || "",
+        lim: false
+      });
+    });
+    return entries;
+  }
+
+  // FAB markup. The popover ol is filled by wireTocFab() once the case body
+  // has been injected, since we need to know which entries actually rendered.
+  function tocFabHtml() {
+    return `
+      <div class="lv-toc-fab" tabindex="0" role="button" aria-label="Contents" aria-haspopup="menu" aria-expanded="false">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line x1="5" y1="6" x2="15" y2="6"></line>
+          <line x1="5" y1="10" x2="15" y2="10"></line>
+          <line x1="5" y1="14" x2="11" y2="14"></line>
+        </svg>
+        <div class="lv-toc-popover" role="menu">
+          <span class="eyebrow">Contents</span>
+          <ol></ol>
+        </div>
+      </div>`;
+  }
+
+  // Wire up the FAB. Both v1 and v3 renderers run per route change, so we
+  // track cleanup per render-pass and flush stale listeners before binding new ones.
+  const __tocFabCleanups = [];
+  function flushTocFabCleanups() {
+    while (__tocFabCleanups.length) {
+      const fn = __tocFabCleanups.pop();
+      try { fn(); } catch (_) { /* no-op */ }
+    }
+  }
+  function wireTocFab(root, entries) {
+    const fab = root.querySelector(".lv-toc-fab");
+    if (!fab) return;
+    const list = fab.querySelector("ol");
+    if (!list) return;
+
+    // Render the list. Only include entries whose target section actually
+    // exists in the DOM (defensive: some kinds may be filtered out later).
+    list.innerHTML = entries
+      .filter((e) => document.getElementById(e.id))
+      .map((e) => `
+        <li data-target="${esc(e.id)}"${e.lim ? ' class="is-lim"' : ""}>
+          <span class="n">${esc(e.num)}</span>
+          <span class="t">${esc(e.title)}</span>
+        </li>`)
+      .join("");
+
+    const close = () => {
+      fab.classList.remove("is-open");
+      fab.setAttribute("aria-expanded", "false");
+    };
+    const open = () => {
+      fab.classList.add("is-open");
+      fab.setAttribute("aria-expanded", "true");
+    };
+
+    const onFabClick = (e) => {
+      // Don't toggle when clicking inside the popover (list items handle their own).
+      if (e.target.closest(".lv-toc-popover")) return;
+      fab.classList.contains("is-open") ? close() : open();
+    };
+    const onFabKey = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        fab.classList.contains("is-open") ? close() : open();
+      }
+      if (e.key === "Escape") close();
+    };
+    const onListClick = (e) => {
+      const li = e.target.closest("li[data-target]");
+      if (!li) return;
+      const target = document.getElementById(li.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(close, 60);
+    };
+    const onOutside = (e) => {
+      if (!fab.contains(e.target)) close();
+    };
+    const onDocKey = (e) => {
+      if (e.key === "Escape") close();
+    };
+
+    fab.addEventListener("click", onFabClick);
+    fab.addEventListener("keydown", onFabKey);
+    list.addEventListener("click", onListClick);
+    document.addEventListener("click", onOutside);
+    document.addEventListener("keydown", onDocKey);
+
+    // Active-section highlight: the section closest to the upper-middle of
+    // the viewport wins.
+    const io = new IntersectionObserver(
+      (records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          list.querySelectorAll("li").forEach((li) => li.classList.remove("is-active"));
+          const li = list.querySelector(`li[data-target="${r.target.id}"]`);
+          if (li) li.classList.add("is-active");
+        });
+      },
+      { rootMargin: "-30% 0px -55% 0px" }
+    );
+    entries.forEach((e) => {
+      const el = document.getElementById(e.id);
+      if (el) io.observe(el);
+    });
+
+    __tocFabCleanups.push(() => {
+      fab.removeEventListener("click", onFabClick);
+      fab.removeEventListener("keydown", onFabKey);
+      list.removeEventListener("click", onListClick);
+      document.removeEventListener("click", onOutside);
+      document.removeEventListener("keydown", onDocKey);
+      io.disconnect();
+    });
+  }
+
   // Impact cells display a label, a prominent value, and a short note.
   // The big value must either contain a digit or stay short (<= 10 chars).
   // If any cell violates that, the whole impact section is hidden so the
@@ -372,8 +524,10 @@
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
 
+    const tocEntries = buildTocEntries(c, "v1");
+
     let narrativeIdx = 0;
-    const storyHtml = c.story.map((s) => {
+    const storyHtml = c.story.map((s, storyI) => {
       if (s.kind === "figure") {
         const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
         const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
@@ -381,6 +535,7 @@
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
+        const sid = sectionId("v1", s.title || "limitations", storyI);
         const renderItems = (arr) => arr.map((it) => `
           <div class="v1-limitation-row">
             <h4>${esc(it.title)}</h4>
@@ -402,11 +557,12 @@
             ${s.oppositeSubtitle ? `<p class="v1-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
           </div>` : "";
         return `
-          <section class="v1-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+          <section id="${esc(sid)}" class="v1-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
             <div class="v1-limitations-card-inner">${frontFace}${backFace}</div>
           </section>`;
       }
       const i = narrativeIdx++;
+      const sid = sectionId("v1", s.title, storyI);
       let body = s.body ? `<p>${esc(s.body)}</p>` : "";
       let extra = "";
       if (s.kind === "framework" && s.items) {
@@ -427,8 +583,9 @@
         extra = `<div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1rem;">${chips}</div>`;
       }
       return `
-        <section class="v1-story-block lv-reveal">
-          <h3>${String(i + 1).padStart(2, "0")} - ${esc(s.title)}</h3>
+        <section id="${esc(sid)}" class="v1-story-block lv-case-section lv-reveal">
+          <span class="lv-section-num">${String(i + 1).padStart(2, "0")}</span>
+          <h2 class="lv-section-title">${esc(s.title)}</h2>
           ${body}${extra}
         </section>`;
     }).join("");
@@ -444,9 +601,6 @@
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
           <em>${esc(c.title)}</em>
         </h1>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.75rem;">
-          ${c.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
-        </div>
       </header>
 
       <div class="v1-case-media lv-reveal" style="--case-hue:${c.coverPaletteHue};aspect-ratio:21/9;margin:3rem 0 4rem;border-radius:var(--radius-lg);position:relative;">
@@ -469,27 +623,19 @@
         <div><div class="lv-eyebrow">Year</div><div style="margin-top:0.5rem;">${esc(c.year)}</div></div>
       </div>
 
-      <div class="v1-case-grid" style="display:grid;grid-template-columns:1fr 2.2fr;gap:clamp(2rem, 5vw, 4rem);">
-        <aside class="lv-reveal">
-          <div class="v1-sticky-nav">
-            <div class="lv-eyebrow">Contents</div>
-            <ol style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.5rem;">
-              ${c.story.filter((s) => s.kind !== "figure" && s.kind !== "limitations").map((s, i) => `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);">${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</li>`).join("")}
-              ${c.story.some((s) => s.kind === "limitations") ? `<li style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-3);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--rule);">↳ ${esc(c.story.find((s) => s.kind === "limitations").title || "Limitations")}</li>` : ""}
-            </ol>
-          </div>
-        </aside>
-        <div>${storyHtml}</div>
-      </div>
+      <div>${storyHtml}</div>
 
-      <a href="#/work/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding:3rem 0;border-top:1px solid var(--rule);">
-        <div class="lv-eyebrow">Next case →</div>
-        <h2 class="v1-case-title" style="margin-top:1rem;font-size:clamp(1.75rem,3.5vw,2.6rem);">${esc(next.title)}</h2>
-        <div style="margin-top:0.75rem;color:var(--ink-3);font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;">
-          ${esc(next.company)} · ${esc(next.impact[0].value)} ${esc(next.impact[0].label.toLowerCase())}
+      ${tocFabHtml()}
+
+      <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
+        <span class="lv-next-label">Next</span>
+        <div class="lv-next-row">
+          <span class="lv-next-title">${esc(next.title)}</span>
+          <span class="lv-next-arrow">→</span>
         </div>
       </a>
     `;
+    wireTocFab(root, tocEntries);
     renderScribbles();
   }
 
@@ -499,8 +645,10 @@
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
 
+    const tocEntries = buildTocEntries(c, "v3");
+
     let narrativeIdx = 0;
-    const storyHtml = c.story.map((s) => {
+    const storyHtml = c.story.map((s, storyI) => {
       if (s.kind === "figure") {
         const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
         const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
@@ -508,6 +656,7 @@
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
+        const sid = sectionId("v3", s.title || "limitations", storyI);
         const renderItems = (arr) => arr.map((it) => `
           <div class="v3-limitation-row">
             <h4>${esc(it.title)}</h4>
@@ -529,14 +678,14 @@
             ${s.oppositeSubtitle ? `<p class="v3-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
           </div>` : "";
         return `
-          <section class="v3-limitations-card ${hasOpp ? "is-flippable" : ""} lv-reveal">
+          <section id="${esc(sid)}" class="v3-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
             <div class="v3-limitations-card-inner">${frontFace}${backFace}</div>
           </section>`;
       }
       const i = narrativeIdx++;
-      const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span><span class="tag">${
-        s.kind === "result" ? "OUTCOME" : s.kind === "framework" ? "MATRIX" : s.kind === "flow" ? "FLOW" : "LOG"
-      }</span></div>`;
+      const sid = sectionId("v3", s.title, storyI);
+      // Mono kicker bar: number + title, no LOG/OUTCOME tag (matches design prototype).
+      const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span></div>`;
       const title = `<h2>${esc(s.title)}</h2>`;
       const body = s.body ? `<p class="v3-story-body">${esc(s.body)}</p>` : "";
       let extra = "";
@@ -553,7 +702,7 @@
         ).join("\n       │\n       ▼\n");
         extra = `<div style="margin-top:1.5rem;padding:1.5rem;background:var(--paper-2);border:1px solid var(--rule);"><pre class="v3-ascii" style="padding:0;background:transparent;border:none;">${esc(lines)}</pre></div>`;
       }
-      return `<section class="v3-story lv-reveal" style="margin-bottom:3.5rem;">${head}${title}${body}${extra}</section>`;
+      return `<section id="${esc(sid)}" class="v3-story lv-case-section lv-reveal" style="margin-bottom:3.5rem;">${head}${title}${body}${extra}</section>`;
     }).join("");
 
     const idxNum = String(idx + 1).padStart(2, "0");
@@ -581,7 +730,6 @@
           <div class="cell"><div class="k">DURATION</div><div class="v">${esc(c.duration)}</div></div>
           <div class="cell"><div class="k">YEAR</div><div class="v">${esc(c.year)}</div></div>
         </div>
-        <div class="tags">${c.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}</div>
       </div>
 
       ${shouldShowImpact(c.impact) ? `
@@ -599,14 +747,17 @@
 
       <div style="margin-top:5rem;">${storyHtml}</div>
 
-      <a href="#/work/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:5rem;padding:2.5rem 0;border-top:2px solid var(--rule);text-decoration:none;color:inherit;">
-        <div class="v3-kicker"><span>→ next.case</span></div>
-        <h2 class="v3-hero-title" style="font-size:clamp(1.6rem,3.5vw,2.8rem);margin-top:1rem;">${esc(next.title)}</h2>
-        <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent);">
-          ${esc(next.company)} · ${esc(next.impact[0].value)} ${esc(next.impact[0].label.toLowerCase())} →
+      ${tocFabHtml()}
+
+      <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
+        <span class="lv-next-label">Next</span>
+        <div class="lv-next-row">
+          <span class="lv-next-title">${esc(next.title)}</span>
+          <span class="lv-next-arrow">→</span>
         </div>
       </a>
     `;
+    wireTocFab(root, tocEntries);
   }
 
   // ========================================================================
