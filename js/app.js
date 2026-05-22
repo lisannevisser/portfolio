@@ -1055,6 +1055,17 @@
     });
   }
 
+  function initFooterEmoji() {
+    const el = document.querySelector(".lv-footer-emoji");
+    if (!el) return;
+    const emojis = ["🩶", "🐶", "🍵", "🎨", "🤸", "🧘"];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % emojis.length;
+      el.textContent = emojis[i];
+    }, 2500);
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
@@ -1068,6 +1079,7 @@
     initEasterEgg();
     initMobileNav();
     initFlipCards();
+    initFooterEmoji();
     renderRoute();
   }
 
