@@ -330,14 +330,20 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
 /* Mobile nav toggle */
 .lv-nav-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 999px;
-  padding: 0.5rem 0.85rem;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   color: var(--ink);
-  font-family: var(--font-mono); font-size: 0.7rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
   cursor: pointer;
+}
+.lv-nav-toggle .material-symbols-outlined {
+  font-size: 22px;
+  line-height: 1;
 }
 [data-variation="v3"] .lv-nav-toggle { border-radius: 3px; }
 
@@ -383,7 +389,7 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
 
 @media (max-width: 1080px) {
   .lv-nav-links { display: none; }
-  .lv-nav-toggle { display: inline-block; }
+  .lv-nav-toggle { display: inline-flex; }
 }
 
 /* ==========================================================================
