@@ -47,8 +47,8 @@ window.LV_DATA = {
   cases: [
     {
       slug: "pricing",
-      title: "A €9.90 guess → a €12.00 decision",
-      subtitle: "Two rounds of pricing experiments on a number nobody had questioned",
+      title: "€9.90 at launch → €12.00 after two rounds",
+      subtitle: "Two rounds of pricing experiments on a core revenue driver",
       company: "Trusted Shops",
       year: "2024",
       role: "Research lead · Hypothesis design",
@@ -61,21 +61,39 @@ window.LV_DATA = {
       ],
       tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
-      tldr: "Trusted Shops' buyer protection had been priced at €9.90 since launch, picked once and never tested. I designed two rounds of A/B tests with seven variants, each grounded in a different pricing-psychology principle. €15.99 won round one on revenue per user; €12.00 won round two once we layered customer-lifetime-value forecasting on top, and shipped as the new price.",
+      tldr: "Trusted Shops' buyer protection had been priced at €9.90 since launch, a price that carried the product through years of growth. The product had matured a lot in that time, and I saw an opportunity to put pricing on a more systematic footing. I designed two rounds of A/B tests with seven variants, each grounded in a different pricing-psychology principle. €15.99 won round one on revenue per user; €12.00 won round two once we layered customer-lifetime-value forecasting on top, and shipped as the new price.",
       story: [
-        { kind: "section", title: "Situation", body: "Buyer protection had been priced at €9.90 since launch. A number picked without data, strategy, or user input. It is one of the company's core revenue drivers, and no one had systematically tested whether it was the right price." },
-        { kind: "figure", hue: 22, label: "Pricing UI · before", caption: "Fig. 1 - The buyer-protection upsell as it appeared at checkout, unchanged for years." },
-        { kind: "section", title: "Approach", body: "Price perception depends on how a number is written and framed, not only on the number itself. I used pricing-psychology research to design the variants instead of picking them by gut feel, and treated the project as an experiment rather than a price change." },
+        { kind: "section", title: "Situation", body: "Buyer protection had been priced at €9.90 since launch. It is one of the company's core revenue drivers, and that price had served the product well through years of growth. The product itself had evolved a lot in that time, so revisiting the number with current evidence felt like the natural next step. The question I wanted to answer: is €9.90 still the right price today, and if not, what does pricing-psychology research suggest instead?" },
+        { kind: "figure", hue: 22, label: "Pricing UI · before", caption: "Fig. 1 - The buyer-protection upsell at checkout, the starting point for the experiments." },
+        { kind: "section", title: "Approach", body: "Price perception depends on how a number is written and framed, not only on the number itself. I built each variant from a specific pricing-psychology principle, so the test wasn't just \"is this number better\" but \"which mechanism actually moves behavior\". Framing the work as an experiment, not a price change, kept the stakes low across the team: any result was useful input for the next round." },
         { kind: "framework", title: "Hypotheses", items: [
           { k: "Charm / odd", v: "€15.99", effect: "Reads as a deal" },
           { k: "Prestige / even", v: "€12.00", effect: "Reads as quality" },
           { k: "Round", v: "€10.00", effect: "Lowest cognitive friction" },
           { k: "Appearance", v: "visual treatment", effect: "How the number is rendered changes perceived size" }
         ]},
-        { kind: "section", title: "Method", body: "Seven variants between €10 and €15, each grounded in a specific psychological principle. Revenue per user as the primary metric, not transaction rate (a higher price can convert slightly fewer users and still produce more revenue). Results segmented by new vs. returning, free-plan holders, and order amount from the referring shop." },
-        { kind: "result", title: "Outcome", body: "Round one: €15.99 won on revenue per user (99.9% win probability). Churn did not rise. Round two extended the range to €20 and layered a CLV forecast on top. €12.00, one of the original hypotheses, won on long-term value and shipped as the new price." },
+        { kind: "section", title: "Method", body: "We tested seven variants between €10 and €15, each grounded in a specific psychological principle. As the primary metric we used revenue per user, not transaction rate. A higher price can convert slightly fewer users and still produce more revenue overall, so transaction rate alone would have hidden the better-performing variants. To check the effect wasn't carried by a single segment, we broke the results down by new versus returning users, by free-plan holders, and by the order amount from the referring shop." },
         { kind: "figure", hue: 22, label: "Variants · ranked", caption: "Fig. 2 - Round-one variants ranked by revenue per user. Round two added a CLV layer and shifted the winner." },
-        { kind: "section", title: "Aftermath", body: "The setup became the template. Hypothesis-driven pricing is now the default approach for price changes at Trusted Shops. The Van Westendorp survey that management declined in round one shipped in round three and is now part of the standard kit. The latest round surfaced demand for a monthly tier and a lower-insurance tier, both on the roadmap for next year." }
+        { kind: "result", title: "Outcome", body: "€15.99 won on revenue per user with a 99.9% win probability. We extended the work into a second round, expanding the price range up to €20 and layering customer-lifetime-value forecasting on top of all tested variants. With CLV factored in, €12.00, one of the original hypotheses from round one, came out on top on long-term value and shipped as the new price. Post-ship we monitored withdrawals and churn over a horizon of a year and longer; neither moved significantly. Annualized, the lift was one of the larger contributors to the team's growth that year. [PLACEHOLDER · drop in a relative share or qualitative line once cleared for publication] The experiment setup has since become the default approach for consumer pricing changes at Trusted Shops." },
+        { kind: "limitations",
+          defaultFace: "opportunities",
+          title: "Limitations",
+          subtitle: "I learned in academia that it's considered good manners to critique your own work, no matter how good it is. Every solution brings room for more ideas. Flip back for the directions I'd pull next.",
+          oppositeTitle: "Opportunities",
+          oppositeSubtitle: "These are directions I'd pull if the project got another round. Some pair to a specific limitation, some are just headroom I noticed along the way. Flip the card to see the caveats this work can and cannot claim.",
+          items: [
+            { title: "Quantitative test design", body: "Both rounds relied on behavioral A/B data and CLV modeling. Qualitative price-sensitivity research (Van Westendorp, conjoint, depth interviews) would have triangulated the result but wasn't part of this scope." },
+            { title: "CLV is a forecast", body: "The winning price was chosen on a customer-lifetime-value model layered on top of the A/B data, not on multi-year observed lifetimes. Post-ship monitoring is starting to confirm the model, but the original decision was partly model-driven." },
+            { title: "Single product surface", body: "Only the buyer-protection upsell was tested. Other pricing levers (subscription tiers, B2B pricing) were not in scope and may behave differently." },
+            { title: "Price tested, mechanisms bundled", body: "Each variant combines related psychological mechanisms (e.g. €15.99 is both charm-priced and odd-ending). Methodologically consistent since the mechanisms aren't independently variable, but the test confirms which price won, not which underlying mechanism drove it." }
+          ],
+          opportunities: [
+            { title: "Van Westendorp survey", body: "I had proposed a price-sensitivity survey for round one and would still run one on a future round. It surfaces the price band users perceive as fair, cheap, or too expensive, and could refine where to test next." },
+            { title: "Conjoint on price / feature trade-offs", body: "Users implicitly trade price against features. A conjoint or MaxDiff study would surface which feature bundles justify which price point, useful input for future tier design." },
+            { title: "Monthly subscription tier", body: "Follow-up user research I ran in this area surfaced clear demand for a monthly model. It sits on the roadmap as a follow-on test of price and cadence together." },
+            { title: "Lower-cover entry tier", body: "The same research surfaced demand for a lower-cover, lower-price option. A natural candidate for the next round of pricing experiments." }
+          ]
+        }
       ]
     },
     {
