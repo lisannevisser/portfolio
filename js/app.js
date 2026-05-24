@@ -547,19 +547,29 @@
         const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations" };
         const front = oppFirst ? oppFace : limFace;
         const back = oppFirst ? limFace : oppFace;
+        const renderHeader = (face, idSuffix, pressed) => {
+          const pid = `${sid}-info-${idSuffix}`;
+          const info = face.subtitle ? `
+              <button class="v1-limitations-info-btn" type="button" aria-expanded="false" aria-controls="${esc(pid)}" aria-label="About this card">i</button>
+              <div class="v1-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden>${esc(face.subtitle)}</div>` : "";
+          const flip = hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="${pressed}">${face.flipLabel}</button>` : "";
+          return `
+            <div class="v1-limitations-header">
+              <div class="v1-limitations-info-group">
+                <span class="v1-limitations-label">${esc(face.title)}</span>${info}
+              </div>
+              ${flip}
+            </div>`;
+        };
         const frontFace = `
           <div class="v1-limitations-face is-front">
-            ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">${front.flipLabel}</button>` : ""}
-            <div class="v1-limitations-label">${esc(front.title)}</div>
+            ${renderHeader(front, "front", "false")}
             <div class="v1-limitations-grid">${renderItems(front.items)}</div>
-            ${front.subtitle ? `<p class="v1-limitations-subtitle">${esc(front.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v1-limitations-face is-back" aria-hidden="true">
-            <button class="v1-limitations-flip" type="button" aria-pressed="true">${back.flipLabel}</button>
-            <div class="v1-limitations-label">${esc(back.title)}</div>
+            ${renderHeader(back, "back", "true")}
             <div class="v1-limitations-grid">${renderItems(back.items)}</div>
-            ${back.subtitle ? `<p class="v1-limitations-subtitle">${esc(back.subtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section id="${esc(sid)}" class="v1-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
@@ -673,19 +683,29 @@
         const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "[ flip → limitations ]" };
         const front = oppFirst ? oppFace : limFace;
         const back = oppFirst ? limFace : oppFace;
+        const renderHeader = (face, idSuffix, pressed) => {
+          const pid = `${sid}-info-${idSuffix}`;
+          const info = face.subtitle ? `
+              <button class="v3-limitations-info-btn" type="button" aria-expanded="false" aria-controls="${esc(pid)}" aria-label="About this card">[ ? ]</button>
+              <div class="v3-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden>${esc(face.subtitle)}</div>` : "";
+          const flip = hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="${pressed}">${face.flipLabel}</button>` : "";
+          return `
+            <div class="v3-limitations-header">
+              <div class="v3-limitations-info-group">
+                <span class="v3-limitations-label">// ${esc(face.title)}</span>${info}
+              </div>
+              ${flip}
+            </div>`;
+        };
         const frontFace = `
           <div class="v3-limitations-face is-front">
-            ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">${front.flipLabel}</button>` : ""}
-            <div class="v3-limitations-label">// ${esc(front.title)}</div>
+            ${renderHeader(front, "front", "false")}
             <div class="v3-limitations-grid">${renderItems(front.items)}</div>
-            ${front.subtitle ? `<p class="v3-limitations-subtitle">${esc(front.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v3-limitations-face is-back" aria-hidden="true">
-            <button class="v3-limitations-flip" type="button" aria-pressed="true">${back.flipLabel}</button>
-            <div class="v3-limitations-label">// ${esc(back.title)}</div>
+            ${renderHeader(back, "back", "true")}
             <div class="v3-limitations-grid">${renderItems(back.items)}</div>
-            ${back.subtitle ? `<p class="v3-limitations-subtitle">${esc(back.subtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section id="${esc(sid)}" class="v3-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
@@ -1047,12 +1067,24 @@
   // ========================================================================
   // BOOT
   // ========================================================================
+  function closeAllInfoPopovers(except) {
+    document.querySelectorAll(".v1-limitations-info-btn, .v3-limitations-info-btn").forEach((b) => {
+      if (b === except) return;
+      if (b.getAttribute("aria-expanded") !== "true") return;
+      b.setAttribute("aria-expanded", "false");
+      const pid = b.getAttribute("aria-controls");
+      const pop = pid && document.getElementById(pid);
+      if (pop) pop.hidden = true;
+    });
+  }
+
   function initFlipCards() {
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".v1-limitations-flip, .v3-limitations-flip");
       if (!btn) return;
       const card = btn.closest(".v1-limitations-card, .v3-limitations-card");
       if (!card) return;
+      closeAllInfoPopovers();
       const flipped = card.classList.toggle("is-flipped");
       card.querySelectorAll(".is-front, .is-back").forEach((face) => {
         const isBack = face.classList.contains("is-back");
@@ -1062,6 +1094,27 @@
         const onBack = b.closest(".is-back");
         b.setAttribute("aria-pressed", String(onBack ? !flipped : flipped));
       });
+    });
+  }
+
+  function initInfoPopovers() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-limitations-info-btn, .v3-limitations-info-btn");
+      if (btn) {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        closeAllInfoPopovers(btn);
+        const pid = btn.getAttribute("aria-controls");
+        const pop = pid && document.getElementById(pid);
+        btn.setAttribute("aria-expanded", String(!expanded));
+        if (pop) pop.hidden = expanded;
+        return;
+      }
+      if (!e.target.closest(".v1-limitations-info-popover, .v3-limitations-info-popover")) {
+        closeAllInfoPopovers();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllInfoPopovers();
     });
   }
 
@@ -1089,6 +1142,7 @@
     initEasterEgg();
     initMobileNav();
     initFlipCards();
+    initInfoPopovers();
     initFooterEmoji();
     renderRoute();
   }
