@@ -542,19 +542,24 @@
             <p>${esc(it.body)}</p>
           </div>`).join("");
         const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const oppFirst = s.defaultFace === "opportunities" && hasOpp;
+        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities" };
+        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations" };
+        const front = oppFirst ? oppFace : limFace;
+        const back = oppFirst ? limFace : oppFace;
         const frontFace = `
           <div class="v1-limitations-face is-front">
-            ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">↻ Opportunities</button>` : ""}
-            <div class="v1-limitations-label">${esc(s.title || "Limitations")}</div>
-            <div class="v1-limitations-grid">${renderItems(s.items)}</div>
-            ${s.subtitle ? `<p class="v1-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
+            ${hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="false">${front.flipLabel}</button>` : ""}
+            <div class="v1-limitations-label">${esc(front.title)}</div>
+            <div class="v1-limitations-grid">${renderItems(front.items)}</div>
+            ${front.subtitle ? `<p class="v1-limitations-subtitle">${esc(front.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v1-limitations-face is-back" aria-hidden="true">
-            <button class="v1-limitations-flip" type="button" aria-pressed="true">↻ Limitations</button>
-            <div class="v1-limitations-label">${esc(s.oppositeTitle || "Opportunities")}</div>
-            <div class="v1-limitations-grid">${renderItems(s.opportunities)}</div>
-            ${s.oppositeSubtitle ? `<p class="v1-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
+            <button class="v1-limitations-flip" type="button" aria-pressed="true">${back.flipLabel}</button>
+            <div class="v1-limitations-label">${esc(back.title)}</div>
+            <div class="v1-limitations-grid">${renderItems(back.items)}</div>
+            ${back.subtitle ? `<p class="v1-limitations-subtitle">${esc(back.subtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section id="${esc(sid)}" class="v1-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
@@ -663,19 +668,24 @@
             <p>${esc(it.body)}</p>
           </div>`).join("");
         const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const oppFirst = s.defaultFace === "opportunities" && hasOpp;
+        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "[ flip → opportunities ]" };
+        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "[ flip → limitations ]" };
+        const front = oppFirst ? oppFace : limFace;
+        const back = oppFirst ? limFace : oppFace;
         const frontFace = `
           <div class="v3-limitations-face is-front">
-            ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">[ flip → opportunities ]</button>` : ""}
-            <div class="v3-limitations-label">// ${esc(s.title || "Limitations")}</div>
-            <div class="v3-limitations-grid">${renderItems(s.items)}</div>
-            ${s.subtitle ? `<p class="v3-limitations-subtitle">${esc(s.subtitle)}</p>` : ""}
+            ${hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="false">${front.flipLabel}</button>` : ""}
+            <div class="v3-limitations-label">// ${esc(front.title)}</div>
+            <div class="v3-limitations-grid">${renderItems(front.items)}</div>
+            ${front.subtitle ? `<p class="v3-limitations-subtitle">${esc(front.subtitle)}</p>` : ""}
           </div>`;
         const backFace = hasOpp ? `
           <div class="v3-limitations-face is-back" aria-hidden="true">
-            <button class="v3-limitations-flip" type="button" aria-pressed="true">[ flip → limitations ]</button>
-            <div class="v3-limitations-label">// ${esc(s.oppositeTitle || "Opportunities")}</div>
-            <div class="v3-limitations-grid">${renderItems(s.opportunities)}</div>
-            ${s.oppositeSubtitle ? `<p class="v3-limitations-subtitle">${esc(s.oppositeSubtitle)}</p>` : ""}
+            <button class="v3-limitations-flip" type="button" aria-pressed="true">${back.flipLabel}</button>
+            <div class="v3-limitations-label">// ${esc(back.title)}</div>
+            <div class="v3-limitations-grid">${renderItems(back.items)}</div>
+            ${back.subtitle ? `<p class="v3-limitations-subtitle">${esc(back.subtitle)}</p>` : ""}
           </div>` : "";
         return `
           <section id="${esc(sid)}" class="v3-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
