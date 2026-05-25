@@ -614,9 +614,10 @@
         </h1>
       </header>
 
+      ${c.hideHero ? "" : `
       <div class="v1-case-media lv-reveal" style="--case-hue:${c.coverPaletteHue};aspect-ratio:21/9;margin:3rem 0 4rem;border-radius:var(--radius-lg);position:relative;">
         <div class="v1-case-media-label">Hero visual · ${esc(c.company)}</div>
-      </div>
+      </div>`}
 
       ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
@@ -1118,6 +1119,7 @@
       if (e.key === "Escape") closeAllInfoPopovers();
     });
   }
+
 
   function initFooterEmoji() {
     const el = document.querySelector(".lv-footer-emoji");
