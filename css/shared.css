@@ -401,7 +401,7 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
   margin-top: 6rem;
 }
 .lv-footer-grid {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem;
   max-width: 1240px; margin: 0 auto;
   padding: 0 clamp(1.25rem, 3vw, 3rem);
 }

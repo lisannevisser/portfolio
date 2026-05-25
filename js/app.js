@@ -1120,6 +1120,7 @@
     });
   }
 
+
   function initFooterEmoji() {
     const el = document.querySelector(".lv-footer-emoji");
     if (!el) return;
