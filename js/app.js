@@ -312,6 +312,9 @@
       svg.setAttribute("class", "lv-scribble");
       svg.setAttribute("viewBox", cfg.vb);
       svg.setAttribute("stroke-width", "2.2");
+      if (kind === "underline" || kind === "squiggle" || kind === "wave") {
+        svg.setAttribute("preserveAspectRatio", "none");
+      }
       svg.style.setProperty("--delay", delay + "s");
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", cfg.d);
