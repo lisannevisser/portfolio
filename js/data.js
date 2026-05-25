@@ -61,6 +61,7 @@ window.LV_DATA = {
       ],
       tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
+      hideHero: true,
       tldr: "Trusted Shops' buyer protection had been priced at €9.90 since launch, a price that carried the product through years of growth. The product had matured a lot in that time, and I saw an opportunity to put pricing on a more systematic footing. I designed two rounds of A/B tests with seven variants, each grounded in a different pricing-psychology principle. €15.99 won round one on revenue per user; €12.00 won round two once we layered customer-lifetime-value forecasting on top, and shipped as the new price.",
       story: [
         { kind: "section", title: "Situation", body: "Buyer protection had been priced at €9.90 since launch. It is one of the company's core revenue drivers, and that price had served the product well through years of growth. The product itself had evolved a lot in that time, so revisiting the number with current evidence felt like the natural next step. The question I wanted to answer: is €9.90 still the right price today, and if not, what does pricing-psychology research suggest instead?" },
