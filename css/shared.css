@@ -905,7 +905,6 @@ html[data-cursor="off"] { cursor: auto; }
   display: block;
   margin-top: 5rem;
   padding: 2rem 0;
-  border-top: 1px solid var(--rule);
   text-decoration: none; color: inherit;
   cursor: pointer;
   transition: padding-left var(--t-fast) var(--ease-out);
