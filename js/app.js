@@ -609,10 +609,6 @@
       <a href="#/work" class="lv-nav-link" data-cursor-label="← Back">← All work</a>
 
       <header style="margin-top:2rem;">
-        <div class="v1-meta-row" style="border-top:none;">
-          <span>${esc(c.company)} · ${esc(c.year)}</span>
-          <span>${esc(c.duration)}</span>
-        </div>
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
           <em>${esc(c.title)}</em>
         </h1>
@@ -624,19 +620,24 @@
 
       ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
-        ${c.impact.map((i) => `
-          <div class="v1-impact-cell">
-            <div class="v1-impact-cell-label">${esc(i.label)}</div>
-            <div class="v1-impact-num">${esc(i.value)}</div>
-            <div class="lv-body" style="margin-top:0.5rem;font-size:0.9rem;">${esc(i.note)}</div>
-          </div>`).join("")}
+        <div class="v1-impact-cell">
+          <div class="v1-impact-cell-label">${esc(c.impact[0].label)}</div>
+          <div class="lv-body" style="font-size:0.9rem;margin-bottom:0.75rem;">${esc(c.impact[0].note)}</div>
+          <div class="v1-impact-num">${esc(c.impact[0].value)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Role</div>
+          <div class="v1-impact-meta">${esc(c.role)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Team</div>
+          <div class="v1-impact-meta">${esc(c.team)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Year</div>
+          <div class="v1-impact-meta">${esc(c.year)}</div>
+        </div>
       </div>` : ""}
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:4rem;" class="lv-reveal v1-meta-3cols">
-        <div><div class="lv-eyebrow">Role</div><div style="margin-top:0.5rem;">${esc(c.role)}</div></div>
-        <div><div class="lv-eyebrow">Team</div><div style="margin-top:0.5rem;">${esc(c.team)}</div></div>
-        <div><div class="lv-eyebrow">Year</div><div style="margin-top:0.5rem;">${esc(c.year)}</div></div>
-      </div>
 
       <div>${storyHtml}</div>
 
