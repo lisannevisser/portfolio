@@ -247,17 +247,21 @@
 
       <!-- V1 WORK -->
       <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:3rem;">
-          <span style="position:relative;display:inline-block;">All the<span data-scribble="squiggle" style="position:absolute;bottom:-0.15em;left:0;width:80%;height:0.25em;"></span></span>
-          <br/><em>receipts.</em>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:1.5rem;">
+          <span style="position:relative;display:inline-block;">My work,<span data-scribble="squiggle" style="position:absolute;bottom:-0.15em;left:0;width:80%;height:0.25em;"></span></span>
+          <br/><em>the full record</em>
         </h1>
-        <div id="v1-work-cases"><!-- filled by app.js --></div>
+        <p class="lv-lead lv-reveal" style="max-width:54ch;margin-bottom:clamp(2.5rem,5vw,4rem);">
+          Each project here passed the same bar: it shipped, it moved a number, and I'd build it the same way again. Click any row for the long version.
+        </p>
+        <div id="v1-work-filters" class="v1-work-filters lv-reveal"></div>
+        <div id="v1-work-cases" class="v1-work-ledger"><!-- filled by app.js --></div>
       </div>
 
       <!-- V3 WORK -->
       <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
         <div class="v3-kicker lv-reveal"><span>./work.index · 5 entries · sorted by order</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">The full <em>record.</em></h1>
+        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">My work, the full <em>record</em></h1>
         <div id="v3-work-cases" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
       </div>
     </section>
@@ -938,7 +942,7 @@
         <ul>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
-          <li><a href="#/blog">Blog</a></li>
+          <li hidden><a href="#/blog">Blog</a></li>
           <li hidden><a href="#/playground">Playground</a></li>
         </ul>
       </div>

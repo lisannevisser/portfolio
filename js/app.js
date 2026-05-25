@@ -988,6 +988,116 @@
   }
 
   // ========================================================================
+  // V1 WORK LEDGER — filter chips + impact-stamp rows + per-row mini-intro
+  // ========================================================================
+  const WORK_PREVIEW = {
+    "pricing": {
+      kind: "stat", label: "in revenue", tilt: -6,
+      categories: ["research", "experimentation"],
+      intro: "Research lead · with PM, data, and finance"
+    },
+    "ai-workflow": {
+      kind: "stat", label: "less cycle time", tilt: 5,
+      categories: ["ops", "experimentation"],
+      intro: "End-to-end owner · cross-functional rollout"
+    },
+    "research-culture": {
+      kind: "stat", label: "of target hit", tilt: -3,
+      categories: ["research", "ops"],
+      intro: "Research lead · org-wide practice"
+    },
+    "design-system": {
+      kind: "image",
+      categories: ["systems", "brand"],
+      intro: "System lead · with 1 designer, 2 engineers"
+    },
+    "website-relaunch": {
+      kind: "stat", label: "pages relaunched", tilt: 7,
+      categories: ["systems", "brand"],
+      intro: "Lead designer · brand, IA & 140+ pages"
+    }
+  };
+
+  const WORK_FILTERS = [
+    { id: "all",             label: "All work" },
+    { id: "research",        label: "Research" },
+    { id: "experimentation", label: "Experimentation" },
+    { id: "systems",         label: "Design systems" },
+    { id: "ops",             label: "Design ops" },
+    { id: "brand",           label: "Brand" }
+  ];
+
+  let v1WorkFilter = "all";
+
+  function inCategory(c, filter) {
+    if (filter === "all") return true;
+    const cats = (WORK_PREVIEW[c.slug] && WORK_PREVIEW[c.slug].categories) || [];
+    return cats.includes(filter);
+  }
+
+  function renderV1WorkLedger() {
+    const filtersEl = $("#v1-work-filters");
+    const rowsEl = $("#v1-work-cases");
+    if (!filtersEl || !rowsEl) return;
+
+    // Filter chips (with counts)
+    const counts = {};
+    WORK_FILTERS.forEach((f) => {
+      counts[f.id] = D.cases.filter((c) => inCategory(c, f.id)).length;
+    });
+    filtersEl.innerHTML = WORK_FILTERS.map((f) => {
+      const active = v1WorkFilter === f.id;
+      const disabled = counts[f.id] === 0;
+      return `
+        <button type="button" class="v1-work-chip${active ? " is-active" : ""}"
+                data-filter="${esc(f.id)}"${disabled ? " disabled" : ""}
+                aria-pressed="${active ? "true" : "false"}">
+          <span>${esc(f.label)}</span>
+          <span class="v1-work-chip-count">${counts[f.id]}</span>
+        </button>
+      `;
+    }).join("");
+
+    // Ledger rows
+    const visible = D.cases.filter((c) => inCategory(c, v1WorkFilter));
+    rowsEl.innerHTML = visible.length === 0
+      ? `<div class="v1-work-empty">Nothing in this category yet — try another filter.</div>`
+      : visible.map((c, i) => {
+          const p = WORK_PREVIEW[c.slug] || {};
+          const stat = c.impact && c.impact[0];
+          const visual = p.kind === "image"
+            ? `<span class="v1-work-thumb" style="--case-hue:${c.coverPaletteHue};"></span>`
+            : `<span class="v1-work-stamp" style="--tilt:${p.tilt != null ? p.tilt : -4}deg;">
+                 <span class="v">${esc(stat ? stat.value : "")}</span>
+                 <span class="k">${esc(p.label || (stat ? stat.label : ""))}</span>
+               </span>`;
+          return `
+            <a href="#/work/${esc(c.slug)}" class="v1-work-row lv-reveal"
+               style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
+              <span class="n">${String(i + 1).padStart(2, "0")}</span>
+              <span class="body">
+                <span class="title">${esc(c.title)}</span>
+                <span class="intro">${esc(p.intro || c.role)} · ${esc(c.company)} · ${esc(c.year)}</span>
+              </span>
+              <span class="visual">${visual}</span>
+            </a>
+          `;
+        }).join("");
+  }
+
+  function initV1WorkFilters() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-work-chip");
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
+      const next = btn.getAttribute("data-filter");
+      if (!next || next === v1WorkFilter) return;
+      v1WorkFilter = next;
+      renderV1WorkLedger();
+    });
+  }
+
+  // ========================================================================
   // DYNAMIC HOME + WORK CASE LISTS (injected so data is one source of truth)
   // ========================================================================
   function renderCaseLists() {
@@ -1066,25 +1176,8 @@
       });
     }
 
-    // V1 — Work list
-    const v1WorkList = $("#v1-work-cases");
-    if (v1WorkList) {
-      v1WorkList.innerHTML = D.cases.map((c, i) => `
-        <a href="#/work/${esc(c.slug)}" class="v1-case-card lv-reveal" style="text-decoration:none;color:inherit;" data-cursor-label="Open">
-          <div>
-            <div class="v1-case-num">${String(i + 1).padStart(2, "0")} · ${esc(c.company)}, ${esc(c.year)}</div>
-            <h3 class="v1-case-title">${esc(c.title)}</h3>
-            <p class="lv-body" style="max-width:56ch;margin-top:0.5rem;">${esc(c.tldr)}</p>
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
-              ${c.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
-            </div>
-          </div>
-          <div class="v1-case-media" style="--case-hue:${c.coverPaletteHue};">
-            <div class="v1-case-media-label">${esc(c.impact[0].value)} · ${esc(c.impact[0].label)}</div>
-          </div>
-        </a>
-      `).join("");
-    }
+    // V1 — Work ledger (filter chips + impact-stamp rows + mini-intro)
+    renderV1WorkLedger();
 
     // V3 — Home case rows
     const v3HomeList = $("#v3-home-cases");
@@ -1202,6 +1295,7 @@
     initMobileNav();
     initFlipCards();
     initInfoPopovers();
+    initV1WorkFilters();
     initFooterEmoji();
     renderRoute();
   }
