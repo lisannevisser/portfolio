@@ -13,7 +13,7 @@
 }
 
 [data-variation="v1"] .v1-hero {
-  padding: clamp(4rem, 10vw, 9rem) 0 clamp(3rem, 7vw, 6rem);
+  padding-block: clamp(4rem, 10vw, 9rem) clamp(3rem, 7vw, 6rem);
   position: relative;
 }
 
@@ -109,7 +109,7 @@
   color: var(--accent);
 }
 
-[data-variation="v1"] .v1-section { padding: clamp(3rem, 7vw, 6rem) 0; position: relative; }
+[data-variation="v1"] .v1-section { padding-block: clamp(3rem, 7vw, 6rem); position: relative; }
 
 [data-variation="v1"] .v1-hand {
   font-family: var(--font-hand); font-weight: 500;
