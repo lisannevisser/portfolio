@@ -1101,26 +1101,79 @@
   // DYNAMIC HOME + WORK CASE LISTS (injected so data is one source of truth)
   // ========================================================================
   function renderCaseLists() {
-    // V1 — Home selected work
+    // V1 — Home selected work: minimal ledger with cursor-following preview
     const v1HomeList = $("#v1-home-cases");
     if (v1HomeList) {
-      v1HomeList.innerHTML = D.cases.map((c, i) => `
-        <a href="#/work/${esc(c.slug)}" class="v1-case-card lv-reveal" style="text-decoration:none;color:inherit;" data-cursor-label="Open">
-          <div>
-            <div class="v1-case-num">Case ${String(i + 1).padStart(2, "0")}</div>
-            <h3 class="v1-case-title">${esc(c.title)}</h3>
-            <p class="lv-body" style="max-width:52ch;margin-top:0.5rem;">${esc(c.tldr)}</p>
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
-              <span class="v1-chip">${esc(c.company)}</span>
-              <span class="v1-chip">${esc(c.year)}</span>
-              <span class="v1-chip" style="color:var(--accent);">${esc(c.impact[0].value)} ${esc(c.impact[0].label)}</span>
-            </div>
+      const PREVIEW = {
+        "pricing":          { kind: "stat",  label: "in revenue",       tilt: -6 },
+        "ai-workflow":      { kind: "stat",  label: "less cycle time",  tilt:  5 },
+        "research-culture": { kind: "stat",  label: "of target hit",    tilt: -3 },
+        "design-system":    { kind: "image" },
+        "website-relaunch": { kind: "stat",  label: "pages relaunched", tilt:  7 }
+      };
+
+      const rowsHtml = D.cases.map((c, i) => {
+        const p = PREVIEW[c.slug] || { kind: "stat", label: c.impact[0].label, tilt: -4 };
+        return `
+          <a href="#/work/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
+             data-preview-kind="${esc(p.kind)}"
+             data-preview-value="${esc(c.impact[0].value)}"
+             data-preview-label="${esc(p.label || c.impact[0].label)}"
+             data-preview-tilt="${p.tilt == null ? -4 : p.tilt}"
+             data-case-hue="${c.coverPaletteHue}">
+            <span class="n">${String(i + 1).padStart(2, "0")}</span>
+            <span class="title">${esc(c.title)}</span>
+          </a>
+        `;
+      }).join("");
+
+      v1HomeList.innerHTML = `
+        <div class="v1-ledger-root">
+          <div class="v1-ledger">${rowsHtml}</div>
+          <div class="v1-ledger-stat-floater" aria-hidden="true">
+            <div class="v"></div>
+            <div class="k"></div>
           </div>
-          <div class="v1-case-media" style="--case-hue:${c.coverPaletteHue};">
-            <div class="v1-case-media-label">${esc(c.tags[0])}</div>
+          <div class="v1-ledger-image-floater" aria-hidden="true">
+            <div class="v1-ledger-cover"></div>
           </div>
-        </a>
-      `).join("");
+        </div>
+      `;
+
+      const ledgerRoot = v1HomeList.querySelector(".v1-ledger-root");
+      const statFloater = ledgerRoot.querySelector(".v1-ledger-stat-floater");
+      const imageFloater = ledgerRoot.querySelector(".v1-ledger-image-floater");
+      const statV = statFloater.querySelector(".v");
+      const statK = statFloater.querySelector(".k");
+      const cover = imageFloater.querySelector(".v1-ledger-cover");
+      let active = null;
+
+      ledgerRoot.addEventListener("mousemove", (e) => {
+        if (!active) return;
+        const target = active.dataset.previewKind === "image" ? imageFloater : statFloater;
+        target.style.left = e.clientX + "px";
+        target.style.top = e.clientY + "px";
+      });
+
+      ledgerRoot.querySelectorAll(".v1-ledger-row").forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          active = row;
+          if (row.dataset.previewKind === "image") {
+            cover.style.setProperty("--case-hue", row.dataset.caseHue);
+            imageFloater.classList.add("is-visible");
+          } else {
+            statV.textContent = row.dataset.previewValue;
+            statK.textContent = row.dataset.previewLabel;
+            statFloater.style.setProperty("--tilt", row.dataset.previewTilt + "deg");
+            statFloater.classList.add("is-visible");
+          }
+        });
+        row.addEventListener("mouseleave", () => {
+          active = null;
+          statFloater.classList.remove("is-visible");
+          imageFloater.classList.remove("is-visible");
+        });
+      });
     }
 
     // V1 — Work ledger (filter chips + impact-stamp rows + mini-intro)
