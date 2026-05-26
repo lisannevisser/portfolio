@@ -296,6 +296,7 @@
     underline: { d: "M 4 18 C 40 8, 80 26, 120 14 S 190 22, 240 10", vb: "0 0 250 30" },
     circle:    { d: "M 140 20 C 90 10 20 25 20 60 C 20 95 80 110 140 100 C 200 92 220 70 210 40 C 200 15 160 10 140 20 Z", vb: "0 0 230 120" },
     arrow:     { d: "M 6 30 C 40 10, 90 50, 140 20 L 130 10 M 140 20 L 128 30", vb: "0 0 150 40" },
+    "arrow-long": { d: "M 4 22 C 90 6, 180 36, 280 18 S 460 8, 588 22 L 572 12 M 588 22 L 570 30", vb: "0 0 600 40" },
     squiggle:  { d: "M 0 10 C 20 0, 40 20, 60 10 S 100 0, 120 10 S 160 20, 180 10", vb: "0 0 180 20" },
     wave:      { d: "M 0 10 Q 15 0, 30 10 T 60 10 T 90 10 T 120 10", vb: "0 0 120 20" },
     asterisk:  { d: "M 20 4 L 20 36 M 6 12 L 34 28 M 6 28 L 34 12 M 4 20 L 36 20", vb: "0 0 40 40" }
@@ -312,7 +313,7 @@
       svg.setAttribute("class", "lv-scribble");
       svg.setAttribute("viewBox", cfg.vb);
       svg.setAttribute("stroke-width", "2.2");
-      if (kind === "underline" || kind === "squiggle" || kind === "wave") {
+      if (kind === "underline" || kind === "squiggle" || kind === "wave" || kind === "arrow-long") {
         svg.setAttribute("preserveAspectRatio", "none");
       }
       svg.style.setProperty("--delay", delay + "s");
@@ -649,10 +650,10 @@
 
       <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
         <span class="lv-next-label">Next</span>
-        <div class="lv-next-row">
+        <span class="lv-next-title-wrap">
           <span class="lv-next-title">${esc(next.title)}</span>
-          <span class="lv-next-arrow">→</span>
-        </div>
+          <span class="lv-next-scribble" data-scribble="arrow-long" data-delay="0.15"></span>
+        </span>
       </a>
     `;
     wireTocFab(root, tocEntries);
@@ -786,13 +787,14 @@
 
       <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
         <span class="lv-next-label">Next</span>
-        <div class="lv-next-row">
+        <span class="lv-next-title-wrap">
           <span class="lv-next-title">${esc(next.title)}</span>
-          <span class="lv-next-arrow">→</span>
-        </div>
+          <span class="lv-next-scribble" data-scribble="arrow-long" data-delay="0.15"></span>
+        </span>
       </a>
     `;
     wireTocFab(root, tocEntries);
+    renderScribbles();
   }
 
   // ========================================================================
