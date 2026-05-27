@@ -47,7 +47,7 @@ window.LV_DATA = {
   cases: [
     {
       slug: "pricing",
-      title: "€9.90 at launch → €12.00 after two rounds",
+      title: "Repricing buyer protection on psychology",
       subtitle: "Two rounds of pricing experiments on a core revenue driver",
       company: "Trusted Shops",
       year: "2024",
@@ -99,7 +99,7 @@ window.LV_DATA = {
     },
     {
       slug: "ai-workflow",
-      title: "From 2 weeks to 2 days",
+      title: "Conversion tests, 2 weeks to 2 days",
       subtitle: "Rebuilding the conversion-test workflow around AI design tools",
       company: "Trusted Shops",
       year: "2025",
@@ -132,7 +132,7 @@ window.LV_DATA = {
     },
     {
       slug: "research-culture",
-      title: "The first focus group in 25 years",
+      title: "Building research as an organizational capability",
       subtitle: "A continuous research practice, built from a zero-budget proposal",
       company: "Trusted Shops",
       year: "2023 — ongoing",
@@ -211,7 +211,7 @@ window.LV_DATA = {
     },
     {
       slug: "website-relaunch",
-      title: "Cargoboard website relaunch",
+      title: "140+ pages relaunched in under a year",
       subtitle: "140+ pages, new brand, new IA, end-to-end in under a year",
       company: "Cargoboard",
       year: "2022 - 2023",
