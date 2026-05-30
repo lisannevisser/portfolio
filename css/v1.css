@@ -782,69 +782,184 @@
 }
 
 /* ==========================================================================
-   ABOUT — Pinned scrollytelling: "The long way around"
-   Outer container is tall; inner .about-scrolly-pin sticks at top.
-   As user scrolls, JS swaps active image + text. Page feels static.
+   ABOUT — Merged hero + pinned scrollytelling (.ahs)
+   One tall sticky section. The big headline collapses into a compact
+   masthead driven by --collapse (0..1, set from JS per scroll frame); the
+   lead fades out and the story chapters fade in beneath; the right-hand
+   image stack cross-fades portrait → chapter.
    ========================================================================== */
-[data-variation="v1"] .about-scrolly {
-  --scrolly-steps: 4;
+[data-variation="v1"] .ahs {
+  --steps: 4;
+  --collapse: 0;
   position: relative;
-  height: calc((var(--scrolly-steps) + 1) * 100svh);
-  margin: clamp(2rem, 6vw, 5rem) 0 clamp(3rem, 8vw, 6rem);
+  height: calc((var(--steps) + 1.65) * 100svh);
+  margin: 0 0 clamp(3rem, 8vw, 6rem);
 }
-[data-variation="v1"] .about-scrolly-pin {
+[data-variation="v1"] .ahs-pin {
   position: sticky;
   top: 0;
   height: 100svh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  padding: clamp(1.5rem, 5vh, 3rem) 0;
+  display: flex;
+  align-items: stretch;
+  padding: clamp(4.5rem, 9vh, 7rem) 0 clamp(1.5rem, 4vh, 3rem);
   box-sizing: border-box;
 }
+[data-variation="v1"] .ahs-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.04fr 0.96fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: stretch;
+}
 
-[data-variation="v1"] .about-scrolly-meta {
+[data-variation="v1"] .ahs-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+[data-variation="v1"] .ahs-mast {
+  flex-shrink: 0;
+  transform-origin: left top;
+  transform: scale(calc(1 - 0.55 * var(--collapse)));
+  margin-bottom: calc(var(--collapse) * -7rem);
+  transition: transform 120ms linear, margin-bottom 120ms linear;
+  will-change: transform;
+}
+[data-variation="v1"] .ahs-eyebrow {
+  opacity: var(--collapse);
+  margin-bottom: 1rem;
+  transition: opacity 200ms var(--ease-out);
+}
+[data-variation="v1"] .ahs-h1 {
+  margin: 0;
+  font-size: calc(clamp(2.8rem, 8.5vw, 7.5rem) * var(--type-scale));
+  line-height: 0.95;
+}
+[data-variation="v1"] .ahs-name { position: relative; display: inline-block; }
+
+[data-variation="v1"] .ahs-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+[data-variation="v1"] .ahs-lead {
+  position: absolute;
+  top: clamp(1rem, 3vh, 2rem);
+  left: 0;
+  right: 0;
+  max-width: 54ch;
+  opacity: calc(1 - var(--collapse) * 1.9);
+  transform: translateY(calc(var(--collapse) * -1.4rem));
+  pointer-events: none;
+  transition: opacity 120ms linear;
+}
+
+[data-variation="v1"] .ahs-steps {
+  position: absolute;
+  inset: 0;
+  opacity: var(--collapse);
+  transition: opacity 240ms var(--ease-out);
+}
+[data-variation="v1"] .ahs-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 38rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out);
+  pointer-events: none;
+}
+[data-variation="v1"] .ahs-step.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+[data-variation="v1"] .ahs-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+[data-variation="v1"] .ahs-step-h {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+[data-variation="v1"] .ahs-step-h em {
+  font-style: italic;
+  color: var(--accent);
+}
+[data-variation="v1"] .ahs-step-p {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+[data-variation="v1"] .ahs-rail {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 1.25rem;
+  padding-top: 0.9rem;
+  opacity: var(--collapse);
+  transition: opacity 240ms var(--ease-out);
 }
-[data-variation="v1"] .about-scrolly-progress {
+[data-variation="v1"] .ahs-rail button {
+  background: none;
+  border: none;
+  border-top: 2px solid transparent;
+  margin-top: -0.95rem;
+  padding: 0.95rem 1.1rem 0 0;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--ink-3);
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
+  cursor: pointer;
+  transition: color 220ms var(--ease-out), border-color 320ms var(--ease-out);
 }
-[data-variation="v1"] .about-scrolly-progress .num[data-current] {
-  color: var(--accent);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: opacity 220ms;
+[data-variation="v1"] .ahs-rail button:hover { color: var(--ink-2); }
+[data-variation="v1"] .ahs-rail button.is-active {
+  color: var(--ink);
+  border-top-color: var(--accent);
 }
-[data-variation="v1"] .about-scrolly-progress .sep { color: var(--rule); }
+[data-variation="v1"] .ahs-progress {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+[data-variation="v1"] .ahs-progress [data-current] { color: var(--accent); }
 
-[data-variation="v1"] .about-scrolly-scene {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: stretch;
-  min-height: 0;
-}
-[data-variation="v1"] .about-scrolly-stage {
+[data-variation="v1"] .ahs-images {
   position: relative;
-  min-height: 0;
-}
-
-[data-variation="v1"] .about-scrolly-img-stage {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--rule);
   background: var(--paper-2);
+  min-height: 0;
 }
-[data-variation="v1"] .about-scrolly-img {
+[data-variation="v1"] .ahs-img {
   position: absolute;
   inset: 0;
   display: flex;
@@ -852,43 +967,35 @@
   justify-content: flex-start;
   padding: 1.4rem 1.5rem;
   opacity: 0;
-  transform: scale(1.03);
+  transform: scale(1.035);
   transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
   pointer-events: none;
-  background-image: repeating-linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px,
-    transparent 1px 14px
-  );
 }
-[data-variation="v1"] .about-scrolly-img:nth-child(2) {
-  background-image: repeating-linear-gradient(
-    -135deg,
-    color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px,
-    transparent 1px 14px
-  );
-}
-[data-variation="v1"] .about-scrolly-img:nth-child(3) {
-  background-image: repeating-linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px,
-    transparent 1px 16px
-  );
-}
-[data-variation="v1"] .about-scrolly-img:nth-child(4) {
-  background-image: repeating-linear-gradient(
-    45deg,
-    color-mix(in oklab, var(--ink) 5%, var(--paper-3)) 0 1px,
-    transparent 1px 12px
-  ),
-  linear-gradient(180deg, var(--paper-2), color-mix(in oklab, var(--accent) 4%, var(--paper-2)));
-}
-[data-variation="v1"] .about-scrolly-img.is-active {
+[data-variation="v1"] .ahs-img.is-active {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
   pointer-events: auto;
 }
-[data-variation="v1"] .about-scrolly-img-label {
+[data-variation="v1"] .ahs-portrait {
+  background:
+    radial-gradient(120% 90% at 70% 20%, color-mix(in oklab, var(--accent) 12%, var(--paper-2)), transparent 60%),
+    repeating-linear-gradient(135deg, color-mix(in oklab, var(--ink) 5%, var(--paper-2)) 0 1px, transparent 1px 15px);
+}
+[data-variation="v1"] .ahs-img[data-step="0"] {
+  background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px, transparent 1px 14px);
+}
+[data-variation="v1"] .ahs-img[data-step="1"] {
+  background: repeating-linear-gradient(-135deg, color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px, transparent 1px 14px);
+}
+[data-variation="v1"] .ahs-img[data-step="2"] {
+  background: repeating-linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px, transparent 1px 16px);
+}
+[data-variation="v1"] .ahs-img[data-step="3"] {
+  background:
+    repeating-linear-gradient(45deg, color-mix(in oklab, var(--ink) 5%, var(--paper-3)) 0 1px, transparent 1px 12px),
+    linear-gradient(180deg, var(--paper-2), color-mix(in oklab, var(--accent) 4%, var(--paper-2)));
+}
+[data-variation="v1"] .ahs-img-label {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.18em;
@@ -900,127 +1007,63 @@
   border-radius: var(--radius-sm);
   backdrop-filter: blur(2px);
 }
-
-[data-variation="v1"] .about-scrolly-text-stage {
-  display: flex;
-  align-items: center;
-}
-[data-variation="v1"] .about-scrolly-step {
+[data-variation="v1"] .ahs-hand {
   position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out);
-  pointer-events: none;
-  max-width: 36rem;
-}
-[data-variation="v1"] .about-scrolly-step.is-active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-[data-variation="v1"] .about-scrolly-num {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.1rem;
-}
-[data-variation="v1"] .about-scrolly-h {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  margin: 0 0 1.1rem;
-  text-wrap: balance;
-}
-[data-variation="v1"] .about-scrolly-h em {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-}
-[data-variation="v1"] .about-scrolly-p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--ink-2);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-[data-variation="v1"] .about-scrolly-rail {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border-top: 1px solid var(--rule);
-  padding-top: 0.9rem;
-}
-[data-variation="v1"] .about-scrolly-rail button {
-  flex: 1;
-  background: none;
-  border: none;
-  border-top: 2px solid transparent;
-  margin-top: -0.95rem;
-  padding: 0.95rem 0.5rem 0;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  text-align: left;
-  cursor: pointer;
-  transition: color 220ms var(--ease-out), border-color 320ms var(--ease-out);
-}
-[data-variation="v1"] .about-scrolly-rail button:hover { color: var(--ink-2); }
-[data-variation="v1"] .about-scrolly-rail button.is-active {
-  color: var(--ink);
-  border-top-color: var(--accent);
+  top: 1.4rem;
+  right: 1.5rem;
+  text-align: right;
+  max-width: 60%;
 }
 
 @media (max-width: 880px) {
-  [data-variation="v1"] .about-scrolly { height: auto; }
-  [data-variation="v1"] .about-scrolly-pin {
+  [data-variation="v1"] .ahs { height: auto; }
+  [data-variation="v1"] .ahs-pin {
     position: relative;
     height: auto;
     top: auto;
-    padding: 0;
+    padding: 1.5rem 0 0;
   }
-  [data-variation="v1"] .about-scrolly-scene {
+  [data-variation="v1"] .ahs-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  [data-variation="v1"] .about-scrolly-img-stage { height: 280px; }
-  [data-variation="v1"] .about-scrolly-text-stage {
-    position: static;
-    display: block;
-    min-height: 0;
+  [data-variation="v1"] .ahs-images {
+    height: 260px;
+    order: -1;
   }
-  [data-variation="v1"] .about-scrolly-step {
+  [data-variation="v1"] .ahs-mast {
+    transform: none !important;
+    margin-bottom: 1.75rem !important;
+  }
+  [data-variation="v1"] .ahs-eyebrow { opacity: 1 !important; }
+  [data-variation="v1"] .ahs-body { position: static; }
+  [data-variation="v1"] .ahs-lead {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+    margin: 0 0 2rem;
+  }
+  [data-variation="v1"] .ahs-steps {
+    position: static;
+    opacity: 1 !important;
+  }
+  [data-variation="v1"] .ahs-step {
     position: static;
     inset: auto;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
     pointer-events: auto;
-    padding: 1.2rem 0 2rem;
-    border-bottom: 1px dashed var(--rule);
+    padding: 1.4rem 0;
+    border-top: 1px dashed var(--rule);
   }
-  [data-variation="v1"] .about-scrolly-step:last-child { border-bottom: none; }
-  [data-variation="v1"] .about-scrolly-img { display: none; }
-  [data-variation="v1"] .about-scrolly-img.is-active { display: flex; }
-  [data-variation="v1"] .about-scrolly-rail,
-  [data-variation="v1"] .about-scrolly-meta .about-scrolly-progress { display: none; }
+  [data-variation="v1"] .ahs-img { display: none; }
+  [data-variation="v1"] .ahs-img.is-active { display: flex; }
+  [data-variation="v1"] .ahs-rail,
+  [data-variation="v1"] .ahs-progress { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-variation="v1"] .about-scrolly-img,
-  [data-variation="v1"] .about-scrolly-step {
-    transition: opacity 220ms ease;
-    transform: none !important;
-  }
+  [data-variation="v1"] .ahs-mast { transition: none; }
+  [data-variation="v1"] .ahs-img,
+  [data-variation="v1"] .ahs-step { transition: opacity 220ms ease; transform: none !important; }
 }

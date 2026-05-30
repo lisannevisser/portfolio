@@ -1283,48 +1283,74 @@
     }, 2500);
   }
 
-  // ---- Pinned scrollytelling: about page "The long way around" -----------
-  function initAboutScrolly() {
-    const scrolly = document.querySelector(".about-scrolly");
-    if (!scrolly) return;
-    const imgs = $$(".about-scrolly-img", scrolly);
-    const steps = $$(".about-scrolly-step", scrolly);
-    const dots = $$(".about-scrolly-rail button", scrolly);
-    const counter = scrolly.querySelector(".about-scrolly-progress [data-current]");
+  // ---- About page: merged hero + pinned scrollytelling -------------------
+  // .ahs section pins for ~5.65 viewports. First ~20% of scroll collapses
+  // the headline into a masthead and cross-fades the lead out / chapters in;
+  // the remainder steps through the four chapters and swaps the right-hand
+  // image accordingly.
+  function initHeroScrolly() {
+    const sec = document.querySelector(".ahs");
+    if (!sec) return;
+    const pin = sec.querySelector(".ahs-pin");
+    const imgs = $$(".ahs-img", sec);
+    const portrait = sec.querySelector(".ahs-img[data-hero]");
+    const stepImgs = $$(".ahs-img[data-step]", sec);
+    const steps = $$(".ahs-step", sec);
+    const dots = $$(".ahs-rail button", sec);
+    const counter = sec.querySelector(".ahs-progress [data-current]");
     const total = steps.length;
     if (!total) return;
-    let active = -1;
+    const HERO_SEG = 0.2;
+    let activeChap = -1;
+    let lastImg = null;
     const isNarrow = () => window.matchMedia("(max-width: 880px)").matches;
 
-    function setActive(n) {
-      n = Math.max(0, Math.min(total - 1, n));
-      if (n === active) return;
-      active = n;
-      imgs.forEach((el, i) => el.classList.toggle("is-active", i === n));
-      steps.forEach((el, i) => el.classList.toggle("is-active", i === n));
-      dots.forEach((el, i) => el.classList.toggle("is-active", i === n));
+    function setImg(el) {
+      if (el === lastImg) return;
+      imgs.forEach((i) => i.classList.toggle("is-active", i === el));
+      lastImg = el;
+    }
+    function setChap(n) {
+      if (n === activeChap) return;
+      activeChap = n;
+      steps.forEach((s, i) => s.classList.toggle("is-active", i === n));
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === n));
       if (counter) counter.textContent = String(n + 1).padStart(2, "0");
     }
 
     function update() {
-      if (isNarrow()) { setActive(0); return; }
-      const rect = scrolly.getBoundingClientRect();
+      if (isNarrow()) {
+        pin.style.setProperty("--collapse", "1");
+        setChap(0);
+        setImg(portrait);
+        return;
+      }
+      const rect = sec.getBoundingClientRect();
       const vh = window.innerHeight;
-      const scrollable = scrolly.offsetHeight - vh;
-      if (scrollable <= 0) { setActive(0); return; }
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-      const idx = Math.min(total - 1, Math.floor(progress * total * 0.999));
-      setActive(idx);
+      const scrollable = sec.offsetHeight - vh;
+      if (scrollable <= 0) {
+        pin.style.setProperty("--collapse", "0");
+        return;
+      }
+      const p = Math.min(1, Math.max(0, -rect.top / scrollable));
+      const collapse = Math.min(1, p / HERO_SEG);
+      pin.style.setProperty("--collapse", collapse.toFixed(3));
+
+      const chapP = Math.min(1, Math.max(0, (p - HERO_SEG) / (1 - HERO_SEG)));
+      const idx = Math.min(total - 1, Math.floor(chapP * total * 0.999));
+      setChap(idx);
+
+      if (collapse < 0.5) setImg(portrait);
+      else setImg(stepImgs[idx]);
     }
 
     dots.forEach((btn) => {
       btn.addEventListener("click", () => {
         const i = parseInt(btn.getAttribute("data-step-jump") || "0", 10);
         const vh = window.innerHeight;
-        const scrollable = scrolly.offsetHeight - vh;
-        const target = scrolly.offsetTop + (scrollable * (i + 0.15) / total);
-        window.scrollTo({ top: target, behavior: "smooth" });
+        const scrollable = sec.offsetHeight - vh;
+        const frac = HERO_SEG + (1 - HERO_SEG) * (i + 0.15) / total;
+        window.scrollTo({ top: sec.offsetTop + scrollable * frac, behavior: "smooth" });
       });
     });
 
@@ -1355,7 +1381,7 @@
     initInfoPopovers();
     initV1WorkFilters();
     initFooterEmoji();
-    initAboutScrolly();
+    initHeroScrolly();
     renderRoute();
   }
 
