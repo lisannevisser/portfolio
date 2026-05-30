@@ -24,9 +24,9 @@
 
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-05-25e" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-05-25e" />
-  <link rel="stylesheet" href="css/v3.css?v=2026-05-25e" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-05-29a" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-05-29a" />
+  <link rel="stylesheet" href="css/v3.css?v=2026-05-29a" />
 </head>
 <body>
 
@@ -305,6 +305,70 @@
                 <div class="v1-hand">"upside down,<br/>a lot of the time"</div>
                 <div class="lv-eyebrow" style="margin-top:1rem;">Portrait · drop your own</div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pinned scrollytelling: text + image swap while pinned -->
+        <section class="about-scrolly">
+          <div class="about-scrolly-pin">
+            <div class="about-scrolly-meta">
+              <div class="lv-eyebrow">The long way around</div>
+              <div class="about-scrolly-progress" aria-hidden="true">
+                <span class="num" data-current>01</span>
+                <span class="sep">/</span>
+                <span class="num total">04</span>
+              </div>
+            </div>
+
+            <div class="about-scrolly-scene">
+              <div class="about-scrolly-stage about-scrolly-img-stage">
+                <div class="about-scrolly-img is-active" data-step="0">
+                  <span class="about-scrolly-img-label">photo · Singapore, 2017</span>
+                </div>
+                <div class="about-scrolly-img" data-step="1">
+                  <span class="about-scrolly-img-label">photo · TikTok office, 2021</span>
+                </div>
+                <div class="about-scrolly-img" data-step="2">
+                  <span class="about-scrolly-img-label">photo · first focus group, 2022</span>
+                </div>
+                <div class="about-scrolly-img" data-step="3">
+                  <span class="about-scrolly-img-label">photo · Berlin studio, now</span>
+                </div>
+              </div>
+
+              <div class="about-scrolly-stage about-scrolly-text-stage">
+                <div class="about-scrolly-step is-active" data-step="0">
+                  <div class="about-scrolly-num">01 · Origin</div>
+                  <h3 class="about-scrolly-h">I started with <em>questions</em>, not pixels.</h3>
+                  <p class="about-scrolly-p">A Sociology MA in Göttingen and a parallel Ethnography and Modern China BA, both finished with distinction in 2020. Six scholarships, three semesters between Singapore, Fudan and Peking University. The questions I loved asking turned out to be exactly the ones good design answers.</p>
+                </div>
+
+                <div class="about-scrolly-step" data-step="1">
+                  <div class="about-scrolly-num">02 · Shipping</div>
+                  <h3 class="about-scrolly-h">Then I learned to <em>ship</em>.</h3>
+                  <p class="about-scrolly-p">Two years at TikTok as a Quality Analyst: weekly UX-quality reviews, cross-functional with User Growth, and an eLearning program on EdCast for 250+ colleagues. Special Contribution Award, Q1 2021. Observation got disciplined, design got tactile.</p>
+                </div>
+
+                <div class="about-scrolly-step" data-step="2">
+                  <div class="about-scrolly-num">03 · Spine</div>
+                  <h3 class="about-scrolly-h">Research &amp; growth became my <em>spine</em>.</h3>
+                  <p class="about-scrolly-p">Solo design lead at Cargoboard, then UX Designer (Growth) at Trusted Shops. The first focus group in a 25-year-old company. Heatmaps that reshaped a brand. A price set on intuition turned into a +15% revenue lift, and 3/3 payment-form tests won at +20% each.</p>
+                </div>
+
+                <div class="about-scrolly-step" data-step="3">
+                  <div class="about-scrolly-num">04 · Now</div>
+                  <h3 class="about-scrolly-h">Still <em>curious</em>, just deliberate about it.</h3>
+                  <p class="about-scrolly-p">Senior Product Designer at Trusted Shops. Leading the IxDF Berlin design community, teaching aerial yoga, training for half marathons, and reading more behavioral science than is strictly healthy. Most of it with Yoshi, my mini poodle, somewhere in the room.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-scrolly-rail" role="tablist" aria-label="Chapters">
+              <button type="button" class="is-active" data-step-jump="0" aria-label="Origin">Origin</button>
+              <button type="button" data-step-jump="1" aria-label="Shipping">Shipping</button>
+              <button type="button" data-step-jump="2" aria-label="Spine">Spine</button>
+              <button type="button" data-step-jump="3" aria-label="Now">Now</button>
             </div>
           </div>
         </section>
@@ -988,7 +1052,7 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=2026-05-25e"></script>
-  <script src="js/app.js?v=2026-05-25e"></script>
+  <script src="js/data.js?v=2026-05-29a"></script>
+  <script src="js/app.js?v=2026-05-29a"></script>
 </body>
 </html>

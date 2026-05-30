@@ -780,3 +780,247 @@
   }
   [data-variation="v1"] .v1-work-row:hover { padding-left: 0; }
 }
+
+/* ==========================================================================
+   ABOUT — Pinned scrollytelling: "The long way around"
+   Outer container is tall; inner .about-scrolly-pin sticks at top.
+   As user scrolls, JS swaps active image + text. Page feels static.
+   ========================================================================== */
+[data-variation="v1"] .about-scrolly {
+  --scrolly-steps: 4;
+  position: relative;
+  height: calc((var(--scrolly-steps) + 1) * 100svh);
+  margin: clamp(2rem, 6vw, 5rem) 0 clamp(3rem, 8vw, 6rem);
+}
+[data-variation="v1"] .about-scrolly-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1.5rem, 5vh, 3rem) 0;
+  box-sizing: border-box;
+}
+
+[data-variation="v1"] .about-scrolly-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+[data-variation="v1"] .about-scrolly-progress {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+[data-variation="v1"] .about-scrolly-progress .num[data-current] {
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: opacity 220ms;
+}
+[data-variation="v1"] .about-scrolly-progress .sep { color: var(--rule); }
+
+[data-variation="v1"] .about-scrolly-scene {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: stretch;
+  min-height: 0;
+}
+[data-variation="v1"] .about-scrolly-stage {
+  position: relative;
+  min-height: 0;
+}
+
+[data-variation="v1"] .about-scrolly-img-stage {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+[data-variation="v1"] .about-scrolly-img {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 1.4rem 1.5rem;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px,
+    transparent 1px 14px
+  );
+}
+[data-variation="v1"] .about-scrolly-img:nth-child(2) {
+  background-image: repeating-linear-gradient(
+    -135deg,
+    color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px,
+    transparent 1px 14px
+  );
+}
+[data-variation="v1"] .about-scrolly-img:nth-child(3) {
+  background-image: repeating-linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px,
+    transparent 1px 16px
+  );
+}
+[data-variation="v1"] .about-scrolly-img:nth-child(4) {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in oklab, var(--ink) 5%, var(--paper-3)) 0 1px,
+    transparent 1px 12px
+  ),
+  linear-gradient(180deg, var(--paper-2), color-mix(in oklab, var(--accent) 4%, var(--paper-2)));
+}
+[data-variation="v1"] .about-scrolly-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+[data-variation="v1"] .about-scrolly-img-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
+  padding: 0.45rem 0.7rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(2px);
+}
+
+[data-variation="v1"] .about-scrolly-text-stage {
+  display: flex;
+  align-items: center;
+}
+[data-variation="v1"] .about-scrolly-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out);
+  pointer-events: none;
+  max-width: 36rem;
+}
+[data-variation="v1"] .about-scrolly-step.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+[data-variation="v1"] .about-scrolly-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+[data-variation="v1"] .about-scrolly-h {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+[data-variation="v1"] .about-scrolly-h em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+[data-variation="v1"] .about-scrolly-p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+[data-variation="v1"] .about-scrolly-rail {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+}
+[data-variation="v1"] .about-scrolly-rail button {
+  flex: 1;
+  background: none;
+  border: none;
+  border-top: 2px solid transparent;
+  margin-top: -0.95rem;
+  padding: 0.95rem 0.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+  cursor: pointer;
+  transition: color 220ms var(--ease-out), border-color 320ms var(--ease-out);
+}
+[data-variation="v1"] .about-scrolly-rail button:hover { color: var(--ink-2); }
+[data-variation="v1"] .about-scrolly-rail button.is-active {
+  color: var(--ink);
+  border-top-color: var(--accent);
+}
+
+@media (max-width: 880px) {
+  [data-variation="v1"] .about-scrolly { height: auto; }
+  [data-variation="v1"] .about-scrolly-pin {
+    position: relative;
+    height: auto;
+    top: auto;
+    padding: 0;
+  }
+  [data-variation="v1"] .about-scrolly-scene {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  [data-variation="v1"] .about-scrolly-img-stage { height: 280px; }
+  [data-variation="v1"] .about-scrolly-text-stage {
+    position: static;
+    display: block;
+    min-height: 0;
+  }
+  [data-variation="v1"] .about-scrolly-step {
+    position: static;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    padding: 1.2rem 0 2rem;
+    border-bottom: 1px dashed var(--rule);
+  }
+  [data-variation="v1"] .about-scrolly-step:last-child { border-bottom: none; }
+  [data-variation="v1"] .about-scrolly-img { display: none; }
+  [data-variation="v1"] .about-scrolly-img.is-active { display: flex; }
+  [data-variation="v1"] .about-scrolly-rail,
+  [data-variation="v1"] .about-scrolly-meta .about-scrolly-progress { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-variation="v1"] .about-scrolly-img,
+  [data-variation="v1"] .about-scrolly-step {
+    transition: opacity 220ms ease;
+    transform: none !important;
+  }
+}

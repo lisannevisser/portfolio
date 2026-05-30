@@ -1283,6 +1283,62 @@
     }, 2500);
   }
 
+  // ---- Pinned scrollytelling: about page "The long way around" -----------
+  function initAboutScrolly() {
+    const scrolly = document.querySelector(".about-scrolly");
+    if (!scrolly) return;
+    const imgs = $$(".about-scrolly-img", scrolly);
+    const steps = $$(".about-scrolly-step", scrolly);
+    const dots = $$(".about-scrolly-rail button", scrolly);
+    const counter = scrolly.querySelector(".about-scrolly-progress [data-current]");
+    const total = steps.length;
+    if (!total) return;
+    let active = -1;
+    const isNarrow = () => window.matchMedia("(max-width: 880px)").matches;
+
+    function setActive(n) {
+      n = Math.max(0, Math.min(total - 1, n));
+      if (n === active) return;
+      active = n;
+      imgs.forEach((el, i) => el.classList.toggle("is-active", i === n));
+      steps.forEach((el, i) => el.classList.toggle("is-active", i === n));
+      dots.forEach((el, i) => el.classList.toggle("is-active", i === n));
+      if (counter) counter.textContent = String(n + 1).padStart(2, "0");
+    }
+
+    function update() {
+      if (isNarrow()) { setActive(0); return; }
+      const rect = scrolly.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const scrollable = scrolly.offsetHeight - vh;
+      if (scrollable <= 0) { setActive(0); return; }
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+      const idx = Math.min(total - 1, Math.floor(progress * total * 0.999));
+      setActive(idx);
+    }
+
+    dots.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = parseInt(btn.getAttribute("data-step-jump") || "0", 10);
+        const vh = window.innerHeight;
+        const scrollable = scrolly.offsetHeight - vh;
+        const target = scrolly.offsetTop + (scrollable * (i + 0.15) / total);
+        window.scrollTo({ top: target, behavior: "smooth" });
+      });
+    });
+
+    let raf = 0;
+    function onScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; update(); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("hashchange", () => requestAnimationFrame(update));
+    update();
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
@@ -1299,6 +1355,7 @@
     initInfoPopovers();
     initV1WorkFilters();
     initFooterEmoji();
+    initAboutScrolly();
     renderRoute();
   }
 
