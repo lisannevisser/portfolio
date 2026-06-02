@@ -829,7 +829,7 @@
   will-change: transform;
 }
 [data-variation="v1"] .ahs-eyebrow {
-  opacity: var(--collapse);
+  opacity: calc(1 - var(--collapse));
   margin-bottom: 1rem;
   transition: opacity 200ms var(--ease-out);
 }
