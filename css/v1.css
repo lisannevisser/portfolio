@@ -401,12 +401,15 @@
 }
 [data-variation="v1"] details.v1-career-row { padding: 0; }
 [data-variation="v1"] details.v1-career-row > summary {
-  display: grid; grid-template-columns: 0.8fr 1.5fr 1.5fr 1fr auto;
+  display: grid; grid-template-columns: 7.5rem 1fr 2rem;
   gap: 2rem; padding: 1.5rem 0;
   align-items: baseline;
   cursor: pointer;
   list-style: none;
   transition: color 220ms var(--ease-out);
+}
+[data-variation="v1"] .v1-career-headline {
+  display: flex; flex-direction: column; gap: 0.3rem;
 }
 [data-variation="v1"] details.v1-career-row > summary::-webkit-details-marker { display: none; }
 [data-variation="v1"] details.v1-career-row > summary::marker { display: none; }
@@ -426,7 +429,7 @@
   font-family: var(--font-mono); font-size: 1.4rem;
   color: var(--ink-3); line-height: 1;
   transition: transform 220ms var(--ease-out), color 220ms var(--ease-out);
-  text-align: right; min-width: 1.5em;
+  text-align: right; min-width: 0;
   display: inline-block;
 }
 [data-variation="v1"] details.v1-career-row[open] .v1-career-chevron {
@@ -434,11 +437,12 @@
 }
 [data-variation="v1"] details.v1-career-row[open] > summary .role { color: var(--accent); }
 [data-variation="v1"] .v1-career-body {
-  display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem;
+  display: grid; grid-template-columns: 7.5rem 1fr 2rem; gap: 2rem;
   padding: 0 0 2rem;
   animation: v1-career-expand 280ms var(--ease-out);
 }
 [data-variation="v1"] .v1-career-body ul {
+  grid-column: 2;
   margin: 0; padding: 0; list-style: none;
 }
 [data-variation="v1"] .v1-career-body li {
@@ -450,6 +454,7 @@
   font-family: var(--font-mono);
 }
 [data-variation="v1"] .v1-career-tags {
+  grid-column: 2;
   display: flex; flex-wrap: wrap; gap: 0.4rem;
   align-content: start;
 }
@@ -635,11 +640,11 @@
   [data-variation="v1"] .v1-limitations-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   [data-variation="v1"] details.v1-career-row > summary { grid-template-columns: 1fr auto; gap: 0.35rem 1rem; padding: 1.25rem 0; }
   [data-variation="v1"] details.v1-career-row > summary > .period,
-  [data-variation="v1"] details.v1-career-row > summary > .role,
-  [data-variation="v1"] details.v1-career-row > summary > .org,
-  [data-variation="v1"] details.v1-career-row > summary > .note { grid-column: 1; }
+  [data-variation="v1"] details.v1-career-row > summary > .v1-career-headline { grid-column: 1; }
   [data-variation="v1"] details.v1-career-row > summary > .v1-career-chevron { grid-column: 2; grid-row: 1 / -1; align-self: start; }
   [data-variation="v1"] .v1-career-body { grid-template-columns: 1fr; gap: 1.25rem; }
+  [data-variation="v1"] .v1-career-body > ul,
+  [data-variation="v1"] .v1-career-body > .v1-career-tags { grid-column: 1; }
   [data-variation="v1"] .v1-credo li { grid-template-columns: auto 1fr; }
 }
 
