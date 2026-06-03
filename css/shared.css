@@ -372,7 +372,7 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--rule);
 }
-.lv-nav-sheet .lv-btn { margin-top: 1.5rem; justify-content: center; }
+.lv-nav-sheet .lv-btn { margin-top: 1.5rem; justify-content: center; color: var(--paper); border-bottom: none; }
 .lv-nav-sheet-close {
   position: absolute; top: 1.25rem; right: 1.25rem;
   background: transparent; border: none;
@@ -429,11 +429,16 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
 }
 .lv-footer-bottom a { color: inherit; font-size: inherit; font-family: inherit; }
 .lv-footer-bottom a:hover { color: var(--ink); }
+.lv-footer-site { text-align: right; }
 @media (max-width: 760px) {
   .lv-footer-grid { grid-template-columns: 1fr 1fr; }
+  /* Cursor toggle is meaningless on touch/mobile (custom cursor is off below 900px) */
+  .lv-cursor-toggle-col { display: none; }
 }
 @media (max-width: 480px) {
   .lv-footer-grid { grid-template-columns: 1fr; }
+  .lv-footer-site { text-align: left; }
+  .lv-footer-bottom { justify-content: flex-start; }
 }
 
 /* ==========================================================================
