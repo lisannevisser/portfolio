@@ -800,24 +800,55 @@
   // ========================================================================
   // BLOG RENDERERS (list + post detail, v1 + v3)
   // ========================================================================
+  // Pull the first few prose blocks (lead/paragraph/string) out of a post body
+  // as plain text, for the gazette front-page aufmacher columns.
+  function gazetteLeadParagraphs(post, max) {
+    const out = [];
+    for (const b of (post.body || [])) {
+      let t = null;
+      if (typeof b === "string") t = b;
+      else if (b && (b.kind === "lead" || b.kind === "paragraph")) t = b.text;
+      if (t) out.push(t);
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+
   function renderBlogLists() {
     const posts = D.posts || [];
 
     const v1List = $("#v1-blog-list");
-    if (v1List) {
-      v1List.innerHTML = posts.map((p, i) => `
-        <a href="#/blog/${esc(p.slug)}" class="lv-reveal v1-career-row" style="text-decoration:none;color:inherit;grid-template-columns:auto 1fr auto;gap:2rem;align-items:baseline;" data-cursor-label="Read">
-          <div class="period">${esc(p.dateLabel)}</div>
-          <div>
-            <div class="role" style="font-size:clamp(1.1rem,1.8vw,1.4rem);">${esc(p.title)}</div>
-            <div class="note" style="margin-top:0.4rem;max-width:62ch;">${esc(p.excerpt)}</div>
-            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.75rem;">
-              ${p.tags.map((t) => `<span class="v1-chip" style="font-size:0.68rem;">${esc(t)}</span>`).join("")}
-            </div>
+    if (v1List && posts.length) {
+      // Newest post runs as the front-page aufmacher; the rest fill the index.
+      const lead = posts[0];
+      const rest = posts.slice(1);
+      const leadParas = gazetteLeadParagraphs(lead, 2);
+
+      const featured = `
+        <a href="#/blog/${esc(lead.slug)}" class="lv-gz-lead lv-reveal" data-cursor-label="Read">
+          <div class="lv-gz-kicker">${lead.tags.map(esc).join(" · ")}</div>
+          <h2 class="lv-gz-lead-head">${esc(lead.title)}</h2>
+          <p class="lv-gz-deck">${esc(lead.excerpt)}</p>
+          <div class="lv-gz-byline">By Lisanne Visser · ${esc(lead.dateLabel)} · ${esc(lead.readingTime)} read</div>
+          <div class="lv-gz-lead-cols">
+            ${leadParas.map((t) => `<p>${inlineMarks(t)}</p>`).join("")}
+            <p class="lv-gz-continue">Continue reading →</p>
           </div>
-          <div class="org" style="font-family:var(--font-mono);font-size:0.75rem;color:var(--ink-3);">${esc(p.readingTime)} →</div>
-        </a>
-      `).join("");
+        </a>`;
+
+      const index = rest.length ? `
+        <div class="lv-gz-section-rule lv-reveal"><span>Also in this edition</span></div>
+        <div class="lv-gz-index">
+          ${rest.map((p) => `
+            <a href="#/blog/${esc(p.slug)}" class="lv-gz-entry lv-reveal" data-cursor-label="Read">
+              <div class="kicker">${p.tags.map(esc).join(" · ")}</div>
+              <h3 class="hl">${esc(p.title)}</h3>
+              <p class="exc">${esc(p.excerpt)}</p>
+              <div class="meta">${esc(p.dateLabel)} · ${esc(p.readingTime)}</div>
+            </a>`).join("")}
+        </div>` : "";
+
+      v1List.innerHTML = featured + index;
     }
 
     const v3List = $("#v3-blog-list");
@@ -915,32 +946,34 @@
     const idx = posts.findIndex((x) => x.slug === p.slug);
     const next = posts[(idx + 1) % posts.length];
 
-    const bodyHtml = renderPostBody(p.body);
+    // Drop cap on the first prose paragraph (the lead stays italic display).
+    const bodyHtml = renderPostBody(p.body)
+      .replace('class="lv-post-p lv-reveal"', 'class="lv-post-p lv-reveal lv-dropcap"');
 
     root.innerHTML = `
-      <a href="#/blog" class="lv-nav-link" data-cursor-label="← Back">← All posts</a>
+      <a href="#/blog" class="lv-gz-back lv-nav-link" data-cursor-label="← Back">← Back to the front page</a>
 
-      <header style="margin-top:2rem;">
-        <div class="v1-meta-row" style="border-top:none;">
+      <header>
+        <div class="lv-gz-article-masthead lv-reveal">
+          <div class="flag">The Design Gazette</div>
+        </div>
+        <div class="lv-gz-dateline lv-gz-dateline--article lv-reveal">
+          <span>${esc(p.tags[0] || "Essay")}</span>
           <span>${esc(p.dateLabel)}</span>
           <span>${esc(p.readingTime)} read</span>
         </div>
-        <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2rem,5vw,4rem);">
-          <em>${esc(p.title)}</em>
-        </h1>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;">
-          ${p.tags.map((t) => `<span class="v1-chip">${esc(t)}</span>`).join("")}
-        </div>
+        <h1 class="lv-gz-article-title lv-reveal">${esc(p.title)}</h1>
+        ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal">${esc(p.excerpt)}</p>` : ""}
       </header>
 
-      <div class="lv-post-body" style="margin-top:3.5rem;">${bodyHtml}</div>
+      <div class="lv-post-body">${bodyHtml}</div>
 
       ${next && next.slug !== p.slug ? `
-        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding:3rem 0;border-top:1px solid var(--rule);">
-          <div class="lv-eyebrow">Next post →</div>
-          <h2 class="v1-case-title" style="margin-top:1rem;font-size:clamp(1.5rem,3vw,2.2rem);">${esc(next.title)}</h2>
+        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding-top:1rem;border-top:3px solid var(--ink);">
+          <div class="lv-gz-kicker" style="text-align:left;">Read next</div>
+          <h2 class="v1-case-title" style="margin-top:0.75rem;font-size:clamp(1.5rem,3vw,2.2rem);">${esc(next.title)}</h2>
           <div style="margin-top:0.75rem;color:var(--ink-3);font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;">
-            ${esc(next.dateLabel)} · ${esc(next.readingTime)}
+            ${esc(next.dateLabel)} · ${esc(next.readingTime)} →
           </div>
         </a>` : ""}
     `;

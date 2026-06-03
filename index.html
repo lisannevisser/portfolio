@@ -568,18 +568,17 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="blog" hidden>
 
-      <!-- V1 BLOG -->
-      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:3rem;">
-          Thinking<br/>
-          <span style="position:relative;display:inline-block;">
-            <em>out loud.</em>
-            <span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.1em;left:0;width:100%;height:0.3em;"></span>
-          </span>
-        </h1>
-        <p class="lv-lead lv-reveal" style="max-width:52ch;margin-bottom:4rem;">
-          Short essays on research, experimentation, and the messy middle of shipping product. No cadence, no newsletter - just posts when something is worth writing down.
-        </p>
+      <!-- V1 BLOG — "The Design Gazette" front page -->
+      <div class="v1-only lv-wrap lv-gazette" style="padding-top:clamp(2.5rem,5vw,4rem);padding-bottom:6rem;">
+        <header class="lv-gz-masthead lv-reveal">
+          <div class="lv-gz-flag">The Design Gazette</div>
+          <p class="lv-gz-subflag">Thinking out loud: short essays on research, experimentation, and the messy middle of shipping product.</p>
+          <div class="lv-gz-dateline">
+            <span>Berlin · No. 1</span>
+            <span>2026 Edition</span>
+            <span>Open to senior &amp; staff roles</span>
+          </div>
+        </header>
         <div id="v1-blog-list"><!-- filled by app.js --></div>
       </div>
 
@@ -596,7 +595,7 @@
     <!-- ROUTE: POST (dynamic)                                       -->
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="post" hidden>
-      <article class="v1-only lv-wrap" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
+      <article class="v1-only lv-wrap lv-gazette lv-gazette-article" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
       <article class="v3-only lv-wrap" id="v3-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
