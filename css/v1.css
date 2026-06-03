@@ -115,12 +115,6 @@
   font-family: var(--font-hand); font-weight: 500;
   font-size: 1.6rem; color: var(--accent); line-height: 1.1;
 }
-[data-variation="v1"] .v1-annotate {
-  position: absolute; font-family: var(--font-hand);
-  font-size: 1.25rem; color: var(--accent); line-height: 1.1;
-  pointer-events: none; white-space: nowrap;
-}
-
 [data-variation="v1"] .v1-logo-strip {
   display: flex; align-items: center;
   overflow: hidden; padding: 2rem 0;
@@ -620,6 +614,13 @@
 }
 
 @media (max-width: 760px) {
+  /* Hero: stack the lead text and CTA, button below the copy, left-aligned. */
+  [data-variation="v1"] .v1-hero-below {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+    align-items: start !important;
+    justify-items: start !important;
+  }
   [data-variation="v1"] .v1-ledger-row {
     grid-template-columns: 30px 1fr;
     gap: 0.5rem 1rem;
@@ -646,10 +647,6 @@
   [data-variation="v1"] .v1-career-body > ul,
   [data-variation="v1"] .v1-career-body > .v1-career-tags { grid-column: 1; }
   [data-variation="v1"] .v1-credo li { grid-template-columns: auto 1fr; }
-}
-
-@media (max-width: 700px) {
-  [data-variation="v1"] .v1-annotate { display: none; }
 }
 
 /* ==========================================================================
