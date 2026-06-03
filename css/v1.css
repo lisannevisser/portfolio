@@ -1069,3 +1069,180 @@
   [data-variation="v1"] .ahs-img,
   [data-variation="v1"] .ahs-step { transition: opacity 220ms ease; transform: none !important; }
 }
+
+/* ==========================================================================
+   Blog "Gazette" — newspaper treatment. v1 only.
+   Front page (blog index) + article masthead. Everything is scoped under
+   .lv-gazette / .lv-gazette-article so v3 and the rest of the site stay
+   untouched. Fraunces is used more liberally here than elsewhere — a
+   newspaper masthead is display-serif by nature.
+   ========================================================================== */
+
+/* --- Masthead (flag + dateline) ----------------------------------------- */
+[data-variation="v1"] .lv-gz-masthead {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+[data-variation="v1"] .lv-gz-flag {
+  font-family: var(--font-display);
+  font-style: normal; font-weight: 600;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 0.92; letter-spacing: -0.025em;
+  color: var(--ink); margin: 0;
+}
+[data-variation="v1"] .lv-gz-subflag {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 300;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  line-height: 1.35; color: var(--ink-2);
+  max-width: 52ch; margin: 0.6rem auto 0;
+}
+[data-variation="v1"] .lv-gz-dateline {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1rem; margin-top: clamp(1rem, 2vw, 1.5rem);
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 3px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --- Featured aufmacher (newest post) ----------------------------------- */
+[data-variation="v1"] .lv-gz-lead {
+  display: block; text-decoration: none; color: inherit;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+[data-variation="v1"] .lv-gz-kicker {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); text-align: center;
+}
+[data-variation="v1"] .lv-gz-lead-head {
+  font-family: var(--font-display); font-style: normal; font-weight: 400;
+  font-size: clamp(2rem, 6vw, 4.5rem); line-height: 1.0;
+  letter-spacing: -0.025em; text-align: center;
+  color: var(--ink); max-width: 18ch; margin: 0.75rem auto 0;
+  transition: color 0.3s var(--ease-out);
+}
+[data-variation="v1"] .lv-gz-lead:hover .lv-gz-lead-head { color: var(--accent); }
+[data-variation="v1"] .lv-gz-deck {
+  font-family: var(--font-display); font-style: italic; font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.35;
+  color: var(--ink-2); text-align: center;
+  max-width: 46ch; margin: 1.25rem auto 0;
+}
+[data-variation="v1"] .lv-gz-byline {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); text-align: center; margin-top: 1.25rem;
+}
+[data-variation="v1"] .lv-gz-lead-cols {
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  max-width: 62ch;
+  column-count: 2; column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  column-rule: 1px solid var(--rule);
+  font-size: 1rem; line-height: 1.62; color: var(--ink-2);
+}
+[data-variation="v1"] .lv-gz-lead-cols p { margin: 0 0 1rem; }
+[data-variation="v1"] .lv-gz-continue {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); break-inside: avoid;
+}
+
+/* Drop cap — featured first column + article first paragraph */
+[data-variation="v1"] .lv-gz-lead-cols > p:first-child::first-letter,
+[data-variation="v1"] .lv-gazette-article .lv-dropcap::first-letter {
+  font-family: var(--font-display); font-weight: 500; font-style: normal;
+  color: var(--accent);
+  font-size: 3.2em; line-height: 0.66; float: left;
+  padding: 0.02em 0.1em 0 0;
+}
+
+/* --- Index ("Also in this edition") ------------------------------------- */
+[data-variation="v1"] .lv-gz-section-rule {
+  display: flex; align-items: center;
+  border-top: 3px solid var(--ink);
+  padding-top: 0.75rem;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
+}
+[data-variation="v1"] .lv-gz-index {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.5rem;
+}
+[data-variation="v1"] .lv-gz-entry {
+  display: block; text-decoration: none; color: inherit;
+  padding: 1.75rem;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+[data-variation="v1"] .lv-gz-entry:nth-child(2n+1) { border-left: none; padding-left: 0; }
+[data-variation="v1"] .lv-gz-entry:nth-child(2n) { padding-right: 0; }
+[data-variation="v1"] .lv-gz-entry:nth-child(-n+2) { border-top: none; padding-top: 0; }
+[data-variation="v1"] .lv-gz-entry .kicker {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+}
+[data-variation="v1"] .lv-gz-entry .hl {
+  font-family: var(--font-display); font-style: normal; font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem); line-height: 1.08;
+  letter-spacing: -0.015em; color: var(--ink); margin: 0.6rem 0 0;
+  transition: color 0.3s var(--ease-out);
+}
+[data-variation="v1"] .lv-gz-entry:hover .hl { color: var(--accent); }
+[data-variation="v1"] .lv-gz-entry .exc {
+  font-size: 0.9rem; line-height: 1.55; color: var(--ink-3); margin-top: 0.6rem;
+}
+[data-variation="v1"] .lv-gz-entry .meta {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 0.9rem;
+}
+
+/* --- Article (single post) masthead ------------------------------------- */
+[data-variation="v1"] .lv-gz-back { display: inline-block; margin-bottom: 2rem; }
+[data-variation="v1"] .lv-gz-article-masthead { text-align: center; }
+[data-variation="v1"] .lv-gz-article-masthead .flag {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.3rem, 3vw, 1.9rem); letter-spacing: -0.01em; color: var(--ink);
+}
+[data-variation="v1"] .lv-gz-dateline--article {
+  justify-content: center; gap: clamp(1rem, 3vw, 2.5rem);
+  margin-top: 0.75rem;
+}
+[data-variation="v1"] .lv-gz-article-title {
+  font-family: var(--font-display); font-style: normal; font-weight: 400;
+  font-size: clamp(2rem, 5.5vw, 4rem); line-height: 1.02; letter-spacing: -0.025em;
+  text-align: center; color: var(--ink);
+  max-width: 20ch; margin: clamp(2rem, 4vw, 3rem) auto 0;
+}
+[data-variation="v1"] .lv-gz-article-deck {
+  font-family: var(--font-display); font-style: italic; font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.4; color: var(--ink-2);
+  text-align: center; max-width: 48ch; margin: 1.25rem auto 0;
+}
+[data-variation="v1"] .lv-gazette-article .lv-post-body {
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+}
+/* Pull quotes read as centered newspaper quotes inside an article */
+[data-variation="v1"] .lv-gazette-article .lv-post-quote {
+  border-left: none; text-align: center;
+  max-width: 32ch; margin-left: auto; margin-right: auto;
+  padding: 1.75rem 0;
+  border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink);
+}
+[data-variation="v1"] .lv-gazette-article .lv-post-quote cite { text-align: center; }
+
+/* --- Gazette responsive -------------------------------------------------- */
+@media (max-width: 640px) {
+  [data-variation="v1"] .lv-gz-dateline { font-size: 0.6rem; letter-spacing: 0.08em; gap: 0.6rem; }
+  [data-variation="v1"] .lv-gz-lead-cols { column-count: 1; }
+  [data-variation="v1"] .lv-gz-index { grid-template-columns: 1fr; }
+  [data-variation="v1"] .lv-gz-entry {
+    border-left: none; padding-left: 0; padding-right: 0;
+    border-top: 1px solid var(--rule); padding-top: 1.75rem;
+  }
+  [data-variation="v1"] .lv-gz-entry:first-child { border-top: none; padding-top: 0; }
+}
