@@ -280,6 +280,59 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "ux-audits-with-ai",
+      title: "How I run UX audits with AI",
+      date: "2026-06-10",
+      dateLabel: "June 2026",
+      readingTime: "7 min",
+      tags: ["AI", "UX audit", "Process"],
+      excerpt: "My audit is no longer a deck about a site. It is a living copy of the site I can pin, share, fix, and, when it's wanted, push to GitHub. Here is the whole workflow.",
+      body: [
+        { kind: "lead", text: "An audit used to be the slow part. A week of screenshots, a deck full of red boxes, a call where I walk the client through it, and then a PDF that lands in a drive and might sit there forever. I rebuilt the whole thing around one idea: the audit should be a living copy of the site, not a document about it. Faster is the obvious win. The real one is that the same artifact carries the finding, the fix, and, if the client wants it, the path to production." },
+
+        { kind: "h2", text: "The deck is the wrong format" },
+        { kind: "paragraph", text: "A traditional audit ends as a static artifact, sitting next to a product it can't touch. Each finding is a slide. The reader has to hold the slide and the live page in their head at the same time and mentally overlay one on the other. Worst of all, the gap between **here is what's wrong** and **here is the change** is exactly where momentum leaks out. The findings can sit in that file forever, and most of them do." },
+        { kind: "paragraph", text: "So I stopped producing a document about the site and started producing a copy of the site. Everything below follows from that one move." },
+
+        { kind: "h2", text: "A disposable replica" },
+        { kind: "paragraph", text: "Read access is all I need. Read access to the repo, plus the access Claude Design needs to import it, and I rebuild the page as a standalone HTML copy, native HTML, in a single chat. No write access, no branch, nothing that can touch production. Then I make more copies in that same chat: one to audit, one to redesign, one to keep clean as a reference. They sit side by side, all shareable, none of them touching the real codebase." },
+        { kind: "paragraph", text: "The point isn't to keep the repo tidy, branches already do that. The point is that a copy is something I can break in front of the client and something they can open without any technical setup. No deploy, no staging URL, no asking a non-technical stakeholder to find their way around GitHub. A link, and they're looking at the real thing." },
+        { kind: "quote", text: "The audit should be a copy of the site I can break, not a document about a site I can't touch.", attribution: "Note to self" },
+
+        { kind: "h2", text: "Pinning the findings" },
+        { kind: "paragraph", text: "On the audit copy I prompt Claude to walk the page and drop pins on the issues, one pin per finding, located on the actual UI. It's the thing a tool like Heurio does, except the pins live on a working copy I can immediately edit. The finding isn't described in the abstract. It's stuck to the pixel it's about." },
+        { kind: "paragraph", text: "The lens is a parameter, not a fixed checklist. I tell it which heuristics to apply depending on what the client actually needs:" },
+        { kind: "list", style: "bullet", items: [
+          { title: "Nielsen's ten.", text: "The default usability pass. Good for catching the obvious structural and feedback gaps." },
+          { title: "Conversion principles.", text: "When the brief is a landing or pricing page and the question is why people don't act." },
+          { title: "Laws of UX.", text: "Hick, Fitts, Jakob, Miller. Useful when the argument is about cognitive load and familiarity." },
+          { title: "Coglode / behavioral.", text: "Behavioral-econ nudges when the conversation is about motivation, not just clarity." }
+        ]},
+        { kind: "paragraph", text: "I iterate the pins until they're right, drop the ones that don't hold up, sharpen the wording on the ones that do. For Paperclip.inc that pass surfaced things like a primary CTA competing with three secondary buttons of equal weight, a plan toggle buried below the fold on the pricing page, and a sign-up form with no inline validation. [Placeholder findings - swap for the real ones.] Each one is a pin you can click, on the page it's about." },
+        { kind: "code", lang: "text", code: "Audit this page copy against Nielsen's ten heuristics\nand basic conversion principles. Drop a numbered pin on\neach issue, anchored to the element it concerns. For each\npin: the heuristic, the problem in one line, and the\nseverity. Don't invent issues to fill a quota." },
+        { kind: "figure", hue: 28, label: "Photo placeholder", caption: "Fig. 1 - the file overview in Claude Design: clean copy, audit copy, redesign copy, side by side." },
+
+        { kind: "h2", text: "Let the client poke at it" },
+        { kind: "paragraph", text: "This is the part a deck simply can't do. The audit copy is a real page at a shareable link. The client opens it, sees the pins in context, and leaves comments directly on the artifact. No deploy, no repo, no technical knowledge required on their side. The audit stops being a thing I present and becomes a thing we work on together." },
+        { kind: "paragraph", text: "That changes the feedback I get. Instead of \"can you resend the slides,\" I get a comment pinned to finding 4 saying the toggle is below the fold for a reason. That's a better conversation, and it happens on the work itself." },
+
+        { kind: "h2", text: "From finding to fix" },
+        { kind: "paragraph", text: "When the client wants the change and not just the diagnosis, I spin up another copy and have Claude build the fixes straight into it. Now there are two live pages at two links: the problem, pinned, and the proposed redesign, working. Side by side, both shareable, both real." },
+        { kind: "paragraph", text: "This is where **faster** quietly becomes **further**. The audit already contains its own prototype. There's no separate \"and now we'd mock it up\" phase, because the mockup is the next copy in the same chat. The diagnosis and the proposal ship as one artifact." },
+
+        { kind: "h2", text: "When it needs to land in the repo" },
+        { kind: "paragraph", text: "The bottleneck in any audit is the translation step: turning findings into dev tasks someone has to scope, ticket, and schedule. That handoff is where the work stalls and where the audit goes stale waiting." },
+        { kind: "paragraph", text: "The code push is the optional bonus, not the headline. Plenty of audits stop at the shared redesign copy, and that's fine. But when the change should actually land, I export to Claude Code, which works against the real repo: it makes the edits, commits, and opens a pull request. The finding becomes a commit, no ticket in between. If a team runs on tickets instead, the same handoff could export tasks to Jira and feed the normal sprint. Either way the translation step stops being the place momentum dies." },
+        { kind: "paragraph", text: "Design did the diagnosis and the proposal; Code lands it in production. Each tool at the thing it's best at." },
+        { kind: "callout", label: "Why two tools", text: "Claude Design is the client-facing artifact: audit it, pin it, share it, redesign it. Claude Code is the handoff when a change has to enter the repo and survive review. Splitting them isn't a workaround, it's playing each to its strength, and it's what turns \"audit\" into a pipeline." },
+
+        { kind: "h2", text: "Where I still do the deciding" },
+        { kind: "paragraph", text: "The honest part. AI finds more than I would alone and far faster, but it over-flags. It'll pin \"low contrast\" on something that's fine, or cite a law that doesn't apply to the case in front of it. The heuristics give it vocabulary, not judgement. I cut maybe a third of what it surfaces before anything reaches the client." },
+        { kind: "paragraph", text: "And that's the actual point. The value isn't that the first pass is right. It's that it's cheap enough that me being the filter costs almost nothing. I spend my time deciding which findings are real and which fix is worth building, not making screenshots and formatting slides. The slow, low-judgement part is gone. The part that needs a designer is the only part left." },
+        { kind: "divider", symbol: "◆ ◆ ◆" }
+      ]
+    },
+    {
       slug: "anatomy-of-a-long-form-post",
       title: "Anatomy of a long-form post",
       date: "2026-05-12",
