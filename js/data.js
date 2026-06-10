@@ -339,10 +339,27 @@ window.LV_DATA = {
       ]
     },
     {
+      slug: "chatgpt-chose-everyone",
+      title: "ChatGPT chose everyone. Claude chose developers.",
+      date: "2026-05-09",
+      dateLabel: "May 2026",
+      readingTime: "4 min",
+      tags: ["Strategy", "Product"],
+      excerpt: "Why Anthropic picked the smaller user group on purpose, and how that bet compounded into one of the fastest-growing companies of the decade.",
+      body: [
+        "ChatGPT had every head start a product can ask for. A year of consumer mindshare ahead of Claude, household-name brand, the most-downloaded app of the decade. By early 2026 it still had over 900 million weekly users and around 25 billion dollars in annualized revenue. And yet Anthropic now runs ahead of it on revenue, with analysts beginning to talk about it as potentially one of the highest-revenue companies of the decade. The interesting question is how that happened in three years.",
+        "Anthropic did not just pick a niche. They picked a group of users whose work was already shaped by the technology they were building. Developers immediately understand what a language model can do. They write code that compounds into more value, and they are paid to adopt tools that make them faster. When the user group's job is already shaped by what you sell, the product-market fit is half-built before you start.",
+        "Everyone is the most expensive user group you can design for. When the brief is mass market, every decision becomes a compromise. Onboarding has to work for a teenager and a CFO. Guardrails have to be tuned for the median. Surface area has to keep getting wider. Optimizing for everyone is a tax that nobody on the team feels until they try to ship. Anthropic skipped it. They built Claude Code: a tool for a developer writing code in a terminal, shaped exactly to that work. It went from launch to 2.5 billion dollars in annualized revenue in roughly a year, more than half of it from enterprise.",
+        "And then they kept earning the right to expand. The desktop client came after Claude Code, and then Cowork, both built for the people who work next to developers: product managers, designers, ops, support. The model underneath is the same. What sits on top is shaped differently for each role. A developer who pays for Claude brings it into the team. The team brings it into the company. A ten-seat engineering contract turns into a hundred seats across functions. That is the shape of developer-first B2B growth, and it is why roughly 80 percent of Anthropic's revenue comes from API and enterprise, and only around 10 to 15 percent from consumer subscriptions.",
+        "None of this would land without a model good enough to carry it. Claude Opus is an asset on its own. It shows up in Cursor and dozens of other products precisely because it is the strongest underlying model for the work developers care about. The ICP discipline and the model quality compound on each other. Neither alone would have been enough.",
+        "Growth is not the only metric a company should be judged by, and the long arc still has to deliver margins, retention, durability. But the lesson for product people here is plainer than people usually want it to be. Pick the user group whose work is already shaped by your technology, and earn the right to expand outward from there. The trajectory tends to reward that more than the comfortable answer of serving everyone at once."
+      ]
+    },
+    {
       slug: "anatomy-of-a-long-form-post",
       title: "Anatomy of a long-form post",
-      date: "2026-05-12",
-      dateLabel: "May 2026",
+      date: "2025-11-18",
+      dateLabel: "November 2025",
       readingTime: "6 min",
       tags: ["Writing", "Design system"],
       excerpt: "A walk through every building block I use when a post needs more than paragraphs - headings, pull quotes, lists, figures, callouts, and code.",
@@ -382,71 +399,6 @@ window.LV_DATA = {
         { kind: "code", lang: "ts", code: "type Block =\n  | { kind: \"paragraph\"; text: string }\n  | { kind: \"h2\" | \"h3\"; text: string }\n  | { kind: \"quote\"; text: string; attribution?: string }\n  | { kind: \"list\"; style: \"bullet\" | \"numbered\"; items: Item[] }\n  | { kind: \"figure\"; hue?: number; label?: string; caption?: string }\n  | { kind: \"callout\"; label?: string; text: string }\n  | { kind: \"divider\"; symbol?: string }\n  | { kind: \"code\"; lang?: string; code: string };" },
         { kind: "h2", text: "What's next" },
         { kind: "paragraph", text: "Real images. A two-column layout for short side-by-sides. And, eventually, a way to embed a small interactive demo for the design-ops posts. None of that is urgent. The point of this kitchen-sink post is to make sure the foundation holds before the writing starts in earnest." }
-      ]
-    },
-    {
-      slug: "chatgpt-chose-everyone",
-      title: "ChatGPT chose everyone. Claude chose developers.",
-      date: "2026-05-09",
-      dateLabel: "May 2026",
-      readingTime: "4 min",
-      tags: ["Strategy", "Product"],
-      excerpt: "Why Anthropic picked the smaller user group on purpose, and how that bet compounded into one of the fastest-growing companies of the decade.",
-      body: [
-        "ChatGPT had every head start a product can ask for. A year of consumer mindshare ahead of Claude, household-name brand, the most-downloaded app of the decade. By early 2026 it still had over 900 million weekly users and around 25 billion dollars in annualized revenue. And yet Anthropic now runs ahead of it on revenue, with analysts beginning to talk about it as potentially one of the highest-revenue companies of the decade. The interesting question is how that happened in three years.",
-        "Anthropic did not just pick a niche. They picked a group of users whose work was already shaped by the technology they were building. Developers immediately understand what a language model can do. They write code that compounds into more value, and they are paid to adopt tools that make them faster. When the user group's job is already shaped by what you sell, the product-market fit is half-built before you start.",
-        "Everyone is the most expensive user group you can design for. When the brief is mass market, every decision becomes a compromise. Onboarding has to work for a teenager and a CFO. Guardrails have to be tuned for the median. Surface area has to keep getting wider. Optimizing for everyone is a tax that nobody on the team feels until they try to ship. Anthropic skipped it. They built Claude Code: a tool for a developer writing code in a terminal, shaped exactly to that work. It went from launch to 2.5 billion dollars in annualized revenue in roughly a year, more than half of it from enterprise.",
-        "And then they kept earning the right to expand. The desktop client came after Claude Code, and then Cowork, both built for the people who work next to developers: product managers, designers, ops, support. The model underneath is the same. What sits on top is shaped differently for each role. A developer who pays for Claude brings it into the team. The team brings it into the company. A ten-seat engineering contract turns into a hundred seats across functions. That is the shape of developer-first B2B growth, and it is why roughly 80 percent of Anthropic's revenue comes from API and enterprise, and only around 10 to 15 percent from consumer subscriptions.",
-        "None of this would land without a model good enough to carry it. Claude Opus is an asset on its own. It shows up in Cursor and dozens of other products precisely because it is the strongest underlying model for the work developers care about. The ICP discipline and the model quality compound on each other. Neither alone would have been enough.",
-        "Growth is not the only metric a company should be judged by, and the long arc still has to deliver margins, retention, durability. But the lesson for product people here is plainer than people usually want it to be. Pick the user group whose work is already shaped by your technology, and earn the right to expand outward from there. The trajectory tends to reward that more than the comfortable answer of serving everyone at once."
-      ]
-    },
-    {
-      slug: "research-before-pixels",
-      title: "Research before pixels",
-      date: "2026-03-12",
-      dateLabel: "March 2026",
-      readingTime: "4 min",
-      tags: ["Research", "Process"],
-      excerpt: "Why I open every project with evidence instead of Figma, and how it changes what the team ships.",
-      body: [
-        "The fastest way to waste three sprints is to start in Figma. I've done it. The team ships something clean, well-spaced, visually tidy - and nobody uses it the way we imagined.",
-        "Research before pixels is not about writing a 40-page report before you open the file. It is a posture: the first question is always what do we actually know, and the second is what would we need to know to be wrong.",
-        "In practice that looks small. A 20-minute conversation with two customers. A Hotjar session of the current flow. A three-question survey on the checkout page. Nothing academic, nothing heavy. Just enough evidence to stop debating opinions.",
-        "The output is rarely a chart. It is a sharper brief. The team stops arguing about button color and starts arguing about the right moment in the flow, the right label, the right default. The work gets smaller and the decisions get firmer.",
-        "Pixels are cheap once the question is right. Most of my best projects started with a one-page note that nobody looked at again. It did its job."
-      ]
-    },
-    {
-      slug: "80-percent-is-a-feature",
-      title: "80% is a feature, not a compromise",
-      date: "2026-02-04",
-      dateLabel: "February 2026",
-      readingTime: "3 min",
-      tags: ["Experimentation", "Design Ops"],
-      excerpt: "Shipping at 80% brand compliance made our conversion-test loop 7x faster. Here is the trade-off I had to defend.",
-      body: [
-        "When we redesigned the conversion-test workflow at Trusted Shops around Figma Make, one question kept coming back: are you ok with this not being pixel-perfect?",
-        "Short answer: yes, on purpose. An experiment that ships in two days at 80% beats an experiment that ships in two weeks at 100%. The cost of waiting is invisible, but it is real - every week of backlog is a week of compounding learning we are not getting.",
-        "The trick is to make the 80 explicit. A designer QA gate catches anything embarrassing. A template system bakes in the non-negotiables: type scale, spacing rhythm, CTA behavior. Inside that fence, conversion managers can move fast without making the product feel broken.",
-        "Then the winning tests get refined to 100% before permanent rollout. The polish does not disappear - it just moves to the point where it actually matters.",
-        "The hardest part is not the design. It is convincing the team that conscious imprecision is a choice, not a slip."
-      ]
-    },
-    {
-      slug: "first-focus-group-in-25-years",
-      title: "Notes from the first focus group in 25 years",
-      date: "2025-11-18",
-      dateLabel: "November 2025",
-      readingTime: "5 min",
-      tags: ["Research ops", "Culture"],
-      excerpt: "What I learned running a method an organization had not used since the 90s, and why I will do it again.",
-      body: [
-        "Running the first focus group in 25 years was not my idea of a bold research move. It was a pragmatic one: we had a trust question that surveys kept answering the same way, and we needed to hear people push back on each other, not on us.",
-        "The interesting part was not the method, it was the reaction inside the company. People were curious. Some were skeptical. A few were openly nervous about what six customers in a room might say out loud.",
-        "The output was not surprising - most insights echoed what the surveys had hinted at. But the weight was different. A quote in a deck moves a room. A percentage does not.",
-        "The lesson I took away is that a research practice is a portfolio, not a method. Surveys for breadth, heatmaps for behavior, interviews for why, and every now and then a focus group for a texture you cannot get any other way.",
-        "I will run another one. Probably this year. Probably with less ceremony."
       ]
     }
   ],
