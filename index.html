@@ -28,10 +28,10 @@
 
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-06-10-5" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-06-10-5" />
-  <link rel="stylesheet" href="css/v3.css?v=2026-06-10-5" />
-  <link rel="stylesheet" href="css/wip.css?v=2026-06-10-5" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-06-10-6" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-06-10-6" />
+  <link rel="stylesheet" href="css/v3.css?v=2026-06-10-6" />
+  <link rel="stylesheet" href="css/wip.css?v=2026-06-10-6" />
 </head>
 <body>
 
@@ -83,6 +83,10 @@
       <div class="v1-only">
         <!-- Hero -->
         <section class="v1-hero lv-wrap">
+          <div class="v1-hero-meta lv-reveal">
+            <span class="v1-hero-id">Lisanne Visser · Senior Product Designer · Berlin</span>
+            <span class="v1-chip is-live">Open to senior &amp; staff roles · Q3 2026</span>
+          </div>
           <div style="position:relative;">
             <h1 class="v1-hero-display lv-reveal">
               <span style="position:relative;display:inline-block;">Design that</span>
@@ -91,18 +95,26 @@
             </h1>
           </div>
 
-          <div class="v1-hero-below" style="display:grid;grid-template-columns:1fr auto;gap:3rem;margin-top:clamp(2rem,5vw,4rem);align-items:end;">
+          <div class="v1-hero-below">
             <p class="lv-lead lv-reveal" style="max-width:52ch;margin:0;">
-              I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to implementation to post-launch metrics.
+              I turn messy product problems into evidence-backed design. Research, experimentation, and systems thinking are the spine. I ship end-to-end, from discovery to implementation to post-launch metrics.
             </p>
-            <div class="lv-reveal" style="position:relative;">
+            <div class="lv-reveal v1-hero-cta">
               <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
                 <a href="#/work" class="lv-btn" data-cursor-label="See →">
                   See the work
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
               </span>
+              <a href="#/about" class="lv-btn is-ghost" data-cursor-label="About">About me</a>
             </div>
+          </div>
+
+          <div class="v1-hero-stats lv-reveal">
+            <div class="stat"><span class="v">+15%</span><span class="k">Revenue lift · pricing experiments</span></div>
+            <div class="stat"><span class="v">−85%</span><span class="k">Test cycle time · 2 weeks to 2 days</span></div>
+            <div class="stat"><span class="v">140+</span><span class="k">Pages relaunched · under a year</span></div>
+            <div class="stat"><span class="v">1.5×</span><span class="k">Research target · hit in year one</span></div>
           </div>
         </section>
 
@@ -119,12 +131,34 @@
             <div>
               <div class="lv-eyebrow">Selected work</div>
               <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
-                Five projects, one <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">spine<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>:<br/>evidence over opinion.
+                Five projects. Each one<br/><em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">moved a number.<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>
               </h2>
             </div>
             <a href="#/work" class="lv-nav-link" data-cursor-label="All →">All work →</a>
           </div>
           <div id="v1-home-cases"><!-- filled by app.js --></div>
+        </section>
+
+        <!-- Method -->
+        <section class="v1-section lv-wrap">
+          <div class="v1-method-grid">
+            <div class="lv-reveal">
+              <div class="lv-eyebrow">The method</div>
+              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+                One spine:<br/><em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);">evidence over opinion.</em>
+              </h2>
+              <p class="lv-body" style="margin-top:1.5rem;max-width:44ch;">
+                Four principles run through every project above. Research sets the direction, experiments check it, and systems keep the result alive after I move on.
+              </p>
+              <a href="#/about" class="lv-nav-link" style="display:inline-block;margin-top:1.25rem;" data-cursor-label="About →">More about how I work →</a>
+            </div>
+            <ul class="v1-credo lv-reveal">
+              <li><span>01</span><span>Research before pixels.</span></li>
+              <li><span>02</span><span>Measure what matters.</span></li>
+              <li><span>03</span><span>Ship the 80, refine the 20.</span></li>
+              <li><span>04</span><span>Systems outlive screens.</span></li>
+            </ul>
+          </div>
         </section>
 
         <!-- CTA -->
@@ -134,12 +168,16 @@
               Let's make<br/>something <em style="color:var(--accent);position:relative;font-family:var(--font-display);font-style:italic;font-weight:400;">measurable.<span data-scribble="underline" data-delay="0.8" style="position:absolute;bottom:-0.2em;left:0;width:100%;height:0.4em;"></span></em>
             </h2>
           </div>
-          <div style="margin-top:2.5rem;" class="lv-reveal">
+          <p class="lv-lead lv-reveal" style="max-width:46ch;margin:1.75rem auto 0;">
+            If you have a messy product problem and a number that should move, write me.
+          </p>
+          <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="lv-reveal">
             <span class="lv-magnetic" data-strength="0.25" style="display:inline-block;">
               <a href="mailto:mail@lisannevisser.com" class="lv-btn" data-cursor-label="✉ Write" style="font-size:1.05rem;padding:1rem 1.75rem;">
                 mail@lisannevisser.com
               </a>
             </span>
+            <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer" class="lv-btn is-ghost" data-cursor-label="↗" style="font-size:1.05rem;padding:1rem 1.75rem;">LinkedIn</a>
           </div>
         </section>
       </div>
@@ -928,8 +966,8 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-06-10-5"></script>
-  <script src="js/app.js?v=2026-06-10-5"></script>
-  <script src="js/wip.js?v=2026-06-10-5"></script>
+  <script src="js/data.js?v=2026-06-10-6"></script>
+  <script src="js/app.js?v=2026-06-10-6"></script>
+  <script src="js/wip.js?v=2026-06-10-6"></script>
 </body>
 </html>

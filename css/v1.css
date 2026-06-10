@@ -13,8 +13,51 @@
 }
 
 [data-variation="v1"] .v1-hero {
-  padding-block: clamp(4rem, 10vw, 9rem) clamp(3rem, 7vw, 6rem);
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 7vw, 6rem);
   position: relative;
+}
+
+/* Hero meta row: identity line left, availability chip right */
+[data-variation="v1"] .v1-hero-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1rem; flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+[data-variation="v1"] .v1-hero-id {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+[data-variation="v1"] .v1-hero-below {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 3rem; align-items: end;
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+[data-variation="v1"] .v1-hero-cta {
+  display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;
+}
+
+/* Hero evidence row: four numbers, one quiet rule above */
+[data-variation="v1"] .v1-hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+[data-variation="v1"] .v1-hero-stats .v {
+  display: block;
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: calc(clamp(1.75rem, 3vw, 2.5rem) * var(--type-scale));
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+[data-variation="v1"] .v1-hero-stats .k {
+  display: block; margin-top: 0.6rem;
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ink-3); line-height: 1.6;
 }
 
 [data-variation="v1"] .v1-hero-display {
@@ -175,6 +218,16 @@
   font-size: 0.75rem;
   color: var(--ink-3); letter-spacing: 0.14em;
   white-space: nowrap;
+}
+
+/* Method section: intro column left, credo list right */
+[data-variation="v1"] .v1-method-grid {
+  display: grid; grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 880px) {
+  [data-variation="v1"] .v1-method-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 [data-variation="v1"] .v1-pull {
@@ -531,7 +584,7 @@
 
 [data-variation="v1"] .v1-ledger-row {
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr);
+  grid-template-columns: 50px minmax(0, 1fr) auto;
   gap: 1.5rem;
   padding: 1.75rem 0;
   align-items: center;
@@ -552,10 +605,34 @@
   font-family: var(--font-mono); font-size: 0.72rem;
   letter-spacing: 0.14em; color: var(--ink-3);
 }
+[data-variation="v1"] .v1-ledger-row .body {
+  display: grid; gap: 0.45rem; min-width: 0;
+}
 [data-variation="v1"] .v1-ledger-row .title {
   font-family: var(--font-display); font-style: italic; font-weight: 400;
   font-size: clamp(1.45rem, 2.6vw, 2rem);
   line-height: 1.1; letter-spacing: -0.015em;
+}
+[data-variation="v1"] .v1-ledger-row .meta {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color var(--t-fast);
+}
+[data-variation="v1"] .v1-ledger-row:hover .meta { color: var(--ink-2); }
+[data-variation="v1"] .v1-ledger-row .stat {
+  display: grid; gap: 0.35rem; justify-items: end; text-align: right;
+}
+[data-variation="v1"] .v1-ledger-row .stat .v {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--accent);
+}
+[data-variation="v1"] .v1-ledger-row .stat .k {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
 }
 
 /* Cursor-following floaters */
@@ -621,10 +698,16 @@
     align-items: start !important;
     justify-items: start !important;
   }
+  [data-variation="v1"] .v1-hero-stats { grid-template-columns: repeat(2, 1fr); }
   [data-variation="v1"] .v1-ledger-row {
     grid-template-columns: 30px 1fr;
     gap: 0.5rem 1rem;
     padding-block: 1.25rem;
+  }
+  [data-variation="v1"] .v1-ledger-row .stat {
+    grid-column: 2; justify-items: start; justify-content: start; text-align: left;
+    grid-auto-flow: column; align-items: baseline; gap: 0.6rem;
+    margin-top: 0.2rem;
   }
   [data-variation="v1"] .v1-ledger-row:hover { padding-left: 0; }
   [data-variation="v1"] .v1-ledger-stat-floater,
