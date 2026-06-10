@@ -18,7 +18,11 @@
         if (hue) document.documentElement.style.setProperty("--accent-hue", hue);
         var ts = localStorage.getItem("lv-ts");
         if (ts) document.documentElement.style.setProperty("--type-scale", ts);
-      } catch (e) {}
+        var wip = localStorage.getItem("lv-wip");
+        document.documentElement.setAttribute("data-wip", wip || "note");
+      } catch (e) {
+        document.documentElement.setAttribute("data-wip", "note");
+      }
     })();
   </script>
 
@@ -27,6 +31,7 @@
   <link rel="stylesheet" href="css/shared.css?v=2026-06-10-3" />
   <link rel="stylesheet" href="css/v1.css?v=2026-06-10-3" />
   <link rel="stylesheet" href="css/v3.css?v=2026-06-10-3" />
+  <link rel="stylesheet" href="css/wip.css?v=2026-06-10-3" />
 </head>
 <body>
 
@@ -911,7 +916,20 @@
     </div>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- WIP indicator — "site under construction" sticky note        -->
+  <!-- ============================================================ -->
+  <aside class="wip-el wip-note" role="note" aria-label="Site notice">
+    <button type="button" class="wip-note-close" data-wip-dismiss aria-label="Dismiss notice">×</button>
+    <p class="wip-note-kicker">A quick heads-up</p>
+    <p class="wip-note-body">This site is being rebuilt
+      <span class="wip-mark" data-scribble="underline" data-delay="0.6">in the open.</span>
+      Mind the wet paint - a few pages aren't quite dry yet.</p>
+    <p class="wip-note-sign">- Lisanne</p>
+  </aside>
+
   <script src="js/data.js?v=2026-06-10-3"></script>
   <script src="js/app.js?v=2026-06-10-3"></script>
+  <script src="js/wip.js?v=2026-06-10-3"></script>
 </body>
 </html>
