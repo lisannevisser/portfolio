@@ -868,10 +868,12 @@
     }
   }
 
-  // Inline marks: **bold** and *italic*. Applied AFTER esc(), so we re-introduce
-  // a tightly-scoped set of tags. Keep this conservative.
+  // Inline marks: [text](url) links, **bold** and *italic*. Applied AFTER esc(),
+  // so we re-introduce a tightly-scoped set of tags. Keep this conservative.
   function inlineMarks(text) {
     return esc(text)
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,
+        '<a class="lv-post-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
       .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<em>$2</em>");
   }
