@@ -236,6 +236,16 @@ html[data-cursor="off"] .lv-cursor-ring { display: none; }
 .lv-wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 3vw, 3rem); }
 .lv-wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 clamp(1.25rem, 3vw, 3rem); }
 
+/* Case studies read narrower than the rest of the site for a calmer column.
+   Text and media share one column width: the body sets the measure, and the
+   per-paragraph ch caps are dropped so prose fills the same width as figures. */
+#v1-case-body.lv-wrap,
+#v3-case-body.lv-wrap { max-width: 820px; }
+#v1-case-body .v1-story-block .lv-section-title + p,
+#v1-case-body .v1-story-block p + p,
+#v3-case-body .v3-story h2 + .v3-story-body,
+#v3-case-body .v3-story-body { max-width: none; }
+
 .lv-divider {
   border: none; border-top: 1px solid var(--rule); margin: 0;
 }
