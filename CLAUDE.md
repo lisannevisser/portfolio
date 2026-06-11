@@ -53,7 +53,9 @@ marketing copy.
 **Sentences**
 - Short to medium. Fact sentences direct.
 - Longer only when spelling out a trade-off or reasoning.
-- Parenthetical asides for side notes, not exclamation marks.
+- Parenthetical asides for side notes, not exclamation marks
+  (case studies; blog posts may use an occasional exclamation mark,
+  see Blog Voice).
 
 **Narrative tension**
 - Welcome when the stakes are real and serve the judgement story. A
@@ -69,6 +71,37 @@ marketing copy.
   "restraint = seniority" stance. Use plain bold labels.
 - No emojis in body text in general.
 - No superlatives without evidence.
+
+### Blog Voice
+
+Blog posts (the Gazette) are looser and warmer than case studies.
+Everything in Tone & Voice still applies (plain language, no
+buzzwords, concreteness, no emojis), but the register shifts. These
+markers come from comparing an editorial rewrite of the
+UX-audits-with-AI post against Lisanne's own draft — the rewrite was
+reverted because it lost her voice:
+
+- **Playful showmanship between sections.** Build-up beats are part
+  of the voice, not manufactured stakes: "Then along came AI.",
+  "From here, it gets even better!", "As if this wasn't enough, I
+  have more to offer.", "the cherry on top". What a case study
+  forbids, a blog post enjoys.
+- **Self-aware humor in parentheses.** "I already rebelled against
+  this establishment (look at me, what a rebel)." One or two per
+  post, puncturing her own seriousness.
+- **Exclamation marks for genuine excitement.** Blog only, sparingly.
+- **Parentheses for asides**, not paired commas: "(or had someone
+  conduct it for you)", "(native HTML is Claude Design's default)".
+- **Colons to introduce a thing or an explanation**, sometimes with a
+  capital after the colon: "I opted for Heurio: A software solution
+  that lets you annotate and score your findings."
+- **Conversational connectors open sentences**: "From here,", "From
+  there,", "In consequence,", "Even more than that,", "However,".
+- **Talky beats tight.** Natural, slightly wordy phrasing ("easily
+  share", "a fair chance you end up with…") wins over maximally
+  compressed prose. If a sentence reads like a magazine editor
+  tightened it, it has drifted off-voice. The cut pass (see Editing)
+  is gentler here than in case studies.
 
 ### Case Study Structure
 
@@ -161,7 +194,9 @@ study by adding an `opportunities` array to the limitations block.
 
 ### Editing
 
-The polish pass. Drafting and editing are separate steps.
+The polish pass. Drafting and editing are separate steps. These
+rules apply to text Claude drafted — Lisanne's own drafts get a
+different, much lighter treatment (see next section).
 
 - **Draft first, then edit.** Don't polish while writing.
 - **Cut pass.** For each sentence ask "if I delete this, is anything
@@ -173,6 +208,38 @@ The polish pass. Drafting and editing are separate steps.
 - **Voice consistency pass.** Scan for textbook-y phrases that
   drifted in ("reaccessed brand assets in accordance with…"). Put
   them back in your normal voice.
+
+### Working on Lisanne's Drafts
+
+Learned on the UX-audits-with-AI post: an editorial rewrite of her
+draft had to be reverted wholesale (PR #54). When she provides the
+text, the job is transcription and repair, not improvement.
+
+- **Her draft is the source of truth.** Keep wording, sentence
+  structure, and section order verbatim. Only fill in what she
+  explicitly asks for (links, citations, figure placeholders, named
+  gaps).
+- **Typo pass means errors only.** Misspellings ("capapble" →
+  "capable") and clear grammar slips ("a typical audits") yes.
+  Rephrasing, tightening, or smoothing no — even when a sentence
+  feels wordy. List the fixes for approval instead of folding them
+  into other changes.
+- **Typo ≠ voice.** Unusual-but-intentional phrasings ("Additionally
+  to", "feedback culture similar to what we're used to in Figma")
+  stay. Same for consistent spelling choices like "judgement" —
+  don't silently Americanize her word picks; the American English
+  list above is for Claude-drafted text. When unsure whether
+  something is a slip or a choice, leave it and ask.
+- **Don't polish away voice markers.** Jokes, parenthetical asides,
+  exclamation marks, build-up beats, small repetitions: features,
+  not bugs.
+- **Never restructure silently.** Moving a figure, code block,
+  paragraph, or section is a content decision she makes, not an
+  edit.
+
+When drafting from scratch (her notes → post), write in Blog Voice
+and expect her to do a wording pass. Flag the spots where you
+guessed at her phrasing rather than burying them.
 
 ## Important: `main` is live
 
