@@ -20,11 +20,6 @@
   [data-wip="note"] .wip-note { animation: wip-rise 600ms var(--ease-out) forwards; }
 }
 
-/* Hand-drawn scribble accents reuse .lv-scribble, sitting relative to their
-   inline wrapper. */
-.wip-mark { position: relative; display: inline-block; }
-.wip-mark .lv-scribble { color: var(--accent); }
-
 /* ==========================================================================
    Sticky note (paper, tilted, taped to the corner)
    ========================================================================== */
@@ -65,22 +60,12 @@
   border: 1px solid rgba(150, 130, 90, 0.18);
   box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
-.wip-note-kicker {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: oklch(0.55 0.07 70);
-  margin: 0 0 0.5rem;
-}
 .wip-note-body {
   font-family: var(--font-hand);
   font-size: 1.42rem;
   line-height: 1.18;
   margin: 0;
 }
-.wip-note-body .wip-mark { font-style: normal; }
-.wip-note-body .lv-scribble { top: auto; bottom: -0.18em; left: 0; height: 0.42em; }
 .wip-note-sign {
   margin: 0.7rem 0 0;
   font-family: var(--font-hand);
