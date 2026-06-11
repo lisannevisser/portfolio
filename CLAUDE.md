@@ -77,9 +77,12 @@ marketing copy.
 Blog posts (the Gazette) are looser and warmer than case studies.
 Everything in Tone & Voice still applies (plain language, no
 buzzwords, concreteness, no emojis), but the register shifts. These
-markers come from comparing an editorial rewrite of the
-UX-audits-with-AI post against Lisanne's own draft — the rewrite was
-reverted because it lost her voice:
+markers come from two posts: comparing an editorial rewrite of the
+UX-audits-with-AI post against Lisanne's own draft (the rewrite was
+reverted because it lost her voice), and writing/editing the
+"better designer with AI" post.
+
+**Voice markers**
 
 - **Playful showmanship between sections.** Build-up beats are part
   of the voice, not manufactured stakes: "Then along came AI.",
@@ -102,6 +105,52 @@ reverted because it lost her voice:
   compressed prose. If a sentence reads like a magazine editor
   tightened it, it has drifted off-voice. The cut pass (see Editing)
   is gentler here than in case studies.
+
+**Structure & restraint**
+- **Honest hook.** A personal confession or admission opens stronger
+  than a thesis. Vulnerable but confident.
+- **Don't overclaim.** Prefer "a good part" over a precise-sounding
+  number that isn't measured, "a day" over a flashy "a morning".
+  Realistic beats impressive.
+- **One bolded core claim per article.** The single sentence the
+  post argues for gets **bold**. Only that one.
+- **Questions as questions.** Write rhetorical questions out with
+  question marks ("Does this heuristic actually apply here?"), not
+  as comma-chained clauses.
+- **Short paragraphs.** One idea per paragraph; split rather than
+  stack.
+- **No ornament.** No pull quotes, no attribution lines, no end
+  dividers. The article ends on its last sentence.
+- **No insider shorthand.** If a word only works because of the
+  sentence before it ("the calls"), expect a reader query; prefer
+  wording that survives first read.
+
+### Blog Post Workflow
+
+How a post travels from raw thoughts to live, learned on the
+"better designer with AI" post.
+
+1. **Draft in data.js on a branch.** The first draft goes straight
+   into the posts array as blocks. Local preview, nothing live until
+   PR.
+2. **Thoughts before polish.** Lisanne dumps raw thoughts
+   (voice-to-text is fine). Claude structures them and maps them
+   against the draft: what's covered, what's missing. Revision
+   happens after she re-read, not before.
+3. **Editing via markdown copy.** For her own editing pass, Claude
+   exports the article as a standalone .md in the worktree root
+   (never committed). She edits there; changes get transferred back
+   to data.js 100% verbatim — the rules in "Working on Lisanne's
+   Drafts" apply.
+4. **Real artifacts beat illustrations.** Chats, PR comments, and
+   screenshots from actual work become elements in the post (the
+   animated chat block is reusable: `kind: "chat"`). Anonymize
+   people ("Developer"), strip real repo links and URLs.
+5. **Cross-link instead of repeating.** If a point is covered in
+   another post or case study, link a text phrase inline and cut the
+   duplicated content.
+6. **Bump the cache-bust version** (`?v=...` in index.html) with
+   every CSS/JS change, or returning visitors get the old assets.
 
 ### Case Study Structure
 
