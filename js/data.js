@@ -341,7 +341,7 @@ window.LV_DATA = {
       date: "2026-06-10",
       dateLabel: "June 2026",
       readingTime: "7 min",
-      tags: ["AI", "UX audit", "Process"],
+      tags: ["AI", "Process"],
       excerpt: "My audit is no longer a slide deck about a site. It is a living copy of the site I can pin, share, fix, and, when it's wanted, push to GitHub. Here is the whole workflow.",
       body: [
         { kind: "lead", text: "An audit used to be a time-consuming task. A week of screenshots, a deck full of red boxes, a call where I walk the client through it, and then a PDF that lands in a drive and might sit there forever. I rebuilt the whole workflow and now it looks completely different. The core idea: an audit as a living copy of the site, not a document about it. Yes, it's faster. But the real benefit is that the same artifact carries the finding, and - if the client wants it -, the fix, and the path to production." },
@@ -373,7 +373,6 @@ window.LV_DATA = {
         { kind: "paragraph", text: "I iterate the pins until they're right, drop the ones that don't hold up, sharpen the wording on the ones that do. This is a point in time where it shows that AI cannot substitute human work: It does a great initial job initially and definitely enriches the result with a few findings a human may miss in the sheer mass of possible lenses to look at a site in all its details. However, as in other settings studies on AI led audits have shown that AI is not capable to deliver reliable results. [(GPT-4o vs. human experts, 2025)](https://arxiv.org/abs/2506.16345)" },
         { kind: "paragraph", text: "AI finds more than I would alone and far faster, but it over-flags. It'll pin \"low contrast\" on something that's fine, or cite a law that doesn't apply to the case in front of it. The heuristics give AI vocabulary, not judgement. I cut maybe a third of what it surfaces before anything reaches the client." },
         { kind: "paragraph", text: "And that's the actual point. The value isn't that the first check is right. It's that it's cheap enough that me being the filter costs almost nothing. I spend my time deciding which findings are real and which fix is worth building, not making screenshots and formatting slides. I add findings AI has missed, and it helps me get ideas I wouldn't have gotten without. The slow, low-judgement part is gone. My focus is on enriching the data. The part that needs a designer is the only part left." },
-        { kind: "code", lang: "text", code: "Audit this page copy against Nielsen's ten heuristics\nand basic conversion principles. Drop a numbered pin on\neach issue, anchored to the element it concerns. For each\npin: the heuristic, the problem in one line, and the\nseverity. Don't invent issues to fill a quota." },
         { kind: "figure", hue: 200, label: "Image placeholder", caption: "Fig. 2 - a pin in the interface, showing its detail when you interact with it." },
 
         { kind: "h2", text: "Let the client poke at it" },
