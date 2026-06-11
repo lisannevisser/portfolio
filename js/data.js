@@ -389,8 +389,7 @@ window.LV_DATA = {
         { kind: "paragraph", text: "Design did the diagnosis and the proposal; Code lands it in production. Each tool at the thing it's best at." },
         { kind: "callout", label: "Why two tools", text: "Claude Design is the client-facing artifact: audit it, pin it, share it, redesign it. Claude Code is the handoff when a change has to enter the repo and survive review. Splitting them isn't a workaround, it's playing each to its strength, and it's what turns \"audit\" into a pipeline. If I want to and when it makes sense for the client I work with, I can utilize the exact flow in Claude Code directly. I just find the presented solution with Claude Design more user-friendly for users who don't have development experience." },
 
-        { kind: "h2", text: "Final thoughts" },
-        { kind: "divider", symbol: "◆ ◆ ◆" }
+        { kind: "h2", text: "Final thoughts" }
       ]
     },
     {
