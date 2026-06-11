@@ -615,7 +615,7 @@ html[data-cursor="off"] { cursor: auto; }
 .lv-post-body > .lv-post-h3 + * { margin-top: 1rem; }
 .lv-post-body > * + .lv-post-h2 { margin-top: 3rem; }
 .lv-post-body > * + .lv-post-h3 { margin-top: 2.25rem; }
-.lv-post-body > * + .lv-post-figure,
+.lv-post-body > * + .lv-post-figure { margin-top: 3.5rem; }
 .lv-post-body > * + .lv-post-quote,
 .lv-post-body > * + .lv-post-callout { margin-top: 2.5rem; }
 .lv-post-body > .lv-post-figure + *,
@@ -717,6 +717,107 @@ html[data-cursor="off"] { cursor: auto; }
   margin-top: 0.75rem; font-family: var(--font-mono);
   font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--ink-3);
+}
+
+/* Chat replay (messenger-style figure; messages reveal sequentially via JS) */
+.lv-post-chat { margin: 0; }
+.lv-chat-window {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex; flex-direction: column; gap: 1.5rem;
+  min-height: 16rem;
+}
+[data-variation="v1"] .lv-chat-window { border-radius: var(--radius-lg); }
+.lv-chat-group {
+  display: flex; gap: 0.85rem; align-items: flex-start;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity var(--t-med) var(--ease-out), transform var(--t-med) var(--ease-out);
+}
+.lv-chat-group.is-active { opacity: 1; transform: none; }
+.lv-chat-avatar {
+  flex: 0 0 auto; width: 2.4rem; height: 2.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft); color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem;
+}
+.lv-chat-group:last-child .lv-chat-avatar { background: var(--paper-3); }
+.lv-chat-rows { flex: 1; min-width: 0; }
+.lv-chat-meta {
+  display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.4rem;
+}
+.lv-chat-meta strong { font-size: 0.95rem; color: var(--ink); }
+.lv-chat-meta .time {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.08em; color: var(--ink-3);
+}
+.lv-chat-msg { margin: 0 0 0.5rem; }
+.lv-chat-msg .lv-chat-bubble { display: none; }
+.lv-chat-msg .lv-chat-typing { display: none; }
+.lv-chat-msg.is-typing .lv-chat-typing { display: inline-flex; }
+.lv-chat-msg.is-shown .lv-chat-bubble { display: block; animation: lv-chat-pop var(--t-fast) var(--ease-out); }
+.lv-chat-bubble {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  border-top-left-radius: var(--radius-sm);
+  padding: 0.7rem 1rem;
+  max-width: 46ch;
+}
+.lv-chat-bubble p {
+  margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--ink-2);
+}
+.lv-chat-link {
+  display: block; margin-top: 0.45rem;
+  font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.5;
+  color: var(--accent); text-decoration: underline;
+  word-break: break-all;
+}
+.lv-chat-typing {
+  align-items: center; gap: 0.3rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  border-top-left-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+}
+.lv-chat-typing i {
+  width: 0.4rem; height: 0.4rem; border-radius: 50%;
+  background: var(--ink-3);
+  animation: lv-chat-dot 1s infinite var(--ease-in-out);
+}
+.lv-chat-typing i:nth-child(2) { animation-delay: 0.15s; }
+.lv-chat-typing i:nth-child(3) { animation-delay: 0.3s; }
+.lv-chat-reaction {
+  display: inline-flex; align-items: center;
+  margin-top: 0.1rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.78rem; font-family: var(--font-mono); color: var(--ink-2);
+  opacity: 0; transform: scale(0.6);
+  transition: opacity var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+.lv-chat-reaction.is-shown { opacity: 1; transform: scale(1); }
+.lv-post-chat figcaption {
+  margin-top: 0.75rem; font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+@keyframes lv-chat-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-0.2rem); opacity: 1; }
+}
+@keyframes lv-chat-pop {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lv-chat-group { opacity: 1; transform: none; transition: none; }
+  .lv-chat-typing i { animation: none; }
+  .lv-chat-msg.is-shown .lv-chat-bubble { animation: none; }
+  .lv-chat-reaction { transition: none; }
 }
 
 /* Callout */

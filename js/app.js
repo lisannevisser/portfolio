@@ -933,12 +933,80 @@
       const lang = b.lang ? `<span class="lang">${esc(b.lang)}</span>` : "";
       return `<pre class="lv-post-code lv-reveal">${lang}<code>${esc(b.code || "")}</code></pre>`;
     }
+    if (kind === "chat") {
+      const groups = (b.messages || []).map((m) => {
+        const bubbles = (m.bubbles || []).map((bb) => {
+          const link = bb.link ? `<span class="lv-chat-link">${esc(bb.link)}</span>` : "";
+          return `<div class="lv-chat-msg" data-chat-step>
+            <span class="lv-chat-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="lv-chat-bubble"><p>${esc(bb.text || "")}</p>${link}</div>
+          </div>`;
+        }).join("");
+        const reaction = m.reaction
+          ? `<span class="lv-chat-reaction" data-chat-reaction>${esc(m.reaction)}</span>` : "";
+        return `<div class="lv-chat-group">
+          <div class="lv-chat-avatar" aria-hidden="true">${esc(m.initial || (m.author || "?").charAt(0))}</div>
+          <div class="lv-chat-rows">
+            <div class="lv-chat-meta"><strong>${esc(m.author || "")}</strong><span class="time">${esc(m.time || "")}</span></div>
+            ${bubbles}${reaction}
+          </div>
+        </div>`;
+      }).join("");
+      const caption = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : "";
+      return `<figure class="lv-post-chat lv-reveal" data-chat>
+        <div class="lv-chat-window" role="log" aria-label="${esc(b.aria || "Chat conversation")}">${groups}</div>
+        ${caption}
+      </figure>`;
+    }
     // Unknown block: render as paragraph fallback.
     return `<p class="lv-post-p lv-reveal">${inlineMarks(b.text || "")}</p>`;
   }
 
   function renderPostBody(blocks) {
     return (blocks || []).map(renderPostBlock).join("\n");
+  }
+
+  // Chat blocks replay like a live conversation: each message shows a short
+  // typing indicator, then pops in; reactions land last. Runs once per render,
+  // when the block scrolls into view. Reduced motion shows everything at once.
+  function initPostChats(root) {
+    if (!root) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $$("[data-chat]", root).forEach((chat) => {
+      const steps = $$("[data-chat-step]", chat);
+      const reactions = $$("[data-chat-reaction]", chat);
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        steps.forEach((s) => s.classList.add("is-shown"));
+        reactions.forEach((r) => r.classList.add("is-shown"));
+        return;
+      }
+      const play = () => {
+        let t = 200;
+        steps.forEach((s) => {
+          setTimeout(() => {
+            s.closest(".lv-chat-group").classList.add("is-active");
+            s.classList.add("is-typing");
+          }, t);
+          t += 850;
+          setTimeout(() => {
+            s.classList.remove("is-typing");
+            s.classList.add("is-shown");
+          }, t);
+          t += 350;
+        });
+        setTimeout(() => {
+          reactions.forEach((r) => r.classList.add("is-shown"));
+        }, t + 400);
+      };
+      const io = new IntersectionObserver((records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          io.disconnect();
+          play();
+        });
+      }, { threshold: 0.35 });
+      io.observe(chat);
+    });
   }
 
   function renderV1Post(p) {
@@ -980,6 +1048,7 @@
         </a>` : ""}
     `;
     renderScribbles();
+    initPostChats(root);
   }
 
   function renderV3Post(p) {
@@ -1022,6 +1091,7 @@
           </div>
         </a>` : ""}
     `;
+    initPostChats(root);
   }
 
   // ========================================================================

@@ -280,6 +280,58 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "better-designer-with-ai",
+      title: "I'm a better designer with AI",
+      date: "2026-06-11",
+      dateLabel: "June 2026",
+      readingTime: "6 min",
+      tags: ["AI", "Craft"],
+      excerpt: "I don't start a design task without an AI anymore, and I've stopped being ashamed of it. Speed is the boring part. What AI actually does is multiply the experience you bring to it.",
+      body: [
+        { kind: "lead", text: "A confession to start with: I no longer begin a design task without handing the briefing to an AI first. For a while I was quietly embarrassed about that, as if needing a second brain meant the first one wasn't enough. I've stopped being embarrassed. The conclusion I've landed on is bigger than a workflow tweak: I'm a better designer with AI. Not faster at the same job. Better at the job. Here is what I mean, concretely." },
+
+        { kind: "h2", text: "Faster is the boring part" },
+        { kind: "paragraph", text: "Speed is real and it matters, especially in experimentation where the speed of learning is the metric. Conversion tests went from two weeks to two days, audits from a week of screenshots to a day. But faster on its own just means the same work sooner." },
+        { kind: "paragraph", text: "The claim I actually want to make is about multiplication: **AI takes the experience you bring to it and multiplies it.** Which also means it needs the experience. You have to know how UX works, what to look for and what to ignore, before the multiplication has anything to work with." },
+
+        { kind: "h2", text: "More judgment reps per week" },
+        { kind: "paragraph", text: "Design quality tracks the number of decisions you make consciously, not the number of hours you spend producing. When I run a [UX audit with AI](#/blog/ux-audits-with-ai), it surfaces far more findings than I would alone, and I cut a good part of them before anything reaches the client. Every cut is a small judgment call: Does this heuristic actually apply here? Is that placement actually a problem? Would a real user actually stumble? I used to spend that time taking screenshots and aligning red boxes on slides. Screenshots don't build judgment. The calls do, and I make many more of them per week now." },
+        { kind: "paragraph", text: "The same shift happened in [our conversion-test workflow](#/work/ai-workflow). When conversion managers visualize their own ideas in Figma Make, my role in each test is no longer production, it's review: which variant holds up, what breaks the design system, what ships at 80% and what needs the full pass. More tests through the pipeline means more of those decisions land on my desk. That's the part of the job that compounds." },
+
+        { kind: "h2", text: "An extension of my own head" },
+        { kind: "paragraph", text: "Brainstorming with AI is a routine part of my work now, and it's the part I used to feel I had to hide. The realization that ended that: using it doesn't mean I can't do it alone. I'd say I'm already decent at looking at a product holistically. Conversion, user-friendliness, enjoyment, dark patterns, growth: those are dimensions I cover by reflex. What AI gives me is an extension of that. The cost of one more perspective is a sentence in a prompt, so the space of perspectives I actually work through has grown, not shrunk." },
+        { kind: "paragraph", text: "The same applies to design directions. Instead of committing early to the first idea that survives my own sketching, I see five directions worked out and pick with evidence in front of me. Wider search, then a deliberate narrowing. That order used to be a luxury. Now it's the default." },
+
+        { kind: "h2", text: "Messy prompts, sharp output" },
+        { kind: "paragraph", text: "I'd love to tell you AI forced me to write razor-sharp briefs. The truth is that my prompts are often basic. Most of the time I don't even type them: I use voice input, because natural speech carries far more context than a typed prompt and it reflects how I actually think. The valuable part happens after. In its answers and in the back-and-forth, the AI sharpens what I was trying to say." },
+        { kind: "paragraph", text: "That's why my writing around the work got better, not just faster. A PR description or a decision summary that comes out of that conversation is more complete and more precise than what I'd produce summarizing myself. Bringing things to the point is what the machine is good at. Supplying the raw thinking is my part." },
+
+        { kind: "h2", text: "Documentation stopped competing with design time" },
+        { kind: "paragraph", text: "Clean design files, briefings, business-readiness sheets, documented decisions: I've always treated these as part of the job, and they've always competed with the design work itself for hours. Now documenting is cheap. When I change an existing design, Claude with the Figma MCP compares the original and the new version and writes the changelog, so PMs, developers, and other designers see what changed without me reconstructing it from memory. On new projects I capture the rationale the same way: what I considered, what I rejected, and why." },
+        { kind: "figure", hue: 150, label: "Image placeholder", caption: "Fig. 1 - a PM asking to make the documented changelog our new standard, the annotated Figma file in the background." },
+
+        { kind: "h2", text: "Design QA that ends in a pull request" },
+        { kind: "paragraph", text: "Design QA used to end in a file full of screenshots and hand-written comments. Now I respond directly on the pull request or in the QA environment. The AI summarizes my findings, runs the root-cause analysis, and turns the feedback into to-dos a developer can pick up, mostly with the solution already attached. When it makes sense, I go one step further and let it fix the issues and open the pull request itself. The finding and the fix arrive together, and nobody translates between a design file and a ticket anymore." },
+        { kind: "chat", caption: "Fig. 2 - the first time I ran this with a developer: QA feedback delivered straight on the pull request.", aria: "Chat between Lisanne and an anonymized developer about design QA feedback left directly on a pull request", messages: [
+          { author: "Lisanne", initial: "L", time: "10:37", reaction: "🙌 1", bubbles: [
+            { text: "I just finished my feedback, I left a comment in your Github PR 🙂 I hope it's what you wanted. I'm happy to continue working on the new product page together ❤️" }
+          ]},
+          { author: "Developer", initial: "A", time: "11:10", bubbles: [
+            { text: "Org 👀 In my PR directly omg I love this" },
+            { text: "I just read a bit, it's the kind of feedback I needed" },
+            { text: "Btw I'm a bit curious, how did you do the analysis? If it's something I can add into my workflow, that would be cool!" }
+          ]}
+        ]},
+
+        { kind: "h2", text: "What it doesn't do" },
+        { kind: "paragraph", text: "The mistake is to conclude that the AI is the designer now. It needs to be told which heuristics apply, what the page is trying to achieve, where the user is coming from in the flow: exactly the information that's missing in a company without a UX person, and whose absence you can see in the product. Hand the same task to a non-designer or to an unbriefed AI and you get a similar result, except the AI's version is design slop that people don't recognize as slop yet, because it's new. The difference is the designer who knows what's relevant and catches where the AI runs down the wrong path." },
+
+        { kind: "h2", text: "Better, defined" },
+        { kind: "paragraph", text: "I'll admit to a skeptical phase. For a stretch it felt like all I did was prompt, and I want to be a designer and a researcher, not a dispatcher. What got me past it is that the shared work is genuinely fun. When I change a design system component, I know where I want to end up, and I could still build it manually. But handing parts to the agent in Figma, and doing QA or opening a pull request while it works, is a mode of working I wouldn't give back." },
+        { kind: "paragraph", text: "So, better, defined: I make more conscious design decisions per week than I did a year ago. I explore wider before I commit. My documentation and my QA feedback are more complete than anything I'd write alone. And I no longer start a task without the second brain, without shame. AI doesn't level the field between designers and non-designers. It multiplies what you bring to it, and what I bring is the experience." }
+      ]
+    },
+    {
       slug: "ux-audits-with-ai",
       title: "How I run UX audits with AI",
       date: "2026-06-10",
