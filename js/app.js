@@ -821,34 +821,57 @@
     if (v1List && posts.length) {
       // Newest post runs as the front-page aufmacher; the rest fill the index.
       const lead = posts[0];
-      const rest = posts.slice(1);
       const leadParas = gazetteLeadParagraphs(lead, 2);
 
+      // Inject the current month (without the year) into the masthead dateline
+      const datelineTags = $("#lv-gz-dateline-tags");
+      if (datelineTags) datelineTags.textContent = lead.dateLabel.replace(/\s*\d{4}$/, "");
+
       const featured = `
-        <a href="#/blog/${esc(lead.slug)}" class="lv-gz-lead lv-reveal" data-cursor-label="Read">
-          <div class="lv-gz-kicker">${lead.tags.map(esc).join(" · ")}</div>
+        <a href="#/blog/${esc(lead.slug)}" class="lv-gz-lead lv-reveal">
           <h2 class="lv-gz-lead-head">${esc(lead.title)}</h2>
           <p class="lv-gz-deck">${esc(lead.excerpt)}</p>
-          <div class="lv-gz-byline">By Lisanne Visser · ${esc(lead.dateLabel)} · ${esc(lead.readingTime)} read</div>
+          <div class="lv-gz-byline">${esc(lead.dateLabel)} · ${esc(lead.readingTime)} read · ${lead.tags.map(esc).join(" · ")}</div>
           <div class="lv-gz-lead-cols">
             ${leadParas.map((t) => `<p>${inlineMarks(t)}</p>`).join("")}
             <p class="lv-gz-continue">Continue reading →</p>
           </div>
         </a>`;
 
-      const index = rest.length ? `
-        <div class="lv-gz-section-rule lv-reveal"><span>Also in this edition</span></div>
-        <div class="lv-gz-index">
-          ${rest.map((p) => `
-            <a href="#/blog/${esc(p.slug)}" class="lv-gz-entry lv-reveal" data-cursor-label="Read">
+      // Split remaining posts by year
+      const currentYear = lead.date.slice(0, 4);
+      const sameYear = posts.slice(1).filter(p => p.date.startsWith(currentYear));
+      const olderPosts = posts.slice(1).filter(p => !p.date.startsWith(currentYear));
+
+      function renderEntryGrid(items) {
+        const isOdd = items.length % 2 !== 0;
+        return `<div class="lv-gz-index">
+          ${items.map((p, i) => `
+            <a href="#/blog/${esc(p.slug)}" class="lv-gz-entry lv-reveal${isOdd && i === items.length - 1 ? " lv-gz-entry--full" : ""}">
               <div class="kicker">${p.tags.map(esc).join(" · ")}</div>
               <h3 class="hl">${esc(p.title)}</h3>
               <p class="exc">${esc(p.excerpt)}</p>
               <div class="meta">${esc(p.dateLabel)} · ${esc(p.readingTime)}</div>
             </a>`).join("")}
-        </div>` : "";
+        </div>`;
+      }
 
-      v1List.innerHTML = featured + index;
+      const sameYearSection = sameYear.length ? `
+        <div class="lv-gz-section-heading lv-reveal"><span>More in this edition</span></div>
+        ${renderEntryGrid(sameYear)}` : "";
+
+      // Group older posts by year
+      const olderByYear = {};
+      olderPosts.forEach(p => {
+        const yr = p.date.slice(0, 4);
+        if (!olderByYear[yr]) olderByYear[yr] = [];
+        olderByYear[yr].push(p);
+      });
+      const olderSections = Object.keys(olderByYear).sort((a, b) => b - a).map(yr => `
+        <div class="lv-gz-section-heading lv-gz-section-heading--archive lv-reveal"><span>${yr} Edition</span></div>
+        ${renderEntryGrid(olderByYear[yr])}`).join("");
+
+      v1List.innerHTML = featured + sameYearSection + olderSections;
     }
 
     const v3List = $("#v3-blog-list");
@@ -1028,23 +1051,24 @@
           <div class="flag">The Design Gazette</div>
         </div>
         <div class="lv-gz-dateline lv-gz-dateline--article lv-reveal">
-          <span>${esc(p.tags[0] || "Essay")}</span>
-          <span>${esc(p.dateLabel)}</span>
-          <span>${esc(p.readingTime)} read</span>
+          <span>Berlin</span>
+          <span>${esc(p.date.slice(0, 4))} Edition</span>
+          <span>${esc(p.dateLabel.replace(/\s*\d{4}$/, ""))}</span>
         </div>
         <h1 class="lv-gz-article-title lv-reveal">${esc(p.title)}</h1>
         ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal">${esc(p.excerpt)}</p>` : ""}
+        <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
       </header>
 
       <div class="lv-post-body">${bodyHtml}</div>
 
       ${next && next.slug !== p.slug ? `
-        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:6rem;text-decoration:none;color:inherit;padding-top:1rem;border-top:3px solid var(--ink);">
-          <div class="lv-gz-kicker" style="text-align:left;">Read next</div>
-          <h2 class="v1-case-title" style="margin-top:0.75rem;font-size:clamp(1.5rem,3vw,2.2rem);">${esc(next.title)}</h2>
-          <div style="margin-top:0.75rem;color:var(--ink-3);font-family:var(--font-mono);font-size:0.8rem;letter-spacing:0.1em;">
-            ${esc(next.dateLabel)} · ${esc(next.readingTime)} →
-          </div>
+        <div class="lv-gz-section-heading lv-reveal" style="margin-top:6rem;"><span>Read next</span></div>
+        <a href="#/blog/${esc(next.slug)}" class="lv-gz-entry lv-gz-entry--full lv-reveal" style="border-top:none;padding-top:0;">
+          <div class="kicker">${next.tags.map(esc).join(" · ")}</div>
+          <h3 class="hl">${esc(next.title)}</h3>
+          <p class="exc">${esc(next.excerpt)}</p>
+          <div class="meta">${esc(next.dateLabel)} · ${esc(next.readingTime)}</div>
         </a>` : ""}
     `;
     renderScribbles();
