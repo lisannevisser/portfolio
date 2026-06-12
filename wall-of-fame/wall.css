@@ -1,0 +1,484 @@
+/* Wall of Fame - Editorial Pinnwand
+   Flat, graphic pinboard: solid offset shadows, flat pins and tape,
+   Archivo Black masthead, Space Mono labels, Libre Caslon captions. */
+
+:root {
+  --ink: #161412;
+  --paper: #f2efe6;
+  --board: #c9a263;
+  --red: #e0391e;
+  --stamp-red: #c52f17;
+  --yellow: #f5d646;
+  --slot-bg: #dcd7c8;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--ink);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.board {
+  position: relative;
+  min-height: calc(100vh - 40px);
+  box-sizing: border-box;
+  background: var(--board);
+  border: 2px solid var(--ink);
+  padding: 56px 40px 72px;
+}
+
+/* ── Pins & tape ─────────────────────────────────────────────── */
+
+.pin {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  z-index: 2;
+}
+
+.pin-red   { background: var(--red); }
+.pin-ink   { background: var(--ink); }
+.pin-paper { background: var(--paper); }
+
+.card-pin {
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tape {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%) rotate(var(--tr, 0deg));
+  width: 92px;
+  height: 26px;
+  border: 2px solid var(--ink);
+  z-index: 2;
+}
+
+.tape-red    { background: rgba(224, 57, 30, .85); }
+.tape-ink    { background: rgba(22, 20, 18, .88); }
+.tape-yellow { background: rgba(245, 214, 70, .9); }
+
+/* ── Masthead ────────────────────────────────────────────────── */
+
+.masthead {
+  position: relative;
+  width: min(900px, 94%);
+  margin: 0 auto 64px;
+  box-sizing: border-box;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 26px 36px 30px;
+  text-align: center;
+  transform: rotate(-0.6deg);
+}
+
+.masthead-pin-left  { width: 22px; height: 22px; top: -11px; left: 34px; }
+.masthead-pin-right { width: 22px; height: 22px; top: -11px; right: 34px; }
+
+.masthead-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
+
+.masthead-title {
+  margin: 20px 0 0;
+  font-family: Archivo, sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6.5vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.fame {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.fame .strike {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  top: 38%;
+  height: 0.13em;
+  background: var(--red);
+}
+
+.fame .shame {
+  position: absolute;
+  top: -0.55em;
+  left: 52%;
+  transform: translateX(-50%) rotate(-4deg);
+  font-family: 'Libre Caslon Text', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.38em;
+  text-transform: lowercase;
+  letter-spacing: 0;
+  color: var(--red);
+}
+
+.stamp {
+  position: absolute;
+  right: -18px;
+  bottom: -34px;
+  width: 110px;
+  height: 110px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 5px solid var(--stamp-red);
+  color: var(--stamp-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-14deg);
+  opacity: .97;
+  filter: url(#stampFx);
+}
+
+.stamp-inner {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2px solid var(--stamp-red);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.stamp-main {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.stamp-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Wall & cards ────────────────────────────────────────────── */
+
+.wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 52px 38px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1460px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  width: var(--w);
+  box-sizing: border-box;
+  margin-top: var(--mt, 0);
+  transform: rotate(var(--r, 0deg));
+  transition: transform .2s;
+}
+
+.card:hover {
+  transform: rotate(var(--rh, 0deg)) translateY(-6px);
+}
+
+.exhibit {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  padding: 14px 14px 16px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.card-no {
+  font-family: Archivo, sans-serif;
+  font-weight: 900;
+  font-size: 34px;
+  color: var(--ink);
+}
+
+.card-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 2px 8px;
+  color: var(--ink);
+}
+
+.card-caption {
+  font-family: 'Libre Caslon Text', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 12px 0 0;
+}
+
+.sticky {
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  padding: 18px 18px 22px;
+  font-family: 'Libre Caslon Text', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.rule {
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--red);
+  padding: 20px 18px 24px;
+}
+
+.rule-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.rule-text {
+  font-family: Archivo, sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+/* ── Footer callout ──────────────────────────────────────────── */
+
+.callout {
+  width: fit-content;
+  max-width: 90%;
+  margin: 70px auto 0;
+  box-sizing: border-box;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 12px 26px;
+  transform: rotate(-0.8deg);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+
+.callout-red { color: var(--red); }
+
+/* ── Photo slots ─────────────────────────────────────────────── */
+
+.wof-slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: var(--slot-bg);
+  overflow: hidden;
+}
+
+.wof-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.wof-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  font: 13px/1.3 'Space Mono', monospace;
+  color: rgba(22, 20, 18, .6);
+}
+
+.wof-empty svg { opacity: .45; }
+
+.wof-empty .wof-cap {
+  max-width: 90%;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.wof-empty .wof-sub { font-size: 10px; }
+
+.wof-empty .wof-sub u {
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(22, 20, 18, .3);
+}
+
+.wof-empty:hover .wof-sub u,
+.wof-empty:focus-visible .wof-sub u {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.wof-ring {
+  position: absolute;
+  inset: 5px;
+  pointer-events: none;
+  border: 1.5px dashed rgba(22, 20, 18, .35);
+  transition: border-color .12s;
+}
+
+.wof-slot.over {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  background: rgba(224, 57, 30, .1);
+}
+
+.wof-slot.over .wof-ring { border-color: var(--red); }
+
+.wof-slot.filled .wof-ring { display: none; }
+.wof-slot.filled .wof-empty { display: none; }
+.wof-slot:not(.filled) .wof-img { display: none; }
+
+.wof-ctl {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s;
+  z-index: 2;
+}
+
+.wof-slot.filled:hover .wof-ctl,
+.wof-slot.filled:focus-within .wof-ctl {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wof-ctl button {
+  appearance: none;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--ink);
+  font: 700 10px/1 'Space Mono', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.wof-ctl button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.wof-err {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  right: 8px;
+  color: var(--stamp-red);
+  font: 11px/1.3 'Space Mono', monospace;
+  background: rgba(242, 239, 230, .92);
+  border: 1px solid var(--stamp-red);
+  padding: 4px 6px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Small screens ───────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  body { padding: 12px; }
+
+  .board {
+    min-height: calc(100vh - 24px);
+    padding: 44px 16px 56px;
+  }
+
+  .masthead {
+    width: 100%;
+    margin-bottom: 56px;
+    padding: 20px 18px 26px;
+  }
+
+  .masthead-meta {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .stamp {
+    right: -10px;
+    bottom: -30px;
+    width: 92px;
+    height: 92px;
+  }
+
+  .stamp-inner {
+    width: 72px;
+    height: 72px;
+  }
+
+  .stamp-main { font-size: 11.5px; }
+  .stamp-sub  { font-size: 6.5px; }
+
+  .wall { gap: 44px 28px; }
+
+  .card { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover { transform: rotate(var(--r, 0deg)); }
+}
