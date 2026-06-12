@@ -27,11 +27,15 @@
   </script>
 
   <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <!-- Wall of Fame route fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
   <link rel="stylesheet" href="css/shared.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/v1.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/v3.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
+  <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-4" />
 </head>
 <body>
 
@@ -830,6 +834,120 @@
       </div>
     </section>
 
+    <!-- ========================================================= -->
+    <!-- ROUTE: WALL OF FAME                                         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="wall-of-fame" hidden>
+      <div class="wof-stage">
+
+        <!-- Stamp ink filter (referenced by the Design Crime stamp) -->
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <filter id="stampFx" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.05 0.07" numOctaves="2" seed="8" result="wobble" />
+              <feDisplacementMap in="SourceGraphic" in2="wobble" scale="2" result="disp" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="3" result="grain" />
+              <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -0.08" result="grainA" />
+              <feComposite in="disp" in2="grainA" operator="in" />
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="wof-board">
+
+          <!-- Pinned masthead strip -->
+          <header class="wof-masthead">
+            <span class="wof-pin wof-pin-red wof-masthead-pin-left" aria-hidden="true"></span>
+            <span class="wof-pin wof-pin-ink wof-masthead-pin-right" aria-hidden="true"></span>
+            <div class="wof-masthead-meta"><span>Dept. of Design Crimes</span><span>Case No. 404</span></div>
+            <h1 class="wof-masthead-title">
+              The Wall of
+              <span class="wof-fame">Fame<span class="wof-strike" aria-hidden="true"></span><span class="wof-shame" aria-hidden="true">shame</span></span>
+            </h1>
+            <div class="wof-stamp" aria-hidden="true">
+              <div class="wof-stamp-inner">
+                <div class="wof-stamp-main">Design<br>Crime</div>
+                <div class="wof-stamp-sub">&#10033; Verified &#10033;</div>
+              </div>
+            </div>
+          </header>
+
+          <!-- Pinned exhibits -->
+          <div class="wof-wall">
+
+            <article class="wof-card wof-exhibit" style="--w:270px; --r:-2.5deg">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">01</span><span class="wof-card-tag">Exhibit A</span></div>
+              <div class="wof-slot" style="height:230px" data-slot="exhibit-a" data-placeholder="Drop your worst offender here"></div>
+              <p class="wof-caption">Push&hellip; pull&hellip; cry.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:252px; --r:2deg; --mt:30px">
+              <span class="wof-tape wof-tape-red" style="--tr:-4deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">02</span><span class="wof-card-tag">Exhibit B</span></div>
+              <div class="wof-slot" style="height:252px" data-slot="exhibit-b" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The elevator panel of doom.</p>
+            </article>
+
+            <aside class="wof-card wof-sticky" style="--w:210px; --r:-3.5deg; --rh:-1deg; --mt:70px">
+              A lovingly curated collection of catastrophic user experiences.
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:282px; --r:-1.4deg">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">03</span><span class="wof-card-tag">Exhibit C</span></div>
+              <div class="wof-slot" style="height:198px" data-slot="exhibit-c" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Are you sure you're sure you're sure?</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:246px; --r:3deg; --mt:44px">
+              <span class="wof-pin wof-pin-paper wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">04</span><span class="wof-card-tag">Exhibit D</span></div>
+              <div class="wof-slot" style="height:238px" data-slot="exhibit-d" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Shower controls - PhD required.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:264px; --r:-2.2deg; --mt:12px">
+              <span class="wof-tape wof-tape-ink" style="--tr:3deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">05</span><span class="wof-card-tag">Exhibit E</span></div>
+              <div class="wof-slot" style="height:216px" data-slot="exhibit-e" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">On? Off? Nobody knows.</p>
+            </article>
+
+            <aside class="wof-card wof-rule" style="--w:218px; --r:2.8deg; --rh:1deg; --mt:86px">
+              <div class="wof-rule-label">Rule No. 1</div>
+              <div class="wof-rule-text">If it needs a sign taped to it, it's bad design.</div>
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:258px; --r:1.6deg; --mt:36px">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">06</span><span class="wof-card-tag">Exhibit F</span></div>
+              <div class="wof-slot" style="height:246px" data-slot="exhibit-f" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The form that resets when you blink.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:276px; --r:-3deg; --mt:8px">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">07</span><span class="wof-card-tag">Exhibit G</span></div>
+              <div class="wof-slot" style="height:202px" data-slot="exhibit-g" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Hotel light switch bingo.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:250px; --r:2.4deg; --mt:52px">
+              <span class="wof-tape wof-tape-yellow" style="--tr:-3deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">08</span><span class="wof-card-tag">Exhibit H</span></div>
+              <div class="wof-slot" style="height:230px" data-slot="exhibit-h" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Ticket machine: 14 steps to despair.</p>
+            </article>
+
+          </div>
+
+          <div class="wof-callout">Got a nominee? <span class="wof-callout-red">Drag your photo onto any empty frame.</span></div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -871,6 +989,7 @@
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
+          <li><a href="#/wall-of-fame">Wall of Fame</a></li>
           <li hidden><a href="#/playground">Playground</a></li>
         </ul>
       </div>
@@ -929,5 +1048,6 @@
   <script src="js/data.js?v=2026-06-12-3"></script>
   <script src="js/app.js?v=2026-06-12-3"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
+  <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
 </html>
