@@ -1,6 +1,10 @@
-// Photo slots for the Wall of Fame pinboard.
-// Drag a photo onto a frame (or click to browse); the image is downscaled
-// through a canvas and persisted in localStorage so the wall survives reload.
+/* =========================================================================
+   Wall of Fame — photo slots for the pinboard route (#/wall-of-fame).
+   Drag a photo onto a frame (or click to browse); the image is downscaled
+   through a canvas and persisted in localStorage so the wall survives
+   reload. Slots are initialized once at load; the route section being
+   hidden at that point is fine, drops only happen while it is visible.
+   ========================================================================= */
 
 (function () {
   'use strict';
@@ -192,7 +196,7 @@
 
   document.querySelectorAll('.wof-slot').forEach(initSlot);
 
-  // Dropping a file outside a slot would navigate away from the wall.
+  // Dropping a file outside a slot would navigate away from the site.
   document.addEventListener('dragover', function (e) { e.preventDefault(); });
   document.addEventListener('drop', function (e) { e.preventDefault(); });
 })();

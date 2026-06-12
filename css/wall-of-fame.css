@@ -1,102 +1,98 @@
-/* Wall of Fame - Editorial Pinnwand
+/* =========================================================================
+   Wall of Fame — editorial pinboard route (#/wall-of-fame).
    Flat, graphic pinboard: solid offset shadows, flat pins and tape,
-   Archivo Black masthead, Space Mono labels, Libre Caslon captions. */
+   Archivo Black masthead, Space Mono labels, Libre Caslon captions.
+   All classes are wof- prefixed and variables live on .wof-stage so the
+   board's palette stays independent from the site theme.
+   ========================================================================= */
 
-:root {
-  --ink: #161412;
-  --paper: #f2efe6;
-  --board: #c9a263;
-  --red: #e0391e;
-  --stamp-red: #c52f17;
-  --yellow: #f5d646;
-  --slot-bg: #dcd7c8;
-}
+.wof-stage {
+  --wof-ink: #161412;
+  --wof-paper: #f2efe6;
+  --wof-board: #c9a263;
+  --wof-red: #e0391e;
+  --wof-stamp-red: #c52f17;
+  --wof-yellow: #f5d646;
+  --wof-slot-bg: #dcd7c8;
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background: var(--ink);
+  background: var(--wof-ink);
   padding: 20px;
   box-sizing: border-box;
 }
 
-.board {
+.wof-board {
   position: relative;
-  min-height: calc(100vh - 40px);
   box-sizing: border-box;
-  background: var(--board);
-  border: 2px solid var(--ink);
+  background: var(--wof-board);
+  border: 2px solid var(--wof-ink);
   padding: 56px 40px 72px;
 }
 
 /* ── Pins & tape ─────────────────────────────────────────────── */
 
-.pin {
+.wof-pin {
   position: absolute;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--wof-ink);
   z-index: 2;
 }
 
-.pin-red   { background: var(--red); }
-.pin-ink   { background: var(--ink); }
-.pin-paper { background: var(--paper); }
+.wof-pin-red   { background: var(--wof-red); }
+.wof-pin-ink   { background: var(--wof-ink); }
+.wof-pin-paper { background: var(--wof-paper); }
 
-.card-pin {
+.wof-card-pin {
   top: -11px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.tape {
+.wof-tape {
   position: absolute;
   top: -13px;
   left: 50%;
   transform: translateX(-50%) rotate(var(--tr, 0deg));
   width: 92px;
   height: 26px;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--wof-ink);
   z-index: 2;
 }
 
-.tape-red    { background: rgba(224, 57, 30, .85); }
-.tape-ink    { background: rgba(22, 20, 18, .88); }
-.tape-yellow { background: rgba(245, 214, 70, .9); }
+.wof-tape-red    { background: rgba(224, 57, 30, .85); }
+.wof-tape-ink    { background: rgba(22, 20, 18, .88); }
+.wof-tape-yellow { background: rgba(245, 214, 70, .9); }
 
 /* ── Masthead ────────────────────────────────────────────────── */
 
-.masthead {
+.wof-masthead {
   position: relative;
   width: min(900px, 94%);
   margin: 0 auto 64px;
   box-sizing: border-box;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  box-shadow: 8px 8px 0 var(--ink);
+  background: var(--wof-paper);
+  border: 2px solid var(--wof-ink);
+  box-shadow: 8px 8px 0 var(--wof-ink);
   padding: 26px 36px 30px;
   text-align: center;
   transform: rotate(-0.6deg);
 }
 
-.masthead-pin-left  { width: 22px; height: 22px; top: -11px; left: 34px; }
-.masthead-pin-right { width: 22px; height: 22px; top: -11px; right: 34px; }
+.wof-masthead-pin-left  { width: 22px; height: 22px; top: -11px; left: 34px; }
+.wof-masthead-pin-right { width: 22px; height: 22px; top: -11px; right: 34px; }
 
-.masthead-meta {
+.wof-masthead-meta {
   font-family: 'Space Mono', monospace;
   font-size: 13px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--wof-ink);
   display: flex;
   justify-content: space-between;
 }
 
-.masthead-title {
+.wof-masthead-title {
   margin: 20px 0 0;
   font-family: Archivo, sans-serif;
   font-weight: 900;
@@ -104,25 +100,25 @@ body {
   line-height: 0.95;
   letter-spacing: -1px;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--wof-ink);
 }
 
-.fame {
+.wof-fame {
   position: relative;
   display: inline-block;
   white-space: nowrap;
 }
 
-.fame .strike {
+.wof-fame .wof-strike {
   position: absolute;
   left: -2%;
   right: -2%;
   top: 38%;
   height: 0.13em;
-  background: var(--red);
+  background: var(--wof-red);
 }
 
-.fame .shame {
+.wof-fame .wof-shame {
   position: absolute;
   top: -0.55em;
   left: 52%;
@@ -133,10 +129,10 @@ body {
   font-size: 0.38em;
   text-transform: lowercase;
   letter-spacing: 0;
-  color: var(--red);
+  color: var(--wof-red);
 }
 
-.stamp {
+.wof-stamp {
   position: absolute;
   right: -18px;
   bottom: -34px;
@@ -144,8 +140,8 @@ body {
   height: 110px;
   box-sizing: border-box;
   border-radius: 50%;
-  border: 5px solid var(--stamp-red);
-  color: var(--stamp-red);
+  border: 5px solid var(--wof-stamp-red);
+  color: var(--wof-stamp-red);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,11 +150,11 @@ body {
   filter: url(#stampFx);
 }
 
-.stamp-inner {
+.wof-stamp-inner {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  border: 2px solid var(--stamp-red);
+  border: 2px solid var(--wof-stamp-red);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,7 +163,7 @@ body {
   gap: 2px;
 }
 
-.stamp-main {
+.wof-stamp-main {
   font-family: 'Space Mono', monospace;
   font-weight: 700;
   font-size: 14px;
@@ -176,7 +172,7 @@ body {
   text-transform: uppercase;
 }
 
-.stamp-sub {
+.wof-stamp-sub {
   font-family: 'Space Mono', monospace;
   font-size: 7.5px;
   letter-spacing: 1.5px;
@@ -185,7 +181,7 @@ body {
 
 /* ── Wall & cards ────────────────────────────────────────────── */
 
-.wall {
+.wof-wall {
   display: flex;
   flex-wrap: wrap;
   gap: 52px 38px;
@@ -195,7 +191,7 @@ body {
   margin: 0 auto;
 }
 
-.card {
+.wof-card {
   position: relative;
   width: var(--w);
   box-sizing: border-box;
@@ -204,108 +200,109 @@ body {
   transition: transform .2s;
 }
 
-.card:hover {
+.wof-card:hover {
   transform: rotate(var(--rh, 0deg)) translateY(-6px);
 }
 
-.exhibit {
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  box-shadow: 7px 7px 0 var(--ink);
+.wof-exhibit {
+  background: var(--wof-paper);
+  border: 2px solid var(--wof-ink);
+  box-shadow: 7px 7px 0 var(--wof-ink);
   padding: 14px 14px 16px;
 }
 
-.card-head {
+.wof-card-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 10px;
 }
 
-.card-no {
+.wof-card-no {
   font-family: Archivo, sans-serif;
   font-weight: 900;
   font-size: 34px;
-  color: var(--ink);
+  line-height: 1.1;
+  color: var(--wof-ink);
 }
 
-.card-tag {
+.wof-card-tag {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--wof-ink);
   padding: 2px 8px;
-  color: var(--ink);
+  color: var(--wof-ink);
 }
 
-.card-caption {
+.wof-caption {
   font-family: 'Libre Caslon Text', serif;
   font-style: italic;
   font-size: 20px;
   line-height: 1.3;
-  color: var(--ink);
+  color: var(--wof-ink);
   margin: 12px 0 0;
 }
 
-.sticky {
-  background: var(--yellow);
-  border: 2px solid var(--ink);
-  box-shadow: 7px 7px 0 var(--ink);
+.wof-sticky {
+  background: var(--wof-yellow);
+  border: 2px solid var(--wof-ink);
+  box-shadow: 7px 7px 0 var(--wof-ink);
   padding: 18px 18px 22px;
   font-family: 'Libre Caslon Text', serif;
   font-style: italic;
   font-size: 20px;
   line-height: 1.35;
-  color: var(--ink);
+  color: var(--wof-ink);
 }
 
-.rule {
-  background: var(--ink);
-  border: 2px solid var(--ink);
-  box-shadow: 7px 7px 0 var(--red);
+.wof-rule {
+  background: var(--wof-ink);
+  border: 2px solid var(--wof-ink);
+  box-shadow: 7px 7px 0 var(--wof-red);
   padding: 20px 18px 24px;
 }
 
-.rule-label {
+.wof-rule-label {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--wof-red);
   margin-bottom: 12px;
 }
 
-.rule-text {
+.wof-rule-text {
   font-family: Archivo, sans-serif;
   font-weight: 900;
   font-size: 22px;
   line-height: 1.15;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--wof-paper);
 }
 
 /* ── Footer callout ──────────────────────────────────────────── */
 
-.callout {
+.wof-callout {
   width: fit-content;
   max-width: 90%;
   margin: 70px auto 0;
   box-sizing: border-box;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--wof-paper);
+  border: 2px solid var(--wof-ink);
+  box-shadow: 6px 6px 0 var(--wof-ink);
   padding: 12px 26px;
   transform: rotate(-0.8deg);
   font-family: 'Space Mono', monospace;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--wof-ink);
   text-align: center;
 }
 
-.callout-red { color: var(--red); }
+.wof-callout-red { color: var(--wof-red); }
 
 /* ── Photo slots ─────────────────────────────────────────────── */
 
@@ -313,7 +310,7 @@ body {
   position: relative;
   display: block;
   width: 100%;
-  background: var(--slot-bg);
+  background: var(--wof-slot-bg);
   overflow: hidden;
 }
 
@@ -363,7 +360,7 @@ body {
 
 .wof-empty:hover .wof-sub u,
 .wof-empty:focus-visible .wof-sub u {
-  color: var(--ink);
+  color: var(--wof-ink);
   text-decoration-color: currentColor;
 }
 
@@ -376,12 +373,12 @@ body {
 }
 
 .wof-slot.over {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--wof-red);
   outline-offset: -2px;
   background: rgba(224, 57, 30, .1);
 }
 
-.wof-slot.over .wof-ring { border-color: var(--red); }
+.wof-slot.over .wof-ring { border-color: var(--wof-red); }
 
 .wof-slot.filled .wof-ring { display: none; }
 .wof-slot.filled .wof-empty { display: none; }
@@ -407,20 +404,20 @@ body {
 
 .wof-ctl button {
   appearance: none;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--wof-ink);
   border-radius: 0;
   padding: 5px 10px;
   cursor: pointer;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--wof-paper);
+  color: var(--wof-ink);
   font: 700 10px/1 'Space Mono', monospace;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .wof-ctl button:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--wof-ink);
+  color: var(--wof-paper);
 }
 
 .wof-err {
@@ -428,10 +425,10 @@ body {
   left: 8px;
   bottom: 8px;
   right: 8px;
-  color: var(--stamp-red);
+  color: var(--wof-stamp-red);
   font: 11px/1.3 'Space Mono', monospace;
   background: rgba(242, 239, 230, .92);
-  border: 1px solid var(--stamp-red);
+  border: 1px solid var(--wof-stamp-red);
   padding: 4px 6px;
   pointer-events: none;
   z-index: 3;
@@ -440,45 +437,44 @@ body {
 /* ── Small screens ───────────────────────────────────────────── */
 
 @media (max-width: 640px) {
-  body { padding: 12px; }
+  .wof-stage { padding: 12px; }
 
-  .board {
-    min-height: calc(100vh - 24px);
+  .wof-board {
     padding: 44px 16px 56px;
   }
 
-  .masthead {
+  .wof-masthead {
     width: 100%;
     margin-bottom: 56px;
     padding: 20px 18px 26px;
   }
 
-  .masthead-meta {
+  .wof-masthead-meta {
     font-size: 10px;
     letter-spacing: 2px;
   }
 
-  .stamp {
+  .wof-stamp {
     right: -10px;
     bottom: -30px;
     width: 92px;
     height: 92px;
   }
 
-  .stamp-inner {
+  .wof-stamp-inner {
     width: 72px;
     height: 72px;
   }
 
-  .stamp-main { font-size: 11.5px; }
-  .stamp-sub  { font-size: 6.5px; }
+  .wof-stamp-main { font-size: 11.5px; }
+  .wof-stamp-sub  { font-size: 6.5px; }
 
-  .wall { gap: 44px 28px; }
+  .wof-wall { gap: 44px 28px; }
 
-  .card { margin-top: 0; }
+  .wof-card { margin-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card { transition: none; }
-  .card:hover { transform: rotate(var(--r, 0deg)); }
+  .wof-card { transition: none; }
+  .wof-card:hover { transform: rotate(var(--r, 0deg)); }
 }
