@@ -282,28 +282,6 @@
   color: var(--wof-paper);
 }
 
-/* ── Footer callout ──────────────────────────────────────────── */
-
-.wof-callout {
-  width: fit-content;
-  max-width: 90%;
-  margin: 70px auto 0;
-  box-sizing: border-box;
-  background: var(--wof-paper);
-  border: 2px solid var(--wof-ink);
-  box-shadow: 6px 6px 0 var(--wof-ink);
-  padding: 12px 26px;
-  transform: rotate(-0.8deg);
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--wof-ink);
-  text-align: center;
-}
-
-.wof-callout-red { color: var(--wof-red); }
-
 /* ── Photo slots ─────────────────────────────────────────────── */
 
 .wof-slot {
