@@ -6,6 +6,29 @@
    board's palette stays independent from the site theme.
    ========================================================================= */
 
+/* Intro head: site typography, so the page opens like the rest of the
+   portfolio before handing over to the board's own visual language. */
+
+.wof-intro {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.wof-intro .lv-lead {
+  max-width: 52ch;
+  margin: 1rem 0 0;
+}
+
+.wof-hand {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--ink-3);
+  margin: 0.75rem 0 0;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+  width: fit-content;
+}
+
 .wof-stage {
   --wof-ink: #161412;
   --wof-paper: #f2efe6;
@@ -15,9 +38,8 @@
   --wof-yellow: #f5d646;
   --wof-slot-bg: #dcd7c8;
 
-  background: var(--wof-ink);
-  padding: 20px;
-  box-sizing: border-box;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 6rem;
 }
 
 .wof-board {
@@ -25,6 +47,7 @@
   box-sizing: border-box;
   background: var(--wof-board);
   border: 2px solid var(--wof-ink);
+  box-shadow: 14px 14px 0 var(--wof-ink);
   padding: 56px 40px 72px;
 }
 
@@ -437,10 +460,11 @@
 /* ── Small screens ───────────────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .wof-stage { padding: 12px; }
+  .wof-stage { padding-bottom: 4rem; }
 
   .wof-board {
-    padding: 44px 16px 56px;
+    box-shadow: 8px 8px 0 var(--wof-ink);
+    padding: 44px 14px 56px;
   }
 
   .wof-masthead {
