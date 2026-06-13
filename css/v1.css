@@ -1009,22 +1009,22 @@
    placeholder texture shows until the file is dropped into images/about/. */
 [data-variation="v1"] .ahs-img[data-step="0"] {
   background:
-    url("../images/about/shanghai.jpg") center / cover no-repeat,
+    url("../images/about/shanghai.jpg?v=2") center / cover no-repeat,
     repeating-linear-gradient(135deg, color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px, transparent 1px 14px);
 }
 [data-variation="v1"] .ahs-img[data-step="1"] {
   background:
-    url("../images/about/don-norman.jpeg") center / cover no-repeat,
+    url("../images/about/don-norman.jpeg?v=2") center / cover no-repeat,
     repeating-linear-gradient(-135deg, color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px, transparent 1px 14px);
 }
 [data-variation="v1"] .ahs-img[data-step="2"] {
   background:
-    url("../images/about/yoshi.jpeg") center / cover no-repeat,
+    url("../images/about/yoshi.jpeg?v=2") center / cover no-repeat,
     repeating-linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px, transparent 1px 16px);
 }
 [data-variation="v1"] .ahs-img[data-step="3"] {
   background:
-    url("../images/about/aerial-yoga.jpeg") center / cover no-repeat,
+    url("../images/about/aerial-yoga.jpeg?v=2") center / cover no-repeat,
     repeating-linear-gradient(45deg, color-mix(in oklab, var(--ink) 5%, var(--paper-3)) 0 1px, transparent 1px 12px),
     linear-gradient(180deg, var(--paper-2), color-mix(in oklab, var(--accent) 4%, var(--paper-2)));
 }
