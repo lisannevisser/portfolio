@@ -193,6 +193,12 @@ a { color: inherit; }
   font-family: var(--font-mono); font-size: 0.65rem;
   letter-spacing: 0.12em; text-transform: uppercase;
 }
+/* Emoji labels (e.g. the Yoshi mushroom) render bigger and without the
+   mono/uppercase treatment meant for text labels. */
+.lv-cursor-ring.is-labelled[data-label="🍄"]::after {
+  font-size: 1.5rem;
+  letter-spacing: 0;
+}
 @media (max-width: 900px) { .lv-cursor, .lv-cursor-ring { display: none; } }
 html[data-cursor="off"] .lv-cursor,
 html[data-cursor="off"] .lv-cursor-ring { display: none; }
@@ -652,7 +658,6 @@ html[data-cursor="off"] { cursor: auto; }
   position: relative;
   color: var(--accent);
   border-bottom: 1px dashed var(--accent);
-  cursor: help;
   white-space: nowrap;
 }
 .lv-term::after {
