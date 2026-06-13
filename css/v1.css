@@ -1026,7 +1026,7 @@
 }
 [data-variation="v1"] .ahs-img[data-step="1"] {
   background:
-    url("../images/about/don-norman.jpeg?v=3") center / cover no-repeat,
+    url("../images/about/don-norman.jpeg?v=4") center / cover no-repeat,
     repeating-linear-gradient(-135deg, color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px, transparent 1px 14px);
 }
 [data-variation="v1"] .ahs-img[data-step="2"] {
