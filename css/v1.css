@@ -992,7 +992,7 @@
   padding: 1.4rem 1.5rem;
   opacity: 0;
   transform: scale(1.035);
-  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
+  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out), filter 600ms var(--ease-out);
   pointer-events: none;
 }
 [data-variation="v1"] .ahs-img.is-active {
@@ -1000,6 +1000,10 @@
   transform: none;
   pointer-events: auto;
 }
+/* Chapter photos sit black-and-white and bloom into color on hover; the
+   portrait video (no [data-step]) is left untouched, so it stays in color. */
+[data-variation="v1"] .ahs-img[data-step] { filter: grayscale(1); }
+[data-variation="v1"] .ahs-img[data-step]:hover { filter: grayscale(0); }
 [data-variation="v1"] .ahs-video {
   position: absolute;
   inset: 0;
