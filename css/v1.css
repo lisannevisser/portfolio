@@ -1121,6 +1121,9 @@
     margin-bottom: 0.55rem;
   }
   [data-variation="v1"] .ahs-step-p { font-size: 0.92rem; line-height: 1.44; }
+  /* The merged free-time chapter carries two paragraphs, so it needs a touch
+     more compression to clear the rail on short or narrow viewports. */
+  [data-variation="v1"] .ahs-step--long .ahs-step-p { font-size: 0.84rem; line-height: 1.36; }
 }
 
 @media (prefers-reduced-motion: reduce) {
