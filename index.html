@@ -7,13 +7,10 @@
   <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
   <meta name="theme-color" content="#faf7f1" />
 
-  <!-- Flash-free variation bootstrap -->
+  <!-- Flash-free preferences bootstrap -->
   <script>
     (function () {
       try {
-        var v = localStorage.getItem("lv-variation") || "v1";
-        if (v !== "v1" && v !== "v3") v = "v1";
-        document.documentElement.setAttribute("data-variation", v);
         var hue = localStorage.getItem("lv-hue");
         if (hue) document.documentElement.style.setProperty("--accent-hue", hue);
         var ts = localStorage.getItem("lv-ts");
@@ -31,9 +28,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-06-13-2" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-06-13-17" />
-  <link rel="stylesheet" href="css/v3.css?v=2026-06-12-3" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-06-13-18" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-06-13-18" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
@@ -45,12 +41,6 @@
   <!-- Custom cursor -->
   <div class="lv-cursor" aria-hidden="true"></div>
   <div class="lv-cursor-ring" aria-hidden="true"></div>
-
-  <!-- Variation switcher — hidden. v3 lives in the DOM for later as an easter egg. -->
-  <div class="lv-switcher" role="tablist" aria-label="Design variation" style="display:none;" hidden>
-    <button type="button" data-variation="v1" role="tab">Designer</button>
-    <button type="button" data-variation="v3" role="tab">Dev-friendly</button>
-  </div>
 
   <!-- Top nav -->
   <nav class="lv-nav">
@@ -147,101 +137,6 @@
           </div>
         </section>
       </div>
-
-      <!-- V3 HOME ------------------------------------------------- -->
-      <div class="v3-only">
-        <section class="v3-hero lv-wrap">
-          <div class="v3-kicker lv-reveal">
-            <span>PORTFOLIO / 2026 / v.3</span>
-            <span class="sep">◆</span>
-            <span class="muted">LAST UPDATE · 2026.04.18</span>
-            <span class="sep">◆</span>
-            <span class="muted">OPEN TO SENIOR &amp; STAFF ROLES · Q3 2026</span>
-          </div>
-          <h1 class="v3-hero-title lv-reveal">Design,<br/><em>measured.</em></h1>
-          <p class="lv-lead lv-reveal" style="max-width:60ch;margin-top:3rem;color:var(--ink-2);">
-            I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to implementation to post-launch metrics.
-          </p>
-
-          <div class="lv-reveal" style="margin-top:3rem;display:flex;gap:1rem;flex-wrap:wrap;">
-            <span class="lv-magnetic" data-strength="0.15" style="display:inline-block;">
-              <a href="#/work" class="lv-btn" data-cursor-label="→ Cases">cd ./work</a>
-            </span>
-            <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="→">mail mail@lisannevisser.com</a>
-          </div>
-
-          <!-- Terminal card -->
-          <div class="v3-terminal lv-reveal">
-            <div class="v3-terminal-head">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="path">~/lisanne/about.yml</span>
-            </div>
-<pre><span class="cmt"># what I do</span>
-<span class="key">role</span>:     "Senior Product Designer"
-<span class="key">spine</span>:    "research + experimentation"
-<span class="key">shipped</span>:  "<span class="str">+15% revenue, 85% faster cycles, 1.5× research target</span>"
-<span class="key">since</span>:    2018
-<span class="key">based</span>:    "Berlin, Germany"
-<span class="key">state</span>:    "<span class="ok">● open to senior &amp; staff</span>"</pre>
-          </div>
-        </section>
-
-        <!-- Case index table -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--rule);gap:1rem;flex-wrap:wrap;">
-            <h2 style="font-family:var(--font-mono);font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;margin:0;color:var(--accent);font-weight:400;">
-              ./cases.index · 5 entries
-            </h2>
-            <a href="#/work" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);text-decoration:none;">ls -la →</a>
-          </div>
-          <div id="v3-home-cases"><!-- filled by app.js --></div>
-        </section>
-
-        <!-- Metrics strip -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal" style="margin-bottom:2rem;">
-            <div class="v3-kicker" style="margin-bottom:0;"><span>./impact.aggregate</span></div>
-          </div>
-          <div class="v3-metrics-strip lv-reveal">
-            <div class="cell"><div class="k">Revenue lift</div><div class="v">+15%</div><div class="note">2 A/B rounds · 7 variants</div></div>
-            <div class="cell"><div class="k">Cycle time</div><div class="v">−85%</div><div class="note">2w → 2d via Figma Make</div></div>
-            <div class="cell"><div class="k">Research cadence</div><div class="v">1.5×</div><div class="note">vs target of 1/mo</div></div>
-            <div class="cell"><div class="k">Tests won</div><div class="v">3/3</div><div class="note">payment-form · +20% each</div></div>
-          </div>
-        </section>
-
-        <!-- Credo -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal v3-credo-section" style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;">
-            <div>
-              <div class="v3-kicker" style="margin-bottom:1rem;"><span>./credo</span></div>
-              <h2 class="v3-hero-title" style="font-size:clamp(1.75rem,3.5vw,2.75rem);">Four <em>principles.</em><br/>Nothing more.</h2>
-            </div>
-            <div>
-              <div class="v3-credo"><span class="num">01</span><span class="text">Research before pixels.</span></div>
-              <div class="v3-credo"><span class="num">02</span><span class="text">Measure what matters.</span></div>
-              <div class="v3-credo"><span class="num">03</span><span class="text">Ship the 80, refine the 20.</span></div>
-              <div class="v3-credo"><span class="num">04</span><span class="text">Systems outlive screens.</span></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="lv-wrap" style="padding-block:clamp(4rem,8vw,7rem);">
-          <div class="lv-reveal v3-cta-box">
-            <div class="v3-kicker" style="margin-bottom:1rem;"><span>./contact</span></div>
-            <h2 class="v3-hero-title" style="font-size:clamp(1.75rem,4.5vw,3.25rem);">Got something <em>measurable?</em></h2>
-            <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-              <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
-                <a href="mailto:mail@lisannevisser.com" class="lv-btn" data-cursor-label="✉">mail@lisannevisser.com</a>
-              </span>
-              <span class="v3-chip is-accent" style="padding:0.75rem 1rem;">Usually replies in &lt;24h</span>
-            </div>
-          </div>
-        </section>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -261,13 +156,6 @@
         <div id="v1-work-filters" class="v1-work-filters lv-reveal"></div>
         <div id="v1-work-cases" class="v1-work-ledger"><!-- filled by app.js --></div>
       </div>
-
-      <!-- V3 WORK -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./work.index · 5 entries · sorted by order</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">My work, the full <em>record</em></h1>
-        <div id="v3-work-cases" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -275,7 +163,6 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="case" hidden>
       <article class="v1-only lv-wrap" id="v1-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
-      <article class="v3-only lv-wrap" id="v3-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
     <!-- ========================================================= -->
@@ -468,74 +355,6 @@
           </div>
         </section>
       </div>
-
-      <!-- V3 ABOUT -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./about.md</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">Curious by training,<br/><em>deliberate by habit.</em></h1>
-
-        <div class="v3-about-grid" style="margin-top:4rem;display:grid;grid-template-columns:2fr 1fr;gap:clamp(2rem,5vw,5rem);">
-          <div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">I didn't start in design. I started in research. A Sociology MA in Göttingen and a parallel Ethnography and Modern China BA, both finished with distinction in 2020, plus six scholarships that put me through the National University of Singapore, Fudan, and Peking University. The questions I loved asking (why people do what they do, what makes a product feel effortless) turned out to be exactly what good design answers.</p>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">Five years in, I've designed end-to-end across consumer trust, B2B logistics, and analytics-heavy operations, often at the intersection of marketing and product. My spine is research and experimentation: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.</p>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">But the label 'growth designer' undersells it. The work that excites me is the full loop: from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterward.</p>
-            <p class="v3-story-body lv-reveal">
-              Off-hours I teach <button type="button" onclick="window.LV_easterEgg &amp;&amp; window.LV_easterEgg()" style="all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);" data-cursor-label="try it">aerial yoga</button>, lead the IxDF Berlin design community, train for half marathons, draw weekly, and read a lot of behavioral science. Usually with Yoshi, my mini poodle, somewhere nearby.
-            </p>
-          </div>
-          <div class="v3-stats-card lv-reveal">
-            <div class="head">STATS</div>
-            <div><span class="label">years_shipping:</span> <span class="val">5+</span></div>
-            <div><span class="label">cases_documented:</span> <span class="val">4</span></div>
-            <div><span class="label">focus_groups_run:</span> <span class="val">1 (first in 25y)</span></div>
-            <div><span class="label">books_read_2025:</span> <span class="val">~30</span></div>
-            <div><span class="label">aerial_yoga:</span> <span class="val">certified</span></div>
-            <div><span class="label">ixdf_berlin:</span> <span class="val">local leader</span></div>
-            <div><span class="label">half_marathons:</span> <span class="val">in training</span></div>
-            <div><span class="label">studio_companion:</span> <span class="val">Yoshi (mini poodle)</span></div>
-            <div><span class="label">linkedin:</span> <a class="val" href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">@lisanne-visser ↗</a></div>
-            <div><span class="label">availability:</span> <span class="is-online">● open</span></div>
-          </div>
-        </div>
-
-        <section style="margin-top:6rem;">
-          <div class="v3-story-head lv-reveal"><span>./career.log</span><span class="tag">3 entries</span></div>
-          <table class="v3-career-table">
-            <thead>
-              <tr><th>PERIOD</th><th>ROLE</th><th>ORG</th><th>FOCUS</th></tr>
-            </thead>
-            <tbody>
-              <tr class="lv-reveal"><td class="period">2025 — Now</td><td class="role">Senior Product Designer</td><td class="org">Trusted Shops</td><td class="note">Expanded scope · details TBD</td></tr>
-              <tr class="lv-reveal"><td class="period">2023 — 2025</td><td class="role">UX Designer (Growth)</td><td class="org">Trusted Shops</td><td class="note">Consumer trust, pricing, experimentation, research culture</td></tr>
-              <tr class="lv-reveal"><td class="period">2022 — 2023</td><td class="role">Product Designer</td><td class="org">Cargoboard</td><td class="note">B2B logistics, design system, IA redesign</td></tr>
-              <tr class="lv-reveal"><td class="period">2020 — 2022</td><td class="role">Quality Assurance Analyst</td><td class="org">TikTok</td><td class="note">UX quality analytics, onboarding, growth XFN</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section style="margin-top:5rem;">
-          <div class="v3-story-head lv-reveal"><span>./reading.now</span><span class="tag">currently on the desk</span></div>
-          <div class="v3-reading-grid">
-            <div class="v3-reading-card lv-reveal"><div class="title">Thinking, Fast and Slow</div><div class="author">Kahneman</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Design is Storytelling</div><div class="author">Lupton</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Klara and the Sun</div><div class="author">Ishiguro</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">The Design of Everyday Things</div><div class="author">Norman</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Laws of UX</div><div class="author">Yablonski</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Hooked</div><div class="author">Eyal</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Sprint</div><div class="author">Knapp</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Radical Candor</div><div class="author">Scott</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Information Architecture</div><div class="author">Rosenfeld</div></div>
-          </div>
-        </section>
-
-        <section style="margin-top:5rem;">
-          <div class="v3-story-head lv-reveal"><span>./inspiration.play</span><span class="tag">on repeat</span></div>
-          <p class="v3-story-body lv-reveal" style="margin-top:1.5rem;margin-bottom:2rem;max-width:60ch;">A video that keeps inspiring me over and over again.</p>
-          <div class="lv-video lv-reveal">
-            <iframe src="https://www.youtube-nocookie.com/embed/WRS9Gek4V5Q" title="A video that keeps inspiring me" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </section>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -565,22 +384,6 @@
           <div class="v1-hand" style="font-size:1.75rem;">ask me about any of these ↑</div>
         </div>
       </div>
-
-      <!-- V3 PLAYGROUND -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./playground · no KPIs here</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">The <em>scratchpad.</em></h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Sketchbook pages, small brand commissions, an aerial-yoga microsite, slow experiments in type and colour. Unfinished, unshipped, useful.</p>
-
-        <div class="v3-playground-grid">
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/drawings</div><div class="title">Sketchbook 2025</div><div class="count">38 pages</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/brand</div><div class="title">Aerial Yoga site</div><div class="count">1 microsite</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/visual</div><div class="title">Canva kits</div><div class="count">3 clients</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/notes</div><div class="title">Reading shelf</div><div class="count">~30 books</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/type</div><div class="title">Type pairings</div><div class="count">open file</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/palette</div><div class="title">Colour studies</div><div class="count">oklch only</div></div>
-        </div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -599,13 +402,6 @@
         <div style="margin-top:5rem;padding:3rem;background:var(--paper-2);border-radius:var(--radius-lg);text-align:center;border:1px solid var(--rule);">
           <div class="v1-hand" style="font-size:1.75rem;">shelves coming soon</div>
         </div>
-      </div>
-
-      <!-- V3 BOOKS -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./reading.log · wip</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">On the <em>shelf.</em></h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">A reading log in the making: design, behavioral science, and the odd novel. Notes and shelves are on the way.</p>
       </div>
     </section>
 
@@ -627,14 +423,6 @@
         </header>
         <div id="v1-blog-list"><!-- filled by app.js --></div>
       </div>
-
-      <!-- V3 BLOG -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./blog.index</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">Thinking <em>out loud.</em></h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Short essays on research, experimentation, and the messy middle of shipping product. No cadence, no newsletter.</p>
-        <div id="v3-blog-list" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -642,7 +430,6 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="post" hidden>
       <article class="v1-only lv-wrap lv-gazette lv-gazette-article" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
-      <article class="v3-only lv-wrap" id="v3-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
     <!-- ========================================================= -->
@@ -707,63 +494,6 @@
           </div>
         </div>
       </div>
-
-      <!-- V3 IMPRESSUM -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./imprint.md · § 5 TMG</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">The <em>fine print.</em></h1>
-
-        <div class="lv-legal-grid" style="margin-top:4rem;">
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./provider</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser<br/>
-              George-Stephenson-Str. 2<br/>
-              10557 Berlin<br/>
-              Germany
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./contact</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a><br/>
-              Phone: [optional]
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./responsible</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser (address as above)
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./vat-id</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              VAT identification number pursuant to §27a UStG:<br/>
-              DE[VAT number]
-            </p>
-          </div>
-
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./liability</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              As a service provider I am responsible for my own content on these pages under the general laws. I accept no liability for the content of external links - responsibility for those lies solely with their respective operators.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./copyright</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              The work, text, and images shown on this site are protected under German copyright law. Any use beyond the narrow limits of copyright requires written permission.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./credits</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              No external assets to credit yet. As the site starts using free stock photos (for blog headers, for example) or referencing other people's articles, the sources and creators will appear here.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./updated</span></div>
-            <p class="v3-story-body lv-reveal">
-              April 2026
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -801,7 +531,7 @@
           <div>
             <div class="lv-eyebrow lv-reveal">Local storage</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
-              The browser's localStorage remembers your design preferences (variation, accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
+              The browser's localStorage remembers your design preferences (accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
             </p>
 
             <div class="lv-eyebrow lv-reveal">Getting in touch</div>
@@ -816,54 +546,6 @@
 
             <div class="lv-eyebrow lv-reveal">Last updated</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;max-width:52ch;">
-              April 2026
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- V3 DATENSCHUTZ -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./privacy.md · GDPR</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">What I <em>don't</em><br/>know about you.</h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Portfolio, not a product. No tracking, no analytics, no ads. Below is an honest list of what still happens technically when you visit.</p>
-
-        <div class="lv-legal-grid" style="margin-top:4rem;">
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./controller</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser, George-Stephenson-Str. 2, 10557 Berlin, Germany. Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a>. Full details in the <a href="#/imprint">imprint</a>.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./server-logs</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Hosted on GitHub Pages (GitHub Inc., USA). On request your browser transmits technically necessary data: IP, date, URL, referrer, browser, OS. Legal basis: Art. 6(1)(f) GDPR. Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./youtube</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Some case studies embed videos from YouTube (Google Ireland Ltd.) via the privacy-enhanced mode (youtube-nocookie.com). No cookies until you press play. On playback, IP and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent via click) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
-            </p>
-          </div>
-
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./local-storage</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              localStorage keeps your design preferences (variation, accent colour, type scale). Nothing is transmitted to me or third parties, it stays on your device, and can be cleared from your browser at any time.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./email</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              If you email me, I process what you send to answer your enquiry. Legal basis: Art. 6(1)(b) or (f) GDPR. Deleted once the purpose no longer applies.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./your-rights</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Access, rectification, erasure, restriction, data portability, objection (Art. 15 - 21 GDPR). A short email is enough. Right to lodge a complaint with the supervisory authority (for Berlin: Berliner Beauftragte für Datenschutz und Informationsfreiheit).
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./updated</span></div>
-            <p class="v3-story-body lv-reveal">
               April 2026
             </p>
           </div>
@@ -1074,8 +756,8 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-06-12-3"></script>
-  <script src="js/app.js?v=2026-06-12-3"></script>
+  <script src="js/data.js?v=2026-06-13-1"></script>
+  <script src="js/app.js?v=2026-06-13-1"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
