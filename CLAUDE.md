@@ -469,7 +469,6 @@ Quick checklist:
 
 - Home page loads without errors (browser console open — red messages?).
 - Navigation works (`#/`, `#/work`, `#/about`, case study).
-- Switch through both design variants (Designer / Dev-friendly).
 - On the page you changed, explicitly verify the new behavior.
 
 ## Emergency: Rollback after a broken merge

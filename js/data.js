@@ -421,7 +421,7 @@ window.LV_DATA = {
         { kind: "lead", text: "Most posts on this blog are five tight paragraphs and out. Some need more room to breathe: a few headings, a pull quote, a list, maybe a figure. This is the kitchen sink - every block type I use, laid out in one place so I can see them next to each other." },
         { kind: "h2", text: "Why blocks beat blobs" },
         { kind: "paragraph", text: "Writing a long post as one wall of paragraphs is fine until the reader starts skimming. The moment they skim, structure becomes the message. Headings give the page a skeleton. Pull quotes hold attention. Lists answer **how many** and **in what order**. A figure says **this is what it looked like**. The job of the block system is to make each of those moves cheap." },
-        { kind: "paragraph", text: "I want to be able to drop a heading in without thinking about CSS. I want a pull quote to feel different in v1 (italic display serif) and v3 (heavier sans, monospace caption), without me writing two versions. The data is one source of truth; the variation styles do the rest." },
+        { kind: "paragraph", text: "I want to be able to drop a heading in without thinking about CSS. I want a pull quote to render as italic display serif without me hand-styling it. The data is one source of truth; the styles do the rest." },
         { kind: "h3", text: "The block types, briefly" },
         { kind: "list", style: "bullet", items: [
           { title: "Lead.", text: "A bigger intro paragraph that signals the start of the piece." },
@@ -465,14 +465,6 @@ window.LV_DATA = {
       { t: "Reading shelf", kind: "reading", hue: 100 },
       { t: "Type pairings file", kind: "type", hue: 20 },
       { t: "Color studies", kind: "palette", hue: 270 }
-    ],
-    v3: [
-      { t: "Sketchbook 2025", kind: "drawings", count: "38 pages" },
-      { t: "Aerial Yoga site", kind: "brand", count: "1 microsite" },
-      { t: "Canva kits", kind: "visual", count: "3 clients" },
-      { t: "Reading shelf", kind: "notes", count: "~30 books" },
-      { t: "Type pairings", kind: "type", count: "open file" },
-      { t: "Color studies", kind: "palette", count: "oklch only" }
     ]
   }
 };

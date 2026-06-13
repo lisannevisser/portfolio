@@ -21,8 +21,8 @@ python3 -m http.server 4322
 
 ```
 index.html    single-page app, hash routes (#/, #/work, #/work/<slug>, #/about, #/playground)
-css/          shared.css (tokens), v1.css (Designer), v3.css (Dev-friendly)
-js/           data.js (content), app.js (router, cursor, switcher, case renderer)
+css/          shared.css (tokens), v1.css (theme)
+js/           data.js (content), app.js (router, cursor, case renderer)
 images/       logos and shared images
 portfolio/    per-case-study assets
 ```

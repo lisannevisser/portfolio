@@ -1071,9 +1071,9 @@
 }
 
 /* ==========================================================================
-   Blog "Gazette" — newspaper treatment. v1 only.
+   Blog "Gazette" — newspaper treatment.
    Front page (blog index) + article masthead. Everything is scoped under
-   .lv-gazette / .lv-gazette-article so v3 and the rest of the site stay
+   .lv-gazette / .lv-gazette-article so the rest of the site stays
    untouched. Fraunces is used more liberally here than elsewhere — a
    newspaper masthead is display-serif by nature.
    ========================================================================== */
