@@ -1031,7 +1031,7 @@
 }
 [data-variation="v1"] .ahs-img[data-step="2"] {
   background:
-    url("../images/about/yoshi.jpeg?v=3") center / cover no-repeat,
+    url("../images/about/aerial-yoga.jpeg?v=5") center / cover no-repeat,
     repeating-linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px, transparent 1px 16px);
 }
 [data-variation="v1"] .ahs-img[data-step="3"] {
