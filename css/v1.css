@@ -1095,9 +1095,12 @@
   [data-variation="v1"] .ahs-progress { display: none; }
 }
 
-/* Shorter desktop/laptop heights: tighten the pinned chapter so the longer
-   bios still fit between the collapsed masthead and the chapter rail. */
-@media (min-width: 881px) and (max-height: 820px) {
+/* Tighten the pinned chapter on shorter heights AND narrower widths, so the
+   longer bios still fit between the collapsed masthead and the chapter rail.
+   Narrow columns wrap text taller while the portrait image gets shorter, so
+   width matters as much as height here. */
+@media (min-width: 881px) and (max-height: 820px),
+       (min-width: 881px) and (max-width: 1200px) {
   [data-variation="v1"] .ahs-pin { padding-top: clamp(3.25rem, 7vh, 5rem); }
   [data-variation="v1"] .ahs-step { padding-top: 0.3rem; }
   [data-variation="v1"] .ahs-num { margin-bottom: 0.5rem; }
