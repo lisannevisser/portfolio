@@ -1241,7 +1241,7 @@
   function initHeroVideo() {
     const vid = document.querySelector(".ahs-video");
     if (!vid) return;
-    const slow = () => { vid.playbackRate = 0.5; };
+    const slow = () => { vid.playbackRate = 0.35; };
     slow();
     vid.addEventListener("loadedmetadata", slow);
     vid.addEventListener("play", slow);
