@@ -735,6 +735,38 @@ html[data-cursor="off"] { cursor: auto; }
   border: 0;
 }
 
+/* Inline interactive term with a hover/focus tooltip (e.g. "Yoshi"). The
+   dashed underline signals it is interactive; the bubble shows on hover and
+   keyboard focus. */
+.lv-term {
+  position: relative;
+  color: var(--accent);
+  border-bottom: 1px dashed var(--accent);
+  cursor: help;
+  white-space: nowrap;
+}
+.lv-term::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%; bottom: calc(100% + 0.55rem);
+  transform: translate(-50%, 4px);
+  width: max-content; max-width: 15rem;
+  white-space: normal;
+  background: var(--ink); color: var(--paper);
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.03em; line-height: 1.45; text-align: left;
+  padding: 0.5rem 0.65rem; border-radius: var(--radius-sm);
+  box-shadow: 0 6px 20px oklch(0 0 0 / 0.18);
+  opacity: 0; pointer-events: none;
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+  z-index: 6;
+}
+.lv-term:hover::after,
+.lv-term:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* Chat replay (messenger-style figure; messages reveal sequentially via JS) */
 .lv-post-chat { margin: 0; }
 .lv-chat-window {

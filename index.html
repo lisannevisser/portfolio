@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-06-13-1" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-06-13-2" />
   <link rel="stylesheet" href="css/v1.css?v=2026-06-13-16" />
   <link rel="stylesheet" href="css/v3.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
@@ -326,7 +326,7 @@
                     <div class="ahs-step" data-step="2">
                       <div class="ahs-num">03 · Off-screen</div>
                       <h2 class="ahs-step-h">Reading, drawing, and a mini poodle named <em>Yoshi</em>.</h2>
-                      <p class="ahs-step-p">In my spare time, I enjoy reading, drawing, and spending time with my mini poodle Yoshi. Yes, you guessed it right! He was named after we first met, and since that day he never disappoints to prove his playful and friendly character. Beyond that, dogs are great teachers to remind us of what's important in life. No wonder I love to bring him along.</p>
+                      <p class="ahs-step-p">In my spare time, I enjoy <a href="#/books" style="color:var(--accent);border-bottom:1px dashed var(--accent);text-decoration:none;" data-cursor-label="my shelf">reading</a>, <a href="#/playground" style="color:var(--accent);border-bottom:1px dashed var(--accent);text-decoration:none;" data-cursor-label="my gallery">drawing</a>, and spending time with my mini poodle <span class="lv-term" tabindex="0" role="note" aria-label="Yoshi, named after the Super Mario character" data-tip="Named after the Super Mario character" data-cursor-label="🍄">Yoshi</span>. He never disappoints to prove his playful and energetic character. No wonder I love to bring him along.</p>
                     </div>
 
                     <div class="ahs-step" data-step="3">
@@ -580,6 +580,32 @@
           <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/type</div><div class="title">Type pairings</div><div class="count">open file</div></div>
           <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/palette</div><div class="title">Colour studies</div><div class="count">oklch only</div></div>
         </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: BOOKS (reading log) — placeholder, to be built out   -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="books" hidden>
+
+      <!-- V1 BOOKS -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;">
+          What's on the <em style="color:var(--accent);">shelf</em>.
+        </h1>
+        <p class="lv-lead lv-reveal" style="max-width:48ch;margin-top:2rem;">
+          A reading log in the making: design, behavioral science, and the odd novel. Notes and shelves are on the way.
+        </p>
+        <div style="margin-top:5rem;padding:3rem;background:var(--paper-2);border-radius:var(--radius-lg);text-align:center;border:1px solid var(--rule);">
+          <div class="v1-hand" style="font-size:1.75rem;">shelves coming soon</div>
+        </div>
+      </div>
+
+      <!-- V3 BOOKS -->
+      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <div class="v3-kicker lv-reveal"><span>./reading.log · wip</span></div>
+        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">On the <em>shelf.</em></h1>
+        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">A reading log in the making: design, behavioral science, and the odd novel. Notes and shelves are on the way.</p>
       </div>
     </section>
 
