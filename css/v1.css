@@ -1007,8 +1007,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Match the black-and-white photo treatment used across the page. */
-  filter: grayscale(1);
 }
 [data-variation="v1"] .ahs-portrait {
   background:
