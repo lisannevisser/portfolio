@@ -1247,9 +1247,156 @@
     vid.addEventListener("play", slow);
   }
 
+  // ========================================================================
+  // BOOKSHELF (cover grid + stats + detail overlay)
+  // ========================================================================
+  function bookStars(rating, cls) {
+    let out = "";
+    for (let s = 1; s <= 5; s++) {
+      out += `<span class="lv-book-star${s <= rating ? " is-on" : ""} ${cls || ""}">&#9733;</span>`;
+    }
+    return out;
+  }
+
+  function reviewToHtml(review) {
+    // Escape first, then turn [text](url) markdown links into anchors.
+    return esc(String(review || "").trim()).replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+  }
+
+  function renderBooks() {
+    const books = D.books || [];
+    const grid = $("#lv-books-grid");
+    const statsEl = $("#lv-books-stats");
+    if (!grid || !books.length) return;
+
+    // ---- Stats ----
+    const total = books.length;
+    const fiveStar = books.filter((b) => b.rating === 5).length;
+    const avg = (books.reduce((s, b) => s + b.rating, 0) / total).toFixed(1);
+
+    const tagCounts = {};
+    books.forEach((b) => (b.tags || []).forEach((t) => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+    const genres = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+    const topGenres = genres.slice(0, 6);
+    const maxGenre = (topGenres[0] && topGenres[0][1]) || 1;
+
+    const byYear = {};
+    books.forEach((b) => {
+      if (b.finished) {
+        const y = b.finished.split("-")[0];
+        byYear[y] = (byYear[y] || 0) + 1;
+      }
+    });
+    const years = Object.entries(byYear).sort((a, b) => a[0].localeCompare(b[0]));
+    const maxYear = Math.max.apply(null, Object.values(byYear).concat([1]));
+    const withDates = books.filter((b) => b.finished).length;
+    const avgPerYear = years.length ? (withDates / years.length).toFixed(1) : "0";
+
+    const ratingDist = [5, 4, 3, 2, 1].map((r) => ({ stars: r, count: books.filter((b) => b.rating === r).length }));
+
+    const bar = (label, count, max, accent) =>
+      `<div class="lv-book-bar">
+        <span class="lv-book-bar-label">${esc(label)}</span>
+        <span class="lv-book-bar-track"><span class="lv-book-bar-fill${accent ? " is-accent" : ""}" style="width:${(count / max) * 100}%"></span></span>
+        <span class="lv-book-bar-num">${count}</span>
+      </div>`;
+
+    if (statsEl) {
+      statsEl.innerHTML = `
+        <div class="lv-book-ribbon">
+          <div><strong>${total}</strong><span>books</span></div>
+          <div><strong>${fiveStar}</strong><span>five-star reads</span></div>
+          <div><strong>${avg}</strong><span>avg rating</span></div>
+        </div>
+        <div class="lv-book-cards">
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Books per year</div>
+            <div class="lv-book-statcard-big">${avgPerYear} <span>avg / year</span></div>
+            ${years.map(([y, c]) => bar(y, c, maxYear, false)).join("")}
+          </div>
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Genres</div>
+            <div class="lv-book-statcard-big">${genres.length} <span>categories</span></div>
+            ${topGenres.map(([t, c]) => bar(t, c, maxGenre, false)).join("")}
+          </div>
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Ratings</div>
+            <div class="lv-book-statcard-big">${avg} <span>avg stars</span></div>
+            ${ratingDist.map((r) => bar(r.stars + "★", r.count, total, true)).join("")}
+          </div>
+        </div>`;
+    }
+
+    // ---- Cover grid ----
+    grid.innerHTML = books
+      .map((b, i) => `
+        <button class="lv-book-card" data-index="${i}" data-cursor-label="Read" aria-label="Open review of ${esc(b.title)}">
+          <span class="lv-book-cover" style="--spine:${esc(b.color)}">
+            <span class="lv-book-fallback" style="background:${esc(b.color)}">${esc(b.title)}</span>
+            <img class="lv-book-img" src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" onerror="this.style.display='none'" />
+            <span class="lv-book-spine" style="background:${esc(b.color)}"></span>
+          </span>
+          <span class="lv-book-meta">
+            <span class="lv-book-title">${esc(b.title)}</span>
+            <span class="lv-book-author">${esc(b.author)}</span>
+            <span class="lv-book-stars">${bookStars(b.rating)}</span>
+          </span>
+        </button>`)
+      .join("");
+
+    // ---- Detail overlay ----
+    const overlay = $("#lv-book-overlay");
+    const detail = $("#lv-book-detail");
+    const backdrop = $("#lv-book-backdrop");
+    const closeBtn = $("#lv-book-close");
+    if (!overlay) return;
+
+    function openBook(b) {
+      $("#lv-book-detail-cover").src = b.cover;
+      $("#lv-book-detail-cover").alt = b.title;
+      const dfb = $("#lv-book-detail-fallback");
+      dfb.style.background = b.color;
+      dfb.textContent = b.title;
+      $("#lv-book-detail-title").textContent = b.title;
+      $("#lv-book-detail-author").textContent = "by " + b.author;
+      $("#lv-book-detail-stars").innerHTML = bookStars(b.rating, "is-lg");
+      $("#lv-book-detail-tags").innerHTML = (b.tags || [])
+        .map((t) => `<span class="lv-book-tag">${esc(t)}</span>`)
+        .join("");
+      $("#lv-book-detail-review").innerHTML = reviewToHtml(b.review);
+      detail.style.setProperty("--spine", b.color);
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeBook() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    grid.addEventListener("click", (e) => {
+      const card = e.target.closest(".lv-book-card");
+      if (!card) return;
+      const b = books[parseInt(card.getAttribute("data-index"), 10)];
+      if (b) openBook(b);
+    });
+    closeBtn.addEventListener("click", closeBook);
+    backdrop.addEventListener("click", closeBook);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeBook();
+    });
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
+    renderBooks();
     renderClientStrip();
     renderScribbles();
     initCursor();
