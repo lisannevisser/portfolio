@@ -390,6 +390,20 @@
 
 [data-variation="v1"] .v1-sticky-nav { position: sticky; top: 5rem; }
 
+/* Two-column career layout: sticky headline + CV CTA left, scrolling roles right */
+[data-variation="v1"] .v1-career-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 13fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+[data-variation="v1"] .v1-career-aside {
+  position: sticky; top: 6rem;
+}
+[data-variation="v1"] .v1-career-cv { margin-top: 1.75rem; }
+[data-variation="v1"] .v1-career-list { min-width: 0; }
+[data-variation="v1"] .v1-career-list .v1-career-row:first-child { border-top: none; }
+
 [data-variation="v1"] .v1-career-row {
   border-top: 1px solid var(--rule);
 }
@@ -645,6 +659,9 @@
   [data-variation="v1"] .v1-framework-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 1rem 1.25rem; }
   [data-variation="v1"] .v1-limitations-face { padding: 1.75rem 1.5rem 2rem; }
   [data-variation="v1"] .v1-limitations-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  [data-variation="v1"] .v1-career-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  [data-variation="v1"] .v1-career-aside { position: static; }
+  [data-variation="v1"] .v1-career-cv { margin-top: 1.25rem; }
   [data-variation="v1"] details.v1-career-row > summary { grid-template-columns: 1fr auto; gap: 0.35rem 1rem; padding: 1.25rem 0; }
   [data-variation="v1"] details.v1-career-row > summary > .period,
   [data-variation="v1"] details.v1-career-row > summary > .v1-career-headline { grid-column: 1; }
