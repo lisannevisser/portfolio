@@ -7,13 +7,10 @@
   <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
   <meta name="theme-color" content="#faf7f1" />
 
-  <!-- Flash-free variation bootstrap -->
+  <!-- Flash-free preferences bootstrap -->
   <script>
     (function () {
       try {
-        var v = localStorage.getItem("lv-variation") || "v1";
-        if (v !== "v1" && v !== "v3") v = "v1";
-        document.documentElement.setAttribute("data-variation", v);
         var hue = localStorage.getItem("lv-hue");
         if (hue) document.documentElement.style.setProperty("--accent-hue", hue);
         var ts = localStorage.getItem("lv-ts");
@@ -27,11 +24,14 @@
   </script>
 
   <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-06-14-1" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-06-14-1" />
-  <link rel="stylesheet" href="css/v3.css?v=2026-06-14-1" />
-  <link rel="stylesheet" href="css/wip.css?v=2026-06-14-1" />
+  <!-- Wall of Fame route fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-06-14-8" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-06-14-7" />
+  <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
+  <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
 <body>
 
@@ -41,12 +41,6 @@
   <!-- Custom cursor -->
   <div class="lv-cursor" aria-hidden="true"></div>
   <div class="lv-cursor-ring" aria-hidden="true"></div>
-
-  <!-- Variation switcher — hidden. v3 lives in the DOM for later as an easter egg. -->
-  <div class="lv-switcher" role="tablist" aria-label="Design variation" style="display:none;" hidden>
-    <button type="button" data-variation="v1" role="tab">Designer</button>
-    <button type="button" data-variation="v3" role="tab">Dev-friendly</button>
-  </div>
 
   <!-- Top nav -->
   <nav class="lv-nav">
@@ -143,101 +137,6 @@
           </div>
         </section>
       </div>
-
-      <!-- V3 HOME ------------------------------------------------- -->
-      <div class="v3-only">
-        <section class="v3-hero lv-wrap">
-          <div class="v3-kicker lv-reveal">
-            <span>PORTFOLIO / 2026 / v.3</span>
-            <span class="sep">◆</span>
-            <span class="muted">LAST UPDATE · 2026.04.18</span>
-            <span class="sep">◆</span>
-            <span class="muted">OPEN TO SENIOR &amp; STAFF ROLES · Q3 2026</span>
-          </div>
-          <h1 class="v3-hero-title lv-reveal">Design,<br/><em>measured.</em></h1>
-          <p class="lv-lead lv-reveal" style="max-width:60ch;margin-top:3rem;color:var(--ink-2);">
-            I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to implementation to post-launch metrics.
-          </p>
-
-          <div class="lv-reveal" style="margin-top:3rem;display:flex;gap:1rem;flex-wrap:wrap;">
-            <span class="lv-magnetic" data-strength="0.15" style="display:inline-block;">
-              <a href="#/work" class="lv-btn" data-cursor-label="→ Cases">cd ./work</a>
-            </span>
-            <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="→">mail mail@lisannevisser.com</a>
-          </div>
-
-          <!-- Terminal card -->
-          <div class="v3-terminal lv-reveal">
-            <div class="v3-terminal-head">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="path">~/lisanne/about.yml</span>
-            </div>
-<pre><span class="cmt"># what I do</span>
-<span class="key">role</span>:     "Senior Product Designer"
-<span class="key">spine</span>:    "research + experimentation"
-<span class="key">shipped</span>:  "<span class="str">+15% revenue, 85% faster cycles, 1.5× research target</span>"
-<span class="key">since</span>:    2018
-<span class="key">based</span>:    "Berlin, Germany"
-<span class="key">state</span>:    "<span class="ok">● open to senior &amp; staff</span>"</pre>
-          </div>
-        </section>
-
-        <!-- Case index table -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--rule);gap:1rem;flex-wrap:wrap;">
-            <h2 style="font-family:var(--font-mono);font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;margin:0;color:var(--accent);font-weight:400;">
-              ./cases.index · 5 entries
-            </h2>
-            <a href="#/work" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);text-decoration:none;">ls -la →</a>
-          </div>
-          <div id="v3-home-cases"><!-- filled by app.js --></div>
-        </section>
-
-        <!-- Metrics strip -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal" style="margin-bottom:2rem;">
-            <div class="v3-kicker" style="margin-bottom:0;"><span>./impact.aggregate</span></div>
-          </div>
-          <div class="v3-metrics-strip lv-reveal">
-            <div class="cell"><div class="k">Revenue lift</div><div class="v">+15%</div><div class="note">2 A/B rounds · 7 variants</div></div>
-            <div class="cell"><div class="k">Cycle time</div><div class="v">−85%</div><div class="note">2w → 2d via Figma Make</div></div>
-            <div class="cell"><div class="k">Research cadence</div><div class="v">1.5×</div><div class="note">vs target of 1/mo</div></div>
-            <div class="cell"><div class="k">Tests won</div><div class="v">3/3</div><div class="note">payment-form · +20% each</div></div>
-          </div>
-        </section>
-
-        <!-- Credo -->
-        <section class="lv-wrap" style="padding-block:clamp(3rem,6vw,5rem);">
-          <div class="lv-reveal v3-credo-section" style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;">
-            <div>
-              <div class="v3-kicker" style="margin-bottom:1rem;"><span>./credo</span></div>
-              <h2 class="v3-hero-title" style="font-size:clamp(1.75rem,3.5vw,2.75rem);">Four <em>principles.</em><br/>Nothing more.</h2>
-            </div>
-            <div>
-              <div class="v3-credo"><span class="num">01</span><span class="text">Research before pixels.</span></div>
-              <div class="v3-credo"><span class="num">02</span><span class="text">Measure what matters.</span></div>
-              <div class="v3-credo"><span class="num">03</span><span class="text">Ship the 80, refine the 20.</span></div>
-              <div class="v3-credo"><span class="num">04</span><span class="text">Systems outlive screens.</span></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="lv-wrap" style="padding-block:clamp(4rem,8vw,7rem);">
-          <div class="lv-reveal v3-cta-box">
-            <div class="v3-kicker" style="margin-bottom:1rem;"><span>./contact</span></div>
-            <h2 class="v3-hero-title" style="font-size:clamp(1.75rem,4.5vw,3.25rem);">Got something <em>measurable?</em></h2>
-            <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-              <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
-                <a href="mailto:mail@lisannevisser.com" class="lv-btn" data-cursor-label="✉">mail@lisannevisser.com</a>
-              </span>
-              <span class="v3-chip is-accent" style="padding:0.75rem 1rem;">Usually replies in &lt;24h</span>
-            </div>
-          </div>
-        </section>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -257,13 +156,6 @@
         <div id="v1-work-filters" class="v1-work-filters lv-reveal"></div>
         <div id="v1-work-cases" class="v1-work-ledger"><!-- filled by app.js --></div>
       </div>
-
-      <!-- V3 WORK -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./work.index · 5 entries · sorted by order</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">My work, the full <em>record</em></h1>
-        <div id="v3-work-cases" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -271,7 +163,6 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="case" hidden>
       <article class="v1-only lv-wrap" id="v1-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
-      <article class="v3-only lv-wrap" id="v3-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
     <!-- ========================================================= -->
@@ -303,61 +194,51 @@
 
                 <div class="ahs-body">
                   <p class="lv-lead ahs-lead">
-                    A generalist product designer in Berlin with a <em style="font-style:italic;color:var(--accent);">research &amp; experimentation</em> spine. Five years across consumer trust, B2B logistics and analytics-heavy operations, usually where marketing meets product. Outside of work, mostly upside down: <button type="button" onclick="window.LV_easterEgg &amp;&amp; window.LV_easterEgg()" style="all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);" data-cursor-label="try it">aerial yoga</button>, half marathons, and Yoshi the mini poodle.
+                    An Economic and Intercultural Sociologist by education, I found my way into product design, where I focus on data-driven design solutions that combine user-centricity with business performance.
                   </p>
 
                   <div class="ahs-steps">
                     <div class="ahs-step is-active" data-step="0">
                       <div class="ahs-num">01 · Origin</div>
-                      <h2 class="ahs-step-h">I started with <em>questions</em>, not pixels.</h2>
-                      <p class="ahs-step-p">A Sociology MA in Göttingen and a parallel Ethnography and Modern China BA, both finished with distinction in 2020. Six scholarships, three semesters between Singapore, Fudan and Peking University. The questions I loved asking turned out to be exactly the ones good design answers.</p>
+                      <h2 class="ahs-step-h">I started in <em>research</em></h2>
+                      <p class="ahs-step-p">During my master's in Sociology, I decided to also do a second bachelor's in Ethnography and Modern China studies. My focus on Economic Sociology in China created an urge to combine perspectives from all three disciplines. In 2020, I graduated from my master's and my additional bachelor's simultaneously, both with distinction. My interdisciplinary studies led me to do research in China, and several scholarships from the German and Chinese governments let me study at Asia's top universities, namely the National University of Singapore, Fudan University in Shanghai, and Beijing University.</p>
                     </div>
 
                     <div class="ahs-step" data-step="1">
-                      <div class="ahs-num">02 · Shipping</div>
-                      <h2 class="ahs-step-h">Then I learned to <em>ship</em>.</h2>
-                      <p class="ahs-step-p">Two years at TikTok as a Quality Analyst: weekly UX-quality reviews, cross-functional with User Growth, and an eLearning program on EdCast for 250+ colleagues. Special Contribution Award, Q1 2021. Observation got disciplined, design got tactile.</p>
+                      <div class="ahs-num">02 · Practice</div>
+                      <h2 class="ahs-step-h">Where product meets <em>business</em></h2>
+                      <p class="ahs-step-p">My work as a product designer often takes place at the intersection between product and marketing teams, enabling me to help brands navigate between user needs and business KPIs. Thanks to my training in social research, I bring strong qualitative and quantitative user research to the table. Through my professional journey, I've partnered with top brands such as TikTok, Canva, and more. I thrive in collaborative environments defined by curiosity, empathy, and radical candor, which I believe are crucial factors to successful digital solutions with happy teams behind them.</p>
                     </div>
 
-                    <div class="ahs-step" data-step="2">
-                      <div class="ahs-num">03 · Spine</div>
-                      <h2 class="ahs-step-h">Research &amp; growth became my <em>spine</em>.</h2>
-                      <p class="ahs-step-p">Solo design lead at Cargoboard, then UX Designer (Growth) at Trusted Shops. The first focus group in a 25-year-old company. Heatmaps that reshaped a brand. A price set on intuition turned into a +15% revenue lift, and 3/3 payment-form tests won at +20% each.</p>
-                    </div>
-
-                    <div class="ahs-step" data-step="3">
-                      <div class="ahs-num">04 · Now</div>
-                      <h2 class="ahs-step-h">Still <em>curious</em>, just deliberate about it.</h2>
-                      <p class="ahs-step-p">Senior Product Designer at Trusted Shops. Leading the IxDF Berlin design community, teaching aerial yoga, training for half marathons, and reading more behavioral science than is strictly healthy. Most of it with Yoshi, my mini poodle, somewhere in the room.</p>
+                    <div class="ahs-step ahs-step--long" data-step="2">
+                      <div class="ahs-num">03 · Off-screen</div>
+                      <h2 class="ahs-step-h">In my <em>free time</em></h2>
+                      <p class="ahs-step-p">In my spare time, I love spending time with friends just as much as I enjoy reading, drawing, and practicing yoga. I love Rocket Yoga and Ashtanga, and I have a 200h yoga teacher training.</p>
+                      <p class="ahs-step-p" style="margin-top:0.6em;">In 2024, I did a teacher training in Aerial Yoga. Over the past two years I've been teaching <a href="https://aerial-yoga.framer.ai/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);border-bottom:1px dashed var(--accent);text-decoration:none;" data-cursor-label="visit">Aerial Yoga classes</a> on the weekends. My own aerial practice slowly shifted from yoga towards acrobatics. Today, I'm at the aerial studio several times a week to practice aerial hammock, aerial hoop or silks.</p>
                     </div>
                   </div>
                 </div>
 
                 <div class="ahs-rail" role="tablist" aria-label="Chapters">
                   <button type="button" class="is-active" data-step-jump="0">Origin</button>
-                  <button type="button" data-step-jump="1">Shipping</button>
-                  <button type="button" data-step-jump="2">Spine</button>
-                  <button type="button" data-step-jump="3">Now</button>
-                  <span class="ahs-progress" aria-hidden="true"><span data-current>01</span> / <span>04</span></span>
+                  <button type="button" data-step-jump="1">Practice</button>
+                  <button type="button" data-step-jump="2">Off-screen</button>
+                  <span class="ahs-progress" aria-hidden="true"><span data-current>01</span> / <span>03</span></span>
                 </div>
               </div>
 
               <div class="ahs-images">
                 <div class="ahs-img ahs-portrait is-active" data-hero>
-                  <span class="ahs-hand v1-hand">"upside down,<br/>a lot of the time"</span>
-                  <span class="ahs-img-label">Portrait · drop your own</span>
+                  <video class="ahs-video" src="images/about/portrait.mp4" autoplay loop muted playsinline preload="auto" aria-label="Lisanne"></video>
                 </div>
                 <div class="ahs-img" data-step="0">
-                  <span class="ahs-img-label">photo · Singapore, 2017</span>
+                  <span class="ahs-img-label">in beijing</span>
                 </div>
                 <div class="ahs-img" data-step="1">
-                  <span class="ahs-img-label">photo · TikTok office, 2021</span>
+                  <span class="ahs-img-label">with Don Norman</span>
                 </div>
                 <div class="ahs-img" data-step="2">
-                  <span class="ahs-img-label">photo · first focus group, 2022</span>
-                </div>
-                <div class="ahs-img" data-step="3">
-                  <span class="ahs-img-label">photo · Berlin studio, now</span>
+                  <span class="ahs-img-label">at aerial class</span>
                 </div>
               </div>
 
@@ -367,20 +248,20 @@
 
         <!-- Career -->
         <section class="v1-section">
-          <div class="lv-reveal" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-            <div>
+          <div class="v1-career-layout">
+            <div class="v1-career-aside lv-reveal">
               <div class="lv-eyebrow">The path so far</div>
               <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
-                The roles that built the <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">method</em>.
+                <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">5+</em> years experience
               </h2>
+              <p class="lv-body" style="margin-top:1rem;">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
+              <a class="lv-btn v1-career-cv" href="https://docs.google.com/document/d/e/2PACX-1vTs7i-4TX2n2JGJyUBESup6hq_8V-bMfm0VISavT0bs4AS4J7na2ZqNZF5w2uv24Ped2_tQbNq4urKq/pub" target="_blank" rel="noopener noreferrer" data-cursor-label="open">View CV</a>
             </div>
-            <span class="lv-eyebrow" style="color:var(--ink-3);">click to expand</span>
-          </div>
-          <div style="margin-top:2rem;">
+            <div class="v1-career-list">
 
-            <details class="lv-reveal v1-career-row">
+            <details class="lv-reveal v1-career-row" open>
               <summary>
-                <span class="period">2026 — Now</span>
+                <span class="period">2025 — Now</span>
                 <span class="v1-career-headline">
                   <span class="role">Senior Product Designer</span>
                   <span class="org">Trusted Shops</span>
@@ -389,12 +270,16 @@
               </summary>
               <div class="v1-career-body">
                 <ul>
-                  <li>Details coming soon. Builds on the UX Designer (Growth) work below with broader scope and senior responsibilities.</li>
+                  <li>Supporting two product teams across design and research, building a mobile app and the membership product, with a strong focus on holistic UX, UX strategy, and consumer experience.</li>
+                  <li>Orchestrating team needs with AI, and establishing AI-based workflows for a range of design and research tasks.</li>
+                  <li>Responsible for ResearchOps: democratizing research and running consumer-domain research.</li>
+                  <li>A key player in driving UX and growth maturity, setting the standards for experimentation and user research.</li>
+                  <li>One of 15 AI ambassadors for the whole company.</li>
                 </ul>
               </div>
             </details>
 
-            <details class="lv-reveal v1-career-row" open>
+            <details class="lv-reveal v1-career-row">
               <summary>
                 <span class="period">2023 — 2025</span>
                 <span class="v1-career-headline">
@@ -458,66 +343,20 @@
               </div>
             </details>
 
+            </div>
           </div>
         </section>
-      </div>
 
-      <!-- V3 ABOUT -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./about.md</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">Curious by training,<br/><em>deliberate by habit.</em></h1>
-
-        <div class="v3-about-grid" style="margin-top:4rem;display:grid;grid-template-columns:2fr 1fr;gap:clamp(2rem,5vw,5rem);">
-          <div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">I didn't start in design. I started in research. A Sociology MA in Göttingen and a parallel Ethnography and Modern China BA, both finished with distinction in 2020, plus six scholarships that put me through the National University of Singapore, Fudan, and Peking University. The questions I loved asking (why people do what they do, what makes a product feel effortless) turned out to be exactly what good design answers.</p>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">Five years in, I've designed end-to-end across consumer trust, B2B logistics, and analytics-heavy operations, often at the intersection of marketing and product. My spine is research and experimentation: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.</p>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">But the label 'growth designer' undersells it. The work that excites me is the full loop: from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterward.</p>
-            <p class="v3-story-body lv-reveal">
-              Off-hours I teach <button type="button" onclick="window.LV_easterEgg &amp;&amp; window.LV_easterEgg()" style="all:unset;cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);" data-cursor-label="try it">aerial yoga</button>, lead the IxDF Berlin design community, train for half marathons, draw weekly, and read a lot of behavioral science. Usually with Yoshi, my mini poodle, somewhere nearby.
-            </p>
+        <!-- A video that stays with me -->
+        <section class="v1-section">
+          <div class="lv-reveal">
+            <div class="lv-eyebrow">On repeat</div>
+            <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+              A video that keeps <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">inspiring</em> me over and over again.
+            </h2>
           </div>
-          <div class="v3-stats-card lv-reveal">
-            <div class="head">STATS</div>
-            <div><span class="label">years_shipping:</span> <span class="val">5+</span></div>
-            <div><span class="label">cases_documented:</span> <span class="val">4</span></div>
-            <div><span class="label">focus_groups_run:</span> <span class="val">1 (first in 25y)</span></div>
-            <div><span class="label">books_read_2025:</span> <span class="val">~30</span></div>
-            <div><span class="label">aerial_yoga:</span> <span class="val">certified</span></div>
-            <div><span class="label">ixdf_berlin:</span> <span class="val">local leader</span></div>
-            <div><span class="label">half_marathons:</span> <span class="val">in training</span></div>
-            <div><span class="label">studio_companion:</span> <span class="val">Yoshi (mini poodle)</span></div>
-            <div><span class="label">linkedin:</span> <a class="val" href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">@lisanne-visser ↗</a></div>
-            <div><span class="label">availability:</span> <span class="is-online">● open</span></div>
-          </div>
-        </div>
-
-        <section style="margin-top:6rem;">
-          <div class="v3-story-head lv-reveal"><span>./career.log</span><span class="tag">3 entries</span></div>
-          <table class="v3-career-table">
-            <thead>
-              <tr><th>PERIOD</th><th>ROLE</th><th>ORG</th><th>FOCUS</th></tr>
-            </thead>
-            <tbody>
-              <tr class="lv-reveal"><td class="period">2026 — Now</td><td class="role">Senior Product Designer</td><td class="org">Trusted Shops</td><td class="note">Expanded scope · details TBD</td></tr>
-              <tr class="lv-reveal"><td class="period">2023 — 2025</td><td class="role">UX Designer (Growth)</td><td class="org">Trusted Shops</td><td class="note">Consumer trust, pricing, experimentation, research culture</td></tr>
-              <tr class="lv-reveal"><td class="period">2022 — 2023</td><td class="role">Product Designer</td><td class="org">Cargoboard</td><td class="note">B2B logistics, design system, IA redesign</td></tr>
-              <tr class="lv-reveal"><td class="period">2020 — 2022</td><td class="role">Quality Assurance Analyst</td><td class="org">TikTok</td><td class="note">UX quality analytics, onboarding, growth XFN</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section style="margin-top:5rem;">
-          <div class="v3-story-head lv-reveal"><span>./reading.now</span><span class="tag">currently on the desk</span></div>
-          <div class="v3-reading-grid">
-            <div class="v3-reading-card lv-reveal"><div class="title">Thinking, Fast and Slow</div><div class="author">Kahneman</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Design is Storytelling</div><div class="author">Lupton</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Klara and the Sun</div><div class="author">Ishiguro</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">The Design of Everyday Things</div><div class="author">Norman</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Laws of UX</div><div class="author">Yablonski</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Hooked</div><div class="author">Eyal</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Sprint</div><div class="author">Knapp</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Radical Candor</div><div class="author">Scott</div></div>
-            <div class="v3-reading-card lv-reveal"><div class="title">Information Architecture</div><div class="author">Rosenfeld</div></div>
+          <div class="lv-video lv-reveal" style="margin-top:2rem;">
+            <iframe src="https://www.youtube-nocookie.com/embed/WRS9Gek4V5Q" title="A video that keeps inspiring me" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </section>
       </div>
@@ -548,22 +387,6 @@
 
         <div style="margin-top:5rem;padding:3rem;background:var(--paper-2);border-radius:var(--radius-lg);text-align:center;border:1px solid var(--rule);">
           <div class="v1-hand" style="font-size:1.75rem;">ask me about any of these ↑</div>
-        </div>
-      </div>
-
-      <!-- V3 PLAYGROUND -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./playground · no KPIs here</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">The <em>scratchpad.</em></h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Sketchbook pages, small brand commissions, an aerial-yoga microsite, slow experiments in type and colour. Unfinished, unshipped, useful.</p>
-
-        <div class="v3-playground-grid">
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/drawings</div><div class="title">Sketchbook 2025</div><div class="count">38 pages</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/brand</div><div class="title">Aerial Yoga site</div><div class="count">1 microsite</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/visual</div><div class="title">Canva kits</div><div class="count">3 clients</div></div>
-          <a href="#/books" class="v3-playground-tile lv-reveal" style="text-decoration:none;" data-cursor-label="Open"><div class="kind">/notes</div><div class="title">Reading shelf</div><div class="count">~30 books</div></a>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/type</div><div class="title">Type pairings</div><div class="count">open file</div></div>
-          <div class="v3-playground-tile lv-reveal" data-cursor-label="Open"><div class="kind">/palette</div><div class="title">Colour studies</div><div class="count">oklch only</div></div>
         </div>
       </div>
     </section>
@@ -635,14 +458,6 @@
         </header>
         <div id="v1-blog-list"><!-- filled by app.js --></div>
       </div>
-
-      <!-- V3 BLOG -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./blog.index</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">Thinking <em>out loud.</em></h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Short essays on research, experimentation, and the messy middle of shipping product. No cadence, no newsletter.</p>
-        <div id="v3-blog-list" style="margin-top:4rem;border-top:2px solid var(--rule);"><!-- filled by app.js --></div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -650,7 +465,6 @@
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="post" hidden>
       <article class="v1-only lv-wrap lv-gazette lv-gazette-article" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
-      <article class="v3-only lv-wrap" id="v3-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
     </section>
 
     <!-- ========================================================= -->
@@ -715,63 +529,6 @@
           </div>
         </div>
       </div>
-
-      <!-- V3 IMPRESSUM -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./imprint.md · § 5 TMG</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">The <em>fine print.</em></h1>
-
-        <div class="lv-legal-grid" style="margin-top:4rem;">
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./provider</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser<br/>
-              George-Stephenson-Str. 2<br/>
-              10557 Berlin<br/>
-              Germany
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./contact</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a><br/>
-              Phone: [optional]
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./responsible</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser (address as above)
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./vat-id</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              VAT identification number pursuant to §27a UStG:<br/>
-              DE[VAT number]
-            </p>
-          </div>
-
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./liability</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              As a service provider I am responsible for my own content on these pages under the general laws. I accept no liability for the content of external links - responsibility for those lies solely with their respective operators.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./copyright</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              The work, text, and images shown on this site are protected under German copyright law. Any use beyond the narrow limits of copyright requires written permission.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./credits</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:1.5rem;">
-              No external assets to credit yet. As the site starts using free stock photos (for blog headers, for example) or referencing other people's articles, the sources and creators will appear here.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./updated</span></div>
-            <p class="v3-story-body lv-reveal">
-              April 2026
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ========================================================= -->
@@ -809,7 +566,7 @@
           <div>
             <div class="lv-eyebrow lv-reveal">Local storage</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
-              The browser's localStorage remembers your design preferences (variation, accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
+              The browser's localStorage remembers your design preferences (accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
             </p>
 
             <div class="lv-eyebrow lv-reveal">Getting in touch</div>
@@ -829,52 +586,110 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- V3 DATENSCHUTZ -->
-      <div class="v3-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <div class="v3-kicker lv-reveal"><span>./privacy.md · GDPR</span></div>
-        <h1 class="v3-hero-title lv-reveal" style="margin-top:1rem;">What I <em>don't</em><br/>know about you.</h1>
-        <p class="v3-story-body lv-reveal" style="margin-top:2rem;max-width:60ch;">Portfolio, not a product. No tracking, no analytics, no ads. Below is an honest list of what still happens technically when you visit.</p>
+    <!-- ========================================================= -->
+    <!-- ROUTE: WALL OF FAME                                         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="wall-of-fame" hidden>
 
-        <div class="lv-legal-grid" style="margin-top:4rem;">
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./controller</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Lisanne Visser, George-Stephenson-Str. 2, 10557 Berlin, Germany. Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a>. Full details in the <a href="#/imprint">imprint</a>.
-            </p>
+      <div class="lv-wrap wof-stage">
 
-            <div class="v3-story-head lv-reveal"><span>./server-logs</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Hosted on GitHub Pages (GitHub Inc., USA). On request your browser transmits technically necessary data: IP, date, URL, referrer, browser, OS. Legal basis: Art. 6(1)(f) GDPR. Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
-            </p>
+        <!-- Stamp ink filter (referenced by the Design Crime stamp) -->
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <filter id="stampFx" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.05 0.07" numOctaves="2" seed="8" result="wobble" />
+              <feDisplacementMap in="SourceGraphic" in2="wobble" scale="2" result="disp" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="3" result="grain" />
+              <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -0.08" result="grainA" />
+              <feComposite in="disp" in2="grainA" operator="in" />
+            </filter>
+          </defs>
+        </svg>
 
-            <div class="v3-story-head lv-reveal"><span>./youtube</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Some case studies embed videos from YouTube (Google Ireland Ltd.) via the privacy-enhanced mode (youtube-nocookie.com). No cookies until you press play. On playback, IP and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent via click) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
-            </p>
+        <div class="wof-board">
+
+          <!-- Pinned masthead strip -->
+          <header class="wof-masthead">
+            <span class="wof-pin wof-pin-red wof-masthead-pin-left" aria-hidden="true"></span>
+            <span class="wof-pin wof-pin-ink wof-masthead-pin-right" aria-hidden="true"></span>
+            <div class="wof-masthead-meta"><span>Dept. of Design Crimes</span><span>Case No. 404</span></div>
+            <h1 class="wof-masthead-title">
+              The Wall of
+              <span class="wof-fame">Fame<span class="wof-strike" aria-hidden="true"></span><span class="wof-shame" aria-hidden="true">shame</span></span>
+            </h1>
+            <div class="wof-stamp" aria-hidden="true">
+              <div class="wof-stamp-inner">
+                <div class="wof-stamp-main">Design<br>Crime</div>
+                <div class="wof-stamp-sub">&#10033; Verified &#10033;</div>
+              </div>
+            </div>
+          </header>
+
+          <!-- Pinned exhibits -->
+          <div class="wof-wall">
+
+            <article class="wof-card wof-exhibit" style="--w:270px; --r:-2.5deg">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">01</span><span class="wof-card-tag">Exhibit A</span></div>
+              <div class="wof-slot" style="height:230px" data-slot="exhibit-a" data-placeholder="Drop your worst offender here"></div>
+              <p class="wof-caption">Push&hellip; pull&hellip; cry.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:252px; --r:2deg; --mt:30px">
+              <span class="wof-tape wof-tape-red" style="--tr:-4deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">02</span><span class="wof-card-tag">Exhibit B</span></div>
+              <div class="wof-slot" style="height:252px" data-slot="exhibit-b" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The elevator panel of doom.</p>
+            </article>
+
+            <aside class="wof-card wof-sticky" style="--w:210px; --r:-3.5deg; --rh:-1deg; --mt:70px">
+              A lovingly curated collection of catastrophic user experiences.
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:282px; --r:-1.4deg">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">03</span><span class="wof-card-tag">Exhibit C</span></div>
+              <div class="wof-slot" style="height:198px" data-slot="exhibit-c" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Are you sure you're sure you're sure?</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:246px; --r:3deg; --mt:44px">
+              <span class="wof-pin wof-pin-paper wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">04</span><span class="wof-card-tag">Exhibit D</span></div>
+              <div class="wof-slot" style="height:238px" data-slot="exhibit-d" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Shower controls - PhD required.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:264px; --r:-2.2deg; --mt:12px">
+              <span class="wof-tape wof-tape-ink" style="--tr:3deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">05</span><span class="wof-card-tag">Exhibit E</span></div>
+              <div class="wof-slot" style="height:216px" data-slot="exhibit-e" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">On? Off? Nobody knows.</p>
+            </article>
+
+            <aside class="wof-card wof-rule" style="--w:218px; --r:2.8deg; --rh:1deg; --mt:86px">
+              <div class="wof-rule-label">Rule No. 1</div>
+              <div class="wof-rule-text">If it needs a sign taped to it, it's bad design.</div>
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:258px; --r:1.6deg; --mt:36px">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">06</span><span class="wof-card-tag">Exhibit F</span></div>
+              <div class="wof-slot" style="height:246px" data-slot="exhibit-f" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The form that resets when you blink.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:276px; --r:-3deg; --mt:8px">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">07</span><span class="wof-card-tag">Exhibit G</span></div>
+              <div class="wof-slot" style="height:202px" data-slot="exhibit-g" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Hotel light switch bingo.</p>
+            </article>
+
           </div>
 
-          <div>
-            <div class="v3-story-head lv-reveal"><span>./local-storage</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              localStorage keeps your design preferences (variation, accent colour, type scale). Nothing is transmitted to me or third parties, it stays on your device, and can be cleared from your browser at any time.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./email</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              If you email me, I process what you send to answer your enquiry. Legal basis: Art. 6(1)(b) or (f) GDPR. Deleted once the purpose no longer applies.
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./your-rights</span></div>
-            <p class="v3-story-body lv-reveal" style="margin-bottom:2rem;">
-              Access, rectification, erasure, restriction, data portability, objection (Art. 15 - 21 GDPR). A short email is enough. Right to lodge a complaint with the supervisory authority (for Berlin: Berliner Beauftragte für Datenschutz und Informationsfreiheit).
-            </p>
-
-            <div class="v3-story-head lv-reveal"><span>./updated</span></div>
-            <p class="v3-story-body lv-reveal">
-              April 2026
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -920,7 +735,8 @@
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
-          <li><a href="#/playground">Playground</a></li>
+          <li><a href="#/wall-of-fame">Wall of Fame</a></li>
+          <li hidden><a href="#/playground">Playground</a></li>
         </ul>
       </div>
     </div>
@@ -970,13 +786,14 @@
   <!-- ============================================================ -->
   <aside class="wip-el wip-note" role="note" aria-label="Site notice">
     <button type="button" class="wip-note-close" data-wip-dismiss aria-label="Dismiss notice">×</button>
-    <p class="wip-note-body">This site is being rebuilt in the open.
+    <p class="wip-note-body">Hi! This site is being rebuilt in the open.
       Mind the wet paint, a few pages aren't quite dry yet.</p>
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-06-14-1"></script>
-  <script src="js/app.js?v=2026-06-14-1"></script>
-  <script src="js/wip.js?v=2026-06-14-1"></script>
+  <script src="js/data.js?v=2026-06-14-8"></script>
+  <script src="js/app.js?v=2026-06-14-8"></script>
+  <script src="js/wip.js?v=2026-06-12-3"></script>
+  <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
 </html>

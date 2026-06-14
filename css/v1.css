@@ -390,6 +390,20 @@
 
 [data-variation="v1"] .v1-sticky-nav { position: sticky; top: 5rem; }
 
+/* Two-column career layout: sticky headline + CV CTA left, scrolling roles right */
+[data-variation="v1"] .v1-career-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 13fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+[data-variation="v1"] .v1-career-aside {
+  position: sticky; top: 6rem;
+}
+[data-variation="v1"] .v1-career-cv { margin-top: 1.75rem; }
+[data-variation="v1"] .v1-career-list { min-width: 0; }
+[data-variation="v1"] .v1-career-list .v1-career-row:first-child { border-top: none; }
+
 [data-variation="v1"] .v1-career-row {
   border-top: 1px solid var(--rule);
 }
@@ -430,6 +444,12 @@
   transform: rotate(45deg); color: var(--accent);
 }
 [data-variation="v1"] details.v1-career-row[open] > summary .role { color: var(--accent); }
+/* Static (non-expanding) career row: same layout, no chevron, no toggle */
+[data-variation="v1"] .v1-career-row--static {
+  display: grid; grid-template-columns: 7.5rem 1fr;
+  gap: 2rem; padding: 1.5rem 0;
+  align-items: baseline;
+}
 [data-variation="v1"] .v1-career-body {
   display: grid; grid-template-columns: 7.5rem 1fr 2rem; gap: 2rem;
   padding: 0 0 2rem;
@@ -639,10 +659,14 @@
   [data-variation="v1"] .v1-framework-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 1rem 1.25rem; }
   [data-variation="v1"] .v1-limitations-face { padding: 1.75rem 1.5rem 2rem; }
   [data-variation="v1"] .v1-limitations-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  [data-variation="v1"] .v1-career-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  [data-variation="v1"] .v1-career-aside { position: static; }
+  [data-variation="v1"] .v1-career-cv { margin-top: 1.25rem; }
   [data-variation="v1"] details.v1-career-row > summary { grid-template-columns: 1fr auto; gap: 0.35rem 1rem; padding: 1.25rem 0; }
   [data-variation="v1"] details.v1-career-row > summary > .period,
   [data-variation="v1"] details.v1-career-row > summary > .v1-career-headline { grid-column: 1; }
   [data-variation="v1"] details.v1-career-row > summary > .v1-career-chevron { grid-column: 2; grid-row: 1 / -1; align-self: start; }
+  [data-variation="v1"] .v1-career-row--static { grid-template-columns: 1fr; gap: 0.35rem; padding: 1.25rem 0; }
   [data-variation="v1"] .v1-career-body { grid-template-columns: 1fr; gap: 1.25rem; }
   [data-variation="v1"] .v1-career-body > ul,
   [data-variation="v1"] .v1-career-body > .v1-career-tags { grid-column: 1; }
@@ -802,7 +826,11 @@
   top: 0;
   height: 100svh;
   display: flex;
-  align-items: stretch;
+  /* Top-align the grid so its height is driven by the (tallest) image
+     instead of stretching to the full viewport. The text column then
+     matches the image height, so the chapter rail closes off level with
+     the bottom of the image. */
+  align-items: flex-start;
   padding: clamp(4.5rem, 9vh, 7rem) 0 clamp(1.5rem, 4vh, 3rem);
   box-sizing: border-box;
 }
@@ -870,7 +898,8 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 0.85rem;
   max-width: 38rem;
   opacity: 0;
   transform: translateY(16px);
@@ -959,6 +988,16 @@
   overflow: hidden;
   border: 1px solid var(--rule);
   background: var(--paper-2);
+  /* Fixed, gently portrait format, top-aligned with the text column. Capped
+     to the pinned height so it never overflows on short viewports, and tall
+     enough that it is never shorter than the chapter text beside it. */
+  align-self: start;
+  justify-self: center;
+  aspect-ratio: 7 / 10;
+  width: 100%;
+  /* Cap to the pinned viewport (minus padding) so the portrait frame never
+     overflows on short screens. Drives the grid/text-column height. */
+  max-height: calc(100svh - 10rem);
   min-height: 0;
 }
 [data-variation="v1"] .ahs-img {
@@ -970,7 +1009,7 @@
   padding: 1.4rem 1.5rem;
   opacity: 0;
   transform: scale(1.035);
-  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out);
+  transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out), filter 600ms var(--ease-out);
   pointer-events: none;
 }
 [data-variation="v1"] .ahs-img.is-active {
@@ -978,22 +1017,43 @@
   transform: none;
   pointer-events: auto;
 }
+/* Chapter photos sit black-and-white and bloom into color on hover; the
+   portrait video (no [data-step]) is left untouched, so it stays in color. */
+[data-variation="v1"] .ahs-img[data-step] { filter: grayscale(1); }
+[data-variation="v1"] .ahs-img[data-step]:hover { filter: grayscale(0); }
+[data-variation="v1"] .ahs-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 [data-variation="v1"] .ahs-portrait {
   background:
     radial-gradient(120% 90% at 70% 20%, color-mix(in oklab, var(--accent) 12%, var(--paper-2)), transparent 60%),
     repeating-linear-gradient(135deg, color-mix(in oklab, var(--ink) 5%, var(--paper-2)) 0 1px, transparent 1px 15px);
 }
+/* Each chapter image layers the real photo over its gradient fallback, so the
+   placeholder texture shows until the file is dropped into images/about/. */
 [data-variation="v1"] .ahs-img[data-step="0"] {
-  background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px, transparent 1px 14px);
+  background:
+    url("../images/about/shanghai.jpg?v=3") center / cover no-repeat,
+    repeating-linear-gradient(135deg, color-mix(in oklab, var(--accent) 9%, var(--paper-2)) 0 1px, transparent 1px 14px);
 }
 [data-variation="v1"] .ahs-img[data-step="1"] {
-  background: repeating-linear-gradient(-135deg, color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px, transparent 1px 14px);
+  background:
+    url("../images/about/don-norman.jpeg?v=4") center / cover no-repeat,
+    repeating-linear-gradient(-135deg, color-mix(in oklab, var(--ink) 6%, var(--paper-2)) 0 1px, transparent 1px 14px);
 }
 [data-variation="v1"] .ahs-img[data-step="2"] {
-  background: repeating-linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px, transparent 1px 16px);
+  background:
+    url("../images/about/aerial-yoga.jpeg?v=5") center / cover no-repeat,
+    repeating-linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, var(--paper-2)) 0 1px, transparent 1px 16px);
 }
 [data-variation="v1"] .ahs-img[data-step="3"] {
   background:
+    url("../images/about/aerial-yoga.jpeg?v=3") center / cover no-repeat,
     repeating-linear-gradient(45deg, color-mix(in oklab, var(--ink) 5%, var(--paper-3)) 0 1px, transparent 1px 12px),
     linear-gradient(180deg, var(--paper-2), color-mix(in oklab, var(--accent) 4%, var(--paper-2)));
 }
@@ -1064,6 +1124,25 @@
   [data-variation="v1"] .ahs-progress { display: none; }
 }
 
+/* Tighten the pinned chapter on shorter heights AND narrower widths, so the
+   longer bios still fit between the collapsed masthead and the chapter rail.
+   Narrow columns wrap text taller while the portrait image gets shorter, so
+   width matters as much as height here. */
+@media (min-width: 881px) and (max-height: 820px),
+       (min-width: 881px) and (max-width: 1200px) {
+  [data-variation="v1"] .ahs-pin { padding-top: clamp(3.25rem, 7vh, 5rem); }
+  [data-variation="v1"] .ahs-step { padding-top: 0.3rem; }
+  [data-variation="v1"] .ahs-num { margin-bottom: 0.5rem; }
+  [data-variation="v1"] .ahs-step-h {
+    font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+    margin-bottom: 0.55rem;
+  }
+  [data-variation="v1"] .ahs-step-p { font-size: 0.92rem; line-height: 1.44; }
+  /* The merged free-time chapter carries two paragraphs, so it needs a touch
+     more compression to clear the rail on short or narrow viewports. */
+  [data-variation="v1"] .ahs-step--long .ahs-step-p { font-size: 0.84rem; line-height: 1.36; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-variation="v1"] .ahs-mast { transition: none; }
   [data-variation="v1"] .ahs-img,
@@ -1071,9 +1150,9 @@
 }
 
 /* ==========================================================================
-   Blog "Gazette" — newspaper treatment. v1 only.
+   Blog "Gazette" — newspaper treatment.
    Front page (blog index) + article masthead. Everything is scoped under
-   .lv-gazette / .lv-gazette-article so v3 and the rest of the site stay
+   .lv-gazette / .lv-gazette-article so the rest of the site stays
    untouched. Fraunces is used more liberally here than elsewhere — a
    newspaper masthead is display-serif by nature.
    ========================================================================== */

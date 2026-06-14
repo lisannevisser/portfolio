@@ -1,5 +1,5 @@
 /* =========================================================================
-   App — vanilla JS: router, variation, cursor, magnetic, tweaks, easter egg,
+   App — vanilla JS: router, cursor, magnetic, tweaks, easter egg,
    case-study renderer, mobile nav.
    Depends on: window.LV_DATA (loaded by js/data.js before this file).
    ========================================================================= */
@@ -10,12 +10,9 @@
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
-  // -------- Early bootstrap (inline head script already set data-variation,
-  // but this re-applies persisted tweaks in case they weren't) ----------
+  // -------- Early bootstrap: re-apply persisted tweaks in case the inline
+  // head script didn't ----------
   function bootstrapVars() {
-    let v = localStorage.getItem("lv-variation") || "v1";
-    if (v !== "v1" && v !== "v3") v = "v1";
-    document.documentElement.setAttribute("data-variation", v);
     const hue = localStorage.getItem("lv-hue");
     if (hue !== null && hue !== "") {
       document.documentElement.style.setProperty("--accent-hue", hue);
@@ -51,22 +48,20 @@
       el.hidden = name !== route.page;
     });
 
-    // Case study: fill every variation template with the selected slug.
+    // Case study: fill the template with the selected slug.
     if (route.page === "case") {
       flushTocFabCleanups();
       const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
       renderV1Case(c);
-      renderV3Case(c);
     } else {
       flushTocFabCleanups();
     }
 
-    // Blog post: render selected post in both variation templates.
+    // Blog post: render the selected post.
     if (route.page === "post") {
       const p = (D.posts || []).find((x) => x.slug === route.slug) || (D.posts || [])[0];
       if (p) {
         renderV1Post(p);
-        renderV3Post(p);
       }
     }
 
@@ -82,28 +77,6 @@
   }
 
   window.addEventListener("hashchange", renderRoute);
-
-  // ========================================================================
-  // VARIATION SWITCHER
-  // ========================================================================
-  function initSwitcher() {
-    const el = $(".lv-switcher");
-    if (!el) return;
-    $$(".lv-switcher button", el).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const v = btn.getAttribute("data-variation");
-        document.documentElement.setAttribute("data-variation", v);
-        localStorage.setItem("lv-variation", v);
-        $$(".lv-switcher button").forEach((b) => {
-          b.classList.toggle("is-active", b.getAttribute("data-variation") === v);
-        });
-      });
-    });
-    const current = document.documentElement.getAttribute("data-variation") || "v1";
-    $$(".lv-switcher button", el).forEach((b) => {
-      b.classList.toggle("is-active", b.getAttribute("data-variation") === current);
-    });
-  }
 
   // ========================================================================
   // CUSTOM CURSOR + MAGNETIC
@@ -414,7 +387,7 @@
       </div>`;
   }
 
-  // Wire up the FAB. Both v1 and v3 renderers run per route change, so we
+  // Wire up the FAB. The case renderer runs per route change, so we
   // track cleanup per render-pass and flush stale listeners before binding new ones.
   const __tocFabCleanups = [];
   function flushTocFabCleanups() {
@@ -660,145 +633,8 @@
     renderScribbles();
   }
 
-  function renderV3Case(c) {
-    const root = $("#v3-case-body");
-    if (!root) return;
-    const idx = D.cases.findIndex((x) => x.slug === c.slug);
-    const next = D.cases[(idx + 1) % D.cases.length];
-
-    const tocEntries = buildTocEntries(c, "v3");
-
-    let narrativeIdx = 0;
-    const storyHtml = c.story.map((s, storyI) => {
-      if (s.kind === "figure") {
-        const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
-        const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
-        const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
-        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
-      }
-      if (s.kind === "limitations" && s.items) {
-        const sid = sectionId("v3", s.title || "limitations", storyI);
-        const renderItems = (arr) => arr.map((it) => `
-          <div class="v3-limitation-row">
-            <h4>${esc(it.title)}</h4>
-            <p>${esc(it.body)}</p>
-          </div>`).join("");
-        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
-        const oppFirst = s.defaultFace === "opportunities" && hasOpp;
-        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "[ flip → opportunities ]" };
-        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "[ flip → limitations ]" };
-        const front = oppFirst ? oppFace : limFace;
-        const back = oppFirst ? limFace : oppFace;
-        const renderHeader = (face, idSuffix, pressed) => {
-          const pid = `${sid}-info-${idSuffix}`;
-          const info = face.subtitle ? `
-              <button class="v3-limitations-info-btn" type="button" aria-expanded="false" aria-controls="${esc(pid)}" aria-label="About this card">[ ? ]</button>
-              <div class="v3-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden>${esc(face.subtitle)}</div>` : "";
-          const flip = hasOpp ? `<button class="v3-limitations-flip" type="button" aria-pressed="${pressed}">${face.flipLabel}</button>` : "";
-          return `
-            <div class="v3-limitations-header">
-              <div class="v3-limitations-info-group">
-                <span class="v3-limitations-label">// ${esc(face.title)}</span>${info}
-              </div>
-              ${flip}
-            </div>`;
-        };
-        const frontFace = `
-          <div class="v3-limitations-face is-front">
-            ${renderHeader(front, "front", "false")}
-            <div class="v3-limitations-grid">${renderItems(front.items)}</div>
-          </div>`;
-        const backFace = hasOpp ? `
-          <div class="v3-limitations-face is-back" aria-hidden="true">
-            ${renderHeader(back, "back", "true")}
-            <div class="v3-limitations-grid">${renderItems(back.items)}</div>
-          </div>` : "";
-        return `
-          <section id="${esc(sid)}" class="v3-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
-            <div class="v3-limitations-card-inner">${frontFace}${backFace}</div>
-          </section>`;
-      }
-      const i = narrativeIdx++;
-      const sid = sectionId("v3", s.title, storyI);
-      // Mono kicker bar: number + title, no LOG/OUTCOME tag (matches design prototype).
-      const head = `<div class="v3-story-head"><span>${String(i + 1).padStart(2, "0")} · ${esc(s.title)}</span></div>`;
-      const title = `<h2>${esc(s.title)}</h2>`;
-      const body = s.body ? `<p class="v3-story-body">${esc(s.body)}</p>` : "";
-      let extra = "";
-      if (s.kind === "framework" && s.items) {
-        extra = `<table class="v3-framework-table">
-          <thead><tr><th>Principle</th><th>Value</th><th>Effect</th></tr></thead>
-          <tbody>${s.items.map((it) => `<tr><td>${esc(it.k)}</td><td>${esc(it.v)}</td><td>${esc(it.effect)}</td></tr>`).join("")}</tbody>
-        </table>`;
-      } else if (s.kind === "flow" && s.items) {
-        const lines = s.items.map((it, j) =>
-          j === s.items.length - 1
-            ? `    [${it.from}]  →  [${it.to}]`
-            : `    [${it.from}]`
-        ).join("\n       │\n       ▼\n");
-        extra = `<div style="margin-top:1.5rem;padding:1.5rem;background:var(--paper-2);border:1px solid var(--rule);"><pre class="v3-ascii" style="padding:0;background:transparent;border:none;">${esc(lines)}</pre></div>`;
-      }
-      return `<section id="${esc(sid)}" class="v3-story lv-case-section lv-reveal" style="margin-bottom:3.5rem;">${head}${title}${body}${extra}</section>`;
-    }).join("");
-
-    const idxNum = String(idx + 1).padStart(2, "0");
-    const total = String(D.cases.length).padStart(2, "0");
-
-    root.innerHTML = `
-      <a href="#/work" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);text-decoration:none;letter-spacing:0.08em;" data-cursor-label="← Back">← ../work</a>
-
-      <header style="margin-top:2rem;">
-        <div class="v3-kicker">
-          <span>CASE / ${idxNum} / ${total}</span>
-          <span class="sep">◆</span>
-          <span>${esc(c.company)}</span>
-          <span class="sep">◆</span>
-          <span>${esc(c.year)}</span>
-        </div>
-        <h1 class="v3-hero-title lv-reveal" style="font-size:clamp(2rem,6vw,4.5rem);">${esc(c.title)}</h1>
-        <p class="lv-lead lv-reveal" style="max-width:62ch;margin-top:2rem;color:var(--ink-2);">${esc(c.tldr)}</p>
-      </header>
-
-      <div class="v3-meta-sheet lv-reveal">
-        <div class="row-grid">
-          <div class="cell"><div class="k">ROLE</div><div class="v">${esc(c.role)}</div></div>
-          <div class="cell"><div class="k">TEAM</div><div class="v">${esc(c.team)}</div></div>
-          <div class="cell"><div class="k">DURATION</div><div class="v">${esc(c.duration)}</div></div>
-          <div class="cell"><div class="k">YEAR</div><div class="v">${esc(c.year)}</div></div>
-        </div>
-      </div>
-
-      ${shouldShowImpact(c.impact) ? `
-      <div class="v3-impact-box lv-reveal">
-        <div class="v3-kicker" style="margin-bottom:1.5rem;"><span>./impact</span></div>
-        <div style="display:grid;gap:1.5rem;">
-          ${c.impact.map((i, j) => `
-            <div class="v3-impact-row">
-              <div class="label">${esc(i.label)}</div>
-              <div class="v3-metric-bar"><div class="fill" style="width:${60 + j * 15}%;animation-delay:${j * 0.2}s;"></div></div>
-              <div class="val">${esc(i.value)}</div>
-            </div>`).join("")}
-        </div>
-      </div>` : ""}
-
-      <div style="margin-top:5rem;">${storyHtml}</div>
-
-      ${tocFabHtml()}
-
-      <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
-        <span class="lv-next-label">Next</span>
-        <span class="lv-next-title-wrap">
-          <span class="lv-next-title">${esc(next.title)}</span>
-          <span class="lv-next-scribble" data-scribble="arrow-long" data-delay="0.15"></span>
-        </span>
-      </a>
-    `;
-    wireTocFab(root, tocEntries);
-    renderScribbles();
-  }
-
   // ========================================================================
-  // BLOG RENDERERS (list + post detail, v1 + v3)
+  // BLOG RENDERERS (list + post detail)
   // ========================================================================
   // Pull the first few prose blocks (lead/paragraph/string) out of a post body
   // as plain text, for the gazette front-page aufmacher columns.
@@ -872,22 +708,6 @@
         ${renderEntryGrid(olderByYear[yr])}`).join("");
 
       v1List.innerHTML = featured + sameYearSection + olderSections;
-    }
-
-    const v3List = $("#v3-blog-list");
-    if (v3List) {
-      v3List.innerHTML = posts.map((p, i) => `
-        <a href="#/blog/${esc(p.slug)}" class="v3-case-row lv-reveal" data-cursor-label="Read">
-          <div class="num">${String(i + 1).padStart(2, "0")}</div>
-          <div>
-            <h3>${esc(p.title)}</h3>
-            <div class="meta">${esc(p.dateLabel)} · ${esc(p.readingTime)} · ${p.tags.map(esc).join(" · ")}</div>
-          </div>
-          <div class="metric" style="font-size:clamp(0.8rem,1.2vw,1rem);font-family:var(--font-mono);">${esc(p.date)}</div>
-          <div class="metric-label">published</div>
-          <div class="arrow">→</div>
-        </a>
-      `).join("");
     }
   }
 
@@ -1072,49 +892,6 @@
         </a>` : ""}
     `;
     renderScribbles();
-    initPostChats(root);
-  }
-
-  function renderV3Post(p) {
-    const root = $("#v3-post-body");
-    if (!root) return;
-    const posts = D.posts || [];
-    const idx = posts.findIndex((x) => x.slug === p.slug);
-    const next = posts[(idx + 1) % posts.length];
-
-    const bodyHtml = renderPostBody(p.body);
-
-    const idxNum = String(idx + 1).padStart(2, "0");
-    const total = String(posts.length).padStart(2, "0");
-
-    root.innerHTML = `
-      <a href="#/blog" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-3);text-decoration:none;letter-spacing:0.08em;" data-cursor-label="← Back">← ../blog</a>
-
-      <header style="margin-top:2rem;">
-        <div class="v3-kicker">
-          <span>POST / ${idxNum} / ${total}</span>
-          <span class="sep">◆</span>
-          <span>${esc(p.dateLabel)}</span>
-          <span class="sep">◆</span>
-          <span>${esc(p.readingTime)}</span>
-        </div>
-        <h1 class="v3-hero-title lv-reveal" style="font-size:clamp(1.75rem,5vw,3.75rem);margin-top:1.5rem;">${esc(p.title)}</h1>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem;">
-          ${p.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}
-        </div>
-      </header>
-
-      <div class="lv-post-body" style="margin-top:4rem;">${bodyHtml}</div>
-
-      ${next && next.slug !== p.slug ? `
-        <a href="#/blog/${esc(next.slug)}" class="lv-reveal" style="display:block;margin-top:5rem;padding:2.5rem 0;border-top:2px solid var(--rule);text-decoration:none;color:inherit;">
-          <div class="v3-kicker"><span>→ next.post</span></div>
-          <h2 class="v3-hero-title" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-top:1rem;">${esc(next.title)}</h2>
-          <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent);">
-            ${esc(next.dateLabel)} · ${esc(next.readingTime)} →
-          </div>
-        </a>` : ""}
-    `;
     initPostChats(root);
   }
 
@@ -1309,48 +1086,13 @@
 
     // V1 — Work ledger (filter chips + impact-stamp rows + mini-intro)
     renderV1WorkLedger();
-
-    // V3 — Home case rows
-    const v3HomeList = $("#v3-home-cases");
-    if (v3HomeList) {
-      v3HomeList.innerHTML = D.cases.map((c, i) => `
-        <a href="#/work/${esc(c.slug)}" class="v3-case-row lv-reveal" data-cursor-label="Open">
-          <div class="num">0${i + 1}</div>
-          <div>
-            <h3>${esc(c.title)}</h3>
-            <div class="meta">${esc(c.company)} · ${esc(c.year)} · ${c.tags.slice(0, 2).map(esc).join(" · ")}</div>
-          </div>
-          <div class="metric">${esc(c.impact[0].value)}</div>
-          <div class="metric-label">${esc(c.impact[0].label)}</div>
-          <div class="arrow">→</div>
-        </a>
-      `).join("");
-    }
-
-    // V3 — Work list
-    const v3WorkList = $("#v3-work-cases");
-    if (v3WorkList) {
-      v3WorkList.innerHTML = D.cases.map((c, i) => `
-        <a href="#/work/${esc(c.slug)}" class="v3-case-row lv-reveal">
-          <div class="num">0${i + 1}</div>
-          <div>
-            <h3>${esc(c.title)}</h3>
-            <div class="meta">${esc(c.company)} · ${esc(c.year)}</div>
-            <div class="tags">${c.tags.map((t) => `<span class="v3-chip">${esc(t)}</span>`).join("")}</div>
-          </div>
-          <div class="metric">${esc(c.impact[0].value)}</div>
-          <div class="metric-label">${esc(c.impact[0].label)}</div>
-          <div class="arrow">→</div>
-        </a>
-      `).join("");
-    }
   }
 
   // ========================================================================
   // BOOT
   // ========================================================================
   function closeAllInfoPopovers(except) {
-    document.querySelectorAll(".v1-limitations-info-btn, .v3-limitations-info-btn").forEach((b) => {
+    document.querySelectorAll(".v1-limitations-info-btn").forEach((b) => {
       if (b === except) return;
       if (b.getAttribute("aria-expanded") !== "true") return;
       b.setAttribute("aria-expanded", "false");
@@ -1362,9 +1104,9 @@
 
   function initFlipCards() {
     document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".v1-limitations-flip, .v3-limitations-flip");
+      const btn = e.target.closest(".v1-limitations-flip");
       if (!btn) return;
-      const card = btn.closest(".v1-limitations-card, .v3-limitations-card");
+      const card = btn.closest(".v1-limitations-card");
       if (!card) return;
       closeAllInfoPopovers();
       const flipped = card.classList.toggle("is-flipped");
@@ -1372,7 +1114,7 @@
         const isBack = face.classList.contains("is-back");
         face.setAttribute("aria-hidden", String(isBack !== flipped));
       });
-      card.querySelectorAll(".v1-limitations-flip, .v3-limitations-flip").forEach((b) => {
+      card.querySelectorAll(".v1-limitations-flip").forEach((b) => {
         const onBack = b.closest(".is-back");
         b.setAttribute("aria-pressed", String(onBack ? !flipped : flipped));
       });
@@ -1381,7 +1123,7 @@
 
   function initInfoPopovers() {
     document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".v1-limitations-info-btn, .v3-limitations-info-btn");
+      const btn = e.target.closest(".v1-limitations-info-btn");
       if (btn) {
         const expanded = btn.getAttribute("aria-expanded") === "true";
         closeAllInfoPopovers(btn);
@@ -1391,7 +1133,7 @@
         if (pop) pop.hidden = expanded;
         return;
       }
-      if (!e.target.closest(".v1-limitations-info-popover, .v3-limitations-info-popover")) {
+      if (!e.target.closest(".v1-limitations-info-popover")) {
         closeAllInfoPopovers();
       }
     });
@@ -1492,6 +1234,17 @@
     window.addEventListener("resize", onScroll);
     window.addEventListener("hashchange", () => requestAnimationFrame(update));
     update();
+  }
+
+  // Slow the about-hero portrait video down a touch — full speed reads as
+  // restless. playbackRate can only be set in JS, and it survives looping.
+  function initHeroVideo() {
+    const vid = document.querySelector(".ahs-video");
+    if (!vid) return;
+    const slow = () => { vid.playbackRate = 0.3; };
+    slow();
+    vid.addEventListener("loadedmetadata", slow);
+    vid.addEventListener("play", slow);
   }
 
   // ========================================================================
@@ -1646,7 +1399,6 @@
     renderBooks();
     renderClientStrip();
     renderScribbles();
-    initSwitcher();
     initCursor();
     initCursorToggle();
     initMagnetic();
@@ -1658,6 +1410,7 @@
     initV1WorkFilters();
     initFooterEmoji();
     initHeroScrolly();
+    initHeroVideo();
     renderRoute();
   }
 
