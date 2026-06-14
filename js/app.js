@@ -1335,7 +1335,7 @@
       .map((b, i) => `
         <button class="lv-book-card" data-index="${i}" data-cursor-label="Read" aria-label="Open review of ${esc(b.title)}">
           <span class="lv-book-cover" style="--spine:${esc(b.color)}">
-            <span class="lv-book-fallback" style="background:${esc(b.color)}">${esc(b.title)}</span>
+            <span class="lv-book-fallback">${esc(b.title)}</span>
             <img class="lv-book-img" src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" onerror="this.style.display='none'" />
             <span class="lv-book-spine" style="background:${esc(b.color)}"></span>
           </span>
@@ -1358,7 +1358,6 @@
       $("#lv-book-detail-cover").src = b.cover;
       $("#lv-book-detail-cover").alt = b.title;
       const dfb = $("#lv-book-detail-fallback");
-      dfb.style.background = b.color;
       dfb.textContent = b.title;
       $("#lv-book-detail-title").textContent = b.title;
       $("#lv-book-detail-author").textContent = "by " + b.author;
