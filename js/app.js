@@ -555,7 +555,9 @@
       }
       const i = narrativeIdx++;
       const sid = sectionId("v1", s.title, storyI);
-      let body = s.body ? `<p>${esc(s.body)}</p>` : "";
+      let body = s.body
+        ? s.body.split(/\n\n+/).map((p) => `<p>${inlineMarks(p)}</p>`).join("")
+        : "";
       let extra = "";
       if (s.kind === "framework" && s.items) {
         extra = `<div class="v1-framework">${s.items.map((it) => `
