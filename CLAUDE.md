@@ -22,6 +22,12 @@ fine in this CLAUDE.md itself.
 `realization` not `realisation`, `skeptical` not `sceptical`, `rigor`
 not `rigour`.
 
+**Currency format.** Write amounts in the European style: the number
+first, a comma as the decimal separator, then a space and the symbol
+(`10,00 €`, `9,90 €`, `15,99 €`). Whole-euro amounts can drop the
+decimals (`10 €`, `20 €`). Never the leading-symbol, dot-decimal form
+(`€10.00`). Applies to all site copy: case studies, About, microcopy.
+
 **Scribbles welcome.** Hand-notes, arrows, drawn annotations are part
 of the visual language. They can appear in cases, About, next to
 figures, or between sections when they add a small personal touch.
