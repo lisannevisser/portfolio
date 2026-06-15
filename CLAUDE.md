@@ -220,8 +220,9 @@ narrative quietly, not as bullet points or headings.
 
 **Limitations card at the bottom**
 End each case study with a scientific-paper style Limitations card,
-visually distinct from the regular sections. 3-5 short items, each
-naming a scope or validity caveat about the work:
+visually distinct from the regular sections. At most 4 short items
+(fewer is fine, never more), each naming a scope or validity caveat
+about the work:
 - Methodological constraints (e.g. "external user testing" — what was
   validated by what method)
 - Sample / coverage limits (e.g. "desktop-first" — what got the
@@ -242,9 +243,9 @@ limitation item, not as its own block.
 **Optional: Opportunities on the back.** The Limitations card can
 flip to a second face labelled "Opportunities" — short forward-looking
 ideas for how the work could be extended (mobile-native pass, public
-component library, experimentation layer, etc.). 3-5 items, 1-2
-sentences each, builds on the actual project (not random product
-ideas). Same item shape as limitations: title + body. Opt-in per case
+component library, experimentation layer, etc.). At most 4 items
+(fewer is fine, never more), 1-2 sentences each, builds on the actual
+project (not random product ideas). Same item shape as limitations: title + body. Opt-in per case
 study by adding an `opportunities` array to the limitations block.
 
 ### Editing
