@@ -135,7 +135,8 @@ window.LV_DATA = {
             { title: "Moving the pipeline onto Claude", body: "I'm currently working on bringing this process from Figma Make over to Claude, because the workflow is even cleaner to maintain there. Two things make the difference: Claude can be given read access to the repo, so templates stay anchored to the real codebase instead of a copy, and it writes native HTML and CSS on request, which is exactly what Kameleoon needs (no React-to-HTML conversion step)." },
             { title: "Template contribution model", body: "Right now I'm the only one who builds templates, which is a clean bottleneck but still a bottleneck. A lightweight way for others to propose templates, with a review gate, would scale it past me." },
             { title: "A written brand-compliance checklist", body: "The 80% rule lives in my judgment. Writing it out as an explicit checklist would let any designer hold the QA gate and make the standard auditable." },
-            { title: "Close the loop back to dev", body: "Winning variants still get refined and rolled out by hand. A cleaner handoff from a winning Figma Make variant into the production codebase would shave off the last manual step." }
+            { title: "Close the loop back to dev", body: "Winning variants still get refined and rolled out by hand. A cleaner handoff from a winning Figma Make variant into the production codebase would shave off the last manual step." },
+            { title: "Measure the pipeline", body: "Tracking tests-per-quarter, time-to-live, and win rate before and after would turn the \"−85%\" from an estimate into a tracked metric." }
           ]
         }
       ]
