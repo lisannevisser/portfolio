@@ -157,21 +157,36 @@ window.LV_DATA = {
       ],
       tags: ["Research ops", "Change management", "Behavioral data"],
       coverPaletteHue: 150,
-      tldr: "No dedicated researcher, no budget, teams making decisions on gut feeling and running disconnected conversion tests. I proposed a lean framework: one method a month, rotated by current need. In year one we hit 1.5× the target, collected the company's first sociodemographic user data, and ran the first focus group in 25 years.",
+      tldr: "There was no researcher, no budget, and no shared picture of who our users actually were. Teams optimized in isolation and trusted their gut. So I proposed something small enough that nobody could say no: one research method a month, picked by whatever question was loudest. Year one came in at 1.5× the target, gave the company its first sociodemographic data on its own users, and put the first focus group in 25 years in a room.",
       story: [
-        { kind: "section", title: "Situation", body: "No heatmaps. No regular research. Teams siloed. Conversion managers implementing design ideas without a holistic UX concept for the pages they were optimizing. The result was a patchwork of isolated wins that did not add up to a coherent experience." },
-        { kind: "section", title: "Framing", body: "Individual tests win small fights. Only a research practice wins the larger one. I proposed a lean approach: one project a month, one method at a time, topic chosen by current need. Not academic rigor for its own sake, a sustainable rhythm teams could actually maintain." },
-        { kind: "framework", title: "Cadence", items: [
+        { kind: "section", title: "Situation", body: "Let me be honest about where this started. No heatmaps. No regular research. Teams sitting in their own silos. Conversion managers shipping design ideas one page at a time, with no shared concept tying any of it together.\n\nSo we won small fights and lost the war. A pile of isolated wins that never added up to an experience anyone had designed on purpose." },
+        { kind: "section", title: "Framing", body: "Here is the thing about individual tests: they win small fights. Only a research practice wins the larger one.\n\nSo I kept the proposal deliberately modest. One project a month. One method at a time. Topic chosen by whatever the business needed most that month. Not academic rigor for its own sake, just a rhythm teams could actually keep without a budget or a dedicated researcher.\n\n**A practice you can sustain beats a perfect study you run once.** That was the whole bet." },
+        { kind: "framework", title: "Cadence", body: "One backbone method, the rest rotating in by need.", items: [
           { k: "Monthly survey", v: "385+ responses", effect: "Statistical significance on rotating topics" },
           { k: "Heatmaps (Clarity)", v: "Always-on", effect: "Surfaced a dead-click issue on branded product names" },
           { k: "Interviews", v: "As-needed", effect: "Qualitative stories behind the numbers" },
           { k: "Focus group", v: "First in 25 yrs", effect: "Qualitative depth on a trust topic" }
         ]},
         { kind: "figure", hue: 150, label: "Cadence · 12 months", caption: "Fig. 1 - A year of research, one method per month. Surveys form the backbone, heatmaps run continuously, interviews and focus groups slot in by topic." },
-        { kind: "section", title: "Evidence", body: "The organization assumed its typical customer was around 50. Survey data showed they were significantly older. The 2018 personas were stereotypical and outdated; the UX team preferred JTBD. I took a third route, a Limbic Types survey mapped to the actual user base, producing the first sociodemographic user data the company had ever collected." },
+        { kind: "section", title: "Evidence", body: "Then the data did something useful: it disagreed with us.\n\nThe organization pictured its typical customer at around 50. The survey said they were significantly older than that. The 2018 personas were stereotypes and well past their expiry date, and the UX team leaned toward JTBD instead. I took a third route: a Limbic Types survey mapped onto the real user base. It turned into the first sociodemographic user data the company had ever collected." },
         { kind: "figure", hue: 150, label: "Limbic Types · user mapping", caption: "Fig. 2 - The Limbic Types segmentation, mapped to our actual user base. Replaced the 2018 personas." },
-        { kind: "result", title: "Proof", body: "Three individual element tests in one quarter: new Plus branding, a comparison table, a progress bar. Each delivered roughly +20%. All three won. The deliberate goal: show through data that holistic, user-centered design outperforms the isolated approach. Each winning test made the case for the next one." },
-        { kind: "section", title: "Aftermath", body: "The framework was later elevated out of our team to serve all consumer-facing teams. B2B teams adopted it. Other designers started running their own research. PMs come to me proactively for research support. From 'the designer does some surveys' to an organizational capability." }
+        { kind: "result", title: "Proof", body: "Now for the part that made people believe.\n\nThree element tests in a single quarter: the new Plus branding, a comparison table, a progress bar. Each one came in around +20%. All three won.\n\nThat was the point of picking them. I wanted to show, with numbers nobody could argue with, that holistic and user-centered beats optimizing in isolation. Each win bought the next test its credibility." },
+        { kind: "section", title: "Aftermath", body: "And then it stopped being my thing.\n\nThe framework was lifted out of our team to serve every consumer-facing team. B2B picked it up. Other designers started running research of their own. PMs began coming to me before a decision instead of after one.\n\nFrom \"the designer does some surveys\" to a capability the organization actually owns." },
+        { kind: "limitations",
+          title: "Limitations",
+          oppositeTitle: "Opportunities",
+          items: [
+            { title: "Internal proxies, not lab studies", body: "Most decisions leaned on surveys, heatmaps, and live A/B tests rather than moderated usability research. Fast and cheap, but a step removed from watching real users struggle." },
+            { title: "One segmentation model", body: "The user picture rests on a single Limbic Types survey. It replaced outdated personas, but it is one lens, not triangulated against behavior over time." },
+            { title: "Solo-led adoption", body: "I drove the rollout largely myself, alongside the UX team lead. Breadth came fast; depth in any single team depended on who picked it up." },
+            { title: "Wins are quarter-scoped", body: "The +20% element tests prove the approach in the short term. Whether the practice compounds over years is still being written (the case is ongoing)." }
+          ],
+          opportunities: [
+            { title: "Longitudinal tracking", body: "Re-run the core survey yearly to watch the user base shift, not just snapshot it once." },
+            { title: "Self-serve research kit", body: "Package the monthly cadence into templates so any team can run a method without me in the loop." },
+            { title: "Tie research to outcomes", body: "Connect each method back to a shipped decision and its metric, so the practice's ROI is visible, not assumed." }
+          ]
+        }
       ]
     },
     {
