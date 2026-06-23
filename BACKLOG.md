@@ -1,4 +1,4 @@
-# Ideen & Backlog
+# Backlog
 
 Ein Ort für Ideen, die später umgesetzt werden sollen. Damit nichts im
 Chat oder im Kopf verloren geht. Manuell gepflegt, wie `CLAUDE.md`.
@@ -77,3 +77,17 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
       Limbic-Follow-up darin integrieren.
 - [ ] Longitudinal: den Kern-Survey jährlich wiederholen, um die
       Nutzerbasis über Zeit zu beobachten, nicht nur als Momentaufnahme.
+
+## Research-Tooling, Skills & Agents
+
+Wiederverwendbare Bausteine, die projektübergreifend greifen - statt jedes
+Mal bei null anzufangen.
+
+- [ ] Eigenes Repo mit Research-Skills, die in verschiedenen Projekten
+      angewendet werden können (gebündelt als wiederverwendbare
+      Claude-Code-Skills/Agents).
+- [ ] Standardisierter Prozess (Skill/Agent) für Audits + Design-Prototypen
+      - ein wiederholbarer Ablauf, der projektübergreifend funktioniert.
+- [ ] Skill oder Agent für Python-Auswertungen von Surveys (Cleaning,
+      Testwahl, ddof, reproduzierbarer Output). Knüpft an den
+      Quant-vs-Qual-Blogpost an.
