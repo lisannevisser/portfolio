@@ -86,8 +86,9 @@ Mal bei null anzufangen.
 - [ ] Eigenes Repo mit Research-Skills, die in verschiedenen Projekten
       angewendet werden können (gebündelt als wiederverwendbare
       Claude-Code-Skills/Agents).
-- [ ] Standardisierter Prozess (Skill/Agent) für Audits + Design-Prototypen
-      - ein wiederholbarer Ablauf, der projektübergreifend funktioniert.
+- [ ] Spec-driven development (SDD) als Prozess (Skill/Agent) für Audits +
+      Design-Prototypen - ein spec-getriebener, wiederholbarer Ablauf, der
+      projektübergreifend funktioniert.
 - [ ] Skill oder Agent für Python-Auswertungen von Surveys (Cleaning,
       Testwahl, ddof, reproduzierbarer Output). Knüpft an den
       Quant-vs-Qual-Blogpost an.
