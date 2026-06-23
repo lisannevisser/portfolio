@@ -343,6 +343,34 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "trust-ai-quant-not-qual",
+      title: "Why I trust AI with quant, not qual",
+      date: "2026-06-23",
+      dateLabel: "June 2026",
+      readingTime: "6 min",
+      tags: ["AI", "Research"],
+      excerpt: "When ChatGPT first landed I aimed it at real research data, qual and quant, and it failed at both. What fixed the quantitative side wasn't a better model: it was taking the calculation out of the AI's hands and giving it to Python. The qualitative side I still won't hand over.",
+      body: [
+        { kind: "lead", text: "A confession to open with: when ChatGPT first showed up, I pointed it straight at my real research data, both the qualitative and the quantitative side. It failed at both. (I know how that sounds from someone who now uses AI every day.)" },
+
+        { kind: "paragraph", text: "The clearest miss was a pile of open-text entries, thousands of them, that I wanted clustered. What came back looked great and was mostly invented: categories that didn't hold, an importance order it made up, and, the part that made me close the tab, quotes it had written itself and served up as real user verbatims. I saw the same thing later on interview data. I tried it briefly and dropped it." },
+
+        { kind: "h2", text: "What actually changed" },
+        { kind: "paragraph", text: "It wasn't a smarter model or a cleverer prompt. It changed when I started using AI to write code, and let Python run my survey analysis instead of the chatbot. The numbers stopped going through the model's guesswork and started going through a script. (The pipeline itself I've described [in another post](#/blog/better-designer-with-ai), so I'll skip the how here.)" },
+        { kind: "paragraph", text: "**The fix wasn't trusting the AI more, it was taking the calculation out of its hands.**" },
+
+        { kind: "h2", text: "Why taking it out of its hands works" },
+        { kind: "paragraph", text: "Someone at a research roundtable recently asked me to explain why a Python analysis should be any more trustworthy than asking the model directly. The answer is almost mechanical. A language model doesn't calculate, it predicts the next token. Ask it for a mean and it returns the most plausible-looking number, a guess in the shape of an answer. Ask it to write the Python, and a separate interpreter computes that mean deterministically. The model stops being the calculator and becomes the author of a procedure: one I can read, check, and run again." },
+        { kind: "paragraph", text: "That's the real prize, and it isn't \"the answer is automatically right.\" A reproducible analysis can still be the wrong analysis. What I get is no black box: the script is transparent, it's repeatable, and I can attach it straight to my research report. My data and methods aren't just described, they can be verified and re-run by anyone who doubts them. The arithmetic is the machine's job. Choosing the right test and reading what the result means stays mine." },
+
+        { kind: "h2", text: "Why I still keep it away from qual" },
+        { kind: "paragraph", text: "Here's the asymmetry. In quant there's a ground truth that catches a lie: the counts have to add up to n, the percentages have to total 100, a sum that doesn't close tells me something broke. In qualitative work that safety net is gone. A made-up theme looks exactly like a real one. No total fails to balance, so the error is invisible, and it lands precisely where the insight was supposed to be." },
+        { kind: "paragraph", text: "And it's the failure mode I already watched happen: clusters drawn wrong, their importance inflated, interpretations that were a nightmare to untangle, and quotes I had to check line by line because some were never said. That isn't a model waiting for a better prompt. It's a task with nothing to check itself against." },
+        { kind: "paragraph", text: "I'll be honest about the edge of what I've tested: I haven't built the same code-backed setup for qualitative data, and I'm skeptical it would rescue it. You can make the mechanical parts reproducible: dedupe, count, cluster on fixed rules. But the interpretive leap, what a theme means and whether a quote actually supports it, has no ground truth to measure against. That's not a tooling gap. It's the nature of qual." },
+        { kind: "paragraph", text: "So I split the work by where that ground truth exists. Numbers: the code runs it, I judge it. Meaning: I read the transcripts myself, I keep the participant's own words, and I never hand the synthesis to a machine that would happily invent a tidy one. The day that changes, I'll happily reconsider. It hasn't yet." }
+      ]
+    },
+    {
       slug: "better-designer-with-ai",
       title: "I'm a better designer with AI",
       date: "2026-06-11",
