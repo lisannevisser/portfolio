@@ -70,6 +70,13 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
       Nur, wenn klar vom Trust-Post differenziert (echte Pipeline:
       Cleaning, Testwahl, ddof-Detail, Output-Artefakt). Aus Post 1
       verlinken statt dort auszubreiten.
+- [ ] Post: "Wie AI die UX-Maturity gesenkt hat." These: AI macht es
+      leicht, design- und research-artige Outputs ohne UX-Kompetenz zu
+      erzeugen, sodass Organisationen sich reifer fühlen, als sie sind -
+      Slop, der noch nicht als Slop erkannt wird. Knüpft an den
+      "What it doesn't do"-Beat aus "I'm a better designer with AI" an
+      (AI multipliziert Erfahrung, ersetzt sie nicht); offen, ob als
+      kritischer Gegenpol dazu cross-verlinkt.
 
 ## ResearchOps / Prozess (später)
 
