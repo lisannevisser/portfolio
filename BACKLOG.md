@@ -70,6 +70,18 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
       Nur, wenn klar vom Trust-Post differenziert (echte Pipeline:
       Cleaning, Testwahl, ddof-Detail, Output-Artefakt). Aus Post 1
       verlinken statt dort auszubreiten.
+- [ ] Post: "Wie AI die UX-Maturity gesenkt hat." These: Gerade Orgs mit
+      niedriger UX-Maturity und fehlendem Incentive, UX zu unterstützen,
+      laufen mit den neuen AI-Möglichkeiten Gefahr, weiter abzurutschen.
+      Wenn plötzlich alle Prototypen bauen können, fühlt sich das
+      kurzfristig wie ein Gewinn an (Tempo, sichtbarer Output), tut aber
+      eigentlich weh: design- und research-artige Outputs ohne
+      UX-Kompetenz, Slop, der noch nicht als Slop erkannt wird, und ein
+      noch schwächeres Argument, echte UX-Leute einzustellen. Der
+      scheinbare Benefit kaschiert, dass die Org sich reifer fühlt, als
+      sie ist. Knüpft an den "What it doesn't do"-Beat aus "I'm a better
+      designer with AI" an (AI multipliziert Erfahrung, ersetzt sie
+      nicht); offen, ob als kritischer Gegenpol dazu cross-verlinkt.
 
 ## ResearchOps / Prozess (später)
 
