@@ -308,10 +308,10 @@ window.LV_DATA = {
       type: "Web · Visual identity",
       year: "2024",
       hue: 330,
-      thumb: "",
-      blurb: "A small one-page site and visual identity for an aerial-yoga teaching practice. Placeholder entry: add a cover thumbnail and a live link.",
+      thumb: "images/visuals/aerial-yoga.jpg",
+      blurb: "A one-page site and visual identity for an aerial-yoga practice, built in Framer. Oversized display type, an airy palette, and a single clear path to the class schedule.",
       embed: "",
-      link: ""
+      link: "https://aerial-yoga.framer.ai/"
     },
     {
       slug: "sketchbook-2025",
