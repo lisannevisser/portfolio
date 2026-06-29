@@ -29,7 +29,7 @@
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
   <link rel="stylesheet" href="css/shared.css?v=2026-06-14-9" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-06-14-7" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-06-28-1" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
@@ -155,6 +155,19 @@
         </p>
         <div id="v1-work-filters" class="v1-work-filters lv-reveal"></div>
         <div id="v1-work-cases" class="v1-work-ledger"><!-- filled by app.js --></div>
+
+        <!-- Teaser into the Visuals gallery -->
+        <section class="v1-visuals-teaser-block lv-reveal">
+          <div class="v1-visuals-teaser-head">
+            <div>
+              <div class="lv-eyebrow">./visuals</div>
+              <h2 class="v1-visuals-teaser-title">The smaller stuff, too.</h2>
+              <p class="v1-visuals-teaser-lead">Brand guides, identities, and studies. Freelance and private work that shows the hand, even when it never became a case study.</p>
+            </div>
+            <a href="#/visuals" class="v1-visuals-teaser-link" data-cursor-label="All →">All visuals →</a>
+          </div>
+          <div class="v1-visuals-teaser-grid" id="v1-visuals-teaser"><!-- filled by app.js --></div>
+        </section>
       </div>
     </section>
 
@@ -435,6 +448,40 @@
                 <p class="lv-book-detail-review" id="lv-book-detail-review"></p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: VISUALS (gallery of small visual work)              -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="visuals" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./visuals</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            The smaller <em>stuff</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            Freelance and private work that's too slight for a full case study but shows the hand: brand guides, identities, sketchbook pages, type and color studies. Click any piece to open it.
+          </p>
+        </header>
+
+        <div class="v1-visuals-grid" id="v1-visuals-grid"><!-- filled by app.js --></div>
+      </div>
+
+      <!-- Detail overlay -->
+      <div class="lv-book-overlay v1-visual-overlay" id="lv-visual-overlay" aria-hidden="true">
+        <div class="lv-book-backdrop" id="lv-visual-backdrop"></div>
+        <div class="v1-visual-detail" role="dialog" aria-modal="true" aria-label="Visual project">
+          <button class="lv-book-close" id="lv-visual-close" type="button" aria-label="Close">×</button>
+          <div class="v1-visual-stage" id="lv-visual-stage"></div>
+          <div class="v1-visual-detail-body">
+            <div class="lv-eyebrow" id="lv-visual-eyebrow"></div>
+            <h2 class="v1-visual-detail-title" id="lv-visual-title"></h2>
+            <p class="v1-visual-detail-blurb" id="lv-visual-blurb"></p>
+            <a class="v1-visual-open" id="lv-visual-link" target="_blank" rel="noopener noreferrer" hidden>Open ↗</a>
           </div>
         </div>
       </div>
@@ -734,7 +781,9 @@
         <ul>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
+          <li><a href="#/visuals" data-cursor-label="Look">Visuals</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
+          <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
           <li hidden><a href="#/playground">Playground</a></li>
         </ul>
@@ -791,8 +840,8 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-06-16-2"></script>
-  <script src="js/app.js?v=2026-06-15-2"></script>
+  <script src="js/data.js?v=2026-06-28-3"></script>
+  <script src="js/app.js?v=2026-06-28-1"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>

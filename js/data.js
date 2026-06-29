@@ -282,6 +282,75 @@ window.LV_DATA = {
     }
   ],
 
+  // Small visual work, too slight for a full case study but it shows the
+  // hand and the craft. Mostly freelance / private. Each card opens a modal;
+  // an `embed` (Canva iframe src) shows the artifact inline, `link` opens it
+  // externally, `thumb` is a cover image (gradient fallback by `hue` if none).
+  visuals: [
+    {
+      slug: "freelance-brand-guide",
+      title: "Brand guide",
+      context: "Freelance",
+      type: "Brand identity",
+      year: "2025",
+      hue: 190,
+      thumb: "images/visuals/brand-guide.jpg",
+      blurb: "A full brand guide built in Canva for the foodsnap brand: logo usage, color system, type scale, and the do's and don'ts. Made to hand off so a non-designer can stay on-brand without me in the room.",
+      // Canva smart-embed src (the design /view URL with ?embed appended).
+      // The modal also shows an "Open in Canva" link as a fallback.
+      embed: "https://www.canva.com/design/DAFs0MtePKA/view?embed",
+      link: "https://www.canva.com/design/DAFs0MtePKA/view"
+    },
+    {
+      slug: "aerial-yoga-site",
+      title: "Aerial Yoga microsite",
+      context: "Private",
+      type: "Web · Visual identity",
+      year: "2024",
+      hue: 330,
+      thumb: "",
+      blurb: "A small one-page site and visual identity for an aerial-yoga teaching practice. Placeholder entry: add a cover thumbnail and a live link.",
+      embed: "",
+      link: ""
+    },
+    {
+      slug: "sketchbook-2025",
+      title: "Sketchbook 2025",
+      context: "Private",
+      type: "Drawings",
+      year: "2025",
+      hue: 50,
+      thumb: "",
+      blurb: "Weekly portraits, still life, urban sketching. The hand-drawn scribbles around this portfolio come from here. Placeholder entry: add scanned spreads as the thumbnail.",
+      embed: "",
+      link: ""
+    },
+    {
+      slug: "type-pairings",
+      title: "Type pairings file",
+      context: "Private",
+      type: "Typography",
+      year: "2024",
+      hue: 20,
+      thumb: "",
+      blurb: "A running file of typeface pairings I like, with notes on where each one works. Placeholder entry: add a preview image.",
+      embed: "",
+      link: ""
+    },
+    {
+      slug: "colour-studies",
+      title: "Colour studies",
+      context: "Private",
+      type: "Palettes",
+      year: "2024",
+      hue: 270,
+      thumb: "",
+      blurb: "Palette explorations pulled from photos, paintings, and packaging. Placeholder entry: add a preview image.",
+      embed: "",
+      link: ""
+    }
+  ],
+
   sideProjects: [
     { kind: "practice", title: "Aerial yoga teaching", detail: "Certified teacher. Weekly classes. Keeps me humble about balance, patience, and what 'effortless' actually costs to build.", tag: "Off-screen" },
     { kind: "reading", title: "~30 books tracked in 2025", detail: "Mix of design, behavioral science, and fiction. Currently: Thinking, Fast and Slow · Klara and the Sun · Design is Storytelling.", tag: "Input" },

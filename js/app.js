@@ -1389,10 +1389,91 @@
     });
   }
 
+  // Visuals: a gallery of small visual work. Cards render into the full
+  // #/visuals grid and a 3-up teaser at the foot of Work. Clicking a card
+  // opens a modal; an `embed` loads inline (Canva iframe), otherwise a
+  // thumbnail / gradient preview shows, with an external link as fallback.
+  function renderVisuals() {
+    const items = D.visuals || [];
+    const grid = $("#v1-visuals-grid");
+    const teaser = $("#v1-visuals-teaser");
+
+    function card(v, i) {
+      const thumb = v.thumb
+        ? `<span class="v1-visual-thumb" style="background-image:url('${esc(v.thumb)}');"></span>`
+        : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span class="v1-visual-kind">${esc(v.type || "")}</span></span>`;
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open">
+        ${thumb}
+        <span class="v1-visual-info">
+          <span class="v1-visual-title">${esc(v.title)}</span>
+          <span class="v1-visual-sub">${esc(v.context || "")}${v.context && v.year ? " · " : ""}${esc(v.year || "")}</span>
+        </span>
+      </button>`;
+    }
+
+    if (grid) grid.innerHTML = items.map(card).join("");
+    if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join("");
+
+    const overlay = $("#lv-visual-overlay");
+    if (!overlay) return;
+    const backdrop = $("#lv-visual-backdrop");
+    const closeBtn = $("#lv-visual-close");
+    const stage = $("#lv-visual-stage");
+
+    function openVisual(v) {
+      $("#lv-visual-eyebrow").textContent = [v.type, v.year].filter(Boolean).join(" · ");
+      $("#lv-visual-title").textContent = v.title;
+      $("#lv-visual-blurb").textContent = v.blurb || "";
+      if (v.embed) {
+        stage.innerHTML = `<iframe class="v1-visual-frame" src="${esc(v.embed)}" loading="lazy" allowfullscreen title="${esc(v.title)}"></iframe>`;
+      } else if (v.thumb) {
+        stage.innerHTML = `<span class="v1-visual-stage-img" style="background-image:url('${esc(v.thumb)}');"></span>`;
+      } else {
+        stage.innerHTML = `<span class="v1-visual-stage-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span>${esc(v.type || v.title)}</span></span>`;
+      }
+      const link = $("#lv-visual-link");
+      if (v.link) {
+        link.href = v.link;
+        link.hidden = false;
+        link.textContent = (v.embed ? "Open in Canva" : "Open project") + " ↗";
+      } else {
+        link.hidden = true;
+        link.removeAttribute("href");
+      }
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeVisual() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      stage.innerHTML = ""; // unload the iframe so it stops playing
+    }
+
+    function onCardClick(e) {
+      const card = e.target.closest(".v1-visual-card");
+      if (!card) return;
+      const v = items[parseInt(card.getAttribute("data-index"), 10)];
+      if (v) openVisual(v);
+    }
+
+    if (grid) grid.addEventListener("click", onCardClick);
+    if (teaser) teaser.addEventListener("click", onCardClick);
+    closeBtn.addEventListener("click", closeVisual);
+    backdrop.addEventListener("click", closeVisual);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeVisual();
+    });
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
     renderBooks();
+    renderVisuals();
     renderClientStrip();
     renderScribbles();
     initCursor();
