@@ -304,7 +304,7 @@ window.LV_DATA = {
     {
       slug: "aerial-yoga-site",
       title: "Aerial Yoga microsite",
-      context: "Private",
+      context: "Personal project",
       type: "Web · Visual identity",
       year: "2024",
       hue: 330,
