@@ -314,40 +314,40 @@ window.LV_DATA = {
       link: "https://aerial-yoga.framer.ai/"
     },
     {
-      slug: "sketchbook-2025",
-      title: "Sketchbook 2025",
-      context: "Private",
-      type: "Drawings",
-      year: "2025",
-      hue: 50,
-      thumb: "",
-      blurb: "Weekly portraits, still life, urban sketching. The hand-drawn scribbles around this portfolio come from here. Placeholder entry: add scanned spreads as the thumbnail.",
+      slug: "figma-onboarding",
+      title: "Onboarding screens",
+      context: "Figma Community",
+      type: "UI kit · iOS",
+      year: "",
+      hue: 220,
+      thumb: "images/visuals/figma-onboarding.jpg",
+      blurb: "A set of simplistic iOS onboarding screens, published as a free template on the Figma Community. Playful hand-drawn illustrations over clean, generous layouts.",
       embed: "",
-      link: ""
+      link: "https://www.figma.com/community/file/1107307239195666218/simplistic-onboarding-screens-ios-app"
     },
     {
-      slug: "type-pairings",
-      title: "Type pairings file",
-      context: "Private",
-      type: "Typography",
-      year: "2024",
+      slug: "figma-openmoji",
+      title: "OpenMoji template",
+      context: "Figma Community",
+      type: "Template · Contribution",
+      year: "",
+      hue: 200,
+      thumb: "images/visuals/figma-openmoji.jpg",
+      blurb: "A Figma template for contributing to the open-source OpenMoji emoji set, with the drawing grid and guides set up so new emoji stay on-system.",
+      embed: "",
+      link: "https://www.figma.com/community/file/1216405776765570841/openmoji-template"
+    },
+    {
+      slug: "figma-canva-templates",
+      title: "Canva design templates",
+      context: "Figma Community",
+      type: "Templates",
+      year: "",
       hue: 20,
-      thumb: "",
-      blurb: "A running file of typeface pairings I like, with notes on where each one works. Placeholder entry: add a preview image.",
+      thumb: "images/visuals/figma-canva-templates.jpg",
+      blurb: "A Figma Community piece pointing to my Canva Creator templates: free, customizable digital and print designs for small brands.",
       embed: "",
-      link: ""
-    },
-    {
-      slug: "colour-studies",
-      title: "Colour studies",
-      context: "Private",
-      type: "Palettes",
-      year: "2024",
-      hue: 270,
-      thumb: "",
-      blurb: "Palette explorations pulled from photos, paintings, and packaging. Placeholder entry: add a preview image.",
-      embed: "",
-      link: ""
+      link: "https://www.figma.com/community/file/1216765425768737898/free-customizable-design-templates-on-canva"
     }
   ],
 
