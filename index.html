@@ -29,7 +29,7 @@
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
   <link rel="stylesheet" href="css/shared.css?v=2026-06-14-9" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-06-28-1" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-07-14-1" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
@@ -226,7 +226,7 @@
                     <div class="ahs-step ahs-step--long" data-step="2">
                       <div class="ahs-num">03 · Off-screen</div>
                       <h2 class="ahs-step-h">In my <em>free time</em></h2>
-                      <p class="ahs-step-p">In my spare time, I love spending time with friends just as much as I enjoy reading, drawing, and practicing yoga. I love Rocket Yoga and Ashtanga, and I have a 200h yoga teacher training.</p>
+                      <p class="ahs-step-p">In my spare time, I love spending time with friends just as much as I enjoy reading, <a href="#/sketchbook">drawing</a>, and practicing yoga. I love Rocket Yoga and Ashtanga, and I have a 200h yoga teacher training.</p>
                       <p class="ahs-step-p" style="margin-top:0.6em;">In 2024, I did a teacher training in Aerial Yoga. Over the past two years I've been teaching <a href="https://aerial-yoga.framer.ai/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);border-bottom:1px dashed var(--accent);text-decoration:none;" data-cursor-label="visit">Aerial Yoga classes</a> on the weekends. My own aerial practice slowly shifted from yoga towards acrobatics. Today, I'm at the aerial studio several times a week to practice aerial hammock, aerial hoop or silks.</p>
                     </div>
                   </div>
@@ -482,6 +482,39 @@
             <h2 class="v1-visual-detail-title" id="lv-visual-title"></h2>
             <p class="v1-visual-detail-blurb" id="lv-visual-blurb"></p>
             <a class="v1-visual-open" id="lv-visual-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Open ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: SKETCHBOOK (photos of hand-drawn work)              -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="sketchbook" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./sketchbook</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            By <em>hand</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            The drawing practice behind the scribbles you see all over this site. Life drawing, ink washes, watercolor studies, and the odd bit of fun. No briefs, no roadmap. Click any piece to see it larger.
+          </p>
+        </header>
+
+        <div class="v1-visuals-grid v1-sketch-grid" id="v1-sketch-grid"><!-- filled by app.js --></div>
+      </div>
+
+      <!-- Detail overlay -->
+      <div class="lv-book-overlay v1-visual-overlay" id="lv-sketch-overlay" aria-hidden="true">
+        <div class="lv-book-backdrop" id="lv-sketch-backdrop"></div>
+        <div class="v1-visual-detail v1-sketch-detail" role="dialog" aria-modal="true" aria-label="Sketch">
+          <button class="lv-book-close" id="lv-sketch-close" type="button" aria-label="Close">×</button>
+          <div class="v1-sketch-stage" id="lv-sketch-stage"></div>
+          <div class="v1-visual-detail-body">
+            <div class="lv-eyebrow" id="lv-sketch-eyebrow"></div>
+            <h2 class="v1-visual-detail-title" id="lv-sketch-title"></h2>
+            <p class="v1-visual-detail-blurb" id="lv-sketch-blurb"></p>
           </div>
         </div>
       </div>
@@ -782,6 +815,7 @@
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/visuals" data-cursor-label="Look">Visuals</a></li>
+          <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
@@ -840,8 +874,8 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-07-13-4"></script>
-  <script src="js/app.js?v=2026-06-28-1"></script>
+  <script src="js/data.js?v=2026-07-14-2"></script>
+  <script src="js/app.js?v=2026-07-14-1"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
