@@ -364,14 +364,6 @@ window.LV_DATA = {
       blurb: "A seated figure worked in ink wash, building the form from light to dark."
     },
     {
-      slug: "anatomy-studies",
-      title: "Anatomy studies",
-      medium: "Ink and wash",
-      thumb: "images/sketchbook/anatomy-studies-thumb.jpg",
-      full: "images/sketchbook/anatomy-studies.jpg",
-      blurb: "A sketchbook spread of hand and skeleton studies, drawn alongside an anatomy reference."
-    },
-    {
       slug: "hand-figure-studies",
       title: "Hands and figures",
       medium: "Ink wash",
@@ -404,28 +396,12 @@ window.LV_DATA = {
       blurb: "A loose watercolor with a soft, blended background."
     },
     {
-      slug: "sailboats-skies",
-      title: "Sailboats and skies",
-      medium: "Watercolor",
-      thumb: "images/sketchbook/sailboats-skies-thumb.jpg",
-      full: "images/sketchbook/sailboats-skies.jpg",
-      blurb: "Small watercolor studies: skies, boats, and a row of shape tests."
-    },
-    {
       slug: "color-tests",
       title: "Color tests",
       medium: "Watercolor",
       thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
       full: "images/sketchbook/color-tests-portrait.jpg",
       blurb: "A page of swatches and a small portrait, learning a new set of pigments."
-    },
-    {
-      slug: "totoro",
-      title: "Totoro",
-      medium: "Graphite",
-      thumb: "images/sketchbook/totoro-thumb.jpg",
-      full: "images/sketchbook/totoro.jpg",
-      blurb: "A pencil study inside a hand-drawn frame."
     },
     {
       slug: "character-doodles",
