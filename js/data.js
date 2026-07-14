@@ -372,14 +372,6 @@ window.LV_DATA = {
       blurb: "Hand and figure studies in ink, testing how far a wash can carry a form."
     },
     {
-      slug: "character-study",
-      title: "Character study",
-      medium: "Ink and watercolor",
-      thumb: "images/sketchbook/character-study-thumb.jpg",
-      full: "images/sketchbook/character-study.jpg",
-      blurb: "A character sketched in ink and colored with a small watercolor set, mid-session."
-    },
-    {
       slug: "seagull-berlin",
       title: "Seagull",
       medium: "Watercolor and ink",
