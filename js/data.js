@@ -420,14 +420,6 @@ window.LV_DATA = {
       blurb: "A page of swatches and a small portrait, learning a new set of pigments."
     },
     {
-      slug: "toucan",
-      title: "Toucan",
-      medium: "Graphite",
-      thumb: "images/sketchbook/toucan-thumb.jpg",
-      full: "images/sketchbook/toucan.jpg",
-      blurb: "A graphite toucan on dotted paper."
-    },
-    {
       slug: "totoro",
       title: "Totoro",
       medium: "Graphite",
