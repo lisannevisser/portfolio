@@ -351,6 +351,140 @@ window.LV_DATA = {
     }
   ],
 
+  // #/sketchbook — photos of hand-drawn work. Personal drawing practice,
+  // kept separate from #/visuals (which is digital work). Each entry:
+  // { slug, title, medium, thumb (grid), full (lightbox), blurb? }.
+  sketchbook: [
+    {
+      slug: "life-drawing-seated",
+      title: "Life drawing",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
+      full: "images/sketchbook/life-drawing-seated.jpg",
+      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+    },
+    {
+      slug: "anatomy-studies",
+      title: "Anatomy studies",
+      medium: "Ink and wash",
+      thumb: "images/sketchbook/anatomy-studies-thumb.jpg",
+      full: "images/sketchbook/anatomy-studies.jpg",
+      blurb: "A sketchbook spread of hand and skeleton studies, drawn alongside an anatomy reference."
+    },
+    {
+      slug: "hand-figure-studies",
+      title: "Hands and figures",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/hand-figure-studies-thumb.jpg",
+      full: "images/sketchbook/hand-figure-studies.jpg",
+      blurb: "Hand and figure studies in ink, testing how far a wash can carry a form."
+    },
+    {
+      slug: "figure-from-behind",
+      title: "Figure from behind",
+      medium: "Brush pen",
+      thumb: "images/sketchbook/figure-from-behind-thumb.jpg",
+      full: "images/sketchbook/figure-from-behind.jpg",
+      blurb: "A quick brush-pen study of a standing figure, focused on the fall of the coat."
+    },
+    {
+      slug: "character-study",
+      title: "Character study",
+      medium: "Ink and watercolor",
+      thumb: "images/sketchbook/character-study-thumb.jpg",
+      full: "images/sketchbook/character-study.jpg",
+      blurb: "A character sketched in ink and colored with a small watercolor set, mid-session."
+    },
+    {
+      slug: "seagull-berlin",
+      title: "Seagull",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/seagull-berlin-thumb.jpg",
+      full: "images/sketchbook/seagull-berlin.jpg",
+      blurb: "A seagull in watercolor and ink, next to some hand-lettering practice."
+    },
+    {
+      slug: "pikachu",
+      title: "Pikachu",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/pikachu-thumb.jpg",
+      full: "images/sketchbook/pikachu.jpg",
+      blurb: "A loose watercolor with a soft, blended background."
+    },
+    {
+      slug: "sailboats-skies",
+      title: "Sailboats and skies",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/sailboats-skies-thumb.jpg",
+      full: "images/sketchbook/sailboats-skies.jpg",
+      blurb: "Small watercolor studies: skies, boats, and a row of shape tests."
+    },
+    {
+      slug: "color-tests",
+      title: "Color tests",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
+      full: "images/sketchbook/color-tests-portrait.jpg",
+      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
+    },
+    {
+      slug: "toucan",
+      title: "Toucan",
+      medium: "Graphite",
+      thumb: "images/sketchbook/toucan-thumb.jpg",
+      full: "images/sketchbook/toucan.jpg",
+      blurb: "A graphite toucan on dotted paper."
+    },
+    {
+      slug: "totoro",
+      title: "Totoro",
+      medium: "Graphite",
+      thumb: "images/sketchbook/totoro-thumb.jpg",
+      full: "images/sketchbook/totoro.jpg",
+      blurb: "A pencil study inside a hand-drawn frame."
+    },
+    {
+      slug: "character-doodles",
+      title: "Character doodles",
+      medium: "Graphite",
+      thumb: "images/sketchbook/character-doodles-thumb.jpg",
+      full: "images/sketchbook/character-doodles.jpg",
+      blurb: "A couple of loose creature doodles."
+    },
+    {
+      slug: "koi-plate",
+      title: "Koi plate",
+      medium: "Ceramic painting",
+      thumb: "images/sketchbook/koi-plate-thumb.jpg",
+      full: "images/sketchbook/koi-plate.jpg",
+      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
+    },
+    {
+      slug: "tree",
+      title: "Tree",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/tree-thumb.jpg",
+      full: "images/sketchbook/tree.jpg",
+      blurb: "A single stylized tree in soft, cool washes."
+    },
+    {
+      slug: "lego-gandalf",
+      title: "Lego Gandalf",
+      medium: "Digital line art",
+      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
+      full: "images/sketchbook/lego-gandalf.jpg",
+      blurb: "A clean line drawing done on the iPad."
+    },
+    {
+      slug: "facely-doodles",
+      title: "Logo doodles",
+      medium: "Ink",
+      thumb: "images/sketchbook/facely-doodles-thumb.jpg",
+      full: "images/sketchbook/facely-doodles.jpg",
+      blurb: "A notebook page of logo and face ideation, drawn small and fast."
+    }
+  ],
+
   sideProjects: [
     { kind: "practice", title: "Aerial yoga teaching", detail: "Certified teacher. Weekly classes. Keeps me humble about balance, patience, and what 'effortless' actually costs to build.", tag: "Off-screen" },
     { kind: "reading", title: "~30 books tracked in 2025", detail: "Mix of design, behavioral science, and fiction. Currently: Thinking, Fast and Slow · Klara and the Sun · Design is Storytelling.", tag: "Input" },

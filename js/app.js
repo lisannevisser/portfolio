@@ -1469,11 +1469,75 @@
     });
   }
 
+  // #/sketchbook — photos of hand-drawn work. Same card + overlay shell as
+  // Visuals, but simpler: no embeds or external links, and the lightbox
+  // shows the full image with `contain` so portrait sketches aren't cropped.
+  function renderSketchbook() {
+    const items = D.sketchbook || [];
+    const grid = $("#v1-sketch-grid");
+    if (!grid) return;
+
+    function card(v, i) {
+      const thumb = v.thumb
+        ? `<span class="v1-visual-thumb" style="background-image:url('${esc(v.thumb)}');"></span>`
+        : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"></span>`;
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open">
+        ${thumb}
+        <span class="v1-visual-info">
+          <span class="v1-visual-title">${esc(v.title)}</span>
+          <span class="v1-visual-sub">${esc(v.medium || "")}</span>
+        </span>
+      </button>`;
+    }
+
+    grid.innerHTML = items.map(card).join("");
+
+    const overlay = $("#lv-sketch-overlay");
+    if (!overlay) return;
+    const backdrop = $("#lv-sketch-backdrop");
+    const closeBtn = $("#lv-sketch-close");
+    const stage = $("#lv-sketch-stage");
+
+    function openSketch(v) {
+      $("#lv-sketch-eyebrow").textContent = v.medium || "";
+      $("#lv-sketch-title").textContent = v.title;
+      $("#lv-sketch-blurb").textContent = v.blurb || "";
+      const src = v.full || v.thumb;
+      stage.innerHTML = src
+        ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" loading="lazy" />`
+        : "";
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeSketch() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      stage.innerHTML = "";
+    }
+
+    grid.addEventListener("click", (e) => {
+      const card = e.target.closest(".v1-visual-card");
+      if (!card) return;
+      const v = items[parseInt(card.getAttribute("data-index"), 10)];
+      if (v) openSketch(v);
+    });
+    closeBtn.addEventListener("click", closeSketch);
+    backdrop.addEventListener("click", closeSketch);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSketch();
+    });
+  }
+
   function boot() {
     renderCaseLists();
     renderBlogLists();
     renderBooks();
     renderVisuals();
+    renderSketchbook();
     renderClientStrip();
     renderScribbles();
     initCursor();
