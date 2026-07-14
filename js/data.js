@@ -380,14 +380,6 @@ window.LV_DATA = {
       blurb: "Hand and figure studies in ink, testing how far a wash can carry a form."
     },
     {
-      slug: "figure-from-behind",
-      title: "Figure from behind",
-      medium: "Brush pen",
-      thumb: "images/sketchbook/figure-from-behind-thumb.jpg",
-      full: "images/sketchbook/figure-from-behind.jpg",
-      blurb: "A quick brush-pen study of a standing figure, focused on the fall of the coat."
-    },
-    {
       slug: "character-study",
       title: "Character study",
       medium: "Ink and watercolor",
@@ -458,14 +450,6 @@ window.LV_DATA = {
       thumb: "images/sketchbook/koi-plate-thumb.jpg",
       full: "images/sketchbook/koi-plate.jpg",
       blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
-    },
-    {
-      slug: "tree",
-      title: "Tree",
-      medium: "Watercolor",
-      thumb: "images/sketchbook/tree-thumb.jpg",
-      full: "images/sketchbook/tree.jpg",
-      blurb: "A single stylized tree in soft, cool washes."
     },
     {
       slug: "lego-gandalf",
