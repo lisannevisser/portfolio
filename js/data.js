@@ -348,6 +348,54 @@ window.LV_DATA = {
       blurb: "A Figma Community piece pointing to my Canva Creator templates: free, customizable digital and print designs for small brands.",
       embed: "",
       link: "https://www.figma.com/community/file/1216765425768737898/free-customizable-design-templates-on-canva"
+    },
+    {
+      slug: "canva-yoga-moodboard",
+      title: "Yoga moodboard",
+      context: "Canva template",
+      type: "Moodboard · Collage",
+      year: "",
+      hue: 30,
+      thumb: "images/visuals/canva-yoga-moodboard.jpg",
+      blurb: "A torn-paper collage moodboard for yoga and wellness brands. Editorial scraps, pressed flowers, and cut-out lettering, set up as a template so the photos swap without breaking the mood.",
+      embed: "",
+      link: "https://www.canva.com/templates/EAGcNTOhUqg-beige-motivierend-yoga-inspiration-moodboard-visionboard-foto-collage/"
+    },
+    {
+      slug: "canva-definition-post",
+      title: "Definition post",
+      context: "Canva template",
+      type: "Social · Instagram",
+      year: "",
+      hue: 220,
+      thumb: "images/visuals/canva-definition.jpg",
+      blurb: "A minimalist 'word, defined' layout for beauty and wellness brands. High-contrast serif display over plenty of white space, built so the term and its definition swap in seconds.",
+      embed: "",
+      link: "https://www.canva.com/templates/EAE73jB9aYs-schwarz-wei-minimalistisch-elegant-worterbuch-definition-lexikon-schonheit-instagram-post/"
+    },
+    {
+      slug: "canva-wifi-card",
+      title: "Wi-Fi card",
+      context: "Canva template",
+      type: "Print · A5",
+      year: "",
+      hue: 210,
+      thumb: "images/visuals/canva-wifi-card.jpg",
+      blurb: "A guest Wi-Fi card for cafés and rentals: marble texture, an airy display face, and clear fields for network and password. Print-ready A5, made to sit on a table without shouting.",
+      embed: "",
+      link: "https://www.canva.com/templates/EAFM94U89ys-schwarz-wei-minimalistisch-modern-elegant-internet-wlan-bild-a5/"
+    },
+    {
+      slug: "canva-loyalty-card",
+      title: "Loyalty card",
+      context: "Canva template",
+      type: "Print · Business card",
+      year: "",
+      hue: 30,
+      thumb: "images/visuals/canva-loyalty-card.jpg",
+      blurb: "A stamp-based loyalty card for a small shop, kept to a warm neutral and one elegant serif line. Ten stamps, a simple reward, nothing more than it needs.",
+      embed: "",
+      link: "https://www.canva.com/templates/EAFNDIAkYvE-beige-elegant-minimalistisch-gutschein-stempel-karte-treue-geschaft-visitenkarte/"
     }
   ],
 

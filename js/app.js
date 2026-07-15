@@ -1435,7 +1435,8 @@
       if (v.link) {
         link.href = v.link;
         link.hidden = false;
-        link.textContent = (v.embed ? "Open in Canva" : "Open project") + " ↗";
+        const isCanva = v.embed || /canva\.com/.test(v.link);
+        link.textContent = (isCanva ? "Open in Canva" : "Open project") + " ↗";
       } else {
         link.hidden = true;
         link.removeAttribute("href");
