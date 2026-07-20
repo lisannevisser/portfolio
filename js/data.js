@@ -152,8 +152,7 @@ window.LV_DATA = {
       duration: "Year one hit 1.5× target",
       impact: [
         { label: "Target exceeded", value: "1.5×", note: "research methods / month" },
-        { label: "Projects shipped", value: "10+", note: "from my team alone" },
-        { label: "Element tests won", value: "100%", note: "3/3 at +20% each" }
+        { label: "Projects shipped", value: "10+", note: "from my team alone" }
       ],
       tags: ["Research ops", "Change management", "Behavioral data"],
       coverPaletteHue: 150,
