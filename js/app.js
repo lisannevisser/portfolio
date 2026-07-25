@@ -1420,8 +1420,13 @@
     const closeBtn = $("#lv-visual-close");
     const stage = $("#lv-visual-stage");
 
-    function openVisual(v) {
+    let current = -1;
+
+    function openVisual(i) {
+      current = ((i % items.length) + items.length) % items.length;
+      const v = items[current];
       $("#lv-visual-eyebrow").textContent = [v.type, v.year].filter(Boolean).join(" · ");
+      $("#lv-visual-count").textContent = items.length > 1 ? `${current + 1} / ${items.length}` : "";
       $("#lv-visual-title").textContent = v.title;
       $("#lv-visual-blurb").textContent = v.blurb || "";
       if (v.embed) {
@@ -1440,10 +1445,11 @@
         link.hidden = true;
         link.removeAttribute("href");
       }
+      const wasOpen = overlay.classList.contains("is-open");
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
-      closeBtn.focus();
+      if (!wasOpen) closeBtn.focus(); // don't steal focus while stepping prev/next
     }
 
     function closeVisual() {
@@ -1456,16 +1462,28 @@
     function onCardClick(e) {
       const card = e.target.closest(".v1-visual-card");
       if (!card) return;
-      const v = items[parseInt(card.getAttribute("data-index"), 10)];
-      if (v) openVisual(v);
+      const i = parseInt(card.getAttribute("data-index"), 10);
+      if (items[i]) openVisual(i);
     }
+
+    const prevBtn = $("#lv-visual-prev");
+    const nextBtn = $("#lv-visual-next");
+    if (items.length < 2) {
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
+    }
+    if (prevBtn) prevBtn.addEventListener("click", () => openVisual(current - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => openVisual(current + 1));
 
     if (grid) grid.addEventListener("click", onCardClick);
     if (teaser) teaser.addEventListener("click", onCardClick);
     closeBtn.addEventListener("click", closeVisual);
     backdrop.addEventListener("click", closeVisual);
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeVisual();
+      if (!overlay.classList.contains("is-open")) return;
+      if (e.key === "Escape") closeVisual();
+      else if (e.key === "ArrowLeft" && items.length > 1) openVisual(current - 1);
+      else if (e.key === "ArrowRight" && items.length > 1) openVisual(current + 1);
     });
   }
 
