@@ -1377,8 +1377,13 @@
   border: 1px solid var(--rule);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
+/* Visuals grid uses real <img> thumbs at their natural ratio (full image,
+   no crop); the span/background version above still serves the sketchbook. */
+[data-variation="v1"] img.v1-visual-thumb {
+  aspect-ratio: auto; height: auto; background: none;
+}
 [data-variation="v1"] .v1-visual-thumb.is-fallback {
-  position: relative; border: none;
+  position: relative; border: none; aspect-ratio: 16 / 10;
   background-image: radial-gradient(70% 60% at 30% 30%, oklch(0.88 0.1 var(--tile-hue)), oklch(0.75 0.12 calc(var(--tile-hue) + 30)));
 }
 [data-variation="v1"] .v1-visual-kind {

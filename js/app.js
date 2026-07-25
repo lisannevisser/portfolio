@@ -1399,8 +1399,10 @@
     const teaser = $("#v1-visuals-teaser");
 
     function card(v, i) {
+      // Real <img> at natural aspect ratio so the full artwork is visible,
+      // no 4:3 crop. The fallback tile (no thumb) stays a gradient span.
       const thumb = v.thumb
-        ? `<span class="v1-visual-thumb" style="background-image:url('${esc(v.thumb)}');"></span>`
+        ? `<img class="v1-visual-thumb" src="${esc(v.thumb)}" alt="" loading="lazy" />`
         : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span class="v1-visual-kind">${esc(v.type || "")}</span></span>`;
       // Image-only card: title and meta live in the modal, not the grid.
       return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open" aria-label="${esc(v.title)}">
