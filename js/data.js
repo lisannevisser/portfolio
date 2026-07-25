@@ -346,6 +346,20 @@ window.LV_DATA = {
       blurb: "A Figma Community piece pointing to my Canva Creator templates: free, customizable digital and print designs for small brands.",
       embed: "",
       link: "https://www.figma.com/community/file/1216765425768737898/free-customizable-design-templates-on-canva"
+    },
+    {
+      slug: "illustration-adventure-set",
+      title: "Illustration Adventure Set",
+      context: "Behance",
+      type: "Illustration",
+      year: "",
+      hue: 260,
+      thumb: "",
+      blurb: "A set of adventure-themed illustrations, published as a project on Behance.",
+      // Behance smart embed (behance.net/embed/project/<id>); the modal
+      // shows an "Open in Behance" link as a fallback.
+      embed: "https://www.behance.net/embed/project/164796291?ilo0=1",
+      link: "https://www.behance.net/gallery/164796291/Illustration-Adventure-Set"
     }
   ],
 

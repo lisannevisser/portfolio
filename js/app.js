@@ -1437,7 +1437,9 @@
       if (v.link) {
         link.href = v.link;
         link.hidden = false;
-        link.textContent = (v.embed ? "Open in Canva" : "Open project") + " ↗";
+        const host = (v.link || v.embed || "").includes("behance.net") ? "Behance"
+          : (v.link || v.embed || "").includes("canva.com") ? "Canva" : "";
+        link.textContent = (v.embed && host ? "Open in " + host : "Open project") + " ↗";
       } else {
         link.hidden = true;
         link.removeAttribute("href");
