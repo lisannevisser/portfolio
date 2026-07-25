@@ -1402,12 +1402,9 @@
       const thumb = v.thumb
         ? `<span class="v1-visual-thumb" style="background-image:url('${esc(v.thumb)}');"></span>`
         : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span class="v1-visual-kind">${esc(v.type || "")}</span></span>`;
-      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open">
+      // Image-only card: title and meta live in the modal, not the grid.
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open" aria-label="${esc(v.title)}">
         ${thumb}
-        <span class="v1-visual-info">
-          <span class="v1-visual-title">${esc(v.title)}</span>
-          <span class="v1-visual-sub">${esc(v.context || "")}${v.context && v.year ? " · " : ""}${esc(v.year || "")}</span>
-        </span>
       </button>`;
     }
 
@@ -1425,7 +1422,7 @@
     function openVisual(i) {
       current = ((i % items.length) + items.length) % items.length;
       const v = items[current];
-      $("#lv-visual-eyebrow").textContent = [v.type, v.year].filter(Boolean).join(" · ");
+      $("#lv-visual-eyebrow").textContent = [v.context, v.year].filter(Boolean).join(" · ");
       $("#lv-visual-count").textContent = items.length > 1 ? `${current + 1} / ${items.length}` : "";
       $("#lv-visual-title").textContent = v.title;
       $("#lv-visual-blurb").textContent = v.blurb || "";
