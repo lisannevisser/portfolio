@@ -1450,7 +1450,28 @@
   background-image: radial-gradient(70% 60% at 30% 30%, oklch(0.88 0.1 var(--tile-hue)), oklch(0.75 0.12 calc(var(--tile-hue) + 30)));
   font-family: var(--font-display); font-style: italic; font-size: 1.6rem; color: rgba(20,20,20,0.85);
 }
+.v1-visual-stage-wrap { position: relative; }
+.v1-visual-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 2.25rem; height: 2.25rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--rule); border-radius: 50%; cursor: pointer;
+  background: var(--paper); color: var(--ink-2);
+  font-size: 1rem; line-height: 1; z-index: 2;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.v1-visual-nav.is-prev { left: 0.6rem; }
+.v1-visual-nav.is-next { right: 0.6rem; }
+.v1-visual-nav:hover { background: var(--paper-2); color: var(--ink); }
 .v1-visual-detail-body { margin-top: 1.5rem; }
+.v1-visual-meta-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+}
+.v1-visual-count {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.08em; color: var(--ink-2); white-space: nowrap;
+}
 .v1-visual-detail-title {
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.1; margin: 0.5rem 0 0;

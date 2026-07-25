@@ -29,7 +29,7 @@
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
   <link rel="stylesheet" href="css/shared.css?v=2026-06-14-9" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-07-14-1" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-07-25-1" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
@@ -161,8 +161,8 @@
           <div class="v1-visuals-teaser-head">
             <div>
               <div class="lv-eyebrow">./visuals</div>
-              <h2 class="v1-visuals-teaser-title">The smaller stuff, too.</h2>
-              <p class="v1-visuals-teaser-lead">Brand guides, identities, and studies. Freelance and private work that shows the hand, even when it never became a case study.</p>
+              <h2 class="v1-visuals-teaser-title">Too good to delete.</h2>
+              <p class="v1-visuals-teaser-lead">Brand guides, identities, and studies from freelance and side work. Collected here so they don't get lost.</p>
             </div>
             <a href="#/visuals" class="v1-visuals-teaser-link" data-cursor-label="All →">All visuals →</a>
           </div>
@@ -461,10 +461,10 @@
         <header class="v1-visuals-head lv-reveal">
           <div class="lv-eyebrow">./visuals</div>
           <h1 class="v1-hero-display" style="margin-top:0.75rem;">
-            The smaller <em>stuff</em>.
+            Too good to <em>delete</em>.
           </h1>
           <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
-            Freelance and private work that's too slight for a full case study but shows the hand: brand guides, identities, sketchbook pages, type and color studies. Click any piece to open it.
+            Brand guides, identities, templates, and studies from freelance jobs and side projects. None of it big enough for a case study. Collected here so it doesn't get lost. Click any piece to open it.
           </p>
         </header>
 
@@ -476,9 +476,16 @@
         <div class="lv-book-backdrop" id="lv-visual-backdrop"></div>
         <div class="v1-visual-detail" role="dialog" aria-modal="true" aria-label="Visual project">
           <button class="lv-book-close" id="lv-visual-close" type="button" aria-label="Close">×</button>
-          <div class="v1-visual-stage" id="lv-visual-stage"></div>
+          <div class="v1-visual-stage-wrap">
+            <div class="v1-visual-stage" id="lv-visual-stage"></div>
+            <button class="v1-visual-nav is-prev" id="lv-visual-prev" type="button" aria-label="Previous piece">←</button>
+            <button class="v1-visual-nav is-next" id="lv-visual-next" type="button" aria-label="Next piece">→</button>
+          </div>
           <div class="v1-visual-detail-body">
-            <div class="lv-eyebrow" id="lv-visual-eyebrow"></div>
+            <div class="v1-visual-meta-row">
+              <div class="lv-eyebrow" id="lv-visual-eyebrow"></div>
+              <div class="v1-visual-count" id="lv-visual-count" aria-hidden="true"></div>
+            </div>
             <h2 class="v1-visual-detail-title" id="lv-visual-title"></h2>
             <p class="v1-visual-detail-blurb" id="lv-visual-blurb"></p>
             <a class="v1-visual-open" id="lv-visual-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Open ↗</a>
@@ -875,7 +882,7 @@
   </aside>
 
   <script src="js/data.js?v=2026-07-25-2"></script>
-  <script src="js/app.js?v=2026-07-25-1"></script>
+  <script src="js/app.js?v=2026-07-25-3"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
