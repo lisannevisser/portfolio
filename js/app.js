@@ -1469,6 +1469,49 @@
     });
   }
 
+  // #/chinese — the Mandarin learning library. Cards are rendered from
+  // D.chineseResources; chips come from D.chineseTaxonomy so the cards and
+  // the future filter UI share one vocabulary. Unknown ids render as-is
+  // instead of breaking the card.
+  function renderChineseResources() {
+    const list = $("#v1-chinese-list");
+    if (!list) return;
+    const tax = D.chineseTaxonomy || {};
+    const items = D.chineseResources || [];
+    const find = (group, id) => (tax[group] || []).find((x) => x.id === id);
+    const label = (group, id) => {
+      const e = find(group, id);
+      return e ? e.label : id;
+    };
+
+    list.innerHTML = items.map((r) => {
+      let host = "";
+      try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (_) { /* keep empty */ }
+      const levelChips = (r.levels || []).map((id) => {
+        const e = find("levels", id);
+        const text = e ? e.label + (e.hint ? " · " + e.hint : "") : id;
+        return `<span class="v1-chip">${esc(text)}</span>`;
+      }).join("");
+      const skillChips = (r.skills || [])
+        .map((id) => `<span class="v1-chip">${esc(label("skills", id))}</span>`)
+        .join("");
+      const costChip = r.cost
+        ? `<span class="v1-chip">${esc(label("costs", r.cost))}</span>` : "";
+      return `
+        <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" class="v1-res-row lv-reveal" data-cursor-label="Visit ↗">
+          <span class="v1-res-head">
+            <span class="v1-res-title">${esc(r.title)}</span>
+            <span class="v1-res-host">${esc(host)} ↗</span>
+          </span>
+          ${r.note ? `<span class="v1-res-note">${esc(r.note)}</span>` : ""}
+          <span class="v1-res-tags">
+            <span class="v1-chip is-res-type">${esc(label("types", r.type))}</span>
+            ${levelChips}${skillChips}${costChip}
+          </span>
+        </a>`;
+    }).join("");
+  }
+
   // #/sketchbook — photos of hand-drawn work. Same card + overlay shell as
   // Visuals, but simpler: no embeds or external links, and the lightbox
   // shows the full image with `contain` so portrait sketches aren't cropped.
@@ -1538,6 +1581,7 @@
     renderBooks();
     renderVisuals();
     renderSketchbook();
+    renderChineseResources();
     renderClientStrip();
     renderScribbles();
     initCursor();

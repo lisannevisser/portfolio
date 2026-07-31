@@ -501,6 +501,59 @@ window.LV_DATA = {
     { title: "UX Writing & Microcopy", author: "Kinneret Yifrah", cover: "https://covers.openlibrary.org/b/isbn/9781492049395-L.jpg", rating: 3, tags: ["UX", "Writing"], color: "#0891B2", review: `A thorough and practical guide to one of the most underrated design skills. Yifrah makes a convincing case that the words in an interface aren't decorative — they are the interface. The book covers everything from error messages to onboarding flows, and the examples are concrete enough to apply immediately. What I appreciate most is the emphasis on tone and voice consistency, which is often the missing piece in design systems.` }
   ],
 
+  // ------------------------------------------------------------------
+  // Chinese learning library (#/chinese) — a personal, curated
+  // collection of Mandarin resources. The taxonomy below is the
+  // long-term sorting system; the planned filter UI will be generated
+  // from it, so keep ids stable once resources reference them.
+  // Each resource: type (exactly one), skills + levels (one or more),
+  // cost (one). Levels follow the new HSK 3.0 bands.
+  chineseTaxonomy: {
+    types: [
+      { id: "reading",    label: "Reading" },
+      { id: "listening",  label: "Listening" },
+      { id: "video",      label: "Video" },
+      { id: "app",        label: "App" },
+      { id: "course",     label: "Course" },
+      { id: "podcast",    label: "Podcast" },
+      { id: "dictionary", label: "Dictionary" },
+      { id: "tool",       label: "Tool" },
+      { id: "community",  label: "Community" }
+    ],
+    skills: [
+      { id: "reading",       label: "Reading" },
+      { id: "listening",     label: "Listening" },
+      { id: "speaking",      label: "Speaking" },
+      { id: "writing",       label: "Writing" },
+      { id: "characters",    label: "Characters" },
+      { id: "vocabulary",    label: "Vocabulary" },
+      { id: "grammar",       label: "Grammar" },
+      { id: "pronunciation", label: "Pronunciation" }
+    ],
+    levels: [
+      { id: "beginner",     label: "Beginner",     hint: "HSK 1-3" },
+      { id: "intermediate", label: "Intermediate", hint: "HSK 4-6" },
+      { id: "advanced",     label: "Advanced",     hint: "HSK 7-9" }
+    ],
+    costs: [
+      { id: "free",     label: "Free" },
+      { id: "freemium", label: "Freemium" },
+      { id: "paid",     label: "Paid" }
+    ]
+  },
+
+  chineseResources: [
+    {
+      title: "Let's Read Chinese",
+      url: "https://letsreadchinese.com/",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["beginner", "intermediate"],
+      cost: "free",
+      note: "Graded reading practice: short texts sorted by level, so you read at the edge of what you know instead of drowning in a native article."
+    }
+  ],
+
   posts: [
     {
       slug: "better-designer-with-ai",
