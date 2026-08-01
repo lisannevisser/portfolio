@@ -1364,6 +1364,26 @@
   gap: 1.5rem;
 }
 
+/* #/visuals only: masonry columns, so the uncropped thumbs pack tightly
+   instead of leaving ragged fixed-height rows. Cards flow down each
+   column; the sketchbook and teaser grids keep the row-based layout. */
+[data-variation="v1"] #v1-visuals-grid {
+  display: block;
+  columns: 3;
+  column-gap: 1.5rem;
+}
+[data-variation="v1"] #v1-visuals-grid .v1-visual-card {
+  display: block; width: 100%;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 900px) {
+  [data-variation="v1"] #v1-visuals-grid { columns: 2; }
+}
+@media (max-width: 560px) {
+  [data-variation="v1"] #v1-visuals-grid { columns: 1; }
+}
+
 /* Card ------------------------------------------------------------------- */
 [data-variation="v1"] .v1-visual-card {
   display: flex; flex-direction: column;
