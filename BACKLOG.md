@@ -1,7 +1,10 @@
 # Backlog
 
-Ein Ort für Ideen, die später umgesetzt werden sollen. Damit nichts im
-Chat oder im Kopf verloren geht. Manuell gepflegt, wie `CLAUDE.md`.
+Die allgemeine To-do- und Ideen-Liste. Hier landet alles: Portfolio-Ideen,
+App-Ideen und andere Projekte - auch (und gerade) die Sachen, an denen ich
+gerade nicht arbeiten will oder kann. Damit nichts im Chat oder im Kopf
+verloren geht. Kein Eintrag ist ein Versprechen, nur ein Parkplatz.
+Manuell gepflegt, wie `CLAUDE.md`.
 
 Format: Checklisten-Items, nach Thema gruppiert. Abhaken (`- [x]`), wenn
 erledigt. Neue Ideen einfach unten im passenden Abschnitt ergänzen, oder
@@ -57,6 +60,19 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
       management-fest ist.
 - [ ] Weitere reine Discovery-Projekte aus dem Daily Job sichten - evtl.
       mehrere zu einer Case bündeln.
+- [ ] Hypothetische Case Study: App-Redesign für den chinesischen Markt.
+      Entwurf liegt als `case-study-app-redesign-chinese-market.md` auf
+      dem Branch `claude/app-redesign-chinese-market-mvmvbj` (5
+      Entscheidungen mit Hypothese + Messplan: Mini-Program statt App,
+      Dichte statt Whitespace, Trust-Modell übersetzt, Identity/Payment,
+      visuelle Sprache). Offen: Entwurf gegenlesen, Figures bauen, in
+      `data.js` übertragen und entscheiden, ob/wo die Case auf der Seite
+      auftaucht (6. Case? eigene "Concepts"-Rubrik?).
+
+## App-Ideen & andere Projekte
+
+Sammelbecken für Ideen außerhalb des Portfolios. Noch leer bis auf die
+Rubrik selbst - neue Einfälle einfach hier drunter.
 
 ## Blog (Gazette)
 
