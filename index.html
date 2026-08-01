@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/v1.css?v=2026-08-01-3" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
+  <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
 </head>
 <body>
 
@@ -800,6 +801,25 @@
       </div>
     </section>
 
+    <!-- ========================================================= -->
+    <!-- ROUTE: STYLEGUIDE (live CSS audit, filled by styleguide.js) -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="styleguide" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head">
+          <div class="lv-eyebrow">./styleguide</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            Taking <em>stock</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            A live audit of this site's CSS, read straight from the stylesheets in your browser. Every token, color, and type size, counted and lined up. This is the status quo before consolidating: see what exists, spot what drifted.
+          </p>
+        </header>
+
+        <div id="lv-sg-root"><!-- filled by styleguide.js --></div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -844,6 +864,7 @@
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
           <li><a href="#/playground">Playground</a></li>
+          <li><a href="#/styleguide" data-cursor-label="Audit">Styleguide</a></li>
         </ul>
       </div>
     </div>
@@ -902,5 +923,6 @@
   <script src="js/app.js?v=2026-08-01-7"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
+  <script src="js/styleguide.js?v=2026-08-01-1"></script>
 </body>
 </html>
