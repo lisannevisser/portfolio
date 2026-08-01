@@ -501,6 +501,100 @@ window.LV_DATA = {
     { title: "UX Writing & Microcopy", author: "Kinneret Yifrah", cover: "https://covers.openlibrary.org/b/isbn/9781492049395-L.jpg", rating: 3, tags: ["UX", "Writing"], color: "#0891B2", review: `A thorough and practical guide to one of the most underrated design skills. Yifrah makes a convincing case that the words in an interface aren't decorative — they are the interface. The book covers everything from error messages to onboarding flows, and the examples are concrete enough to apply immediately. What I appreciate most is the emphasis on tone and voice consistency, which is often the missing piece in design systems.` }
   ],
 
+  // ------------------------------------------------------------------
+  // Chinese learning library (#/chinese) — a personal, curated
+  // collection of Mandarin resources. The taxonomy below is the
+  // long-term sorting system; the planned filter UI will be generated
+  // from it, so keep ids stable once resources reference them.
+  // Each resource: type (exactly one), skills + levels (one or more;
+  // culture-side entries like the Tsinghua design course may leave both
+  // empty), cost (one), plus an optional hsk field for resources that organize
+  // their content around a specific HSK numbering (old 2.0 vs new 3.0).
+  // Levels follow the new HSK 3.0 bands. Resources with secondary: true
+  // render in the "More recommendations" list below the main one:
+  // still worth keeping, but dated or clunky by the main list's bar.
+  chineseTaxonomy: {
+    types: [
+      { id: "reading",    label: "Reading",    zh: "阅读" },
+      { id: "listening",  label: "Listening",  zh: "听力" },
+      { id: "video",      label: "Video",      zh: "视频" },
+      { id: "app",        label: "App",        zh: "应用" },
+      { id: "course",     label: "Course",     zh: "课程" },
+      { id: "podcast",    label: "Podcast",    zh: "播客" },
+      { id: "dictionary", label: "Dictionary", zh: "词典" },
+      { id: "tool",       label: "Tool",       zh: "工具" },
+      { id: "community",  label: "Community",  zh: "社区" }
+    ],
+    // Skills mirror the course units of a Chinese degree program:
+    // 阅读 reading, 听力 listening, 口语 speaking, 写作 writing, and so on.
+    skills: [
+      { id: "reading",       label: "Reading",       zh: "阅读" },
+      { id: "listening",     label: "Listening",     zh: "听力" },
+      { id: "speaking",      label: "Speaking",      zh: "口语" },
+      { id: "writing",       label: "Writing",       zh: "写作" },
+      { id: "characters",    label: "Characters",    zh: "汉字" },
+      { id: "vocabulary",    label: "Vocabulary",    zh: "词汇" },
+      { id: "grammar",       label: "Grammar",       zh: "语法" },
+      { id: "pronunciation", label: "Pronunciation", zh: "发音" }
+    ],
+    levels: [
+      { id: "beginner",     label: "Beginner",     zh: "初级", hint: "HSK 1-3" },
+      { id: "intermediate", label: "Intermediate", zh: "中级", hint: "HSK 4-6" },
+      { id: "advanced",     label: "Advanced",     zh: "高级", hint: "HSK 7-9" }
+    ],
+    costs: [
+      { id: "free",     label: "Free",     zh: "免费" },
+      { id: "freemium", label: "Freemium", zh: "部分免费" },
+      { id: "paid",     label: "Paid",     zh: "付费" }
+    ],
+    hskVersions: [
+      { id: "hsk2", label: "Old HSK 2.0", zh: "旧版" },
+      { id: "hsk3", label: "New HSK 3.0", zh: "新版" }
+    ]
+  },
+
+  chineseResources: [
+    {
+      title: "Let's Read Chinese",
+      url: "https://letsreadchinese.com/",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["beginner", "intermediate"],
+      cost: "free",
+      note: "Graded reading practice: short texts sorted by level, so you read at the edge of what you know instead of drowning in a native article."
+    },
+    {
+      title: "Pleco",
+      url: "https://www.pleco.com/",
+      type: "dictionary",
+      skills: ["reading", "characters", "vocabulary"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "The dictionary every learner ends up with: handwriting input, OCR, and add-on dictionaries, so an unknown character is never more than a scribble away."
+    },
+    {
+      title: "Chinese for HSK (Peking University)",
+      url: "https://www.coursera.org/partners/pku",
+      type: "course",
+      skills: ["vocabulary", "grammar", "listening", "reading"],
+      levels: ["beginner", "intermediate"],
+      cost: "freemium",
+      hsk: "hsk2",
+      secondary: true,
+      note: "Peking University, one of China's top universities, runs a full MOOC series on Coursera from HSK 1 up to HSK 5, free to audit. Lecture-style and built on the old HSK levels, but the most rigorous structured path you can take without a classroom."
+    },
+    {
+      title: "Human Factors and Culture in Design (Tsinghua)",
+      url: "https://www.edx.org/learn/user-experience-ux/tsinghua-university-user-experience-ux-design-human-factors-and-culture-in-design-she-ji-de-ren-yin-yu-wen-hua",
+      type: "course",
+      skills: [],
+      levels: [],
+      cost: "freemium",
+      secondary: true,
+      note: "The odd one out, no language training: Tsinghua's UX course on human factors and how culture shapes design, taught through Chinese cases. It sits exactly where Chinese, intercultural training, and my day job in design meet."
+    }
+  ],
+
   posts: [
     {
       slug: "better-designer-with-ai",

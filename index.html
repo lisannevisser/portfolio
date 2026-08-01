@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-06-14-9" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-07-25-2" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-07-28-1" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-08-01-3" />
   <link rel="stylesheet" href="css/wip.css?v=2026-06-12-3" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-06-12-7" />
 </head>
@@ -528,6 +528,42 @@
     </section>
 
     <!-- ========================================================= -->
+    <!-- ROUTE: CHINESE (Mandarin learning library)                 -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="chinese" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./中文</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            My Chinese <em>library</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:58ch;margin-top:1.25rem;">
+            I studied Chinese at university a few years ago. Between the switch to the new HSK system and too little practice since, I'm working my way back in. This page is my own library of Mandarin resources worth keeping: good material isn't widely accessible in the West, and a lot of what you do find is outdated or clunky to use. Only things I find valuable myself go on this list.
+          </p>
+        </header>
+
+        <details class="v1-res-filter-acc lv-reveal" id="v1-chinese-filter-acc">
+          <summary>
+            <span class="v1-res-filter-acc-icon" aria-hidden="true">+</span>
+            Filter / 筛选
+            <span class="v1-work-chip-count" id="v1-chinese-filter-count" hidden>0</span>
+          </summary>
+          <div class="v1-res-filters" id="v1-chinese-filters"><!-- filled by app.js --></div>
+        </details>
+
+        <div class="v1-res-list" id="v1-chinese-list"><!-- filled by app.js --></div>
+
+        <div class="lv-reveal" id="v1-chinese-more-head" hidden style="margin-top:4.5rem;">
+          <div class="lv-eyebrow">More recommendations</div>
+          <p class="lv-lead" style="max-width:58ch;margin-top:1rem;">
+            Not as modern or polished as the list above, but too useful to leave out.
+          </p>
+        </div>
+        <div class="v1-res-list" id="v1-chinese-more"><!-- filled by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
     <!-- ROUTE: BLOG (list)                                          -->
     <!-- ========================================================= -->
     <section class="lv-route lv-page" data-page="blog" hidden>
@@ -808,14 +844,6 @@
           </li>
         </ul>
       </div>
-      <div class="lv-cursor-toggle-col">
-        <h4>Cursor</h4>
-        <button type="button" class="lv-cursor-toggle" role="switch" aria-checked="true" aria-label="Toggle custom cursor" data-cursor-label="Toggle">
-          <span class="lv-cursor-toggle-track" aria-hidden="true">
-            <span class="lv-cursor-toggle-thumb"></span>
-          </span>
-        </button>
-      </div>
       <div class="lv-footer-site">
         <h4>Site</h4>
         <ul>
@@ -825,6 +853,7 @@
           <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
+          <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
           <li hidden><a href="#/playground">Playground</a></li>
         </ul>
@@ -881,8 +910,8 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-07-25-2"></script>
-  <script src="js/app.js?v=2026-07-25-4"></script>
+  <script src="js/data.js?v=2026-08-01-3"></script>
+  <script src="js/app.js?v=2026-08-01-5"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
 </body>
