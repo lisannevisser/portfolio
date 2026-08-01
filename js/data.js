@@ -300,20 +300,6 @@ window.LV_DATA = {
       link: "https://www.canva.com/design/DAFs0MtePKA/view"
     },
     {
-      slug: "goettingen-guest-lecture",
-      title: "From sociology to product design",
-      context: "University of Göttingen",
-      type: "Guest lecture · Slides",
-      year: "2025",
-      hue: 90,
-      thumb: "images/visuals/goettingen-lecture.jpg",
-      blurb: "An invited guest lecture at the University of Göttingen on career perspectives for sociology students: how I went from sociology into product design, and where data, design, and intercultural perspectives meet in my work. The deck is in German, built in Figma Slides.",
-      // Figma Slides embed (embed.figma.com/deck/<key>?embed-host=share).
-      // The modal also shows an "Open in Figma" link as a fallback.
-      embed: "https://embed.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s?embed-host=share",
-      link: "https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s"
-    },
-    {
       slug: "aerial-yoga-site",
       title: "Aerial Yoga microsite",
       context: "Personal project",
@@ -359,8 +345,9 @@ window.LV_DATA = {
       thumb: "images/visuals/canva-yoga-flyer.jpg",
       blurb: "A yoga studio flyer from my Canva Creator collection: free, customizable templates for small brands. One of the designs I publish on Canva.",
       embed: "",
-      // TODO: link directly to the Canva template (link tbd)
-      link: ""
+      // The template itself is no longer online, so the link points to the
+      // Canva Creator profile (the collection) instead.
+      link: "https://www.canva.com/p/lisanne-visser/"
     },
     {
       slug: "illustration-adventure-set",
@@ -376,8 +363,6 @@ window.LV_DATA = {
       embed: "https://www.behance.net/embed/project/164796291?ilo0=1",
       link: "https://www.behance.net/gallery/164796291/Illustration-Adventure-Set"
     },
-    // Placeholder slots (todo): swap each for a real piece from the old
-    // folders. They render as gradient tiles until they get a thumb.
     {
       slug: "facelyu",
       title: "FacelyU face yoga app",
@@ -390,29 +375,21 @@ window.LV_DATA = {
       embed: "",
       link: "https://www.instagram.com/facely_u/"
     },
+    // Last on purpose: with the masonry columns this puts the deck at the
+    // bottom right of the grid.
     {
-      slug: "placeholder-2",
-      title: "Placeholder 2",
-      context: "",
-      type: "Coming soon",
-      year: "",
-      hue: 40,
-      thumb: "",
-      blurb: "A reserved slot while more pieces come out of the old folders.",
-      embed: "",
-      link: ""
-    },
-    {
-      slug: "placeholder-3",
-      title: "Placeholder 3",
-      context: "",
-      type: "Coming soon",
-      year: "",
-      hue: 320,
-      thumb: "",
-      blurb: "A reserved slot while more pieces come out of the old folders.",
-      embed: "",
-      link: ""
+      slug: "goettingen-guest-lecture",
+      title: "From sociology to product design",
+      context: "University of Göttingen",
+      type: "Guest lecture · Slides",
+      year: "2025",
+      hue: 90,
+      thumb: "images/visuals/goettingen-lecture.jpg",
+      blurb: "An invited guest lecture at the University of Göttingen on career perspectives for sociology students: how I went from sociology into product design, and where data, design, and intercultural perspectives meet in my work. The deck is in German, built in Figma Slides.",
+      // Figma Slides embed (embed.figma.com/deck/<key>?embed-host=share).
+      // The modal also shows an "Open in Figma" link as a fallback.
+      embed: "https://embed.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s?embed-host=share",
+      link: "https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s"
     }
   ],
 
