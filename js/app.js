@@ -580,7 +580,7 @@
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
         <div class="v1-impact-cell">
           <div class="v1-impact-cell-label">${esc(c.impact[0].label)}</div>
-          <div class="lv-body" style="font-size:0.9rem;margin-bottom:0.75rem;">${esc(c.impact[0].note)}</div>
+          <div class="lv-body" style="font-size:var(--text-md);margin-bottom:0.75rem;">${esc(c.impact[0].note)}</div>
           <div class="v1-impact-num">${esc(c.impact[0].value)}</div>
         </div>
         <div class="v1-impact-cell v1-impact-cell--meta">
