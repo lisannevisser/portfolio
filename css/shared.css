@@ -339,7 +339,7 @@ a { color: inherit; }
   margin-top: 6rem;
 }
 .lv-footer-grid {
-  display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem;
   max-width: 1240px; margin: 0 auto;
   padding: 0 clamp(1.25rem, 3vw, 3rem);
 }
@@ -369,6 +369,8 @@ a { color: inherit; }
 .lv-footer-site { text-align: right; }
 @media (max-width: 760px) {
   .lv-footer-grid { grid-template-columns: 1fr 1fr; }
+  .lv-footer-grid > div:first-child { grid-column: 1 / -1; }
+  .lv-footer-site:nth-of-type(2) { text-align: left; }
 }
 @media (max-width: 480px) {
   .lv-footer-grid { grid-template-columns: 1fr; }

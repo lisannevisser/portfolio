@@ -300,20 +300,6 @@ window.LV_DATA = {
       link: "https://www.canva.com/design/DAFs0MtePKA/view"
     },
     {
-      slug: "goettingen-guest-lecture",
-      title: "From sociology to product design",
-      context: "University of Göttingen",
-      type: "Guest lecture · Slides",
-      year: "2025",
-      hue: 90,
-      thumb: "images/visuals/goettingen-lecture.jpg",
-      blurb: "An invited guest lecture at the University of Göttingen on career perspectives for sociology students: how I went from sociology into product design, and where data, design, and intercultural perspectives meet in my work. The deck is in German, built in Figma Slides.",
-      // Figma Slides embed (embed.figma.com/deck/<key>?embed-host=share).
-      // The modal also shows an "Open in Figma" link as a fallback.
-      embed: "https://embed.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s?embed-host=share",
-      link: "https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s"
-    },
-    {
       slug: "aerial-yoga-site",
       title: "Aerial Yoga microsite",
       context: "Personal project",
@@ -359,8 +345,9 @@ window.LV_DATA = {
       thumb: "images/visuals/canva-yoga-flyer.jpg",
       blurb: "A yoga studio flyer from my Canva Creator collection: free, customizable templates for small brands. One of the designs I publish on Canva.",
       embed: "",
-      // TODO: link directly to the Canva template (link tbd)
-      link: ""
+      // The template itself is no longer online, so the link points to the
+      // Canva Creator profile (the collection) instead.
+      link: "https://www.canva.com/p/lisanne-visser/"
     },
     {
       slug: "illustration-adventure-set",
@@ -376,8 +363,6 @@ window.LV_DATA = {
       embed: "https://www.behance.net/embed/project/164796291?ilo0=1",
       link: "https://www.behance.net/gallery/164796291/Illustration-Adventure-Set"
     },
-    // Placeholder slots (todo): swap each for a real piece from the old
-    // folders. They render as gradient tiles until they get a thumb.
     {
       slug: "facelyu",
       title: "FacelyU face yoga app",
@@ -390,29 +375,21 @@ window.LV_DATA = {
       embed: "",
       link: "https://www.instagram.com/facely_u/"
     },
+    // Last on purpose: with the masonry columns this puts the deck at the
+    // bottom right of the grid.
     {
-      slug: "placeholder-2",
-      title: "Placeholder 2",
-      context: "",
-      type: "Coming soon",
-      year: "",
-      hue: 40,
-      thumb: "",
-      blurb: "A reserved slot while more pieces come out of the old folders.",
-      embed: "",
-      link: ""
-    },
-    {
-      slug: "placeholder-3",
-      title: "Placeholder 3",
-      context: "",
-      type: "Coming soon",
-      year: "",
-      hue: 320,
-      thumb: "",
-      blurb: "A reserved slot while more pieces come out of the old folders.",
-      embed: "",
-      link: ""
+      slug: "goettingen-guest-lecture",
+      title: "From sociology to product design",
+      context: "University of Göttingen",
+      type: "Guest lecture · Slides",
+      year: "2025",
+      hue: 90,
+      thumb: "images/visuals/goettingen-lecture.jpg",
+      blurb: "An invited guest lecture at the University of Göttingen on career perspectives for sociology students: how I went from sociology into product design, and where data, design, and intercultural perspectives meet in my work. The deck is in German, built in Figma Slides.",
+      // Figma Slides embed (embed.figma.com/deck/<key>?embed-host=share).
+      // The modal also shows an "Open in Figma" link as a fallback.
+      embed: "https://embed.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s?embed-host=share",
+      link: "https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s"
     }
   ],
 
@@ -563,9 +540,8 @@ window.LV_DATA = {
   // culture-side entries like the Tsinghua design course may leave both
   // empty), cost (one), plus an optional hsk field for resources that organize
   // their content around a specific HSK numbering (old 2.0 vs new 3.0).
-  // Levels follow the new HSK 3.0 bands. Resources with secondary: true
-  // render in the "More recommendations" list below the main one:
-  // still worth keeping, but dated or clunky by the main list's bar.
+  // Levels follow the new HSK 3.0 bands. All resources render in one
+  // flat list; the filters at the top are the only grouping.
   chineseTaxonomy: {
     types: [
       { id: "reading",    label: "Reading",    zh: "阅读" },
@@ -650,7 +626,115 @@ window.LV_DATA = {
       skills: ["pronunciation", "characters", "vocabulary", "listening"],
       levels: ["beginner"],
       cost: "freemium",
-      note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. Listed with a caveat: I don't believe an app alone teaches you a language, but as an on-ramp it's the best of its kind."
+      note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. An app alone won't teach you a language, but as an on-ramp it's the best of its kind."
+    },
+    {
+      title: "Hack Chinese",
+      url: "https://www.hackchinese.com/",
+      type: "app",
+      skills: ["vocabulary"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "paid",
+      note: "Zero-setup vocabulary SRS with curated lists (HSK, common textbooks) and clean progress stats. Pleco stays my everyday dictionary, but for studying I prefer a ready-made, maintained system over building my own decks."
+    },
+    {
+      title: "Hanly",
+      url: "https://www.hanlyapp.com/",
+      type: "app",
+      skills: ["characters", "vocabulary"],
+      levels: ["beginner", "intermediate"],
+      cost: "freemium",
+      note: "Indie app that teaches characters through their actual composition: components first, then the complex characters built from them, with stroke animations and spaced repetition. Free apart from the tap-to-read Reader."
+    },
+    {
+      title: "TeaTime Chinese 茶歇中文",
+      url: "https://teatimechinese.com/",
+      type: "podcast",
+      skills: ["listening", "vocabulary"],
+      levels: ["intermediate"],
+      cost: "free",
+      note: "Culture, history, and current topics in clear, deliberately paced Mandarin. The most recommended intermediate podcast for a reason."
+    },
+    {
+      title: "Learning Chinese Through Stories",
+      url: "https://www.learningchinesethroughstories.com/",
+      type: "podcast",
+      skills: ["listening", "vocabulary"],
+      levels: ["intermediate", "advanced"],
+      cost: "freemium",
+      note: "Story plus story-walkthrough, almost entirely in Chinese. The step from learner podcasts toward authentic listening."
+    },
+    {
+      title: "Cozy Mandarin",
+      url: "https://www.cozymandarin.com/",
+      type: "podcast",
+      skills: ["listening"],
+      levels: ["intermediate"],
+      cost: "free",
+      note: "Short, low-pressure comprehensible-input episodes by a native speaker, published near-daily. Listening practice that actually fits into a routine."
+    },
+    {
+      title: "Short Stories in Chinese (Penguin Parallel Text)",
+      url: "https://www.goodreads.com/book/show/10953429-new-penguin-parallel-text",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["intermediate", "advanced"],
+      cost: "paid",
+      note: "Eight Chinese short stories with the English translation on the facing page, edited by translator John Balcom. Published in 2013; the stories themselves date from the 1980s and 90s. Real literature in the purest bilingual format."
+    },
+    {
+      title: "Graded Chinese Reader (Sinolingua)",
+      url: "https://www.purpleculture.net/graded-readers-c-104_106/",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["intermediate"],
+      cost: "paid",
+      note: "The adapted short-story series on my own shelf: contemporary Chinese stories with a pinyin-hiding card in the back, so pinyin is there when you need it and gone when you don't."
+    },
+    {
+      title: "Imagin8 Press",
+      url: "https://imagin8press.com/",
+      type: "reading",
+      skills: ["reading"],
+      levels: ["beginner", "intermediate"],
+      cost: "paid",
+      note: "Small indie press retelling real classics like Journey to the West as graded readers, every page layered with hanzi, pinyin, and English. Real titles instead of invented learner stories, which is exactly how I like my readers."
+    },
+    {
+      title: "Heavenly Path",
+      url: "https://heavenlypath.notion.site/",
+      type: "community",
+      skills: ["reading"],
+      levels: ["intermediate", "advanced"],
+      cost: "free",
+      note: "Community-maintained Notion guide from graded readers to native webnovels, games, and TV, sorted by character count instead of HSK level. The roadmap for what to read next."
+    },
+    {
+      title: "italki",
+      url: "https://www.italki.com/",
+      type: "community",
+      skills: ["speaking"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "paid",
+      note: "The marketplace for 1:1 lessons with professional teachers and community tutors. The speaking-practice building block in nearly every serious learning stack."
+    },
+    {
+      title: "HelloTalk",
+      url: "https://www.hellotalk.com/",
+      type: "community",
+      skills: ["speaking", "writing"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "The biggest language-exchange community, and the Mandarin side is one of its most active. Feels like social media: corrections, voice messages, and Moments from native speakers."
+    },
+    {
+      title: "Tandem",
+      url: "https://tandem.net/",
+      type: "community",
+      skills: ["speaking", "writing"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "Language exchange as structured 1:1 partnerships. The quieter, more focused counterpart to HelloTalk."
     },
     {
       title: "Chinese for HSK (Peking University)",
@@ -660,7 +744,6 @@ window.LV_DATA = {
       levels: ["beginner", "intermediate"],
       cost: "freemium",
       hsk: "hsk2",
-      secondary: true,
       note: "Peking University, one of China's top universities, runs a full MOOC series on Coursera from HSK 1 up to HSK 5, free to audit. Lecture-style and built on the old HSK levels, but the most rigorous structured path you can take without a classroom."
     },
     {
@@ -670,7 +753,6 @@ window.LV_DATA = {
       skills: [],
       levels: [],
       cost: "freemium",
-      secondary: true,
       note: "The odd one out, no language training: Tsinghua's UX course on human factors and how culture shapes design, taught through Chinese cases. It sits exactly where Chinese, intercultural training, and my day job in design meet."
     }
   ],

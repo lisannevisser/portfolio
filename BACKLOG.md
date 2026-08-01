@@ -45,6 +45,13 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 
 ## Work-Page / Navigation
 
+- [ ] Entscheiden, ob es eine eigene Überseite "Playground" geben soll,
+      die alle Nicht-Portfolio-Seiten bündelt (Visuals, Sketchbook,
+      Reading, Chinese Library, Wall of Fame, Playground) - ggf. mit
+      eigener Unternavigation. Das sind Spaßprojekte, keine
+      Portfolio-Seiten; deshalb ist Playground seit 2026-08-01 aus der
+      Topnav raus und die Seiten stehen im Footer unter "Work in
+      progress".
 - [ ] Navigation NICHT splitten - "Work" bleibt der einzige Eintrag.
 - [ ] Filter-/Linsen-Chips auf der Work-Seite über die bestehenden Tags
       (z. B. "Research & Experimentation" / "Design & Systems"). Cases
