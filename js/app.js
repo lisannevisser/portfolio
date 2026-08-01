@@ -1387,9 +1387,11 @@
       const thumb = v.thumb
         ? `<img class="v1-visual-thumb" src="${esc(v.thumb)}" alt="" loading="lazy" />`
         : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span class="v1-visual-kind">${esc(v.type || "")}</span></span>`;
-      // Image-only card: title and meta live in the modal, not the grid.
-      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open" aria-label="${esc(v.title)}">
+      // Image-only card: the title only appears in the hover scrim and as
+      // the accessible label; everything else lives in the modal.
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open" aria-label="${esc(v.title)}" style="--card-i:${i % 3};">
         ${thumb}
+        <span class="v1-visual-hover" aria-hidden="true"><span>${esc(v.title)}</span></span>
       </button>`;
     }
 
@@ -1402,13 +1404,11 @@
     const closeBtn = $("#lv-visual-close");
     const stage = $("#lv-visual-stage");
 
-    let current = -1;
+    const detail = overlay.querySelector(".v1-visual-detail");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function openVisual(i) {
-      current = ((i % items.length) + items.length) % items.length;
-      const v = items[current];
+    function openVisual(v, fromEl) {
       $("#lv-visual-eyebrow").textContent = [v.context, v.year].filter(Boolean).join(" · ");
-      $("#lv-visual-count").textContent = items.length > 1 ? `${current + 1} / ${items.length}` : "";
       $("#lv-visual-title").textContent = v.title;
       $("#lv-visual-blurb").textContent = v.blurb || "";
       if (v.embed) {
@@ -1429,11 +1429,26 @@
         link.hidden = true;
         link.removeAttribute("href");
       }
-      const wasOpen = overlay.classList.contains("is-open");
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
-      if (!wasOpen) closeBtn.focus(); // don't steal focus while stepping prev/next
+      // Zoom the panel out of the clicked card: start at the card's
+      // position/size, then let the stylesheet transition float it home.
+      if (fromEl && detail && !reduceMotion) {
+        const from = fromEl.getBoundingClientRect();
+        const to = detail.getBoundingClientRect();
+        if (to.width && to.height) {
+          const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+          const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+          const s = Math.min(1, Math.max(from.width / to.width, 0.25));
+          detail.style.transition = "none";
+          detail.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+          void detail.offsetWidth; // flush so the next frame transitions
+          detail.style.transition = "";
+          detail.style.transform = "";
+        }
+      }
+      closeBtn.focus();
     }
 
     function closeVisual() {
@@ -1446,28 +1461,31 @@
     function onCardClick(e) {
       const card = e.target.closest(".v1-visual-card");
       if (!card) return;
-      const i = parseInt(card.getAttribute("data-index"), 10);
-      if (items[i]) openVisual(i);
+      const v = items[parseInt(card.getAttribute("data-index"), 10)];
+      if (v) openVisual(v, card);
     }
 
-    const prevBtn = $("#lv-visual-prev");
-    const nextBtn = $("#lv-visual-next");
-    if (items.length < 2) {
-      if (prevBtn) prevBtn.hidden = true;
-      if (nextBtn) nextBtn.hidden = true;
+    // Stagger the masonry cards in as they scroll into view.
+    const gridCards = grid ? $$(".v1-visual-card", grid) : [];
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      gridCards.forEach((c) => c.classList.add("is-in"));
+    } else {
+      const io = new IntersectionObserver((records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          r.target.classList.add("is-in");
+          io.unobserve(r.target);
+        });
+      }, { threshold: 0.15 });
+      gridCards.forEach((c) => io.observe(c));
     }
-    if (prevBtn) prevBtn.addEventListener("click", () => openVisual(current - 1));
-    if (nextBtn) nextBtn.addEventListener("click", () => openVisual(current + 1));
 
     if (grid) grid.addEventListener("click", onCardClick);
     if (teaser) teaser.addEventListener("click", onCardClick);
     closeBtn.addEventListener("click", closeVisual);
     backdrop.addEventListener("click", closeVisual);
     document.addEventListener("keydown", (e) => {
-      if (!overlay.classList.contains("is-open")) return;
-      if (e.key === "Escape") closeVisual();
-      else if (e.key === "ArrowLeft" && items.length > 1) openVisual(current - 1);
-      else if (e.key === "ArrowRight" && items.length > 1) openVisual(current + 1);
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeVisual();
     });
   }
 

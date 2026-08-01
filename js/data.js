@@ -360,6 +360,44 @@ window.LV_DATA = {
       // shows an "Open in Behance" link as a fallback.
       embed: "https://www.behance.net/embed/project/164796291?ilo0=1",
       link: "https://www.behance.net/gallery/164796291/Illustration-Adventure-Set"
+    },
+    // Placeholder slots (todo): swap each for a real piece from the old
+    // folders. They render as gradient tiles until they get a thumb.
+    {
+      slug: "placeholder-1",
+      title: "Placeholder 1",
+      context: "",
+      type: "Coming soon",
+      year: "",
+      hue: 150,
+      thumb: "",
+      blurb: "A reserved slot while more pieces come out of the old folders.",
+      embed: "",
+      link: ""
+    },
+    {
+      slug: "placeholder-2",
+      title: "Placeholder 2",
+      context: "",
+      type: "Coming soon",
+      year: "",
+      hue: 40,
+      thumb: "",
+      blurb: "A reserved slot while more pieces come out of the old folders.",
+      embed: "",
+      link: ""
+    },
+    {
+      slug: "placeholder-3",
+      title: "Placeholder 3",
+      context: "",
+      type: "Coming soon",
+      year: "",
+      hue: 320,
+      thumb: "",
+      blurb: "A reserved slot while more pieces come out of the old folders.",
+      embed: "",
+      link: ""
     }
   ],
 
