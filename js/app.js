@@ -1484,7 +1484,7 @@
       return e ? e.label : id;
     };
 
-    list.innerHTML = items.map((r) => {
+    const card = (r) => {
       let host = "";
       try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (_) { /* keep empty */ }
       const levelChips = (r.levels || []).map((id) => {
@@ -1492,6 +1492,8 @@
         const text = e ? e.label + (e.hint ? " · " + e.hint : "") : id;
         return `<span class="v1-chip">${esc(text)}</span>`;
       }).join("");
+      const hskChip = r.hsk
+        ? `<span class="v1-chip">${esc(label("hskVersions", r.hsk))}</span>` : "";
       const skillChips = (r.skills || [])
         .map((id) => `<span class="v1-chip">${esc(label("skills", id))}</span>`)
         .join("");
@@ -1506,10 +1508,18 @@
           ${r.note ? `<span class="v1-res-note">${esc(r.note)}</span>` : ""}
           <span class="v1-res-tags">
             <span class="v1-chip is-res-type">${esc(label("types", r.type))}</span>
-            ${levelChips}${skillChips}${costChip}
+            ${levelChips}${hskChip}${skillChips}${costChip}
           </span>
         </a>`;
-    }).join("");
+    };
+
+    list.innerHTML = items.filter((r) => !r.secondary).map(card).join("");
+
+    const more = items.filter((r) => r.secondary);
+    const moreList = $("#v1-chinese-more");
+    const moreHead = $("#v1-chinese-more-head");
+    if (moreList) moreList.innerHTML = more.map(card).join("");
+    if (moreHead) moreHead.hidden = more.length === 0;
   }
 
   // #/sketchbook — photos of hand-drawn work. Same card + overlay shell as

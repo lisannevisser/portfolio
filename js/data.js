@@ -507,7 +507,11 @@ window.LV_DATA = {
   // long-term sorting system; the planned filter UI will be generated
   // from it, so keep ids stable once resources reference them.
   // Each resource: type (exactly one), skills + levels (one or more),
-  // cost (one). Levels follow the new HSK 3.0 bands.
+  // cost (one), plus an optional hsk field for resources that organize
+  // their content around a specific HSK numbering (old 2.0 vs new 3.0).
+  // Levels follow the new HSK 3.0 bands. Resources with secondary: true
+  // render in the "More recommendations" list below the main one:
+  // still worth keeping, but dated or clunky by the main list's bar.
   chineseTaxonomy: {
     types: [
       { id: "reading",    label: "Reading" },
@@ -539,6 +543,10 @@ window.LV_DATA = {
       { id: "free",     label: "Free" },
       { id: "freemium", label: "Freemium" },
       { id: "paid",     label: "Paid" }
+    ],
+    hskVersions: [
+      { id: "hsk2", label: "Old HSK 2.0" },
+      { id: "hsk3", label: "New HSK 3.0" }
     ]
   },
 
@@ -560,6 +568,28 @@ window.LV_DATA = {
       levels: ["beginner", "intermediate", "advanced"],
       cost: "freemium",
       note: "The dictionary every learner ends up with: handwriting input, OCR, and add-on dictionaries, so an unknown character is never more than a scribble away."
+    },
+    {
+      title: "Chinese for HSK 1-3 (Peking University)",
+      url: "https://www.coursera.org/specializations/hsk-learn-chinese",
+      type: "course",
+      skills: ["vocabulary", "grammar", "listening", "reading"],
+      levels: ["beginner"],
+      cost: "freemium",
+      hsk: "hsk2",
+      secondary: true,
+      note: "Peking University's lecture-style MOOC series on Coursera, free to audit. Built on the old HSK levels and showing its age, but still the most solid structured course you can take without a classroom."
+    },
+    {
+      title: "Chinese for HSK 4 (Peking University)",
+      url: "https://www.coursera.org/learn/hsk-4",
+      type: "course",
+      skills: ["vocabulary", "grammar", "listening", "reading"],
+      levels: ["intermediate"],
+      cost: "freemium",
+      hsk: "hsk2",
+      secondary: true,
+      note: "The intermediate continuation of the same series: six weeks of reading, listening, and grammar toward old HSK 4, with an HSK 5 course after it if you want to keep going."
     }
   ],
 
