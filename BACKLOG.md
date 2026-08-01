@@ -117,6 +117,14 @@ alles bleibt auf dem Gerät. Später evtl. als Portfolio-Material nutzbar
   - Falls App Store: Datenschutzerklärung nötig (HealthKit-Pflicht),
     Privacy-Label "Data Not Collected". "Kein Account, keine Werbung,
     alles lokal" als Store-Argument nutzen.
+  - [ ] Launch: Bewertungs-Prompt über Apples natives StoreKit-Review
+        (requestReview). Nicht sofort fragen, sondern nach
+        Zufriedenheits-Signalen: z. B. Tagesziel mehrfach erreicht,
+        App über 1-2 Wochen regelmäßig geöffnet. Apple-Regeln beachten:
+        Nur der native Dialog ist erlaubt, max. 3 Prompts pro Jahr pro
+        User, Apple entscheidet selbst, ob der Dialog wirklich
+        erscheint. Deshalb den Trigger auf einen guten Moment legen
+        (direkt nach Zielerreichung, nicht beim App-Start).
 
 ## Research-Tooling, Skills & Agents
 
