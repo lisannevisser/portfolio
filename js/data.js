@@ -300,6 +300,20 @@ window.LV_DATA = {
       link: "https://www.canva.com/design/DAFs0MtePKA/view"
     },
     {
+      slug: "goettingen-guest-lecture",
+      title: "From sociology to product design",
+      context: "University of Göttingen",
+      type: "Guest lecture · Slides",
+      year: "2025",
+      hue: 90,
+      thumb: "images/visuals/goettingen-lecture.jpg",
+      blurb: "An invited guest lecture at the University of Göttingen on career perspectives for sociology students: how I went from sociology into product design, and where data, design, and intercultural perspectives meet in my work. The deck is in German, built in Figma Slides.",
+      // Figma Slides embed (embed.figma.com/deck/<key>?embed-host=share).
+      // The modal also shows an "Open in Figma" link as a fallback.
+      embed: "https://embed.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s?embed-host=share",
+      link: "https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s"
+    },
+    {
       slug: "aerial-yoga-site",
       title: "Aerial Yoga microsite",
       context: "Personal project",
