@@ -662,6 +662,105 @@ window.LV_DATA = {
       note: "Zero-setup vocabulary SRS with curated lists (HSK, common textbooks) and clean progress stats. Pleco stays my everyday dictionary, but for studying I prefer a ready-made, maintained system over building my own decks."
     },
     {
+      title: "Hanly",
+      url: "https://www.hanlyapp.com/",
+      type: "app",
+      skills: ["characters", "vocabulary"],
+      levels: ["beginner", "intermediate"],
+      cost: "freemium",
+      note: "Indie app that teaches characters through their actual composition: components first, then the complex characters built from them, with stroke animations and spaced repetition. Free apart from the tap-to-read Reader."
+    },
+    {
+      title: "TeaTime Chinese 茶歇中文",
+      url: "https://teatimechinese.com/",
+      type: "podcast",
+      skills: ["listening", "vocabulary"],
+      levels: ["intermediate"],
+      cost: "free",
+      note: "Culture, history, and current topics in clear, deliberately paced Mandarin. The most recommended intermediate podcast for a reason."
+    },
+    {
+      title: "Learning Chinese Through Stories",
+      url: "https://www.learningchinesethroughstories.com/",
+      type: "podcast",
+      skills: ["listening", "vocabulary"],
+      levels: ["intermediate", "advanced"],
+      cost: "freemium",
+      note: "Story plus story-walkthrough, almost entirely in Chinese. The step from learner podcasts toward authentic listening."
+    },
+    {
+      title: "Cozy Mandarin",
+      url: "https://www.cozymandarin.com/",
+      type: "podcast",
+      skills: ["listening"],
+      levels: ["intermediate"],
+      cost: "free",
+      note: "Short, low-pressure comprehensible-input episodes by a native speaker, published near-daily. Listening practice that actually fits into a routine."
+    },
+    {
+      title: "Short Stories in Chinese (Penguin Parallel Text)",
+      url: "https://www.goodreads.com/book/show/10953429-new-penguin-parallel-text",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["intermediate", "advanced"],
+      cost: "paid",
+      note: "Eight contemporary Chinese short stories with the English translation on the facing page, edited by translator John Balcom. Real literature in the purest bilingual format."
+    },
+    {
+      title: "Graded Chinese Reader (Sinolingua)",
+      url: "https://www.purpleculture.net/graded-readers-c-104_106/",
+      type: "reading",
+      skills: ["reading", "vocabulary"],
+      levels: ["intermediate"],
+      cost: "paid",
+      note: "The adapted short-story series on my own shelf: contemporary Chinese stories with a pinyin-hiding card in the back, so pinyin is there when you need it and gone when you don't."
+    },
+    {
+      title: "Imagin8 Press",
+      url: "https://imagin8press.com/",
+      type: "reading",
+      skills: ["reading"],
+      levels: ["beginner", "intermediate"],
+      cost: "paid",
+      note: "Small indie press retelling real classics like Journey to the West as graded readers, every page layered with hanzi, pinyin, and English. Real titles instead of invented learner stories, which is exactly how I like my readers."
+    },
+    {
+      title: "Heavenly Path",
+      url: "https://heavenlypath.notion.site/",
+      type: "community",
+      skills: ["reading"],
+      levels: ["intermediate", "advanced"],
+      cost: "free",
+      note: "Community-maintained Notion guide from graded readers to native webnovels, games, and TV, sorted by character count instead of HSK level. The roadmap for what to read next."
+    },
+    {
+      title: "italki",
+      url: "https://www.italki.com/",
+      type: "community",
+      skills: ["speaking"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "paid",
+      note: "The marketplace for 1:1 lessons with professional teachers and community tutors. The speaking-practice building block in nearly every serious learning stack."
+    },
+    {
+      title: "HelloTalk",
+      url: "https://www.hellotalk.com/",
+      type: "community",
+      skills: ["speaking", "writing"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "The biggest language-exchange community, and the Mandarin side is one of its most active. Feels like social media: corrections, voice messages, and Moments from native speakers."
+    },
+    {
+      title: "Tandem",
+      url: "https://tandem.net/",
+      type: "community",
+      skills: ["speaking", "writing"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "Language exchange as structured 1:1 partnerships. The quieter, more focused counterpart to HelloTalk."
+    },
+    {
       title: "Chinese for HSK (Peking University)",
       url: "https://www.coursera.org/partners/pku",
       type: "course",
