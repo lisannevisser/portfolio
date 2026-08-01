@@ -1582,16 +1582,9 @@
     };
 
     const visible = items.filter((r) => cnMatches(r, null));
-    const primary = visible.filter((r) => !r.secondary);
-    list.innerHTML = primary.length === 0
+    list.innerHTML = visible.length === 0
       ? `<div class="v1-res-empty">Nothing matches this combination yet: the library is still growing.</div>`
-      : primary.map(card).join("");
-
-    const more = visible.filter((r) => r.secondary);
-    const moreList = $("#v1-chinese-more");
-    const moreHead = $("#v1-chinese-more-head");
-    if (moreList) moreList.innerHTML = more.map(card).join("");
-    if (moreHead) moreHead.hidden = more.length === 0;
+      : visible.map(card).join("");
   }
 
   function initChineseFilters() {
