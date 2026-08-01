@@ -90,6 +90,34 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 - [ ] Longitudinal: den Kern-Survey jährlich wiederholen, um die
       Nutzerbasis über Zeit zu beobachten, nicht nur als Momentaufnahme.
 
+## App-Projekte (iOS, eigene Apps)
+
+Kleine eigene Apps, gebaut mit Claude Code + Xcode. Voraussetzung: Mac
+mit Xcode. Kosten: 0 € solange nur lokal installiert (7-Tage-Limit beim
+kostenlosen Account), 99 € / Jahr fürs Apple Developer Program (gilt
+für beliebig viele Apps, dauerhafte Installation, TestFlight, App
+Store). Beide Apps: kein Account, keine Server, keine Datensammlung -
+alles bleibt auf dem Gerät. Später evtl. als Portfolio-Material nutzbar
+(Side Projects / Case).
+
+- [ ] **Affirmations-App** (gestartet). Fertig bauen und rund machen.
+      Aufwand: Kern ein Nachmittag, poliert 1-2 Tage.
+- [ ] **Schrittzähler-App.** Cleaner Schrittzähler ohne Werbung und
+      Clutter, mit eigenem Design als Differenzierung. Aufwand: Kern
+      1-2 Tage, poliert 3-5 Tage, Watch zusätzlich 2-3 Tage.
+  - [ ] Phase 1: iPhone-App + Homescreen-Widget, HealthKit-Anbindung
+        (nur lesen, Standard-Berechtigungsdialog).
+  - [ ] Phase 2: Lockscreen-Widget + optionale Erinnerung ("noch 6.000
+        bis zum Ziel").
+  - [ ] Phase 3: Watch-App + Komplikation fürs Zifferblatt. Spätestens
+        hier die 99 € investieren.
+  - Bekannte Grenze: Homescreen-Widgets aktualisieren nur alle 15-30
+    Min (Apple-Update-Budget), kein Live-Ticker. Live-Zahlen zeigt die
+    geöffnete App.
+  - Falls App Store: Datenschutzerklärung nötig (HealthKit-Pflicht),
+    Privacy-Label "Data Not Collected". "Kein Account, keine Werbung,
+    alles lokal" als Store-Argument nutzen.
+
 ## Research-Tooling, Skills & Agents
 
 Wiederverwendbare Bausteine, die projektübergreifend greifen - statt jedes
