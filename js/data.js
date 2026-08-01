@@ -350,16 +350,17 @@ window.LV_DATA = {
       link: "https://www.figma.com/community/file/1216405776765570841/openmoji-template"
     },
     {
-      slug: "figma-canva-templates",
-      title: "Canva design templates",
-      context: "Figma Community",
-      type: "Templates",
-      year: "2023",
-      hue: 20,
-      thumb: "images/visuals/figma-canva-templates.jpg",
-      blurb: "A Figma Community piece pointing to my Canva Creator templates: free, customizable digital and print designs for small brands.",
+      slug: "canva-yoga-flyer",
+      title: "Yoga flyer template",
+      context: "Canva Creator",
+      type: "Template · Print",
+      year: "",
+      hue: 30,
+      thumb: "images/visuals/canva-yoga-flyer.jpg",
+      blurb: "A yoga studio flyer from my Canva Creator collection: free, customizable templates for small brands. One of the designs I publish on Canva.",
       embed: "",
-      link: "https://www.figma.com/community/file/1216765425768737898/free-customizable-design-templates-on-canva"
+      // TODO: link directly to the Canva template (link tbd)
+      link: ""
     },
     {
       slug: "illustration-adventure-set",
@@ -385,7 +386,7 @@ window.LV_DATA = {
       year: "2020",
       hue: 350,
       thumb: "images/visuals/facelyu.jpg",
-      blurb: "A face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
+      blurb: "My first design project ever: a face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
       embed: "",
       link: "https://www.instagram.com/facely_u/"
     },
