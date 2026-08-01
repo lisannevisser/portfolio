@@ -300,6 +300,18 @@ window.LV_DATA = {
       link: "https://www.canva.com/design/DAFs0MtePKA/view"
     },
     {
+      slug: "already-wordmark",
+      title: "al/ready wordmark",
+      context: "Concept",
+      type: "Wordmark · Naming",
+      year: "2026",
+      hue: 5,
+      thumb: "images/visuals/already-wordmark.jpg",
+      blurb: "A wordmark for al/ready, a to-do app concept: the app that got it all done, already. The slash splits the name into “all” and “ready”, and the presentation keeps the red construction guides visible.",
+      embed: "",
+      link: ""
+    },
+    {
       slug: "aerial-yoga-site",
       title: "Aerial Yoga microsite",
       context: "Personal project",
