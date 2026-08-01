@@ -49,7 +49,7 @@
       <div class="lv-nav-links">
         <a href="#/work" class="lv-nav-link" data-route="work">Work</a>
         <a href="#/about" class="lv-nav-link" data-route="about">About</a>
-        <a href="#/playground" class="lv-nav-link" data-route="playground" hidden>Playground</a>
+        <a href="#/playground" class="lv-nav-link" data-route="playground">Playground</a>
         <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="Email" style="padding:0.45rem 0.9rem;font-size:0.85rem;">Say hi</a>
       </div>
       <button class="lv-nav-toggle" type="button" aria-label="Open menu"><span class="material-symbols-outlined" aria-hidden="true">lunch_dining</span></button>
@@ -62,7 +62,7 @@
     <button class="lv-nav-sheet-close" type="button" aria-label="Close menu">Close ×</button>
     <a href="#/work">Work</a>
     <a href="#/about">About</a>
-    <a href="#/playground" hidden>Playground</a>
+    <a href="#/playground">Playground</a>
     <a href="mailto:mail@lisannevisser.com" class="lv-btn" style="display:inline-flex;">Say hi</a>
   </aside>
 
@@ -111,7 +111,7 @@
         <section class="v1-section lv-wrap">
           <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.5rem;gap:1.5rem;flex-wrap:wrap;" class="lv-reveal">
             <div>
-              <div class="lv-eyebrow">Selected work</div>
+              <div class="lv-eyebrow">./work</div>
               <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
                 Work worth a <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">read<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>.
               </h2>
@@ -146,7 +146,8 @@
 
       <!-- V1 WORK -->
       <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:1.5rem;">
+        <div class="lv-eyebrow lv-reveal" style="margin-top:2rem;">./work</div>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:0.75rem;margin-bottom:1.5rem;">
           <span style="position:relative;display:inline-block;">My work,<span data-scribble="squiggle" style="position:absolute;bottom:-0.15em;left:0;width:80%;height:0.25em;"></span></span>
           <br/><em>the full record</em>
         </h1>
@@ -195,7 +196,7 @@
 
               <div class="ahs-text">
                 <div class="ahs-mast">
-                  <div class="lv-eyebrow ahs-eyebrow">About me</div>
+                  <div class="lv-eyebrow ahs-eyebrow">./about</div>
                   <h1 class="v1-hero-display ahs-h1">
                     Hello,<br/>I'm
                     <span class="ahs-name">
@@ -263,8 +264,7 @@
         <section class="v1-section">
           <div class="v1-career-layout">
             <div class="v1-career-aside lv-reveal">
-              <div class="lv-eyebrow">The path so far</div>
-              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+              <h2 class="lv-h1" style="margin-top:0;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
                 <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">5+</em> years experience
               </h2>
               <p class="lv-body" style="margin-top:1rem;">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
@@ -363,8 +363,7 @@
         <!-- A video that stays with me -->
         <section class="v1-section">
           <div class="lv-reveal">
-            <div class="lv-eyebrow">On repeat</div>
-            <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+            <h2 class="lv-h1" style="margin-top:0;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
               A video that keeps <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">inspiring</em> me over and over again.
             </h2>
           </div>
@@ -382,7 +381,8 @@
 
       <!-- V1 PLAYGROUND -->
       <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
-        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;">
+        <div class="lv-eyebrow lv-reveal" style="margin-top:2rem;">./playground</div>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:0.75rem;">
           Not <em style="color:var(--accent);">everything</em><br/>needs a KPI.
         </h1>
         <p class="lv-lead lv-reveal" style="max-width:48ch;margin-top:2rem;">
@@ -547,7 +547,9 @@
         <div class="v1-res-list" id="v1-chinese-list"><!-- filled by app.js --></div>
 
         <div class="lv-reveal" id="v1-chinese-more-head" hidden style="margin-top:4.5rem;">
-          <div class="lv-eyebrow">More recommendations</div>
+          <h2 class="lv-h1" style="margin-top:0;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+            More <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">recommendations</em>.
+          </h2>
           <p class="lv-lead" style="max-width:58ch;margin-top:1rem;">
             Not as modern or polished as the list above, but too useful to leave out.
           </p>
@@ -848,7 +850,7 @@
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
-          <li hidden><a href="#/playground">Playground</a></li>
+          <li><a href="#/playground">Playground</a></li>
         </ul>
       </div>
     </div>
