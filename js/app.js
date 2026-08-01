@@ -1471,34 +1471,85 @@
 
   // #/chinese — the Mandarin learning library. Cards are rendered from
   // D.chineseResources; chips come from D.chineseTaxonomy so the cards and
-  // the future filter UI share one vocabulary. Unknown ids render as-is
-  // instead of breaking the card.
+  // the filter UI share one vocabulary. Unknown ids render as-is instead
+  // of breaking the card.
+  //
+  // Filtering: one facet per taxonomy group, single-select with an "All"
+  // default, groups combine with AND. Filter chips are bilingual
+  // ("Reading / 阅读"); the card chips stay English to keep them scannable.
+  const CN_FILTER_GROUPS = [
+    { key: "type",  group: "types",       label: "Type",  zh: "类型",
+      match: (r, id) => r.type === id },
+    { key: "skill", group: "skills",      label: "Skill", zh: "技能",
+      match: (r, id) => (r.skills || []).includes(id) },
+    { key: "level", group: "levels",      label: "Level", zh: "水平",
+      match: (r, id) => (r.levels || []).includes(id) },
+    { key: "hsk",   group: "hskVersions", label: "HSK",   zh: null,
+      match: (r, id) => r.hsk === id },
+    { key: "cost",  group: "costs",       label: "Cost",  zh: "费用",
+      match: (r, id) => r.cost === id }
+  ];
+  const cnFilter = { type: "all", skill: "all", level: "all", hsk: "all", cost: "all" };
+
+  function cnMatches(r, except) {
+    return CN_FILTER_GROUPS.every((g) => {
+      if (g.key === except) return true;
+      const sel = cnFilter[g.key];
+      return sel === "all" || g.match(r, sel);
+    });
+  }
+
   function renderChineseResources() {
     const list = $("#v1-chinese-list");
     if (!list) return;
     const tax = D.chineseTaxonomy || {};
     const items = D.chineseResources || [];
-    const find = (group, id) => (tax[group] || []).find((x) => x.id === id);
-    const label = (group, id) => {
-      const e = find(group, id);
-      return e ? e.label : id;
-    };
 
+    // Active-facet badge on the accordion summary, so applied filters
+    // stay visible while the accordion is closed.
+    const countEl = $("#v1-chinese-filter-count");
+    if (countEl) {
+      const active = CN_FILTER_GROUPS.filter((g) => cnFilter[g.key] !== "all").length;
+      countEl.textContent = active;
+      countEl.hidden = active === 0;
+    }
+
+    // Filter rows: chips carry "English / 中文" labels. Counts are computed
+    // against the other groups' current selections; chips that would empty
+    // the list are disabled instead of hidden. Only this inner container is
+    // re-rendered, so the accordion's open state survives filter clicks.
+    const filtersEl = $("#v1-chinese-filters");
+    if (filtersEl) {
+      filtersEl.innerHTML = CN_FILTER_GROUPS.map((g) => {
+        const options = [{ id: "all", label: "All", zh: "全部" }].concat(tax[g.group] || []);
+        const chips = options.map((o) => {
+          const count = items.filter((r) =>
+            cnMatches(r, g.key) && (o.id === "all" || g.match(r, o.id))).length;
+          const active = cnFilter[g.key] === o.id;
+          const text = o.zh ? `${o.label} / ${o.zh}` : o.label;
+          return `
+            <button type="button" class="v1-work-chip${active ? " is-active" : ""}"
+                    data-cn-group="${esc(g.key)}" data-cn-id="${esc(o.id)}"
+                    ${count === 0 && !active ? " disabled" : ""}
+                    aria-pressed="${active ? "true" : "false"}">
+              <span>${esc(text)}</span>
+              <span class="v1-work-chip-count">${count}</span>
+            </button>`;
+        }).join("");
+        const gLabel = g.zh ? `${g.label} / ${g.zh}` : g.label;
+        return `
+          <div class="v1-res-filter-row">
+            <span class="v1-res-filter-label">${esc(gLabel)}</span>
+            <span class="v1-res-filter-chips">${chips}</span>
+          </div>`;
+      }).join("");
+    }
+
+    // Cards stay chip-free on purpose: the taxonomy is fully visible in
+    // the filter accordion, so the card carries only content and link.
     const card = (r) => {
       let host = "";
       try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (_) { /* keep empty */ }
-      const levelChips = (r.levels || []).map((id) => {
-        const e = find("levels", id);
-        const text = e ? e.label + (e.hint ? " · " + e.hint : "") : id;
-        return `<span class="v1-chip">${esc(text)}</span>`;
-      }).join("");
-      const hskChip = r.hsk
-        ? `<span class="v1-chip">${esc(label("hskVersions", r.hsk))}</span>` : "";
-      const skillChips = (r.skills || [])
-        .map((id) => `<span class="v1-chip">${esc(label("skills", id))}</span>`)
-        .join("");
-      const costChip = r.cost
-        ? `<span class="v1-chip">${esc(label("costs", r.cost))}</span>` : "";
       return `
         <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" class="v1-res-row lv-reveal" data-cursor-label="Visit ↗">
           <span class="v1-res-head">
@@ -1506,20 +1557,33 @@
             <span class="v1-res-host">${esc(host)} ↗</span>
           </span>
           ${r.note ? `<span class="v1-res-note">${esc(r.note)}</span>` : ""}
-          <span class="v1-res-tags">
-            <span class="v1-chip is-res-type">${esc(label("types", r.type))}</span>
-            ${levelChips}${hskChip}${skillChips}${costChip}
-          </span>
         </a>`;
     };
 
-    list.innerHTML = items.filter((r) => !r.secondary).map(card).join("");
+    const visible = items.filter((r) => cnMatches(r, null));
+    const primary = visible.filter((r) => !r.secondary);
+    list.innerHTML = primary.length === 0
+      ? `<div class="v1-res-empty">Nothing matches this combination yet: the library is still growing.</div>`
+      : primary.map(card).join("");
 
-    const more = items.filter((r) => r.secondary);
+    const more = visible.filter((r) => r.secondary);
     const moreList = $("#v1-chinese-more");
     const moreHead = $("#v1-chinese-more-head");
     if (moreList) moreList.innerHTML = more.map(card).join("");
     if (moreHead) moreHead.hidden = more.length === 0;
+  }
+
+  function initChineseFilters() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-cn-group]");
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
+      const key = btn.getAttribute("data-cn-group");
+      const id = btn.getAttribute("data-cn-id");
+      if (!key || !id || cnFilter[key] === id) return;
+      cnFilter[key] = id;
+      renderChineseResources();
+    });
   }
 
   // #/sketchbook — photos of hand-drawn work. Same card + overlay shell as
@@ -1602,6 +1666,7 @@
     initFlipCards();
     initInfoPopovers();
     initV1WorkFilters();
+    initChineseFilters();
     initFooterEmoji();
     initHeroScrolly();
     initHeroVideo();

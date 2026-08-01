@@ -506,47 +506,50 @@ window.LV_DATA = {
   // collection of Mandarin resources. The taxonomy below is the
   // long-term sorting system; the planned filter UI will be generated
   // from it, so keep ids stable once resources reference them.
-  // Each resource: type (exactly one), skills + levels (one or more),
-  // cost (one), plus an optional hsk field for resources that organize
+  // Each resource: type (exactly one), skills + levels (one or more;
+  // culture-side entries like the Tsinghua design course may leave both
+  // empty), cost (one), plus an optional hsk field for resources that organize
   // their content around a specific HSK numbering (old 2.0 vs new 3.0).
   // Levels follow the new HSK 3.0 bands. Resources with secondary: true
   // render in the "More recommendations" list below the main one:
   // still worth keeping, but dated or clunky by the main list's bar.
   chineseTaxonomy: {
     types: [
-      { id: "reading",    label: "Reading" },
-      { id: "listening",  label: "Listening" },
-      { id: "video",      label: "Video" },
-      { id: "app",        label: "App" },
-      { id: "course",     label: "Course" },
-      { id: "podcast",    label: "Podcast" },
-      { id: "dictionary", label: "Dictionary" },
-      { id: "tool",       label: "Tool" },
-      { id: "community",  label: "Community" }
+      { id: "reading",    label: "Reading",    zh: "阅读" },
+      { id: "listening",  label: "Listening",  zh: "听力" },
+      { id: "video",      label: "Video",      zh: "视频" },
+      { id: "app",        label: "App",        zh: "应用" },
+      { id: "course",     label: "Course",     zh: "课程" },
+      { id: "podcast",    label: "Podcast",    zh: "播客" },
+      { id: "dictionary", label: "Dictionary", zh: "词典" },
+      { id: "tool",       label: "Tool",       zh: "工具" },
+      { id: "community",  label: "Community",  zh: "社区" }
     ],
+    // Skills mirror the course units of a Chinese degree program:
+    // 阅读 reading, 听力 listening, 口语 speaking, 写作 writing, and so on.
     skills: [
-      { id: "reading",       label: "Reading" },
-      { id: "listening",     label: "Listening" },
-      { id: "speaking",      label: "Speaking" },
-      { id: "writing",       label: "Writing" },
-      { id: "characters",    label: "Characters" },
-      { id: "vocabulary",    label: "Vocabulary" },
-      { id: "grammar",       label: "Grammar" },
-      { id: "pronunciation", label: "Pronunciation" }
+      { id: "reading",       label: "Reading",       zh: "阅读" },
+      { id: "listening",     label: "Listening",     zh: "听力" },
+      { id: "speaking",      label: "Speaking",      zh: "口语" },
+      { id: "writing",       label: "Writing",       zh: "写作" },
+      { id: "characters",    label: "Characters",    zh: "汉字" },
+      { id: "vocabulary",    label: "Vocabulary",    zh: "词汇" },
+      { id: "grammar",       label: "Grammar",       zh: "语法" },
+      { id: "pronunciation", label: "Pronunciation", zh: "发音" }
     ],
     levels: [
-      { id: "beginner",     label: "Beginner",     hint: "HSK 1-3" },
-      { id: "intermediate", label: "Intermediate", hint: "HSK 4-6" },
-      { id: "advanced",     label: "Advanced",     hint: "HSK 7-9" }
+      { id: "beginner",     label: "Beginner",     zh: "初级", hint: "HSK 1-3" },
+      { id: "intermediate", label: "Intermediate", zh: "中级", hint: "HSK 4-6" },
+      { id: "advanced",     label: "Advanced",     zh: "高级", hint: "HSK 7-9" }
     ],
     costs: [
-      { id: "free",     label: "Free" },
-      { id: "freemium", label: "Freemium" },
-      { id: "paid",     label: "Paid" }
+      { id: "free",     label: "Free",     zh: "免费" },
+      { id: "freemium", label: "Freemium", zh: "部分免费" },
+      { id: "paid",     label: "Paid",     zh: "付费" }
     ],
     hskVersions: [
-      { id: "hsk2", label: "Old HSK 2.0" },
-      { id: "hsk3", label: "New HSK 3.0" }
+      { id: "hsk2", label: "Old HSK 2.0", zh: "旧版" },
+      { id: "hsk3", label: "New HSK 3.0", zh: "新版" }
     ]
   },
 
@@ -570,26 +573,25 @@ window.LV_DATA = {
       note: "The dictionary every learner ends up with: handwriting input, OCR, and add-on dictionaries, so an unknown character is never more than a scribble away."
     },
     {
-      title: "Chinese for HSK 1-3 (Peking University)",
-      url: "https://www.coursera.org/specializations/hsk-learn-chinese",
+      title: "Chinese for HSK (Peking University)",
+      url: "https://www.coursera.org/partners/pku",
       type: "course",
       skills: ["vocabulary", "grammar", "listening", "reading"],
-      levels: ["beginner"],
+      levels: ["beginner", "intermediate"],
       cost: "freemium",
       hsk: "hsk2",
       secondary: true,
-      note: "Peking University's lecture-style MOOC series on Coursera, free to audit. Built on the old HSK levels and showing its age, but still the most solid structured course you can take without a classroom."
+      note: "Peking University, one of China's top universities, runs a full MOOC series on Coursera from HSK 1 up to HSK 5, free to audit. Lecture-style and built on the old HSK levels, but the most rigorous structured path you can take without a classroom."
     },
     {
-      title: "Chinese for HSK 4 (Peking University)",
-      url: "https://www.coursera.org/learn/hsk-4",
+      title: "Human Factors and Culture in Design (Tsinghua)",
+      url: "https://www.edx.org/learn/user-experience-ux/tsinghua-university-user-experience-ux-design-human-factors-and-culture-in-design-she-ji-de-ren-yin-yu-wen-hua",
       type: "course",
-      skills: ["vocabulary", "grammar", "listening", "reading"],
-      levels: ["intermediate"],
+      skills: [],
+      levels: [],
       cost: "freemium",
-      hsk: "hsk2",
       secondary: true,
-      note: "The intermediate continuation of the same series: six weeks of reading, listening, and grammar toward old HSK 4, with an HSK 5 course after it if you want to keep going."
+      note: "The odd one out, no language training: Tsinghua's UX course on human factors and how culture shapes design, taught through Chinese cases. It sits exactly where Chinese, intercultural training, and my day job in design meet."
     }
   ],
 
