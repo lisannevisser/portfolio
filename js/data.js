@@ -626,6 +626,33 @@ window.LV_DATA = {
       note: "The dictionary every learner ends up with: handwriting input, OCR, and add-on dictionaries, so an unknown character is never more than a scribble away."
     },
     {
+      title: "Zhongwen",
+      url: "https://chromewebstore.google.com/detail/zhongwen-chinese-english/kkmlkkjojmombglmlpbpapmhcaljjkde",
+      type: "tool",
+      skills: ["reading", "vocabulary"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "free",
+      note: "Popup dictionary as a browser extension: hover over any character on any page and get pinyin with tone colors and a translation. Freshly installed, and it already makes the whole Chinese web feel readable."
+    },
+    {
+      title: "Language Reactor",
+      url: "https://www.languagereactor.com/",
+      type: "tool",
+      skills: ["listening", "vocabulary"],
+      levels: ["intermediate", "advanced"],
+      cost: "freemium",
+      note: "Dual subtitles and tap-to-look-up words on Netflix and YouTube. New in my toolkit, but the promise is exactly why I installed it: shows I'd watch anyway become listening practice."
+    },
+    {
+      title: "HelloChinese",
+      url: "https://www.hellochinese.cc/",
+      type: "app",
+      skills: ["pronunciation", "characters", "vocabulary", "listening"],
+      levels: ["beginner"],
+      cost: "freemium",
+      note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. Listed with a caveat: I don't believe an app alone teaches you a language, but as an on-ramp it's the best of its kind."
+    },
+    {
       title: "Chinese for HSK (Peking University)",
       url: "https://www.coursera.org/partners/pku",
       type: "course",
