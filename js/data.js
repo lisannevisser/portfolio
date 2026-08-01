@@ -563,9 +563,8 @@ window.LV_DATA = {
   // culture-side entries like the Tsinghua design course may leave both
   // empty), cost (one), plus an optional hsk field for resources that organize
   // their content around a specific HSK numbering (old 2.0 vs new 3.0).
-  // Levels follow the new HSK 3.0 bands. Resources with secondary: true
-  // render in the "More recommendations" list below the main one:
-  // still worth keeping, but dated or clunky by the main list's bar.
+  // Levels follow the new HSK 3.0 bands. All resources render in one
+  // flat list; the filters at the top are the only grouping.
   chineseTaxonomy: {
     types: [
       { id: "reading",    label: "Reading",    zh: "阅读" },
@@ -650,7 +649,7 @@ window.LV_DATA = {
       skills: ["pronunciation", "characters", "vocabulary", "listening"],
       levels: ["beginner"],
       cost: "freemium",
-      note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. Listed with a caveat: I don't believe an app alone teaches you a language, but as an on-ramp it's the best of its kind."
+      note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. An app alone won't teach you a language, but as an on-ramp it's the best of its kind."
     },
     {
       title: "Hack Chinese",
@@ -704,7 +703,7 @@ window.LV_DATA = {
       skills: ["reading", "vocabulary"],
       levels: ["intermediate", "advanced"],
       cost: "paid",
-      note: "Eight contemporary Chinese short stories with the English translation on the facing page, edited by translator John Balcom. Real literature in the purest bilingual format."
+      note: "Eight Chinese short stories with the English translation on the facing page, edited by translator John Balcom. Published in 2013; the stories themselves date from the 1980s and 90s. Real literature in the purest bilingual format."
     },
     {
       title: "Graded Chinese Reader (Sinolingua)",
@@ -768,7 +767,6 @@ window.LV_DATA = {
       levels: ["beginner", "intermediate"],
       cost: "freemium",
       hsk: "hsk2",
-      secondary: true,
       note: "Peking University, one of China's top universities, runs a full MOOC series on Coursera from HSK 1 up to HSK 5, free to audit. Lecture-style and built on the old HSK levels, but the most rigorous structured path you can take without a classroom."
     },
     {
@@ -778,7 +776,6 @@ window.LV_DATA = {
       skills: [],
       levels: [],
       cost: "freemium",
-      secondary: true,
       note: "The odd one out, no language training: Tsinghua's UX course on human factors and how culture shapes design, taught through Chinese cases. It sits exactly where Chinese, intercultural training, and my day job in design meet."
     }
   ],
