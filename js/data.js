@@ -368,7 +368,7 @@ window.LV_DATA = {
       type: "Illustration",
       year: "",
       hue: 260,
-      thumb: "",
+      thumb: "images/visuals/illustration-adventure-set.jpg",
       blurb: "A set of adventure-themed illustrations, published as a project on Behance.",
       // Behance smart embed (behance.net/embed/project/<id>); the modal
       // shows an "Open in Behance" link as a fallback.
@@ -378,16 +378,16 @@ window.LV_DATA = {
     // Placeholder slots (todo): swap each for a real piece from the old
     // folders. They render as gradient tiles until they get a thumb.
     {
-      slug: "placeholder-1",
-      title: "Placeholder 1",
-      context: "",
-      type: "Coming soon",
-      year: "",
-      hue: 150,
-      thumb: "",
-      blurb: "A reserved slot while more pieces come out of the old folders.",
+      slug: "facelyu",
+      title: "FacelyU face yoga app",
+      context: "Side project",
+      type: "App · Social media",
+      year: "2020",
+      hue: 350,
+      thumb: "images/visuals/facelyu.jpg",
+      blurb: "A face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
       embed: "",
-      link: ""
+      link: "https://www.instagram.com/facely_u/"
     },
     {
       slug: "placeholder-2",
