@@ -1504,15 +1504,20 @@
     if (!list) return;
     const tax = D.chineseTaxonomy || {};
     const items = D.chineseResources || [];
-    const find = (group, id) => (tax[group] || []).find((x) => x.id === id);
-    const label = (group, id) => {
-      const e = find(group, id);
-      return e ? e.label : id;
-    };
 
-    // Filter bar: one row per group, chips carry "English / 中文" labels.
-    // Counts are computed against the other groups' current selections;
-    // chips that would empty the list are disabled instead of hidden.
+    // Active-facet badge on the accordion summary, so applied filters
+    // stay visible while the accordion is closed.
+    const countEl = $("#v1-chinese-filter-count");
+    if (countEl) {
+      const active = CN_FILTER_GROUPS.filter((g) => cnFilter[g.key] !== "all").length;
+      countEl.textContent = active;
+      countEl.hidden = active === 0;
+    }
+
+    // Filter rows: chips carry "English / 中文" labels. Counts are computed
+    // against the other groups' current selections; chips that would empty
+    // the list are disabled instead of hidden. Only this inner container is
+    // re-rendered, so the accordion's open state survives filter clicks.
     const filtersEl = $("#v1-chinese-filters");
     if (filtersEl) {
       filtersEl.innerHTML = CN_FILTER_GROUPS.map((g) => {
@@ -1540,21 +1545,11 @@
       }).join("");
     }
 
+    // Cards stay chip-free on purpose: the taxonomy is fully visible in
+    // the filter accordion, so the card carries only content and link.
     const card = (r) => {
       let host = "";
       try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (_) { /* keep empty */ }
-      const levelChips = (r.levels || []).map((id) => {
-        const e = find("levels", id);
-        const text = e ? e.label + (e.hint ? " · " + e.hint : "") : id;
-        return `<span class="v1-chip">${esc(text)}</span>`;
-      }).join("");
-      const hskChip = r.hsk
-        ? `<span class="v1-chip">${esc(label("hskVersions", r.hsk))}</span>` : "";
-      const skillChips = (r.skills || [])
-        .map((id) => `<span class="v1-chip">${esc(label("skills", id))}</span>`)
-        .join("");
-      const costChip = r.cost
-        ? `<span class="v1-chip">${esc(label("costs", r.cost))}</span>` : "";
       return `
         <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" class="v1-res-row lv-reveal" data-cursor-label="Visit ↗">
           <span class="v1-res-head">
@@ -1562,10 +1557,6 @@
             <span class="v1-res-host">${esc(host)} ↗</span>
           </span>
           ${r.note ? `<span class="v1-res-note">${esc(r.note)}</span>` : ""}
-          <span class="v1-res-tags">
-            <span class="v1-chip is-res-type">${esc(label("types", r.type))}</span>
-            ${levelChips}${hskChip}${skillChips}${costChip}
-          </span>
         </a>`;
     };
 
