@@ -1423,7 +1423,8 @@
         link.href = v.link;
         link.hidden = false;
         const host = (v.link || v.embed || "").includes("behance.net") ? "Behance"
-          : (v.link || v.embed || "").includes("canva.com") ? "Canva" : "";
+          : (v.link || v.embed || "").includes("canva.com") ? "Canva"
+          : (v.link || v.embed || "").includes("figma.com") ? "Figma" : "";
         link.textContent = (v.embed && host ? "Open in " + host : "Open project") + " ↗";
       } else {
         link.hidden = true;
