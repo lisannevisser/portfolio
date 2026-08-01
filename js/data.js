@@ -653,6 +653,15 @@ window.LV_DATA = {
       note: "The gamified starter app, built for Mandarin instead of copied from another language: tone graphs, speech feedback, stroke animations. Listed with a caveat: I don't believe an app alone teaches you a language, but as an on-ramp it's the best of its kind."
     },
     {
+      title: "Hack Chinese",
+      url: "https://www.hackchinese.com/",
+      type: "app",
+      skills: ["vocabulary"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "paid",
+      note: "Zero-setup vocabulary SRS with curated lists (HSK, common textbooks) and clean progress stats. Pleco stays my everyday dictionary, but for studying I prefer a ready-made, maintained system over building my own decks."
+    },
+    {
       title: "Chinese for HSK (Peking University)",
       url: "https://www.coursera.org/partners/pku",
       type: "course",
