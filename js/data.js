@@ -551,6 +551,15 @@ window.LV_DATA = {
       levels: ["beginner", "intermediate"],
       cost: "free",
       note: "Graded reading practice: short texts sorted by level, so you read at the edge of what you know instead of drowning in a native article."
+    },
+    {
+      title: "Pleco",
+      url: "https://www.pleco.com/",
+      type: "dictionary",
+      skills: ["reading", "characters", "vocabulary"],
+      levels: ["beginner", "intermediate", "advanced"],
+      cost: "freemium",
+      note: "The dictionary every learner ends up with: handwriting input, OCR, and add-on dictionaries, so an unknown character is never more than a scribble away."
     }
   ],
 
