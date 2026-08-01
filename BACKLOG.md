@@ -7,6 +7,23 @@ Format: Checklisten-Items, nach Thema gruppiert. Abhaken (`- [x]`), wenn
 erledigt. Neue Ideen einfach unten im passenden Abschnitt ergänzen, oder
 einen neuen Abschnitt aufmachen.
 
+## Visuals-Seite (Canva & Co.)
+
+Stand nach PR #151/#152: Übersichtskarte raus, Yoga-Flyer-Karte drin
+(noch ohne Link), FacelyU- und Adventure-Set-Cover live.
+
+- [ ] Canva-Link zum Yoga-Flyer-Template nachtragen (`link: ""` mit
+      TODO-Kommentar in `js/data.js`, Karte "canva-yoga-flyer").
+- [ ] Zwei weitere Canva-Designs raussuchen und als Karten ergänzen
+      (Cover als SVG/PNG + direkter Template-Link; Workflow wie beim
+      Flyer: headless Chrome rendert, sips macht das JPEG).
+- [ ] Übersichts-PNG (mehrere Designs grafisch arrangiert) in voller
+      Auflösung testen: als optionale Karte mit Link aufs Canva-Profil.
+      Offene Frage: Grid-im-Grid-Optik - entscheidet sich am Bild.
+- [ ] Jahr für "Illustration Adventure Set" nachtragen (steht leer).
+- [ ] FacelyU: Zeitraum der 750+ Follower präzisieren (Post-Daten im
+      eingeloggten Instagram-Account ablesen; extern nicht belegbar).
+
 ## Research-Positionierung (Portfolio gesamt)
 
 Das Portfolio liest sich heute als "Designerin mit Research-Rückgrat",
