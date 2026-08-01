@@ -75,6 +75,16 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 - [ ] Weitere reine Discovery-Projekte aus dem Daily Job sichten - evtl.
       mehrere zu einer Case bündeln.
 
+## Cargoboard Split - Follow-ups (nach PR #154)
+
+- [ ] Case 04 (Design System) Story-Body aufräumen: Section "Approach",
+      Framework-Item "IA" und "Outcome"-Text referenzieren noch IA-Arbeit,
+      die inzwischen komplett zu Case 05 gehört. Rebrand-Erwähnung bleibt.
+- [ ] Case 05 (Website Relaunch) vom Platzhalter zum vollen Case ausbauen:
+      echte `duration`, Subtitle ersetzen ("[Case study in progress]"),
+      Story-Sections schreiben (Audit, IA-Ansatz, Marketer-Kollab,
+      Dev-Hiring, Outcome).
+
 ## Blog (Gazette)
 
 - [ ] Post: "Warum ich AI bei Quant traue, aber nicht bei Qual."
