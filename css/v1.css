@@ -1364,6 +1364,38 @@
   gap: 1.5rem;
 }
 
+/* #/visuals only: masonry columns, so the uncropped thumbs pack tightly
+   instead of leaving ragged fixed-height rows. Cards flow down each
+   column; the sketchbook and teaser grids keep the row-based layout. */
+[data-variation="v1"] #v1-visuals-grid {
+  display: block;
+  columns: 3;
+  column-gap: 1.5rem;
+}
+[data-variation="v1"] #v1-visuals-grid .v1-visual-card {
+  display: block; width: 100%;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  /* Scroll reveal: cards fade up as they enter the viewport, staggered
+     per column via --card-i (set inline by app.js). */
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+  transition-delay: calc(var(--card-i, 0) * 70ms);
+}
+[data-variation="v1"] #v1-visuals-grid .v1-visual-card.is-in {
+  opacity: 1; transform: none;
+}
+[data-variation="v1"] #v1-visuals-grid .v1-visual-card.is-in:hover {
+  transform: translateY(-4px);
+  transition-delay: 0ms;
+}
+@media (max-width: 900px) {
+  [data-variation="v1"] #v1-visuals-grid { columns: 2; }
+}
+@media (max-width: 560px) {
+  [data-variation="v1"] #v1-visuals-grid { columns: 1; }
+}
+
 /* Card ------------------------------------------------------------------- */
 [data-variation="v1"] .v1-visual-card {
   display: flex; flex-direction: column;
@@ -1377,8 +1409,13 @@
   border: 1px solid var(--rule);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
+/* Visuals grid uses real <img> thumbs at their natural ratio (full image,
+   no crop); the span/background version above still serves the sketchbook. */
+[data-variation="v1"] img.v1-visual-thumb {
+  aspect-ratio: auto; height: auto; background: none;
+}
 [data-variation="v1"] .v1-visual-thumb.is-fallback {
-  position: relative; border: none;
+  position: relative; border: none; aspect-ratio: 16 / 10;
   background-image: radial-gradient(70% 60% at 30% 30%, oklch(0.88 0.1 var(--tile-hue)), oklch(0.75 0.12 calc(var(--tile-hue) + 30)));
 }
 [data-variation="v1"] .v1-visual-kind {
@@ -1388,9 +1425,22 @@
   color: rgba(20,20,20,0.6);
 }
 [data-variation="v1"] .v1-visual-card:hover .v1-visual-thumb {
-  transform: translateY(-4px);
   box-shadow: 0 18px 40px rgba(0,0,0,0.16);
 }
+/* The lift moves to the card so the hover scrim travels with the image. */
+[data-variation="v1"] .v1-visual-card { position: relative; transition: transform 0.4s var(--ease-out); }
+[data-variation="v1"] .v1-visual-card:hover { transform: translateY(-4px); }
+[data-variation="v1"] .v1-visual-hover {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: flex-end; padding: 1rem 1.1rem;
+  border-radius: var(--radius-lg); pointer-events: none;
+  background: linear-gradient(to top, rgba(24,18,12,0.55), rgba(24,18,12,0) 45%);
+  color: #fff; font-family: var(--font-display); font-style: italic;
+  font-size: 1.15rem; line-height: 1.2;
+  opacity: 0; transition: opacity var(--t-fast);
+}
+[data-variation="v1"] .v1-visual-card:hover .v1-visual-hover,
+[data-variation="v1"] .v1-visual-card:focus-visible .v1-visual-hover { opacity: 1; }
 [data-variation="v1"] .v1-visual-info {
   display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.85rem;
 }
@@ -1450,28 +1500,7 @@
   background-image: radial-gradient(70% 60% at 30% 30%, oklch(0.88 0.1 var(--tile-hue)), oklch(0.75 0.12 calc(var(--tile-hue) + 30)));
   font-family: var(--font-display); font-style: italic; font-size: 1.6rem; color: rgba(20,20,20,0.85);
 }
-.v1-visual-stage-wrap { position: relative; }
-.v1-visual-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 2.25rem; height: 2.25rem;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--rule); border-radius: 50%; cursor: pointer;
-  background: var(--paper); color: var(--ink-2);
-  font-size: 1rem; line-height: 1; z-index: 2;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  transition: background var(--t-fast), color var(--t-fast);
-}
-.v1-visual-nav.is-prev { left: 0.6rem; }
-.v1-visual-nav.is-next { right: 0.6rem; }
-.v1-visual-nav:hover { background: var(--paper-2); color: var(--ink); }
 .v1-visual-detail-body { margin-top: 1.5rem; }
-.v1-visual-meta-row {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-}
-.v1-visual-count {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  letter-spacing: 0.08em; color: var(--ink-2); white-space: nowrap;
-}
 .v1-visual-detail-title {
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.1; margin: 0.5rem 0 0;
