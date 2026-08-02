@@ -899,12 +899,12 @@
           <li><a href="#/about">About</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
           <li><a href="#/visuals" data-cursor-label="Look">Visuals</a></li>
+          <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
         </ul>
       </div>
       <div class="lv-footer-site">
         <h4>Work in progress</h4>
         <ul>
-          <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
           <!-- Wall of Fame (#/wall-of-fame) is unlinked on purpose: the route
@@ -966,10 +966,20 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-08-02-4"></script>
+  <script src="js/data.js?v=2026-08-02-6"></script>
   <script src="js/app.js?v=2026-08-02-2"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
+
+  <!-- Edit-Modus (Pilot). Lädt nur mit ?edit=1 in der URL, für alle anderen
+       Besuche passiert hier nichts. Siehe js/edit-mode.js. -->
+  <script>
+    if (new URLSearchParams(location.search).get("edit") === "1") {
+      var lvEdit = document.createElement("script");
+      lvEdit.src = "js/edit-mode.js?v=2026-08-02-1";
+      document.head.appendChild(lvEdit);
+    }
+  </script>
 </body>
 </html>
