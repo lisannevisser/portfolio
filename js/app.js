@@ -1017,7 +1017,11 @@
         "website-relaunch": { kind: "stat",  label: "pages relaunched", tilt:  7 }
       };
 
-      const rowsHtml = D.cases.map((c, i) => {
+      // The home page teases the top of the list, not the whole shelf.
+      // Order comes from data.js; "All work →" carries the rest.
+      const HOME_CASE_COUNT = 3;
+
+      const rowsHtml = D.cases.slice(0, HOME_CASE_COUNT).map((c, i) => {
         const p = PREVIEW[c.slug] || { kind: "stat", label: c.impact[0].label, tilt: -4 };
         return `
           <a href="#/work/${esc(c.slug)}" class="v1-ledger-row lv-reveal"

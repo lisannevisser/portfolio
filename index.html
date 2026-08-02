@@ -7,6 +7,33 @@
   <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
   <meta name="theme-color" content="#faf7f1" />
 
+  <!-- Canonical and sharing. These five absolute URLs are the only place the
+       host name is hard-coded; when the site moves to its own domain, this
+       block is the whole change. -->
+  <link rel="canonical" href="https://lisannevisser.github.io/portfolio/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lisannevisser.github.io/portfolio/" />
+  <meta property="og:site_name" content="Lisanne Visser" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Lisanne Visser — Senior Product Designer" />
+  <meta property="og:description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
+  <meta property="og:image" content="https://lisannevisser.github.io/portfolio/images/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Design that earns its pixels. Lisanne Visser, Senior Product Designer, Berlin." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lisanne Visser — Senior Product Designer" />
+  <meta name="twitter:description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
+  <meta name="twitter:image" content="https://lisannevisser.github.io/portfolio/images/og-card.png" />
+
+  <!-- Provisional favicon: "li" set in JetBrains Mono, the same mono as the
+       top nav, converted to outlines. Variant B ("l." with the dot) sits next
+       to it at images/logos/favicon-b-l-dot.svg; swapping is a one-line change.
+       Real branding is a separate project, see BACKLOG.md. -->
+  <link rel="icon" href="images/logos/favicon-a-li.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
   <!-- Flash-free preferences bootstrap -->
   <script>
     (function () {
@@ -23,13 +50,12 @@
     })();
   </script>
 
+  <!-- Every font is self-hosted from /fonts/. No request leaves for a font,
+       which keeps visitor IPs off third-party servers. Wall of Fame board
+       faces are declared in wall-of-fame.css and only fetched on that route. -->
   <link rel="stylesheet" href="css/fonts.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <!-- Wall of Fame route fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-3" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-08-02-3" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-4" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-08-02-4" />
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
@@ -52,7 +78,7 @@
         <a href="#/about" class="lv-nav-link" data-route="about">About</a>
         <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="Email" style="padding:0.45rem 0.9rem;font-size:var(--text-sm);">Say hi</a>
       </div>
-      <button class="lv-nav-toggle" type="button" aria-label="Open menu"><span class="material-symbols-outlined" aria-hidden="true">lunch_dining</span></button>
+      <button class="lv-nav-toggle" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
     </div>
   </nav>
 
@@ -625,13 +651,22 @@
             </p>
 
             <div class="lv-eyebrow lv-reveal">Credits</div>
-            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:1.5rem;max-width:52ch;">
-              No external assets to credit yet. As the site starts using free stock photos (for blog headers, for example) or referencing other people's articles, the sources and creators will appear here.
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:1rem;max-width:52ch;">
+              Other people made things I get to build on. They belong here by name.
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Typefaces</strong>, all self-hosted under the SIL Open Font License: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> (Undercase Type), <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a> (Instrument), <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (JetBrains), <a href="https://fonts.google.com/specimen/Caveat" target="_blank" rel="noopener">Caveat</a> (Impallari Type). The Wall of Fame board adds <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> (Omnibus-Type), <a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener">Libre Caslon Text</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Space+Mono" target="_blank" rel="noopener">Space Mono</a> (Colophon Foundry).
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Icon.</strong> The burger in the mobile menu is the "lunch_dining" glyph from <a href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Material Symbols</a>, inlined as SVG, Apache License 2.0.
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1.5rem;max-width:52ch;">
+              <strong>Images.</strong> All photos, illustrations, and scribbles on this site are my own. If that ever changes (stock photography in a blog header, someone else's diagram in a case study), the source and the creator get named at the image and listed here.
             </p>
 
             <div class="lv-eyebrow lv-reveal">Last updated</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;max-width:52ch;">
-              April 2026
+              August 2026
             </p>
           </div>
         </div>
@@ -668,9 +703,19 @@
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
               Some case studies embed videos from YouTube (Google Ireland Ltd.). I use the privacy-enhanced mode (youtube-nocookie.com), which means YouTube does not set cookies until you press play. Once you start a video, your IP address and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent through clicking play) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
             </p>
+
+            <div class="lv-eyebrow lv-reveal">Canva and Behance embeds</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              The Visuals page shows some pieces inline through embeds from Canva (Canva Pty Ltd, Australia) and Behance (Adobe Inc., USA). Nothing is requested while you browse the grid: an embed is only loaded once you open the card it belongs to, and it is removed again when you close it. From the moment it loads, your IP address and browser data go to that provider, and it may set cookies. Legal basis: Art. 6(1)(a) GDPR (consent through opening the card) and Art. 6(1)(f) GDPR. Details: <a href="https://www.canva.com/policies/privacy-policy/" target="_blank" rel="noopener">Canva Privacy Policy</a>, <a href="https://www.adobe.com/privacy/policy.html" target="_blank" rel="noopener">Adobe Privacy Policy</a>.
+            </p>
           </div>
 
           <div>
+            <div class="lv-eyebrow lv-reveal">Fonts</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              Every typeface on this site is served from this site. There is no Google Fonts request and no font CDN, so loading a page does not hand your IP address to a font provider. The typefaces are credited in the <a href="#/imprint">imprint</a>.
+            </p>
+
             <div class="lv-eyebrow lv-reveal">Local storage</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
               The browser's localStorage remembers your design preferences (accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
@@ -688,7 +733,7 @@
 
             <div class="lv-eyebrow lv-reveal">Last updated</div>
             <p class="lv-body lv-reveal" style="margin-top:0.75rem;max-width:52ch;">
-              April 2026
+              August 2026
             </p>
           </div>
         </div>
@@ -740,8 +785,8 @@
             <article class="wof-card wof-exhibit" style="--w:270px; --r:-2.5deg">
               <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
               <div class="wof-card-head"><span class="wof-card-no">01</span><span class="wof-card-tag">Exhibit A</span></div>
-              <div class="wof-slot" style="height:230px" data-slot="exhibit-a" data-placeholder="Drop your worst offender here"></div>
-              <p class="wof-caption">Push&hellip; pull&hellip; cry.</p>
+              <div class="wof-slot" style="height:230px" data-slot="exhibit-a" data-placeholder="Drop your worst offender here" data-default="images/wall-of-fame/traffic-light.jpg" data-alt="A pedestrian traffic light taped to a pole, its green walking figure mounted upside down"></div>
+              <p class="wof-caption">Taped on, upside down, still official.</p>
             </article>
 
             <article class="wof-card wof-exhibit" style="--w:252px; --r:2deg; --mt:30px">
@@ -862,7 +907,9 @@
         <ul>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
-          <li><a href="#/wall-of-fame">Wall of Fame</a></li>
+          <!-- Wall of Fame (#/wall-of-fame) is unlinked on purpose: the route
+               still works, but the board needs content before it earns a slot
+               in the footer. See BACKLOG.md. -->
           <li><a href="#/playground">Playground</a></li>
           <li><a href="#/styleguide" data-cursor-label="Audit">Styleguide</a></li>
         </ul>
@@ -871,7 +918,7 @@
     <div class="lv-footer-bottom">
       <span>© 2026 Lisanne Visser</span>
       <span><a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
-      <span>Built with <span class="lv-footer-emoji" aria-hidden="true">🩶</span></span>
+      <span>Built with <span class="lv-footer-emoji" aria-hidden="true">🩶</span> · <a href="https://github.com/lisannevisser/portfolio" target="_blank" rel="noopener noreferrer">Source on GitHub</a></span>
     </div>
   </footer>
 
@@ -922,7 +969,7 @@
   <script src="js/data.js?v=2026-08-02-6"></script>
   <script src="js/app.js?v=2026-08-02-3"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
-  <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
+  <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
 
   <!-- Edit-Modus (Pilot). Lädt nur mit ?edit=1 in der URL, für alle anderen
