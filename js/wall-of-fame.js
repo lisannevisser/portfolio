@@ -73,6 +73,10 @@
   function initSlot(el) {
     var id = el.getAttribute('data-slot');
     var placeholder = el.getAttribute('data-placeholder') || 'Drop an image';
+    // A committed photo the slot falls back to when the visitor hasn't
+    // dropped their own. Overridable via drag/browse; "Remove" reverts to it.
+    var def = el.getAttribute('data-default') || '';
+    var defAlt = el.getAttribute('data-alt') || '';
 
     el.innerHTML =
       '<img class="wof-img" alt="Pinned bad UX photo">' +
@@ -96,11 +100,22 @@
 
     empty.querySelector('.wof-cap').textContent = placeholder;
     empty.setAttribute('aria-label', placeholder);
+    if (defAlt) img.alt = defAlt;
+
+    // If a source ever fails to load (missing default file, corrupt stored
+    // data), degrade to the drop UI instead of a broken-image icon.
+    img.addEventListener('error', function () {
+      if (!img.getAttribute('src')) return;
+      img.removeAttribute('src');
+      el.classList.remove('filled');
+    });
 
     function render() {
       var url = store[id];
-      if (url && /^data:image\//.test(url)) {
-        if (img.getAttribute('src') !== url) img.src = url;
+      // Visitor's own drop wins; otherwise the committed default (if any).
+      var src = (url && /^data:image\//.test(url)) ? url : def;
+      if (src) {
+        if (img.getAttribute('src') !== src) img.src = src;
         el.classList.add('filled');
       } else {
         img.removeAttribute('src');
