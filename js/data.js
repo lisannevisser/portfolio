@@ -374,6 +374,21 @@ window.LV_DATA = {
       link: "https://www.canva.com/de_de/vorlagen/EAGEuCoS1eY-blau-modern-fotografisch-sale-rabatt-ausverkauf-mode-flyer/"
     },
     {
+      slug: "canva-food-story",
+      title: "Animated story template",
+      context: "Canva Creator",
+      type: "Template · Instagram",
+      year: "",
+      hue: 150,
+      // Still frame, not the animation: Canva's own preview mp4 drops the
+      // "Jetzt neu" headline, so the card shows the finished frame instead.
+      thumb: "images/visuals/canva-food-story.jpg",
+      fit: "contain",
+      blurb: "An animated Instagram story for local food businesses, from my Canva Creator collection. Grid paper, a two-tone green palette, thick hand-drawn line art. Built so a shop owner can swap in their own offer and post it without touching the layout or the timing.",
+      embed: "",
+      link: "https://www.canva.com/de_de/vorlagen/EAF85hLHAEM-beige-grun-animiert-nostalgisch-essen-lokal-werbung-instagram-story/"
+    },
+    {
       slug: "illustration-adventure-set",
       title: "Illustration Adventure Set",
       context: "Behance",

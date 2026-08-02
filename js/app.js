@@ -1414,7 +1414,10 @@
       if (v.embed) {
         stage.innerHTML = `<iframe class="v1-visual-frame" src="${esc(v.embed)}" loading="lazy" allowfullscreen title="${esc(v.title)}"></iframe>`;
       } else if (v.thumb) {
-        stage.innerHTML = `<span class="v1-visual-stage-img" style="background-image:url('${esc(v.thumb)}');"></span>`;
+        // Landscape thumbs fill the stage; `fit: "contain"` keeps a portrait
+        // piece whole instead of cropping into the middle of it.
+        const fit = v.fit === "contain" ? " is-contain" : "";
+        stage.innerHTML = `<span class="v1-visual-stage-img${fit}" style="background-image:url('${esc(v.thumb)}');"></span>`;
       } else {
         stage.innerHTML = `<span class="v1-visual-stage-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span>${esc(v.type || v.title)}</span></span>`;
       }
