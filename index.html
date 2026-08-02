@@ -54,7 +54,7 @@
        which keeps visitor IPs off third-party servers. Wall of Fame board
        faces are declared in wall-of-fame.css and only fetched on that route. -->
   <link rel="stylesheet" href="css/fonts.css" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-4" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-5" />
   <link rel="stylesheet" href="css/v1.css?v=2026-08-02-4" />
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
@@ -965,15 +965,15 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-08-02-6"></script>
-  <script src="js/app.js?v=2026-08-02-4"></script>
+  <script src="js/data.js?v=2026-08-02-7"></script>
+  <script src="js/app.js?v=2026-08-02-5"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
 
-  <!-- Edit-Modus. Einmal ?edit=wet-paint aufrufen, danach merkt der Browser
-       es sich; ?edit=off oder der "Beenden"-Knopf schalten wieder ab. Ohne
-       gesetzte Markierung wird js/edit-mode.js nie geladen. -->
+  <!-- Edit mode. Visit ?edit=wet-paint once and the browser remembers it;
+       ?edit=off or the "Done" button switch it back off. Without the flag,
+       js/edit-mode.js never loads. See that file for the whole story. -->
   <script>
     (function () {
       try {
@@ -982,7 +982,7 @@
         if (p === "off") localStorage.removeItem("lv-edit");
         if (localStorage.getItem("lv-edit") !== "on") return;
         var s = document.createElement("script");
-        s.src = "js/edit-mode.js?v=2026-08-02-2";
+        s.src = "js/edit-mode.js?v=2026-08-02-3";
         document.head.appendChild(s);
       } catch (e) {}
     })();

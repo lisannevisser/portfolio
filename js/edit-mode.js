@@ -1,46 +1,45 @@
 /* ==========================================================================
    EDIT MODE
    --------------------------------------------------------------------------
-   Text bearbeiten direkt im Layout, statt im Code oder über den Chat.
+   Edit copy in the layout it lives in, instead of in the code or over chat.
 
-   EINSCHALTEN
-     Einmal pro Gerät diese URL aufrufen:
+   TURNING IT ON
+     Visit this once per device:
        https://lisannevisser.github.io/portfolio/?edit=wet-paint
-     Danach merkt der Browser sich das (localStorage) und der Edit-Modus ist
-     auf allen Seiten an, ohne dass der Parameter nochmal drangehängt werden
-     muss. index.html lädt diese Datei nur, wenn die Markierung gesetzt ist.
+     The browser remembers it (localStorage), so the mode stays on across
+     every page without the parameter. index.html only loads this file when
+     the flag is set.
 
-   AUSSCHALTEN
-     Der "Beenden"-Knopf in der Leiste, oder ?edit=off an eine beliebige URL.
+   TURNING IT OFF
+     The "Done" button in the bar, or ?edit=off on any URL.
 
-   Der Schlüssel steht offen im Repo. Er verhindert, dass jemand zufällig
-   draufstößt, er ist keine Zugangssperre. Braucht es auch nicht: das Modul
-   hat keinen Schreibpfad, kein Token, kein Backend. Änderungen leben im
-   Browser der jeweiligen Person und sonst nirgends.
+   The key sits in the open in a public repo. It stops anyone stumbling in by
+   accident; it is not access control. It doesn't need to be: this module has
+   no write path, no token, no backend. Edits live in the browser of whoever
+   made them and nowhere else.
 
-   WIE ES FUNKTIONIERT
-   - app.js hängt an jedes Textelement ein data-lv-edit mit dem Pfad des
-     Wertes in window.LV_DATA (z. B. "cases.0.story.4.body").
-   - Wo ein Quelltext-String als mehrere Absätze rendert (Case-Bodies, an
-     Leerzeilen gesplittet), sagt data-lv-part, welcher Absatz gemeint ist.
-   - Beim Reinklicken zeigt das Feld den Rohtext, inklusive **fett** und
-     [Link](url). Beim Rausklicken wird wieder gerendert.
-   - Änderungen liegen in localStorage, überleben also einen Reload.
-   - "Kopieren" legt einen Patch als JSON in die Zwischenablage. Der geht an
-     Claude, der ihn wortwörtlich nach data.js überträgt.
+   HOW IT WORKS
+   - app.js hangs a data-lv-edit on every text element, naming the value in
+     window.LV_DATA that produced it (e.g. "cases.0.story.4.body").
+   - Where one source string renders as several paragraphs (case bodies, split
+     on blank lines), data-lv-part says which paragraph this node is.
+   - On focus the field shows the raw source, including **bold** and
+     [links](url). On blur it renders again.
+   - Changes live in localStorage, so they survive a reload.
+   - "Copy" puts a patch on the clipboard as JSON. That goes to Claude, who
+     transfers it into data.js verbatim.
 
-   Nichts hier schreibt in eine Datei. Der Patch ist der Übergabepunkt.
+   Nothing here writes to a file. The patch is the handover.
    ========================================================================== */
 (function () {
   "use strict";
 
-  const KEY = "wet-paint";   // muss zum Schnipsel in index.html passen
+  const KEY = "wet-paint";   // must match the snippet in index.html
   const FLAG = "lv-edit";
   const STORE_KEY = "lv-edit-draft-v1";
 
-  // Der Parameter wird normalerweise schon in index.html ausgewertet. Hier
-  // nochmal, damit die Datei auch dann korrekt ist, wenn sie direkt geladen
-  // wird.
+  // index.html already reads the parameter. Repeated here so the file is
+  // still correct when it gets loaded on its own.
   try {
     const param = new URLSearchParams(location.search).get("edit");
     if (param === KEY) localStorage.setItem(FLAG, "on");
@@ -54,7 +53,7 @@
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
   // ------------------------------------------------------------------------
-  // PFADE IN LV_DATA
+  // PATHS INTO LV_DATA
   // ------------------------------------------------------------------------
   const parsePath = (path) =>
     path.split(".").map((k) => (/^\d+$/.test(k) ? Number(k) : k));
@@ -70,9 +69,9 @@
     if (target != null) target[last] = value;
   }
 
-  // Ein Feld ist entweder ein ganzer String oder ein Absatz darin. Der
-  // Renderer in app.js splittet an Leerzeilen, hier wird genauso gesplittet,
-  // damit die Absatznummer beide Seiten meint.
+  // A field is either a whole string or one paragraph inside it. app.js
+  // splits on blank lines when rendering, so the same split happens here and
+  // the paragraph index means the same thing on both sides.
   const SPLIT = /\n\n+/;
 
   function readField(path, part) {
@@ -95,11 +94,11 @@
   }
 
   // ------------------------------------------------------------------------
-  // ENTWURF
-  // Map: Schlüssel -> { path, part, old, next }. Der Schlüssel trennt
-  // Absätze desselben Strings. `old` ist immer der ursprüngliche Wert aus
-  // data.js, egal wie oft ein Feld angefasst wurde, sonst wäre "zurück" nach
-  // der zweiten Änderung kaputt.
+  // DRAFT
+  // Map: key -> { path, part, old, next }. The key keeps paragraphs of the
+  // same string apart. `old` is always the original value from data.js, no
+  // matter how often a field was touched, otherwise "undo" would break after
+  // the second edit.
   // ------------------------------------------------------------------------
   let changes = new Map();
 
@@ -118,8 +117,8 @@
     try {
       localStorage.setItem(STORE_KEY, JSON.stringify(Array.from(changes.values())));
     } catch (err) {
-      // Privater Modus: der Entwurf überlebt dann keinen Reload. Kein Grund
-      // abzubrechen, das Bearbeiten funktioniert weiter.
+      // Private mode: the draft won't survive a reload. No reason to bail,
+      // editing still works.
     }
   }
 
@@ -133,7 +132,7 @@
   }
 
   // ------------------------------------------------------------------------
-  // FELDER
+  // FIELDS
   // ------------------------------------------------------------------------
   const esc = (s) =>
     (window.LV_RENDER && window.LV_RENDER.esc)
@@ -144,8 +143,8 @@
   const partOf = (el) =>
     el.hasAttribute("data-lv-part") ? Number(el.getAttribute("data-lv-part")) : null;
 
-  // Ein Feld so zurückrendern, wie app.js es gerendert hätte: mit inlineMarks,
-  // wenn data-lv-marks gesetzt ist, sonst nur escaped.
+  // Render a field back the way app.js would have: through inlineMarks when
+  // data-lv-marks is set, escaped otherwise.
   function paint(el, value) {
     const R = window.LV_RENDER || {};
     if (el.hasAttribute("data-lv-marks") && R.inlineMarks) {
@@ -168,9 +167,9 @@
     el.addEventListener("paste", onPaste);
   }
 
-  // Beim Reinklicken auf den Rohtext umschalten. Bei Absätzen ohne Marks
-  // sieht man keinen Unterschied; bei fett/Links tauchen die Zeichen auf,
-  // damit sie überhaupt editierbar sind.
+  // On focus, swap in the raw source. For paragraphs without marks nothing
+  // changes visually; where there is bold or a link the characters show up,
+  // which is the only way to edit them.
   function onFocus(e) {
     const el = e.currentTarget;
     el.dataset.lvBefore = readField(el.dataset.lvEdit, partOf(el));
@@ -182,12 +181,12 @@
     const path = el.dataset.lvEdit;
     const part = partOf(el);
     const before = el.dataset.lvBefore || "";
-    // contenteditable streut gerne geschützte Leerzeichen ein.
+    // contenteditable likes to sprinkle in non-breaking spaces.
     const next = el.textContent.replace(/\u00a0/g, " ").trim();
 
     if (!next) {
       paint(el, before);
-      flash("Feld war leer, Änderung verworfen");
+      flash("Field was empty, change discarded");
       return;
     }
 
@@ -205,8 +204,8 @@
   }
 
   function onKeydown(e) {
-    // Hält Tippen aus den globalen Shortcuts in app.js raus (das Easter Egg
-    // hört auf "yyy" — sonst steht die Seite beim Schreiben auf dem Kopf).
+    // Keeps typing out of the global shortcuts in app.js (the easter egg
+    // listens for "yyy", so the page would flip while writing).
     e.stopPropagation();
     if (e.key === "Enter") {
       e.preventDefault();
@@ -220,7 +219,7 @@
     }
   }
 
-  // Eingefügter Text kommt als reiner Text rein, nicht als fremdes HTML.
+  // Pasted text comes in as plain text, not as somebody else's HTML.
   function onPaste(e) {
     e.preventDefault();
     const text = ((e.clipboardData || window.clipboardData).getData("text/plain") || "")
@@ -229,36 +228,36 @@
   }
 
   // ------------------------------------------------------------------------
-  // LEISTE
+  // BAR
   // ------------------------------------------------------------------------
   let bar, panel, countEl;
   let fieldCount = 0;
 
   const BLOCK_LABEL = {
-    lead: "Lead", paragraph: "Absatz", h2: "Überschrift", h3: "Überschrift",
-    quote: "Zitat", list: "Liste", figure: "Abbildung", callout: "Callout",
-    section: "Abschnitt", result: "Ergebnis", framework: "Framework",
+    lead: "Lead", paragraph: "Paragraph", h2: "Heading", h3: "Heading",
+    quote: "Quote", list: "List", figure: "Figure", callout: "Callout",
+    section: "Section", result: "Outcome", framework: "Framework",
     limitations: "Limitations", flow: "Flow"
   };
 
   const FIELD_LABEL = {
-    title: "Titel", subtitle: "Untertitel", excerpt: "Teaser", role: "Rolle",
-    team: "Team", year: "Jahr", caption: "Bildunterschrift", label: "Label",
-    body: "Text", text: "Text", attribution: "Quelle", note: "Notiz",
-    value: "Wert", oppositeTitle: "Titel Rückseite", oppositeSubtitle: "Untertitel Rückseite"
+    title: "Title", subtitle: "Subtitle", excerpt: "Teaser", role: "Role",
+    team: "Team", year: "Year", caption: "Caption", label: "Label",
+    body: "Body", text: "Text", attribution: "Attribution", note: "Note",
+    value: "Value", oppositeTitle: "Back title", oppositeSubtitle: "Back subtitle"
   };
 
   function label(c) {
     const seg = c.path.split(".");
     const field = seg[seg.length - 1];
     const named = FIELD_LABEL[field] || field;
-    const partSuffix = c.part == null ? "" : ` · Absatz ${c.part + 1}`;
+    const partSuffix = c.part == null ? "" : ` · paragraph ${c.part + 1}`;
 
     const m = c.path.match(/^(posts|cases)\.(\d+)\.(body|story)\.(\d+)/);
     if (!m) return `${named} · ${seg[0]}`;
     const block = getPath(window.LV_DATA, `${m[1]}.${m[2]}.${m[3]}.${m[4]}`);
     const kind = typeof block === "string" ? "paragraph" : (block && block.kind) || "";
-    const where = m[1] === "cases" ? "Case" : "Artikel";
+    const where = m[1] === "cases" ? "Case" : "Post";
     return `${where} · ${BLOCK_LABEL[kind] || kind || "Block"} #${m[4]}${partSuffix}`;
   }
 
@@ -270,10 +269,10 @@
       <div class="lv-edit-row">
         <span class="lv-edit-badge">Edit</span>
         <span class="lv-edit-count"></span>
-        <button type="button" data-act="list">Liste</button>
-        <button type="button" data-act="copy">Kopieren</button>
-        <button type="button" data-act="reset">Verwerfen</button>
-        <button type="button" data-act="exit">Beenden</button>
+        <button type="button" data-act="list">List</button>
+        <button type="button" data-act="copy">Copy</button>
+        <button type="button" data-act="reset">Discard</button>
+        <button type="button" data-act="exit">Done</button>
       </div>`;
     document.body.appendChild(bar);
     panel = $(".lv-edit-panel", bar);
@@ -296,8 +295,8 @@
     renderBar();
   }
 
-  // Die Leiste bricht auf schmalen Displays um. Der Abstand unter der Seite
-  // nimmt die tatsächliche Höhe mit, sonst verdeckt sie den letzten Absatz.
+  // The bar wraps on narrow screens. The page's bottom padding tracks its
+  // real height, otherwise it covers the last paragraph.
   function fitBody() {
     const row = bar && $(".lv-edit-row", bar);
     if (!row) return;
@@ -308,8 +307,8 @@
   function renderBar() {
     const n = changes.size;
     countEl.textContent = n
-      ? (n === 1 ? "1 Änderung" : `${n} Änderungen`)
-      : (fieldCount ? `${fieldCount} Felder bearbeitbar` : "Hier gibt es nichts zu bearbeiten");
+      ? (n === 1 ? "1 change" : `${n} changes`)
+      : (fieldCount ? `${fieldCount} fields editable` : "Nothing to edit on this page");
     $$("button[data-act]", bar).forEach((b) => {
       const act = b.getAttribute("data-act");
       if (act === "copy" || act === "reset" || act === "list") b.disabled = n === 0;
@@ -328,17 +327,27 @@
       <div class="lv-edit-item">
         <div class="lv-edit-head">
           <span class="lv-edit-label">${esc(label(c))}</span>
-          <button type="button" class="lv-edit-revert" data-revert="${esc(key)}">zurück</button>
+          <button type="button" class="lv-edit-revert" data-revert="${esc(key)}">undo</button>
         </div>
-        <div class="lv-edit-old">${esc(trunc(c.old))}</div>
-        <div class="lv-edit-new">${esc(trunc(c.next))}</div>
+        <div class="lv-edit-old">${esc(diffPair(c.old, c.next)[0])}</div>
+        <div class="lv-edit-new">${esc(diffPair(c.old, c.next)[1])}</div>
       </div>`).join("");
   }
 
-  const trunc = (s, n) => {
-    const str = String(s == null ? "" : s);
-    return str.length > (n || 90) ? str.slice(0, n || 90) + "…" : str;
-  };
+  // Both lines are cut to fit, but cutting from the front hides the edit when
+  // it sits at the end of a long paragraph — old and new then read identical.
+  // So the window starts just before the first character that differs.
+  function diffPair(a, b) {
+    const A = String(a == null ? "" : a);
+    const B = String(b == null ? "" : b);
+    let i = 0;
+    while (i < A.length && i < B.length && A[i] === B[i]) i++;
+    const start = Math.max(0, i - 25);
+    const cut = (s) =>
+      (start > 0 ? "…" : "") + s.slice(start, start + 110) +
+      (start + 110 < s.length ? "…" : "");
+    return [cut(A), cut(B)];
+  }
 
   function fieldEl(path, part) {
     return $$(`[data-lv-edit="${path}"]`).find((el) => partOf(el) === part) || null;
@@ -363,18 +372,18 @@
     changes.forEach((c) => writeField(c.path, c.part, c.old));
     changes.clear();
     saveDraft();
-    window.dispatchEvent(new Event("hashchange")); // Seite sauber neu rendern
+    window.dispatchEvent(new Event("hashchange")); // re-render the page clean
     renderBar();
     renderPanel();
-    flash("Alle Änderungen verworfen");
+    flash("All changes discarded");
   }
 
   function exitMode() {
     if (changes.size &&
-        !window.confirm(`${changes.size} nicht kopierte Änderung(en). Trotzdem beenden?`)) return;
+        !window.confirm(`${changes.size} change(s) not copied yet. Leave anyway?`)) return;
     try {
       localStorage.removeItem(FLAG);
-    } catch (err) { /* dann bleibt es bis zum Tab-Ende an */ }
+    } catch (err) { /* then it stays on until the tab closes */ }
     location.replace(location.pathname + location.hash);
   }
 
@@ -398,7 +407,7 @@
     const text = patchText();
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text).then(
-        () => flash("Patch kopiert — ab in den Chat"),
+        () => flash("Patch copied, off to the chat"),
         () => showPatch(text)
       );
     } else {
@@ -406,11 +415,11 @@
     }
   }
 
-  // Fallback, wenn die Zwischenablage nicht darf (http im LAN zum Beispiel).
+  // Fallback for when the clipboard is off limits (plain http, for example).
   function showPatch(text) {
     panel.hidden = false;
     panel.innerHTML = `
-      <p class="lv-edit-empty">Zwischenablage nicht verfügbar. Text markieren und kopieren:</p>
+      <p class="lv-edit-empty">Clipboard not available. Select the text and copy it:</p>
       <textarea class="lv-edit-out" readonly></textarea>`;
     const ta = $(".lv-edit-out", panel);
     ta.value = text;
@@ -432,7 +441,7 @@
   }
 
   // ------------------------------------------------------------------------
-  // START
+  // BOOT
   // ------------------------------------------------------------------------
   function arm() {
     const fields = $$("[data-lv-edit]").filter((el) => !el.closest("[hidden].lv-route"));
@@ -503,8 +512,8 @@
 
     if (changes.size) {
       applyDraft();
-      // Wenn app.js schon gerendert hat, muss die Seite einmal neu, damit der
-      // Entwurf sichtbar wird.
+      // If app.js already rendered, the page needs one more pass for the
+      // draft to show up.
       if ($$("[data-lv-edit]").length) window.dispatchEvent(new Event("hashchange"));
     }
     arm();

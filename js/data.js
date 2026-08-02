@@ -817,6 +817,48 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "the-part-of-a-cms-i-wanted",
+      title: "The part of a CMS I actually wanted",
+      date: "2026-08-02",
+      dateLabel: "August 2026",
+      readingTime: "5 min",
+      tags: ["Process", "Craft"],
+      excerpt: "I lost the same article twice to a chat window, then briefly considered retrofitting a CMS onto a site that has no business having one. What I built instead is one URL long.",
+      body: [
+        { kind: "lead", text: "A confession to start with: I have lost the same article twice. Not to a crash and not to a bad merge. I was editing it as markdown inside a chat window, forgot to hit save, switched to another chat because something over there had finished, and came back to an empty slate. (Yes, the same article. No, I did not learn the first time.)" },
+
+        { kind: "h2", text: "Freedom at the top, friction at the bottom" },
+        { kind: "paragraph", text: "This site is hand-built: no framework, no build step, and all of the content in a single file called data.js. That gives me a lot of room. A new block type, a card that flips to its opposite face, a chat that replays itself, none of it needs anyone's permission or a plugin that happens to support it." },
+        { kind: "paragraph", text: "But inventing block types is not what I do most often. What I do most often is fix a sentence. And for that one job, standing directly in the code is the worst possible place to be. To change a sentence I first have to find it somewhere in a thousand-line object, and then I have to picture what it will look like once it renders. I see the layout in one window and edit in another, and the connection between the two lives in my head." },
+        { kind: "paragraph", text: "The workaround was decent: Claude exports an article as markdown, I edit that, the result gets transferred back word for word. Decent enough that I used it for months. Decent enough that I lost two articles to it." },
+
+        { kind: "h2", text: "So, a CMS?" },
+        { kind: "paragraph", text: "That is exactly what a CMS is for. So I looked at the good git-based ones, [Sveltia](https://sveltiacms.app), [Decap](https://decapcms.org) and [Tina](https://tina.io), and had Claude cost out what moving would actually take." },
+        { kind: "paragraph", text: "The answer was sobering. My content is one nested object with 21 custom block types in it: limitation cards that flip, an animated chat replay, color palettes, type specimens. A CMS wants markdown files or JSON collections with a schema. Mapping mine means writing a schema for every block type and then keeping that schema in sync with the renderer by hand, forever. And the feature I actually wanted, clicking text on the page and typing, needs React. This site is vanilla JavaScript." },
+        { kind: "paragraph", text: "So the deal on the table was: rebuild the data layer, maintain a second description of it for the rest of the site's life, and get a form editor at the end of it. A form editor is further away from editing in the design than what I already had. **What I wanted from a CMS was its last hundred meters: touching the text where it lives.** The rest of it is machinery for problems I do not have." },
+
+        { kind: "h2", text: "One URL long" },
+        { kind: "paragraph", text: "So we built the last hundred meters instead. It is one file, it only loads when I ask for it, and asking for it means visiting the site once with a key in the URL. From there the browser remembers, and every page I open stays editable until I press Done." },
+        { kind: "paragraph", text: "Underneath, the trick is unglamorous. When the site renders a paragraph, it also writes down where that paragraph came from: which case, which section, which paragraph inside that section. The edit mode reads those notes, makes the elements editable, and knows exactly which value to change when I type." },
+        { kind: "figure", src: "images/blog/edit-mode-focus.png", alt: "A case study paragraph in edit mode, focused, showing the raw source text with asterisks around a bold phrase. A dark bar at the bottom of the screen reads 52 fields editable.", caption: "Fig. 1 - A paragraph in focus. The field shows the raw source, so the asterisks around a bold phrase are there to be edited instead of hidden behind the rendering." },
+        { kind: "paragraph", text: "That last part matters more than it sounds. Click into a paragraph and it shows me the raw text, asterisks and link syntax included. Click away and it renders again. Nothing is interpreted on my behalf, which means what I see while typing is what ends up in the file." },
+
+        { kind: "h2", text: "The part that fixes the lost articles" },
+        { kind: "paragraph", text: "Every paragraph I touch stays highlighted for the rest of the session. A list shows old against new with one undo per entry, so I can throw away a single sentence without losing the other nine. Copy puts the whole set on the clipboard as a patch. And if I try to leave with changes I have not copied yet, it asks me first." },
+        { kind: "figure", src: "images/blog/edit-mode-changed.png", alt: "The same case study with an edited paragraph highlighted in yellow. The bar at the bottom is expanded into a list showing two changes, each with the old text struck through and the new text below it.", caption: "Fig. 2 - Two edited paragraphs. The list cuts each line at the first character that differs, so the change is visible instead of buried under the identical first half." },
+        { kind: "paragraph", text: "That last one is the entire reason for the story at the top of this post." },
+
+        { kind: "h2", text: "Yes, anyone can turn it on" },
+        { kind: "paragraph", text: "The key sits in a URL and my repository is public, so nobody should mistake this for a lock. Two reasons I sleep fine anyway. The first: the edit mode has no write path. No token, no backend, no request leaving the page. Whatever you change lives in your browser and nowhere else. The second: you could already do this. Open the developer tools on any site in the world, type document.designMode = 'on' into the console, and you can rewrite this very sentence. I did not add a capability. I added convenience." },
+        { kind: "paragraph", text: "What makes it useful is not secrecy. It is that I own the repository and the write rights. An edit only becomes real once it travels through a patch, a pull request and a green CI run that I merge. Everything before that is a suggestion." },
+
+        { kind: "h2", text: "What it still doesn't do" },
+        { kind: "paragraph", text: "I still go to the chat. The patch does not apply itself. I paste it, Claude transfers it into data.js word for word, and that is deliberate: my wording is the source of truth here, and I would rather hand over an explicit before-and-after than trust a silent write." },
+        { kind: "paragraph", text: "Beyond that, it is text only. No new blocks, no reordering, no images. Rename a section heading and the table of contents keeps the old label until the next reload. There is also a cost I am keeping an eye on, which is that the production markup now carries a set of attributes for a feature that almost no visitor will ever use." },
+        { kind: "paragraph", text: "None of that bothers me yet. It is the same move I made with [our conversion-test workflow](#/work/ai-workflow): keep the system that works, and take out the one step that hurts. I can fix a sentence in the place where the sentence lives, from my desk or from my phone, and I never have to leave the codebase that gives me everything else." }
+      ]
+    },
+    {
       slug: "better-designer-with-ai",
       title: "I'm a better designer with AI",
       date: "2026-06-11",
