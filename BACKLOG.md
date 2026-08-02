@@ -61,6 +61,35 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 - [ ] Reihenfolge: einen research-starken Case (Research-Culture oder
       Pricing) nach oben legen - steuert den ersten Eindruck am stärksten.
 
+## Wall of Fame (versteckt, nicht verlinkt)
+
+Seit 2026-08-02 ist die Seite **aus dem Footer raus**. Die Route
+`#/wall-of-fame` funktioniert weiterhin und alle Assets liegen im Repo -
+sie ist nur nirgends mehr verlinkt. Grund: das Board braucht erst
+Inhalt, und das ist Arbeit, die vor dem Launch nicht reinpasst.
+
+Was schon da ist (Stand PR #132):
+
+- 7 Exhibit-Slots, Drag-and-Drop für Besucher, Auswahl bleibt lokal im
+  Browser.
+- Ein committetes Default-Foto in Exhibit A (getapte Fußgängerampel,
+  verkehrt herum montiert), das für alle Besucher rendert. Fehlt die
+  Datei, fällt der Slot sauber auf die Drop-UI zurück.
+- Eigenes Stylesheet (`css/wall-of-fame.css`) und eigene Logik
+  (`js/wall-of-fame.js`).
+
+Offene Entscheidung, eins von beiden:
+
+- [ ] **Weiterarbeiten**: die restlichen 6 Slots mit echten Fotos
+      befüllen, dann wieder in den Footer aufnehmen.
+- [ ] **Auslagern / rausnehmen**: falls die Seite nicht zurückkommt,
+      gehören mit raus: die Route in `index.html`,
+      `css/wall-of-fame.css`, `js/wall-of-fame.js`,
+      `images/wall-of-fame/`, die Stylesheet- und Script-Zeilen im
+      `<head>` bzw. am Seitenende, und die Google-Fonts-Zeile für
+      Archivo / Libre Caslon / Space Mono (die lädt aktuell auf *jeder*
+      Seite, nur für dieses Board).
+
 ## Neue Case Studies
 
 - [ ] Limbic-Types als eigene Case ausgliedern (aktuell nur Unterpunkt im
