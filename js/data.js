@@ -362,6 +362,18 @@ window.LV_DATA = {
       link: "https://www.canva.com/p/lisanne-visser/"
     },
     {
+      slug: "canva-sale-flyer",
+      title: "Fashion sale flyer",
+      context: "Canva Creator",
+      type: "Template · Print",
+      year: "",
+      hue: 235,
+      thumb: "images/visuals/canva-sale-flyer.jpg",
+      blurb: "A two-sided sale flyer from my Canva Creator collection: an oversized SALE lockup cut into the photo on the front, the brand story and the offer on the back. Free to use and fully editable.",
+      embed: "",
+      link: "https://www.canva.com/de_de/vorlagen/EAGEuCoS1eY-blau-modern-fotografisch-sale-rabatt-ausverkauf-mode-flyer/"
+    },
+    {
       slug: "illustration-adventure-set",
       title: "Illustration Adventure Set",
       context: "Behance",
