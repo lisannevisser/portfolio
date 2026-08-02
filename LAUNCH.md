@@ -19,6 +19,21 @@ Launch **nicht** blockiert, steht in `BACKLOG.md`.
 - **Homepage** zeigt drei Cases statt fünf.
 - **Wall of Fame** aus dem Footer, Route bleibt. PR #132 ist drin,
   PR #130 geschlossen.
+- **Canonical, Open Graph und Twitter Card** gesetzt, mit einem eigens
+  gebauten Share-Bild (`images/og-card.png`). Ein Link auf LinkedIn zeigt
+  jetzt eine gestaltete Karte statt einer leeren Vorschau.
+- **Footer** verlinkt das Repo ("Source on GitHub"), damit der Dev-Punkt
+  ankommt, ohne an der URL zu hängen.
+
+## Entschieden
+
+- **Launch auf `lisannevisser.github.io/portfolio`.** Die Domain kommt
+  direkt danach.
+- **Der `<title>` behält den vollen Namen.** Recruiter suchen nach
+  "Lisanne Visser", und genau das ist gerade die Zielgruppe.
+- **Die Wortmarke bleibt `lisanne.design`.** Sie ist die Markenschicht,
+  die URL die Auffindbarkeitsschicht. Die beiden dürfen
+  auseinanderlaufen, bis die Domain steht.
 
 ## Offen
 
@@ -28,7 +43,8 @@ Launch **nicht** blockiert, steht in `BACKLOG.md`.
 | Restliche Texte gegenlesen | **Lisanne** |
 | Case-Visuals: 8 Figures sind noch farbige Platzhalter | **Lisanne** liefert Bilder, ich baue sie ein |
 | Impressum: `Phone: [optional]` und `DE[VAT number]` stehen live auf der Seite | **Lisanne** (oder sag Bescheid, dann nehme ich die beiden Zeilen raus) |
-| Domain: `lisanne.design` oder `github.io`? Es gibt noch kein CNAME | **Lisanne** entscheidet, ich setze um |
+| `lisanne.design` registrieren. Die Domain gehört dir noch nicht, und die Wortmarke nennt sie bereits | **Lisanne** |
+| Danach: DNS setzen, CNAME, HTTPS erzwingen, die absoluten URLs im `<head>` umstellen | **ich** |
 | WIP-Zettel abschalten (Default auf `off`) | **ich**, als letzter Schritt vor dem Merge |
 
 ## Was ich komplett allein erledigen kann

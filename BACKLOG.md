@@ -92,16 +92,15 @@ Offene Entscheidung, eins von beiden:
 
 ## SEO & Meta (nach dem Launch)
 
-Kein P0, aber genau der Kleinkram, der sonst den Launch aufhält. Die
-ersten drei hängen an der **Domain-Entscheidung** (`lisanne.design` oder
-`*.github.io`), weil `canonical` und `og:url` absolute URLs brauchen.
-
-- [ ] `<link rel="canonical">` setzen.
-- [ ] Open-Graph- und Twitter-Card-Tags (`og:title`, `og:description`,
-      `og:image`, `og:url`, `twitter:card`). Aktuell hat die Seite vier
-      Meta-Tags, ein Share auf LinkedIn sieht entsprechend nackt aus.
-- [ ] `og:image` gestalten (1200x630). Kann erst entstehen, wenn es
-      Case-Visuals gibt.
+- [x] `canonical`, Open Graph und Twitter Card gesetzt, mit
+      `images/og-card.png` (1200x630, aus den eigenen Fonts gebaut).
+      Die absoluten URLs stehen als einziger Block im `<head>` und sind
+      beim Domainumzug die komplette Änderung.
+- [ ] Beim Domainumzug: den Meta-Block auf die neue Domain umstellen,
+      Share-Bild-URL inklusive.
+- [ ] Share-Bild neu bauen, sobald es echte Case-Visuals gibt. Die
+      aktuelle Karte ist typografisch, das trägt, aber ein Bild trägt
+      weiter.
 - [ ] `robots.txt` und `sitemap.xml` anlegen. Bei Hash-Routing bringt
       eine Sitemap wenig, deshalb vorher prüfen, ob sich der Aufwand
       lohnt.
