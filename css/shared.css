@@ -666,11 +666,16 @@ html { cursor: none; }
 .lv-post-list li::marker { color: var(--accent); }
 .lv-post-list li strong { color: var(--ink); font-weight: 600; }
 
-/* Figure (placeholder visual block; swap in real <img> later) */
+/* Figure. With a src it renders .shot, without it the placeholder .frame. */
 .lv-post-figure {
   margin: 0;
   --post-figure-hue: 200;
 }
+.lv-post-figure .shot {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--rule);
+}
+[data-variation="v1"] .lv-post-figure .shot { border-radius: var(--radius-lg); }
 .lv-post-figure .frame {
   --hue: var(--post-figure-hue);
   aspect-ratio: 16 / 9;

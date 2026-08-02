@@ -774,7 +774,11 @@
       const hue = Number.isFinite(b.hue) ? b.hue : 200;
       const label = b.label ? `<span class="label"${editAttr(path, "label")}>${esc(b.label)}</span>` : "";
       const caption = b.caption ? `<figcaption${editAttr(path, "caption")}>${esc(b.caption)}</figcaption>` : "";
-      return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};"><div class="frame" role="img" aria-label="${esc(b.alt || b.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+      // With a src it's a real image, without it the placeholder frame.
+      const visual = b.src
+        ? `<img class="shot" src="${esc(b.src)}" alt="${esc(b.alt || b.caption || "")}" loading="lazy" decoding="async" />`
+        : `<div class="frame" role="img" aria-label="${esc(b.alt || b.caption || "Figure placeholder")}">${label}</div>`;
+      return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};">${visual}${caption}</figure>`;
     }
     if (kind === "callout") {
       const label = b.label ? `<div class="lv-post-callout-label"${editAttr(path, "label")}>${esc(b.label)}</div>` : "";
