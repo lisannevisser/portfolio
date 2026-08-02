@@ -72,6 +72,9 @@
     });
 
     window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Lets js/edit-mode.js (?edit=1) re-arm its fields after every route render.
+    document.dispatchEvent(new CustomEvent("lv:rendered", { detail: route }));
   }
 
   window.addEventListener("hashchange", renderRoute);
@@ -701,50 +704,61 @@
       .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<em>$2</em>");
   }
 
+  // Edit-mode anchors. Each attribute names the value in LV_DATA that produced
+  // the node, so js/edit-mode.js can write a change back to the right key.
+  // `marks` flags fields that go through inlineMarks rather than plain esc.
+  // Inert on normal page loads — only js/edit-mode.js (?edit=1) reads them.
+  function editAttr(path, field, marks) {
+    if (!path) return "";
+    return ` data-lv-edit="${field ? path + "." + field : path}"${marks ? " data-lv-marks" : ""}`;
+  }
+
   // Render one post-body block. Strings are paragraphs (backward-compat).
-  // Objects dispatch on .kind.
-  function renderPostBlock(b) {
+  // Objects dispatch on .kind. `path` locates the block in LV_DATA
+  // (e.g. "posts.0.body.3"); empty when the caller doesn't track one.
+  function renderPostBlock(b, path) {
     if (typeof b === "string") {
-      return `<p class="lv-post-p lv-reveal">${inlineMarks(b)}</p>`;
+      return `<p class="lv-post-p lv-reveal"${editAttr(path, "", 1)}>${inlineMarks(b)}</p>`;
     }
     const kind = b.kind;
     if (kind === "paragraph") {
-      return `<p class="lv-post-p lv-reveal">${inlineMarks(b.text || "")}</p>`;
+      return `<p class="lv-post-p lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
     }
     if (kind === "lead") {
-      return `<p class="lv-post-lead lv-reveal">${inlineMarks(b.text || "")}</p>`;
+      return `<p class="lv-post-lead lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
     }
     if (kind === "h2") {
-      return `<h2 class="lv-post-h2 lv-reveal">${inlineMarks(b.text || "")}</h2>`;
+      return `<h2 class="lv-post-h2 lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</h2>`;
     }
     if (kind === "h3") {
-      return `<h3 class="lv-post-h3 lv-reveal">${inlineMarks(b.text || "")}</h3>`;
+      return `<h3 class="lv-post-h3 lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</h3>`;
     }
     if (kind === "quote") {
       const cite = b.attribution
-        ? `<cite>${esc(b.attribution)}</cite>` : "";
-      return `<blockquote class="lv-post-quote lv-reveal"><p>${inlineMarks(b.text || "")}</p>${cite}</blockquote>`;
+        ? `<cite${editAttr(path, "attribution")}>${esc(b.attribution)}</cite>` : "";
+      return `<blockquote class="lv-post-quote lv-reveal"><p${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>${cite}</blockquote>`;
     }
     if (kind === "list") {
       const tag = b.style === "numbered" ? "ol" : "ul";
-      const items = (b.items || []).map((it) => {
-        if (typeof it === "string") return `<li>${inlineMarks(it)}</li>`;
+      const items = (b.items || []).map((it, i) => {
+        const ip = path ? `${path}.items.${i}` : "";
+        if (typeof it === "string") return `<li${editAttr(ip, "", 1)}>${inlineMarks(it)}</li>`;
         if (it && it.title) {
-          return `<li><strong>${inlineMarks(it.title)}</strong> ${inlineMarks(it.text || "")}</li>`;
+          return `<li><strong${editAttr(ip, "title", 1)}>${inlineMarks(it.title)}</strong> <span${editAttr(ip, "text", 1)}>${inlineMarks(it.text || "")}</span></li>`;
         }
-        return `<li>${inlineMarks((it && it.text) || "")}</li>`;
+        return `<li${editAttr(ip, "text", 1)}>${inlineMarks((it && it.text) || "")}</li>`;
       }).join("");
       return `<${tag} class="lv-post-list lv-reveal">${items}</${tag}>`;
     }
     if (kind === "figure") {
       const hue = Number.isFinite(b.hue) ? b.hue : 200;
-      const label = b.label ? `<span class="label">${esc(b.label)}</span>` : "";
-      const caption = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : "";
+      const label = b.label ? `<span class="label"${editAttr(path, "label")}>${esc(b.label)}</span>` : "";
+      const caption = b.caption ? `<figcaption${editAttr(path, "caption")}>${esc(b.caption)}</figcaption>` : "";
       return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};"><div class="frame" role="img" aria-label="${esc(b.alt || b.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
     }
     if (kind === "callout") {
-      const label = b.label ? `<div class="lv-post-callout-label">${esc(b.label)}</div>` : "";
-      return `<aside class="lv-post-callout lv-reveal">${label}<p>${inlineMarks(b.text || "")}</p></aside>`;
+      const label = b.label ? `<div class="lv-post-callout-label"${editAttr(path, "label")}>${esc(b.label)}</div>` : "";
+      return `<aside class="lv-post-callout lv-reveal">${label}<p${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p></aside>`;
     }
     if (kind === "divider") {
       if (b.symbol) {
@@ -782,11 +796,14 @@
       </figure>`;
     }
     // Unknown block: render as paragraph fallback.
-    return `<p class="lv-post-p lv-reveal">${inlineMarks(b.text || "")}</p>`;
+    return `<p class="lv-post-p lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
   }
 
-  function renderPostBody(blocks) {
-    return (blocks || []).map(renderPostBlock).join("\n");
+  // `base` is the blocks array's path in LV_DATA (e.g. "posts.0.body").
+  function renderPostBody(blocks, base) {
+    return (blocks || [])
+      .map((b, i) => renderPostBlock(b, base ? `${base}.${i}` : ""))
+      .join("\n");
   }
 
   // Chat blocks replay like a live conversation: each message shows a short
@@ -840,7 +857,7 @@
     const next = posts[(idx + 1) % posts.length];
 
     // Drop cap on the first prose paragraph (the lead stays italic display).
-    const bodyHtml = renderPostBody(p.body)
+    const bodyHtml = renderPostBody(p.body, idx >= 0 ? `posts.${idx}.body` : "")
       .replace('class="lv-post-p lv-reveal"', 'class="lv-post-p lv-reveal lv-dropcap"');
 
     root.innerHTML = `
@@ -855,8 +872,8 @@
           <span>${esc(p.date.slice(0, 4))} Edition</span>
           <span>${esc(p.dateLabel.replace(/\s*\d{4}$/, ""))}</span>
         </div>
-        <h1 class="lv-gz-article-title lv-reveal">${esc(p.title)}</h1>
-        ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal">${esc(p.excerpt)}</p>` : ""}
+        <h1 class="lv-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
+        ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
         <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
       </header>
 
@@ -1665,6 +1682,10 @@
       if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSketch();
     });
   }
+
+  // Shared with js/edit-mode.js so an edited field re-renders exactly the way
+  // it was rendered in the first place.
+  window.LV_RENDER = { inlineMarks, esc };
 
   function boot() {
     renderCaseLists();
