@@ -61,6 +61,75 @@ a { color: inherit; }
   --radius-sm: 6px;
   --radius-md: 14px;
   --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Status & surface accents */
+  --live: oklch(0.65 0.2 145);
+  --glint: rgba(255, 255, 255, 0.4);
+  --scrim: color-mix(in srgb, var(--ink) 35%, transparent);
+  --scrim-strong: color-mix(in srgb, var(--ink) 55%, transparent);
+
+  /* Ink/paper alpha steps */
+  --ink-a85: color-mix(in srgb, var(--ink) 85%, transparent);
+  --ink-a70: color-mix(in srgb, var(--ink) 70%, transparent);
+  --ink-a60: color-mix(in srgb, var(--ink) 60%, transparent);
+  --ink-a05: color-mix(in srgb, var(--ink) 5%, transparent);
+  --paper-a70: color-mix(in srgb, var(--paper) 70%, transparent);
+
+  /* Elevation */
+  --shadow-sm: 0 5px 15px color-mix(in srgb, var(--ink) 8%, transparent);
+  --shadow-md: 0 11px 28px color-mix(in srgb, var(--ink) 12%, transparent);
+  --shadow-lg: 0 22px 50px color-mix(in srgb, var(--ink) 18%, transparent);
+  --shadow-xl: 0 25px 70px color-mix(in srgb, var(--ink) 30%, transparent);
+
+  /* Hue-parametric tints (components set --hue) */
+  --tint-soft: oklch(0.88 0.1 var(--hue, 200));
+  --tint-mid: oklch(0.82 0.1 var(--hue, 200));
+  --tint-deep: oklch(0.72 0.12 calc(var(--hue, 200) + 30));
+  --tint-frame: oklch(0.78 0.06 var(--hue, 200));
+  --tint-frame-deep: oklch(0.62 0.12 var(--hue, 200));
+  /* NOTE: var(--hue) inside these recipes resolves where the custom property
+     is declared. The block below re-declares them on every consumer so each
+     component's own --hue wins; keep it in sync when adding consumers. */
+
+  /* Fluid type scale */
+  --fs-hero: clamp(3rem, 10vw, 9.5rem);
+  --fs-display: clamp(3rem, 8vw, 7.5rem);
+  --fs-h1: clamp(2rem, 5vw, 4rem);
+  --fs-title: clamp(1.7rem, 3.2vw, 2.5rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --fs-h3: clamp(1.4rem, 2.6vw, 2rem);
+  --fs-h4: clamp(1.25rem, 2.1vw, 1.65rem);
+  --fs-lead: clamp(1.05rem, 1.5vw, 1.35rem);
+
+  /* Static type ladder */
+  --text-2xs: 0.68rem;
+  --text-xs: 0.72rem;
+  --text-sm: 0.8rem;
+  --text-md: 0.95rem;
+  --text-base: 1rem;
+  --text-lg: 1.15rem;
+  --text-xl: 1.35rem;
+  --text-2xl: 1.55rem;
+  --text-3xl: 1.8rem;
+
+  /* Component: bookshelf */
+  --book-cover: #9a8f80;
+  --book-cover-ink: #46403a;
+  --book-cover-ink-deep: #2a2622;
+  --book-star: #e0a32e;
+}
+
+/* Hue-parametric tint recipes, re-declared on every consumer so var(--hue)
+   resolves against the component's own hue (a root-level declaration would
+   freeze the 200 fallback for the whole tree). */
+.v1-playground-tile, .v1-visual-thumb.is-fallback, .v1-visual-stage-fallback,
+.v1-case-media, .v1-ledger-cover, .v1-work-thumb, .lv-post-figure .frame {
+  --tint-soft: oklch(0.88 0.1 var(--hue, 200));
+  --tint-mid: oklch(0.82 0.1 var(--hue, 200));
+  --tint-deep: oklch(0.72 0.12 calc(var(--hue, 200) + 30));
+  --tint-frame: oklch(0.78 0.06 var(--hue, 200));
+  --tint-frame-deep: oklch(0.62 0.12 var(--hue, 200));
 }
 
 /* ==========================================================================
@@ -69,7 +138,7 @@ a { color: inherit; }
 .lv-display {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: calc(clamp(3rem, 8vw, 7.5rem) * var(--type-scale));
+  font-size: calc(var(--fs-display) * var(--type-scale));
   line-height: 0.95;
   letter-spacing: -0.035em;
   color: var(--ink);
@@ -77,30 +146,30 @@ a { color: inherit; }
 .lv-h1 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: calc(clamp(2rem, 5vw, 4rem) * var(--type-scale));
+  font-size: calc(var(--fs-h1) * var(--type-scale));
   line-height: 1.02;
   letter-spacing: -0.025em;
 }
 .lv-h2 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: calc(clamp(1.5rem, 3vw, 2.25rem) * var(--type-scale));
+  font-size: calc(var(--fs-h2) * var(--type-scale));
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 .lv-lead {
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-size: var(--fs-lead);
   line-height: 1.55;
   color: var(--ink-2);
 }
 .lv-body {
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.65;
   color: var(--ink-2);
 }
 .lv-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--ink-3);
@@ -116,9 +185,9 @@ a { color: inherit; }
   background: var(--ink);
   color: var(--paper);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: var(--text-md);
   font-weight: 500;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition: transform var(--t-fast) var(--ease-out), background var(--t-fast), color var(--t-fast);
   text-decoration: none;
@@ -196,7 +265,7 @@ a { color: inherit; }
 /* Emoji labels (e.g. the Yoshi mushroom) render bigger and without the
    mono/uppercase treatment meant for text labels. */
 .lv-cursor-ring.is-labelled[data-label="🍄"]::after {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   letter-spacing: 0;
 }
 @media (max-width: 900px) { .lv-cursor, .lv-cursor-ring { display: none; } }
@@ -238,22 +307,22 @@ a { color: inherit; }
 }
 .lv-logo {
   font-family: var(--font-mono);
-  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase;
   text-decoration: none; color: var(--ink);
   display: inline-flex; align-items: center; gap: 0.5rem;
   flex-shrink: 0;
 }
 .lv-logo-dot {
   width: 8px; height: 8px; border-radius: 50%;
-  background: oklch(0.65 0.2 145);
-  box-shadow: 0 0 0 4px oklch(0.65 0.2 145 / 0.2);
+  background: var(--live);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--live) 20%, transparent);
   animation: pulse 2s infinite;
 }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .lv-nav-links { display: flex; gap: 1.5rem; align-items: center; }
 .lv-nav-link {
-  font-family: var(--font-body); font-size: 0.9rem;
+  font-family: var(--font-body); font-size: var(--text-md);
   color: var(--ink-2); text-decoration: none;
   transition: color var(--t-fast);
   padding: 0.5rem 0;
@@ -273,12 +342,25 @@ a { color: inherit; }
   justify-content: center;
   background: transparent;
   border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   width: 40px;
   height: 40px;
   padding: 0;
   color: var(--ink);
   cursor: pointer;
+  position: relative;
+}
+/* The visible circle stays 40px (on the 8px grid); the hit area grows to the
+   44px convention through a transparent overlay. Same trick on the sheet close
+   button and the limitations info button. */
+.lv-nav-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 /* Inline burger glyph. Was a Material Symbols webfont glyph; the icon is
    now an inlined SVG path so no icon font is loaded for a single character. */
@@ -295,7 +377,7 @@ a { color: inherit; }
   width: min(320px, 85vw);
   background: var(--paper);
   border-left: 1px solid var(--rule);
-  box-shadow: -20px 0 60px rgba(0,0,0,0.15);
+  box-shadow: -20px 0 60px color-mix(in srgb, var(--ink) 15%, transparent);
   z-index: 9200;
   padding: 5rem 2rem 2rem;
   flex-direction: column;
@@ -306,7 +388,7 @@ a { color: inherit; }
 .lv-nav-sheet.is-open { transform: translateX(0); display: flex; }
 .lv-nav-sheet a {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   color: var(--ink);
   text-decoration: none;
   padding: 0.75rem 0;
@@ -317,13 +399,23 @@ a { color: inherit; }
   position: absolute; top: 1.25rem; right: 1.25rem;
   background: transparent; border: none;
   color: var(--ink); cursor: pointer;
-  font-family: var(--font-mono); font-size: 0.72rem;
+  font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.14em; text-transform: uppercase;
+}
+.lv-nav-sheet-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  min-width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 .lv-nav-scrim {
   display: none;
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: var(--scrim);
   z-index: 9100;
 }
 .lv-nav-scrim.is-open { display: block; }
@@ -347,13 +439,13 @@ a { color: inherit; }
   padding: 0 clamp(1.25rem, 3vw, 3rem);
 }
 .lv-footer h4 {
-  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase;
   letter-spacing: 0.14em; color: var(--ink-3); margin: 0 0 1rem;
 }
 .lv-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.lv-footer a { color: var(--ink-2); text-decoration: none; font-size: 0.95rem; }
+.lv-footer a { color: var(--ink-2); text-decoration: none; font-size: var(--text-md); }
 .lv-footer a:hover { color: var(--ink); }
-.lv-footer a.lv-logo { color: var(--ink); font-size: 0.8rem; }
+.lv-footer a.lv-logo { color: var(--ink); font-size: var(--text-sm); }
 .lv-social-link { display: inline-flex; align-items: center; gap: 0.5rem; }
 .lv-social-link svg { flex-shrink: 0; transition: transform var(--t-fast) var(--ease-out); }
 .lv-social-link:hover svg { transform: translateY(-1px); }
@@ -402,14 +494,14 @@ a { color: inherit; }
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  box-shadow: var(--shadow-lg);
   padding: 1.25rem;
   font-family: var(--font-body);
   display: none;
 }
 .lv-tweaks.is-open { display: block; }
 .lv-tweaks h3 {
-  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase;
   letter-spacing: 0.14em; margin: 0 0 0.75rem; color: var(--ink-3);
 }
 .lv-tweak-row { margin-bottom: 0.9rem; }
@@ -444,7 +536,7 @@ a { color: inherit; }
   border: 1px solid var(--rule);
   color: var(--ink-2);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-sm);
   display: flex; align-items: center; justify-content: center;
   transition: transform var(--t-fast) var(--ease-out);
 }
@@ -475,11 +567,11 @@ body:not(.lv-upside-down) {
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%) rotate(180deg);
   background: var(--ink); color: var(--paper);
-  padding: 1rem 1.5rem; border-radius: 999px;
-  font-family: var(--font-mono); font-size: 0.78rem;
+  padding: 1rem 1.5rem; border-radius: var(--radius-pill);
+  font-family: var(--font-mono); font-size: var(--text-sm);
   letter-spacing: 0.12em; text-transform: uppercase;
   z-index: 10000; pointer-events: none;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-xl);
 }
 
 @media (hover: none) {
@@ -516,11 +608,11 @@ html { cursor: none; }
 .lv-post-body > .lv-post-callout + * { margin-top: 2.5rem; }
 
 /* Paragraph + lead */
-.lv-post-p { font-size: 1.05rem; line-height: 1.7; color: var(--ink-2); }
+.lv-post-p { font-size: var(--text-base); line-height: 1.7; color: var(--ink-2); }
 .lv-post-p strong { color: var(--ink); font-weight: 600; }
 .lv-post-p em { font-style: italic; }
 .lv-post-lead {
-  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-size: var(--fs-lead);
   line-height: 1.55; color: var(--ink);
 }
 [data-variation="v1"] .lv-post-lead {
@@ -530,7 +622,7 @@ html { cursor: none; }
 
 /* Headings */
 .lv-post-h2 {
-  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-size: var(--fs-h3);
   line-height: 1.15; letter-spacing: -0.02em;
   color: var(--ink);
 }
@@ -538,7 +630,7 @@ html { cursor: none; }
   font-family: var(--font-display); font-style: italic; font-weight: 400;
 }
 .lv-post-h3 {
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-size: var(--text-lg);
   line-height: 1.3; color: var(--ink);
 }
 [data-variation="v1"] .lv-post-h3 {
@@ -551,7 +643,7 @@ html { cursor: none; }
   border-left: 2px solid var(--accent);
 }
 .lv-post-quote p {
-  font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.3;
+  font-size: var(--fs-h4); line-height: 1.3;
   color: var(--ink); margin: 0;
 }
 [data-variation="v1"] .lv-post-quote p {
@@ -560,14 +652,14 @@ html { cursor: none; }
 }
 .lv-post-quote cite {
   display: block; margin-top: 0.75rem;
-  font-family: var(--font-mono); font-size: 0.78rem;
+  font-family: var(--font-mono); font-size: var(--text-sm);
   letter-spacing: 0.1em; color: var(--ink-3); font-style: normal;
   text-transform: uppercase;
 }
 
 /* Lists */
 .lv-post-list {
-  font-size: 1.05rem; line-height: 1.7; color: var(--ink-2);
+  font-size: var(--text-base); line-height: 1.7; color: var(--ink-2);
   padding-left: 1.25rem;
 }
 .lv-post-list li { margin: 0 0 0.5rem; }
@@ -580,23 +672,24 @@ html { cursor: none; }
   --post-figure-hue: 200;
 }
 .lv-post-figure .frame {
+  --hue: var(--post-figure-hue);
   aspect-ratio: 16 / 9;
   background:
     linear-gradient(135deg,
-      oklch(0.78 0.06 var(--post-figure-hue)) 0%,
-      oklch(0.62 0.12 var(--post-figure-hue)) 100%);
+      var(--tint-frame) 0%,
+      var(--tint-frame-deep) 100%);
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
 [data-variation="v1"] .lv-post-figure .frame { border-radius: var(--radius-lg); }
 .lv-post-figure .frame .label {
-  font-family: var(--font-mono); font-size: 0.72rem;
+  font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: oklch(1 0 0 / 0.7);
+  color: var(--paper-a70);
 }
 .lv-post-figure figcaption {
   margin-top: 0.75rem; font-family: var(--font-mono);
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--ink-3);
 }
 
@@ -633,10 +726,10 @@ html { cursor: none; }
   width: max-content; max-width: 15rem;
   white-space: normal;
   background: var(--ink); color: var(--paper);
-  font-family: var(--font-mono); font-size: 0.68rem;
+  font-family: var(--font-mono); font-size: var(--text-2xs);
   letter-spacing: 0.03em; line-height: 1.45; text-align: left;
   padding: 0.5rem 0.65rem; border-radius: var(--radius-sm);
-  box-shadow: 0 6px 20px oklch(0 0 0 / 0.18);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--ink) 18%, transparent);
   opacity: 0; pointer-events: none;
   transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
   z-index: 6;
@@ -668,16 +761,16 @@ html { cursor: none; }
   border-radius: var(--radius-sm);
   background: var(--accent-soft); color: var(--ink);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem;
+  font-family: var(--font-mono); font-weight: 700; font-size: var(--text-md);
 }
 .lv-chat-group:last-child .lv-chat-avatar { background: var(--paper-3); }
 .lv-chat-rows { flex: 1; min-width: 0; }
 .lv-chat-meta {
   display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.4rem;
 }
-.lv-chat-meta strong { font-size: 0.95rem; color: var(--ink); }
+.lv-chat-meta strong { font-size: var(--text-md); color: var(--ink); }
 .lv-chat-meta .time {
-  font-family: var(--font-mono); font-size: 0.7rem;
+  font-family: var(--font-mono); font-size: var(--text-2xs);
   letter-spacing: 0.08em; color: var(--ink-3);
 }
 .lv-chat-msg { margin: 0 0 0.5rem; }
@@ -698,7 +791,7 @@ html { cursor: none; }
 }
 .lv-chat-link {
   display: block; margin-top: 0.45rem;
-  font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.5;
+  font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.5;
   color: var(--accent); text-decoration: underline;
   word-break: break-all;
 }
@@ -721,16 +814,16 @@ html { cursor: none; }
   display: inline-flex; align-items: center;
   margin-top: 0.1rem;
   padding: 0.2rem 0.6rem;
-  border: 1px solid var(--rule); border-radius: 999px;
+  border: 1px solid var(--rule); border-radius: var(--radius-pill);
   background: var(--paper);
-  font-size: 0.78rem; font-family: var(--font-mono); color: var(--ink-2);
+  font-size: var(--text-sm); font-family: var(--font-mono); color: var(--ink-2);
   opacity: 0; transform: scale(0.6);
   transition: opacity var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
 }
 .lv-chat-reaction.is-shown { opacity: 1; transform: scale(1); }
 .lv-post-chat figcaption {
   margin-top: 0.75rem; font-family: var(--font-mono);
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--ink-3);
 }
 @keyframes lv-chat-dot {
@@ -756,11 +849,11 @@ html { cursor: none; }
 }
 [data-variation="v1"] .lv-post-callout { border-radius: var(--radius-md); }
 .lv-post-callout-label {
-  font-family: var(--font-mono); font-size: 0.72rem;
+  font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--accent); margin: 0 0 0.5rem;
 }
-.lv-post-callout p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--ink-2); }
+.lv-post-callout p { margin: 0; font-size: var(--text-base); line-height: 1.6; color: var(--ink-2); }
 
 /* Divider */
 .lv-post-divider {
@@ -771,7 +864,7 @@ html { cursor: none; }
 .lv-post-divider.has-symbol {
   background: transparent; height: auto;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-size: 0.85rem;
+  font-family: var(--font-mono); font-size: var(--text-sm);
   color: var(--ink-3); letter-spacing: 0.5em;
 }
 
@@ -779,14 +872,14 @@ html { cursor: none; }
 .lv-post-code {
   margin: 0; padding: 1.25rem 1.5rem;
   background: var(--paper-2);
-  font-family: var(--font-mono); font-size: 0.85rem;
+  font-family: var(--font-mono); font-size: var(--text-sm);
   line-height: 1.6; color: var(--ink-2);
   overflow-x: auto;
 }
 [data-variation="v1"] .lv-post-code { border-radius: var(--radius-md); }
 .lv-post-code .lang {
   display: block; margin-bottom: 0.75rem;
-  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: var(--text-2xs); letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-3);
 }
 
@@ -801,13 +894,13 @@ html { cursor: none; }
   transform: translateY(-50%);
   z-index: 800;
   width: 44px; height: 44px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--paper);
   border: 1px solid var(--rule);
   color: var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   transition: color var(--t-fast), border-color var(--t-fast),
               box-shadow var(--t-fast), background var(--t-fast);
   outline: none;
@@ -816,7 +909,7 @@ html { cursor: none; }
 .lv-toc-fab:focus-visible,
 .lv-toc-fab.is-open {
   color: var(--accent); border-color: var(--accent);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
 }
 .lv-toc-fab svg { width: 18px; height: 18px; }
 
@@ -840,7 +933,7 @@ html { cursor: none; }
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
   padding: 1.25rem 1.5rem 1.5rem;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-lg);
   opacity: 0; visibility: hidden;
   pointer-events: none;
   transition: opacity 240ms var(--ease-out),
@@ -865,7 +958,7 @@ html { cursor: none; }
 
 .lv-toc-popover .eyebrow {
   display: block; margin: 0 0 1.25rem;
-  font-family: var(--font-mono); font-size: 0.68rem;
+  font-family: var(--font-mono); font-size: var(--text-2xs);
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -880,11 +973,11 @@ html { cursor: none; }
   align-items: baseline;
 }
 .lv-toc-popover li .n {
-  font-family: var(--font-mono); font-size: 0.7rem;
+  font-family: var(--font-mono); font-size: var(--text-2xs);
   letter-spacing: 0.08em; color: var(--ink-3);
 }
 .lv-toc-popover li .t {
-  font-family: var(--font-body); font-size: 0.9rem;
+  font-family: var(--font-body); font-size: var(--text-md);
   line-height: 1.3; color: var(--ink-2);
 }
 .lv-toc-popover li.is-lim {
@@ -955,7 +1048,7 @@ html { cursor: none; }
 .lv-next-title {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-size: var(--fs-h4);
   line-height: 1.1; letter-spacing: -0.015em;
   color: var(--ink);
   transition: color var(--t-fast);
@@ -970,7 +1063,7 @@ html { cursor: none; }
 }
 .lv-next-label {
   display: block; margin-bottom: 0.6rem;
-  font-family: var(--font-mono); font-size: 0.7rem;
+  font-family: var(--font-mono); font-size: var(--text-2xs);
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -991,9 +1084,9 @@ html { cursor: none; }
 .lv-book-ribbon > div { display: flex; align-items: baseline; gap: 0.5rem; }
 .lv-book-ribbon strong {
   font-family: var(--font-display); font-weight: 500;
-  font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--ink); letter-spacing: -0.02em;
+  font-size: var(--fs-h2); color: var(--ink); letter-spacing: -0.02em;
 }
-.lv-book-ribbon span { font-size: 0.85rem; color: var(--ink-3); }
+.lv-book-ribbon span { font-size: var(--text-sm); color: var(--ink-3); }
 
 .lv-book-cards {
   margin-top: 2.5rem;
@@ -1006,13 +1099,13 @@ html { cursor: none; }
 }
 .lv-book-statcard-big {
   font-family: var(--font-display); font-weight: 500;
-  font-size: 1.5rem; color: var(--ink); margin: 0.35rem 0 1.1rem; letter-spacing: -0.02em;
+  font-size: var(--text-2xl); color: var(--ink); margin: 0.35rem 0 1.1rem; letter-spacing: -0.02em;
 }
-.lv-book-statcard-big span { font-family: var(--font-body); font-size: 0.8rem; font-weight: 400; color: var(--ink-3); }
-.lv-book-bar { display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; margin-top: 0.55rem; }
+.lv-book-statcard-big span { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 400; color: var(--ink-3); }
+.lv-book-bar { display: flex; align-items: center; gap: 0.6rem; font-size: var(--text-xs); margin-top: 0.55rem; }
 .lv-book-bar-label { width: 5.5rem; color: var(--ink-3); flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lv-book-bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
-.lv-book-bar-fill { display: block; height: 100%; background: var(--ink-2); border-radius: 999px; }
+.lv-book-bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: var(--radius-pill); overflow: hidden; }
+.lv-book-bar-fill { display: block; height: 100%; background: var(--ink-2); border-radius: var(--radius-pill); }
 .lv-book-bar-fill.is-accent { background: var(--accent); }
 .lv-book-bar-num { width: 1.25rem; text-align: right; color: var(--ink-3); font-variant-numeric: tabular-nums; flex-shrink: 0; }
 
@@ -1040,18 +1133,18 @@ html { cursor: none; }
 .lv-book-img,
 .lv-book-fallback {
   display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
-  border-radius: 0 4px 4px 0; box-shadow: 4px 5px 18px rgba(0,0,0,0.16);
+  border-radius: 0 4px 4px 0; box-shadow: 4px 5px 18px color-mix(in srgb, var(--ink) 16%, transparent);
 }
 .lv-book-img { position: relative; z-index: 1; }
 .lv-book-fallback {
   position: absolute; inset: 0; z-index: 0;
   display: flex; align-items: center; justify-content: center;
   padding: 0.75rem; box-sizing: border-box;
-  font-family: var(--font-display); font-size: 0.95rem; font-weight: 500;
+  font-family: var(--font-display); font-size: var(--text-md); font-weight: 500;
   line-height: 1.2; text-align: center;
   /* Pastel tint of the book's spine color, with a darker tinted title. */
-  background: color-mix(in oklch, var(--spine, #9a8f80) 24%, white);
-  color: color-mix(in oklch, var(--spine, #46403a) 55%, #2a2622);
+  background: color-mix(in oklch, var(--spine, var(--book-cover)) 24%, white);
+  color: color-mix(in oklch, var(--spine, var(--book-cover-ink)) 55%, var(--book-cover-ink-deep));
 }
 .lv-book-spine {
   position: absolute; left: 0; top: 0; width: 14px; height: 100%;
@@ -1061,18 +1154,18 @@ html { cursor: none; }
 .lv-book-meta { display: block; margin-top: 1rem; }
 .lv-book-title {
   display: block; font-family: var(--font-body); font-weight: 600;
-  font-size: 0.9rem; line-height: 1.25; color: var(--ink);
+  font-size: var(--text-md); line-height: 1.25; color: var(--ink);
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .lv-book-card:hover .lv-book-title { color: var(--accent); }
-.lv-book-author { display: block; margin-top: 0.2rem; font-size: 0.78rem; color: var(--ink-3); }
+.lv-book-author { display: block; margin-top: 0.2rem; font-size: var(--text-sm); color: var(--ink-3); }
 .lv-book-stars { display: block; margin-top: 0.4rem; letter-spacing: 0.05em; }
-.lv-book-star { font-size: 0.78rem; color: var(--rule); }
-.lv-book-star.is-on { color: #e0a32e; }
-.lv-book-star.is-lg { font-size: 1.05rem; }
+.lv-book-star { font-size: var(--text-sm); color: var(--rule); }
+.lv-book-star.is-on { color: var(--book-star); }
+.lv-book-star.is-lg { font-size: var(--text-base); }
 
 .lv-books-nudge {
-  margin-top: clamp(3rem, 6vw, 4.5rem); font-size: 0.9rem; color: var(--ink-3);
+  margin-top: clamp(3rem, 6vw, 4.5rem); font-size: var(--text-md); color: var(--ink-3);
 }
 .lv-books-nudge a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
 
@@ -1083,12 +1176,12 @@ html { cursor: none; }
   padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
 .lv-book-overlay.is-open { opacity: 1; pointer-events: auto; }
-.lv-book-backdrop { position: absolute; inset: 0; background: rgba(15,12,8,0.55); backdrop-filter: blur(4px); }
+.lv-book-backdrop { position: absolute; inset: 0; background: var(--scrim-strong); backdrop-filter: blur(4px); }
 .lv-book-detail {
   position: relative; background: var(--paper); color: var(--ink);
   border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
   max-width: 680px; width: 100%; max-height: calc(100vh - 3rem); overflow-y: auto;
-  box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-xl);
   transform: translateY(18px) scale(0.97); transition: transform 0.35s var(--ease-out);
 }
 .lv-book-overlay.is-open .lv-book-detail { transform: translateY(0) scale(1); }
@@ -1096,7 +1189,7 @@ html { cursor: none; }
   position: absolute; top: 0.85rem; right: 0.85rem; width: 2.25rem; height: 2.25rem;
   display: flex; align-items: center; justify-content: center; border: none; cursor: pointer;
   border-radius: 50%; background: var(--paper-2); color: var(--ink-2);
-  font-size: 1.4rem; line-height: 1; transition: background var(--t-fast), color var(--t-fast);
+  font-size: var(--text-xl); line-height: 1; transition: background var(--t-fast), color var(--t-fast);
 }
 .lv-book-close:hover { background: var(--paper-3); color: var(--ink); }
 .lv-book-detail-inner { display: flex; flex-direction: column; gap: 1.75rem; }
@@ -1106,26 +1199,26 @@ html { cursor: none; }
 .lv-book-detail-cover img {
   position: relative; z-index: 1;
   width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
-  border-radius: 4px; box-shadow: 6px 8px 26px rgba(0,0,0,0.22);
+  border-radius: 4px; box-shadow: 6px 8px 26px color-mix(in srgb, var(--ink) 22%, transparent);
 }
 .lv-book-detail-fallback {
   position: absolute; inset: 0; z-index: 0;
   display: flex; align-items: center; justify-content: center;
   padding: 0.75rem; box-sizing: border-box; border-radius: 4px;
-  font-family: var(--font-display); font-size: 1rem; font-weight: 500;
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 500;
   line-height: 1.2; text-align: center;
-  background: color-mix(in oklch, var(--spine, #9a8f80) 24%, white);
-  color: color-mix(in oklch, var(--spine, #46403a) 55%, #2a2622);
+  background: color-mix(in oklch, var(--spine, var(--book-cover)) 24%, white);
+  color: color-mix(in oklch, var(--spine, var(--book-cover-ink)) 55%, var(--book-cover-ink-deep));
 }
 .lv-book-detail-body { flex: 1; min-width: 0; }
 .lv-book-detail-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.85rem; }
 .lv-book-tag {
-  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em;
-  padding: 0.25rem 0.6rem; border-radius: 999px; background: var(--paper-2); color: var(--ink-3);
+  font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem; border-radius: var(--radius-pill); background: var(--paper-2); color: var(--ink-3);
 }
 .lv-book-detail-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
-.lv-book-detail-author { margin-top: 0.35rem; color: var(--ink-3); font-size: 0.95rem; }
+.lv-book-detail-author { margin-top: 0.35rem; color: var(--ink-3); font-size: var(--text-md); }
 .lv-book-detail-stars { margin-top: 0.75rem; letter-spacing: 0.08em; }
 .lv-book-detail-review-wrap { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
-.lv-book-detail-review { margin-top: 0.6rem; font-size: 1rem; line-height: 1.65; color: var(--ink-2); }
+.lv-book-detail-review { margin-top: 0.6rem; font-size: var(--text-base); line-height: 1.65; color: var(--ink-2); }
 .lv-book-detail-review a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
