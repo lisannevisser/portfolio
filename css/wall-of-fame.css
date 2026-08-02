@@ -100,9 +100,9 @@
   z-index: 2;
 }
 
-.wof-tape-red    { background: rgba(224, 57, 30, .85); }
-.wof-tape-ink    { background: rgba(22, 20, 18, .88); }
-.wof-tape-yellow { background: rgba(245, 214, 70, .9); }
+.wof-tape-red    { background: color-mix(in srgb, var(--wof-red) 85%, transparent); }
+.wof-tape-ink    { background: color-mix(in srgb, var(--wof-ink) 88%, transparent); }
+.wof-tape-yellow { background: color-mix(in srgb, var(--wof-yellow) 90%, transparent); }
 
 /* ── Masthead ────────────────────────────────────────────────── */
 
@@ -356,7 +356,7 @@
   cursor: pointer;
   user-select: none;
   font: 13px/1.3 'Space Mono', monospace;
-  color: rgba(22, 20, 18, .6);
+  color: color-mix(in srgb, var(--wof-ink) 60%, transparent);
 }
 
 .wof-empty svg { opacity: .45; }
@@ -373,7 +373,7 @@
 
 .wof-empty .wof-sub u {
   text-underline-offset: 2px;
-  text-decoration-color: rgba(22, 20, 18, .3);
+  text-decoration-color: color-mix(in srgb, var(--wof-ink) 30%, transparent);
 }
 
 .wof-empty:hover .wof-sub u,
@@ -386,14 +386,14 @@
   position: absolute;
   inset: 5px;
   pointer-events: none;
-  border: 1.5px dashed rgba(22, 20, 18, .35);
+  border: 1.5px dashed color-mix(in srgb, var(--wof-ink) 35%, transparent);
   transition: border-color .12s;
 }
 
 .wof-slot.over {
   outline: 2px solid var(--wof-red);
   outline-offset: -2px;
-  background: rgba(224, 57, 30, .1);
+  background: color-mix(in srgb, var(--wof-red) 10%, transparent);
 }
 
 .wof-slot.over .wof-ring { border-color: var(--wof-red); }
@@ -445,7 +445,7 @@
   right: 8px;
   color: var(--wof-stamp-red);
   font: 11px/1.3 'Space Mono', monospace;
-  background: rgba(242, 239, 230, .92);
+  background: color-mix(in srgb, var(--wof-paper) 92%, transparent);
   border: 1px solid var(--wof-stamp-red);
   padding: 4px 6px;
   pointer-events: none;

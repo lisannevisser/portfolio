@@ -71,6 +71,35 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 - [ ] Reihenfolge: einen research-starken Case (Research-Culture oder
       Pricing) nach oben legen - steuert den ersten Eindruck am stärksten.
 
+## Design-System: Raster & Touch-Targets
+
+Gemessen am 2026-08-02 im Zuge der Token-Konsolidierung (Schritt D).
+Beides ist Bestand, nicht durch die Konsolidierung entstanden.
+
+- [ ] **Auf ein 8px-System umstellen.** Die Seite hat heute kein
+      durchgehendes Raster: von 369 Abstandswerten (padding, margin, gap,
+      inset) liegen nur 44% auf 8px, 65% auf 8 oder 4px - 27% fallen
+      komplett daneben. Ursache ist strukturell: viele Werte sind krumme
+      rem-Zahlen, die nie auf einem px-Raster landen können. Die
+      häufigsten Ausreißer: `0.6rem` (9,6px, 17x), `0.85rem` (13,6px, 9x),
+      `0.35rem` (5,6px, 8x), `0.4rem` (6,4px, 8x), `0.7rem` (11,2px, 7x),
+      `0.45rem` (7,2px, 6x), `1.1rem` (17,6px, 6x). Vorschlag für die
+      Umsetzung: eine Spacing-Skala als Tokens (`--space-1` = 4px bis
+      `--space-10` = 80px) und die Werte darauf einrasten - analog zur
+      Typo-Leiter aus Schritt D. Braucht eine eigene visuelle
+      Review-Runde, weil sich Abstände sichtbar verschieben.
+- [ ] **Touch-Targets nachziehen.** Gemessen gegen WCAG 2.5.8 (24px
+      Minimum) und die 44px-Konvention (Apple HIG / WCAG 2.5.5):
+  - `.v1-limitations-info-btn` ist 17,6 x 17,6px - unter dem
+    24px-Minimum, auf allen Viewports. Der dringendste Fall.
+  - `.lv-nav-sheet-close` ist 71,7 x 17px - die Höhe reißt das Minimum,
+    und der Button sitzt in der mobilen Navigation.
+  - `.lv-nav-toggle` (Hamburger) ist 40 x 40px - über dem Minimum, aber
+    unter 44. Vier Pixel mehr wären passend zum 8px-Raster.
+  - Unkritisch, nur zur Vollständigkeit: `.lv-logo` misst 17px Höhe,
+    fällt aber als Inline-Textlink unter die WCAG-Ausnahme.
+  - Sauber sind bereits: Hero-CTA (45px), TOC-FAB (44x44), die
+    Sheet-Links (55px), Buch-Cover und Blog-Karten.
 ## Wall of Fame (versteckt, nicht verlinkt)
 
 Seit 2026-08-02 ist die Seite **aus dem Footer raus**. Die Route
