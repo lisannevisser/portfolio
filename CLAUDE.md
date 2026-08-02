@@ -28,6 +28,20 @@ first, a comma as the decimal separator, then a space and the symbol
 decimals (`10 €`, `20 €`). Never the leading-symbol, dot-decimal form
 (`€10.00`). Applies to all site copy: case studies, About, microcopy.
 
+**Credit what isn't ours.** Whenever we link out to someone else's
+resource, or use material we didn't make, name the source. Two places,
+both required:
+
+1. **At the thing itself**, on the page. A named link rather than a bare
+   "here", a caption under the image, the book with publisher and year.
+2. **In the Credits block on the imprint page** (`#/imprint`), so there
+   is one list a reader can check.
+
+Applies to typefaces, icons, photos, illustrations, diagrams, and
+articles we lean on. When adding an asset, adding its credit is part of
+the same change, not a follow-up. It's the decent thing to do, and on a
+portfolio it also shows you know where your material comes from.
+
 **Scribbles welcome.** Hand-notes, arrows, drawn annotations are part
 of the visual language. They can appear in cases, About, next to
 figures, or between sections when they add a small personal touch.

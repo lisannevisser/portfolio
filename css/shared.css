@@ -280,9 +280,12 @@ a { color: inherit; }
   color: var(--ink);
   cursor: pointer;
 }
-.lv-nav-toggle .material-symbols-outlined {
-  font-size: 22px;
-  line-height: 1;
+/* Inline burger glyph. Was a Material Symbols webfont glyph; the icon is
+   now an inlined SVG path so no icon font is loaded for a single character. */
+.lv-nav-toggle svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .lv-nav-sheet {

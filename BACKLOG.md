@@ -71,6 +71,105 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 - [ ] Reihenfolge: einen research-starken Case (Research-Culture oder
       Pricing) nach oben legen - steuert den ersten Eindruck am stärksten.
 
+## Wall of Fame (versteckt, nicht verlinkt)
+
+Seit 2026-08-02 ist die Seite **aus dem Footer raus**. Die Route
+`#/wall-of-fame` funktioniert weiterhin und alle Assets liegen im Repo -
+sie ist nur nirgends mehr verlinkt. Grund: das Board braucht erst
+Inhalt, und das ist Arbeit, die vor dem Launch nicht reinpasst.
+
+Was schon da ist (Stand PR #132):
+
+- 7 Exhibit-Slots, Drag-and-Drop für Besucher, Auswahl bleibt lokal im
+  Browser.
+- Ein committetes Default-Foto in Exhibit A (getapte Fußgängerampel,
+  verkehrt herum montiert), das für alle Besucher rendert. Fehlt die
+  Datei, fällt der Slot sauber auf die Drop-UI zurück.
+- Eigenes Stylesheet (`css/wall-of-fame.css`) und eigene Logik
+  (`js/wall-of-fame.js`).
+
+Offene Entscheidung, eins von beiden:
+
+- [ ] **Weiterarbeiten**: die restlichen 6 Slots mit echten Fotos
+      befüllen, dann wieder in den Footer aufnehmen.
+- [ ] **Auslagern / rausnehmen**: falls die Seite nicht zurückkommt,
+      gehören mit raus: die Route in `index.html`,
+      `css/wall-of-fame.css`, `js/wall-of-fame.js`,
+      `images/wall-of-fame/`, die Stylesheet- und Script-Zeilen im
+      `<head>` bzw. am Seitenende, und die vier Board-Fontdateien
+      (`archivo-*`, `libre-caslon-text-*`, `space-mono-*` in `fonts/`)
+      samt ihrer `@font-face`-Blöcke oben in `css/wall-of-fame.css`.
+
+## SEO & Meta (nach dem Launch)
+
+- [x] `canonical`, Open Graph und Twitter Card gesetzt, mit
+      `images/og-card.png` (1200x630, aus den eigenen Fonts gebaut).
+      Die absoluten URLs stehen als einziger Block im `<head>` und sind
+      beim Domainumzug die komplette Änderung.
+- [ ] Beim Domainumzug: den Meta-Block auf die neue Domain umstellen,
+      Share-Bild-URL inklusive.
+- [ ] Share-Bild neu bauen, sobald es echte Case-Visuals gibt. Die
+      aktuelle Karte ist typografisch, das trägt, aber ein Bild trägt
+      weiter.
+- [ ] `robots.txt` und `sitemap.xml` anlegen. Bei Hash-Routing bringt
+      eine Sitemap wenig, deshalb vorher prüfen, ob sich der Aufwand
+      lohnt.
+- [ ] Structured Data (`Person`-Schema) im JSON-LD-Block.
+
+## Footer, Informationsarchitektur & Branding
+
+- [ ] Footer aufräumen und entscheiden, welche der Nebenseiten
+      dauerhaft bleiben. Aktuell hängt die komplette
+      Informationsarchitektur am Footer, was als Zwischenzustand
+      funktioniert, aber keine bewusste Struktur ist. Die Überschrift
+      "Work in progress" bleibt, solange sie stimmt.
+- [ ] **Branding ist ein eigenes Projekt und bewusst ausgeklammert.**
+      Es gibt kein Logo und vorerst soll auch keins entstehen. Der
+      Header bleibt beim Mono. Das Favicon ist eine Übergangslösung
+      (siehe unten).
+- [ ] Favicon final entscheiden: Variante A (`li`) ist verdrahtet,
+      Variante B (`l.`) liegt daneben unter
+      `images/logos/favicon-b-l-dot.svg`. Beide sind JetBrains Mono in
+      Outlines, lassen sich also direkt in Figma weiterbearbeiten.
+- [ ] Offen: der Typeface aus dem alten Portfolio (i-Punkt als leicht
+      gedrehtes Quadrat, Pixel-Vibe). Schön, würde aber eine dritte
+      typografische Stimme auf die Seite bringen. Nur zusammen mit einer
+      echten Branding-Runde entscheiden, nicht nebenbei.
+
+### Branding-Infos nach Figma holen
+
+Aktuell liegen die Branding-Grundlagen verstreut: als CSS-Variablen, als
+SVG-Board, als Live-Styleguide. Für eine echte Branding-Runde gehören sie
+an einen Ort. Eine `.fig` lässt sich nicht generieren, das ist Handarbeit,
+aber die Vorlagen liegen alle bereit.
+
+- [ ] Figma-Datei aufsetzen und befüllen mit:
+  - Den beiden Favicon-Varianten samt Größenstaffel und Specs.
+    `images/logos/favicon-board.svg` importiert genau das als Frame.
+  - Den vier Typefaces (Fraunces, Instrument Sans, JetBrains Mono,
+    Caveat) mit der Type-Scale, wie sie in `css/shared.css` steht.
+  - Den Farbtokens: `--paper`, `--ink`, `--ink-2`, `--rule` und dem
+    Accent, der über `--accent-hue` durchstimmbar ist. Der Hue ist eine
+    Besonderheit, die eine statische Palette nicht abbildet.
+  - Der Scribble-Sprache (Kreise, Unterstreichungen, Pfeile).
+  - Den wiederkehrenden Bausteinen: Buttons, Ledger-Zeilen der Work-Liste,
+    Case-Cover, Impact-Zellen, Limitations-Karte mit Flip.
+  - Dem Share-Bild-Layout (`images/og-card.png`, 1200x630).
+- [ ] Dabei mitentscheiden: Was ist die Quelle der Wahrheit? Es gibt
+      bereits einen Live-Styleguide unter `#/styleguide`, der die echten
+      CSS-Werte ausliest. Zwei Quellen driften garantiert
+      auseinander - entweder Figma führt und die CSS folgt, oder Figma
+      ist bewusst nur der Entwurfsraum fürs Branding und der Styleguide
+      bleibt maßgeblich.
+
+## Homepage
+
+- [ ] Stärker mit einem Visual arbeiten statt nur mit der Ledger-Liste.
+      Bewusst zurückgestellt: solange es keine Case-Visuals gibt, lässt
+      sich das nicht sinnvoll entscheiden.
+- [x] Selected work von fünf auf drei Cases gekürzt (`HOME_CASE_COUNT`
+      in `js/app.js`), "All work →" trägt den Rest.
+
 ## Neue Case Studies
 
 - [ ] Limbic-Types als eigene Case ausgliedern (aktuell nur Unterpunkt im

@@ -1,3 +1,8 @@
 # Sites that 404 on bots but resolve fine in real browsers.
 # LinkedIn returns 404 to non-logged-in crawlers as anti-scraping.
 https://www\.linkedin\.com/.*
+
+# Adobe's servers trip lychee's HTTP/2 handling ("HTTP/2 protocol error"),
+# which is a transport complaint, not a dead link. Needed for the Adobe
+# privacy policy we link from the Behance embed section on #/privacy.
+https://www\.adobe\.com/.*
