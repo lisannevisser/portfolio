@@ -86,9 +86,54 @@ Offene Entscheidung, eins von beiden:
       gehören mit raus: die Route in `index.html`,
       `css/wall-of-fame.css`, `js/wall-of-fame.js`,
       `images/wall-of-fame/`, die Stylesheet- und Script-Zeilen im
-      `<head>` bzw. am Seitenende, und die Google-Fonts-Zeile für
-      Archivo / Libre Caslon / Space Mono (die lädt aktuell auf *jeder*
-      Seite, nur für dieses Board).
+      `<head>` bzw. am Seitenende, und die vier Board-Fontdateien
+      (`archivo-*`, `libre-caslon-text-*`, `space-mono-*` in `fonts/`)
+      samt ihrer `@font-face`-Blöcke oben in `css/wall-of-fame.css`.
+
+## SEO & Meta (nach dem Launch)
+
+Kein P0, aber genau der Kleinkram, der sonst den Launch aufhält. Die
+ersten drei hängen an der **Domain-Entscheidung** (`lisanne.design` oder
+`*.github.io`), weil `canonical` und `og:url` absolute URLs brauchen.
+
+- [ ] `<link rel="canonical">` setzen.
+- [ ] Open-Graph- und Twitter-Card-Tags (`og:title`, `og:description`,
+      `og:image`, `og:url`, `twitter:card`). Aktuell hat die Seite vier
+      Meta-Tags, ein Share auf LinkedIn sieht entsprechend nackt aus.
+- [ ] `og:image` gestalten (1200x630). Kann erst entstehen, wenn es
+      Case-Visuals gibt.
+- [ ] `robots.txt` und `sitemap.xml` anlegen. Bei Hash-Routing bringt
+      eine Sitemap wenig, deshalb vorher prüfen, ob sich der Aufwand
+      lohnt.
+- [ ] Structured Data (`Person`-Schema) im JSON-LD-Block.
+
+## Footer, Informationsarchitektur & Branding
+
+- [ ] Footer aufräumen und entscheiden, welche der Nebenseiten
+      dauerhaft bleiben. Aktuell hängt die komplette
+      Informationsarchitektur am Footer, was als Zwischenzustand
+      funktioniert, aber keine bewusste Struktur ist. Die Überschrift
+      "Work in progress" bleibt, solange sie stimmt.
+- [ ] **Branding ist ein eigenes Projekt und bewusst ausgeklammert.**
+      Es gibt kein Logo und vorerst soll auch keins entstehen. Der
+      Header bleibt beim Mono. Das Favicon ist eine Übergangslösung
+      (siehe unten).
+- [ ] Favicon final entscheiden: Variante A (`li`) ist verdrahtet,
+      Variante B (`l.`) liegt daneben unter
+      `images/logos/favicon-b-l-dot.svg`. Beide sind JetBrains Mono in
+      Outlines, lassen sich also direkt in Figma weiterbearbeiten.
+- [ ] Offen: der Typeface aus dem alten Portfolio (i-Punkt als leicht
+      gedrehtes Quadrat, Pixel-Vibe). Schön, würde aber eine dritte
+      typografische Stimme auf die Seite bringen. Nur zusammen mit einer
+      echten Branding-Runde entscheiden, nicht nebenbei.
+
+## Homepage
+
+- [ ] Stärker mit einem Visual arbeiten statt nur mit der Ledger-Liste.
+      Bewusst zurückgestellt: solange es keine Case-Visuals gibt, lässt
+      sich das nicht sinnvoll entscheiden.
+- [x] Selected work von fünf auf drei Cases gekürzt (`HOME_CASE_COUNT`
+      in `js/app.js`), "All work →" trägt den Rest.
 
 ## Neue Case Studies
 
