@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- Wall of Fame route fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;900&family=Libre+Caslon+Text:ital@1&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-2" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-08-02-2" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-3" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-08-02-3" />
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
@@ -112,7 +112,7 @@
             <div>
               <div class="lv-eyebrow">./work</div>
               <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
-                Work worth a <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">read<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>.
+                Selected <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">work<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>.
               </h2>
             </div>
             <a href="#/work" class="lv-nav-link" data-cursor-label="All →">All work →</a>
@@ -853,13 +853,13 @@
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
+          <li><a href="#/visuals" data-cursor-label="Look">Visuals</a></li>
+          <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
         </ul>
       </div>
       <div class="lv-footer-site">
         <h4>Work in progress</h4>
         <ul>
-          <li><a href="#/visuals" data-cursor-label="Look">Visuals</a></li>
-          <li><a href="#/sketchbook" data-cursor-label="By hand">Sketchbook</a></li>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
           <li><a href="#/wall-of-fame">Wall of Fame</a></li>
@@ -919,10 +919,25 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
+<<<<<<< HEAD
   <script src="js/data.js?v=2026-08-02-1"></script>
   <script src="js/app.js?v=2026-08-02-1"></script>
+=======
+  <script src="js/data.js?v=2026-08-02-6"></script>
+  <script src="js/app.js?v=2026-08-02-2"></script>
+>>>>>>> origin/main
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-06-12-4"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
+
+  <!-- Edit-Modus (Pilot). Lädt nur mit ?edit=1 in der URL, für alle anderen
+       Besuche passiert hier nichts. Siehe js/edit-mode.js. -->
+  <script>
+    if (new URLSearchParams(location.search).get("edit") === "1") {
+      var lvEdit = document.createElement("script");
+      lvEdit.src = "js/edit-mode.js?v=2026-08-02-1";
+      document.head.appendChild(lvEdit);
+    }
+  </script>
 </body>
 </html>

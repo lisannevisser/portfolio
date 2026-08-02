@@ -24,6 +24,16 @@ Stand nach PR #151/#152: Übersichtskarte raus, Yoga-Flyer-Karte drin
 - [ ] FacelyU: Zeitraum der 750+ Follower präzisieren (Post-Daten im
       eingeloggten Instagram-Account ablesen; extern nicht belegbar).
 
+## Sketchbook-Seite
+
+Die Seite ist seit 2026-08-02 fertig und steht im Footer unter "Site",
+nicht mehr unter "Work in progress".
+
+- [ ] Auswahl noch mal durchgehen: ein paar der älteren Illustrationen
+      rausnehmen, damit nur die Arbeiten stehen bleiben, die die aktuelle
+      Zeichenpraxis zeigen. Einträge in `js/data.js` (`sketchbook`) löschen
+      und die zugehörigen Dateien in `images/sketchbook/` mit entfernen.
+
 ## Research-Positionierung (Portfolio gesamt)
 
 Das Portfolio liest sich heute als "Designerin mit Research-Rückgrat",

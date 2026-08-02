@@ -362,6 +362,18 @@ window.LV_DATA = {
       link: "https://www.canva.com/p/lisanne-visser/"
     },
     {
+      slug: "canva-sale-flyer",
+      title: "Fashion sale flyer",
+      context: "Canva Creator",
+      type: "Template · Print",
+      year: "",
+      hue: 235,
+      thumb: "images/visuals/canva-sale-flyer.jpg",
+      blurb: "A two-sided sale flyer from my Canva Creator collection: an oversized SALE lockup cut into the photo on the front, the brand story and the offer on the back. Free to use and fully editable.",
+      embed: "",
+      link: "https://www.canva.com/de_de/vorlagen/EAGEuCoS1eY-blau-modern-fotografisch-sale-rabatt-ausverkauf-mode-flyer/"
+    },
+    {
       slug: "illustration-adventure-set",
       title: "Illustration Adventure Set",
       context: "Behance",
@@ -387,6 +399,24 @@ window.LV_DATA = {
       embed: "",
       link: "https://www.instagram.com/facely_u/"
     },
+    // Second to last on purpose: the 9:16 story is the tallest card in the
+    // grid, so far up it dominates the page (and on mobile, where the grid
+    // collapses to one column, you hit it almost immediately).
+    {
+      slug: "canva-food-story",
+      title: "Animated story template",
+      context: "Canva Creator",
+      type: "Template · Instagram",
+      year: "",
+      hue: 150,
+      // Still frame, not the animation: Canva's own preview mp4 drops the
+      // "Jetzt neu" headline, so the card shows the finished frame instead.
+      thumb: "images/visuals/canva-food-story.jpg",
+      fit: "contain",
+      blurb: "An animated Instagram story for local food businesses, from my Canva Creator collection. Grid paper, a two-tone green palette, thick hand-drawn line art. Built so a shop owner can swap in their own offer and post it without touching the layout or the timing.",
+      embed: "",
+      link: "https://www.canva.com/de_de/vorlagen/EAF85hLHAEM-beige-grun-animiert-nostalgisch-essen-lokal-werbung-instagram-story/"
+    },
     // Last on purpose: with the masonry columns this puts the deck at the
     // bottom right of the grid.
     {
@@ -409,6 +439,22 @@ window.LV_DATA = {
   // kept separate from #/visuals (which is digital work). Each entry:
   // { slug, title, medium, thumb (grid), full (lightbox), blurb? }.
   sketchbook: [
+    {
+      slug: "lighthouse-watercolor",
+      title: "Lighthouse",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
+      full: "images/sketchbook/lighthouse-watercolor.jpg",
+      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
+    },
+    {
+      slug: "eye-anatomy-studies",
+      title: "Eye studies",
+      medium: "Graphite and ink",
+      thumb: "images/sketchbook/eye-anatomy-studies-thumb.jpg",
+      full: "images/sketchbook/eye-anatomy-studies.jpg",
+      blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
+    },
     {
       slug: "life-drawing-seated",
       title: "Life drawing",
@@ -845,7 +891,6 @@ window.LV_DATA = {
         { kind: "paragraph", text: "Read access is all I need: Read access to the repo, plus the access Claude Design needs to import it. From here, I rebuild the page as a standalone HTML copy (native HTML is Claude Design's default) in a single chat. No write access, no branch, nothing that can touch production. Then I make more copies in that same chat: one to audit, one to redesign, one to keep clean as a reference. They sit side by side, all shareable, none of them touching the real codebase." },
         { kind: "figure", hue: 28, label: "Photo placeholder", caption: "Fig. 1 - the file overview in Claude Design: clean copy, audit copy, redesign copy, side by side." },
         { kind: "paragraph", text: "The point isn't to keep the repo tidy, branches already do that. The point is that a copy is something I can easily share with the client and something they can open without any technical setup. No deploy, no staging URL, no asking a non-technical stakeholder to find their way around GitHub. A link to share, and they're looking at the real thing. Even more than that, they can leave comments directly in the interface." },
-        { kind: "quote", text: "The audit should be a copy of the site I can break, not a document about a site I can't touch.", attribution: "Note to self" },
 
         { kind: "h2", text: "Pinning the findings" },
         { kind: "paragraph", text: "On the audit copy I prompt Claude to walk the page and drop pins on the issues, one pin per finding, located on the actual UI. It's the thing a tool like [Heurio](https://heurio.co) does, except the pins live on a working copy I can immediately edit and transfer back into code if wanted. And because I'm the creator of the auditing tool, I can add any functionality I want. I usually go with Nielsen heuristics as my standard set of guidelines. Most of the time, I then enrich the set of heuristics with psychological effects, like [Coglode.com](https://www.coglode.com). Coglode is a library of effects like the Laws of UX but much broader." },
@@ -856,9 +901,9 @@ window.LV_DATA = {
           { title: "Laws of UX.", text: "Hick, Fitts, Jakob, Miller. Useful when the argument is about cognitive load and familiarity." },
           { title: "Coglode / behavioral.", text: "Behavioral-econ nudges when the conversation is about motivation, not just clarity." },
           { title: "Dark patterns.", text: "Where the interface works against the user instead of for them: forced continuity, confirmshaming, items sneaked into the basket. Worth flagging before it becomes a trust problem." },
-          { title: "Accessibility guidelines.", text: "A WCAG-led pass: contrast, focus order, target size, labels, and whether the page still works without a mouse. The bar is a published standard, not an opinion." }
+          { title: "Accessibility guidelines.", text: "A WCAG-led check: contrast, focus order, target size, labels, and whether the page still works without a mouse. The bar is a published standard, not an opinion." }
         ]},
-        { kind: "paragraph", text: "For Paperclip.inc that procedure surfaced things like a primary CTA competing with three secondary buttons of equal weight, a plan toggle buried below the fold on the pricing page, and a sign-up form with no inline validation. Each one is a pin you can click, on the page it's about." },
+        { kind: "paragraph", text: "For Paperclip.inc that procedure surfaced things like a primary CTA competing with three secondary buttons of equal weight, a plan toggle buried below the fold on the pricing page, and a sign-up form with no inline validation. Which also goes to show that just because you let a computer do the work does not grant that things will be thought through." },
 
         { kind: "h2", text: "Where I (a human) win over AI" },
         { kind: "paragraph", text: "I iterate the pins until they're right, drop the ones that don't hold up, sharpen the wording on the ones that do. This is a point in time where it shows that AI cannot substitute human work: It does a great initial job initially and definitely enriches the result with a few findings a human may miss in the sheer mass of possible lenses to look at a site in all its details. However, as in other settings studies on AI led audits have shown that AI is not capable to deliver reliable results. [(GPT-4o vs. human experts, 2025)](https://arxiv.org/abs/2506.16345)" },
