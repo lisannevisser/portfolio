@@ -374,21 +374,6 @@ window.LV_DATA = {
       link: "https://www.canva.com/de_de/vorlagen/EAGEuCoS1eY-blau-modern-fotografisch-sale-rabatt-ausverkauf-mode-flyer/"
     },
     {
-      slug: "canva-food-story",
-      title: "Animated story template",
-      context: "Canva Creator",
-      type: "Template · Instagram",
-      year: "",
-      hue: 150,
-      // Still frame, not the animation: Canva's own preview mp4 drops the
-      // "Jetzt neu" headline, so the card shows the finished frame instead.
-      thumb: "images/visuals/canva-food-story.jpg",
-      fit: "contain",
-      blurb: "An animated Instagram story for local food businesses, from my Canva Creator collection. Grid paper, a two-tone green palette, thick hand-drawn line art. Built so a shop owner can swap in their own offer and post it without touching the layout or the timing.",
-      embed: "",
-      link: "https://www.canva.com/de_de/vorlagen/EAF85hLHAEM-beige-grun-animiert-nostalgisch-essen-lokal-werbung-instagram-story/"
-    },
-    {
       slug: "illustration-adventure-set",
       title: "Illustration Adventure Set",
       context: "Behance",
@@ -413,6 +398,24 @@ window.LV_DATA = {
       blurb: "My first design project ever: a face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
       embed: "",
       link: "https://www.instagram.com/facely_u/"
+    },
+    // Second to last on purpose: the 9:16 story is the tallest card in the
+    // grid, so far up it dominates the page (and on mobile, where the grid
+    // collapses to one column, you hit it almost immediately).
+    {
+      slug: "canva-food-story",
+      title: "Animated story template",
+      context: "Canva Creator",
+      type: "Template · Instagram",
+      year: "",
+      hue: 150,
+      // Still frame, not the animation: Canva's own preview mp4 drops the
+      // "Jetzt neu" headline, so the card shows the finished frame instead.
+      thumb: "images/visuals/canva-food-story.jpg",
+      fit: "contain",
+      blurb: "An animated Instagram story for local food businesses, from my Canva Creator collection. Grid paper, a two-tone green palette, thick hand-drawn line art. Built so a shop owner can swap in their own offer and post it without touching the layout or the timing.",
+      embed: "",
+      link: "https://www.canva.com/de_de/vorlagen/EAF85hLHAEM-beige-grun-animiert-nostalgisch-essen-lokal-werbung-instagram-story/"
     },
     // Last on purpose: with the masonry columns this puts the deck at the
     // bottom right of the grid.
