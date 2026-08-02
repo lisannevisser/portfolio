@@ -126,6 +126,32 @@ Offene Entscheidung, eins von beiden:
       typografische Stimme auf die Seite bringen. Nur zusammen mit einer
       echten Branding-Runde entscheiden, nicht nebenbei.
 
+### Branding-Infos nach Figma holen
+
+Aktuell liegen die Branding-Grundlagen verstreut: als CSS-Variablen, als
+SVG-Board, als Live-Styleguide. Für eine echte Branding-Runde gehören sie
+an einen Ort. Eine `.fig` lässt sich nicht generieren, das ist Handarbeit,
+aber die Vorlagen liegen alle bereit.
+
+- [ ] Figma-Datei aufsetzen und befüllen mit:
+  - Den beiden Favicon-Varianten samt Größenstaffel und Specs.
+    `images/logos/favicon-board.svg` importiert genau das als Frame.
+  - Den vier Typefaces (Fraunces, Instrument Sans, JetBrains Mono,
+    Caveat) mit der Type-Scale, wie sie in `css/shared.css` steht.
+  - Den Farbtokens: `--paper`, `--ink`, `--ink-2`, `--rule` und dem
+    Accent, der über `--accent-hue` durchstimmbar ist. Der Hue ist eine
+    Besonderheit, die eine statische Palette nicht abbildet.
+  - Der Scribble-Sprache (Kreise, Unterstreichungen, Pfeile).
+  - Den wiederkehrenden Bausteinen: Buttons, Ledger-Zeilen der Work-Liste,
+    Case-Cover, Impact-Zellen, Limitations-Karte mit Flip.
+  - Dem Share-Bild-Layout (`images/og-card.png`, 1200x630).
+- [ ] Dabei mitentscheiden: Was ist die Quelle der Wahrheit? Es gibt
+      bereits einen Live-Styleguide unter `#/styleguide`, der die echten
+      CSS-Werte ausliest. Zwei Quellen driften garantiert
+      auseinander - entweder Figma führt und die CSS folgt, oder Figma
+      ist bewusst nur der Entwurfsraum fürs Branding und der Styleguide
+      bleibt maßgeblich.
+
 ## Homepage
 
 - [ ] Stärker mit einem Visual arbeiten statt nur mit der Ledger-Liste.
