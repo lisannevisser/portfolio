@@ -437,6 +437,22 @@ window.LV_DATA = {
   // { slug, title, medium, thumb (grid), full (lightbox), blurb? }.
   sketchbook: [
     {
+      slug: "lighthouse-watercolor",
+      title: "Lighthouse",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
+      full: "images/sketchbook/lighthouse-watercolor.jpg",
+      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
+    },
+    {
+      slug: "eye-anatomy-studies",
+      title: "Eye studies",
+      medium: "Graphite and ink",
+      thumb: "images/sketchbook/eye-anatomy-studies-thumb.jpg",
+      full: "images/sketchbook/eye-anatomy-studies.jpg",
+      blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
+    },
+    {
       slug: "life-drawing-seated",
       title: "Life drawing",
       medium: "Ink wash",
