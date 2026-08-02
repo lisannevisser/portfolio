@@ -1495,6 +1495,8 @@
 }
 .v1-visual-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 .v1-visual-stage-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+/* Portrait pieces (a 9:16 story, a flyer): show the whole frame, bars and all. */
+.v1-visual-stage-img.is-contain { background-size: contain; background-repeat: no-repeat; background-color: var(--paper-2); }
 .v1-visual-stage-fallback {
   position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 1.5rem;
   background-image: radial-gradient(70% 60% at 30% 30%, oklch(0.88 0.1 var(--tile-hue)), oklch(0.75 0.12 calc(var(--tile-hue) + 30)));
