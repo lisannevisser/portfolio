@@ -967,19 +967,26 @@
   </aside>
 
   <script src="js/data.js?v=2026-08-02-6"></script>
-  <script src="js/app.js?v=2026-08-02-3"></script>
+  <script src="js/app.js?v=2026-08-02-4"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
 
-  <!-- Edit-Modus (Pilot). Lädt nur mit ?edit=1 in der URL, für alle anderen
-       Besuche passiert hier nichts. Siehe js/edit-mode.js. -->
+  <!-- Edit-Modus. Einmal ?edit=wet-paint aufrufen, danach merkt der Browser
+       es sich; ?edit=off oder der "Beenden"-Knopf schalten wieder ab. Ohne
+       gesetzte Markierung wird js/edit-mode.js nie geladen. -->
   <script>
-    if (new URLSearchParams(location.search).get("edit") === "1") {
-      var lvEdit = document.createElement("script");
-      lvEdit.src = "js/edit-mode.js?v=2026-08-02-1";
-      document.head.appendChild(lvEdit);
-    }
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get("edit");
+        if (p === "wet-paint") localStorage.setItem("lv-edit", "on");
+        if (p === "off") localStorage.removeItem("lv-edit");
+        if (localStorage.getItem("lv-edit") !== "on") return;
+        var s = document.createElement("script");
+        s.src = "js/edit-mode.js?v=2026-08-02-2";
+        document.head.appendChild(s);
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

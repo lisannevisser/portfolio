@@ -489,37 +489,49 @@
 
     const tocEntries = buildTocEntries(c, "v1");
 
+    // Path of this case in LV_DATA, for the edit-mode anchors below.
+    const cpath = idx >= 0 ? `cases.${idx}` : "";
+
     let narrativeIdx = 0;
     const storyHtml = c.story.map((s, storyI) => {
+      const bp = cpath ? `${cpath}.story.${storyI}` : "";
       if (s.kind === "figure") {
         const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
-        const label = s.label ? `<span class="label">${esc(s.label)}</span>` : "";
-        const caption = s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : "";
+        const label = s.label ? `<span class="label"${editAttr(bp, "label")}>${esc(s.label)}</span>` : "";
+        const caption = s.caption ? `<figcaption${editAttr(bp, "caption")}>${esc(s.caption)}</figcaption>` : "";
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
         const sid = sectionId("v1", s.title || "limitations", storyI);
-        const renderItems = (arr) => arr.map((it) => `
+        const renderItems = (arr, base) => arr.map((it, j) => {
+          const ip = base ? `${base}.${j}` : "";
+          return `
           <div class="v1-limitation-row">
-            <h4>${esc(it.title)}</h4>
-            <p>${esc(it.body)}</p>
-          </div>`).join("");
+            <h4${editAttr(ip, "title")}>${esc(it.title)}</h4>
+            <p${editAttr(ip, "body")}>${esc(it.body)}</p>
+          </div>`;
+        }).join("");
         const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
         const oppFirst = s.defaultFace === "opportunities" && hasOpp;
-        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities" };
-        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations" };
+        // Only anchor a face's title/subtitle when the key really exists in
+        // data.js — the labels below fall back to hardcoded strings.
+        const facePath = (field) => (bp && s[field] != null ? `${bp}.${field}` : "");
+        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
+          base: bp ? `${bp}.items` : "", titlePath: facePath("title"), subtitlePath: facePath("subtitle") };
+        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
+          base: bp ? `${bp}.opportunities` : "", titlePath: facePath("oppositeTitle"), subtitlePath: facePath("oppositeSubtitle") };
         const front = oppFirst ? oppFace : limFace;
         const back = oppFirst ? limFace : oppFace;
         const renderHeader = (face, idSuffix, pressed) => {
           const pid = `${sid}-info-${idSuffix}`;
           const info = face.subtitle ? `
               <button class="v1-limitations-info-btn" type="button" aria-expanded="false" aria-controls="${esc(pid)}" aria-label="About this card">i</button>
-              <div class="v1-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden>${esc(face.subtitle)}</div>` : "";
+              <div class="v1-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden${editAttr(face.subtitlePath)}>${esc(face.subtitle)}</div>` : "";
           const flip = hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="${pressed}">${face.flipLabel}</button>` : "";
           return `
             <div class="v1-limitations-header">
               <div class="v1-limitations-info-group">
-                <span class="v1-limitations-label">${esc(face.title)}</span>${info}
+                <span class="v1-limitations-label"${editAttr(face.titlePath)}>${esc(face.title)}</span>${info}
               </div>
               ${flip}
             </div>`;
@@ -527,12 +539,12 @@
         const frontFace = `
           <div class="v1-limitations-face is-front">
             ${renderHeader(front, "front", "false")}
-            <div class="v1-limitations-grid">${renderItems(front.items)}</div>
+            <div class="v1-limitations-grid">${renderItems(front.items, front.base)}</div>
           </div>`;
         const backFace = hasOpp ? `
           <div class="v1-limitations-face is-back" aria-hidden="true">
             ${renderHeader(back, "back", "true")}
-            <div class="v1-limitations-grid">${renderItems(back.items)}</div>
+            <div class="v1-limitations-grid">${renderItems(back.items, back.base)}</div>
           </div>` : "";
         return `
           <section id="${esc(sid)}" class="v1-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
@@ -542,30 +554,34 @@
       const i = narrativeIdx++;
       const sid = sectionId("v1", s.title, storyI);
       let body = s.body
-        ? s.body.split(/\n\n+/).map((p) => `<p>${inlineMarks(p)}</p>`).join("")
+        ? s.body.split(/\n\n+/).map((p, pi) => `<p${editAttr(bp, "body", 1, pi)}>${inlineMarks(p)}</p>`).join("")
         : "";
       let extra = "";
       if (s.kind === "framework" && s.items) {
-        extra = `<div class="v1-framework">${s.items.map((it) => `
+        extra = `<div class="v1-framework">${s.items.map((it, j) => {
+          const ip = bp ? `${bp}.items.${j}` : "";
+          return `
           <div class="v1-framework-row">
-            <span>${esc(it.k)}</span>
-            <span>${esc(it.v)}</span>
-            <span>${esc(it.effect)}</span>
-          </div>`).join("")}</div>`;
+            <span${editAttr(ip, "k")}>${esc(it.k)}</span>
+            <span${editAttr(ip, "v")}>${esc(it.v)}</span>
+            <span${editAttr(ip, "effect")}>${esc(it.effect)}</span>
+          </div>`;
+        }).join("")}</div>`;
       } else if (s.kind === "flow" && s.items) {
         const chips = s.items.map((it, j) => {
           const arrow = `<svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M 2 5 L 16 5 M 12 2 L 16 5 L 12 8"/></svg>`;
+          const ip = bp ? `${bp}.items.${j}` : "";
           const last = j === s.items.length - 1
-            ? `<span class="v1-chip" style="background:var(--accent);color:var(--paper);border-color:var(--accent);padding:0.6rem 1rem;">${esc(it.to)}</span>`
+            ? `<span class="v1-chip" style="background:var(--accent);color:var(--paper);border-color:var(--accent);padding:0.6rem 1rem;"${editAttr(ip, "to")}>${esc(it.to)}</span>`
             : "";
-          return `<span class="v1-chip" style="padding:0.6rem 1rem;">${esc(it.from)}</span>${arrow}${last}`;
+          return `<span class="v1-chip" style="padding:0.6rem 1rem;"${editAttr(ip, "from")}>${esc(it.from)}</span>${arrow}${last}`;
         }).join("");
         extra = `<div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1rem;">${chips}</div>`;
       }
       return `
         <section id="${esc(sid)}" class="v1-story-block lv-case-section lv-reveal">
           <span class="lv-section-num">${String(i + 1).padStart(2, "0")}</span>
-          <h2 class="lv-section-title">${esc(s.title)}</h2>
+          <h2 class="lv-section-title"${editAttr(bp, "title")}>${esc(s.title)}</h2>
           ${body}${extra}
         </section>`;
     }).join("");
@@ -575,28 +591,28 @@
 
       <header style="margin-top:2rem;">
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
-          <em>${esc(c.title)}</em>
+          <em${editAttr(cpath, "title")}>${esc(c.title)}</em>
         </h1>
       </header>
 
       ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
         <div class="v1-impact-cell">
-          <div class="v1-impact-cell-label">${esc(c.impact[0].label)}</div>
-          <div class="lv-body" style="font-size:var(--text-md);margin-bottom:0.75rem;">${esc(c.impact[0].note)}</div>
-          <div class="v1-impact-num">${esc(c.impact[0].value)}</div>
+          <div class="v1-impact-cell-label"${editAttr(cpath && `${cpath}.impact.0`, "label")}>${esc(c.impact[0].label)}</div>
+          <div class="lv-body" style="font-size:var(--text-md);margin-bottom:0.75rem;"${editAttr(cpath && `${cpath}.impact.0`, "note")}>${esc(c.impact[0].note)}</div>
+          <div class="v1-impact-num"${editAttr(cpath && `${cpath}.impact.0`, "value")}>${esc(c.impact[0].value)}</div>
         </div>
         <div class="v1-impact-cell v1-impact-cell--meta">
           <div class="v1-impact-cell-label">Role</div>
-          <div class="v1-impact-meta">${esc(c.role)}</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "role")}>${esc(c.role)}</div>
         </div>
         <div class="v1-impact-cell v1-impact-cell--meta">
           <div class="v1-impact-cell-label">Team</div>
-          <div class="v1-impact-meta">${esc(c.team)}</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "team")}>${esc(c.team)}</div>
         </div>
         <div class="v1-impact-cell v1-impact-cell--meta">
           <div class="v1-impact-cell-label">Year</div>
-          <div class="v1-impact-meta">${esc(c.year)}</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "year")}>${esc(c.year)}</div>
         </div>
       </div>` : ""}
 
@@ -707,10 +723,14 @@
   // Edit-mode anchors. Each attribute names the value in LV_DATA that produced
   // the node, so js/edit-mode.js can write a change back to the right key.
   // `marks` flags fields that go through inlineMarks rather than plain esc.
-  // Inert on normal page loads — only js/edit-mode.js (?edit=1) reads them.
-  function editAttr(path, field, marks) {
+  // `part` is the paragraph index when one source string renders as several
+  // <p> (case-study bodies split on blank lines).
+  // Inert on normal page loads — only js/edit-mode.js reads them.
+  function editAttr(path, field, marks, part) {
     if (!path) return "";
-    return ` data-lv-edit="${field ? path + "." + field : path}"${marks ? " data-lv-marks" : ""}`;
+    return ` data-lv-edit="${field ? path + "." + field : path}"` +
+      (marks ? " data-lv-marks" : "") +
+      (part == null ? "" : ` data-lv-part="${part}"`);
   }
 
   // Render one post-body block. Strings are paragraphs (backward-compat).
