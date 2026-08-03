@@ -944,6 +944,11 @@
       kind: "stat", label: "pages relaunched", tilt: 7,
       categories: ["systems", "brand"],
       intro: "Lead designer · brand, IA & 140+ pages"
+    },
+    "alright-app": {
+      kind: "stat", label: "spec to TestFlight", tilt: -5,
+      categories: ["brand", "ops"],
+      intro: "Solo build · design, dev, brand & business model"
     }
   };
 
