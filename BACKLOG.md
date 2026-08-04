@@ -193,9 +193,20 @@ aber die Vorlagen liegen alle bereit.
 
 ## Homepage
 
-- [ ] Stärker mit einem Visual arbeiten statt nur mit der Ledger-Liste.
-      Bewusst zurückgestellt: solange es keine Case-Visuals gibt, lässt
-      sich das nicht sinnvoll entscheiden.
+- [x] Stärker mit einem Visual arbeiten statt nur mit der Ledger-Liste.
+      Jede Ledger-Zeile zeigt jetzt ein statisches Cover-Thumbnail, Hover
+      zeigt konsistent die Impact-Metrik (vorher: bei einem Case ein
+      Bild-Floater statt Metrik, der einzige Ausreißer). Thumbnails sind
+      noch Hue-Platzhalter wie auf der `#/work`-Seite.
+- [ ] Platzhalter-Thumbnails durch echte Produktbilder ersetzen, sobald
+      die drei Case-Visuals fertig sind (`renderCaseLists` in
+      `js/app.js`, `.v1-ledger-row .thumb` in `css/v1.css`).
+- [ ] Titel/Subtitle der Cases wirken zu textlastig und zu
+      marketing-sprech, unaussagekräftig. Ziel: kurz, auf den Punkt,
+      entweder beschreibend fürs Projekt oder mit leichtem
+      Storytelling-Moment, der Neugier weckt - Bild trägt ohnehin den
+      Großteil des ersten Eindrucks. Vor der Umsetzung: 2-3
+      Inspirations-Portfolios sichten, die diese Balance gut lösen.
 - [x] Selected work von fünf auf drei Cases gekürzt (`HOME_CASE_COUNT`
       in `js/app.js`), "All work →" trägt den Rest.
 
