@@ -565,7 +565,7 @@
 
 [data-variation="v1"] .v1-ledger-row {
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr);
+  grid-template-columns: 50px minmax(0, 1fr) auto;
   gap: 1.5rem;
   padding: 1.75rem 0;
   align-items: center;
@@ -620,33 +620,22 @@
   color: var(--paper-a70); margin-top: 0.55rem;
 }
 
-[data-variation="v1"] .v1-ledger-image-floater {
-  position: fixed; pointer-events: none; z-index: 80;
-  width: 320px; height: 240px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.9);
-  transition: opacity 0.25s var(--ease-out), transform 0.35s var(--ease-out);
-  box-shadow: var(--shadow-lg);
-}
-[data-variation="v1"] .v1-ledger-image-floater.is-visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-[data-variation="v1"] .v1-ledger-cover {
+[data-variation="v1"] .v1-ledger-row .thumb {
   --hue: var(--case-hue, 200);
-  position: absolute; inset: 0;
+  display: block; width: 140px; height: 96px;
+  border-radius: var(--radius-md);
+  overflow: hidden; position: relative;
   background:
     radial-gradient(80% 60% at 30% 30%, var(--tint-soft), transparent 60%),
     linear-gradient(135deg, var(--tint-mid), var(--tint-deep));
-  box-shadow: inset 0 0 0 1px var(--glint);
+  box-shadow: var(--shadow-md), inset 0 0 0 1px var(--glint);
+  transition: transform var(--t-fast, 220ms) var(--ease-out);
 }
-[data-variation="v1"] .v1-ledger-cover::after {
+[data-variation="v1"] .v1-ledger-row .thumb::after {
   content: ""; position: absolute; inset: 0;
   background: repeating-linear-gradient(135deg, transparent 0 8px, var(--ink-a05) 8px 9px);
-  pointer-events: none;
 }
+[data-variation="v1"] .v1-ledger-row:hover .thumb { transform: scale(1.04); }
 
 @media (max-width: 760px) {
   /* Hero: stack the lead text and CTA, button below the copy, left-aligned. */
@@ -661,9 +650,12 @@
     gap: 0.5rem 1rem;
     padding-block: 1.25rem;
   }
+  [data-variation="v1"] .v1-ledger-row .thumb {
+    grid-column: 1 / -1; justify-self: start; margin-top: 0.6rem;
+    width: 100%; max-width: 220px; height: 140px;
+  }
   [data-variation="v1"] .v1-ledger-row:hover { padding-left: 0; }
-  [data-variation="v1"] .v1-ledger-stat-floater,
-  [data-variation="v1"] .v1-ledger-image-floater { display: none; }
+  [data-variation="v1"] .v1-ledger-stat-floater { display: none; }
 }
 
 @media (max-width: 900px) {

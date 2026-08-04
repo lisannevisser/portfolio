@@ -1039,11 +1039,11 @@
     const v1HomeList = $("#v1-home-cases");
     if (v1HomeList) {
       const PREVIEW = {
-        "pricing":          { kind: "stat",  label: "in revenue",       tilt: -6 },
-        "ai-workflow":      { kind: "stat",  label: "less cycle time",  tilt:  5 },
-        "research-culture": { kind: "stat",  label: "of target hit",    tilt: -3 },
-        "design-system":    { kind: "image" },
-        "website-relaunch": { kind: "stat",  label: "pages relaunched", tilt:  7 }
+        "pricing":          { label: "in revenue",       tilt: -6 },
+        "ai-workflow":      { label: "less cycle time",  tilt:  5 },
+        "research-culture": { label: "of target hit",    tilt: -3 },
+        "design-system":    { label: "Brand identity",   tilt:  4 },
+        "website-relaunch": { label: "pages relaunched", tilt:  7 }
       };
 
       // The home page teases the top of the list, not the whole shelf.
@@ -1051,16 +1051,15 @@
       const HOME_CASE_COUNT = 3;
 
       const rowsHtml = D.cases.slice(0, HOME_CASE_COUNT).map((c, i) => {
-        const p = PREVIEW[c.slug] || { kind: "stat", label: c.impact[0].label, tilt: -4 };
+        const p = PREVIEW[c.slug] || { label: c.impact[0].label, tilt: -4 };
         return `
           <a href="#/work/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
-             data-preview-kind="${esc(p.kind)}"
              data-preview-value="${esc(c.impact[0].value)}"
              data-preview-label="${esc(p.label || c.impact[0].label)}"
-             data-preview-tilt="${p.tilt == null ? -4 : p.tilt}"
-             data-case-hue="${c.coverPaletteHue}">
+             data-preview-tilt="${p.tilt == null ? -4 : p.tilt}">
             <span class="n">${String(i + 1).padStart(2, "0")}</span>
             <span class="title">${esc(c.title)}</span>
+            <span class="thumb" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true"></span>
           </a>
         `;
       }).join("");
@@ -1072,44 +1071,32 @@
             <div class="v"></div>
             <div class="k"></div>
           </div>
-          <div class="v1-ledger-image-floater" aria-hidden="true">
-            <div class="v1-ledger-cover"></div>
-          </div>
         </div>
       `;
 
       const ledgerRoot = v1HomeList.querySelector(".v1-ledger-root");
       const statFloater = ledgerRoot.querySelector(".v1-ledger-stat-floater");
-      const imageFloater = ledgerRoot.querySelector(".v1-ledger-image-floater");
       const statV = statFloater.querySelector(".v");
       const statK = statFloater.querySelector(".k");
-      const cover = imageFloater.querySelector(".v1-ledger-cover");
       let active = null;
 
       ledgerRoot.addEventListener("mousemove", (e) => {
         if (!active) return;
-        const target = active.dataset.previewKind === "image" ? imageFloater : statFloater;
-        target.style.left = e.clientX + "px";
-        target.style.top = e.clientY + "px";
+        statFloater.style.left = e.clientX + "px";
+        statFloater.style.top = e.clientY + "px";
       });
 
       ledgerRoot.querySelectorAll(".v1-ledger-row").forEach((row) => {
         row.addEventListener("mouseenter", () => {
           active = row;
-          if (row.dataset.previewKind === "image") {
-            cover.style.setProperty("--case-hue", row.dataset.caseHue);
-            imageFloater.classList.add("is-visible");
-          } else {
-            statV.textContent = row.dataset.previewValue;
-            statK.textContent = row.dataset.previewLabel;
-            statFloater.style.setProperty("--tilt", row.dataset.previewTilt + "deg");
-            statFloater.classList.add("is-visible");
-          }
+          statV.textContent = row.dataset.previewValue;
+          statK.textContent = row.dataset.previewLabel;
+          statFloater.style.setProperty("--tilt", row.dataset.previewTilt + "deg");
+          statFloater.classList.add("is-visible");
         });
         row.addEventListener("mouseleave", () => {
           active = null;
           statFloater.classList.remove("is-visible");
-          imageFloater.classList.remove("is-visible");
         });
       });
     }

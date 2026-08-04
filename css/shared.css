@@ -124,7 +124,7 @@ a { color: inherit; }
    resolves against the component's own hue (a root-level declaration would
    freeze the 200 fallback for the whole tree). */
 .v1-playground-tile, .v1-visual-thumb.is-fallback, .v1-visual-stage-fallback,
-.v1-case-media, .v1-ledger-cover, .v1-work-thumb, .lv-post-figure .frame {
+.v1-case-media, .v1-ledger-row .thumb, .v1-work-thumb, .lv-post-figure .frame {
   --tint-soft: oklch(0.88 0.1 var(--hue, 200));
   --tint-mid: oklch(0.82 0.1 var(--hue, 200));
   --tint-deep: oklch(0.72 0.12 calc(var(--hue, 200) + 30));
