@@ -379,7 +379,7 @@ window.LV_DATA = {
       year: "2025",
       hue: 320,
       thumb: "images/visuals/quantum-bradford.jpg",
-      blurb: "The event site for the Bradford Quantum Hackathon 2025, hosted by the University of Bradford, Quantinuum, and Aqora. The branding wasn't mine and came as a general brand guide with no web guidelines, so I translated it into a web design and built the full site in Framer. Alongside the site I designed further event assets, including a multipage flyer.",
+      blurb: "The event site for the Bradford Quantum Hackathon 2025, hosted by the University of Bradford, Quantinuum, and Aqora. Alongside the website that I designed in Framer, I designed further event assets, including a multipage flyer.",
       embed: "",
       link: "https://quantumbradford2025.com/"
     },
