@@ -27,13 +27,21 @@
   // ========================================================================
   // HASH ROUTER
   // ========================================================================
+  // Routes parked out of sight: the section, JS, and CSS all still exist,
+  // but the route is not reachable and falls back to home. To bring one
+  // back, just delete its name from this set (and re-add a footer link if
+  // wanted). Wall of Fame is parked until the board has real content.
+  const DISABLED_ROUTES = new Set(["wall-of-fame"]);
+
   function parseHash(h) {
     const clean = (h || "").replace(/^#\/?/, "");
     if (!clean) return { page: "home" };
     const parts = clean.split("/");
     if (parts[0] === "work" && parts[1]) return { page: "case", slug: parts[1] };
     if (parts[0] === "blog" && parts[1]) return { page: "post", slug: parts[1] };
-    return { page: parts[0] || "home" };
+    const page = parts[0] || "home";
+    if (DISABLED_ROUTES.has(page)) return { page: "home" };
+    return { page };
   }
 
   function renderRoute() {
