@@ -906,9 +906,10 @@
         <ul>
           <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
           <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
-          <!-- Wall of Fame (#/wall-of-fame) is unlinked on purpose: the route
-               still works, but the board needs content before it earns a slot
-               in the footer. See BACKLOG.md. -->
+          <!-- Wall of Fame (#/wall-of-fame) is parked until the board has real
+               content. The route is disabled via DISABLED_ROUTES in js/app.js
+               (falls back to home) and unlinked here. To bring it back, remove
+               it from that set and re-add a link. See BACKLOG.md. -->
           <li><a href="#/playground">Playground</a></li>
           <li><a href="#/styleguide" data-cursor-label="Audit">Styleguide</a></li>
         </ul>
@@ -966,7 +967,7 @@
   </aside>
 
   <script src="js/data.js?v=2026-08-09-2"></script>
-  <script src="js/app.js?v=2026-08-03-1"></script>
+  <script src="js/app.js?v=2026-08-17-1"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
