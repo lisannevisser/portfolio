@@ -877,6 +877,61 @@ window.LV_DATA = {
 
   posts: [
     {
+      slug: "design-trends-2027",
+      title: "The design trends I'm betting on for 2027",
+      date: "2026-08-19",
+      dateLabel: "August 2026",
+      readingTime: "6 min",
+      tags: ["Design", "AI"],
+      excerpt: "Perfect looks cheap now, and a good part of the internet looks like the same prompt. My bet for 2027: handwriting, deliberate ugliness, a bit of Dada, and layouts that read like a newspaper.",
+      body: [
+        { kind: "lead", text: "A confession to start with: when I need a look for something, my first move is to open a chat and ask for options. I get twelve. They are all fine. And a good part of them look like the twelve I got last time, for a completely different project. (That is not the machine being lazy. I asked for modern and clean, which is roughly asking for the average of everything.)" },
+        { kind: "paragraph", text: "That sameness is the part worth talking about. Going into 2027, the interesting question is no longer what a design can pull off. It is who a design can prove made it." },
+
+        { kind: "h2", text: "Trend zero: AI minimalism, whether we like it or not" },
+        { kind: "paragraph", text: "Soft gradient, centered sans, generous white space, a rounded icon set, one of those faintly glossy 3D illustrations. That is the default look of the moment, and I count it as a trend for 2027 because it cannot be avoided. It just was not authored by design professionals. It is the middle of the distribution, available instantly." },
+        { kind: "paragraph", text: "None of that is an argument against the tools. I use AI in almost every part of my work and I wrote a whole post about why [I'm a better designer with it](#/blog/better-designer-with-ai). It is an argument about what happens when everybody starts from the same default." },
+        { kind: "paragraph", text: "There is research behind that now, not just grumbling. Doshi and Hauser showed in [Science Advances](https://doi.org/10.1126/sciadv.adn5290) that writers who took story ideas from a language model were rated as more creative and more enjoyable, while their stories resembled each other more. [Anderson, Shah and Kreminski](https://arxiv.org/abs/2402.01536) measured the same effect for idea generation: more ideas per person, less variety across people. And a 2025 study in [Patterns](https://www.cell.com/patterns/fulltext/S2666-3899%2825%2900299-5) let image and text models feed each other with no human in the loop, where the output collapsed onto roughly a dozen generic motifs." },
+        { kind: "paragraph", text: "So the finding is not that AI makes bad design. It is more uncomfortable than that: AI makes averagely good, highly interchangeable design, in unlimited supply. **When competence gets cheap, the thing left to design is the evidence that a person was here.**" },
+
+        { kind: "h2", text: "Trend 1: Handwriting as proof of life" },
+        { kind: "paragraph", text: "The first countermove is the handmade one. Hand lettering, a visible stroke, baselines sitting slightly crooked, paper grain, ink that bleeds, elements that look placed instead of centered. Not as a retro quote. As a signature." },
+        { kind: "paragraph", text: "Instagram made that move in the open in August 2026. After a decade the wordmark went, replaced by something half script and half print, with a handwriting face called Instagram Pen and a monospace called Instagram Mono added to the system. You do not have to like the result, and the internet did not: it was renamed Instagzam within hours. But a company that could afford flawless picked a line that looks like a hand." },
+        { kind: "paragraph", text: "The research here is unusually tidy. Fuchs, Schreier and van Osselaer found a [handmade effect](https://doi.org/10.1509/jm.14.0018): stating that a product was made by hand makes it more attractive, and the mediator is a perception that it holds something like affection. Schroll, Schnurr and Grewal showed that [handwritten typefaces](https://www.dhruvgrewal.com/wp-content/uploads/2018/05/2018-JCR-Font-2.pdf) raise the perceived human presence in a product, which is what builds the attachment. And the older [effort heuristic](https://www.sciencedirect.com/science/article/abs/pii/S0022103103000659) from Kruger and colleagues says work that looks like it took effort reads as better and worth more, especially when quality is hard to judge. Which is the situation a reader is in most of the time now." },
+        { kind: "callout", label: "Caveat", text: "The effort heuristic has a shaky replication record: a 2023 attempt in Collabra: Psychology got mixed results for two of the original experiments, and later work suggests people only read effort as quality when an effort story is already in their head, not when a talent story is. I treat it as a mechanism, not a law." },
+
+        { kind: "h2", text: "Trend 2: Childlike, and I mean that as a compliment" },
+        { kind: "paragraph", text: "Crayon color, wobbly shapes, heads too big for their bodies, sticker logic, things that look like they came out of a school notebook. My reading: this is a distraction move, and the distraction is the point. When the news is permanently too much, an interface that refuses to take itself seriously for a minute is a rest. (I have a soft spot for this one, which is probably diagnostic.)" },
+        { kind: "paragraph", text: "There is a measurable side to it. Nittono and colleagues showed in [PLoS ONE](https://doi.org/10.1371/journal.pone.0046362) that looking at cute images narrows attention and makes behavior more careful, with a large improvement in a fine motor task. Childlike form does not only set a mood, it changes how people handle a thing. And escapism research from the pandemic and from conflict zones treats light, nostalgic media use as a real coping strategy, with an honest note about the cost when it becomes the only one." },
+        { kind: "paragraph", text: "So naive works while it organizes a break. It stops working the moment it tidies away something serious." },
+
+        { kind: "h2", text: "Trend 3: Creative expressionism, ugly included" },
+        { kind: "paragraph", text: "From here it gets more fun. The trend I am most curious about is the uncomfortable one: loud, extreme, overdrawn design that in places is simply ugly. Colors that fight, type squeezed out of shape, layouts with no rest in them, too much of everything." },
+        { kind: "paragraph", text: "The point is not provocation for its own sake. The point is evidence. Generative systems are trained toward the most likely next step, so they pull structurally toward the middle. A decision that runs against every instinct for pleasantness embodies the opposite of that." },
+        { kind: "paragraph", text: "Aesthetics research explains why this is more than sulking. The [pleasure-interest model](https://doi.org/10.3389/fpsyg.2017.00015) from Graf and Landwehr splits liking into two routes: pleasure, which comes from things being easy to process, and interest, which comes from working out something that was hard at first. Ugly can buy interest. The most advanced yet acceptable principle from Hekkert, Snelders and van Wieringen (British Journal of Psychology, 2003) is the guardrail: novelty carries as long as the category stays recognizable. And [a 2025 paper by Chen and colleagues](https://doi.org/10.1177/02762374251371282) found that novelty weighs more heavily in crowded categories, which is a fairly precise description of a feed full of generated work." },
+        { kind: "paragraph", text: "Which flips the review question. Not: is this pleasant? But: could a machine have produced this? If the answer is yes, in 2027 it is not finished." },
+
+        { kind: "h2", text: "Trend 4: Surrealism and Dada" },
+        { kind: "paragraph", text: "From there it is a short walk to the two movements I keep thinking about. Collage with the cuts left visible, scale errors on purpose, text that refuses to make sense, chance used as a method." },
+        { kind: "paragraph", text: "The historical parallel is obvious, and I want to be careful with it. Dada came out of the First World War and out of the collapse of a certain faith in reason and progress, and its absurdity was an argument rather than a mood. Tate has a short account of [how artists responded to that war](https://www.tate.org.uk/whats-on/tate-britain/aftermath/nine-ways-artists-responded-first-world-war). Surrealism carried the same refusal toward the unconscious, under the pressure of the crises that followed." },
+        { kind: "paragraph", text: "What is different now is the threat. We are not facing a front, we are facing a flood. And here is the objection I have to make against myself: image models are very good at making things look surreal. What they cannot do is make a surreal image that carries a claim. This trend only holds where there is an idea behind the break instead of an effect." },
+
+        { kind: "h2", text: "Trend 5: Editorial, and labels" },
+        { kind: "paragraph", text: "The quietest of the five, and the one I expect to see in real products first: editorial design in the sense of old newspapers. Column setting, running heads, subheads, captions, a block of body text left standing instead of broken into cards. Next to that, label logic: stamps, batch numbers, footnotes, a line that says checked on." },
+        { kind: "paragraph", text: "That references human work twice over. Visually, a newspaper page remembers an editor, a person who decided what goes on top. Structurally, a label is a claim about origin. It is no coincidence that 2026 produced a whole crop of those: the Authors Guild put a Human Authored seal on books, [The Human Made Mark](https://senalnews.com/en/content/the-human-made-mark-launches-global-certification-to-champion-human-creativity-in-film-and-tv) launched for film and television in April, Not By AI badges sit on websites, and [Content Credentials](https://en.wikipedia.org/wiki/Content_Credentials) provide the technical layer underneath. Design is running ahead of that movement aesthetically. A layout that looks like a source note claims provenance before anyone checks a certificate." },
+        { kind: "paragraph", text: "And provenance does real work. Bellaiche and colleagues [swapped the labels on artwork](https://doi.org/10.1186/s41235-023-00499-6): every image was AI generated, only the credit line said human or AI, and the human label lifted liking, beauty, profundity and worth. Disclosure research from 2025 and 2026 finds the same discount for ads and for the organizations behind them, though one 2025 study is careful to note that the broader effects are limited. The label is not everything. It is a lot for four words in a corner." },
+
+        { kind: "h2", text: "What I am taking into my own work" },
+        { kind: "list", style: "bullet", items: [
+          { title: "Provenance is the quality signal.", text: "Looking good is table stakes. Being visibly from someone is the part that is scarce." },
+          { title: "Perfect is cheap, deciding is not.", text: "The expensive part of a design is the choice nobody else would have made." },
+          { title: "A trend is not an obligation.", text: "A product that promises calm should not get the loud one. Handwriting, editorial and labels combine with almost any tone. Expressionism does not." },
+          { title: "One test question per draft.", text: "Could this have fallen out of a prompt? If yes, keep going." }
+        ]},
+        { kind: "paragraph", text: "My prediction in one sentence: 2027 is not the year design beats AI. It is the year visibly human work becomes a position you can take, all the way to the slightly exhausting, deliberately unlovely draft whose one unbeatable advantage is that no machine would have built it that way." }
+      ]
+    },
+    {
       slug: "the-part-of-a-cms-i-wanted",
       title: "The part of a CMS I actually wanted",
       date: "2026-08-02",
