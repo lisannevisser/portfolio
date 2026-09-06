@@ -33,9 +33,14 @@
   // wanted). Wall of Fame is parked until the board has real content.
   const DISABLED_ROUTES = new Set(["wall-of-fame"]);
 
+  // Which route the bare URL lands on. Flip this to "cv" and the CV
+  // one-pager becomes the front door; the current home page stays reachable
+  // at #/home and nothing else has to change.
+  const HOME_ROUTE = "home";
+
   function parseHash(h) {
     const clean = (h || "").replace(/^#\/?/, "");
-    if (!clean) return { page: "home" };
+    if (!clean) return { page: HOME_ROUTE };
     const parts = clean.split("/");
     if (parts[0] === "work" && parts[1]) return { page: "case", slug: parts[1] };
     if (parts[0] === "blog" && parts[1]) return { page: "post", slug: parts[1] };

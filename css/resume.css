@@ -1,0 +1,537 @@
+/* ==========================================================================
+   Resume — the CV-style one-pager at #/cv.
+
+   A deliberately quiet page. Three type roles and nothing else:
+     Fraunces (display)      headlines and numbers, roman, never colored
+     Instrument Sans (body)  every running text
+     JetBrains Mono          labels, indices, the eyebrow line only
+
+   One vertical rhythm: every panel uses the same --cv-pad block padding and
+   the same --cv-gap between its parts, so the spacing between sections never
+   argues with itself. Colour is carried by paper and ink, not by headings.
+   ========================================================================== */
+
+[data-route="cv"] {
+  --cv-paper: #fcfbf8;
+  --cv-paper-2: #f5f2ec;
+  --cv-rule: rgba(26, 24, 20, 0.12);
+  --cv-rule-soft: rgba(26, 24, 20, 0.07);
+
+  /* One rhythm for the whole page. */
+  --cv-pad: clamp(4rem, 9vh, 7.5rem);
+  --cv-gap: clamp(1.4rem, 2.6vw, 2.25rem);
+  --cv-gap-sm: clamp(0.7rem, 1.2vw, 1rem);
+
+  /* One type ladder for the whole page. */
+  --cv-fs-hero: clamp(2.9rem, 8vw, 6.5rem);
+  --cv-fs-h2: clamp(1.85rem, 4.2vw, 3.1rem);
+  --cv-fs-h3: clamp(1.05rem, 1.5vw, 1.25rem);
+  --cv-fs-num: clamp(2.6rem, 6vw, 4.6rem);
+  --cv-fs-lead: clamp(1.05rem, 1.35vw, 1.25rem);
+  --cv-fs-body: 1rem;
+  --cv-fs-label: 0.7rem;
+}
+
+/* Flat paper: the accent radial gradients that wash the rest of the site are
+   switched off here, so the page reads as white with a warm tint. */
+[data-route="cv"] body,
+[data-route="cv"] .lv-page[data-page="cv"] {
+  background: var(--cv-paper);
+}
+
+/* Sticky nav plus scroll snap: keep a panel's top clear of the nav bar. */
+[data-route="cv"] { scroll-padding-top: 4.5rem; }
+
+/* Gentle page-turn snapping. Only where there is vertical room for it and
+   where the visitor has not asked for less motion. "proximity" settles a
+   panel that is nearly in place instead of hijacking every scroll. */
+@media (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+  [data-route="cv"] { scroll-snap-type: y proximity; }
+  [data-route="cv"] .cv-panel { scroll-snap-align: start; }
+}
+
+/* ==========================================================================
+   Panel — one topic, one screen
+   ========================================================================== */
+.cv-panel {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--cv-pad);
+  border-top: 1px solid var(--cv-rule-soft);
+}
+.cv-panel:first-child { border-top: 0; }
+.cv-panel-inner { width: 100%; }
+
+/* Panels that hold a lot (career, capabilities) may grow past one screen. */
+.cv-panel.is-tall { align-items: flex-start; }
+
+/* The page-turn: a panel lifts in and settles back as it leaves the viewport.
+   Progressive enhancement, so browsers without scroll-driven animations get a
+   plain, perfectly readable page. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-panel-inner {
+      animation: cv-turn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%, exit 30% exit 100%;
+    }
+    @keyframes cv-turn {
+      0%   { opacity: 0; transform: translateY(28px) scale(0.985); }
+      100% { opacity: 1; transform: none; }
+    }
+  }
+}
+
+/* Fallback reveal, driven by IntersectionObserver in js/resume.js. */
+@media (prefers-reduced-motion: no-preference) {
+  .cv-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    transition-delay: var(--cv-delay, 0ms);
+  }
+  .cv-reveal.is-in { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Shared type
+   ========================================================================== */
+.cv-label {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+.cv-h2 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--cv-fs-h2);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  max-width: 22ch;
+}
+.cv-h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--cv-fs-h3);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.cv-lead {
+  font-size: var(--cv-fs-lead);
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 56ch;
+}
+.cv-body {
+  font-size: var(--cv-fs-body);
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 62ch;
+}
+.cv-head { display: grid; gap: var(--cv-gap-sm); margin-bottom: var(--cv-gap); }
+
+/* ==========================================================================
+   Cover
+   ========================================================================== */
+.cv-cover-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.cv-cover-portrait {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--cv-paper-2);
+  border: 1px solid var(--cv-rule);
+}
+.cv-cover-portrait video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cv-cover .cv-cover-name {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--cv-fs-hero);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin: 0.4em 0 0;
+}
+.cv-cover-role {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--cv-fs-lead);
+  color: var(--ink);
+  margin: var(--cv-gap-sm) 0 0;
+}
+.cv-cover-pitch { margin-top: var(--cv-gap); }
+.cv-cover-meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  margin-top: var(--cv-gap);
+  padding-top: var(--cv-gap-sm);
+  border-top: 1px solid var(--cv-rule);
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.cv-cover-actions {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  margin-top: var(--cv-gap);
+}
+.cv-cover-actions .lv-btn { font-size: var(--text-md); }
+
+/* Scroll hint at the bottom of the cover. */
+.cv-scroll-hint {
+  position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.cv-scroll-hint::after {
+  content: ""; width: 1px; height: 26px;
+  background: linear-gradient(var(--ink-3), transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cv-scroll-hint::after { animation: cv-hint 2.4s var(--ease-in-out) infinite; transform-origin: top; }
+  @keyframes cv-hint { 0%, 100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+}
+
+/* ==========================================================================
+   Proof row — the four numbers worth leading with
+   ========================================================================== */
+.cv-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--cv-gap);
+  border-top: 1px solid var(--cv-rule);
+  padding-top: var(--cv-gap);
+}
+.cv-proof-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--cv-fs-num);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.cv-proof-label {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 0.7rem;
+}
+.cv-proof-note {
+  font-size: var(--text-md);
+  color: var(--ink-2);
+  margin-top: 0.35rem;
+  max-width: 26ch;
+}
+
+/* ==========================================================================
+   Project panel — headline, scope, one number, one visual
+   ========================================================================== */
+.cv-project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.cv-project-text { display: grid; gap: var(--cv-gap-sm); align-content: center; }
+.cv-project-kicker {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.cv-project-headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--cv-fs-h2);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0.2em 0 0;
+  max-width: 18ch;
+}
+.cv-project-scope {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--ink-3);
+  margin: 0.5rem 0 0;
+}
+.cv-project-line { margin-top: var(--cv-gap-sm); }
+
+.cv-project-ask {
+  padding-top: var(--cv-gap-sm);
+  border-top: 1px solid var(--cv-rule);
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: var(--cv-gap-sm);
+}
+.cv-project-ask a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--cv-rule); }
+.cv-project-ask a:hover { border-bottom-color: var(--ink); }
+
+/* --- The visual ---------------------------------------------------------
+   A real screenshot when one exists (set `cover` in data.js), otherwise a
+   typographic plate: the number, set large, with the client wordmark under
+   it. Quiet by design, no tinted gradients. */
+.cv-plate {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--cv-rule);
+  border-radius: var(--radius-md);
+  background: var(--cv-paper-2);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(1.1rem, 2.2vw, 1.8rem);
+}
+.cv-plate::before {
+  /* Faint ruled paper, the same idea as an index card. */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom, transparent 0, transparent 27px, var(--cv-rule-soft) 27px, var(--cv-rule-soft) 28px
+  );
+  opacity: 0.7;
+  pointer-events: none;
+}
+.cv-plate > * { position: relative; }
+.cv-plate-kind {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.cv-plate-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.cv-plate-foot {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1rem;
+}
+.cv-plate-logo { max-height: 30px; max-width: 55%; width: auto; opacity: 0.7; filter: grayscale(1); }
+.cv-plate-org {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: right;
+}
+.cv-figure { margin: 0; }
+.cv-figcaption {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-top: 0.8rem;
+  text-align: right;
+}
+.cv-cover-img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid var(--cv-rule);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cv-plate, .cv-cover-img { transition: transform var(--t-med) var(--ease-out); }
+  .cv-project-grid:hover .cv-plate,
+  .cv-project-grid:hover .cv-cover-img { transform: translateY(-4px); }
+}
+
+/* The site-wide accent underline in the nav and the wet-paint note both
+   pull focus on a page whose whole point is looking finished. Off here. */
+[data-route="cv"] .lv-nav-link.is-active::after { background: var(--ink); }
+[data-route="cv"] .wip-el { display: none !important; }
+
+/* ==========================================================================
+   Capabilities
+   ========================================================================== */
+.cv-cap-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cv-gap);
+  border-top: 1px solid var(--cv-rule);
+  padding-top: var(--cv-gap);
+}
+/* Capped at three columns: five items then read 3 + 2 instead of leaving a
+   single orphan on the second row. */
+@media (min-width: 680px)  { .cv-cap-list { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .cv-cap-list { grid-template-columns: repeat(3, 1fr); } }
+.cv-cap-item { display: grid; gap: 0.5rem; align-content: start; }
+
+/* ==========================================================================
+   Career + education ledger
+   ========================================================================== */
+.cv-ledger { border-top: 1px solid var(--cv-rule); }
+.cv-ledger-row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0.4rem clamp(1.5rem, 3vw, 3rem);
+  padding-block: clamp(1.1rem, 2vw, 1.6rem);
+  border-bottom: 1px solid var(--cv-rule-soft);
+}
+.cv-ledger-period {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 0.35rem;
+}
+.cv-ledger-org {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 0.35rem;
+}
+.cv-ledger-note { margin-top: 0.5rem; }
+
+.cv-subhead {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin: clamp(2rem, 4vw, 3rem) 0 var(--cv-gap-sm);
+}
+
+/* Tools */
+.cv-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cv-tool {
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--cv-rule);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.8rem;
+}
+
+/* Client wordmarks */
+.cv-clients {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: var(--cv-gap);
+}
+.cv-clients img { max-height: 22px; width: auto; opacity: 0.55; filter: grayscale(1); }
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+.cv-contact { text-align: left; }
+.cv-contact-mail {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--cv-rule);
+  display: inline-block;
+  margin-top: var(--cv-gap);
+  word-break: break-word;
+}
+.cv-contact-mail:hover { border-bottom-color: var(--ink); }
+.cv-contact-links {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem;
+  margin-top: var(--cv-gap);
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.cv-contact-links a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--cv-rule); }
+.cv-contact-links a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* ==========================================================================
+   Reading aids — progress bar and the panel rail
+   ========================================================================== */
+.cv-progress {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  z-index: 60; pointer-events: none;
+  background: transparent;
+}
+.cv-progress i {
+  display: block; height: 100%; width: 0;
+  background: var(--ink);
+  opacity: 0.55;
+}
+[data-route="cv"] .cv-progress { display: block; }
+
+.cv-rail {
+  position: fixed; right: clamp(1rem, 2.5vw, 2rem); top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+  display: none;
+  flex-direction: column; gap: 0.55rem;
+  align-items: flex-end;
+}
+[data-route="cv"] .cv-rail { display: flex; }
+.cv-rail button {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.15rem 0;
+  font-family: var(--font-mono);
+  font-size: var(--cv-fs-label);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+  opacity: 0.45;
+  transition: opacity var(--t-fast), color var(--t-fast);
+}
+.cv-rail-name { display: none; }
+.cv-rail button:hover .cv-rail-name { display: inline; }
+.cv-rail-num { font-variant-numeric: tabular-nums; }
+.cv-rail button i {
+  display: block; width: 18px; height: 1px; background: currentColor;
+  transition: width var(--t-fast) var(--ease-out);
+}
+.cv-rail button:hover { opacity: 1; }
+.cv-rail button.is-current { opacity: 1; color: var(--ink); }
+.cv-rail button.is-current i { width: 32px; }
+@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
+  [data-route="cv"] .cv-rail { display: none; }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 860px) {
+  .cv-project-grid { grid-template-columns: 1fr; gap: var(--cv-gap); }
+  .cv-cover-grid { grid-template-columns: 1fr; }
+  .cv-cover-portrait { display: none; }
+  .cv-project-headline { max-width: none; }
+  .cv-ledger-row { grid-template-columns: 1fr; }
+  .cv-ledger-period { padding-top: 0; }
+  .cv-panel { min-height: 0; padding-block: clamp(3rem, 12vw, 5rem); }
+  .cv-scroll-hint { display: none; }
+  .cv-figcaption { text-align: left; }
+  [data-route="cv"] .cv-panel:first-child { min-height: 88svh; }
+}

@@ -31,17 +31,196 @@ window.LV_DATA = {
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
 
-  // SVG placeholder wordmarks. Swap with real brand files at the same paths.
+  // Real wordmarks where we have them, placeholders otherwise. Two files are
+  // named after the export they came from rather than the brand: "Wortmarke
+  // 1C.svg" is Cargoboard and "main_logo_color_black.svg" is Aqora. They were
+  // mapped the other way round until 2026-09; keep an eye on it when adding.
   clientLogos: {
     "Trusted Shops": "images/logos/Trusted-Shops_Logo_black.svg",
-    Cargoboard: "images/logos/main_logo_color_black.svg",
+    Cargoboard: "images/logos/Wortmarke 1C.svg",
     Funke: "images/logos/Funke-Mediengruppe-Logo.png",
     TikTok: "images/logos/TikTok-logo-RGB-Horizontal-black.png",
     Canva: "images/logos/canva.svg",
-    Aqora: "images/logos/Wortmarke 1C.svg",
+    Aqora: "images/logos/main_logo_color_black.svg",
     Autarc: "images/logos/autarc.svg",
     feelinghale: "images/logos/feelinghale-logo.svg",
     "Dr. Vivien Karl": "images/logos/dr-vivien-karl.svg"
+  },
+
+  // =====================================================================
+  // RESUME — the CV-style one-pager at #/cv.
+  //
+  // This is the short, applyable version of the site: one scroll panel per
+  // topic, every project reduced to headline, scope, one number, one visual.
+  // The long case studies stay in `cases` below and stay reachable at
+  // #/work/<slug>; they are just not advertised here on purpose. When a case
+  // study is ready to show, add `caseLink: true` to its entry and the panel
+  // grows a link to it.
+  //
+  // Drop a real image at images/cases/<slug>.jpg and set `cover` to that path
+  // to replace the generated typographic plate.
+  // =====================================================================
+  resume: {
+    headline: "Senior Product Designer",
+    pitch:
+      "I work where product meets business: research, experimentation, and design systems, shipped end to end. Five years across consumer trust, B2B logistics, and internal tooling.",
+    availability: "Open to senior and lead roles",
+    locationLine: "Berlin · on site or remote",
+    cvUrl:
+      "https://docs.google.com/document/d/e/2PACX-1vTs7i-4TX2n2JGJyUBESup6hq_8V-bMfm0VISavT0bs4AS4J7na2ZqNZF5w2uv24Ped2_tQbNq4urKq/pub",
+
+    proof: [
+      { value: "+15%", label: "revenue", note: "from a repriced core product" },
+      { value: "140+", label: "pages relaunched", note: "in under a year, solo design" },
+      { value: "1.5×", label: "research target", note: "year one of a new practice" },
+      { value: "−85%", label: "test cycle time", note: "two weeks down to two days" }
+    ],
+
+    projects: [
+      {
+        slug: "pricing",
+        kind: "Pricing experiment",
+        company: "Trusted Shops",
+        period: "2024",
+        headline: "Repriced a core revenue driver on pricing psychology",
+        scope: "Research lead · hypothesis design · 2 A/B tests · 7 variants · 3 months",
+        metric: { value: "+15%", label: "revenue", note: "estimated annual lift, no significant rise in churn" },
+        line:
+          "Buyer protection had sat at 9,90 € since launch, years earlier. I built the hypotheses from pricing-psychology research and ran two rounds of live tests with a conversion manager.",
+        cover: null
+      },
+      {
+        slug: "ai-workflow",
+        kind: "Design ops",
+        company: "Trusted Shops",
+        period: "2025 — ongoing",
+        headline: "Rebuilt the conversion-test workflow around AI tools",
+        scope: "Owner · end to end · adopted beyond my team",
+        metric: { value: "−85%", label: "cycle time", note: "two weeks to two days per test" },
+        line:
+          "Tests used to wait on engineering. Now design builds and ships the variant itself, and the workflow spread across the org. I am one of 15 AI ambassadors at the company.",
+        cover: null
+      },
+      {
+        slug: "research-culture",
+        kind: "Research practice",
+        company: "Trusted Shops",
+        period: "2023 — ongoing",
+        headline: "Turned research into an organizational capability",
+        scope: "Research lead · change management · zero budget at the start",
+        metric: { value: "1.5×", label: "target hit", note: "research methods per month, year one" },
+        line:
+          "A proposal with no budget behind it became a continuous practice: interviews, surveys, behavioral data, and colleagues in other teams running their own studies.",
+        cover: null
+      },
+      {
+        slug: "website-relaunch",
+        kind: "Website relaunch",
+        company: "Cargoboard",
+        period: "2022 — 2023",
+        headline: "140+ pages relaunched as the only designer",
+        scope: "Lead designer · brand, IA, system, illustration · 10 months",
+        metric: { value: "140+", label: "pages", note: "concept to launch in under a year" },
+        line:
+          "New brand, new information architecture, new component library, built next to front-end and shipped page by page.",
+        cover: null
+      },
+      {
+        slug: "design-system",
+        kind: "Brand & design system",
+        company: "Cargoboard",
+        period: "2021 — 2022",
+        headline: "The company's first design language, from brand to components",
+        scope: "System lead · type, color, illustration, components, docs · 18 months",
+        metric: { value: "1st", label: "design system", note: "org-wide default for web, print, and internal tools" },
+        line:
+          "Brand discovery first, then the visual system, then the atomic library in Figma and zeroheight that the whole company still works from.",
+        cover: null
+      },
+      {
+        slug: "alright-app",
+        kind: "Solo product",
+        company: "Personal project",
+        period: "2026",
+        headline: "An iOS app built solo in one weekend, naming to TestFlight",
+        scope: "Founder · design · build · AI-assisted",
+        metric: { value: "1 weekend", label: "spec to TestFlight", note: "10+ naming rounds before one cleared trademark and domain" },
+        line:
+          "Product, brand, and business model in one go. Proof that I can take an idea to a shippable build without a team around me.",
+        cover: null
+      }
+    ],
+
+    capabilities: [
+      {
+        title: "Research",
+        body: "Interviews, surveys, tree testing, heatmaps, behavioral data. I ran the first focus group in a 25-year-old company and built the research habit that outlived the project."
+      },
+      {
+        title: "Experimentation",
+        body: "Hypothesis design, A/B tests, and reading results honestly, including the ones that say no. Pricing, checkout, onboarding."
+      },
+      {
+        title: "Design systems",
+        body: "Type, color, illustration, components, documentation. Built in Figma and zeroheight, maintained so other people can use them without me."
+      },
+      {
+        title: "AI in the workflow",
+        body: "Not a demo. Audits, test variants, and prototypes that ship, with the parts that still need a human clearly marked."
+      },
+      {
+        title: "End to end delivery",
+        body: "Fuzzy strategic question to shipped UI to post-launch numbers. I stay with the work after launch."
+      }
+    ],
+
+    career: [
+      {
+        period: "2025 — Now",
+        role: "Senior Product Designer",
+        org: "Trusted Shops",
+        note: "Two product teams, mobile app and membership. ResearchOps, experimentation standards, AI workflows."
+      },
+      {
+        period: "2023 — 2025",
+        role: "UX Designer, Growth",
+        org: "Trusted Shops",
+        note: "Data-driven design and A/B testing with performance marketing. Introduced continuous research."
+      },
+      {
+        period: "2022 — 2023",
+        role: "Product Designer",
+        org: "Cargoboard",
+        note: "One-person design team: 140+ page relaunch, rebrand, first design system, first user research."
+      },
+      {
+        period: "2020 — 2022",
+        role: "Quality Assurance Analyst",
+        org: "TikTok",
+        note: "UX quality analysis and reporting, first onboarding manager, eLearning for 250+ colleagues."
+      }
+    ],
+
+    education: [
+      {
+        period: "2020",
+        role: "M.A. Sociology, B.A. Ethnography & Modern China Studies",
+        org: "Both with distinction",
+        note: "Studied at the National University of Singapore, Fudan University, and Peking University on German and Chinese government scholarships."
+      }
+    ],
+
+    tools: [
+      "Figma",
+      "zeroheight",
+      "Claude",
+      "UXtweak",
+      "Hotjar",
+      "Heurio",
+      "Adobe Illustrator",
+      "Canva",
+      "Framer"
+    ]
   },
 
   cases: [

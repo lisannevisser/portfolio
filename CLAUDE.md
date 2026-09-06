@@ -311,6 +311,64 @@ When drafting from scratch (her notes → post), write in Blog Voice
 and expect her to do a wording pass. Flag the spots where you
 guessed at her phrasing rather than burying them.
 
+## The CV One-Pager (`#/cv`)
+
+Added 2026-09. The short, applyable version of the site: one scroll
+panel per topic, the whole thing readable in about two minutes.
+
+**Why it exists.** The case studies are the bottleneck. Writing them
+well takes concentration and time, and until they are done the site
+cannot be sent to anyone. The CV page removes that dependency: every
+project is reduced to a headline, the scope, one number, and one
+visual, and the long version is handed over on request. Applying stops
+waiting on writing.
+
+**Where the content lives.** `window.LV_DATA.resume` in `js/data.js`.
+Everything except the cover panel is rendered from there by
+`js/resume.js`; the cover is static in `index.html` so the name and the
+pitch exist without JavaScript. Styling is `css/resume.css` and nothing
+else touches it.
+
+**The case studies are parked, not deleted.** They stay in `cases` and
+stay reachable at `#/work/<slug>`. The CV page just does not advertise
+them. When one is finished, add `caseLink: true` to that project in
+`resume.projects` and its panel grows a link to the full study.
+
+**Project visuals.** Each panel renders a typographic plate (the number
+set large, the client wordmark under it) as a stand-in. Drop a real
+image at `images/cases/<slug>.jpg`, set `cover` on the project, and the
+plate is replaced. `coverAlt` sets the alt text; without it the
+headline is used.
+
+**Design rules on this page**, tighter than the rest of the site:
+
+- **No color in headings.** Ink on paper only. Colored headlines read
+  as AI design.
+- **Three type roles, no more.** Fraunces for headlines and numbers
+  (roman, never italic), Instrument Sans for running text, JetBrains
+  Mono for labels and indices. The mono stays because it carries the
+  nav, the logo, and the favicon.
+- **One rhythm.** Every panel uses the same `--cv-pad` block padding
+  and the same `--cv-gap` between its parts. If a section needs its own
+  spacing, the section is wrong, not the token.
+- **One type ladder.** `--cv-fs-hero` once, `--cv-fs-h2` for section
+  and project headlines, `--cv-fs-h3` for item titles, then lead, body,
+  label. Nothing in between.
+- **Motion is enhancement.** Panels lift in via `animation-timeline:
+  view()` where the browser supports it, with an IntersectionObserver
+  fallback, and everything switches off under
+  `prefers-reduced-motion`. Snapping is `proximity`, not `mandatory`,
+  and only above 700px of viewport height.
+
+**Making it the front door.** `HOME_ROUTE` at the top of `js/app.js`.
+Set it to `"cv"` and the bare URL lands on the CV page; the current
+home page stays reachable at `#/home`. One line, reversible.
+
+**Related global change.** The same commit toned the paper down from
+beige (`#f4efe6`) to warm white (`#fbf9f5`) and cut the two accent
+washes in `css/v1.css` to roughly a third. The tint is still there, it
+just no longer sets the mood. Revert those two blocks to go back.
+
 ## Important: `main` is live
 
 The site runs on **GitHub Pages** from the `main` branch. That means:

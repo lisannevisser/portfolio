@@ -42,9 +42,11 @@ a { color: inherit; }
    V1 — Designer / Editorial / Craft
    ======================================================================== */
 [data-variation="v1"] {
-  --paper: #f4efe6;
-  --paper-2: #ebe4d5;
-  --paper-3: #e0d6c2;
+  /* Paper: warm white rather than beige. The tint is still there, it just
+     sits in the background instead of setting the mood. */
+  --paper: #fbf9f5;
+  --paper-2: #f2eee5;
+  --paper-3: #e7e0d2;
   --ink: #1a1814;
   --ink-2: #3d3a33;
   --ink-3: #6b665c;

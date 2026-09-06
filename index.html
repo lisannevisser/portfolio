@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lisanne Visser — Senior Product Designer</title>
   <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin. Open to senior &amp; staff roles — Q3 2026." />
-  <meta name="theme-color" content="#faf7f1" />
+  <meta name="theme-color" content="#fbf9f5" />
 
   <!-- Canonical and sharing. These five absolute URLs are the only place the
        host name is hard-coded; when the site moves to its own domain, this
@@ -54,16 +54,22 @@
        which keeps visitor IPs off third-party servers. Wall of Fame board
        faces are declared in wall-of-fame.css and only fetched on that route. -->
   <link rel="stylesheet" href="css/fonts.css" />
-  <link rel="stylesheet" href="css/shared.css?v=2026-08-02-5" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-08-02-4" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-09-06-1" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-09-06-1" />
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
+  <link rel="stylesheet" href="css/resume.css?v=2026-09-06-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
 </head>
 <body>
 
   <!-- Paper grain overlay -->
   <div class="lv-grain" aria-hidden="true"></div>
+
+  <!-- Reading aids for the CV one-pager (#/cv). Both are hidden by CSS on
+       every other route; js/resume.js fills and drives them. -->
+  <div class="cv-progress" aria-hidden="true"><i id="cv-progress-bar"></i></div>
+  <nav class="cv-rail" id="cv-rail" aria-label="Sections"></nav>
 
   <!-- Custom cursor -->
   <div class="lv-cursor" aria-hidden="true"></div>
@@ -74,6 +80,7 @@
     <div class="lv-nav-inner">
       <a href="#/" class="lv-logo">lisanne.design</a>
       <div class="lv-nav-links">
+        <a href="#/cv" class="lv-nav-link" data-route="cv">CV</a>
         <a href="#/work" class="lv-nav-link" data-route="work">Work</a>
         <a href="#/about" class="lv-nav-link" data-route="about">About</a>
         <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="Email" style="padding:0.45rem 0.9rem;font-size:var(--text-sm);">Say hi</a>
@@ -86,12 +93,56 @@
   <div class="lv-nav-scrim" aria-hidden="true"></div>
   <aside class="lv-nav-sheet" aria-label="Mobile navigation">
     <button class="lv-nav-sheet-close" type="button" aria-label="Close menu">Close ×</button>
+    <a href="#/cv">CV</a>
     <a href="#/work">Work</a>
     <a href="#/about">About</a>
     <a href="mailto:mail@lisannevisser.com" class="lv-btn" style="display:inline-flex;">Say hi</a>
   </aside>
 
   <main>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: CV (the one-pager: one scroll panel per topic)       -->
+    <!--                                                             -->
+    <!-- The short, applyable version of the site. The cover panel   -->
+    <!-- below is static on purpose (name and pitch should exist     -->
+    <!-- without JavaScript); every panel under it is rendered by    -->
+    <!-- js/resume.js from window.LV_DATA.resume.                    -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="cv" id="cv-page" hidden>
+      <div class="v1-only">
+
+        <!-- Cover -->
+        <section class="cv-panel cv-cover" data-cv-panel data-cv-label="Intro">
+          <div class="cv-panel-inner lv-wrap cv-cover-grid">
+            <div class="cv-cover-text">
+              <p class="cv-label">Curriculum vitae</p>
+              <h1 class="cv-cover-name">Lisanne Visser</h1>
+              <p class="cv-cover-role">Senior Product Designer</p>
+              <p class="cv-lead cv-cover-pitch">
+                I work where product meets business: research, experimentation, and design systems, shipped end to end. Five years across consumer trust, B2B logistics, and internal tooling.
+              </p>
+              <div class="cv-cover-meta">
+                <span>Open to senior and lead roles</span>
+                <span>Berlin &middot; on site or remote</span>
+                <span>5+ years</span>
+              </div>
+              <div class="cv-cover-actions">
+                <a class="lv-btn" href="mailto:mail@lisannevisser.com" data-cursor-label="Write">Write to me</a>
+                <a class="lv-btn is-ghost" href="https://docs.google.com/document/d/e/2PACX-1vTs7i-4TX2n2JGJyUBESup6hq_8V-bMfm0VISavT0bs4AS4J7na2ZqNZF5w2uv24Ped2_tQbNq4urKq/pub" target="_blank" rel="noopener noreferrer" data-cursor-label="Open">CV document</a>
+              </div>
+            </div>
+            <div class="cv-cover-portrait">
+              <video src="images/about/portrait.mp4" autoplay loop muted playsinline preload="auto" aria-label="Portrait of Lisanne Visser"></video>
+            </div>
+          </div>
+          <span class="cv-scroll-hint" aria-hidden="true">Scroll</span>
+        </section>
+
+        <!-- Panels 01 to 05, filled by js/resume.js -->
+        <div id="cv-body"></div>
+      </div>
+    </section>
 
     <!-- ========================================================= -->
     <!-- ROUTE: HOME                                                 -->
@@ -901,6 +952,7 @@
       <div class="lv-footer-site">
         <h4>Site</h4>
         <ul>
+          <li><a href="#/cv">CV</a></li>
           <li><a href="#/work">Work</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/blog" data-cursor-label="Read">Blog</a></li>
@@ -973,8 +1025,9 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-08-19-2"></script>
-  <script src="js/app.js?v=2026-08-17-1"></script>
+  <script src="js/data.js?v=2026-09-06-1"></script>
+  <script src="js/app.js?v=2026-09-06-1"></script>
+  <script src="js/resume.js?v=2026-09-06-1"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
