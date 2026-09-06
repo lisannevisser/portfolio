@@ -48,31 +48,32 @@ window.LV_DATA = {
   },
 
   // =====================================================================
-  // RESUME — the CV-style one-pager at #/cv.
+  // ONE-PAGER — the scrolling portfolio at #/portfolio, and the site's
+  // front door (see HOME_ROUTE in js/app.js).
   //
-  // This is the short, applyable version of the site: one scroll panel per
-  // topic, every project reduced to headline, scope, one number, one visual.
-  // The long case studies stay in `cases` below and stay reachable at
-  // #/work/<slug>; they are just not advertised here on purpose. When a case
-  // study is ready to show, add `caseLink: true` to its entry and the panel
-  // grows a link to it.
+  // One panel per topic. Every project carries the situation, the decision I
+  // made, the methods, and one number; the full write-ups stay in `cases`
+  // below and stay reachable at #/work/<slug>, they are just not advertised
+  // here on purpose. When a case study is ready to show, add
+  // `caseLink: true` to its entry and the panel grows a link to it.
   //
   // Drop a real image at images/cases/<slug>.jpg and set `cover` to that path
   // to replace the generated typographic plate.
   // =====================================================================
-  resume: {
-    headline: "Senior Product Designer",
+  onepager: {
+    role: "Senior Product Designer",
+    statement: "Research first, then pixels, then the number that moved.",
     pitch:
-      "I work where product meets business: research, experimentation, and design systems, shipped end to end. Five years across consumer trust, B2B logistics, and internal tooling.",
+      "Five years designing across consumer trust, B2B logistics, and internal tooling. I take the fuzzy question, run the research, ship the interface, and stay around for the post-launch numbers.",
     availability: "Open to senior and lead roles",
     locationLine: "Berlin · on site or remote",
     cvUrl:
       "https://docs.google.com/document/d/e/2PACX-1vTs7i-4TX2n2JGJyUBESup6hq_8V-bMfm0VISavT0bs4AS4J7na2ZqNZF5w2uv24Ped2_tQbNq4urKq/pub",
 
     proof: [
-      { value: "+15%", label: "revenue", note: "from a repriced core product" },
-      { value: "140+", label: "pages relaunched", note: "in under a year, solo design" },
-      { value: "1.5×", label: "research target", note: "year one of a new practice" },
+      { value: "+15%", label: "revenue", note: "from a price I rebuilt on research" },
+      { value: "140+", label: "pages relaunched", note: "in under a year, as the only designer" },
+      { value: "1.5×", label: "research target", note: "year one of a practice I started" },
       { value: "−85%", label: "test cycle time", note: "two weeks down to two days" }
     ],
 
@@ -83,10 +84,13 @@ window.LV_DATA = {
         company: "Trusted Shops",
         period: "2024",
         headline: "Repriced a core revenue driver on pricing psychology",
-        scope: "Research lead · hypothesis design · 2 A/B tests · 7 variants · 3 months",
+        scope: "Research lead · hypothesis design · 3 months",
+        situation:
+          "Buyer protection had sat at 9,90 € since launch, several years earlier. Market and product had moved on, the price had not, and it carried a large share of consumer revenue.",
+        decision:
+          "I built the variants from pricing-psychology research instead of round numbers, and ran them as two live A/B rounds with a conversion manager. Seven variants, one winner, churn watched the whole way through.",
+        methods: ["A/B testing", "Pricing psychology", "Hypothesis design", "Revenue analysis"],
         metric: { value: "+15%", label: "revenue", note: "estimated annual lift, no significant rise in churn" },
-        line:
-          "Buyer protection had sat at 9,90 € since launch, years earlier. I built the hypotheses from pricing-psychology research and ran two rounds of live tests with a conversion manager.",
         cover: null
       },
       {
@@ -96,9 +100,12 @@ window.LV_DATA = {
         period: "2025 — ongoing",
         headline: "Rebuilt the conversion-test workflow around AI tools",
         scope: "Owner · end to end · adopted beyond my team",
+        situation:
+          "Every conversion test queued behind engineering capacity. Two weeks from idea to live test, which in practice meant most ideas never got tested at all.",
+        decision:
+          "I rebuilt the workflow so design builds and ships the variant itself, with AI doing the front-end work and clear rules for what still needs a developer. It spread past my team, and I am one of 15 AI ambassadors at the company.",
+        methods: ["Design ops", "AI-assisted build", "Experimentation", "Enablement"],
         metric: { value: "−85%", label: "cycle time", note: "two weeks to two days per test" },
-        line:
-          "Tests used to wait on engineering. Now design builds and ships the variant itself, and the workflow spread across the org. I am one of 15 AI ambassadors at the company.",
         cover: null
       },
       {
@@ -106,11 +113,14 @@ window.LV_DATA = {
         kind: "Research practice",
         company: "Trusted Shops",
         period: "2023 — ongoing",
-        headline: "Turned research into an organizational capability",
-        scope: "Research lead · change management · zero budget at the start",
+        headline: "Turned research into something the company does without me",
+        scope: "Research lead · change management · no budget at the start",
+        situation:
+          "Research happened when somebody happened to have time. No budget, no tooling, no habit, and a 25-year-old company that had never run a focus group.",
+        decision:
+          "I wrote a proposal that needed no budget and started with methods colleagues could run themselves. Year one beat the target for research methods per month by half, and other teams now run their own studies.",
+        methods: ["ResearchOps", "Interviews & surveys", "Behavioral data", "Coaching"],
         metric: { value: "1.5×", label: "target hit", note: "research methods per month, year one" },
-        line:
-          "A proposal with no budget behind it became a continuous practice: interviews, surveys, behavioral data, and colleagues in other teams running their own studies.",
         cover: null
       },
       {
@@ -120,9 +130,12 @@ window.LV_DATA = {
         period: "2022 — 2023",
         headline: "140+ pages relaunched as the only designer",
         scope: "Lead designer · brand, IA, system, illustration · 10 months",
+        situation:
+          "A B2B logistics site that had grown page by page, with an information architecture that matched neither how customers searched nor what the business had become.",
+        decision:
+          "I restructured the IA with marketing so it survived both the SEO link structure and customer mental models, then shipped the relaunch page by page next to front-end rather than as one big bang.",
+        methods: ["Information architecture", "Brand", "Design system", "Illustration"],
         metric: { value: "140+", label: "pages", note: "concept to launch in under a year" },
-        line:
-          "New brand, new information architecture, new component library, built next to front-end and shipped page by page.",
         cover: null
       },
       {
@@ -132,9 +145,12 @@ window.LV_DATA = {
         period: "2021 — 2022",
         headline: "The company's first design language, from brand to components",
         scope: "System lead · type, color, illustration, components, docs · 18 months",
+        situation:
+          "No brand guidelines, no component library, and every new page starting from a blank artboard.",
+        decision:
+          "Brand discovery first, so the system had something to stand on, then the atomic library in Figma and zeroheight, documented well enough that marketing and developers use it without asking me.",
+        methods: ["Brand discovery", "Atomic design", "Figma & zeroheight", "Documentation"],
         metric: { value: "1st", label: "design system", note: "org-wide default for web, print, and internal tools" },
-        line:
-          "Brand discovery first, then the visual system, then the atomic library in Figma and zeroheight that the whole company still works from.",
         cover: null
       },
       {
@@ -144,17 +160,27 @@ window.LV_DATA = {
         period: "2026",
         headline: "An iOS app built solo in one weekend, naming to TestFlight",
         scope: "Founder · design · build · AI-assisted",
-        metric: { value: "1 weekend", label: "spec to TestFlight", note: "10+ naming rounds before one cleared trademark and domain" },
-        line:
-          "Product, brand, and business model in one go. Proof that I can take an idea to a shippable build without a team around me.",
+        situation:
+          "I wanted to know how far a designer gets alone now, with no developer, no budget, and a weekend.",
+        decision:
+          "Spec, naming, brand, product, and business model in one go, with Claude as build partner. Ten naming rounds before one cleared trademark, search, and a usable domain. Free and ad-free at launch.",
+        methods: ["Product strategy", "Branding", "iOS", "AI-assisted build"],
+        metric: { value: "1 weekend", label: "spec to TestFlight", note: "naming, brand, build, and submission" },
         cover: null
       }
+    ],
+
+    credo: [
+      "Research before pixels",
+      "Measure what matters",
+      "Ship the 80, refine the 20",
+      "Systems outlive screens"
     ],
 
     capabilities: [
       {
         title: "Research",
-        body: "Interviews, surveys, tree testing, heatmaps, behavioral data. I ran the first focus group in a 25-year-old company and built the research habit that outlived the project."
+        body: "Interviews, surveys, tree testing, heatmaps, behavioral data. I ran the first focus group in a 25-year-old company and left the habit behind when the project ended."
       },
       {
         title: "Experimentation",
@@ -170,7 +196,7 @@ window.LV_DATA = {
       },
       {
         title: "End to end delivery",
-        body: "Fuzzy strategic question to shipped UI to post-launch numbers. I stay with the work after launch."
+        body: "Fuzzy strategic question to shipped interface to post-launch numbers. I stay with the work after launch."
       }
     ],
 
@@ -207,6 +233,41 @@ window.LV_DATA = {
         role: "M.A. Sociology, B.A. Ethnography & Modern China Studies",
         org: "Both with distinction",
         note: "Studied at the National University of Singapore, Fudan University, and Peking University on German and Chinese government scholarships."
+      }
+    ],
+
+    // The parts of the site that are not client work, and the reason the
+    // profile reads as a person rather than a role description.
+    beyond: [
+      {
+        title: "I write about the work",
+        body: "The Gazette, my own publication on the site. Mostly what AI actually changes in a design workflow, written from projects rather than from predictions.",
+        links: [
+          { label: "I'm a better designer with AI", href: "#/blog/better-designer-with-ai" },
+          { label: "How I run UX audits with AI", href: "#/blog/ux-audits-with-ai" },
+          { label: "All posts", href: "#/blog" }
+        ]
+      },
+      {
+        title: "I draw",
+        body: "Illustration is part of the job when a design system needs its own visual language, and it stays a habit outside it. Sketchbook pages, brand guides, and freelance visuals.",
+        links: [
+          { label: "Sketchbook", href: "#/sketchbook" },
+          { label: "Visuals", href: "#/visuals" }
+        ]
+      },
+      {
+        title: "I teach",
+        body: "A 2025 guest lecture at the University of Göttingen on the way from sociology into product design. On weekends I teach aerial yoga, which is where I learned how patient good instruction has to be.",
+        links: [{ label: "The lecture deck", href: "#/visuals" }]
+      },
+      {
+        title: "I keep notes in public",
+        body: "32 books with what I actually took from them, and 19 resources in a Mandarin learning library I keep for myself and leave open for anyone else.",
+        links: [
+          { label: "Reading", href: "#/books" },
+          { label: "Mandarin library", href: "#/chinese" }
+        ]
       }
     ],
 

@@ -311,28 +311,39 @@ When drafting from scratch (her notes → post), write in Blog Voice
 and expect her to do a wording pass. Flag the spots where you
 guessed at her phrasing rather than burying them.
 
-## The CV One-Pager (`#/cv`)
+## The One-Pager (`#/portfolio`, and the front door)
 
-Added 2026-09. The short, applyable version of the site: one scroll
-panel per topic, the whole thing readable in about two minutes.
+Added 2026-09. The whole portfolio as one scroll: one panel per topic,
+readable end to end in a few minutes. It is the landing route, so the
+bare URL opens it.
 
-**Why it exists.** The case studies are the bottleneck. Writing them
-well takes concentration and time, and until they are done the site
-cannot be sent to anyone. The CV page removes that dependency: every
-project is reduced to a headline, the scope, one number, and one
-visual, and the long version is handed over on request. Applying stops
+**Why it exists.** The case studies were the bottleneck. Writing them
+well takes concentration and time, and until they were done the site
+could not be sent to anyone. The one-pager removes that dependency:
+each project carries the situation, the decision, the methods, and one
+number, and the full write-up is handed over on request. Applying stops
 waiting on writing.
 
-**Where the content lives.** `window.LV_DATA.resume` in `js/data.js`.
+**It is a portfolio, not a CV.** No "curriculum vitae" framing, no
+CV-style headings. The career ledger is one panel among several, and it
+sits after the work, not before it. The link to the Google Doc CV lives
+in the cover and the contact panel and nowhere else.
+
+**Where the content lives.** `window.LV_DATA.onepager` in `js/data.js`.
 Everything except the cover panel is rendered from there by
-`js/resume.js`; the cover is static in `index.html` so the name and the
-pitch exist without JavaScript. Styling is `css/resume.css` and nothing
-else touches it.
+`js/onepager.js`; the cover is static in `index.html` so the name, the
+statement and the pitch exist without JavaScript. Styling is
+`css/onepager.css` and nothing else touches it.
+
+**Panel order.** Cover, 01 numbers, 02 work chapter opener, six project
+panels, 03 how I work, 04 track record, 05 outside the brief, 06
+contact. Project panels alternate which side the visual sits on.
 
 **The case studies are parked, not deleted.** They stay in `cases` and
-stay reachable at `#/work/<slug>`. The CV page just does not advertise
-them. When one is finished, add `caseLink: true` to that project in
-`resume.projects` and its panel grows a link to the full study.
+stay reachable at `#/work/<slug>`, and the old work list is still at
+`#/work`. The one-pager just does not advertise them. When a case study
+is finished, add `caseLink: true` to that project in
+`onepager.projects` and its panel grows a link to the full study.
 
 **Project visuals.** Each panel renders a typographic plate (the number
 set large, the client wordmark under it) as a stand-in. Drop a real
@@ -346,25 +357,28 @@ headline is used.
   as AI design.
 - **Three type roles, no more.** Fraunces for headlines and numbers
   (roman, never italic), Instrument Sans for running text, JetBrains
-  Mono for labels and indices. The mono stays because it carries the
-  nav, the logo, and the favicon.
-- **One rhythm.** Every panel uses the same `--cv-pad` block padding
-  and the same `--cv-gap` between its parts. If a section needs its own
+  Mono for labels, indices and chips. The mono stays because it carries
+  the nav, the logo, and the favicon.
+- **One rhythm.** Every panel uses the same `--op-pad` block padding
+  and the same `--op-gap` between its parts. If a section needs its own
   spacing, the section is wrong, not the token.
-- **One type ladder.** `--cv-fs-hero` once, `--cv-fs-h2` for section
-  and project headlines, `--cv-fs-h3` for item titles, then lead, body,
+- **One type ladder.** `--op-fs-hero` once, `--op-fs-h2` for section
+  and project headlines, `--op-fs-h3` for item titles, then lead, body,
   label. Nothing in between.
 - **Motion is enhancement.** Panels lift in via `animation-timeline:
-  view()` where the browser supports it, with an IntersectionObserver
-  fallback, and everything switches off under
-  `prefers-reduced-motion`. Snapping is `proximity`, not `mandatory`,
-  and only above 700px of viewport height.
+  view()` where the browser supports it, and only where it does not is
+  the IntersectionObserver reveal used, so the same content never fades
+  twice. Everything switches off under `prefers-reduced-motion`.
+  Snapping is `proximity`, not `mandatory`, and only above 700px of
+  viewport height.
 
-**Making it the front door.** `HOME_ROUTE` at the top of `js/app.js`.
-Set it to `"cv"` and the bare URL lands on the CV page; the current
-home page stays reachable at `#/home`. One line, reversible.
+**The old home page is parked, not deleted.** `HOME_ROUTE` at the top
+of `js/app.js` decides what the bare URL opens. It is `"portfolio"`;
+set it back to `"home"` and the previous home page is the front door
+again. Either way the other one stays reachable at its own route
+(`#/home` / `#/portfolio`).
 
-**Related global change.** The same commit toned the paper down from
+**Related global change.** The same work toned the paper down from
 beige (`#f4efe6`) to warm white (`#fbf9f5`) and cut the two accent
 washes in `css/v1.css` to roughly a third. The tint is still there, it
 just no longer sets the mood. Revert those two blocks to go back.
