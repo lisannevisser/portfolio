@@ -977,9 +977,16 @@
     return cats.includes(filter);
   }
 
+  // The v1 Work page and the Bold Type Work page (#/work-bold) share the
+  // ledger, the chips, and the active filter; only the dress differs.
+  const WORK_LEDGERS = [
+    ["#v1-work-filters", "#v1-work-cases"],
+    ["#bt-work-filters", "#bt-work-cases"]
+  ];
   function renderV1WorkLedger() {
-    const filtersEl = $("#v1-work-filters");
-    const rowsEl = $("#v1-work-cases");
+    WORK_LEDGERS.forEach(([f, r]) => renderWorkLedgerInto($(f), $(r)));
+  }
+  function renderWorkLedgerInto(filtersEl, rowsEl) {
     if (!filtersEl || !rowsEl) return;
 
     // Filter chips (with counts)
@@ -1429,6 +1436,7 @@
     const items = D.visuals || [];
     const grid = $("#v1-visuals-grid");
     const teaser = $("#v1-visuals-teaser");
+    const teaserBold = $("#bt-visuals-teaser");
 
     function card(v, i) {
       // Real <img> at natural aspect ratio so the full artwork is visible,
@@ -1446,6 +1454,7 @@
 
     if (grid) grid.innerHTML = items.map(card).join("");
     if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join("");
+    if (teaserBold) teaserBold.innerHTML = items.slice(0, 3).map(card).join("");
 
     const overlay = $("#lv-visual-overlay");
     if (!overlay) return;
@@ -1535,6 +1544,7 @@
 
     if (grid) grid.addEventListener("click", onCardClick);
     if (teaser) teaser.addEventListener("click", onCardClick);
+    if (teaserBold) teaserBold.addEventListener("click", onCardClick);
     closeBtn.addEventListener("click", closeVisual);
     backdrop.addEventListener("click", closeVisual);
     document.addEventListener("keydown", (e) => {
