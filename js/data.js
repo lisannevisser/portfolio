@@ -387,6 +387,30 @@ window.LV_DATA = {
       link: "https://quantumbradford2025.com/"
     },
     {
+      slug: "quantinuum-sg-grand-challenge",
+      title: "Quantinuum SG Grand Challenge site",
+      context: "Aqora",
+      type: "Web design",
+      year: "2026",
+      hue: 160,
+      thumb: "images/visuals/quantinuum-grand-challenge.jpg",
+      blurb: "The event site for the Quantinuum SG Grand Challenge 2026, a quantum computing challenge organized by Quantinuum and supported by Singapore's National Quantum Office and Aqora. Challenge, themes, timeline, prizes, mentors, and judges on one page, with the grand finale in Singapore.",
+      embed: "",
+      link: "https://quantinuum-sg-grand-challenge-2026.aqora.io/"
+    },
+    {
+      slug: "cargoboard-api-page",
+      title: "Cargoboard API use case",
+      context: "Cargoboard",
+      type: "Web design",
+      year: "2023",
+      hue: 0,
+      thumb: "images/visuals/cargoboard-api.jpg",
+      blurb: "The automation use-case page on cargoboard.com, one of the marketing pages from the website relaunch: the shipping API explained to shop and ERP owners, set in the rebrand's type, color, and illustration system.",
+      embed: "",
+      link: "https://cargoboard.com/de/use-cases/automatisierung"
+    },
+    {
       slug: "figma-onboarding",
       title: "Onboarding screens",
       context: "Figma Community",

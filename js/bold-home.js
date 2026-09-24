@@ -16,8 +16,7 @@
   const CHAPTERS = [
     { id: "intro", label: "Intro", color: "var(--bt-rose)" },
     { id: "work", label: "Work", color: "var(--bt-cobalt)" },
-    { id: "experience", label: "Experience", color: "var(--bt-mustard)" },
-    { id: "contact", label: "Contact", color: "var(--bt-rose)" },
+    { id: "contact", label: "Contact", color: "var(--bt-mustard)" },
   ];
   const pad = (n) => String(n).padStart(2, "0");
 

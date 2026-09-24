@@ -59,7 +59,7 @@
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
-  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-7" />
+  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-8" />
 </head>
 <body>
 
@@ -167,7 +167,7 @@
 
     <!-- ========================================================= -->
     <!-- ROUTE: HOME, BOLD TYPE (#/home-bold)                        -->
-    <!-- Second take on the homepage. Four snap-scrolled chapters,   -->
+    <!-- Second take on the homepage. Three snap-scrolled chapters,  -->
     <!-- own nav + rail; cards, rail and counter come from            -->
     <!-- js/bold-home.js, styles from css/bold-home.css.              -->
     <!-- ========================================================= -->
@@ -194,9 +194,15 @@
         <div class="bt-chapter bt-chapter--intro" data-chapter-id="intro">
           <div class="bt-kicker"><span>00 — Hi, I'm Lisanne</span></div>
           <h1 class="bt-display">Design that <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 340 130" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22 C 70 6, 210 16, 330 10 C 336 44, 334 88, 328 116 C 232 124, 96 118, 12 122 C 6 92, 4 52, 8 22 Z"/></svg><span>earns</span></span> its pixels.</h1>
-          <div class="bt-intro-foot">
-            <p class="bt-lead">I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine, but I ship end-to-end, from discovery to implementation to post-launch metrics.</p>
-            <div class="bt-swipe" aria-hidden="true">swipe up<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+          <div class="bt-intro-bottom">
+            <div class="bt-intro-foot">
+              <p class="bt-lead">I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine, but I ship end-to-end, from discovery to implementation to post-launch metrics.</p>
+              <div class="bt-swipe" aria-hidden="true">swipe up<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+            </div>
+            <!-- Logo marquee, same clients list as the v1 home (renderClientStrip in app.js). -->
+            <div class="bt-logos" aria-label="Companies I have worked with">
+              <div class="v1-logo-track bt-logo-track"><!-- filled by app.js --></div>
+            </div>
           </div>
         </div>
 
@@ -207,29 +213,9 @@
           <div class="bt-work-grid"><!-- filled by js/bold-home.js --></div>
         </div>
 
-        <!-- 02 Experience -->
-        <div class="bt-chapter bt-chapter--experience" data-chapter-id="experience">
-          <div class="bt-kicker"><span>02 — Experience</span></div>
-          <div class="bt-xp">
-            <div>
-              <h3 class="bt-xp-headline"><span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 120 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 40 4, 84 12, 116 7 C 118 30, 116 56, 112 72 C 78 78, 34 74, 8 76 C 5 56, 4 32, 6 14 Z"/></svg><span>5+</span></span> years<br>experience</h3>
-              <a href="#/about" class="bt-xp-cv" data-cursor-label="CV →">View CV</a>
-            </div>
-            <div>
-              <p class="bt-xp-copy">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
-              <div class="bt-xp-rows">
-                <div class="bt-xp-row"><span class="bt-xp-when">2025 — Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
-                <div class="bt-xp-row"><span class="bt-xp-when">2023 — 2025</span><span class="bt-xp-role">UX Designer (Growth) <small>Trusted Shops</small></span></div>
-                <div class="bt-xp-row"><span class="bt-xp-when">2022 — 2023</span><span class="bt-xp-role">Product Designer <small>Cargoboard</small></span></div>
-                <div class="bt-xp-row"><span class="bt-xp-when">2020 — 2022</span><span class="bt-xp-role">Quality Assurance Analyst <small>TikTok</small></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- 03 Contact -->
         <div class="bt-chapter bt-chapter--contact" data-chapter-id="contact">
-          <div class="bt-kicker"><span>03 — Contact</span></div>
+          <div class="bt-kicker"><span>02 — Contact</span></div>
           <h2 class="bt-display">Let's make something <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>measurable.</span></span></h2>
           <div class="bt-contact-grid">
             <a href="mailto:mail@lisannevisser.com" class="bt-tile bt-tile--rose" data-cursor-label="✉ Write"><span class="bt-tile-k">Write me</span><span class="bt-tile-v">mail@lisannevisser.com</span></a>
@@ -333,9 +319,29 @@
             </div>
           </section>
 
-          <!-- 04 Inspiration -->
+          <!-- 04 Experience (moved here from the home) -->
+          <section class="bt-xp-section">
+            <div class="bt-kicker"><span>04 — Experience</span></div>
+            <div class="bt-xp">
+              <div>
+                <h2 class="bt-xp-headline"><span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 120 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 40 4, 84 12, 116 7 C 118 30, 116 56, 112 72 C 78 78, 34 74, 8 76 C 5 56, 4 32, 6 14 Z"/></svg><span>5+</span></span> years<br>experience</h2>
+                <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer" class="bt-xp-cv" data-cursor-label="CV →">Full CV on LinkedIn</a>
+              </div>
+              <div>
+                <p class="bt-xp-copy">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
+                <div class="bt-xp-rows">
+                  <div class="bt-xp-row"><span class="bt-xp-when">2025 — Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2023 — 2025</span><span class="bt-xp-role">UX Designer (Growth) <small>Trusted Shops</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2022 — 2023</span><span class="bt-xp-role">Product Designer <small>Cargoboard</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2020 — 2022</span><span class="bt-xp-role">Quality Assurance Analyst <small>TikTok</small></span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05 Inspiration -->
           <section class="bt-inspire">
-            <div class="bt-kicker"><span>04 — Inspiration</span></div>
+            <div class="bt-kicker"><span>05 — Inspiration</span></div>
             <h2 class="bt-display bt-inspire-h">A video that keeps <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>inspiring</span></span> me over and over again.</h2>
             <div class="lv-video bt-video">
               <iframe src="https://www.youtube-nocookie.com/embed/WRS9Gek4V5Q" title="A video that keeps inspiring me" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -1601,12 +1607,12 @@
     <p class="wip-note-sign">Lisanne :)</p>
   </aside>
 
-  <script src="js/data.js?v=2026-08-19-2"></script>
-  <script src="js/app.js?v=2026-09-24-5"></script>
+  <script src="js/data.js?v=2026-09-24-1"></script>
+  <script src="js/app.js?v=2026-09-24-6"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
-  <script src="js/bold-home.js?v=2026-09-24-2"></script>
+  <script src="js/bold-home.js?v=2026-09-24-3"></script>
 
   <!-- Edit mode. Visit ?edit=wet-paint once and the browser remembers it;
        ?edit=off or the "Done" button switch it back off. Without the flag,

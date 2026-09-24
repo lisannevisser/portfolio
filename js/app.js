@@ -308,10 +308,8 @@
   // ========================================================================
   // CLIENT LOGO STRIP (V1) — swap in real PNGs when available
   // ========================================================================
+  // Client logo marquee. One track on the v1 home, one on #/home-bold.
   function renderClientStrip() {
-    const track = $(".v1-logo-track");
-    if (!track) return;
-    if (track.dataset.rendered === "true") return;
     const items = [];
     // Render the list three times for smooth marquee continuity
     for (let pass = 0; pass < 3; pass++) {
@@ -324,8 +322,11 @@
         }
       });
     }
-    track.innerHTML = items.join("");
-    track.dataset.rendered = "true";
+    $$(".v1-logo-track").forEach((track) => {
+      if (track.dataset.rendered === "true") return;
+      track.innerHTML = items.join("");
+      track.dataset.rendered = "true";
+    });
   }
 
   // ========================================================================
