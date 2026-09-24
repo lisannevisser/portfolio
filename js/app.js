@@ -1184,9 +1184,13 @@
   // the headline into a masthead and cross-fades the lead out / chapters in;
   // the remainder steps through the four chapters and swaps the right-hand
   // image accordingly.
+  // One scrolly per .ahs section: the v1 About and the Bold Type About
+  // (#/about-bold) each carry their own. A hidden section measures as
+  // zero height, so its update() bails out early and costs nothing.
   function initHeroScrolly() {
-    const sec = document.querySelector(".ahs");
-    if (!sec) return;
+    $$(".ahs").forEach(initHeroScrollyFor);
+  }
+  function initHeroScrollyFor(sec) {
     const pin = sec.querySelector(".ahs-pin");
     const imgs = $$(".ahs-img", sec);
     const portrait = sec.querySelector(".ahs-img[data-hero]");
@@ -1264,12 +1268,12 @@
   // Slow the about-hero portrait video down a touch — full speed reads as
   // restless. playbackRate can only be set in JS, and it survives looping.
   function initHeroVideo() {
-    const vid = document.querySelector(".ahs-video");
-    if (!vid) return;
-    const slow = () => { vid.playbackRate = 0.3; };
-    slow();
-    vid.addEventListener("loadedmetadata", slow);
-    vid.addEventListener("play", slow);
+    $$(".ahs-video").forEach((vid) => {
+      const slow = () => { vid.playbackRate = 0.3; };
+      slow();
+      vid.addEventListener("loadedmetadata", slow);
+      vid.addEventListener("play", slow);
+    });
   }
 
   // ========================================================================
