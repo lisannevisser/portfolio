@@ -19,7 +19,9 @@
 html[data-route="home-bold"] .lv-nav,
 html[data-route="home-bold"] .lv-footer,
 html[data-route="about-bold"] .lv-nav,
-html[data-route="about-bold"] .lv-footer { display: none; }
+html[data-route="about-bold"] .lv-footer,
+html[data-route="work-bold"] .lv-nav,
+html[data-route="work-bold"] .lv-footer { display: none; }
 html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 @media (min-width: 900px) and (min-height: 700px) {
   html[data-route="home-bold"] { scroll-snap-type: y mandatory; }
@@ -465,4 +467,87 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-inspire-h { font-size: 38px; line-height: 1.15; }
   .bt-video { border-radius: 10px; }
   .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type work — #/work-bold
+   The v1 Work structure (filter chips, case ledger, visuals teaser; all
+   rendered by app.js into the shared .v1-work-* classes) in the Bold Type
+   dress. Overrides only what differs from v1.css.
+   ========================================================================== */
+.bt--work { min-height: 100vh; }
+.bt-page { padding-top: clamp(6rem, 15vh, 8.5rem); padding-bottom: 36px; }
+.bt-page-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.bt-page-h1 { margin: 22px 0 0; font-size: clamp(56px, 8.6vw, 120px); line-height: 1; }
+.bt-page-head .bt-lead { margin-top: 32px; }
+
+/* Chips: hard ink pills, rose when active. */
+.bt--work .bt-work-filters { border-bottom: 2px solid var(--ink); margin-bottom: 0; padding-bottom: 1.5rem; }
+.bt--work .v1-work-chip {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); border: 2px solid var(--ink); padding: 8px 12px;
+}
+.bt--work .v1-work-chip:hover:not(:disabled) { background: var(--bt-rose); border-color: var(--ink); }
+.bt--work .v1-work-chip.is-active { background: var(--ink); color: var(--paper); }
+.bt--work .v1-work-chip-count { background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.bt--work .v1-work-chip.is-active .v1-work-chip-count { background: color-mix(in srgb, var(--paper) 25%, transparent); }
+
+/* Ledger rows: mono index, Bricolage title with the growing underline from
+   the home cards, one highlight color per row cycling rose / cobalt / mustard. */
+.bt--work .v1-work-row { border-bottom: 2px solid var(--ink); padding: 28px 0; gap: 28px; }
+.bt--work .v1-work-row:last-child { border-bottom: 2px solid var(--ink); }
+.bt--work .v1-work-row:hover { color: var(--ink); padding-left: 0; }
+.bt--work .v1-work-row .n { color: var(--ink); font-size: 11px; letter-spacing: 0.14em; }
+.bt--work .v1-work-row .body { gap: 10px; justify-items: start; }
+.bt--work .v1-work-row .title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(24px, 2.8vw, 36px); line-height: 1.1; letter-spacing: -0.03em;
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-row-color), var(--bt-row-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+.bt--work .v1-work-row:hover .title { background-size: 100% 0.9em; }
+.bt--work .v1-work-row:nth-child(3n + 1) { --bt-row-color: var(--bt-rose); }
+.bt--work .v1-work-row:nth-child(3n + 2) { --bt-row-color: var(--bt-cobalt); }
+.bt--work .v1-work-row:nth-child(3n + 3) { --bt-row-color: var(--bt-mustard); }
+.bt--work .v1-work-row:nth-child(3n + 2):hover .title { color: var(--paper); }
+.bt--work .v1-work-row .intro { color: var(--ink-3); }
+.bt--work .v1-work-row:hover .intro { color: var(--ink); }
+
+/* The stat stamp and the cover thumb take the ink frame of the photos. */
+.bt--work .v1-work-stamp {
+  border-radius: 14px; box-shadow: none; border: 2px solid var(--ink);
+  background: var(--ink); color: var(--paper); padding: 12px 18px 14px;
+}
+.bt--work .v1-work-stamp .v {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 28px; letter-spacing: -0.03em; color: var(--bt-mustard);
+}
+.bt--work .v1-work-stamp .k { color: rgba(244, 239, 230, 0.7); font-size: 10px; letter-spacing: 0.14em; }
+.bt--work .v1-work-row:hover .v1-work-stamp { transform: rotate(0deg) scale(1.04); box-shadow: none; }
+.bt--work .v1-work-thumb { border-radius: 8px; box-shadow: none; border: 2px solid var(--ink); }
+.bt--work .v1-work-empty { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2rem 0; }
+
+/* Visuals teaser. */
+.bt-teaser { margin-top: clamp(4rem, 10vw, 7rem); }
+.bt-teaser-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 32px;
+}
+.bt-teaser-h { margin: 22px 0 0; font-size: clamp(38px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; }
+.bt-teaser-lead { margin-top: 20px; font-size: 17px; max-width: 48ch; }
+.bt-teaser-link { flex-shrink: 0; margin-top: 0; }
+.bt--work .bt-teaser-grid .v1-visual-card { border: 2px solid var(--ink); border-radius: 10px; box-shadow: none; }
+.bt--work .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  .bt-page { padding-top: 6rem; }
+  .bt-page-h1 { font-size: clamp(44px, 14.4vw, 56px); }
+  .bt-page-head .bt-lead { margin-top: 20px; }
+  .bt--work .v1-work-row { padding: 20px 0; gap: 14px; }
+  .bt--work .v1-work-row .title { font-size: 23px; }
+  .bt-teaser-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .bt-teaser-h { font-size: 34px; }
+  .bt--work .bt-colophon--light span:last-child { display: none; }
 }
