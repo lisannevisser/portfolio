@@ -43,5 +43,6 @@ jobs:
             --no-progress
             --max-retries 2
             --accept 200,204,301,302,308,403,429
+            --exclude 'sciencedirect\.com'
             index.html
           fail: true

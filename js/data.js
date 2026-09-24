@@ -23,10 +23,13 @@ window.LV_DATA = {
     ]
   },
 
+  // Same rows as the About page and the Bold Type home. Not rendered from
+  // here yet (About hard-codes its rows), kept in sync so nothing quotes it.
   career: [
-    { role: "Senior Product Designer", org: "Trusted Shops", period: "2022 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
-    { role: "Product Designer", org: "Cargoboard", period: "2020 — 2022", city: "Berlin", note: "B2B logistics, design system, IA redesign" },
-    { role: "UX Designer", org: "Agency work", period: "2018 — 2020", city: "Berlin", note: "Clients across retail, fintech, healthcare" }
+    { role: "Senior Product Designer", org: "Trusted Shops", period: "2025 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
+    { role: "UX Designer (Growth)", org: "Trusted Shops", period: "2023 — 2025", city: "Berlin" },
+    { role: "Product Designer", org: "Cargoboard", period: "2022 — 2023", city: "Berlin", note: "B2B logistics, design system, IA redesign" },
+    { role: "Quality Assurance Analyst", org: "TikTok", period: "2020 — 2022" }
   ],
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],

@@ -59,6 +59,7 @@
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
+  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-1" />
 </head>
 <body>
 
@@ -161,6 +162,87 @@
             </span>
           </div>
         </section>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: HOME, BOLD TYPE (#/home-bold)                        -->
+    <!-- Second take on the homepage. Four snap-scrolled chapters,   -->
+    <!-- own nav + rail; cards, rail and counter come from            -->
+    <!-- js/bold-home.js, styles from css/bold-home.css.              -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="home-bold" hidden>
+      <div class="bt v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type home">
+          <div class="bt-nav-progress" aria-hidden="true"></div>
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link" data-chapter="work">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <span class="bt-nav-count" aria-live="polite"></span>
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <!-- 00 Intro -->
+        <div class="bt-chapter bt-chapter--intro" data-chapter-id="intro">
+          <div class="bt-kicker"><span>00 — Hi, I'm Lisanne</span></div>
+          <h1 class="bt-display">Design that <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 340 130" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22 C 70 6, 210 16, 330 10 C 336 44, 334 88, 328 116 C 232 124, 96 118, 12 122 C 6 92, 4 52, 8 22 Z"/></svg><span>earns</span></span> its pixels.</h1>
+          <div class="bt-intro-foot">
+            <p class="bt-lead">I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine, but I ship end-to-end, from discovery to implementation to post-launch metrics.</p>
+            <div class="bt-swipe" aria-hidden="true">swipe up<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+          </div>
+        </div>
+
+        <!-- 01 Work -->
+        <div class="bt-chapter bt-chapter--work" data-chapter-id="work">
+          <div class="bt-kicker"><span>01 — Selected work</span></div>
+          <h2 class="bt-display">Selected <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 60 4, 140 14, 194 8 C 196 34, 194 62, 190 80 C 134 86, 56 82, 10 84 C 6 62, 4 36, 6 16 Z"/></svg><span>work.</span></span></h2>
+          <div class="bt-work-grid"><!-- filled by js/bold-home.js --></div>
+        </div>
+
+        <!-- 02 Experience -->
+        <div class="bt-chapter bt-chapter--experience" data-chapter-id="experience">
+          <div class="bt-kicker"><span>02 — Experience</span></div>
+          <div class="bt-xp">
+            <div>
+              <h3 class="bt-xp-headline"><span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 120 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 40 4, 84 12, 116 7 C 118 30, 116 56, 112 72 C 78 78, 34 74, 8 76 C 5 56, 4 32, 6 14 Z"/></svg><span>5+</span></span> years<br>experience</h3>
+              <a href="#/about" class="bt-xp-cv" data-cursor-label="CV →">View CV</a>
+            </div>
+            <div>
+              <p class="bt-xp-copy">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
+              <div class="bt-xp-rows">
+                <div class="bt-xp-row"><span class="bt-xp-when">2025 — Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">2023 — 2025</span><span class="bt-xp-role">UX Designer (Growth) <small>Trusted Shops</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">2022 — 2023</span><span class="bt-xp-role">Product Designer <small>Cargoboard</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">2020 — 2022</span><span class="bt-xp-role">Quality Assurance Analyst <small>TikTok</small></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Contact -->
+        <div class="bt-chapter bt-chapter--contact" data-chapter-id="contact">
+          <div class="bt-kicker"><span>03 — Contact</span></div>
+          <h2 class="bt-display">Let's make something <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>measurable.</span></span></h2>
+          <div class="bt-contact-grid">
+            <a href="mailto:mail@lisannevisser.com" class="bt-tile bt-tile--rose" data-cursor-label="✉ Write"><span class="bt-tile-k">Write me</span><span class="bt-tile-v">mail@lisannevisser.com</span></a>
+            <a href="#/about" class="bt-tile bt-tile--cobalt" data-cursor-label="CV →"><span class="bt-tile-k">Background</span><span class="bt-tile-v">View CV</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+            <a href="#/work" class="bt-tile bt-tile--mustard" data-cursor-label="All →"><span class="bt-tile-k">More</span><span class="bt-tile-v">All work</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="bt-colophon">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/blog">Blog</a> · <a href="#/sketchbook">Sketchbook</a></span>
+          </div>
+        </div>
+
+        <div class="bt-rail" aria-label="Chapters"><!-- filled by js/bold-home.js --></div>
       </div>
     </section>
 
@@ -654,7 +736,7 @@
               Other people made things I get to build on. They belong here by name.
             </p>
             <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
-              <strong>Typefaces</strong>, all self-hosted under the SIL Open Font License: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> (Undercase Type), <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a> (Instrument), <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (JetBrains), <a href="https://fonts.google.com/specimen/Caveat" target="_blank" rel="noopener">Caveat</a> (Impallari Type). The Wall of Fame board adds <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> (Omnibus-Type), <a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener">Libre Caslon Text</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Space+Mono" target="_blank" rel="noopener">Space Mono</a> (Colophon Foundry).
+              <strong>Typefaces</strong>, all self-hosted under the SIL Open Font License: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> (Undercase Type), <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a> (Instrument), <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (JetBrains), <a href="https://fonts.google.com/specimen/Caveat" target="_blank" rel="noopener">Caveat</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Bricolage+Grotesque" target="_blank" rel="noopener">Bricolage Grotesque</a> (Mathieu Triay) on the Bold Type home. The Wall of Fame board adds <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> (Omnibus-Type), <a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener">Libre Caslon Text</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Space+Mono" target="_blank" rel="noopener">Space Mono</a> (Colophon Foundry).
             </p>
             <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
               <strong>Icon.</strong> The burger in the mobile menu is the "lunch_dining" glyph from <a href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Material Symbols</a>, inlined as SVG, Apache License 2.0.
@@ -978,6 +1060,7 @@
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
+  <script src="js/bold-home.js?v=2026-09-24-1"></script>
 
   <!-- Edit mode. Visit ?edit=wet-paint once and the browser remembers it;
        ?edit=off or the "Done" button switch it back off. Without the flag,
