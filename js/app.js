@@ -1662,13 +1662,13 @@
     });
   }
 
-  // #/sketchbook — photos of hand-drawn work. Same card + overlay shell as
-  // Visuals, but simpler: no embeds or external links, and the lightbox
-  // shows the full image with `contain` so portrait sketches aren't cropped.
+  // #/sketchbook and #/sketchbook-bold — photos of hand-drawn work. Same
+  // card + overlay shell as Visuals, but simpler: no embeds or external
+  // links, and the lightbox shows the full image with `contain` so portrait
+  // sketches aren't cropped. Each route section carries its own grid and
+  // overlay (found by class), so one init serves both dresses.
   function renderSketchbook() {
     const items = D.sketchbook || [];
-    const grid = $("#v1-sketch-grid");
-    if (!grid) return;
 
     function card(v, i) {
       const thumb = v.thumb
@@ -1683,45 +1683,51 @@
       </button>`;
     }
 
-    grid.innerHTML = items.map(card).join("");
+    $$(".v1-sketch-grid").forEach((grid) => {
+      grid.innerHTML = items.map(card).join("");
 
-    const overlay = $("#lv-sketch-overlay");
-    if (!overlay) return;
-    const backdrop = $("#lv-sketch-backdrop");
-    const closeBtn = $("#lv-sketch-close");
-    const stage = $("#lv-sketch-stage");
+      const section = grid.closest(".lv-route");
+      const overlay = section && $(".v1-sketch-overlay", section);
+      if (!overlay) return;
+      const backdrop = $(".v1-sketch-backdrop", overlay);
+      const closeBtn = $(".v1-sketch-close", overlay);
+      const stage = $(".v1-sketch-stage", overlay);
+      const eyebrow = $(".v1-sketch-eyebrow", overlay);
+      // The Bold Type eyebrow wraps its text in a span (kicker markup).
+      const eyebrowText = $("span", eyebrow) || eyebrow;
 
-    function openSketch(v) {
-      $("#lv-sketch-eyebrow").textContent = v.medium || "";
-      $("#lv-sketch-title").textContent = v.title;
-      $("#lv-sketch-blurb").textContent = v.blurb || "";
-      const src = v.full || v.thumb;
-      stage.innerHTML = src
-        ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" loading="lazy" />`
-        : "";
-      overlay.classList.add("is-open");
-      overlay.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      closeBtn.focus();
-    }
+      function openSketch(v) {
+        eyebrowText.textContent = v.medium || "";
+        $(".v1-sketch-title", overlay).textContent = v.title;
+        $(".v1-sketch-blurb", overlay).textContent = v.blurb || "";
+        const src = v.full || v.thumb;
+        stage.innerHTML = src
+          ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" loading="lazy" />`
+          : "";
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      }
 
-    function closeSketch() {
-      overlay.classList.remove("is-open");
-      overlay.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      stage.innerHTML = "";
-    }
+      function closeSketch() {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        stage.innerHTML = "";
+      }
 
-    grid.addEventListener("click", (e) => {
-      const card = e.target.closest(".v1-visual-card");
-      if (!card) return;
-      const v = items[parseInt(card.getAttribute("data-index"), 10)];
-      if (v) openSketch(v);
-    });
-    closeBtn.addEventListener("click", closeSketch);
-    backdrop.addEventListener("click", closeSketch);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSketch();
+      grid.addEventListener("click", (e) => {
+        const card = e.target.closest(".v1-visual-card");
+        if (!card) return;
+        const v = items[parseInt(card.getAttribute("data-index"), 10)];
+        if (v) openSketch(v);
+      });
+      closeBtn.addEventListener("click", closeSketch);
+      backdrop.addEventListener("click", closeSketch);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSketch();
+      });
     });
   }
 

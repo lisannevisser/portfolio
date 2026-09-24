@@ -21,7 +21,11 @@ html[data-route="home-bold"] .lv-footer,
 html[data-route="about-bold"] .lv-nav,
 html[data-route="about-bold"] .lv-footer,
 html[data-route="work-bold"] .lv-nav,
-html[data-route="work-bold"] .lv-footer { display: none; }
+html[data-route="work-bold"] .lv-footer,
+html[data-route="sketchbook-bold"] .lv-nav,
+html[data-route="sketchbook-bold"] .lv-footer,
+html[data-route="404-bold"] .lv-nav,
+html[data-route="404-bold"] .lv-footer { display: none; }
 html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 @media (min-width: 900px) and (min-height: 700px) {
   html[data-route="home-bold"] { scroll-snap-type: y mandatory; }
@@ -550,4 +554,126 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-teaser-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bt-teaser-h { font-size: 34px; }
   .bt--work .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type sketchbook — #/sketchbook-bold
+   The v1 Sketchbook gallery (cards + lightbox from app.js, shared
+   .v1-visual-* classes) in the Bold Type dress: ink-framed thumbs with a
+   slight tilt, the medium as a handwritten pill hanging off the frame,
+   Bricolage titles with the growing underline from the home cards.
+   ========================================================================== */
+.bt--sketch { min-height: 100vh; }
+.bt--sketch .bt-nav-progress, .bt--sketch .bt-nav-count { display: none; }
+.bt--sketch .bt-page-head .bt-lead { max-width: 56ch; }
+
+[data-variation="v1"] .bt-sketch-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+  padding-top: 8px;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.4s var(--ease-out);
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover,
+[data-variation="v1"] .bt--sketch .v1-visual-card:focus-visible {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+.bt--sketch .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--sketch .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--sketch .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+
+[data-variation="v1"] .bt--sketch .v1-visual-thumb {
+  border: 2px solid var(--ink); border-radius: 10px;
+  background-color: var(--paper-2); transition: none;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover .v1-visual-thumb { box-shadow: none; }
+[data-variation="v1"] .bt--sketch .v1-visual-info { margin-top: 14px; gap: 0; align-items: flex-start; }
+[data-variation="v1"] .bt--sketch .v1-visual-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 26px; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover .v1-visual-title { background-size: 100% 0.9em; }
+[data-variation="v1"] .bt--sketch .v1-visual-card:nth-child(3n + 2):hover .v1-visual-title { color: var(--paper); }
+/* The medium becomes a handwritten pill hanging off the frame's top-left
+   corner, like the photo captions on #/about-bold. */
+[data-variation="v1"] .bt--sketch .v1-visual-sub {
+  position: absolute; top: -14px; left: 12px; z-index: 1;
+  font-family: var(--font-hand); font-size: 21px; line-height: 1.1;
+  letter-spacing: 0; text-transform: none; color: var(--ink);
+  background: var(--paper); padding: 3px 12px;
+  border: 2px solid var(--ink); border-radius: 999px;
+  transform: rotate(-2deg);
+}
+[data-variation="v1"] .bt--sketch .v1-visual-sub:empty { display: none; }
+
+/* Lightbox: same ink frame as everything else on the page. */
+.bt--sketch .v1-visual-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+.bt--sketch .v1-sketch-stage { border: 2px solid var(--ink); border-radius: 10px; }
+.bt--sketch .v1-sketch-img { border-radius: 6px; }
+.bt--sketch .v1-visual-detail-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
+  margin-top: 14px;
+}
+.bt--sketch .v1-sketch-eyebrow { color: var(--ink); }
+.bt--sketch .v1-sketch-eyebrow span:empty { display: none; }
+.bt--sketch .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+.bt--sketch .lv-book-close:hover { background: var(--bt-rose); }
+.bt--sketch .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  [data-variation="v1"] .bt-sketch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 16px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-card { transform: none; }
+  [data-variation="v1"] .bt--sketch .v1-visual-card:hover,
+  [data-variation="v1"] .bt--sketch .v1-visual-card:focus-visible { transform: none; }
+  [data-variation="v1"] .bt--sketch .v1-visual-thumb { border-radius: 8px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-title { font-size: 20px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-sub { top: -12px; left: 8px; font-size: 17px; padding: 2px 9px; }
+  .bt--sketch .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  [data-variation="v1"] .bt-sketch-grid { grid-template-columns: 1fr; gap: 28px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-title { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--sketch .v1-visual-card, .bt--sketch .v1-visual-title { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type 404 — #/404-bold
+   One dark chapter in the dress of the home's Contact one. The root carries
+   data-chapter="contact" so the nav and logo take the dark palette.
+   ========================================================================== */
+.bt--404 { min-height: 100vh; }
+.bt--404 .bt-nav-progress, .bt--404 .bt-nav-count { display: none; }
+.bt-chapter--404 { padding-top: 140px; }
+.bt-chapter--404 .bt-display {
+  margin-top: 22px;
+  font-size: clamp(56px, 10vw, 136px); line-height: 0.98;
+}
+.bt-404-lead { margin-top: 32px; color: rgba(244, 239, 230, 0.7); }
+/* Handwritten aside pointing down at the tiles. */
+.bt-404-note {
+  margin-top: auto; padding-top: 48px; align-self: flex-end;
+  display: flex; align-items: flex-end; gap: 8px;
+  font-family: var(--font-hand); font-size: 26px; line-height: 1;
+  color: var(--bt-mustard); transform: rotate(-3deg);
+}
+.bt-404-note svg { width: 22px; height: 34px; }
+.bt-404-note svg path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.bt-chapter--404 .bt-contact-grid { margin-top: 14px; }
+
+@media (max-width: 900px) {
+  .bt-chapter--404 { padding-top: 110px; }
+  .bt-chapter--404 .bt-display { margin-top: 0; font-size: clamp(42px, 14vw, 64px); line-height: 1.04; letter-spacing: -0.045em; }
+  .bt-404-lead { margin-top: 0; }
+  .bt-404-note { padding-top: 24px; font-size: 22px; align-self: flex-start; }
+  .bt-chapter--404 .bt-contact-grid { margin-top: 0; }
+  .bt-chapter--404 .bt-colophon span:last-child { display: none; }
 }

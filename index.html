@@ -59,7 +59,7 @@
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
-  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-4" />
+  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-5" />
 </head>
 <body>
 
@@ -397,6 +397,99 @@
           <div class="bt-colophon bt-colophon--light">
             <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
             <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: SKETCHBOOK, BOLD TYPE (#/sketchbook-bold)            -->
+    <!-- The v1 Sketchbook gallery (cards + lightbox rendered by     -->
+    <!-- renderSketchbook in app.js) in the Bold Type dress.         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="sketchbook-bold" hidden>
+      <div class="bt bt--sketch v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type sketchbook">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work-bold" class="bt-nav-link">Work</a>
+              <a href="#/about-bold" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Sketchbook</span></div>
+            <h1 class="bt-display bt-page-h1">By <span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>hand.</span></span></h1>
+            <p class="bt-lead">The drawing practice behind the scribbles you see all over this site. Life drawing, ink washes, watercolor studies, and the odd bit of fun. No briefs, no roadmap. Click any piece to see it larger.</p>
+          </header>
+
+          <div class="v1-visuals-grid v1-sketch-grid bt-sketch-grid"><!-- filled by app.js --></div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+          </div>
+        </div>
+
+        <!-- Detail overlay -->
+        <div class="lv-book-overlay v1-visual-overlay v1-sketch-overlay" aria-hidden="true">
+          <div class="lv-book-backdrop v1-sketch-backdrop"></div>
+          <div class="v1-visual-detail v1-sketch-detail" role="dialog" aria-modal="true" aria-label="Sketch">
+            <button class="lv-book-close v1-sketch-close" type="button" aria-label="Close">×</button>
+            <div class="v1-sketch-stage"></div>
+            <div class="v1-visual-detail-body">
+              <div class="bt-kicker v1-sketch-eyebrow"><span></span></div>
+              <h2 class="v1-visual-detail-title v1-sketch-title"></h2>
+              <p class="v1-visual-detail-blurb v1-sketch-blurb"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: 404, BOLD TYPE (#/404-bold)                          -->
+    <!-- One dark chapter in the dress of the home's Contact one:    -->
+    <!-- headline, three tiles back into the site, colophon.         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="404-bold" hidden>
+      <div class="bt bt--404 v1-only" data-chapter="contact">
+
+        <nav class="bt-nav" aria-label="Bold Type not found">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work-bold" class="bt-nav-link">Work</a>
+              <a href="#/about-bold" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-chapter bt-chapter--contact bt-chapter--404">
+          <div class="bt-kicker"><span>404 — Page not found</span></div>
+          <h1 class="bt-display">This page <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>wandered off.</span></span></h1>
+          <p class="bt-lead bt-404-lead">Nothing lives at this address. A typo in the link, an old bookmark, or a page I've since retired. Either way, the rest of the site is still where it was.</p>
+          <div class="bt-404-note" aria-hidden="true">these ones do exist<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+          <div class="bt-contact-grid">
+            <a href="#/home-bold" class="bt-tile bt-tile--rose" data-cursor-label="Home →"><span class="bt-tile-k">Start over</span><span class="bt-tile-v">Home</span></a>
+            <a href="#/work-bold" class="bt-tile bt-tile--cobalt" data-cursor-label="Work →"><span class="bt-tile-k">Browse</span><span class="bt-tile-v">All work</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+            <a href="mailto:mail@lisannevisser.com?subject=Broken%20link%20on%20lisanne.design" class="bt-tile bt-tile--mustard" data-cursor-label="✉ Write"><span class="bt-tile-k">Found a dead link?</span><span class="bt-tile-v">Tell me</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="bt-colophon">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/blog">Blog</a> · <a href="#/sketchbook-bold">Sketchbook</a></span>
           </div>
         </div>
       </div>
@@ -765,19 +858,19 @@
           </p>
         </header>
 
-        <div class="v1-visuals-grid v1-sketch-grid" id="v1-sketch-grid"><!-- filled by app.js --></div>
+        <div class="v1-visuals-grid v1-sketch-grid"><!-- filled by app.js --></div>
       </div>
 
       <!-- Detail overlay -->
-      <div class="lv-book-overlay v1-visual-overlay" id="lv-sketch-overlay" aria-hidden="true">
-        <div class="lv-book-backdrop" id="lv-sketch-backdrop"></div>
+      <div class="lv-book-overlay v1-visual-overlay v1-sketch-overlay" aria-hidden="true">
+        <div class="lv-book-backdrop v1-sketch-backdrop"></div>
         <div class="v1-visual-detail v1-sketch-detail" role="dialog" aria-modal="true" aria-label="Sketch">
-          <button class="lv-book-close" id="lv-sketch-close" type="button" aria-label="Close">×</button>
-          <div class="v1-sketch-stage" id="lv-sketch-stage"></div>
+          <button class="lv-book-close v1-sketch-close" type="button" aria-label="Close">×</button>
+          <div class="v1-sketch-stage"></div>
           <div class="v1-visual-detail-body">
-            <div class="lv-eyebrow" id="lv-sketch-eyebrow"></div>
-            <h2 class="v1-visual-detail-title" id="lv-sketch-title"></h2>
-            <p class="v1-visual-detail-blurb" id="lv-sketch-blurb"></p>
+            <div class="lv-eyebrow v1-sketch-eyebrow"></div>
+            <h2 class="v1-visual-detail-title v1-sketch-title"></h2>
+            <p class="v1-visual-detail-blurb v1-sketch-blurb"></p>
           </div>
         </div>
       </div>
@@ -1212,7 +1305,7 @@
   </aside>
 
   <script src="js/data.js?v=2026-08-19-2"></script>
-  <script src="js/app.js?v=2026-09-24-2"></script>
+  <script src="js/app.js?v=2026-09-24-3"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
