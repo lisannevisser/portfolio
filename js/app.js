@@ -45,6 +45,10 @@
     if (parts[0] === "work" && parts[1]) {
       return D.cases.some((x) => x.slug === parts[1]) ? { page: "case", slug: parts[1] } : NOT_FOUND;
     }
+    // The Bold Type case study lives at #/work-bold/<slug>, same cases.
+    if (parts[0] === "work-bold" && parts[1]) {
+      return D.cases.some((x) => x.slug === parts[1]) ? { page: "case-bold", slug: parts[1] } : NOT_FOUND;
+    }
     if (parts[0] === "blog" && parts[1]) {
       return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post", slug: parts[1] } : NOT_FOUND;
     }
@@ -67,13 +71,11 @@
       el.hidden = name !== route.page;
     });
 
-    // Case study: fill the template with the selected slug.
-    if (route.page === "case") {
-      flushTocFabCleanups();
+    // Case study: fill the v1 or the Bold Type template with the selected slug.
+    flushTocFabCleanups();
+    if (route.page === "case" || route.page === "case-bold") {
       const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
-      renderV1Case(c);
-    } else {
-      flushTocFabCleanups();
+      renderV1Case(c, route.page === "case-bold" ? "bold" : "v1");
     }
 
     // Blog post: render the selected post into the v1 or the Bold Type article.
@@ -88,7 +90,7 @@
     $$(".lv-nav-link").forEach((a) => {
       const target = a.getAttribute("data-route");
       const active =
-        target === route.page || (target === "work" && route.page === "case");
+        target === route.page || (target === "work" && (route.page === "case" || route.page === "case-bold"));
       a.classList.toggle("is-active", active);
     });
 
@@ -503,13 +505,20 @@
     return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
   }
 
-  function renderV1Case(c) {
-    const root = $("#v1-case-body");
+  // One case, two dresses: "v1" fills #v1-case-body (#/work/<slug>), "bold"
+  // fills #bt-case-body (#/work-bold/<slug>). Story blocks, impact grid,
+  // limitations card and TOC are the same markup; the section ids carry the
+  // dress as prefix so both roots can hold a case without clashing.
+  function renderV1Case(c, dress) {
+    const bold = dress === "bold";
+    const root = $(bold ? "#bt-case-body" : "#v1-case-body");
     if (!root) return;
+    const base = bold ? "#/work-bold" : "#/work";
+    const idPrefix = bold ? "bt" : "v1";
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
 
-    const tocEntries = buildTocEntries(c, "v1");
+    const tocEntries = buildTocEntries(c, idPrefix);
 
     // Path of this case in LV_DATA, for the edit-mode anchors below.
     const cpath = idx >= 0 ? `cases.${idx}` : "";
@@ -524,7 +533,7 @@
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
-        const sid = sectionId("v1", s.title || "limitations", storyI);
+        const sid = sectionId(idPrefix, s.title || "limitations", storyI);
         const renderItems = (arr, base) => arr.map((it, j) => {
           const ip = base ? `${base}.${j}` : "";
           return `
@@ -574,7 +583,7 @@
           </section>`;
       }
       const i = narrativeIdx++;
-      const sid = sectionId("v1", s.title, storyI);
+      const sid = sectionId(idPrefix, s.title, storyI);
       let body = s.body
         ? s.body.split(/\n\n+/).map((p, pi) => `<p${editAttr(bp, "body", 1, pi)}>${inlineMarks(p)}</p>`).join("")
         : "";
@@ -608,14 +617,24 @@
         </section>`;
     }).join("");
 
-    root.innerHTML = `
-      <a href="#/work" class="lv-nav-link" data-cursor-label="← Back">← All work</a>
+    const header = bold ? `
+      <a href="${base}" class="bt-back" data-cursor-label="← Back">← All work</a>
+
+      <header class="bt-case-head">
+        <div class="bt-kicker lv-reveal"><span>${esc(c.company)} — ${esc(c.year)}</span></div>
+        <h1 class="bt-display bt-case-title lv-reveal"${editAttr(cpath, "title")}>${esc(c.title)}</h1>
+        ${c.subtitle ? `<p class="bt-lead bt-case-sub lv-reveal"${editAttr(cpath, "subtitle")}>${esc(c.subtitle)}</p>` : ""}
+      </header>` : `
+      <a href="${base}" class="lv-nav-link" data-cursor-label="← Back">← All work</a>
 
       <header style="margin-top:2rem;">
         <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
           <em${editAttr(cpath, "title")}>${esc(c.title)}</em>
         </h1>
-      </header>
+      </header>`;
+
+    root.innerHTML = `
+      ${header}
 
       ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
@@ -642,7 +661,7 @@
 
       ${tocFabHtml()}
 
-      <a href="#/work/${esc(next.slug)}" class="lv-next-case lv-reveal">
+      <a href="${base}/${esc(next.slug)}" class="lv-next-case lv-reveal">
         <span class="lv-next-label">Next</span>
         <span class="lv-next-title-wrap">
           <span class="lv-next-title">${esc(next.title)}</span>
@@ -1017,13 +1036,13 @@
   // The v1 Work page and the Bold Type Work page (#/work-bold) share the
   // ledger, the chips, and the active filter; only the dress differs.
   const WORK_LEDGERS = [
-    ["#v1-work-filters", "#v1-work-cases"],
-    ["#bt-work-filters", "#bt-work-cases"]
+    ["#v1-work-filters", "#v1-work-cases", "#/work"],
+    ["#bt-work-filters", "#bt-work-cases", "#/work-bold"]
   ];
   function renderV1WorkLedger() {
-    WORK_LEDGERS.forEach(([f, r]) => renderWorkLedgerInto($(f), $(r)));
+    WORK_LEDGERS.forEach(([f, r, base]) => renderWorkLedgerInto($(f), $(r), base));
   }
-  function renderWorkLedgerInto(filtersEl, rowsEl) {
+  function renderWorkLedgerInto(filtersEl, rowsEl, base) {
     if (!filtersEl || !rowsEl) return;
 
     // Filter chips (with counts)
@@ -1058,7 +1077,7 @@
                  <span class="k">${esc(p.label || (stat ? stat.label : ""))}</span>
                </span>`;
           return `
-            <a href="#/work/${esc(c.slug)}" class="v1-work-row lv-reveal"
+            <a href="${base}/${esc(c.slug)}" class="v1-work-row lv-reveal"
                style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
               <span class="n">${String(i + 1).padStart(2, "0")}</span>
               <span class="body">
