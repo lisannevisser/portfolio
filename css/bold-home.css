@@ -1,7 +1,7 @@
 /* ==========================================================================
    Bold Type home — #/home-bold
-   A second, full-bleed take on the homepage: four snap-scrolled chapters
-   (Intro, Work, Experience, Contact), Bricolage Grotesque display type,
+   A second, full-bleed take on the homepage: three snap-scrolled chapters
+   (Intro, Work, Contact), Bricolage Grotesque display type,
    hand-cut highlight blobs in rose / cobalt / mustard, and a chapter rail
    on the right. Lives next to the v1 home; nothing here touches it.
    Source: Claude Design "Portfolio Bold Type" (3a desktop, 3b mobile).
@@ -122,6 +122,22 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   display: flex; align-items: flex-end; justify-content: space-between; gap: 48px;
 }
 .bt-swipe { display: none; }
+.bt-intro-bottom { display: flex; flex-direction: column; }
+
+/* -------- Logo marquee (foot of the intro) -------- */
+.bt-logos {
+  margin-top: 40px; padding-top: 22px; border-top: 2px solid var(--ink);
+  display: flex; align-items: center; overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+[data-variation="v1"] .bt-logo-track { gap: 56px; padding-right: 56px; }
+[data-variation="v1"] .bt-logo-track img { height: 26px; filter: grayscale(1) opacity(0.85); }
+[data-variation="v1"] .bt-logo-track img:hover { filter: none; }
+[data-variation="v1"] .bt-logo-track span {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 20px; letter-spacing: -0.02em; color: var(--ink);
+}
 
 /* -------- Work cards -------- */
 .bt-work-grid {
@@ -168,7 +184,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt-card:nth-child(3n + 2):hover .bt-card-title { color: var(--paper); }
 .bt-card-sub { font-size: 15px; color: var(--ink-3); padding: 0 6px; }
 
-/* -------- Experience -------- */
+/* -------- Experience (the block lives on #/about-bold, see .bt-xp-section) -------- */
 .bt-xp {
   flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
 }
@@ -314,6 +330,9 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-kicker { font-size: 11px; }
   .bt-lead { font-size: 16px; }
   .bt-intro-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .bt-logos { margin-top: 24px; padding-top: 16px; }
+  [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
+  [data-variation="v1"] .bt-logo-track img { height: 20px; }
   .bt-swipe {
     display: flex; align-items: center; gap: 6px;
     font-family: var(--font-hand); font-size: 23px;
@@ -456,7 +475,16 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt--about .ahs-portrait { background: var(--paper-2); }
 
-/* Inspiration: the fifth chapter, full width under the scrolly. */
+/* Experience: chapter 04, full width under the scrolly. The block itself
+   (.bt-xp and friends) keeps the styles from the home section above. */
+.bt-xp-section {
+  display: flex; flex-direction: column; gap: 28px;
+  padding: 0 0 clamp(3rem, 8vw, 5rem); margin-bottom: clamp(3rem, 8vw, 5rem);
+  border-bottom: 2px solid var(--ink);
+}
+.bt-xp-section .bt-xp { flex: none; align-items: start; }
+
+/* Inspiration: the sixth chapter, full width under Experience. */
 .bt-inspire { display: flex; flex-direction: column; gap: 28px; padding: 0 0 36px; scroll-margin-top: 96px; }
 .bt-inspire-h { font-size: clamp(34px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; max-width: 22ch; }
 .bt-video { border: 2px solid var(--ink); border-radius: 12px; }
