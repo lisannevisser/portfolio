@@ -100,12 +100,14 @@
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
-      // The mobile menu button reuses the site's nav sheet; the global
-      // toggle is hidden on this route, so trigger it by hand.
-      if (e.target.closest(".bt-nav-menu")) {
-        const toggle = $(".lv-nav-toggle");
-        if (toggle) toggle.click();
-      }
+    });
+    // The mobile menu button reuses the site's nav sheet; the global toggle
+    // is hidden on these routes, so trigger it by hand. Bound on document
+    // because #/about-bold has its own .bt-nav outside this root.
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".bt-nav-menu")) return;
+      const toggle = $(".lv-nav-toggle");
+      if (toggle) toggle.click();
     });
   }
 
