@@ -22,6 +22,8 @@ html[data-route="about-bold"] .lv-nav,
 html[data-route="about-bold"] .lv-footer,
 html[data-route="work-bold"] .lv-nav,
 html[data-route="work-bold"] .lv-footer,
+html[data-route="case-bold"] .lv-nav,
+html[data-route="case-bold"] .lv-footer,
 html[data-route="sketchbook-bold"] .lv-nav,
 html[data-route="sketchbook-bold"] .lv-footer,
 html[data-route="visuals-bold"] .lv-nav,
@@ -592,6 +594,157 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-teaser-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bt-teaser-h { font-size: 34px; }
   .bt--work .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type case study — #/work-bold/<slug>
+   The v1 case (renderV1Case in app.js: impact grid, story blocks,
+   framework table, flow chips, limitations card, TOC fab, next case) in
+   the Bold Type dress. The site accent flips to cobalt inside this root,
+   which recolors the section numbers, chips, arrows and hover states that
+   the shared markup paints with var(--accent); the rest is ink frames and
+   Bricolage headlines. Overrides only what differs from v1.css.
+   ========================================================================== */
+.bt--case { min-height: 100vh; --accent: var(--bt-cobalt); }
+.bt--case .bt-nav-progress, .bt--case .bt-nav-count { display: none; }
+.bt-back {
+  display: inline-block; margin: 0 0 40px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+  transition: background 0.2s ease;
+}
+.bt-back:hover { background: var(--bt-rose); }
+.bt-case-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.bt-case-title { margin: 22px 0 0; max-width: 16ch; font-size: clamp(44px, 6.4vw, 88px); line-height: 1; }
+.bt-case-sub { margin-top: 28px; }
+
+/* Impact grid: four ink-framed tiles, the metric on rose. */
+[data-variation="v1"] .bt--case .v1-impact-grid {
+  gap: 16px; border: 0; border-radius: 0; overflow: visible; background: none;
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+[data-variation="v1"] .bt--case .v1-impact-cell {
+  padding: 22px 24px; border: 2px solid var(--ink); border-radius: 14px; background: var(--paper);
+  display: flex; flex-direction: column;
+}
+[data-variation="v1"] .bt--case .v1-impact-cell:first-child { background: var(--bt-rose); }
+[data-variation="v1"] .bt--case .v1-impact-cell-label {
+  font-size: 11px; letter-spacing: 0.16em; color: var(--ink); margin-bottom: 14px;
+}
+[data-variation="v1"] .bt--case .v1-impact-cell .lv-body { color: var(--ink); font-size: 14px; order: 3; margin: 10px 0 0; }
+[data-variation="v1"] .bt--case .v1-impact-num {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(40px, 4.6vw, 60px); line-height: 1; letter-spacing: -0.04em; color: var(--ink);
+  margin-top: auto;
+}
+[data-variation="v1"] .bt--case .v1-impact-meta {
+  font-family: var(--bt-font-display); font-weight: 700;
+  font-size: 20px; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin-top: auto;
+}
+
+/* Story: 2px rules between sections, numbered pills cycling the three colors. */
+.bt-case > div { max-width: 820px; }
+[data-variation="v1"] .bt--case .v1-story-block { padding: 40px 0; border-top: 2px solid var(--ink); }
+[data-variation="v1"] .bt--case .v1-story-block:first-child { border-top: 0; padding-top: 0; }
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-num {
+  display: inline-block; margin: 0 0 18px;
+  font-size: 11px; letter-spacing: 0.16em; color: var(--ink);
+  background: var(--bt-num, var(--bt-rose)); padding: 5px 10px;
+  border: 2px solid var(--ink); border-radius: 999px;
+}
+.bt--case section:nth-of-type(3n + 2) { --bt-num: var(--bt-cobalt); }
+.bt--case section:nth-of-type(3n + 3) { --bt-num: var(--bt-mustard); }
+[data-variation="v1"] .bt--case section:nth-of-type(3n + 2) .lv-section-num { color: var(--paper); }
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(30px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.04em;
+  margin: 0 0 22px;
+}
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 19px; line-height: 1.6; max-width: none; }
+[data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 17px; line-height: 1.68; max-width: none; }
+[data-variation="v1"] .bt--case .v1-story-block p a,
+[data-variation="v1"] .bt--case .lv-post-link {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt); transition: background 0.2s ease;
+}
+[data-variation="v1"] .bt--case .v1-story-block p a:hover,
+[data-variation="v1"] .bt--case .lv-post-link:hover { background: var(--bt-rose); }
+[data-variation="v1"] .bt--case .lv-post-figure .frame,
+[data-variation="v1"] .bt--case .lv-post-figure .shot { border: 2px solid var(--ink); border-radius: 10px; }
+[data-variation="v1"] .bt--case .lv-post-figure figcaption { color: var(--ink); }
+
+/* Framework table + flow chips. */
+[data-variation="v1"] .bt--case .v1-framework { background: var(--paper); border: 2px solid var(--ink); border-radius: 12px; margin-top: 24px; }
+[data-variation="v1"] .bt--case .v1-framework-row { border-top: 2px solid var(--ink); padding: 16px 20px; }
+[data-variation="v1"] .bt--case .v1-framework-row:first-child { border-top: 0; }
+[data-variation="v1"] .bt--case .v1-framework-row > *:first-child {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 700; font-size: 19px; letter-spacing: -0.02em;
+}
+[data-variation="v1"] .bt--case .v1-framework-row > *:nth-child(2) { font-size: 12px; letter-spacing: 0.08em; }
+[data-variation="v1"] .bt--case .v1-framework-row > *:nth-child(3) { font-size: 16px; }
+[data-variation="v1"] .bt--case .v1-chip {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); background: var(--paper); border: 2px solid var(--ink); border-radius: 999px;
+}
+
+/* Limitations card: ink frame, paper faces, pill flip button. Both faces
+   share one grid cell, so the card is as tall as the longer face and the
+   back can't run past the frame. */
+[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 0 8px; }
+[data-variation="v1"] .bt--case .v1-limitations-card-inner { display: grid; }
+[data-variation="v1"] .bt--case .v1-limitations-face { grid-area: 1 / 1; }
+[data-variation="v1"] .bt--case .v1-limitations-face.is-back { position: relative; inset: auto; }
+[data-variation="v1"] .bt--case .v1-limitations-face { background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px; }
+[data-variation="v1"] .bt--case .v1-limitations-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
+[data-variation="v1"] .bt--case .v1-limitations-flip {
+  border: 2px solid var(--ink); color: var(--ink); font-size: 11px; letter-spacing: 0.12em; padding: 7px 12px;
+}
+[data-variation="v1"] .bt--case .v1-limitations-flip:hover { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); }
+[data-variation="v1"] .bt--case .v1-limitations-info-btn { border: 2px solid var(--ink); color: var(--ink); font-family: var(--font-mono); font-style: normal; font-size: 11px; }
+[data-variation="v1"] .bt--case .v1-limitations-info-btn:hover,
+[data-variation="v1"] .bt--case .v1-limitations-info-btn[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+[data-variation="v1"] .bt--case .v1-limitations-info-popover {
+  border: 2px solid var(--ink); border-radius: 10px; box-shadow: none;
+  font-family: var(--font-body); font-style: normal; font-size: 15px; color: var(--ink);
+}
+[data-variation="v1"] .bt--case .v1-limitation-row h4 {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 700;
+  font-size: 20px; letter-spacing: -0.02em; line-height: 1.2;
+}
+[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; }
+
+/* TOC fab + next case. */
+.bt--case .lv-toc-fab { border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
+.bt--case .lv-toc-fab:hover, .bt--case .lv-toc-fab:focus-visible, .bt--case .lv-toc-fab.is-open { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); box-shadow: none; }
+.bt--case .lv-toc-popover { border: 2px solid var(--ink); border-radius: 12px; box-shadow: none; }
+.bt--case .lv-toc-popover::before { border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.bt--case .lv-toc-popover .eyebrow { color: var(--ink); }
+.bt--case .lv-toc-popover li.is-lim { border-top: 2px solid var(--ink); }
+.bt--case .lv-next-case { margin-top: 64px; padding: 32px 0 0; border-top: 2px solid var(--ink); }
+.bt--case .lv-next-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
+[data-variation="v1"] .bt--case .lv-next-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.04em;
+}
+.bt--case .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 1100px) {
+  .bt--case .lv-toc-popover::before { border-left: 0; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+}
+@media (max-width: 900px) {
+  .bt-back { margin-bottom: 28px; }
+  .bt-case-title { font-size: clamp(34px, 10vw, 44px); line-height: 1.04; letter-spacing: -0.045em; }
+  .bt-case-sub { margin-top: 18px; }
+  [data-variation="v1"] .bt--case .v1-impact-grid { gap: 10px; }
+  [data-variation="v1"] .bt--case .v1-impact-cell { border: 2px solid var(--ink); padding: 16px 18px; }
+  [data-variation="v1"] .bt--case .v1-impact-num { font-size: 40px; margin-top: 8px; }
+  [data-variation="v1"] .bt--case .v1-story-block { padding: 28px 0; }
+  [data-variation="v1"] .bt--case .v1-story-block .lv-section-title { font-size: 28px; }
+  [data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 17px; }
+  [data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 16px; }
+  [data-variation="v1"] .bt--case .v1-limitations-face { padding: 22px 20px 24px; }
+  .bt--case .bt-colophon--light span:last-child { display: none; }
 }
 
 /* ==========================================================================

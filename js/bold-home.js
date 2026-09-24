@@ -26,7 +26,7 @@
     const grid = $(".bt-work-grid", root);
     if (!grid) return;
     grid.innerHTML = D.cases.slice(0, 3).map((c) => `
-      <a href="#/work/${esc(c.slug)}" class="bt-card" data-cursor-label="Read →">
+      <a href="#/work-bold/${esc(c.slug)}" class="bt-card" data-cursor-label="Read →">
         <span class="bt-card-cover" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true"></span>
         <span class="bt-card-text">
           <span class="bt-card-title">${esc(c.title)}</span>
