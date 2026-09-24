@@ -48,6 +48,10 @@
     if (parts[0] === "blog" && parts[1]) {
       return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post", slug: parts[1] } : NOT_FOUND;
     }
+    // The Bold Type article lives at #/blog-bold/<slug>, same posts.
+    if (parts[0] === "blog-bold" && parts[1]) {
+      return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post-bold", slug: parts[1] } : NOT_FOUND;
+    }
     const page = parts[0] || "home";
     if (DISABLED_ROUTES.has(page)) return { page: "home" };
     return hasSection(page) ? { page } : NOT_FOUND;
@@ -72,11 +76,11 @@
       flushTocFabCleanups();
     }
 
-    // Blog post: render the selected post.
-    if (route.page === "post") {
+    // Blog post: render the selected post into the v1 or the Bold Type article.
+    if (route.page === "post" || route.page === "post-bold") {
       const p = (D.posts || []).find((x) => x.slug === route.slug) || (D.posts || [])[0];
       if (p) {
-        renderV1Post(p);
+        renderV1Post(p, route.page === "post-bold" ? "bold" : "v1");
       }
     }
 
@@ -666,21 +670,24 @@
     return out;
   }
 
+  // The Gazette front page. Rendered twice from the same posts: into the
+  // v1 blog (#v1-blog-list, links to #/blog/<slug>) and into the Bold Type
+  // blog (#bt-blog-list, links to #/blog-bold/<slug>). Both dresses share
+  // the .lv-gz-* markup; the Bold Type one restyles it in bold-home.css.
   function renderBlogLists() {
     const posts = D.posts || [];
+    if (!posts.length) return;
+    const lead = posts[0];
 
-    const v1List = $("#v1-blog-list");
-    if (v1List && posts.length) {
-      // Newest post runs as the front-page aufmacher; the rest fill the index.
-      const lead = posts[0];
+    // Inject the current month (without the year) into the masthead datelines
+    $$(".lv-gz-dateline-tags").forEach((el) => {
+      el.textContent = lead.dateLabel.replace(/\s*\d{4}$/, "");
+    });
+
+    function gazetteFront(base) {
       const leadParas = gazetteLeadParagraphs(lead, 2);
-
-      // Inject the current month (without the year) into the masthead dateline
-      const datelineTags = $("#lv-gz-dateline-tags");
-      if (datelineTags) datelineTags.textContent = lead.dateLabel.replace(/\s*\d{4}$/, "");
-
       const featured = `
-        <a href="#/blog/${esc(lead.slug)}" class="lv-gz-lead lv-reveal">
+        <a href="${base}/${esc(lead.slug)}" class="lv-gz-lead lv-reveal">
           <h2 class="lv-gz-lead-head">${esc(lead.title)}</h2>
           <p class="lv-gz-deck">${esc(lead.excerpt)}</p>
           <div class="lv-gz-byline">${esc(lead.dateLabel)} · ${esc(lead.readingTime)} read · ${lead.tags.map(esc).join(" · ")}</div>
@@ -699,7 +706,7 @@
         const isOdd = items.length % 2 !== 0;
         return `<div class="lv-gz-index">
           ${items.map((p, i) => `
-            <a href="#/blog/${esc(p.slug)}" class="lv-gz-entry lv-reveal${isOdd && i === items.length - 1 ? " lv-gz-entry--full" : ""}">
+            <a href="${base}/${esc(p.slug)}" class="lv-gz-entry lv-reveal${isOdd && i === items.length - 1 ? " lv-gz-entry--full" : ""}">
               <div class="kicker">${p.tags.map(esc).join(" · ")}</div>
               <h3 class="hl">${esc(p.title)}</h3>
               <p class="exc">${esc(p.excerpt)}</p>
@@ -723,8 +730,13 @@
         <div class="lv-gz-section-heading lv-gz-section-heading--archive lv-reveal"><span>${yr} Edition</span></div>
         ${renderEntryGrid(olderByYear[yr])}`).join("");
 
-      v1List.innerHTML = featured + sameYearSection + olderSections;
+      return featured + sameYearSection + olderSections;
     }
+
+    const v1List = $("#v1-blog-list");
+    if (v1List) v1List.innerHTML = gazetteFront("#/blog");
+    const btList = $("#bt-blog-list");
+    if (btList) btList.innerHTML = gazetteFront("#/blog-bold");
   }
 
   // Inline marks: [text](url) links, **bold** and *italic*. Applied AFTER esc(),
@@ -890,9 +902,14 @@
     });
   }
 
-  function renderV1Post(p) {
-    const root = $("#v1-post-body");
+  // One post, two dresses: "v1" fills #v1-post-body (#/blog/<slug>), "bold"
+  // fills #bt-post-body (#/blog-bold/<slug>). The body blocks are the same;
+  // only the masthead and the back / read-next links differ.
+  function renderV1Post(p, dress) {
+    const bold = dress === "bold";
+    const root = $(bold ? "#bt-post-body" : "#v1-post-body");
     if (!root) return;
+    const base = bold ? "#/blog-bold" : "#/blog";
     const posts = D.posts || [];
     const idx = posts.findIndex((x) => x.slug === p.slug);
     const next = posts[(idx + 1) % posts.length];
@@ -901,9 +918,14 @@
     const bodyHtml = renderPostBody(p.body, idx >= 0 ? `posts.${idx}.body` : "")
       .replace('class="lv-post-p lv-reveal"', 'class="lv-post-p lv-reveal lv-dropcap"');
 
-    root.innerHTML = `
-      <a href="#/blog" class="lv-gz-back lv-nav-link" data-cursor-label="← Back">← Back to the front page</a>
-
+    const month = p.dateLabel.replace(/\s*\d{4}$/, "");
+    const header = bold ? `
+      <header class="bt-gz-article-head">
+        <div class="bt-kicker lv-reveal"><span>The Design Gazette — ${esc(p.date.slice(0, 4))} Edition — ${esc(month)}</span></div>
+        <h1 class="bt-display bt-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
+        ${p.excerpt ? `<p class="bt-lead bt-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
+        <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
+      </header>` : `
       <header>
         <div class="lv-gz-article-masthead lv-reveal">
           <div class="flag">The Design Gazette</div>
@@ -911,18 +933,23 @@
         <div class="lv-gz-dateline lv-gz-dateline--article lv-reveal">
           <span>Berlin</span>
           <span>${esc(p.date.slice(0, 4))} Edition</span>
-          <span>${esc(p.dateLabel.replace(/\s*\d{4}$/, ""))}</span>
+          <span>${esc(month)}</span>
         </div>
         <h1 class="lv-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
         ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
         <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
-      </header>
+      </header>`;
+
+    root.innerHTML = `
+      <a href="${base}" class="lv-gz-back lv-nav-link" data-cursor-label="← Back">← Back to the front page</a>
+
+      ${header}
 
       <div class="lv-post-body">${bodyHtml}</div>
 
       ${next && next.slug !== p.slug ? `
         <div class="lv-gz-section-heading lv-reveal" style="margin-top:6rem;"><span>Read next</span></div>
-        <a href="#/blog/${esc(next.slug)}" class="lv-gz-entry lv-gz-entry--full lv-reveal" style="border-top:none;padding-top:0;">
+        <a href="${base}/${esc(next.slug)}" class="lv-gz-entry lv-gz-entry--full lv-reveal" style="border-top:none;padding-top:0;">
           <div class="kicker">${next.tags.map(esc).join(" · ")}</div>
           <h3 class="hl">${esc(next.title)}</h3>
           <p class="exc">${esc(next.excerpt)}</p>
@@ -1437,15 +1464,20 @@
     });
   }
 
-  // Visuals: a gallery of small visual work. Cards render into the full
-  // #/visuals grid and a 3-up teaser at the foot of Work. Clicking a card
-  // opens a modal; an `embed` loads inline (Canva iframe), otherwise a
-  // thumbnail / gradient preview shows, with an external link as fallback.
+  // Visuals: a gallery of small visual work. Every container with
+  // data-visuals gets the cards: "grid" takes the whole list (#/visuals,
+  // #/visuals-bold), "teaser" the first three (foot of Work, Work bold).
+  // Clicking a card opens the overlay of the container's data-dress ("v1"
+  // or "bt"). The overlays sit after <main>, outside the route sections,
+  // so a teaser can open one while the gallery route itself is hidden.
+  // An `embed` loads inline (Canva iframe), otherwise a thumbnail /
+  // gradient preview shows, with an external link as fallback.
   function renderVisuals() {
     const items = D.visuals || [];
-    const grid = $("#v1-visuals-grid");
-    const teaser = $("#v1-visuals-teaser");
-    const teaserBold = $("#bt-visuals-teaser");
+    const grids = $$("[data-visuals]");
+    const overlays = {};
+    $$(".v1-visual-overlay[data-dress]").forEach((o) => { overlays[o.getAttribute("data-dress")] = o; });
+    if (!grids.length) return;
 
     function card(v, i) {
       // Real <img> at natural aspect ratio so the full artwork is visible,
@@ -1461,23 +1493,22 @@
       </button>`;
     }
 
-    if (grid) grid.innerHTML = items.map(card).join("");
-    if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join("");
-    if (teaserBold) teaserBold.innerHTML = items.slice(0, 3).map(card).join("");
+    grids.forEach((grid) => {
+      const list = grid.getAttribute("data-visuals") === "teaser" ? items.slice(0, 3) : items;
+      grid.innerHTML = list.map(card).join("");
+    });
 
-    const overlay = $("#lv-visual-overlay");
-    if (!overlay) return;
-    const backdrop = $("#lv-visual-backdrop");
-    const closeBtn = $("#lv-visual-close");
-    const stage = $("#lv-visual-stage");
-
-    const detail = overlay.querySelector(".v1-visual-detail");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let openOverlay = null;
 
-    function openVisual(v, fromEl) {
-      $("#lv-visual-eyebrow").textContent = [v.context, v.year].filter(Boolean).join(" · ");
-      $("#lv-visual-title").textContent = v.title;
-      $("#lv-visual-blurb").textContent = v.blurb || "";
+    function openVisual(v, fromEl, overlay) {
+      const stage = $(".v1-visual-stage", overlay);
+      const detail = $(".v1-visual-detail", overlay);
+      const eyebrow = $(".v1-visual-eyebrow", overlay);
+      // The Bold Type eyebrow wraps its text in a span (kicker markup).
+      ($("span", eyebrow) || eyebrow).textContent = [v.context, v.year].filter(Boolean).join(" · ");
+      $(".v1-visual-detail-title", overlay).textContent = v.title;
+      $(".v1-visual-detail-blurb", overlay).textContent = v.blurb || "";
       if (v.embed) {
         stage.innerHTML = `<iframe class="v1-visual-frame" src="${esc(v.embed)}" loading="lazy" allowfullscreen title="${esc(v.title)}"></iframe>`;
       } else if (v.thumb) {
@@ -1488,7 +1519,7 @@
       } else {
         stage.innerHTML = `<span class="v1-visual-stage-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span>${esc(v.type || v.title)}</span></span>`;
       }
-      const link = $("#lv-visual-link");
+      const link = $(".v1-visual-open", overlay);
       if (v.link) {
         link.href = v.link;
         link.hidden = false;
@@ -1503,6 +1534,7 @@
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+      openOverlay = overlay;
       // Zoom the panel out of the clicked card: start at the card's
       // position/size, then let the stylesheet transition float it home.
       if (fromEl && detail && !reduceMotion) {
@@ -1519,25 +1551,32 @@
           detail.style.transform = "";
         }
       }
-      closeBtn.focus();
+      $(".lv-book-close", overlay).focus();
     }
 
     function closeVisual() {
+      const overlay = openOverlay;
+      if (!overlay) return;
       overlay.classList.remove("is-open");
       overlay.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
-      stage.innerHTML = ""; // unload the iframe so it stops playing
+      $(".v1-visual-stage", overlay).innerHTML = ""; // unload the iframe so it stops playing
+      openOverlay = null;
     }
 
-    function onCardClick(e) {
-      const card = e.target.closest(".v1-visual-card");
-      if (!card) return;
-      const v = items[parseInt(card.getAttribute("data-index"), 10)];
-      if (v) openVisual(v, card);
-    }
+    grids.forEach((grid) => {
+      const overlay = overlays[grid.getAttribute("data-dress")] || overlays.v1;
+      if (!overlay) return;
+      grid.addEventListener("click", (e) => {
+        const card = e.target.closest(".v1-visual-card");
+        if (!card) return;
+        const v = items[parseInt(card.getAttribute("data-index"), 10)];
+        if (v) openVisual(v, card, overlay);
+      });
+    });
 
-    // Stagger the masonry cards in as they scroll into view.
-    const gridCards = grid ? $$(".v1-visual-card", grid) : [];
+    // Stagger the gallery cards in as they scroll into view (full grids only).
+    const gridCards = $$('[data-visuals="grid"] .v1-visual-card');
     if (reduceMotion || !("IntersectionObserver" in window)) {
       gridCards.forEach((c) => c.classList.add("is-in"));
     } else {
@@ -1551,13 +1590,12 @@
       gridCards.forEach((c) => io.observe(c));
     }
 
-    if (grid) grid.addEventListener("click", onCardClick);
-    if (teaser) teaser.addEventListener("click", onCardClick);
-    if (teaserBold) teaserBold.addEventListener("click", onCardClick);
-    closeBtn.addEventListener("click", closeVisual);
-    backdrop.addEventListener("click", closeVisual);
+    Object.values(overlays).forEach((overlay) => {
+      $(".lv-book-close", overlay).addEventListener("click", closeVisual);
+      $(".lv-book-backdrop", overlay).addEventListener("click", closeVisual);
+    });
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeVisual();
+      if (e.key === "Escape" && openOverlay) closeVisual();
     });
   }
 
