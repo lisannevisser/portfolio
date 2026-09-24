@@ -33,15 +33,24 @@
   // wanted). Wall of Fame is parked until the board has real content.
   const DISABLED_ROUTES = new Set(["wall-of-fame"]);
 
+  // Anything that isn't a route section, a known case slug, or a known post
+  // slug lands on the 404 page (the Bold Type one at #/404-bold).
+  const NOT_FOUND = { page: "404-bold" };
+  const hasSection = (page) => !!$(`.lv-route[data-page="${page}"]`);
+
   function parseHash(h) {
     const clean = (h || "").replace(/^#\/?/, "");
     if (!clean) return { page: "home" };
     const parts = clean.split("/");
-    if (parts[0] === "work" && parts[1]) return { page: "case", slug: parts[1] };
-    if (parts[0] === "blog" && parts[1]) return { page: "post", slug: parts[1] };
+    if (parts[0] === "work" && parts[1]) {
+      return D.cases.some((x) => x.slug === parts[1]) ? { page: "case", slug: parts[1] } : NOT_FOUND;
+    }
+    if (parts[0] === "blog" && parts[1]) {
+      return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post", slug: parts[1] } : NOT_FOUND;
+    }
     const page = parts[0] || "home";
     if (DISABLED_ROUTES.has(page)) return { page: "home" };
-    return { page };
+    return hasSection(page) ? { page } : NOT_FOUND;
   }
 
   function renderRoute() {
