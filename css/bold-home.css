@@ -386,6 +386,20 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 
 /* Scrolly: room for the fixed nav on top, mast in display type. */
 .bt--about .ahs-pin { padding-top: clamp(5.5rem, 14vh, 8rem); }
+/* Unlike the v1 About, the "Hello, I'm Lisanne." mast doesn't stay as a
+   small masthead: it folds away completely as chapter 01 takes over, so
+   the chapters start at the top. Desktop only; on narrow screens the
+   scrolly is a plain stacked page and --collapse is pinned to 1. */
+@media (min-width: 881px) {
+  .bt--about .ahs-mast {
+    transform: none;
+    margin-bottom: 0;
+    max-height: calc((1 - var(--collapse)) * 70vh);
+    overflow: hidden;
+    opacity: calc(1 - var(--collapse) * 1.6);
+    transition: max-height 120ms linear, opacity 120ms linear;
+  }
+}
 .bt--about .ahs-eyebrow { margin-bottom: 1.25rem; }
 .bt--about .ahs-h1 { font-size: clamp(56px, 8.6vw, 132px); line-height: 1; letter-spacing: -0.05em; }
 .bt--about .ahs-lead { top: clamp(1.5rem, 4vh, 2.5rem); }
