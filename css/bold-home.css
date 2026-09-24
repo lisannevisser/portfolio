@@ -31,7 +31,11 @@ html[data-route="blog-bold"] .lv-footer,
 html[data-route="post-bold"] .lv-nav,
 html[data-route="post-bold"] .lv-footer,
 html[data-route="404-bold"] .lv-nav,
-html[data-route="404-bold"] .lv-footer { display: none; }
+html[data-route="404-bold"] .lv-footer,
+html[data-route="imprint-bold"] .lv-nav,
+html[data-route="imprint-bold"] .lv-footer,
+html[data-route="privacy-bold"] .lv-nav,
+html[data-route="privacy-bold"] .lv-footer { display: none; }
 html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 @media (min-width: 900px) and (min-height: 700px) {
   html[data-route="home-bold"] { scroll-snap-type: y mandatory; }
@@ -966,4 +970,49 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-404-note { padding-top: 24px; font-size: 22px; align-self: flex-start; }
   .bt-chapter--404 .bt-contact-grid { margin-top: 0; }
   .bt-chapter--404 .bt-colophon span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type imprint + privacy — #/imprint-bold, #/privacy-bold
+   The v1 legal pages, text for text, in the Bold Type dress: display
+   headline with a blob, then the two-column .lv-legal-grid where every
+   block gets a numbered mono kicker and an ink rule. The imprint's
+   address block sits in display type; everything else stays body text.
+   ========================================================================== */
+.bt--legal { min-height: 100vh; }
+.bt--legal .bt-nav-progress, .bt--legal .bt-nav-count { display: none; }
+.bt--legal .bt-page-head .bt-lead { max-width: 56ch; }
+.bt-legal { border-top: 2px solid var(--ink); }
+.bt-legal-block { padding: 26px 0 30px; border-bottom: 2px solid var(--ink); }
+.bt-legal-block .bt-kicker { color: var(--ink); }
+.bt-legal-p {
+  margin: 14px 0 0; max-width: 52ch;
+  font-size: 16px; line-height: 1.6; color: var(--ink-2);
+}
+.bt-legal-p + .bt-legal-p { margin-top: 12px; }
+.bt-legal-p strong { color: var(--ink); font-weight: 600; }
+.bt-legal-p--big {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 23px; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink);
+}
+.bt-legal-p a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt);
+  transition: background 0.18s ease;
+}
+.bt-legal-p a:hover { background: var(--bt-rose); }
+.bt-legal-p--big a { border-bottom-width: 3px; }
+.bt--legal .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  .bt--legal .bt-page-h1 { font-size: clamp(40px, 12.5vw, 56px); }
+  .bt-legal-block { padding: 20px 0 22px; }
+  .bt-legal-p { font-size: 14.5px; line-height: 1.55; }
+  .bt-legal-p--big { font-size: 20px; }
+  .bt--legal .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 720px) {
+  /* One column: no grid gap, so the seam between the two former columns
+     is one rule like every other block boundary. */
+  .bt-legal { gap: 0; }
 }
