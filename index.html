@@ -59,7 +59,7 @@
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
-  <link rel="stylesheet" href="css/bold-home.css?v=2026-09-24-9" />
+  <link rel="stylesheet" href="css/bold-home.css?v=2026-10-27-1" />
 </head>
 <body>
 
@@ -167,7 +167,7 @@
 
     <!-- ========================================================= -->
     <!-- ROUTE: HOME, BOLD TYPE (#/, default)                        -->
-    <!-- Second take on the homepage. Three snap-scrolled chapters,  -->
+    <!-- Second take on the homepage. Four snap-scrolled chapters,   -->
     <!-- own nav + rail; cards, rail and counter come from            -->
     <!-- js/bold-home.js, styles from css/bold-home.css.              -->
     <!-- ========================================================= -->
@@ -213,9 +213,30 @@
           <div class="bt-work-grid"><!-- filled by js/bold-home.js --></div>
         </div>
 
+        <!-- 02 About (short version of #/about) -->
+        <div class="bt-chapter bt-chapter--about" data-chapter-id="about">
+          <div class="bt-kicker"><span>02 — About</span></div>
+          <div class="bt-about">
+            <div class="bt-about-text">
+              <h2 class="bt-display">Sociologist turned product <span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>designer.</span></span></h2>
+              <p class="bt-lead">An Economic and Intercultural Sociologist by education, I found my way into product design, where I focus on data-driven design solutions that combine user-centricity with business performance.</p>
+              <div class="bt-xp-rows bt-about-rows">
+                <div class="bt-xp-row"><span class="bt-xp-when">Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">Background</span><span class="bt-xp-role">Sociology &amp; Modern China studies <small>research in Beijing, Shanghai, Singapore</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">Off-screen</span><span class="bt-xp-role">Aerial acrobatics <small>and teaching Aerial Yoga</small></span></div>
+              </div>
+              <a href="#/about" class="bt-xp-cv" data-cursor-label="About →">More about me</a>
+            </div>
+            <div class="bt-about-portrait">
+              <video src="images/about/portrait.mp4" autoplay loop muted playsinline preload="metadata" aria-label="Lisanne"></video>
+              <span class="bt-about-label">that's me</span>
+            </div>
+          </div>
+        </div>
+
         <!-- 03 Contact -->
         <div class="bt-chapter bt-chapter--contact" data-chapter-id="contact">
-          <div class="bt-kicker"><span>02 — Contact</span></div>
+          <div class="bt-kicker"><span>03 — Contact</span></div>
           <h2 class="bt-display">Let's make something <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>measurable.</span></span></h2>
           <div class="bt-contact-grid">
             <a href="mailto:mail@lisannevisser.com" class="bt-tile bt-tile--rose" data-cursor-label="✉ Write"><span class="bt-tile-k">Write me</span><span class="bt-tile-v">mail@lisannevisser.com</span></a>
@@ -1667,7 +1688,7 @@
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
-  <script src="js/bold-home.js?v=2026-10-27-1"></script>
+  <script src="js/bold-home.js?v=2026-10-27-2"></script>
 
   <!-- Edit mode. Visit ?edit=wet-paint once and the browser remembers it;
        ?edit=off or the "Done" button switch it back off. Without the flag,
