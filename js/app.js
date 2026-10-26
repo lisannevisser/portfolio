@@ -33,6 +33,15 @@
   // wanted). Wall of Fame is parked until the board has real content.
   const DISABLED_ROUTES = new Set(["wall-of-fame"]);
 
+  // Bold Type is the default dress. The plain slugs (#/, #/work,
+  // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
+  // the original v1 dress stays reachable as a backup at "<name>-classic"
+  // (#/home-classic, #/work-classic/<slug>, ...). Pages that only exist in v1
+  // (books, chinese, playground, styleguide) keep their plain slug. Old
+  // "-bold" links still resolve and get rewritten to the plain slug.
+  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "imprint", "privacy"]);
+  const DYNAMIC = { work: ["case", D.cases], blog: ["post", D.posts || []] };
+
   // Anything that isn't a route section, a known case slug, or a known post
   // slug lands on the 404 page (the Bold Type one at #/404-bold).
   const NOT_FOUND = { page: "404-bold" };
@@ -40,25 +49,26 @@
 
   function parseHash(h) {
     const clean = (h || "").replace(/^#\/?/, "");
-    if (!clean) return { page: "home" };
     const parts = clean.split("/");
-    if (parts[0] === "work" && parts[1]) {
-      return D.cases.some((x) => x.slug === parts[1]) ? { page: "case", slug: parts[1] } : NOT_FOUND;
+    const m = (parts[0] || "home").match(/^(.+?)(-classic|-bold)?$/);
+    const name = m[1];
+    const dress = m[2] === "-classic" ? "classic" : "bold";
+
+    // Legacy Bold Type URL: show the same page under its plain slug.
+    if (m[2] === "-bold" && DRESSED.has(name)) {
+      const rest = parts.slice(1).join("/");
+      history.replaceState(null, "", name === "home" && !rest ? "#/" : "#/" + name + (rest ? "/" + rest : ""));
     }
-    // The Bold Type case study lives at #/work-bold/<slug>, same cases.
-    if (parts[0] === "work-bold" && parts[1]) {
-      return D.cases.some((x) => x.slug === parts[1]) ? { page: "case-bold", slug: parts[1] } : NOT_FOUND;
+
+    if (DYNAMIC[name] && parts[1]) {
+      const [page, list] = DYNAMIC[name];
+      if (!list.some((x) => x.slug === parts[1])) return NOT_FOUND;
+      return { page: dress === "bold" ? page + "-bold" : page, slug: parts[1] };
     }
-    if (parts[0] === "blog" && parts[1]) {
-      return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post", slug: parts[1] } : NOT_FOUND;
-    }
-    // The Bold Type article lives at #/blog-bold/<slug>, same posts.
-    if (parts[0] === "blog-bold" && parts[1]) {
-      return (D.posts || []).some((x) => x.slug === parts[1]) ? { page: "post-bold", slug: parts[1] } : NOT_FOUND;
-    }
-    const page = parts[0] || "home";
-    if (DISABLED_ROUTES.has(page)) return { page: "home" };
-    return hasSection(page) ? { page } : NOT_FOUND;
+    if (DISABLED_ROUTES.has(name)) return { page: "home-bold" };
+    if (DRESSED.has(name)) return { page: dress === "bold" ? name + "-bold" : name };
+    if (m[2]) return NOT_FOUND;
+    return hasSection(name) ? { page: name } : NOT_FOUND;
   }
 
   function renderRoute() {
@@ -505,15 +515,15 @@
     return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
   }
 
-  // One case, two dresses: "v1" fills #v1-case-body (#/work/<slug>), "bold"
-  // fills #bt-case-body (#/work-bold/<slug>). Story blocks, impact grid,
+  // One case, two dresses: "v1" fills #v1-case-body (#/work-classic/<slug>), "bold"
+  // fills #bt-case-body (#/work/<slug>). Story blocks, impact grid,
   // limitations card and TOC are the same markup; the section ids carry the
   // dress as prefix so both roots can hold a case without clashing.
   function renderV1Case(c, dress) {
     const bold = dress === "bold";
     const root = $(bold ? "#bt-case-body" : "#v1-case-body");
     if (!root) return;
-    const base = bold ? "#/work-bold" : "#/work";
+    const base = bold ? "#/work" : "#/work-classic";
     const idPrefix = bold ? "bt" : "v1";
     const idx = D.cases.findIndex((x) => x.slug === c.slug);
     const next = D.cases[(idx + 1) % D.cases.length];
@@ -691,8 +701,8 @@
   }
 
   // The Gazette front page. Rendered twice from the same posts: into the
-  // v1 blog (#v1-blog-list, links to #/blog/<slug>) and into the Bold Type
-  // blog (#bt-blog-list, links to #/blog-bold/<slug>). Both dresses share
+  // v1 blog (#v1-blog-list, links to #/blog-classic/<slug>) and into the Bold
+  // Type blog (#bt-blog-list, links to #/blog/<slug>). Both dresses share
   // the .lv-gz-* markup; the Bold Type one restyles it in bold-home.css.
   function renderBlogLists() {
     const posts = D.posts || [];
@@ -754,9 +764,9 @@
     }
 
     const v1List = $("#v1-blog-list");
-    if (v1List) v1List.innerHTML = gazetteFront("#/blog");
+    if (v1List) v1List.innerHTML = gazetteFront("#/blog-classic");
     const btList = $("#bt-blog-list");
-    if (btList) btList.innerHTML = gazetteFront("#/blog-bold");
+    if (btList) btList.innerHTML = gazetteFront("#/blog");
   }
 
   // Inline marks: [text](url) links, **bold** and *italic*. Applied AFTER esc(),
@@ -922,14 +932,14 @@
     });
   }
 
-  // One post, two dresses: "v1" fills #v1-post-body (#/blog/<slug>), "bold"
-  // fills #bt-post-body (#/blog-bold/<slug>). The body blocks are the same;
+  // One post, two dresses: "v1" fills #v1-post-body (#/blog-classic/<slug>), "bold"
+  // fills #bt-post-body (#/blog/<slug>). The body blocks are the same;
   // only the masthead and the back / read-next links differ.
   function renderV1Post(p, dress) {
     const bold = dress === "bold";
     const root = $(bold ? "#bt-post-body" : "#v1-post-body");
     if (!root) return;
-    const base = bold ? "#/blog-bold" : "#/blog";
+    const base = bold ? "#/blog" : "#/blog-classic";
     const posts = D.posts || [];
     const idx = posts.findIndex((x) => x.slug === p.slug);
     const next = posts[(idx + 1) % posts.length];
@@ -1036,8 +1046,8 @@
   // The v1 Work page and the Bold Type Work page (#/work-bold) share the
   // ledger, the chips, and the active filter; only the dress differs.
   const WORK_LEDGERS = [
-    ["#v1-work-filters", "#v1-work-cases", "#/work"],
-    ["#bt-work-filters", "#bt-work-cases", "#/work-bold"]
+    ["#v1-work-filters", "#v1-work-cases", "#/work-classic"],
+    ["#bt-work-filters", "#bt-work-cases", "#/work"]
   ];
   function renderV1WorkLedger() {
     WORK_LEDGERS.forEach(([f, r, base]) => renderWorkLedgerInto($(f), $(r), base));
@@ -1124,7 +1134,7 @@
       const rowsHtml = D.cases.slice(0, HOME_CASE_COUNT).map((c, i) => {
         const p = PREVIEW[c.slug] || { label: c.impact[0].label, tilt: -4 };
         return `
-          <a href="#/work/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
+          <a href="#/work-classic/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
              data-preview-value="${esc(c.impact[0].value)}"
              data-preview-label="${esc(p.label || c.impact[0].label)}"
              data-preview-tilt="${p.tilt == null ? -4 : p.tilt}">
