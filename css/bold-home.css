@@ -1,7 +1,7 @@
 /* ==========================================================================
    Bold Type home — #/home-bold
-   A second, full-bleed take on the homepage: three snap-scrolled chapters
-   (Intro, Work, Contact), Bricolage Grotesque display type,
+   A second, full-bleed take on the homepage: four snap-scrolled chapters
+   (Intro, Work, About, Contact), Bricolage Grotesque display type,
    hand-cut highlight blobs in rose / cobalt / mustard, and a chapter rail
    on the right. Lives next to the v1 home; nothing here touches it.
    Source: Claude Design "Portfolio Bold Type" (3a desktop, 3b mobile).
@@ -220,6 +220,30 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt-xp-role small { font-weight: 400; font-size: inherit; color: var(--ink-3); }
 
+/* -------- About: short version of #/about, rows reuse .bt-xp-row -------- */
+.bt-about {
+  flex: 1; margin-top: 22px;
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: center;
+}
+.bt-chapter--about .bt-display { font-size: clamp(44px, 6.4vw, 88px); line-height: 1.05; }
+.bt-about-text .bt-lead { margin-top: 28px; }
+.bt-about-rows { margin-top: 28px; max-width: 640px; }
+.bt-about-rows .bt-xp-role { font-size: 19px; }
+.bt-about-rows .bt-xp-when { text-transform: uppercase; }
+.bt-about-portrait {
+  /* Right margin keeps the portrait clear of the fixed chapter rail. */
+  position: relative; justify-self: end; width: 100%; max-width: 360px; margin-right: 72px;
+  aspect-ratio: 4 / 5; border: 2px solid var(--ink); border-radius: 12px;
+  background: var(--paper-2); transform: rotate(1.2deg);
+}
+.bt-about-portrait video { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block; }
+.bt-about-label {
+  position: absolute; left: 14px; bottom: -16px;
+  font-family: var(--font-hand); font-size: 22px; line-height: 1.1;
+  color: var(--ink); background: var(--paper);
+  padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px;
+}
+
 /* -------- Contact -------- */
 .bt-contact-grid {
   margin-top: auto;
@@ -360,6 +384,14 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-xp-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
   .bt-xp-when { display: none; }
   .bt-xp-role { font-size: 17px; }
+
+  .bt-about { margin-top: 0; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  .bt-chapter--about .bt-display { font-size: clamp(36px, 11vw, 52px); line-height: 1.1; letter-spacing: -0.045em; }
+  .bt-about-text .bt-lead, .bt-about-rows { margin-top: 18px; }
+  .bt-about-rows .bt-xp-when { display: block; }
+  .bt-about-rows .bt-xp-role { font-size: 16px; }
+  .bt-about-portrait { order: -1; justify-self: start; max-width: 150px; margin-right: 0; transform: rotate(-1.5deg); }
+  .bt-about-label { left: 8px; bottom: -12px; font-size: 17px; padding: 2px 10px; }
 
   .bt-contact-grid { grid-template-columns: 1fr; gap: 10px; }
   .bt-tile { flex-direction: row; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 12px; min-height: 24px; }

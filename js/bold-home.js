@@ -16,7 +16,8 @@
   const CHAPTERS = [
     { id: "intro", label: "Intro", color: "var(--bt-rose)" },
     { id: "work", label: "Work", color: "var(--bt-cobalt)" },
-    { id: "contact", label: "Contact", color: "var(--bt-mustard)" },
+    { id: "about", label: "About", color: "var(--bt-mustard)" },
+    { id: "contact", label: "Contact", color: "var(--bt-rose)" },
   ];
   const pad = (n) => String(n).padStart(2, "0");
 
@@ -70,7 +71,7 @@
 
   // The current chapter is whichever one sits under the viewport's midline.
   // Read on scroll rather than via IntersectionObserver so the state can't
-  // lag behind a snap or an instant jump. Four rect reads per event is cheap.
+  // lag behind a snap or an instant jump. A few rect reads per event is cheap.
   function initScrollSpy() {
     const sections = $$(".bt-chapter", root);
     let current = -1;
