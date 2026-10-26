@@ -521,6 +521,20 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 /* Inspiration: the sixth chapter, full width under Experience. */
 .bt-inspire { display: flex; flex-direction: column; gap: 28px; padding: 0 0 36px; scroll-margin-top: 96px; }
 .bt-inspire-h { font-size: clamp(34px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; max-width: 22ch; }
+/* Hovering "inspiring" turns the blob dark and runs a rainbow through the word. */
+.bt-inspire-h .bt-mark svg path { transition: fill 0.25s ease; }
+.bt-inspire-h .bt-mark:hover svg path { fill: var(--ink); }
+.bt-inspire-h .bt-mark:hover > span {
+  background: linear-gradient(90deg, #ff5f6d, #ffb347, #ffe066, #6ee7a8, #5ac8fa, #8f7cff, #ff7ad9, #ff5f6d);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  animation: bt-rainbow 2.4s linear infinite;
+}
+@keyframes bt-rainbow { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .bt-inspire-h .bt-mark:hover > span { animation: none; }
+}
 .bt-video { border: 2px solid var(--ink); border-radius: 12px; }
 .bt-colophon--light {
   margin-top: 8px; border-top-color: var(--rule); color: var(--ink-3);
