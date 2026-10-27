@@ -339,9 +339,10 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt-nav-cta:hover { background: var(--bt-rose); color: var(--ink); border-color: var(--bt-rose); }
 
-/* Chapter progress: four segments along the top of the nav, filled up to
-   the current chapter (driven by js/bold-home.js). Only the home nav has
-   the element, so other Bold Type pages are untouched. */
+/* Chapter progress: four segments, filled up to the current chapter
+   (driven by js/bold-home.js). Along the top on mobile, a vertical rail in
+   the left gutter on desktop, where the nav already has enough going on.
+   Only the home nav has the element, so other Bold Type pages are untouched. */
 .bt-nav-progress { display: flex; gap: 4px; }
 .bt-nav-progress span {
   flex: 1; height: 4px; border-radius: 2px;
@@ -349,7 +350,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt-nav-progress span.is-done { background: var(--chapter-color); }
 @media (min-width: 901px) {
-  .bt-nav-progress { position: absolute; top: 10px; left: 64px; right: 64px; }
+  .bt-nav-progress {
+    position: fixed; left: 28px; top: 50%; transform: translateY(-50%);
+    flex-direction: column; gap: 6px;
+  }
+  .bt-nav-progress span { flex: none; width: 4px; height: 44px; }
 }
 /* Mobile-only nav bits: counter, menu button. */
 .bt-nav-right { display: none; }
@@ -489,6 +494,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt--about .ahs-step-h .bt-mark { padding: 0 0.08em; }
 .bt--about .ahs-step-p { font-size: 16px; line-height: 1.6; }
+/* v1.css shrinks the long free-time chapter on short or narrow windows; the
+   taller photo frame leaves room for it, so all three chapters match. */
+@media (min-width: 901px) {
+  .bt.bt--about .ahs-step--long .ahs-step-p { font-size: 16px; line-height: 1.6; }
+}
 
 /* Chapter rail under the text, in the rail's mono voice. */
 .bt--about .ahs-rail { border-top: 2px solid var(--ink); }
