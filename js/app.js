@@ -556,8 +556,12 @@
         const label = s.label ? `<span class="label"${editAttr(bp, "label")}>${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption${editAttr(bp, "caption")}>${esc(s.caption)}</figcaption>` : "";
         // With a src it's a real image, without it the placeholder frame.
-        const visual = s.src
+        // srcNarrow swaps in a portrait layout on phones (wide diagrams).
+        const img = s.src
           ? `<img class="shot" src="${esc(s.src)}" alt="${esc(s.alt || s.caption || "")}" loading="lazy" decoding="async" />`
+          : "";
+        const visual = s.src
+          ? (s.srcNarrow ? `<picture style="display:block"><source media="(max-width: 640px)" srcset="${esc(s.srcNarrow)}" />${img}</picture>` : img)
           : `<div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>`;
         return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;">${visual}${caption}</figure>`;
       }
