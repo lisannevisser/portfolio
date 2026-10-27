@@ -392,7 +392,7 @@ window.LV_DATA = {
     },
     {
       slug: "website-relaunch",
-      title: "140+ pages relaunched in under a year",
+      title: "Relaunching a 140+ Page Company Website in Under a Year",
       subtitle: "140+ pages, new brand, new IA, end-to-end in under a year",
       company: "Cargoboard",
       year: "2022 - 2023",
