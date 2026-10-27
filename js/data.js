@@ -626,7 +626,7 @@ window.LV_DATA = {
       year: "2026",
       hue: 265,
       thumb: "images/visuals/figma-make-talk.jpg",
-      blurb: "An internal tech talk at Trusted Shops, co-presented with Daniel Beck, on how we took conversion tests from up to two weeks to two days with Figma Make: the problem, the tool comparison, the two-day journey from first prompt to live test, and the 90% rule that keeps UX in the loop. This public version leaves out the slides on internal tool access.",
+      blurb: "An internal tech talk at Trusted Shops on how we took conversion tests from up to two weeks to two days with Figma Make: the problem, the tool comparison, the two-day journey from first prompt to live test, and the 90% rule that keeps UX in the loop. This public version leaves out the slides on internal tool access.",
       embed: "",
       link: "talks/ai-prototyping-figma-make.pdf"
     },
