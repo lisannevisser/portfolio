@@ -130,6 +130,7 @@ window.LV_DATA = {
       ],
       tags: ["Design Ops", "AI workflows", "End-to-end"],
       coverPaletteHue: 265,
+      coverImage: "images/ai-workflow/cover.svg",
       tldr: "Every conversion test our team wanted to release waited up to two weeks for the same reason: a developer had to build it inside a sprint. When Figma Make shipped in May 2025, I immediately rebuilt the workflow so conversion managers could visualize their own ideas inside design-system-aware templates. With a designer QA gate at min. 80% brand compliance and a refinement loop for the winners the cycle from idea to live test went from two weeks to two days maximum, and the setup spread past my team into the default way conversion tests get built.",
       story: [
         { kind: "section", title: "Situation", body: "Every conversion test we ran moved through the same chain: someone has an idea, a designer mocks it up, a developer builds it inside a sprint, the test goes live. Four steps, and one of them set the pace for all the others.\n\nThe developer step owned the calendar. Not because the work was hard (most of these were small, lightweight changes) but because it had to wait for a sprint to have room.\n\nFor a team whose whole job is learning fast, that's a strange place to be: the bottleneck wasn't the thinking or the design, it was the queue." },

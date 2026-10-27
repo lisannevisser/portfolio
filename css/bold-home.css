@@ -169,6 +169,12 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   content: ""; position: absolute; inset: 0;
   background: repeating-linear-gradient(135deg, transparent 0 8px, var(--ink-a05) 8px 9px);
 }
+/* A case with its own coverImage drops the hatch and lets the picture fill. */
+.bt-card-cover.has-image::after { content: none; }
+.bt-card-cover img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
 .bt-card:hover .bt-card-cover { transform: scale(1.03); }
 .bt-card-title {
   align-self: flex-start;
