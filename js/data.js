@@ -219,7 +219,7 @@ window.LV_DATA = {
       // DRAFT · placeholders marked [PLACEHOLDER · ...]. Sits after the
       // first three cases so the home page teaser stays unchanged.
       slug: "illustrations-vs-icons",
-      title: "Taking the verdict out of the picture",
+      title: "Taking the Verdict Out of the Picture: When Less Emotion Sells More",
       subtitle: "An A/B test that swapped emotional illustrations for neutral icons on the payment form",
       company: "Trusted Shops",
       year: "2024 — 2025",
