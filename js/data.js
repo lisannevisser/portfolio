@@ -34,17 +34,17 @@ window.LV_DATA = {
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
 
-  // SVG placeholder wordmarks. Swap with real brand files at the same paths.
+  // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
     "Trusted Shops": "images/logos/Trusted-Shops_Logo_black.svg",
     Cargoboard: "images/logos/main_logo_color_black.svg",
     Funke: "images/logos/Funke-Mediengruppe-Logo.png",
     TikTok: "images/logos/TikTok-logo-RGB-Horizontal-black.png",
-    Canva: "images/logos/canva.svg",
+    Canva: "images/logos/canva-wordmark.svg",
     Aqora: "images/logos/Wortmarke 1C.svg",
-    Autarc: "images/logos/autarc.svg",
+    Autarc: "images/logos/autarc-wordmark.svg",
     feelinghale: "images/logos/feelinghale-logo.svg",
-    "Dr. Vivien Karl": "images/logos/dr-vivien-karl.svg"
+    "Dr. Vivien Karl": "images/logos/dr-vivien-karl.png"
   },
 
   cases: [
