@@ -79,10 +79,15 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   padding: var(--bt-hero-top) 64px 64px;
   display: flex;
   flex-direction: column;
-  border-top: 2px solid var(--ink);
+  position: relative;
 }
-.bt-chapter:first-child,
-.bt-chapter--intro { border-top: 0; } /* the nav comes first, so :first-child misses the intro */
+/* Chapter dividers stop at the content edge, like the rules on every other
+   Bold Type page (and the footer), instead of running edge to edge. Intro
+   has nothing above it; Contact changes background instead. */
+.bt-chapter:not(.bt-chapter--intro):not(.bt-chapter--contact)::before {
+  content: ""; position: absolute; top: 0; left: 64px; right: 64px;
+  height: 2px; background: var(--ink);
+}
 .bt-chapter--intro {
   /* Headline and lead hug the kicker like on the other pages; the logo band
      drops to the foot of the screen (padding-bottom moves into .bt-logos). */
@@ -141,10 +146,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 
 /* -------- Logo marquee (foot of the intro) -------- */
 .bt-logos {
-  /* Full bleed: the rule runs edge to edge like the chapter dividers. */
-  /* margin-top: auto pins the band to the bottom; equal padding above and
-     below keeps the logos centered between the rule and the screen edge. */
-  margin: auto -64px 0; padding: 40px 0; border-top: 2px solid var(--ink);
+  /* Content width, like the chapter dividers: the rule stops at the content
+     edge and the logos fade out there too. margin-top: auto pins the band
+     to the bottom; equal padding above and below keeps the logos centered
+     between the rule and the screen edge. */
+  margin: auto 0 0; padding: 40px 0; border-top: 2px solid var(--ink);
   display: flex; align-items: center; overflow: hidden;
   /* Two mask layers: the first keeps the 2px rule solid across the full
      width, the second fades only the logos in and out at the edges. */
@@ -388,7 +394,8 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-kicker { font-size: 11px; }
   .bt-lead { font-size: 16px; }
   .bt-intro-foot { margin-top: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
-  .bt-logos { margin: auto -22px 0; padding: 26px 0; }
+  .bt-logos { margin: auto 0 0; padding: 26px 0; }
+  .bt-chapter:not(.bt-chapter--intro):not(.bt-chapter--contact)::before { left: 22px; right: 22px; }
   [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
   [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
   .bt-swipe {
