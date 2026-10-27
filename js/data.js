@@ -27,7 +27,8 @@ window.LV_DATA = {
   career: [
     { role: "Senior Product Designer", org: "Trusted Shops", period: "2025 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
     { role: "Product Designer", org: "Trusted Shops", period: "2023 — 2025", city: "Berlin" },
-    { role: "Product Designer, freelance", org: "Aqora, Canva, Funke and more", period: "2020 — Now", note: "Quantum computing platform, design systems, research" },
+    { role: "Product Designer & Researcher", org: "Aqora", period: "2023 — Now", note: "Quantum computing hub, product design, field research" },
+    { role: "Product Designer, freelance", org: "Canva, Funke and more", period: "2020 — Now", note: "Design systems, research, UX/UI across industries" },
     { role: "Product Designer", org: "Cargoboard", period: "2022 — 2023", city: "Berlin", note: "B2B logistics, design system, IA redesign" },
     { role: "Quality Assurance Analyst", org: "TikTok", period: "2020 — 2022" }
   ],
