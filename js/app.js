@@ -572,9 +572,9 @@
         // Only anchor a face's title/subtitle when the key really exists in
         // data.js — the labels below fall back to hardcoded strings.
         const facePath = (field) => (bp && s[field] != null ? `${bp}.${field}` : "");
-        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
+        const limFace = { kind: "lim", title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
           base: bp ? `${bp}.items` : "", titlePath: facePath("title"), subtitlePath: facePath("subtitle") };
-        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
+        const oppFace = { kind: "opp", title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
           base: bp ? `${bp}.opportunities` : "", titlePath: facePath("oppositeTitle"), subtitlePath: facePath("oppositeSubtitle") };
         const front = oppFirst ? oppFace : limFace;
         const back = oppFirst ? limFace : oppFace;
@@ -593,12 +593,12 @@
             </div>`;
         };
         const frontFace = `
-          <div class="v1-limitations-face is-front">
+          <div class="v1-limitations-face is-front is-${front.kind}">
             ${renderHeader(front, "front", "false")}
             <div class="v1-limitations-grid">${renderItems(front.items, front.base)}</div>
           </div>`;
         const backFace = hasOpp ? `
-          <div class="v1-limitations-face is-back" aria-hidden="true">
+          <div class="v1-limitations-face is-back is-${back.kind}" aria-hidden="true">
             ${renderHeader(back, "back", "true")}
             <div class="v1-limitations-grid">${renderItems(back.items, back.base)}</div>
           </div>` : "";
