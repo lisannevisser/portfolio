@@ -489,8 +489,10 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt--about .ahs-progress { color: var(--ink); font-variant-numeric: tabular-nums; }
 .bt--about .ahs-progress [data-current] { color: var(--ink); }
 
-/* Photos: hard ink frame, slight tilt, color instead of grayscale, and the
-   design's handwritten pill hanging off the bottom-left corner. */
+/* Photos: hard ink frame, slight tilt, and the design's handwritten pill
+   hanging off the bottom-left corner. Chapter photos fade in black-and-white
+   and bloom into color once their step is active (scroll-driven, so it works
+   without hover); the portrait video has no [data-step] and stays in color. */
 .bt--about .ahs-images {
   border: 2px solid var(--ink); border-radius: 10px; background: var(--paper-2);
   overflow: visible; max-width: 360px; transform: rotate(1.5deg);
@@ -499,7 +501,8 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
    the caption pill can hang past the frame edge. */
 .bt--about .ahs-img { border-radius: 8px; padding: 0; }
 .bt--about .ahs-video { border-radius: 8px; }
-.bt--about .ahs-img[data-step] { filter: none; }
+.bt--about .ahs-img[data-step] { filter: grayscale(1); }
+.bt--about .ahs-img[data-step].is-active { filter: grayscale(0); transition-delay: 0ms, 0ms, 450ms; }
 .bt--about .ahs-img-label {
   position: absolute; left: 14px; bottom: -16px;
   font-family: var(--font-hand); font-size: 22px; line-height: 1.1; letter-spacing: 0; text-transform: none;
