@@ -287,6 +287,49 @@ aber die Vorlagen liegen alle bereit.
       Credit (Seite + Imprint), Desktop-Lift Runde 1 (rechnerisch ~8,2%),
       Payment-Update-Seite (eigener Test?), Name des Maturity-Modells.
 
+- [ ] Aqora-Case-Study (Quantum-Schicht fürs Portfolio, Stand
+      2026-10-27). Hintergrund: Lisanne überlegt eine PhD-Bewerbung im
+      Umfeld Quantum Computing (realistische Richtung: HCI für Quantum-
+      Software oder Quantum Education, nicht Physik). Das Portfolio soll
+      Quantum als Domäne sichtbar machen, ohne die Research-Positionierung
+      zu verschieben. NDA ist kein Thema, alles von Aqora darf gezeigt
+      werden. Erledigt: ein Quantum-Absatz im About ("02 — Practice") und
+      "quantum computing tools" in der longBio.
+  - [ ] Kandidat 1 (Favorit): Field Research auf der IASQA 2026
+        (International Autumn School in Quantum Algorithms for many-body
+        problems, CECAM Flagship School, 6.-16. Oktober 2026, Institut
+        d'études scientifiques de Cargèse, Korsika; ca. 70 PhDs, Postdocs
+        und Industrie, u. a. Quobly, Pasqal, Eviden, Google Quantum AI,
+        Air Liquide; Sponsor u. a. Alice & Bob). Lisanne war als
+        Researcherin vor Ort. Story: Aqora arbeitet seit 2023 mit
+        Proto-Personas vom Co-Founder (stark ausdifferenziert, je Persona
+        eine Journey Map, Zuordnung B2B/B2C, Unternehmenstypen, Profile),
+        validiert nur durch sein Branchenwissen. Die School war die erste
+        Gelegenheit, ins Feld zu gehen: Zielgruppen prüfen, das neue
+        Teaching-Feature (vor Ort im Einsatz) evaluieren, das
+        Research-Paper-Feature (in Entwicklung), Brand-Feedback, Usability.
+        Auswertung läuft (Stand 2026-10-27). Plan: Case parallel zur
+        Auswertung schreiben; erster Draft aus dem Event-Material (Setting,
+        Fragestellung, Methode), Findings nachziehen. Proto-Personas liegen
+        im FigJam-Board "aqora - Brainstorm" (Link bei Lisanne; Figma-MCP
+        braucht einmal Autorisierung über /mcp, sonst Export als PDF/PNG).
+        Freigabe fürs Zeigen von Personas und Journey Maps mit Aqora klären.
+  - [ ] Kandidat 2: Hackathons mit Unternehmen organisieren und
+        durchführen, als wiederholbarer Workflow (gerade im Aufbau).
+        Prozess-Case nach dem Muster von research-culture: was ein
+        Hackathon braucht, was standardisiert wurde, was pro Partner
+        variiert. Erst, wenn der Workflow steht.
+  - Notiz: Breite statt Tiefe ist bei Aqora die ehrliche Lage (viel
+    gesehen, wenig einzelnes in-depth). Die IASQA-Case löst das, weil
+    Field Research dort die Tiefe liefert.
+  - [ ] Alternative oder Ergänzung: Gazette-Post "Design für Quantum-
+        Nutzer" aus soziologischem Blick auf eine technische Community.
+        Trägt das Research-Interesse in Prosa, auch wenn die Case klein
+        ausfällt.
+  - Begriffshinweis: "Quantum UX" in Bewerbungen meiden (wird in Blogs
+    metaphorisch verwendet). Besser "HCI for quantum computing", "usable
+    quantum software" oder "quantum education".
+
 ## Cargoboard Split - Follow-ups (nach PR #154)
 
 - [ ] Case 04 (Design System) Story-Body aufräumen: Section "Approach",
@@ -391,6 +434,10 @@ Mal bei null anzufangen.
 
 ## About: CV
 
+- [ ] Quantum/Aqora im CV sichtbarer machen (Branding-Frage: Aqora nur
+      als Freelance-Zeile geht wegen der Jahreszahlen nicht; Alternative
+      über Projektzeilen oder einen Domänen-Hinweis). Läuft im separaten
+      CV-Projekt (`~/claude/cv-linkedin`), hier nur als Erinnerung.
 - [ ] Web-CV aktuell halten: `CV_Lisanne_Visser.pdf` im Repo-Root kommt
       aus `~/claude/cv-linkedin` (`node build.mjs cv-web.json`, ohne
       Telefonnummer). Nach jedem CV-Update neu kopieren und den
