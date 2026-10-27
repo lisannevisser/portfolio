@@ -32,7 +32,7 @@ window.LV_DATA = {
     { role: "Quality Assurance Analyst", org: "TikTok", period: "2020 — 2022" }
   ],
 
-  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
+  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "HALE.NOW", "Dr. Vivien Karl"],
 
   // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
@@ -43,7 +43,7 @@ window.LV_DATA = {
     Canva: "images/logos/canva-wordmark.svg",
     Aqora: "images/logos/Wortmarke 1C.svg",
     Autarc: "images/logos/autarc-wordmark.svg",
-    feelinghale: "images/logos/feelinghale-wordmark.svg",
+    "HALE.NOW": "images/logos/hale-now-wordmark.svg",
     "Dr. Vivien Karl": "images/logos/dr-vivien-karl.png"
   },
 
@@ -59,8 +59,8 @@ window.LV_DATA = {
     Canva: 1.12,
     Aqora: 0.72,
     Autarc: 0.74,
-    feelinghale: 1.45,
-    "Dr. Vivien Karl": 0.5
+    "HALE.NOW": 0.62,
+    "Dr. Vivien Karl": 0.38
   },
 
   cases: [

@@ -287,3 +287,16 @@ Mal bei null anzufangen.
 - [ ] Skill oder Agent für Python-Auswertungen von Surveys (Cleaning,
       Testwahl, ddof, reproduzierbarer Output). Knüpft an den
       Quant-vs-Qual-Blogpost an.
+
+## Case Study: Conversion tests (`#/work/ai-workflow`)
+
+Fig. 1 und Fig. 2 sind seit PR #218 generierte FigJam-Diagramme
+(`docs/figures/ai-workflow-diagrams.py`).
+
+- [ ] Nachschauen, ob die Präsentation aus dem firmeninternen Tech Talk
+      zum neuen Workflow (Figma Slides) noch auffindbar ist. Eine echte
+      Folie könnte Fig. 2 ersetzen oder ergänzen, vorher freigeben lassen
+      und anonymisieren.
+- [ ] Platzhalter im Text füllen: "ADD DETAILS - WAS IT A TABLE?" und
+      "The hypothesis behind it: XXXX" (Approach) sowie die Adoption-Zeile
+      im Outcome.
