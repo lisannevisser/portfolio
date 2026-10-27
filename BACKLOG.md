@@ -290,8 +290,7 @@ Mal bei null anzufangen.
 
 ## About: CV
 
-- [ ] Öffentliche CV-Version als PDF ins Repo legen und auf `#/about`
-      (Experience) und `#/about-classic` (Career) verlinken. Bis dahin
-      steht dort "CV on request" als Mail-Link (`TODO(cv)`-Kommentare in
-      `index.html`). Die Kontakt-Kachel "View CV" auf der Startseite
-      zeigt weiter auf `#/about`.
+- [ ] Web-CV aktuell halten: `CV_Lisanne_Visser.pdf` im Repo-Root kommt
+      aus `~/claude/cv-linkedin` (`node build.mjs cv-web.json`, ohne
+      Telefonnummer). Nach jedem CV-Update neu kopieren und den
+      `?v=`-Parameter an beiden Links in `index.html` hochzählen.
