@@ -492,7 +492,21 @@
       if (el) io.observe(el);
     });
 
+    // Expanded at the top of the page so readers see the structure next to
+    // the headline; shrinks into the button as soon as they start scrolling.
+    // CSS only honours .is-expanded on screens wide enough to hold the card.
+    let raf = 0;
+    const syncExpanded = () => {
+      raf = 0;
+      fab.classList.toggle("is-expanded", window.scrollY < 120);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(syncExpanded); };
+    syncExpanded();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     __tocFabCleanups.push(() => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
       fab.removeEventListener("click", onFabClick);
       fab.removeEventListener("keydown", onFabKey);
       list.removeEventListener("click", onListClick);
