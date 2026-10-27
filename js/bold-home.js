@@ -1,5 +1,5 @@
 /* =========================================================================
-   Bold Type home (#/home-bold): work cards from data.js, chapter rail,
+   Bold Type home (#/home-bold): work cards from data.js, mobile
    progress segments, and the light/dark nav flip on the Contact chapter.
    Depends on: window.LV_DATA and window.LV_RENDER (set by js/app.js).
    ========================================================================= */
@@ -37,17 +37,9 @@
     `).join("");
   }
 
-  // -------- Rail + progress: built once, driven by an observer --------
-  function renderRail() {
-    const rail = $(".bt-rail", root);
+  // -------- Mobile progress bar: built once, driven by the scroll spy --------
+  function renderProgress() {
     const progress = $(".bt-nav-progress", root);
-    if (rail) {
-      rail.innerHTML = CHAPTERS.map((c, i) => `
-        <button type="button" class="bt-rail-btn" data-go="${c.id}" style="--chapter-color:${c.color}">
-          <span>${pad(i)} ${c.label}</span><span class="bar"></span>
-        </button>
-      `).join("") + `<span class="bt-rail-count"></span>`;
-    }
     if (progress) {
       progress.innerHTML = CHAPTERS.map((c) => `<span style="--chapter-color:${c.color}"></span>`).join("");
     }
@@ -56,14 +48,13 @@
   function setChapter(index) {
     const ch = CHAPTERS[index];
     root.setAttribute("data-chapter", ch.id);
-    $$(".bt-rail-btn", root).forEach((b, i) => b.classList.toggle("is-active", i === index));
-    $$(".bt-nav-progress span", root).forEach((s, i) => {
+        $$(".bt-nav-progress span", root).forEach((s, i) => {
       s.classList.toggle("is-done", i <= index);
       // Every filled segment takes the current chapter's color, as in the design.
       if (i <= index) s.style.setProperty("--chapter-color", ch.color);
     });
     const count = `${pad(index)} / ${pad(CHAPTERS.length - 1)}`;
-    $$(".bt-rail-count, .bt-nav-count", root).forEach((el) => (el.textContent = count));
+    $$(".bt-nav-count", root).forEach((el) => (el.textContent = count));
     $$(".bt-nav-link", root).forEach((a) => {
       a.classList.toggle("is-current", a.getAttribute("data-chapter") === ch.id);
     });
@@ -113,7 +104,7 @@
 
   function boot() {
     renderCards();
-    renderRail();
+    renderProgress();
     initClicks();
     initScrollSpy();
   }
