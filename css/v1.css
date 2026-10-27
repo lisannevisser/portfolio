@@ -1035,6 +1035,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 0%; /* keep the head in frame, crop the keyboard instead */
   display: block;
 }
 [data-variation="v1"] .ahs-portrait {

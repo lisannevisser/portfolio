@@ -236,7 +236,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   aspect-ratio: 4 / 5; border: 2px solid var(--ink); border-radius: 12px;
   background: var(--paper-2); transform: rotate(1.2deg);
 }
-.bt-about-portrait video { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block; }
+.bt-about-portrait video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; border-radius: 10px; display: block; }
 .bt-about-label {
   position: absolute; left: 14px; bottom: -16px;
   font-family: var(--font-hand); font-size: 22px; line-height: 1.1;
