@@ -554,7 +554,11 @@
         const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
         const label = s.label ? `<span class="label"${editAttr(bp, "label")}>${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption${editAttr(bp, "caption")}>${esc(s.caption)}</figcaption>` : "";
-        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+        // With a src it's a real image, without it the placeholder frame.
+        const visual = s.src
+          ? `<img class="shot" src="${esc(s.src)}" alt="${esc(s.alt || s.caption || "")}" loading="lazy" decoding="async" />`
+          : `<div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>`;
+        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;">${visual}${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
         const sid = sectionId(idPrefix, s.title || "limitations", storyI);
