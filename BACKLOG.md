@@ -287,3 +287,11 @@ Mal bei null anzufangen.
 - [ ] Skill oder Agent für Python-Auswertungen von Surveys (Cleaning,
       Testwahl, ddof, reproduzierbarer Output). Knüpft an den
       Quant-vs-Qual-Blogpost an.
+
+## About: CV
+
+- [ ] Öffentliche CV-Version als PDF ins Repo legen und auf `#/about`
+      (Experience) und `#/about-classic` (Career) verlinken. Bis dahin
+      steht dort "CV on request" als Mail-Link (`TODO(cv)`-Kommentare in
+      `index.html`). Die Kontakt-Kachel "View CV" auf der Startseite
+      zeigt weiter auf `#/about`.
