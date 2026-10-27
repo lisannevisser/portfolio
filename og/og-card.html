@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- Source of images/og-card.png (the social share card, 1200x630).
+     Re-render from the repo root:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+       --force-device-scale-factor=1 --allow-file-access-from-files --virtual-time-budget=3000 \
+       --window-size=1200,630 --screenshot=images/og-card.png og/og-card.html
+     Then bump the ?v= on og:image and twitter:image in index.html. --><html lang="en"><head><meta charset="utf-8"><title>Share card</title><meta name="robots" content="noindex"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url("../fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");font-weight:200 800}
+@font-face{font-family:"Instrument Sans";src:url("../fonts/instrument-sans-latin-wght-normal.woff2") format("woff2");font-weight:400 700}
+@font-face{font-family:"JetBrains Mono";src:url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");font-weight:100 800}
+@font-face{font-family:"Caveat";src:url("../fonts/caveat-latin-wght-normal.woff2") format("woff2");font-weight:400 700}
+:root{--paper:#f4efe6;--ink:#1a1814;--ink-3:#6b665c;--rose:#f4a3b8;--cobalt:#1f3fbf;--mustard:#e8c547}
+*{box-sizing:border-box}html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Instrument Sans",sans-serif;position:relative}
+.top{position:absolute;left:64px;right:64px;top:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-family:"JetBrains Mono";font-size:16px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:10px 18px;border:2px solid var(--ink);border-radius:999px}
+.logo::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--cobalt)}
+.kicker{font-family:"JetBrains Mono";font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+h1{position:absolute;left:64px;top:150px;margin:0;font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.05em;line-height:.98;font-size:142px}
+.mark{position:relative;display:inline-block;padding:0 .04em}
+.mark svg{position:absolute;z-index:0;left:-.06em;top:.03em;width:calc(100% + .12em);height:92%}
+.mark svg path{fill:var(--rose)}.mark span{position:relative;z-index:1}
+.note{position:absolute;left:690px;top:356px;font-family:"Caveat";font-size:34px;font-weight:600;color:var(--cobalt);transform:rotate(-4deg)}
+.note svg{position:absolute;left:-70px;top:-6px;width:66px;height:40px;fill:none;stroke:var(--cobalt);stroke-width:2.6;stroke-linecap:round}
+.foot{position:absolute;left:0;right:0;bottom:0;height:128px;border-top:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 64px}
+.name{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;letter-spacing:-.03em}
+.role{font-size:22px;color:var(--ink-3);margin-top:4px}
+.tags{display:flex;gap:12px}
+.tag{font-family:"JetBrains Mono";font-size:14px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:9px 16px;border-radius:999px;border:2px solid var(--ink)}
+.tag.c{background:var(--cobalt);border-color:var(--cobalt);color:var(--paper)}.tag.m{background:var(--mustard);border-color:var(--mustard)}
+</style></head><body>
+<div class="top"><div class="logo">lisanne.design</div><div class="kicker">Portfolio · Berlin</div></div>
+<h1>Design that <span class="mark"><svg viewBox="0 0 340 130" preserveAspectRatio="none"><path d="M8 22 C 70 6, 210 16, 330 10 C 336 44, 334 88, 328 116 C 232 124, 96 118, 12 122 C 6 92, 4 52, 8 22 Z"/></svg><span>earns</span></span><br>its pixels.</h1>
+<div class="note"><svg viewBox="0 0 66 40"><path d="M62 26 C 44 34, 22 30, 6 16"/><path d="M6 16 L 18 14"/><path d="M6 16 L 10 28"/></svg>hi, I'm Lisanne</div>
+<div class="foot"><div><div class="name">Lisanne Visser</div><div class="role">Senior Product Designer</div></div>
+<div class="tags"><span class="tag c">Research</span><span class="tag m">Experimentation</span><span class="tag">Systems</span></div></div>
+</body></html>
