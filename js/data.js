@@ -11,7 +11,7 @@ window.LV_DATA = {
       "I turn messy product problems into evidence-backed design. Research, experimentation, and systems thinking sit at the center of the work; I ship end-to-end, from discovery to pixels to post-launch metrics.",
     longBio: [
       "I didn't start in design. I started in curiosity. A communications degree, a first UX role at an agency, and a slow realization that the questions I loved asking (why do people do what they do? what makes a product feel effortless?) were exactly the questions good design answers.",
-      "Five years in, I've designed end-to-end across B2B logistics, consumer trust, and internal tooling. Research and experimentation hold the work together: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.",
+      "Five years in, I've designed end-to-end across B2B logistics, consumer trust, quantum computing tools, and internal tooling. Research and experimentation hold the work together: I've run the first focus group in a 25-year-old company, introduced heatmaps that reshaped a brand, and turned a price set on intuition into a 15% revenue lift.",
       "The label 'growth designer' undersells it. The work that excites me is the full loop, from a fuzzy strategic question to shipped UI to measured outcome, with a design system and a research habit left behind afterward."
     ],
     credo: [
@@ -68,7 +68,7 @@ window.LV_DATA = {
   cases: [
     {
       slug: "pricing",
-      title: "Repricing buyer protection on psychology",
+      title: "Designing Product Prices with Psychology",
       subtitle: "Two rounds of pricing experiments on a core revenue driver",
       company: "Trusted Shops",
       year: "2024",
@@ -119,7 +119,7 @@ window.LV_DATA = {
     },
     {
       slug: "ai-workflow",
-      title: "Conversion tests, 2 weeks to 2 days",
+      title: "Speeding Up Test Prep Cycles: 2 Weeks to 2 Days",
       subtitle: "Rebuilding the conversion-test workflow around AI design tools",
       company: "Trusted Shops",
       year: "2025",
@@ -219,7 +219,7 @@ window.LV_DATA = {
       // DRAFT · placeholders marked [PLACEHOLDER · ...]. Sits after the
       // first three cases so the home page teaser stays unchanged.
       slug: "illustrations-vs-icons",
-      title: "Taking the verdict out of the picture",
+      title: "Taking the Verdict Out of the Picture: When Less Emotion Sells More",
       subtitle: "An A/B test that swapped emotional illustrations for neutral icons on the payment form",
       company: "Trusted Shops",
       year: "2024 — 2025",
@@ -345,7 +345,7 @@ window.LV_DATA = {
     },
     {
       slug: "design-system",
-      title: "Cargoboard's rebrand and first design system",
+      title: "Building a Scale-Up's First Design System",
       subtitle: "Brand discovery, visual system, and the company's first design language",
       company: "Cargoboard",
       year: "2021 - 2022",
