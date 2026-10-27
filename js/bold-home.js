@@ -35,9 +35,6 @@
         </span>
       </a>
     `).join("");
-    // The link under the cards names how many cases sit behind it.
-    const all = $(".bt-work-all", root);
-    if (all) all.textContent = `All ${D.cases.length} case studies`;
   }
 
   // -------- Progress bar: built once, driven by the scroll spy --------

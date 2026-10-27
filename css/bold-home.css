@@ -210,7 +210,14 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
    adds no height to a chapter that has to fit one screen. Same mustard
    underline as "More about me" in the About chapter (.bt-xp-cv). */
 .bt-work-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
-.bt-work-all { flex-shrink: 0; margin: 0 -8px 0.5em 0; }
+.bt-work-all { flex-shrink: 0; margin: 0 -8px 0.5em 0; position: relative; padding-right: 26px; }
+/* The mustard underline runs on past the text and ends in an arrowhead. */
+.bt-work-all::after {
+  content: ""; position: absolute; right: 4px; top: 88%;
+  width: 0.42em; height: 0.42em;
+  border-top: 0.16em solid var(--bt-mustard); border-right: 0.16em solid var(--bt-mustard);
+  transform: translateY(-50%) rotate(45deg);
+}
 
 /* -------- Experience (the block lives on #/about-bold, see .bt-xp-section) -------- */
 .bt-xp {
