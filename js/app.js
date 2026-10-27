@@ -42,6 +42,14 @@
   const DRAFT_POSTS = new Set(["design-trends-2027"]);
   const livePosts = () => (D.posts || []).filter((p) => !DRAFT_POSTS.has(p.slug));
 
+  // Cases parked the same way: the entry stays in js/data.js, but it drops
+  // out of the home ledger, the work list, the "Next case" link, and its
+  // URL lands on 404. To publish one, delete its slug from this set and
+  // restore its typeface credit in the imprint (index.html). alright-app is
+  // parked until the app ships; without a launch there is no outcome to show.
+  const DRAFT_CASES = new Set(["alright-app"]);
+  const liveCases = () => (D.cases || []).filter((c) => !DRAFT_CASES.has(c.slug));
+
   // Bold Type is the default dress. The plain slugs (#/, #/work,
   // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
   // the original v1 dress stays reachable as a backup at "<name>-classic"
@@ -49,7 +57,7 @@
   // (chinese, playground, styleguide) keep their plain slug. Old
   // "-bold" links still resolve and get rewritten to the plain slug.
   const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
-  const DYNAMIC = { work: ["case", D.cases], blog: ["post", livePosts()] };
+  const DYNAMIC = { work: ["case", liveCases()], blog: ["post", livePosts()] };
 
   // Anything that isn't a route section, a known case slug, or a known post
   // slug lands on the 404 page (the Bold Type one at #/404-bold).
@@ -93,7 +101,7 @@
     // Case study: fill the v1 or the Bold Type template with the selected slug.
     flushTocFabCleanups();
     if (route.page === "case" || route.page === "case-bold") {
-      const c = D.cases.find((x) => x.slug === route.slug) || D.cases[0];
+      const c = liveCases().find((x) => x.slug === route.slug) || liveCases()[0];
       renderV1Case(c, route.page === "case-bold" ? "bold" : "v1");
     }
 
@@ -550,8 +558,8 @@
     if (!root) return;
     const base = bold ? "#/work" : "#/work-classic";
     const idPrefix = bold ? "bt" : "v1";
-    const idx = D.cases.findIndex((x) => x.slug === c.slug);
-    const next = D.cases[(idx + 1) % D.cases.length];
+    const idx = liveCases().findIndex((x) => x.slug === c.slug);
+    const next = liveCases()[(idx + 1) % liveCases().length];
 
     const tocEntries = buildTocEntries(c, idPrefix);
 
@@ -1101,7 +1109,7 @@
     // Filter chips (with counts)
     const counts = {};
     WORK_FILTERS.forEach((f) => {
-      counts[f.id] = D.cases.filter((c) => inCategory(c, f.id)).length;
+      counts[f.id] = liveCases().filter((c) => inCategory(c, f.id)).length;
     });
     filtersEl.innerHTML = WORK_FILTERS.map((f) => {
       const active = v1WorkFilter === f.id;
@@ -1117,7 +1125,7 @@
     }).join("");
 
     // Ledger rows
-    const visible = D.cases.filter((c) => inCategory(c, v1WorkFilter));
+    const visible = liveCases().filter((c) => inCategory(c, v1WorkFilter));
     rowsEl.innerHTML = visible.length === 0
       ? `<div class="v1-work-empty">Nothing in this category yet — try another filter.</div>`
       : visible.map((c, i) => {
@@ -1174,7 +1182,7 @@
       // Order comes from data.js; "All work →" carries the rest.
       const HOME_CASE_COUNT = 3;
 
-      const rowsHtml = D.cases.slice(0, HOME_CASE_COUNT).map((c, i) => {
+      const rowsHtml = liveCases().slice(0, HOME_CASE_COUNT).map((c, i) => {
         const p = PREVIEW[c.slug] || { label: c.impact[0].label, tilt: -4 };
         return `
           <a href="#/work-classic/${esc(c.slug)}" class="v1-ledger-row lv-reveal"

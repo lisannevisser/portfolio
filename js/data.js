@@ -68,7 +68,7 @@ window.LV_DATA = {
   cases: [
     {
       slug: "pricing",
-      title: "Repricing buyer protection on psychology",
+      title: "Designing Product Prices with Psychology",
       subtitle: "Two rounds of pricing experiments on a core revenue driver",
       company: "Trusted Shops",
       year: "2024",
@@ -119,7 +119,7 @@ window.LV_DATA = {
     },
     {
       slug: "ai-workflow",
-      title: "Conversion tests, 2 weeks to 2 days",
+      title: "Speeding Up Test Prep Cycles: 2 Weeks to 2 Days",
       subtitle: "Rebuilding the conversion-test workflow around AI design tools",
       company: "Trusted Shops",
       year: "2025",
@@ -219,7 +219,7 @@ window.LV_DATA = {
       // DRAFT · placeholders marked [PLACEHOLDER · ...]. Sits after the
       // first three cases so the home page teaser stays unchanged.
       slug: "illustrations-vs-icons",
-      title: "Taking the verdict out of the picture",
+      title: "Taking the Verdict Out of the Picture: When Less Emotion Sells More",
       subtitle: "An A/B test that swapped emotional illustrations for neutral icons on the payment form",
       company: "Trusted Shops",
       year: "2024 — 2025",
@@ -276,7 +276,7 @@ window.LV_DATA = {
     },
     {
       slug: "design-system",
-      title: "Cargoboard's rebrand and first design system",
+      title: "Building a Scale-Up's First Design System",
       subtitle: "Brand discovery, visual system, and the company's first design language",
       company: "Cargoboard",
       year: "2021 - 2022",
