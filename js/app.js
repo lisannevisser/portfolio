@@ -666,8 +666,15 @@
         </h1>
       </header>`;
 
+    // Optional cover image between the header and the impact grid.
+    const cover = c.cover
+      ? `<figure class="lv-post-figure lv-case-cover lv-reveal"><img class="shot" src="${esc(c.cover)}" alt="${esc(c.coverAlt || "")}" decoding="async" /></figure>`
+      : "";
+
     root.innerHTML = `
       ${header}
+
+      ${cover}
 
       ${shouldShowImpact(c.impact) ? `
       <div class="v1-impact-grid lv-reveal" style="margin-bottom:4rem;">
