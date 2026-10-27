@@ -1383,7 +1383,7 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
 .bt-404-lead { margin-top: 32px; color: rgba(244, 239, 230, 0.7); }
 /* Handwritten aside pointing down at the tiles. */
 .bt-404-note {
-  margin-top: auto; padding-top: 48px; align-self: flex-end;
+  margin-top: auto; padding-top: 48px; align-self: center;
   display: flex; align-items: flex-end; gap: 8px;
   font-family: var(--font-hand); font-size: 26px; line-height: 1;
   color: var(--bt-mustard); transform: rotate(-3deg);
