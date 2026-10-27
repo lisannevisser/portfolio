@@ -436,7 +436,10 @@ Mal bei null anzufangen.
 
 - [ ] Quantum/Aqora im CV sichtbarer machen (Branding-Frage: Aqora nur
       als Freelance-Zeile geht wegen der Jahreszahlen nicht; Alternative
-      über Projektzeilen oder einen Domänen-Hinweis). Läuft im separaten
+      über Projektzeilen oder einen Domänen-Hinweis). Aqora ist seit 2023;
+      Idee: eigene Karrierezeile "2023 — Now, Product Designer &
+      Researcher, freelance, Aqora" im Portfolio (About, Home) und im CV,
+      zusammen ändern. Das LinkedIn-About nennt 2023 schon. Läuft im separaten
       CV-Projekt (`~/claude/cv-linkedin`), hier nur als Erinnerung.
 - [ ] Web-CV aktuell halten: `CV_Lisanne_Visser.pdf` im Repo-Root kommt
       aus `~/claude/cv-linkedin` (`node build.mjs cv-web.json`, ohne
