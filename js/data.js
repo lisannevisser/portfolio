@@ -575,60 +575,12 @@ window.LV_DATA = {
       blurb: "An anatomy study of the lower leg and foot in black ink, next to a page of loose watercolor washes."
     },
     {
-      slug: "facely-doodles",
-      title: "Logo doodles",
-      medium: "Ink",
-      thumb: "images/sketchbook/facely-doodles-thumb.jpg",
-      full: "images/sketchbook/facely-doodles.jpg",
-      blurb: "A notebook page of logo and face ideation, drawn small and fast."
-    },
-    {
-      slug: "lego-gandalf",
-      title: "Lego Gandalf",
-      medium: "Digital line art",
-      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
-      full: "images/sketchbook/lego-gandalf.jpg",
-      blurb: "A clean line drawing done on the iPad."
-    },
-    {
-      slug: "koi-plate",
-      title: "Koi plate",
-      medium: "Ceramic painting",
-      thumb: "images/sketchbook/koi-plate-thumb.jpg",
-      full: "images/sketchbook/koi-plate.jpg",
-      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
-    },
-    {
-      slug: "character-doodles",
-      title: "Character doodles",
-      medium: "Graphite",
-      thumb: "images/sketchbook/character-doodles-thumb.jpg",
-      full: "images/sketchbook/character-doodles.jpg",
-      blurb: "A couple of loose creature doodles."
-    },
-    {
-      slug: "color-tests",
-      title: "Color tests",
-      medium: "Watercolor",
-      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
-      full: "images/sketchbook/color-tests-portrait.jpg",
-      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
-    },
-    {
-      slug: "pikachu",
-      title: "Pikachu",
+      slug: "lighthouse-watercolor",
+      title: "Lighthouse",
       medium: "Watercolor and ink",
-      thumb: "images/sketchbook/pikachu-thumb.jpg",
-      full: "images/sketchbook/pikachu.jpg",
-      blurb: "A loose watercolor with a soft, blended background."
-    },
-    {
-      slug: "life-drawing-seated",
-      title: "Life drawing",
-      medium: "Ink wash",
-      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
-      full: "images/sketchbook/life-drawing-seated.jpg",
-      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
+      full: "images/sketchbook/lighthouse-watercolor.jpg",
+      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
     },
     {
       slug: "eye-anatomy-studies",
@@ -639,12 +591,60 @@ window.LV_DATA = {
       blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
     },
     {
-      slug: "lighthouse-watercolor",
-      title: "Lighthouse",
+      slug: "life-drawing-seated",
+      title: "Life drawing",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
+      full: "images/sketchbook/life-drawing-seated.jpg",
+      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+    },
+    {
+      slug: "pikachu",
+      title: "Pikachu",
       medium: "Watercolor and ink",
-      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
-      full: "images/sketchbook/lighthouse-watercolor.jpg",
-      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
+      thumb: "images/sketchbook/pikachu-thumb.jpg",
+      full: "images/sketchbook/pikachu.jpg",
+      blurb: "A loose watercolor with a soft, blended background."
+    },
+    {
+      slug: "color-tests",
+      title: "Color tests",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
+      full: "images/sketchbook/color-tests-portrait.jpg",
+      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
+    },
+    {
+      slug: "character-doodles",
+      title: "Character doodles",
+      medium: "Graphite",
+      thumb: "images/sketchbook/character-doodles-thumb.jpg",
+      full: "images/sketchbook/character-doodles.jpg",
+      blurb: "A couple of loose creature doodles."
+    },
+    {
+      slug: "koi-plate",
+      title: "Koi plate",
+      medium: "Ceramic painting",
+      thumb: "images/sketchbook/koi-plate-thumb.jpg",
+      full: "images/sketchbook/koi-plate.jpg",
+      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
+    },
+    {
+      slug: "lego-gandalf",
+      title: "Lego Gandalf",
+      medium: "Digital line art",
+      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
+      full: "images/sketchbook/lego-gandalf.jpg",
+      blurb: "A clean line drawing done on the iPad."
+    },
+    {
+      slug: "facely-doodles",
+      title: "Logo doodles",
+      medium: "Ink",
+      thumb: "images/sketchbook/facely-doodles-thumb.jpg",
+      full: "images/sketchbook/facely-doodles.jpg",
+      blurb: "A notebook page of logo and face ideation, drawn small and fast."
     }
   ],
 
