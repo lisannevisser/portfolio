@@ -698,9 +698,6 @@ html { cursor: none; }
   color: var(--ink-3);
 }
 
-/* Case cover: the optional image between the case header and the impact grid. */
-.lv-case-cover { margin: 0 0 clamp(2.5rem, 5vw, 4rem); }
-
 /* Responsive video embed (16/9 YouTube etc.) */
 .lv-video {
   position: relative;
