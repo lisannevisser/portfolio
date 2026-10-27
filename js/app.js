@@ -37,9 +37,9 @@
   // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
   // the original v1 dress stays reachable as a backup at "<name>-classic"
   // (#/home-classic, #/work-classic/<slug>, ...). Pages that only exist in v1
-  // (books, chinese, playground, styleguide) keep their plain slug. Old
+  // (chinese, playground, styleguide) keep their plain slug. Old
   // "-bold" links still resolve and get rewritten to the plain slug.
-  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "imprint", "privacy"]);
+  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
   const DYNAMIC = { work: ["case", D.cases], blog: ["post", D.posts || []] };
 
   // Anything that isn't a route section, a known case slug, or a known post
@@ -328,7 +328,8 @@
       D.clients.forEach((c) => {
         const logo = D.clientLogos[c];
         if (logo) {
-          items.push(`<img src="${logo}" alt="${c}" loading="lazy" onerror="this.outerHTML='<span>— ${c}</span>'">`);
+          const scale = (D.clientLogoScale || {})[c] || 1;
+          items.push(`<img src="${logo}" alt="${c}" style="--logo-scale:${scale}" loading="lazy" onerror="this.outerHTML='<span>— ${c}</span>'">`);
         } else {
           items.push(`<span>— ${c}</span>`);
         }
@@ -492,7 +493,21 @@
       if (el) io.observe(el);
     });
 
+    // Expanded at the top of the page so readers see the structure next to
+    // the headline; shrinks into the button as soon as they start scrolling.
+    // CSS only honours .is-expanded on screens wide enough to hold the card.
+    let raf = 0;
+    const syncExpanded = () => {
+      raf = 0;
+      fab.classList.toggle("is-expanded", window.scrollY < 120);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(syncExpanded); };
+    syncExpanded();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     __tocFabCleanups.push(() => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
       fab.removeEventListener("click", onFabClick);
       fab.removeEventListener("keydown", onFabKey);
       list.removeEventListener("click", onListClick);
@@ -540,7 +555,15 @@
         const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
         const label = s.label ? `<span class="label"${editAttr(bp, "label")}>${esc(s.label)}</span>` : "";
         const caption = s.caption ? `<figcaption${editAttr(bp, "caption")}>${esc(s.caption)}</figcaption>` : "";
-        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;"><div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>${caption}</figure>`;
+        // With a src it's a real image, without it the placeholder frame.
+        // srcNarrow swaps in a portrait layout on phones (wide diagrams).
+        const img = s.src
+          ? `<img class="shot" src="${esc(s.src)}" alt="${esc(s.alt || s.caption || "")}" loading="lazy" decoding="async" />`
+          : "";
+        const visual = s.src
+          ? (s.srcNarrow ? `<picture style="display:block"><source media="(max-width: 640px)" srcset="${esc(s.srcNarrow)}" />${img}</picture>` : img)
+          : `<div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>`;
+        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;">${visual}${caption}</figure>`;
       }
       if (s.kind === "limitations" && s.items) {
         const sid = sectionId(idPrefix, s.title || "limitations", storyI);
@@ -557,9 +580,9 @@
         // Only anchor a face's title/subtitle when the key really exists in
         // data.js — the labels below fall back to hardcoded strings.
         const facePath = (field) => (bp && s[field] != null ? `${bp}.${field}` : "");
-        const limFace = { title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
+        const limFace = { kind: "lim", title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
           base: bp ? `${bp}.items` : "", titlePath: facePath("title"), subtitlePath: facePath("subtitle") };
-        const oppFace = { title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
+        const oppFace = { kind: "opp", title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
           base: bp ? `${bp}.opportunities` : "", titlePath: facePath("oppositeTitle"), subtitlePath: facePath("oppositeSubtitle") };
         const front = oppFirst ? oppFace : limFace;
         const back = oppFirst ? limFace : oppFace;
@@ -578,12 +601,12 @@
             </div>`;
         };
         const frontFace = `
-          <div class="v1-limitations-face is-front">
+          <div class="v1-limitations-face is-front is-${front.kind}">
             ${renderHeader(front, "front", "false")}
             <div class="v1-limitations-grid">${renderItems(front.items, front.base)}</div>
           </div>`;
         const backFace = hasOpp ? `
-          <div class="v1-limitations-face is-back" aria-hidden="true">
+          <div class="v1-limitations-face is-back is-${back.kind}" aria-hidden="true">
             ${renderHeader(back, "back", "true")}
             <div class="v1-limitations-grid">${renderItems(back.items, back.base)}</div>
           </div>` : "";
@@ -1357,11 +1380,14 @@
     );
   }
 
+  // Every container with data-books="grid" gets the covers (#/books in the
+  // Bold Type dress, #/books-classic). Both open the one review overlay,
+  // which sits after <main>. The stats block only exists in the classic dress.
   function renderBooks() {
     const books = D.books || [];
-    const grid = $("#lv-books-grid");
+    const grids = $$('[data-books="grid"]');
     const statsEl = $("#lv-books-stats");
-    if (!grid || !books.length) return;
+    if (!grids.length || !books.length) return;
 
     // ---- Stats ----
     const total = books.length;
@@ -1422,7 +1448,7 @@
     }
 
     // ---- Cover grid ----
-    grid.innerHTML = books
+    const cards = books
       .map((b, i) => `
         <button class="lv-book-card" data-index="${i}" data-cursor-label="Read" aria-label="Open review of ${esc(b.title)}">
           <span class="lv-book-cover" style="--spine:${esc(b.color)}">
@@ -1437,6 +1463,7 @@
           </span>
         </button>`)
       .join("");
+    grids.forEach((grid) => { grid.innerHTML = cards; });
 
     // ---- Detail overlay ----
     const overlay = $("#lv-book-overlay");
@@ -1470,12 +1497,12 @@
       document.body.style.overflow = "";
     }
 
-    grid.addEventListener("click", (e) => {
+    grids.forEach((grid) => grid.addEventListener("click", (e) => {
       const card = e.target.closest(".lv-book-card");
       if (!card) return;
       const b = books[parseInt(card.getAttribute("data-index"), 10)];
       if (b) openBook(b);
-    });
+    }));
     closeBtn.addEventListener("click", closeBook);
     backdrop.addEventListener("click", closeBook);
     document.addEventListener("keydown", (e) => {

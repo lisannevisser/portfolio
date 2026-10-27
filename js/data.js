@@ -33,19 +33,35 @@ window.LV_DATA = {
     { role: "Quality Assurance Analyst", org: "TikTok", period: "2020 — 2022" }
   ],
 
-  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "feelinghale", "Dr. Vivien Karl"],
+  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "HALE.NOW", "Dr. Vivien Karl"],
 
-  // SVG placeholder wordmarks. Swap with real brand files at the same paths.
+  // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
-    "Trusted Shops": "images/logos/Trusted-Shops_Logo_black.svg",
+    "Trusted Shops": "images/logos/trusted-shops-wordmark.svg",
     Cargoboard: "images/logos/main_logo_color_black.svg",
     Funke: "images/logos/Funke-Mediengruppe-Logo.png",
-    TikTok: "images/logos/TikTok-logo-RGB-Horizontal-black.png",
-    Canva: "images/logos/canva.svg",
+    TikTok: "images/logos/tiktok-wordmark.png",
+    Canva: "images/logos/canva-wordmark.svg",
     Aqora: "images/logos/Wortmarke 1C.svg",
-    Autarc: "images/logos/autarc.svg",
-    feelinghale: "images/logos/feelinghale-logo.svg",
-    "Dr. Vivien Karl": "images/logos/dr-vivien-karl.svg"
+    Autarc: "images/logos/autarc-wordmark.svg",
+    "HALE.NOW": "images/logos/hale-now-wordmark.svg",
+    "Dr. Vivien Karl": "images/logos/dr-vivien-karl.png"
+  },
+
+  // Optical size per logo, as a factor of the strip's logo height. Wide,
+  // flat wordmarks run smaller, compact or stacked ones larger, so they all
+  // carry about the same weight. Where it can't be even, the big brands
+  // (TikTok, Canva, Funke) get the extra size.
+  clientLogoScale: {
+    "Trusted Shops": 1.3,
+    Cargoboard: 0.78,
+    Funke: 1.4,
+    TikTok: 0.88,
+    Canva: 1.12,
+    Aqora: 0.72,
+    Autarc: 0.74,
+    "HALE.NOW": 0.62,
+    "Dr. Vivien Karl": 0.38
   },
 
   cases: [
@@ -118,9 +134,9 @@ window.LV_DATA = {
       tldr: "Every conversion test our team wanted to release waited up to two weeks for the same reason: a developer had to build it inside a sprint. When Figma Make shipped in May 2025, I immediately rebuilt the workflow so conversion managers could visualize their own ideas inside design-system-aware templates. With a designer QA gate at min. 80% brand compliance and a refinement loop for the winners the cycle from idea to live test went from two weeks to two days maximum, and the setup spread past my team into the default way conversion tests get built.",
       story: [
         { kind: "section", title: "Situation", body: "Every conversion test we ran moved through the same chain: someone has an idea, a designer mocks it up, a developer builds it inside a sprint, the test goes live. Four steps, and one of them set the pace for all the others.\n\nThe developer step owned the calendar. Not because the work was hard (most of these were small, lightweight changes) but because it had to wait for a sprint to have room.\n\nFor a team whose whole job is learning fast, that's a strange place to be: the bottleneck wasn't the thinking or the design, it was the queue." },
-        { kind: "figure", hue: 265, label: "Test cycle · before", caption: "Fig. 1 - The old conversion-test cycle. Four handoffs, with the developer step waiting on sprint capacity." },
+        { kind: "figure", hue: 265, src: "images/ai-workflow/test-cycle-before.svg", srcNarrow: "images/ai-workflow/test-cycle-before-narrow.svg", alt: "A FigJam-style board of the old test cycle. Four sticky notes in a loop: Idea (conversion manager), Mockup (designer), Build (developer, waiting for the next sprint with room) and Live test (conversion manager). The Build step is circled with the note: the queue sets the pace. A brace over the row reads: up to 2 weeks, idea to live test.", caption: "Fig. 1 - The old conversion-test cycle. Four handoffs, with the developer step waiting on sprint capacity." },
         { kind: "section", title: "Approach", body: "Here's the thing I kept coming back to: **the slowest part of a conversion test was never the design, it was waiting for someone else to build it.**\n\nI'd been watching AI design tools for a while, half-curious, half-skeptical. At the time, AI could do a lot, but in terms of design it was lagging. So when Figma Make shipped in May 2025, I tested it on release day with one question: if our design system is wired in, does it produce good enough results so that a designer or conversion manager can visualize their own idea on a codebase? And beyond that: Would we be able to launch a test without a developer in the loop?\n\nThe answer was close enough to yes that I rebuilt the workflow around it. Not as a faster way to make mockups, but as a way to move production out of the bottleneck entirely and hand it to the people who have the ideas in the first place.\n\nI invited one of the conversion managers to test the workflow with me. We picked an experiment from the backlog that we found suitable. ADD DETAILS - WAS IT A TABLE? We picked an idea that was sitting on the shelf for a while: Adding a comparison table to the pricing page. The hypothesis behind it: XXXX. Another reason why we picked a table was that tables are tedious to build in HTML and CSS. It marked a perfect test object to see how AI could support us with a developer independent workflow." },
-        { kind: "figure", hue: 265, label: "Workflow · designer overview", caption: "Fig. 2 - The pipeline that replaced the sprint dependency: idea, template, designer QA gate, live test, refinement. Each stage with one owner and one job." },
+        { kind: "figure", hue: 265, src: "images/ai-workflow/pipeline-now.svg", srcNarrow: "images/ai-workflow/pipeline-now-narrow.svg", alt: "A FigJam-style board of the new pipeline. Idea and Template (conversion manager), a diamond for the designer QA gate at min. 80% brand compliance that sends weaker variants back to the template, Live test (conversion manager) and Refinement of winners to 100% (designer). Every result loops back to the next idea. A brace over the row reads: 2 days max, no developer in the loop.", caption: "Fig. 2 - The pipeline that replaced the sprint dependency: idea, template, designer QA gate, live test, refinement. Each stage with one owner and one job." },
         { kind: "section", title: "Method", body: "Two decisions did the heavy lifting.\n\nThe first was templates. Rather than letting everyone generate some random version of a page per test, I built 1:1 replicas of our live pages as Figma Make templates as soon as the feature became available. Each one bakes in the prompt instructions that keep output consistent: automatic test naming, export conventions, role awareness. Only I, as the team's designer, manage the templates. Everyone else works inside them. That's what keeps a fast workflow from turning into a mess.\n\nMoreover, using a template saves tokens on context. And additionally, I have added a prompt to the template that lets Figma Make know about the users' intentions for exporting to Kameleoon, our A/B testing tool. As per default, Figma Make writes prototypes in React. For Kameleoon, however, we need pure HTML + CSS.\n\nThe second was the 80% rule. In experimentation, the speed of learning matters more than pixel perfection. So we ship at a minimum of 80% brand compliance after a designer QA, enough that nothing embarrassing goes out, and we refine the winners to 100% before they roll out for good. The 80 isn't a corner cut under pressure. It's a deliberate gate: good enough to learn from, honest about what a test actually needs. Technically, it does not only mess with design cohesiveness, but also with the method of A/B testing, but we decided to compromise for speed. We monitor each implementation and general performance on a daily basis. And in a time where businesses request fast AI solutions, committing on temporary design inconsistencies felt like a reasonable trade-off." },
         { kind: "result", title: "Outcome", body: "With the new workflow in place, idea to live test went from up to two weeks to maximum of two days. That was the number I was after. We got extremely developer-independent, and our conversion managers even removed design as a bottleneck. Being able to visualize their ideas and hand a wireframe to design enables us to work even more efficiently.\n\nThe part I didn't plan for was what happened next. PMs in other departments started picking up Figma Make. Other designers picked it up. The templates quietly became a single source of truth, sitting alongside our main Figma files as the place tests actually start.\n\nAnd my own role shifted. I went from executing designs to maintaining the system around them: owning the templates, holding the QA gate, deciding what ships at 80% and what earns the full pass. More tests through the pipeline means more of those calls land on my desk, and that's the part of the job that compounds. I'm still designing, but when it comes to simple A/B tests, my role has shifted noticeably. With Figma Make's connection to Figma design files, it's also easy to move ideas around and go from a coded prototype that doesn't quite work yet to a design file I can polish for better quality testing.\n\n[PLACEHOLDER · drop in an adoption number or a qualitative line once cleared for publication]" },
         { kind: "limitations",
@@ -170,8 +186,7 @@ window.LV_DATA = {
           { k: "Interviews", v: "As-needed", effect: "Qualitative stories behind the numbers" },
           { k: "Focus group", v: "First in 25 yrs", effect: "Qualitative depth on a trust topic" }
         ]},
-        { kind: "figure", hue: 150, label: "Cadence · 12 months", caption: "Fig. 1 - A year of research, one method per month. Surveys form the backbone, heatmaps run continuously, interviews and focus groups slot in by topic." },
-        { kind: "figure", hue: 150, label: "Focus group · first in 25 years", caption: "Fig. 2 - Placeholder for a photo of the first focus group in 25 years, run on a trust topic." },
+        { kind: "figure", hue: 150, src: "images/research-culture/focus-group.jpg", alt: "A bright meeting room set up for a focus group. Participants sit in small groups on chairs and wooden stools, some at a table with a laptop, others in conversation, while a moderator in a yellow shirt stands taking notes.", caption: "Fig. 1 - The first focus group in 25 years." },
         { kind: "section", title: "Evidence & Aftermath", body: "The setup worked well. It was maintainable and drew interest from different stakeholders. I was able to introduce new research methods to the company (the first focus group in 25 years!) and open research at touchpoints where the company was never able to get user feedback before. Then, pretty early on, the data did something useful: it disagreed with us.\n\nThe organization pictured its typical B2C user at around 50 years old. Several surveys I had launched at touchpoints I had made accessible said they were significantly older than that. A core user group that is at least 10 years older than the company had thought drew C-level interest, leading to even more research being requested. The UX team leadership saw a chance as well, and rolled out my setup for B2B facing teams as well.\n\nAnd then it stopped being my thing alone.\n\nThe framework was lifted out of our team to serve every consumer-facing team, with official sponsorship. We started to get budget, for conducting research and getting the tools we needed. B2B picked it up. Other designers started running research of their own. PMs began coming to me before a decision instead of after one, and started to actively request research.\n\nThis is the story of how I moved from \"the designer does some surveys\" to a capability the organization actually owns. It's a deliberate company choice to not hire a full-time researcher. But with the current setup, designers and PMs are now able to build product decisions on data. AB testing hypotheses are getting a backbone." },
         { kind: "section", title: "Democratization of Research", body: "And my favorite part: I use the situation to democratize research. With no dedicated research team, we need all hands on deck. I take advantage of the natural human curiosity to learn and grow and invite everyone to join research. Under the guidance of a trained expert, conversion managers, developers, anyone really, can join in on the fun. First they get a short intro, then they shadow, and then they run research on their own. Over time, I have seen people gain knowledge, critical thinking skills and experience, and now I have a bunch of colleagues that can do research on their own, or that I can turn to when I don't have enough capacity. And people love it. It's easy to tell how much everyone enjoys this opportunity. And it's not just fun, everything they learn from the interaction with users or the data they generate, they take back into their work, making the product work more user-centric from the start." },
         { kind: "limitations",
@@ -261,6 +276,7 @@ window.LV_DATA = {
         { kind: "figure", hue: 330, label: "Brand system · color and illustration", caption: "Fig. 1 - Signature red extended into tints, tones, and shades, with blue and green as secondaries. Illustration system built for accessibility across multiple backgrounds." },
         { kind: "section", title: "Information architecture", body: "The original navigation hid most of the site. Even Cargoboard's own employees used Google to find their own pages, and operative pages like optional insurance were the hardest to reach. I drew on Nielsen Norman patterns and Information Architecture for the Web and Beyond (Rosenfeld, Morville, Arango, O'Reilly 2015), then worked with the SEO team on a link structure that served both users and search. We tested with a card sort workshop and tree-tested in UXtweak with users recruited from the live site. Both confirmed our direction and surfaced a few wording fixes that shipped into the final IA." },
         { kind: "section", title: "Design and handoff", body: "Design started desktop-first, since roughly 95% of Cargoboard's customers are desktop users. Every desktop wireframe was sketched alongside its mobile equivalent, so mobile shipped on time, on the new system. The product owner wanted to stay on Wordpress and Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. That pushed the system to be more disciplined: every component had to be reproducible by someone who could not open Figma. Throughout the project I used the customer service team as a proxy for user knowledge I could not generate myself, treating their input as hypothesis rather than evidence so we did not confuse operations opinion with user need." },
+        { kind: "figure", hue: 330, src: "images/website-relaunch/homepage.jpg", alt: "The relaunched cargoboard.com homepage in a browser: the hero with the booking form, the digital-freight section, and the company video.", caption: "Fig. 2 - The relaunched homepage: booking form up front, then the digital freight forwarder pitch and the company video." },
         { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs, and new pages now ship on top of it without a designer in the loop on every one. Treating the system as the lever, not the deliverable, was the bet that paid off: every page since launch has compounded on it, and the brand still feels coherent across surfaces I never touched. Tracking (Hotjar, GA, recordings) went live with the relaunch, and the hypotheses (reduced support tickets about finding pages, internal teams self-serving from the system) became measurable once analytics had a few months of data." },
         { kind: "limitations",
           title: "Limitations",
@@ -400,6 +416,18 @@ window.LV_DATA = {
       link: "https://quantinuum-sg-grand-challenge-2026.aqora.io/"
     },
     {
+      slug: "ferienwohnungen-visser",
+      title: "Holiday apartments website",
+      context: "Family business",
+      type: "Web design",
+      year: "2020",
+      hue: 140,
+      thumb: "images/visuals/ferienwohnungen.jpg",
+      blurb: "The website for my family's holiday apartments in Norden on the North Sea coast, built to win direct bookings in a market dominated by travel platforms.",
+      embed: "",
+      link: ""
+    },
+    {
       slug: "cargoboard-api-page",
       title: "Cargoboard API use case",
       context: "Cargoboard",
@@ -487,6 +515,18 @@ window.LV_DATA = {
       embed: "",
       link: "https://www.instagram.com/facely_u/"
     },
+    {
+      slug: "facelyu-screens",
+      title: "FacelyU app screens",
+      context: "Side project",
+      type: "App · iOS",
+      year: "2020",
+      hue: 20,
+      thumb: "images/visuals/facelyu-screens.jpg",
+      blurb: "Screens from the FacelyU iOS app: choosing a workout, music, and focus area, the session player, and the daily reminder. Soft peach gradients with a serif display face to keep a calm, self-care feel.",
+      embed: "",
+      link: ""
+    },
     // Second to last on purpose: the 9:16 story is the tallest card in the
     // grid, so far up it dominates the page (and on mobile, where the grid
     // collapses to one column, you hit it almost immediately).
@@ -561,60 +601,12 @@ window.LV_DATA = {
       blurb: "An anatomy study of the lower leg and foot in black ink, next to a page of loose watercolor washes."
     },
     {
-      slug: "facely-doodles",
-      title: "Logo doodles",
-      medium: "Ink",
-      thumb: "images/sketchbook/facely-doodles-thumb.jpg",
-      full: "images/sketchbook/facely-doodles.jpg",
-      blurb: "A notebook page of logo and face ideation, drawn small and fast."
-    },
-    {
-      slug: "lego-gandalf",
-      title: "Lego Gandalf",
-      medium: "Digital line art",
-      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
-      full: "images/sketchbook/lego-gandalf.jpg",
-      blurb: "A clean line drawing done on the iPad."
-    },
-    {
-      slug: "koi-plate",
-      title: "Koi plate",
-      medium: "Ceramic painting",
-      thumb: "images/sketchbook/koi-plate-thumb.jpg",
-      full: "images/sketchbook/koi-plate.jpg",
-      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
-    },
-    {
-      slug: "character-doodles",
-      title: "Character doodles",
-      medium: "Graphite",
-      thumb: "images/sketchbook/character-doodles-thumb.jpg",
-      full: "images/sketchbook/character-doodles.jpg",
-      blurb: "A couple of loose creature doodles."
-    },
-    {
-      slug: "color-tests",
-      title: "Color tests",
-      medium: "Watercolor",
-      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
-      full: "images/sketchbook/color-tests-portrait.jpg",
-      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
-    },
-    {
-      slug: "pikachu",
-      title: "Pikachu",
+      slug: "lighthouse-watercolor",
+      title: "Lighthouse",
       medium: "Watercolor and ink",
-      thumb: "images/sketchbook/pikachu-thumb.jpg",
-      full: "images/sketchbook/pikachu.jpg",
-      blurb: "A loose watercolor with a soft, blended background."
-    },
-    {
-      slug: "life-drawing-seated",
-      title: "Life drawing",
-      medium: "Ink wash",
-      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
-      full: "images/sketchbook/life-drawing-seated.jpg",
-      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
+      full: "images/sketchbook/lighthouse-watercolor.jpg",
+      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
     },
     {
       slug: "eye-anatomy-studies",
@@ -625,12 +617,60 @@ window.LV_DATA = {
       blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
     },
     {
-      slug: "lighthouse-watercolor",
-      title: "Lighthouse",
+      slug: "life-drawing-seated",
+      title: "Life drawing",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
+      full: "images/sketchbook/life-drawing-seated.jpg",
+      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+    },
+    {
+      slug: "pikachu",
+      title: "Pikachu",
       medium: "Watercolor and ink",
-      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
-      full: "images/sketchbook/lighthouse-watercolor.jpg",
-      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
+      thumb: "images/sketchbook/pikachu-thumb.jpg",
+      full: "images/sketchbook/pikachu.jpg",
+      blurb: "A loose watercolor with a soft, blended background."
+    },
+    {
+      slug: "color-tests",
+      title: "Color tests",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
+      full: "images/sketchbook/color-tests-portrait.jpg",
+      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
+    },
+    {
+      slug: "character-doodles",
+      title: "Character doodles",
+      medium: "Graphite",
+      thumb: "images/sketchbook/character-doodles-thumb.jpg",
+      full: "images/sketchbook/character-doodles.jpg",
+      blurb: "A couple of loose creature doodles."
+    },
+    {
+      slug: "koi-plate",
+      title: "Koi plate",
+      medium: "Ceramic painting",
+      thumb: "images/sketchbook/koi-plate-thumb.jpg",
+      full: "images/sketchbook/koi-plate.jpg",
+      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
+    },
+    {
+      slug: "lego-gandalf",
+      title: "Lego Gandalf",
+      medium: "Digital line art",
+      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
+      full: "images/sketchbook/lego-gandalf.jpg",
+      blurb: "A clean line drawing done on the iPad."
+    },
+    {
+      slug: "facely-doodles",
+      title: "Logo doodles",
+      medium: "Ink",
+      thumb: "images/sketchbook/facely-doodles-thumb.jpg",
+      full: "images/sketchbook/facely-doodles.jpg",
+      blurb: "A notebook page of logo and face ideation, drawn small and fast."
     }
   ],
 
@@ -663,7 +703,7 @@ window.LV_DATA = {
     { title: "Artemis Fowl", author: "Eoin Colfer", cover: "https://covers.openlibrary.org/b/isbn/9780141339092-L.jpg", rating: 5, tags: ["Fiction", "Sci-Fi"], color: "#059669", review: `My favourite book as a kid — and still one that shaped me in ways I can trace back clearly. The intelligence, high-tech world-building, and sheer creativity of Colfer's universe fascinated me and laid an early foundation for my interest in innovation and clever thinking. It's also a brilliant case study in character development: Artemis starts as an outright villain and evolves in ways that feel earned. The world-building is extraordinarily inventive. My Harry Potter — except the magic is technology. :)` },
     { title: "Atomic Habits", author: "James Clear", cover: "https://covers.openlibrary.org/b/isbn/0735211299-L.jpg", rating: 4, tags: ["Productivity", "Psychology"], color: "#F59E0B", finished: "2023-08", review: `Clear's framework for building habits translates directly to product design — how do we make the desired user behavior easy, obvious, and rewarding? Great for thinking about onboarding and retention.` },
     { title: "Creative Confidence", author: "Tom & David Kelley", cover: "https://covers.openlibrary.org/b/isbn/038534936X-L.jpg", rating: 4, tags: ["Creativity", "Design Thinking"], color: "#EC4899", finished: "2024-01", review: `The Kelley brothers from IDEO show that creativity isn't a gift — it's a muscle. This book gave me the confidence to push back on "we've always done it this way" and propose bolder solutions.` },
-    { title: "Design for Impact", author: "Erin Weigel", cover: "https://covers.openlibrary.org/b/isbn/9780137519620-L.jpg", rating: 3, tags: ["Design", "UX"], color: "#7C3AED", review: `Weigel reframes design as a discipline that has to prove its value — not just aesthetically, but in measurable outcomes. The book is part manifesto, part methodology, and it pushes designers to think like product owners. Refreshingly honest about the gap between beautiful design and effective design. A good read for anyone who wants to advocate for their work more confidently in cross-functional teams.` },
+    { title: "Design for Impact", author: "Erin Weigel", cover: "https://covers.openlibrary.org/b/isbn/9780137519620-L.jpg", rating: 3, tags: ["Design", "UX", "A/B Testing"], color: "#7C3AED", review: `Weigel reframes design as a discipline that has to prove its value — not just aesthetically, but in measurable outcomes. The book is part manifesto, part methodology, and it pushes designers to think like product owners. Refreshingly honest about the gap between beautiful design and effective design. A good read for anyone who wants to advocate for their work more confidently in cross-functional teams.` },
     { title: "Design is Storytelling", author: "Ellen Lupton", cover: "https://covers.openlibrary.org/b/isbn/9781942303992-L.jpg", rating: 3, tags: ["Design", "Creativity"], color: "#DB2777", review: `Ellen Lupton makes a compelling argument that design and narrative are fundamentally the same thing — both are about guiding someone through an experience with intention. The book draws on screenwriting, visual theory, and cognitive psychology to show how designers can create more emotionally resonant work. Short and beautifully produced, it's the kind of book you return to for a quick dose of creative thinking.` },
     { title: "Don't Make Me Think", author: "Steve Krug", cover: "https://covers.openlibrary.org/b/isbn/0321965515-L.jpg", rating: 5, tags: ["UX", "Usability"], color: "#1a1a1a", finished: "2022-03", review: `The book that started it all for me. Krug's approach to usability is refreshingly simple — the best interfaces are the ones you don't have to think about. I come back to this whenever I catch myself overcomplicating a design.` },
     { title: "Emojis", author: "Greta Rebane", cover: "https://covers.openlibrary.org/b/isbn/9783406773761-L.jpg", rating: 3, tags: ["Culture", "Communication"], color: "#F59E0B", review: `A surprisingly rich cultural analysis of something we use every day without much thought. Rebane traces the history, semiotics, and social dynamics of emoji — how they've shifted communication norms, created new ambiguities, and become a genuine visual language. As a designer who thinks about communication and interface, it was a fascinating lens on how small visual decisions carry enormous cultural weight.` },

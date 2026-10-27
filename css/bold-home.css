@@ -28,6 +28,8 @@ html[data-route="sketchbook-bold"] .lv-nav,
 html[data-route="sketchbook-bold"] .lv-footer,
 html[data-route="visuals-bold"] .lv-nav,
 html[data-route="visuals-bold"] .lv-footer,
+html[data-route="books-bold"] .lv-nav,
+html[data-route="books-bold"] .lv-footer,
 html[data-route="blog-bold"] .lv-nav,
 html[data-route="blog-bold"] .lv-footer,
 html[data-route="post-bold"] .lv-nav,
@@ -134,7 +136,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 [data-variation="v1"] .bt-logo-track { gap: 56px; padding-right: 56px; }
-[data-variation="v1"] .bt-logo-track img { height: 26px; filter: grayscale(1) opacity(0.85); }
+[data-variation="v1"] .bt-logo-track img { height: calc(26px * var(--logo-scale, 1)); filter: grayscale(1) opacity(0.85); }
 [data-variation="v1"] .bt-logo-track img:hover { filter: none; }
 [data-variation="v1"] .bt-logo-track span {
   font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
@@ -358,7 +360,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-intro-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
   .bt-logos { margin-top: 24px; padding-top: 16px; }
   [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
-  [data-variation="v1"] .bt-logo-track img { height: 20px; }
+  [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
   .bt-swipe {
     display: flex; align-items: center; gap: 6px;
     font-family: var(--font-hand); font-size: 23px;
@@ -767,14 +769,47 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   color: var(--ink); background: var(--paper); border: 2px solid var(--ink); border-radius: 999px;
 }
 
-/* Limitations card: ink frame, paper faces, pill flip button. Both faces
-   share one grid cell, so the card is as tall as the longer face and the
-   back can't run past the frame. */
-[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 0 8px; }
-[data-variation="v1"] .bt--case .v1-limitations-card-inner { display: grid; }
+/* Limitations card: a small stack of two index cards. Both faces share one
+   grid cell, so the stack is as tall as the longer face. The card on top
+   tilts a little and casts a hard ink shadow; the other one peeks out
+   behind it in its marker color (mustard = limitations, rose =
+   opportunities), content hidden. Flipping swaps the two instead of
+   turning the card in 3D. */
+[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 18px 24px 0; perspective: none; }
+[data-variation="v1"] .bt--case .v1-limitations-card .v1-limitations-card-inner { display: grid; transform: none; transition: none; }
 [data-variation="v1"] .bt--case .v1-limitations-face { grid-area: 1 / 1; }
 [data-variation="v1"] .bt--case .v1-limitations-face.is-back { position: relative; inset: auto; }
-[data-variation="v1"] .bt--case .v1-limitations-face { background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px; }
+[data-variation="v1"] .bt--case .v1-limitations-face {
+  --face-color: var(--bt-mustard);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px;
+  backface-visibility: visible; -webkit-backface-visibility: visible;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s, background-color 0.45s;
+}
+[data-variation="v1"] .bt--case .v1-limitations-face.is-opp { --face-color: var(--bt-rose); }
+/* On top: front face by default, back face once flipped. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back {
+  z-index: 2; transform: rotate(-0.6deg); box-shadow: 6px 6px 0 var(--ink);
+}
+/* Underneath: offset, tilted the other way, filled with its marker color. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front {
+  z-index: 1; transform: rotate(1.6deg) translate(14px, 10px); box-shadow: none;
+  background-color: var(--face-color);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back > *,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front > * { visibility: hidden; }
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-back {
+  transform: rotate(-1deg) translateY(-3px); box-shadow: 9px 9px 0 var(--ink);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-front {
+  transform: rotate(2.4deg) translate(18px, 12px);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-variation="v1"] .bt--case .v1-limitations-face { transition: none; }
+}
 [data-variation="v1"] .bt--case .v1-limitations-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
 [data-variation="v1"] .bt--case .v1-limitations-flip {
   border: 2px solid var(--ink); color: var(--ink); font-size: 11px; letter-spacing: 0.12em; padding: 7px 12px;
@@ -790,14 +825,18 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 [data-variation="v1"] .bt--case .v1-limitation-row h4 {
   font-family: var(--bt-font-display); font-style: normal; font-weight: 700;
   font-size: 20px; letter-spacing: -0.02em; line-height: 1.2;
+  display: inline; padding: 0 2px;
+  background-image: linear-gradient(var(--face-color), var(--face-color));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.3em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; }
+[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; margin-top: 8px; }
 
 /* TOC fab + next case. */
 .bt--case .lv-toc-fab { border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
 .bt--case .lv-toc-fab:hover, .bt--case .lv-toc-fab:focus-visible, .bt--case .lv-toc-fab.is-open { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); box-shadow: none; }
 .bt--case .lv-toc-popover { border: 2px solid var(--ink); border-radius: 12px; box-shadow: none; }
-.bt--case .lv-toc-popover::before { border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.bt--case .lv-toc-popover::before { border-color: var(--ink); border-width: 2px; }
 .bt--case .lv-toc-popover .eyebrow { color: var(--ink); }
 .bt--case .lv-toc-popover li.is-lim { border-top: 2px solid var(--ink); }
 .bt--case .lv-next-case { margin-top: 64px; padding: 32px 0 0; border-top: 2px solid var(--ink); }
@@ -808,8 +847,14 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt--case .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
 
-@media (max-width: 1100px) {
-  .bt--case .lv-toc-popover::before { border-left: 0; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+/* Line the button and the expanded card up with the page's right edge. */
+@media (min-width: 1101px) {
+  .bt--case .lv-toc-fab { right: 64px; }
+}
+@media (min-width: 1320px) {
+  .bt--case .lv-toc-fab.is-expanded,
+  .bt--case .lv-toc-fab.is-expanded:hover,
+  .bt--case .lv-toc-fab.is-expanded:focus-visible { background: transparent; border-color: transparent; color: transparent; }
 }
 @media (max-width: 900px) {
   .bt-back { margin-bottom: 28px; }
@@ -823,6 +868,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   [data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 17px; }
   [data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 16px; }
   [data-variation="v1"] .bt--case .v1-limitations-face { padding: 22px 20px 24px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card { margin-right: 10px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back { transform: none; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front { transform: translate(8px, 8px); }
   .bt--case .bt-colophon--light span:last-child { display: none; }
 }
 
@@ -1017,6 +1067,125 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bt--visuals .v1-visual-card, .bt--visuals .v1-visual-hover > span { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type bookshelf — #/books
+   The cover grid (cards from renderBooks in app.js, shared .lv-book-*
+   classes) in the Bold Type dress: flat ink-framed covers with a slight
+   tilt instead of the 3D spine, Bricolage titles with the growing
+   underline from the sketchbook. No stats block here.
+   The review overlay (#lv-book-overlay) sits after <main> and is shared
+   with #/books-classic, so its Bold dress keys off the route.
+   ========================================================================== */
+.bt--books { min-height: 100vh; }
+.bt--books .bt-nav-progress, .bt--books .bt-nav-count { display: none; }
+.bt--books .bt-page-head .bt-lead { max-width: 56ch; }
+
+.bt-books-grid.lv-books-grid {
+  margin-top: 0; padding-top: 8px;
+  align-items: start;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 48px 28px;
+}
+.bt--books .lv-book-card { perspective: none; }
+.bt--books .lv-book-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--books .lv-book-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--books .lv-book-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+.bt--books .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.4s var(--ease-out);
+}
+.bt--books .lv-book-card:hover .lv-book-cover,
+.bt--books .lv-book-card:focus-visible .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+.bt--books .lv-book-img,
+.bt--books .lv-book-fallback {
+  border: 2px solid var(--ink); border-radius: 8px; box-shadow: none;
+}
+.bt--books .lv-book-fallback { font-family: var(--bt-font-display); font-weight: 800; letter-spacing: -0.02em; }
+.bt--books .lv-book-spine { display: none; }
+
+.bt--books .lv-book-meta { margin-top: 16px; }
+.bt--books .lv-book-title {
+  display: inline; -webkit-line-clamp: unset;
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 19px; line-height: 1.15; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 4px; margin-left: -4px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+.bt--books .lv-book-card:hover .lv-book-title,
+.bt--books .lv-book-card:focus-visible .lv-book-title { color: var(--ink); background-size: 100% 0.9em; }
+.bt--books .lv-book-card:nth-child(3n + 2):hover .lv-book-title,
+.bt--books .lv-book-card:nth-child(3n + 2):focus-visible .lv-book-title { color: var(--paper); }
+.bt--books .lv-book-author {
+  margin-top: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.bt--books .lv-book-stars { margin-top: 6px; }
+.bt--books .lv-book-star { color: var(--bt-rule); }
+.bt--books .lv-book-star.is-on { color: var(--ink); }
+
+.bt-books-nudge {
+  margin-top: clamp(3.5rem, 8vw, 5.5rem);
+  font-family: var(--bt-font-display); font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; letter-spacing: -0.03em;
+  max-width: 34ch;
+}
+.bt-books-nudge a {
+  color: var(--ink); text-decoration: none; padding: 0 4px;
+  background: linear-gradient(var(--bt-mustard), var(--bt-mustard)) no-repeat 0 85% / 100% 0.3em;
+  transition: background-size 0.22s ease;
+}
+.bt-books-nudge a:hover { background-size: 100% 0.9em; }
+.bt--books .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Review overlay in the Bold Type dress: ink frame, Bricolage title, tags
+   as ink pills, ink stars. Outside any .bt root, so it keys off the route. */
+html[data-route="books-bold"] .lv-book-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-cover img,
+html[data-route="books-bold"] .lv-book-detail-fallback { border: 2px solid var(--ink); border-radius: 8px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-fallback { font-family: var(--bt-font-display); font-weight: 800; }
+html[data-route="books-bold"] .lv-book-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); background: none; border: 2px solid var(--ink); padding: 4px 10px;
+}
+html[data-route="books-bold"] .lv-book-tag:first-child { background: var(--bt-rose); }
+html[data-route="books-bold"] .lv-book-detail-title {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
+}
+html[data-route="books-bold"] .lv-book-detail-author {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+html[data-route="books-bold"] .lv-book-star { color: rgba(26, 24, 20, 0.2); }
+html[data-route="books-bold"] .lv-book-star.is-on { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap { border-top: 2px solid var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap .lv-eyebrow { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review { font-size: 16px; line-height: 1.6; color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review a { color: var(--ink); border-bottom: 2px solid var(--bt-mustard); }
+html[data-route="books-bold"] .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose); }
+
+@media (max-width: 1100px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 18px; }
+  .bt--books .lv-book-card:nth-child(n) { --tilt: 0deg; }
+  .bt--books .lv-book-title { font-size: 17px; }
+  .bt--books .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--books .lv-book-cover, .bt--books .lv-book-title { transition: none; }
 }
 
 /* ==========================================================================
