@@ -834,7 +834,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt--case .lv-toc-fab { border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
 .bt--case .lv-toc-fab:hover, .bt--case .lv-toc-fab:focus-visible, .bt--case .lv-toc-fab.is-open { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); box-shadow: none; }
 .bt--case .lv-toc-popover { border: 2px solid var(--ink); border-radius: 12px; box-shadow: none; }
-.bt--case .lv-toc-popover::before { border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.bt--case .lv-toc-popover::before { border-color: var(--ink); border-width: 2px; }
 .bt--case .lv-toc-popover .eyebrow { color: var(--ink); }
 .bt--case .lv-toc-popover li.is-lim { border-top: 2px solid var(--ink); }
 .bt--case .lv-next-case { margin-top: 64px; padding: 32px 0 0; border-top: 2px solid var(--ink); }
@@ -845,8 +845,14 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt--case .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
 
-@media (max-width: 1100px) {
-  .bt--case .lv-toc-popover::before { border-left: 0; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+/* Line the button and the expanded card up with the page's right edge. */
+@media (min-width: 1101px) {
+  .bt--case .lv-toc-fab { right: 64px; }
+}
+@media (min-width: 1320px) {
+  .bt--case .lv-toc-fab.is-expanded,
+  .bt--case .lv-toc-fab.is-expanded:hover,
+  .bt--case .lv-toc-fab.is-expanded:focus-visible { background: transparent; border-color: transparent; color: transparent; }
 }
 @media (max-width: 900px) {
   .bt-back { margin-bottom: 28px; }
