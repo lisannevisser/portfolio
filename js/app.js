@@ -329,7 +329,7 @@
         const logo = D.clientLogos[c];
         if (logo) {
           const scale = (D.clientLogoScale || {})[c] || 1;
-          items.push(`<img src="${logo}" alt="${c}" style="--logo-scale:${scale}" loading="lazy" onerror="this.outerHTML='<span>— ${c}</span>'">`);
+          items.push(`<img src="${logo}" alt="${c}" style="--logo-scale:${scale}" onerror="this.outerHTML='<span>— ${c}</span>'">`);
         } else {
           items.push(`<span>— ${c}</span>`);
         }

@@ -124,8 +124,9 @@
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 [data-variation="v1"] .v1-logo-track {
-  display: flex; gap: 3.5rem; animation: v1-marquee 40s linear infinite;
+  display: flex; gap: 3.5rem; animation: v1-marquee 70s linear infinite;
   white-space: nowrap; align-items: center;
+  width: max-content; flex-shrink: 0;
   padding-right: 3.5rem;
 }
 [data-variation="v1"] .v1-logo-track span {
@@ -138,7 +139,9 @@
   transition: filter 0.3s var(--ease-out);
 }
 [data-variation="v1"] .v1-logo-track img:hover { filter: grayscale(0) opacity(1); }
-@keyframes v1-marquee { to { transform: translateX(-50%); } }
+/* The track holds three identical copies (see renderClientStrip), so one
+   copy is a third of its width. Shifting by exactly one copy loops seamlessly. */
+@keyframes v1-marquee { to { transform: translateX(calc(-100% / 3)); } }
 
 [data-variation="v1"] .v1-impact-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
