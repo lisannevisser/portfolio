@@ -1572,7 +1572,7 @@
         const host = (v.link || v.embed || "").includes("behance.net") ? "Behance"
           : (v.link || v.embed || "").includes("canva.com") ? "Canva"
           : (v.link || v.embed || "").includes("figma.com") ? "Figma" : "";
-        link.textContent = (v.embed && host ? "Open in " + host : "Open project") + " ↗";
+        link.textContent = (v.embed && host ? "Open in " + host : /\.pdf$/i.test(v.link) ? "Open slides (PDF)" : "Open project") + " ↗";
       } else {
         link.hidden = true;
         link.removeAttribute("href");

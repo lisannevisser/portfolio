@@ -28,7 +28,7 @@
     if (!grid) return;
     grid.innerHTML = D.cases.slice(0, 3).map((c) => `
       <a href="#/work/${esc(c.slug)}" class="bt-card" data-cursor-label="Read →">
-        <span class="bt-card-cover${c.coverSrc ? " has-image" : ""}" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true">${c.coverSrc ? `<img src="${esc(c.coverSrc)}" alt="" loading="lazy" />` : ""}</span>
+        <span class="bt-card-cover${c.coverImage ? " has-image" : ""}" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true">${c.coverImage ? `<img src="${esc(c.coverImage)}" alt="" />` : ""}</span>
         <span class="bt-card-text">
           <span class="bt-card-title">${esc(c.title)}</span>
           <span class="bt-card-sub">${esc(c.company)} · ${esc((c.tags || [])[0] || c.year)}</span>
