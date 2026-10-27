@@ -28,6 +28,8 @@ html[data-route="sketchbook-bold"] .lv-nav,
 html[data-route="sketchbook-bold"] .lv-footer,
 html[data-route="visuals-bold"] .lv-nav,
 html[data-route="visuals-bold"] .lv-footer,
+html[data-route="books-bold"] .lv-nav,
+html[data-route="books-bold"] .lv-footer,
 html[data-route="blog-bold"] .lv-nav,
 html[data-route="blog-bold"] .lv-footer,
 html[data-route="post-bold"] .lv-nav,
@@ -1065,6 +1067,125 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bt--visuals .v1-visual-card, .bt--visuals .v1-visual-hover > span { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type bookshelf — #/books
+   The cover grid (cards from renderBooks in app.js, shared .lv-book-*
+   classes) in the Bold Type dress: flat ink-framed covers with a slight
+   tilt instead of the 3D spine, Bricolage titles with the growing
+   underline from the sketchbook. No stats block here.
+   The review overlay (#lv-book-overlay) sits after <main> and is shared
+   with #/books-classic, so its Bold dress keys off the route.
+   ========================================================================== */
+.bt--books { min-height: 100vh; }
+.bt--books .bt-nav-progress, .bt--books .bt-nav-count { display: none; }
+.bt--books .bt-page-head .bt-lead { max-width: 56ch; }
+
+.bt-books-grid.lv-books-grid {
+  margin-top: 0; padding-top: 8px;
+  align-items: start;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 48px 28px;
+}
+.bt--books .lv-book-card { perspective: none; }
+.bt--books .lv-book-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--books .lv-book-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--books .lv-book-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+.bt--books .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.4s var(--ease-out);
+}
+.bt--books .lv-book-card:hover .lv-book-cover,
+.bt--books .lv-book-card:focus-visible .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+.bt--books .lv-book-img,
+.bt--books .lv-book-fallback {
+  border: 2px solid var(--ink); border-radius: 8px; box-shadow: none;
+}
+.bt--books .lv-book-fallback { font-family: var(--bt-font-display); font-weight: 800; letter-spacing: -0.02em; }
+.bt--books .lv-book-spine { display: none; }
+
+.bt--books .lv-book-meta { margin-top: 16px; }
+.bt--books .lv-book-title {
+  display: inline; -webkit-line-clamp: unset;
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 19px; line-height: 1.15; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 4px; margin-left: -4px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+.bt--books .lv-book-card:hover .lv-book-title,
+.bt--books .lv-book-card:focus-visible .lv-book-title { color: var(--ink); background-size: 100% 0.9em; }
+.bt--books .lv-book-card:nth-child(3n + 2):hover .lv-book-title,
+.bt--books .lv-book-card:nth-child(3n + 2):focus-visible .lv-book-title { color: var(--paper); }
+.bt--books .lv-book-author {
+  margin-top: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.bt--books .lv-book-stars { margin-top: 6px; }
+.bt--books .lv-book-star { color: var(--bt-rule); }
+.bt--books .lv-book-star.is-on { color: var(--ink); }
+
+.bt-books-nudge {
+  margin-top: clamp(3.5rem, 8vw, 5.5rem);
+  font-family: var(--bt-font-display); font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; letter-spacing: -0.03em;
+  max-width: 34ch;
+}
+.bt-books-nudge a {
+  color: var(--ink); text-decoration: none; padding: 0 4px;
+  background: linear-gradient(var(--bt-mustard), var(--bt-mustard)) no-repeat 0 85% / 100% 0.3em;
+  transition: background-size 0.22s ease;
+}
+.bt-books-nudge a:hover { background-size: 100% 0.9em; }
+.bt--books .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Review overlay in the Bold Type dress: ink frame, Bricolage title, tags
+   as ink pills, ink stars. Outside any .bt root, so it keys off the route. */
+html[data-route="books-bold"] .lv-book-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-cover img,
+html[data-route="books-bold"] .lv-book-detail-fallback { border: 2px solid var(--ink); border-radius: 8px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-fallback { font-family: var(--bt-font-display); font-weight: 800; }
+html[data-route="books-bold"] .lv-book-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); background: none; border: 2px solid var(--ink); padding: 4px 10px;
+}
+html[data-route="books-bold"] .lv-book-tag:first-child { background: var(--bt-rose); }
+html[data-route="books-bold"] .lv-book-detail-title {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
+}
+html[data-route="books-bold"] .lv-book-detail-author {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+html[data-route="books-bold"] .lv-book-star { color: rgba(26, 24, 20, 0.2); }
+html[data-route="books-bold"] .lv-book-star.is-on { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap { border-top: 2px solid var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap .lv-eyebrow { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review { font-size: 16px; line-height: 1.6; color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review a { color: var(--ink); border-bottom: 2px solid var(--bt-mustard); }
+html[data-route="books-bold"] .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose); }
+
+@media (max-width: 1100px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 18px; }
+  .bt--books .lv-book-card:nth-child(n) { --tilt: 0deg; }
+  .bt--books .lv-book-title { font-size: 17px; }
+  .bt--books .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--books .lv-book-cover, .bt--books .lv-book-title { transition: none; }
 }
 
 /* ==========================================================================
