@@ -1775,11 +1775,11 @@
     });
   }
 
-  // #/sketchbook and #/sketchbook-bold — photos of hand-drawn work. Same
-  // card + overlay shell as Visuals, but simpler: no embeds or external
-  // links, and the lightbox shows the full image with `contain` so portrait
-  // sketches aren't cropped. Each route section carries its own grid and
-  // overlay (found by class), so one init serves both dresses.
+  // #/sketchbook and #/sketchbook-classic — photos of hand-drawn work. Same
+  // cards as Visuals, but the lightbox has no card: the whole sketch sits on
+  // the page with its title and blurb, sized to fit without scrolling, and
+  // arrows / arrow keys flip through the set. Each route section carries its
+  // own grid and overlay (found by class), so one init serves both dresses.
   function renderSketchbook() {
     const items = D.sketchbook || [];
 
@@ -1803,20 +1803,31 @@
       const overlay = section && $(".v1-sketch-overlay", section);
       if (!overlay) return;
       const backdrop = $(".v1-sketch-backdrop", overlay);
-      const closeBtn = $(".v1-sketch-close", overlay);
+      const photo = $(".v1-sketch-photo", overlay);
       const stage = $(".v1-sketch-stage", overlay);
-      const eyebrow = $(".v1-sketch-eyebrow", overlay);
-      // The Bold Type eyebrow wraps its text in a span (kicker markup).
-      const eyebrowText = $("span", eyebrow) || eyebrow;
+      const closeBtn = $(".v1-sketch-close", overlay);
+      let current = -1;
+      let returnFocus = null;
 
-      function openSketch(v) {
-        eyebrowText.textContent = v.medium || "";
+      // Fill the lightbox for item i. data-pos (0-2) mirrors the grid's
+      // 3n+1 / 3n+2 / 3n+3 rhythm, so the CSS can give the open sketch the
+      // same tilt and marker color as the card it came from.
+      function show(i) {
+        current = (i + items.length) % items.length;
+        const v = items[current];
+        photo.setAttribute("data-pos", String(current % 3));
+        $(".v1-sketch-medium", overlay).textContent = v.medium || "";
         $(".v1-sketch-title", overlay).textContent = v.title;
         $(".v1-sketch-blurb", overlay).textContent = v.blurb || "";
         const src = v.full || v.thumb;
         stage.innerHTML = src
-          ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" loading="lazy" />`
+          ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" />`
           : "";
+      }
+
+      function openSketch(i, fromEl) {
+        returnFocus = fromEl || null;
+        show(i);
         overlay.classList.add("is-open");
         overlay.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
@@ -1828,18 +1839,25 @@
         overlay.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
         stage.innerHTML = "";
+        current = -1;
+        if (returnFocus) returnFocus.focus();
       }
 
       grid.addEventListener("click", (e) => {
         const card = e.target.closest(".v1-visual-card");
         if (!card) return;
-        const v = items[parseInt(card.getAttribute("data-index"), 10)];
-        if (v) openSketch(v);
+        const i = parseInt(card.getAttribute("data-index"), 10);
+        if (items[i]) openSketch(i, card);
       });
       closeBtn.addEventListener("click", closeSketch);
       backdrop.addEventListener("click", closeSketch);
+      $(".v1-sketch-prev", overlay).addEventListener("click", () => show(current - 1));
+      $(".v1-sketch-next", overlay).addEventListener("click", () => show(current + 1));
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSketch();
+        if (!overlay.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeSketch();
+        else if (e.key === "ArrowLeft") show(current - 1);
+        else if (e.key === "ArrowRight") show(current + 1);
       });
     });
   }
