@@ -493,6 +493,15 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   border: 2px solid var(--ink); border-radius: 10px; background: var(--paper-2);
   overflow: visible; max-width: 360px; transform: rotate(1.5deg);
 }
+/* Desktop: a taller 9:16 frame (same 360px width) so the block fills more of
+   the screen under the shared hero top. Capped to the space left below that
+   top and above the pin's bottom padding, so short windows never overflow. */
+@media (min-width: 881px) {
+  .bt.bt--about .ahs-images {
+    aspect-ratio: 9 / 16;
+    max-height: calc(100svh - var(--bt-hero-top) - clamp(1.5rem, 4vh, 3rem) - 1.5rem);
+  }
+}
 /* Radius clips the photo (it's a background), so overflow stays visible and
    the caption pill can hang past the frame edge. */
 .bt--about .ahs-img { border-radius: 8px; padding: 0; }
