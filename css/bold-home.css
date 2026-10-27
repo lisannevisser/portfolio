@@ -79,7 +79,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   border-top: 2px solid var(--ink);
 }
 .bt-chapter:first-child { border-top: 0; }
-.bt-chapter--intro { justify-content: space-between; }
+.bt-chapter--intro {
+  /* Headline and lead hug the kicker like on the other pages; the logo band
+     drops to the foot of the screen (padding-bottom moves into .bt-logos). */
+  padding-bottom: 0;
+}
 .bt-chapter--contact {
   background: var(--ink);
   color: var(--paper);
@@ -100,7 +104,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   letter-spacing: -0.05em;
   line-height: 0.98;
 }
-.bt-chapter--intro .bt-display { font-size: clamp(64px, 12.2vw, 156px); }
+.bt-chapter--intro .bt-display { margin-top: 22px; font-size: clamp(64px, 12.2vw, 156px); }
 .bt-chapter--work .bt-display { margin-top: 22px; font-size: clamp(52px, 9.4vw, 120px); line-height: 1.05; }
 .bt-chapter--contact .bt-display { margin-top: 22px; font-size: clamp(50px, 8.75vw, 112px); line-height: 1.02; }
 
@@ -125,15 +129,18 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   font-size: 19px; line-height: 1.6; color: var(--ink-2);
 }
 .bt-intro-foot {
+  margin-top: 32px;
   display: flex; align-items: flex-end; justify-content: space-between; gap: 48px;
 }
 .bt-swipe { display: none; }
-.bt-intro-bottom { display: flex; flex-direction: column; }
+.bt-intro-bottom { flex: 1; display: flex; flex-direction: column; }
 
 /* -------- Logo marquee (foot of the intro) -------- */
 .bt-logos {
   /* Full bleed: the rule runs edge to edge like the chapter dividers. */
-  margin: 40px -64px 0; padding-top: 22px; border-top: 2px solid var(--ink);
+  /* margin-top: auto pins the band to the bottom; equal padding above and
+     below keeps the logos centered between the rule and the screen edge. */
+  margin: auto -64px 0; padding: 40px 0; border-top: 2px solid var(--ink);
   display: flex; align-items: center; overflow: hidden;
   /* Two mask layers: the first keeps the 2px rule solid across the full
      width, the second fades only the logos in and out at the edges. */
@@ -333,13 +340,14 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 @media (max-width: 900px) {
   .bt-chapter { padding: 96px 22px 36px; gap: 18px; }
   .bt-chapter--contact { padding-bottom: 26px; gap: 16px; }
-  .bt-chapter--intro .bt-display { font-size: clamp(48px, 16.4vw, 72px); line-height: 1.02; }
+  .bt-chapter--intro { padding-bottom: 0; }
+  .bt-chapter--intro .bt-display { margin-top: 0; font-size: clamp(48px, 16.4vw, 72px); line-height: 1.02; }
   .bt-chapter--work .bt-display { margin-top: 0; font-size: clamp(40px, 13.3vw, 58px); line-height: 1.1; letter-spacing: -0.045em; }
   .bt-chapter--contact .bt-display { margin-top: 0; font-size: clamp(38px, 12.8vw, 56px); line-height: 1.08; letter-spacing: -0.045em; }
   .bt-kicker { font-size: 11px; }
   .bt-lead { font-size: 16px; }
-  .bt-intro-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .bt-logos { margin: 24px -22px 0; padding-top: 16px; }
+  .bt-intro-foot { margin-top: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .bt-logos { margin: auto -22px 0; padding: 26px 0; }
   [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
   [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
   .bt-swipe {
@@ -437,6 +445,13 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 
 /* Scrolly: room for the fixed nav on top, mast in display type. */
 .bt--about .ahs-pin { padding-top: clamp(5.5rem, 14vh, 8rem); }
+/* Desktop: the photo sets the block's height, which is well short of the
+   viewport, so a top-aligned block left a band of empty space below it.
+   Center it in the space under the fixed nav instead; `safe` falls back to
+   top-aligned when a short window can't fit the block. */
+@media (min-width: 881px) {
+  .bt--about .ahs-pin { align-items: safe center; padding-top: 80px; padding-bottom: 0; }
+}
 /* Unlike the v1 About, the "Hello, I'm Lisanne." mast doesn't stay as a
    small masthead: it folds away completely as chapter 01 takes over, so
    the chapters start at the top. Desktop only; on narrow screens the
