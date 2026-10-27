@@ -222,6 +222,16 @@ aber die Vorlagen liegen alle bereit.
   - [ ] Offen: 6. Case ODER den Research-Culture-Case ersetzen /
         verschlanken?
   - [ ] Offen: konkrete Findings nennen oder auf Methode + Ansatz fokussieren?
+  - Update 2026-10-27: **Vorerst zurückgestellt.** Das Limbic-Modell
+    (Häusel / Gruppe Nymphenburg) ist wissenschaftlich umstritten, als
+    alleinige Case wäre das eine Angriffsfläche. Lisanne baut gerade neue
+    Käuferprofile, diesmal ohne limbische Typen: alle vorhandenen
+    Research-Informationen plus Marktdaten zusammentragen, in den
+    kommenden Wochen validieren, daraus Profile ableiten. Idee: mit der
+    Case warten, bis die validierten Profile stehen, und dann die
+    Lernkurve erzählen (Limbic als erster Proxy → Grenzen erkannt →
+    datenbasierte, validierte Profile). Die Limbic-Kritik wird so zum
+    Reifeschritt statt zur Schwachstelle.
 - [ ] Research-Culture-Case: Limbic nur kurz erwähnen und auf die
       dedizierte Case verlinken (cross-link statt Wiederholung).
 - [ ] Post-Cancellation-Survey als Discovery-Case. Erstmals eingeführter
@@ -230,6 +240,11 @@ aber die Vorlagen liegen alle bereit.
       management-fest ist.
 - [ ] Weitere reine Discovery-Projekte aus dem Daily Job sichten - evtl.
       mehrere zu einer Case bündeln.
+- [ ] Illustrationen vs. Icons (A/B-Test Payment-Form, Jan 2025) als
+      Entwurf angelegt: `illustrations-vs-icons` in `js/data.js`, steht
+      an 4. Stelle. Offen: Screens vorher/nachher, E.ON-Screenshot +
+      Credit (Seite + Imprint), Desktop-Lift Runde 1 (rechnerisch ~8,2%),
+      Payment-Update-Seite (eigener Test?), Name des Maturity-Modells.
 
 ## Cargoboard Split - Follow-ups (nach PR #154)
 

@@ -82,7 +82,7 @@ window.LV_DATA = {
       ],
       tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
-      coverImage: "images/pricing/cover.jpg",
+      coverImage: "images/pricing/cover-mockup.jpg",
       hideHero: true,
       tldr: "A price nobody had touched since launch, sitting on one of the company's biggest revenue drivers. 9,90 € for buyer protection, and it had quietly carried the product through years of growth. The product had grown up a lot since then, so I took the opportunity to put the price on firmer footing. I ran two rounds of A/B tests, seven variants in total, each built on a different principle from pricing psychology. 15,99 € won round one on revenue per user. Then 12,00 € took round two once we added customer-lifetime-value forecasting, and that became the new price.",
       story: [
@@ -215,6 +215,63 @@ window.LV_DATA = {
       ]
     },
     {
+      // DRAFT · placeholders marked [PLACEHOLDER · ...]. Sits after the
+      // first three cases so the home page teaser stays unchanged.
+      slug: "illustrations-vs-icons",
+      title: "A parcel, not a broken parcel",
+      subtitle: "An A/B test that swapped emotional illustrations for neutral icons on the payment form",
+      company: "Trusted Shops",
+      year: "2024 — 2025",
+      role: "Hypothesis & design · Test iteration",
+      team: "With 1 conversion manager (setup, analysis)",
+      duration: "2 A/B tests · Nov 2024 to Feb 2025",
+      impact: [
+        { label: "Mobile conversion", value: "+7.54%", note: "icons vs. original, 98.95% significance" },
+        { label: "Variants tested", value: "5", note: "across 2 rounds" },
+        { label: "Shipped", value: "Feb 2025", note: "icons replaced the illustrations" }
+      ],
+      tags: ["Experimentation", "Visual language", "Behavioral Science"],
+      coverPaletteHue: 340,
+      tldr: "Our payment form explained buyer protection with three illustrated cards: a closed shop with a red cross, a wallet with a fly coming out, a broken parcel. Each picture showed a case and, along the way, told you how to feel about it. During our rebrand, I tested what happens when the cards only show the thing: a shop, money, a parcel. The icon variant lifted mobile conversion by 7.54% and has been live since February 2025.",
+      story: [
+        { kind: "section", title: "The dog that stayed", body: "On E.ON's cancellation page, a sad dog has been looking at customers for years. [PLACEHOLDER · check the page is still live, add the date you looked]\n\nMy colleague, a conversion manager, used to work at E.ON and told me how it got there: they tested different animal pictures on that page, and the dog won. On a page where you want people to think twice, that makes a lot of sense.\n\nThe dog stuck with me, because we had plenty of emotional pictures on our own pages. Did they actually push people toward the action we wanted? Nobody had checked." },
+        { kind: "figure", hue: 340, label: "E.ON cancellation page · the sad dog", alt: "PLACEHOLDER · screenshot of the E.ON cancellation page with the dog picture.", caption: "Fig. 1 - [PLACEHOLDER · E.ON cancellation page, screenshot taken on DATE. Source: eon.de, URL. Add to the imprint Credits in the same change.]" },
+        { kind: "section", title: "Every picture came with a verdict", body: "The pictures I had in mind sat on our buyer-protection payment form. In November 2024, we had added benefit cards below the CTA, taken straight from our consumer website: an illustration, a short headline, center-aligned text. Three cards with the main protection cases beat nine and two, with a 4.47% lift on mobile.\n\nThe cards worked. Looking at them again, though, I noticed that each illustration did more than show a case. It came with a verdict. Shop insolvency was a closed shop with a red cross. No refund was a wallet with a fly coming out. Parcel not arrived was a broken parcel.\n\nI'd always thought the illustration style had been A/B tested at some point. It turned out it had started as an exploration and grown into our default from there. At the same time, we were in the middle of a rebrand, and the playful style felt like a lot for what is, in the end, an insurance product.\n\nBy then, I'd been at the company for a year. With a whole range of products to learn, the pages you see every day slowly turn into furniture (I'm no exception). Getting a fresh look at them anyway is a habit I work on. [PLACEHOLDER · keep or cut, your call]" },
+        { kind: "framework", title: "Same case, minus the verdict", body: "Here's the thing: **a picture that shows a case also tells people how to feel about it, and that part had never been tested.** Does the verdict push people toward protecting themselves? Or does it just give them one more thing to interpret? To find out, I replaced each illustration with an icon that shows the object and leaves the judgment out:", items: [
+          { k: "Shop insolvency", v: "Closed shop, red cross", effect: "A shop" },
+          { k: "No refund", v: "Wallet with a fly", effect: "Money" },
+          { k: "Parcel not arrived", v: "Broken parcel", effect: "A parcel" }
+        ]},
+        { kind: "section", title: "Two variants, so alignment couldn't take the credit", body: "The original had a second weak spot: all text was center-aligned. If I'd only tested icons against it, a win could just as well have come from the alignment.\n\nSo we ran two variants. Variant A kept the illustrations and moved everything to the left. Variant B did the same, with icons. From there, A against the original shows what the alignment does, and B against A shows what the icons add on top.\n\nThe test ran in Kameleoon from January 14 to 27, 2025. My colleague documented the hypothesis in our team's standard format: content that explains the product helps unsure users understand its value, with an expected 5% gain in conversion rate." },
+        { kind: "figure", hue: 340, label: "Original · Variant A · Variant B", alt: "PLACEHOLDER · the three benefit-card versions side by side: original with illustrations and centered text, variant A with illustrations and left-aligned text, variant B with icons and left-aligned text.", caption: "Fig. 2 - [PLACEHOLDER · Original (illustrations, centered), Variant A (illustrations, left-aligned), Variant B (icons, left-aligned).]" },
+        { kind: "framework", title: "Clear on mobile, a tendency on desktop", body: "Conversion rate per variant:", items: [
+          { k: "Original", v: "Mobile 7.19%", effect: "Desktop 8.98%" },
+          { k: "A · illustrations, left-aligned", v: "Mobile 7.39%", effect: "Desktop 8.74%" },
+          { k: "B · icons, left-aligned", v: "Mobile 7.73%", effect: "Desktop 9.11%" }
+        ]},
+        { kind: "result", title: "Shipped, with the why still open", body: "On mobile, the icon variant lifted conversion rate by 7.54% against the original, at 98.95% significance. Left alignment alone helped a little (7.19% to 7.39%), the icons did the larger part.\n\nDesktop was quieter. The icons came out ahead again with a 1.45% lift, but at 64.02% significance that's a tendency, not a result. However, one detail stood out: the alignment-only variant did worse than the original on desktop. The icons were the one change that held up on both devices.\n\nWe rolled out the icons on February 17, 2025. Beyond the numbers, the page got calmer: less color, less to look at, more focus on the text. And it fit right into where the rebrand was going.\n\nSo was it the missing verdict? Our documented learning says users no longer had to interpret the pictures and could focus on the content. That's what I set out to test, but the icons changed more than the meaning of the picture (more on that in the limitations). I'll take the win and keep the question open.\n\n[PLACEHOLDER · was the payment-update page (the frustrated woman at her laptop) part of this, or a separate test? Add or cut.]" },
+        { kind: "figure", hue: 340, label: "Payment form · after", alt: "PLACEHOLDER · the payment form as it is live today, with three icon benefit cards below the CTA.", caption: "Fig. 3 - [PLACEHOLDER · the live payment form with icon cards, since February 2025.]" },
+        { kind: "limitations",
+          defaultFace: "opportunities",
+          title: "Limitations",
+          subtitle: "In academia, where I come from, it's considered good manners to critique your own work, no matter how good it is. Every solution brings room for more ideas.",
+          oppositeTitle: "Opportunities",
+          oppositeSubtitle: "These are directions I'd pull if the project got another round. Some pair to a specific limitation, some are just headroom I noticed along the way.",
+          items: [
+            { title: "Desktop stayed inconclusive", body: "The decision rests on mobile. Desktop reached 64.02% significance, so the desktop lift is a tendency. When a test counts as done is a call our conversion managers make, and here the mobile result carried it." },
+            { title: "Icons changed more than the meaning", body: "Swapping illustrations for icons also removed color, detail and visual weight. The test shows the icons won, not which of these properties drove it. The missing verdict is the most plausible reading, not a proven one." },
+            { title: "Standard hypothesis, not a calculated one", body: "Like most of our tests, the hypothesis assumed a default 5% effect instead of a calculated minimum detectable effect. That fits where our experimentation practice stands today, at \"Run\" on a four-step maturity scale. [PLACEHOLDER · name the maturity model and credit it]" },
+            { title: "One surface, one moment", body: "Only the payment form was tested, two months after the cards first went live. Other pages with emotional imagery kept theirs untested. [PLACEHOLDER · adjust if the payment-update page was tested]" }
+          ],
+          opportunities: [
+            { title: "Isolate the verdict", body: "A follow-up with icon against icon, one neutral and one with an evaluative cue (a crossed-out shop, a broken parcel), would test the emotional connotation on its own." },
+            { title: "Test emotion on purpose", body: "The E.ON dog shows emotion can work where you want people to hesitate. A loss-framed image on the payment-update page would be the place to test that deliberately instead of by default." },
+            { title: "Calculated hypotheses", body: "Estimating the expected effect and the needed runtime up front would make it clearer when a test is done, and would have flagged early that desktop wouldn't reach significance in two weeks." }
+          ]
+        }
+      ]
+    },
+    {
       slug: "design-system",
       title: "Cargoboard's rebrand and first design system",
       subtitle: "Brand discovery, visual system, and the company's first design language",
@@ -285,7 +342,7 @@ window.LV_DATA = {
         { kind: "section", title: "Information architecture", body: "The original navigation hid most of the site. Even Cargoboard's own employees used Google to find their own pages, and operative pages like optional insurance were the hardest to reach. I drew on Nielsen Norman patterns and Information Architecture for the Web and Beyond (Rosenfeld, Morville, Arango, O'Reilly 2015), then worked with the SEO team on a link structure that served both users and search. We tested with a card sort workshop and tree-tested in UXtweak with users recruited from the live site. Both confirmed our direction and surfaced a few wording fixes that shipped into the final IA." },
         { kind: "section", title: "Design and handoff", body: "Design started desktop-first, since roughly 95% of Cargoboard's customers are desktop users. Every desktop wireframe was sketched alongside its mobile equivalent, so mobile shipped on time, on the new system. The product owner wanted to stay on Wordpress and Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. That pushed the system to be more disciplined: every component had to be reproducible by someone who could not open Figma. Throughout the project I used the customer service team as a proxy for user knowledge I could not generate myself, treating their input as hypothesis rather than evidence so we did not confuse operations opinion with user need." },
         { kind: "figure", hue: 330, src: "images/website-relaunch/old-site-2021.jpg", alt: "The services section of the old cargoboard.de: a heading, a paragraph of copy, and two cards with stock photos of trucks and a shipping container.", caption: "Fig. 2 - Before: the services section of the old cargoboard.de, May 2021. Screenshot from the Internet Archive's Wayback Machine." },
-        { kind: "figure", hue: 330, src: "images/website-relaunch/old-homepage-2021.jpg", alt: "The top of the old cargoboard.de homepage with the red logo, a red Jetzt Versenden button, and a booking form with a red Weiter button, above a how-it-works section with red checkmarks and a red Jetzt starten button.", caption: "Fig. 3 - Before: the top of the old homepage and its how-it-works section, May 2021. Red, black, and white throughout (the map behind the booking form doesn't load in the archive). Screenshot from the Internet Archive's Wayback Machine." },
+        { kind: "figure", hue: 330, src: "images/website-relaunch/old-homepage-2021-map.jpg", alt: "The top of the old cargoboard.de homepage on a dark map of Europe, with the red logo, white navigation, a red Jetzt Versenden button, and a booking form with a red Weiter button, above a how-it-works section with red checkmarks and a red Jetzt starten button.", caption: "Fig. 3 - Before: the top of the old homepage and its how-it-works section, May 2021. Red, black, and white throughout. Screenshot from the Internet Archive's Wayback Machine. The dark map behind the booking form doesn't load in the archive, so I re-rendered it in the original style with CARTO map tiles (map data © OpenStreetMap contributors)." },
         { kind: "figure", hue: 330, src: "images/website-relaunch/homepage.jpg", alt: "The relaunched cargoboard.com homepage in a browser: the hero with the booking form, the digital-freight section, and the company video.", caption: "Fig. 4 - After: the relaunched homepage. Blue takes over the large surfaces, red stays for the calls to action." },
         { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs, and new pages now ship on top of it without a designer in the loop on every one. Treating the system as the lever, not the deliverable, was the bet that paid off: every page since launch has compounded on it, and the brand still feels coherent across surfaces I never touched. Tracking (Hotjar, GA, recordings) went live with the relaunch, and the hypotheses (reduced support tickets about finding pages, internal teams self-serving from the system) became measurable once analytics had a few months of data." },
         { kind: "limitations",
