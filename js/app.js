@@ -328,7 +328,8 @@
       D.clients.forEach((c) => {
         const logo = D.clientLogos[c];
         if (logo) {
-          items.push(`<img src="${logo}" alt="${c}" loading="lazy" onerror="this.outerHTML='<span>— ${c}</span>'">`);
+          const scale = (D.clientLogoScale || {})[c] || 1;
+          items.push(`<img src="${logo}" alt="${c}" style="--logo-scale:${scale}" loading="lazy" onerror="this.outerHTML='<span>— ${c}</span>'">`);
         } else {
           items.push(`<span>— ${c}</span>`);
         }

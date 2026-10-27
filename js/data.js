@@ -36,15 +36,31 @@ window.LV_DATA = {
 
   // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
-    "Trusted Shops": "images/logos/Trusted-Shops_Logo_black.svg",
+    "Trusted Shops": "images/logos/trusted-shops-wordmark.svg",
     Cargoboard: "images/logos/main_logo_color_black.svg",
     Funke: "images/logos/Funke-Mediengruppe-Logo.png",
-    TikTok: "images/logos/TikTok-logo-RGB-Horizontal-black.png",
+    TikTok: "images/logos/tiktok-wordmark.png",
     Canva: "images/logos/canva-wordmark.svg",
     Aqora: "images/logos/Wortmarke 1C.svg",
     Autarc: "images/logos/autarc-wordmark.svg",
-    feelinghale: "images/logos/feelinghale-logo.svg",
+    feelinghale: "images/logos/feelinghale-wordmark.svg",
     "Dr. Vivien Karl": "images/logos/dr-vivien-karl.png"
+  },
+
+  // Optical size per logo, as a factor of the strip's logo height. Wide,
+  // flat wordmarks run smaller, compact or stacked ones larger, so they all
+  // carry about the same weight. Where it can't be even, the big brands
+  // (TikTok, Canva, Funke) get the extra size.
+  clientLogoScale: {
+    "Trusted Shops": 1.3,
+    Cargoboard: 0.78,
+    Funke: 1.4,
+    TikTok: 0.88,
+    Canva: 1.12,
+    Aqora: 0.72,
+    Autarc: 0.74,
+    feelinghale: 1.45,
+    "Dr. Vivien Karl": 0.5
   },
 
   cases: [

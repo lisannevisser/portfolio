@@ -133,13 +133,11 @@
   font-size: var(--text-xl); color: var(--ink-2);
 }
 [data-variation="v1"] .v1-logo-track img {
-  height: 28px; width: auto;
+  height: calc(28px * var(--logo-scale, 1)); width: auto;
   filter: grayscale(1) opacity(0.72);
   transition: filter 0.3s var(--ease-out);
 }
 [data-variation="v1"] .v1-logo-track img:hover { filter: grayscale(0) opacity(1); }
-/* Long, flat wordmark: half height so it weighs the same as the others. */
-[data-variation="v1"] .v1-logo-track img[alt="Dr. Vivien Karl"] { height: 13px; }
 @keyframes v1-marquee { to { transform: translateX(-50%); } }
 
 [data-variation="v1"] .v1-impact-grid {
