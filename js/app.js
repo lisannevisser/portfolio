@@ -1032,6 +1032,11 @@
       categories: ["research", "ops"],
       intro: "Research lead · org-wide practice"
     },
+    "illustrations-vs-icons": {
+      kind: "stat", label: "mobile conversion", tilt: 4,
+      categories: ["experimentation", "brand"],
+      intro: "Hypothesis & design · with 1 conversion manager"
+    },
     "design-system": {
       kind: "image",
       categories: ["systems", "brand"],
