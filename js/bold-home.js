@@ -1,5 +1,5 @@
 /* =========================================================================
-   Bold Type home (#/home-bold): work cards from data.js, mobile
+   Bold Type home (#/home-bold): work cards from data.js, chapter
    progress segments, and the light/dark nav flip on the Contact chapter.
    Depends on: window.LV_DATA and window.LV_RENDER (set by js/app.js).
    ========================================================================= */
@@ -35,9 +35,12 @@
         </span>
       </a>
     `).join("");
+    // The link under the cards names how many cases sit behind it.
+    const all = $(".bt-work-all", root);
+    if (all) all.textContent = `All ${D.cases.length} case studies`;
   }
 
-  // -------- Mobile progress bar: built once, driven by the scroll spy --------
+  // -------- Progress bar: built once, driven by the scroll spy --------
   function renderProgress() {
     const progress = $(".bt-nav-progress", root);
     if (progress) {
@@ -48,7 +51,7 @@
   function setChapter(index) {
     const ch = CHAPTERS[index];
     root.setAttribute("data-chapter", ch.id);
-        $$(".bt-nav-progress span", root).forEach((s, i) => {
+    $$(".bt-nav-progress span", root).forEach((s, i) => {
       s.classList.toggle("is-done", i <= index);
       // Every filled segment takes the current chapter's color, as in the design.
       if (i <= index) s.style.setProperty("--chapter-color", ch.color);
