@@ -82,8 +82,9 @@ nicht als "Researcherin". Diese Punkte verschieben es Richtung Research.
 
 - [ ] Cases mit der Frage + dem Learning eröffnen, nicht mit Output + Zahl.
 - [ ] Research-Synthese sichtbar machen: Affinity Map, Journey Map,
-      Survey-Report, Interview-Guide, Coding-Schema. Aktuell ist nur das
-      Limbic-Mapping als echtes Research-Artefakt sichtbar.
+      Survey-Report, Interview-Guide, Coding-Schema. Das Limbic-Mapping
+      (früher Fig. 3 im Research-Culture-Case) ist seit #137 raus, aktuell
+      ist also kein echtes Research-Artefakt mehr sichtbar.
 - [ ] Pro Case eine Methoden-Zeile mit n ergänzen (z. B. "Tree Test, n=24,
       UXtweak").
 - [ ] Stichprobengrößen nachtragen, wo sie fehlen:
@@ -253,15 +254,17 @@ aber die Vorlagen liegen alle bereit.
 
 ## Neue Case Studies
 
-- [ ] Limbic-Types als eigene Case ausgliedern (aktuell nur Unterpunkt im
-      Research-Culture-Case). Generative Segmentierung von null an;
+- [ ] Limbic-Types als eigene Case (stand früher als Unterpunkt im
+      Research-Culture-Case, siehe unten). Generative Segmentierung von null an;
       Decision-Lead: "Wir konnten nicht sagen, wer unsere User sind - und
       Personas/JTBD passten nicht." Ehrlich rahmen als adaptierter Proxy
       ohne offizielles Tool und als einzelne Momentaufnahme.
       Opportunities-Flip: Follow-up-Interviews + Standard-Interview-Guide,
       um die Typen über Zeit zu validieren.
-  - [ ] Offen: 6. Case ODER den Research-Culture-Case ersetzen /
-        verschlanken?
+  - [x] ~~Offen: 6. Case ODER den Research-Culture-Case ersetzen /
+        verschlanken?~~ Entschieden 2026-10-27: eigene, zusätzliche Case.
+        Limbic gehört nicht mehr in den Research-Culture-Case, der bleibt
+        als eigenständige Case bestehen.
   - [ ] Offen: konkrete Findings nennen oder auf Methode + Ansatz fokussieren?
   - Update 2026-10-27: **Vorerst zurückgestellt.** Das Limbic-Modell
     (Häusel / Gruppe Nymphenburg) ist wissenschaftlich umstritten, als
@@ -273,8 +276,14 @@ aber die Vorlagen liegen alle bereit.
     Lernkurve erzählen (Limbic als erster Proxy → Grenzen erkannt →
     datenbasierte, validierte Profile). Die Limbic-Kritik wird so zum
     Reifeschritt statt zur Schwachstelle.
-- [ ] Research-Culture-Case: Limbic nur kurz erwähnen und auf die
-      dedizierte Case verlinken (cross-link statt Wiederholung).
+- [x] Limbic aus dem Research-Culture-Case rausnehmen. Lisanne will das
+      dort nicht mehr haben (bestätigt 2026-10-27). Ist auf `main` schon
+      erledigt: Evidence-Absatz, Fig. 3 (Limbic-Mapping) und das
+      Limitation-Item "One segmentation model" sind seit #137 raus. Der
+      Case erwähnt nur noch das Alters-Finding aus den Surveys.
+  - [ ] Optional, erst wenn die Limbic-/Käuferprofil-Case live ist: im
+        Research-Culture-Case einen kurzen Cross-Link setzen (z. B. beim
+        Alters-Finding), statt den Inhalt dort zu wiederholen.
 - [ ] Post-Cancellation-Survey als Discovery-Case. Erstmals eingeführter
       Touchpoint, reiner Erkenntnisgewinn - aber mit "und deshalb"-Frame
       (welche Entscheidung / Annahme-Korrektur folgte), damit es
