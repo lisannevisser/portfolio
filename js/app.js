@@ -37,9 +37,9 @@
   // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
   // the original v1 dress stays reachable as a backup at "<name>-classic"
   // (#/home-classic, #/work-classic/<slug>, ...). Pages that only exist in v1
-  // (books, chinese, playground, styleguide) keep their plain slug. Old
+  // (chinese, playground, styleguide) keep their plain slug. Old
   // "-bold" links still resolve and get rewritten to the plain slug.
-  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "imprint", "privacy"]);
+  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
   const DYNAMIC = { work: ["case", D.cases], blog: ["post", D.posts || []] };
 
   // Anything that isn't a route section, a known case slug, or a known post
@@ -1387,11 +1387,14 @@
     );
   }
 
+  // Every container with data-books="grid" gets the covers (#/books in the
+  // Bold Type dress, #/books-classic). Both open the one review overlay,
+  // which sits after <main>. The stats block only exists in the classic dress.
   function renderBooks() {
     const books = D.books || [];
-    const grid = $("#lv-books-grid");
+    const grids = $$('[data-books="grid"]');
     const statsEl = $("#lv-books-stats");
-    if (!grid || !books.length) return;
+    if (!grids.length || !books.length) return;
 
     // ---- Stats ----
     const total = books.length;
@@ -1452,7 +1455,7 @@
     }
 
     // ---- Cover grid ----
-    grid.innerHTML = books
+    const cards = books
       .map((b, i) => `
         <button class="lv-book-card" data-index="${i}" data-cursor-label="Read" aria-label="Open review of ${esc(b.title)}">
           <span class="lv-book-cover" style="--spine:${esc(b.color)}">
@@ -1467,6 +1470,7 @@
           </span>
         </button>`)
       .join("");
+    grids.forEach((grid) => { grid.innerHTML = cards; });
 
     // ---- Detail overlay ----
     const overlay = $("#lv-book-overlay");
@@ -1500,12 +1504,12 @@
       document.body.style.overflow = "";
     }
 
-    grid.addEventListener("click", (e) => {
+    grids.forEach((grid) => grid.addEventListener("click", (e) => {
       const card = e.target.closest(".lv-book-card");
       if (!card) return;
       const b = books[parseInt(card.getAttribute("data-index"), 10)];
       if (b) openBook(b);
-    });
+    }));
     closeBtn.addEventListener("click", closeBook);
     backdrop.addEventListener("click", closeBook);
     document.addEventListener("keydown", (e) => {
