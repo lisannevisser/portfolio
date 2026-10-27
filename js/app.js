@@ -1338,17 +1338,6 @@
     update();
   }
 
-  // Slow the about-hero portrait video down a touch — full speed reads as
-  // restless. playbackRate can only be set in JS, and it survives looping.
-  function initHeroVideo() {
-    $$(".ahs-video").forEach((vid) => {
-      const slow = () => { vid.playbackRate = 0.3; };
-      slow();
-      vid.addEventListener("loadedmetadata", slow);
-      vid.addEventListener("play", slow);
-    });
-  }
-
   // ========================================================================
   // BOOKSHELF (cover grid + stats + detail overlay)
   // ========================================================================
@@ -1832,7 +1821,6 @@
     initChineseFilters();
     initFooterEmoji();
     initHeroScrolly();
-    initHeroVideo();
     renderRoute();
   }
 
