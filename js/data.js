@@ -7,7 +7,6 @@ window.LV_DATA = {
       "Generalist product designer with a research & experimentation spine",
     location: "Berlin, Germany",
     email: "mail@lisannevisser.com",
-    availability: "Open to senior & staff roles · Q3 2026",
     shortBio:
       "I turn messy product problems into evidence-backed design. Research, experimentation, and systems thinking sit at the center of the work; I ship end-to-end, from discovery to pixels to post-launch metrics.",
     longBio: [
