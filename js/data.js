@@ -613,6 +613,38 @@ window.LV_DATA = {
       thumb: "images/sketchbook/facely-doodles-thumb.jpg",
       full: "images/sketchbook/facely-doodles.jpg",
       blurb: "A notebook page of logo and face ideation, drawn small and fast."
+    },
+    {
+      slug: "skeleton-foot",
+      title: "Foot bones",
+      medium: "Ink",
+      thumb: "images/sketchbook/skeleton-foot-thumb.jpg",
+      full: "images/sketchbook/skeleton-foot.jpg",
+      blurb: "An anatomy study of the lower leg and foot in black ink, next to a page of loose watercolor washes."
+    },
+    {
+      slug: "skeleton-hand",
+      title: "Hand bones",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/skeleton-hand-thumb.jpg",
+      full: "images/sketchbook/skeleton-hand.jpg",
+      blurb: "The bones of a hand in ink on a toned page, with the dog keeping an eye on things."
+    },
+    {
+      slug: "skull-ink",
+      title: "Skull",
+      medium: "Ink and watercolor",
+      thumb: "images/sketchbook/skull-ink-thumb.jpg",
+      full: "images/sketchbook/skull-ink.jpg",
+      blurb: "An animal skull in ink and gray wash, laid over a spread of warm brown watercolor."
+    },
+    {
+      slug: "seascape-painting",
+      title: "Seascape",
+      medium: "Acrylic on canvas",
+      thumb: "images/sketchbook/seascape-painting-thumb.jpg",
+      full: "images/sketchbook/seascape-painting.jpg",
+      blurb: "A small painting of a bay at dusk, built up in short, thick strokes."
     }
   ],
 
