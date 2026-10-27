@@ -26,15 +26,15 @@ window.LV_DATA = {
   // Same rows as the About page and the Bold Type home. Not rendered from
   // here yet (About hard-codes its rows), kept in sync so nothing quotes it.
   career: [
-    { role: "Senior Product Designer (Growth)", org: "Trusted Shops", period: "2025 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
-    { role: "UX Designer (Growth)", org: "Trusted Shops", period: "2023 — 2025", city: "Berlin" },
+    { role: "Senior Product Designer", org: "Trusted Shops", period: "2025 — Now", city: "Berlin", note: "Consumer trust, pricing, experimentation, research culture" },
+    { role: "Product Designer", org: "Trusted Shops", period: "2023 — 2025", city: "Berlin" },
     { role: "Product Designer, freelance", org: "Aqora", period: "2023 — Now", note: "Quantum computing platform, design system, research" },
-    { role: "UX & Product Designer, freelance", org: "lisanne.design", period: "2020 — Now", note: "Canva, HALE.NOW and more" },
+    { role: "Product Designer, freelance", org: "lisanne.design", period: "2020 — Now", note: "Canva, HALE.NOW and more" },
     { role: "Product Designer", org: "Cargoboard", period: "2022 — 2023", city: "Berlin", note: "B2B logistics, design system, IA redesign" },
     { role: "Quality Assurance Analyst", org: "TikTok", period: "2020 — 2022" }
   ],
 
-  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Autarc", "HALE.NOW", "Dr. Vivien Karl"],
+  clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Quantinuum", "Autarc", "HALE.NOW", "Dr. Vivien Karl"],
 
   // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
@@ -44,6 +44,7 @@ window.LV_DATA = {
     TikTok: "images/logos/tiktok-wordmark.png",
     Canva: "images/logos/canva-wordmark.svg",
     Aqora: "images/logos/Wortmarke 1C.svg",
+    Quantinuum: "images/logos/quantinuum-wordmark.svg",
     Autarc: "images/logos/autarc-wordmark.svg",
     "HALE.NOW": "images/logos/hale-now-wordmark.svg",
     "Dr. Vivien Karl": "images/logos/dr-vivien-karl.png"
@@ -60,6 +61,7 @@ window.LV_DATA = {
     TikTok: 0.88,
     Canva: 1.12,
     Aqora: 0.72,
+    Quantinuum: 0.95,
     Autarc: 0.74,
     "HALE.NOW": 0.62,
     "Dr. Vivien Karl": 0.38
@@ -88,6 +90,7 @@ window.LV_DATA = {
       story: [
         { kind: "section", title: "Situation", body: "All the way back to launch several years ago, 9,90 € was the price for buyer protection. It's one of the company's core revenue drivers, and that price had served it well. But market and product had evolved, and the price hadn't moved with it. So the question more or less asked itself: is 9,90 € still right today? And if it isn't, what does pricing-psychology research suggest instead?" },
         { kind: "section", title: "Approach", body: "Here's the thing people might miss about price: **how a number is written and framed can move revenue as much as the number itself.**\n\nSo when my colleague Daniel, a Conversion Manager, and I decided to start the project, it was important to me not to run a test that only asked \"is this number bigger or smaller?\". Hence, I built several variants from specific principles in pricing psychology, which turned the question into: which mechanism might actually change behavior?\n\nBecause we framed the project as an experiment, it kept the stakes low across the team (any result, win or lose, was useful input for the next round) and it made a change to a core revenue driver feel safe to try for all stakeholders. Low risk, high potential!" },
+        { kind: "figure", hue: 22, src: "images/pricing/upgrade-page-mockup.jpg", alt: "The buyer-protection checkout page in a browser window on a soft orange gradient. Headline Aktivieren Sie Ihren Käuferschutz, then two plans: Käuferschutz PLUS at 12,00 € per year, marked as recommended and selected, and Käuferschutz Single at 4,99 € one-off. On the right, a summary box with the 12,00 € total and a blue Zahlungspflichtig bestellen button.", caption: "Fig. 1 - A variant of the buyer-protection page at the new price: 12,00 € for PLUS, next to the one-off Single option." },
         { kind: "framework", title: "Hypotheses", body: "Here is a snippet of the hypotheses we tested and some of the rationales behind them:", items: [
           { k: "Charm / odd", v: "15,99 €", effect: "Reads as a deal" },
           { k: "Prestige / even", v: "12,00 €", effect: "Reads as quality" },
@@ -95,7 +98,6 @@ window.LV_DATA = {
         ]},
         { kind: "section", title: "Method", body: "We tested seven variants between 10 € and 15 €, each tied to a specific psychological principle.\n\nThe metric mattered as much as the variants: We measured revenue per user, not just transaction rate. A higher price can convert slightly fewer people and still bring in more money overall, so transaction rate on its own would have hidden the variants that were actually winning.\n\nAnd because a headline result can hide an uneven one, we broke the numbers down: new versus returning users, free-plan holders, and the order amount from the shop that sent them. All to ensure no single segment was carrying the effect." },
         { kind: "result", title: "Outcome", body: "15,99 € won round one on revenue per user, with a 99.9% win probability.\n\nFrom here, it got more interesting. We ran a second round, stretched the price range up to 20 €, and layered customer-lifetime-value forecasting on top of every variant. With long-term value in the picture, the winner changed: 12,00 €, one of the original hypotheses from round one, came out on top and shipped as the new price.\n\nThe part I was most nervous about turned out fine. We watched withdrawals and churn over a year and longer, and neither moved in any meaningful way. Annualized, the lift was one of the larger contributions to the team's growth that year. [PLACEHOLDER · drop in a relative share or qualitative line once cleared for publication]\n\nThe best outcome wasn't the number, though. The experiment setup has since become the default way consumer pricing gets changed at Trusted Shops." },
-        { kind: "figure", hue: 22, src: "images/pricing/upgrade-page.jpg", alt: "The buyer-protection checkout page. Headline Aktivieren Sie Ihren Käuferschutz, then two plans: Käuferschutz PLUS at 12,00 € per year, marked as recommended and selected, and Käuferschutz Single at 4,99 € one-off. On the right, a summary box with the 12,00 € total and a blue Zahlungspflichtig bestellen button.", caption: "Fig. 1 - A variant of the buyer-protection page at the new price: 12,00 € for PLUS, next to the one-off Single option." },
         { kind: "limitations",
           defaultFace: "opportunities",
           title: "Limitations",
@@ -218,7 +220,7 @@ window.LV_DATA = {
       // DRAFT · placeholders marked [PLACEHOLDER · ...]. Sits after the
       // first three cases so the home page teaser stays unchanged.
       slug: "illustrations-vs-icons",
-      title: "A parcel, not a broken parcel",
+      title: "Taking the verdict out of the picture",
       subtitle: "An A/B test that swapped emotional illustrations for neutral icons on the payment form",
       company: "Trusted Shops",
       year: "2024 — 2025",
@@ -234,23 +236,24 @@ window.LV_DATA = {
       coverPaletteHue: 340,
       tldr: "Our payment form explained buyer protection with three illustrated cards: a closed shop with a red cross, a wallet with a fly coming out, a broken parcel. Each picture showed a case and, along the way, told you how to feel about it. During our rebrand, I tested what happens when the cards only show the thing: a shop, money, a parcel. The icon variant lifted mobile conversion by 7.54% and has been live since February 2025.",
       story: [
-        { kind: "section", title: "The dog that stayed", body: "On E.ON's cancellation page, a sad dog has been looking at customers for years. [PLACEHOLDER · check the page is still live, add the date you looked]\n\nMy colleague, a conversion manager, used to work at E.ON and told me how it got there: they tested different animal pictures on that page, and the dog won. On a page where you want people to think twice, that makes a lot of sense.\n\nThe dog stuck with me, because we had plenty of emotional pictures on our own pages. Did they actually push people toward the action we wanted? Nobody had checked." },
-        { kind: "figure", hue: 340, label: "E.ON cancellation page · the sad dog", alt: "PLACEHOLDER · screenshot of the E.ON cancellation page with the dog picture.", caption: "Fig. 1 - [PLACEHOLDER · E.ON cancellation page, screenshot taken on DATE. Source: eon.de, URL. Add to the imprint Credits in the same change.]" },
+        { kind: "section", title: "The dog that stayed", body: "On E.ON's cancellation page, a sad dog has been looking at customers for years.\n\nMy colleague, a conversion manager, used to work at E.ON and told me how it got there: they tested different animal pictures on that page, and the dog won. On a page where you want people to think twice, that makes a lot of sense.\n\nThe dog stuck with me, because we had plenty of emotional pictures on our own pages. Did they actually push people toward the action we wanted? Nobody had checked." },
+        { kind: "figure", hue: 340, src: "images/illustrations-vs-icons/eon-cancellation.jpg", alt: "The E.ON cancellation page in a browser window. On a red panel: Sie möchten Ihren Vertrag kündigen? Es gibt gute Gründe zu bleiben, with three reasons listed. Next to it, a photo of a brown and white terrier sitting on a doormat, looking up at the camera.", caption: "Fig. 1 - E.ON's cancellation page on eon.de, still live in October 2026. Page and photo belong to E.ON." },
         { kind: "section", title: "Every picture came with a verdict", body: "The pictures I had in mind sat on our buyer-protection payment form. In November 2024, we had added benefit cards below the CTA, taken straight from our consumer website: an illustration, a short headline, center-aligned text. Three cards with the main protection cases beat nine and two, with a 4.47% lift on mobile.\n\nThe cards worked. Looking at them again, though, I noticed that each illustration did more than show a case. It came with a verdict. Shop insolvency was a closed shop with a red cross. No refund was a wallet with a fly coming out. Parcel not arrived was a broken parcel.\n\nI'd always thought the illustration style had been A/B tested at some point. It turned out it had started as an exploration and grown into our default from there. At the same time, we were in the middle of a rebrand, and the playful style felt like a lot for what is, in the end, an insurance product.\n\nBy then, I'd been at the company for a year. With a whole range of products to learn, the pages you see every day slowly turn into furniture (I'm no exception). Getting a fresh look at them anyway is a habit I work on. [PLACEHOLDER · keep or cut, your call]" },
         { kind: "framework", title: "Same case, minus the verdict", body: "Here's the thing: **a picture that shows a case also tells people how to feel about it, and that part had never been tested.** Does the verdict push people toward protecting themselves? Or does it just give them one more thing to interpret? To find out, I replaced each illustration with an icon that shows the object and leaves the judgment out:", items: [
           { k: "Shop insolvency", v: "Closed shop, red cross", effect: "A shop" },
           { k: "No refund", v: "Wallet with a fly", effect: "Money" },
           { k: "Parcel not arrived", v: "Broken parcel", effect: "A parcel" }
         ]},
+        { kind: "figure", hue: 340, label: "Illustrations · Icons", alt: "PLACEHOLDER · the three illustrations (closed shop with a red cross, wallet with a fly, broken parcel) above the three icons that replaced them (shop, money, parcel).", caption: "Fig. 2 - [PLACEHOLDER · the three illustrations and the three icons on their own, outside the page.]" },
         { kind: "section", title: "Two variants, so alignment couldn't take the credit", body: "The original had a second weak spot: all text was center-aligned. If I'd only tested icons against it, a win could just as well have come from the alignment.\n\nSo we ran two variants. Variant A kept the illustrations and moved everything to the left. Variant B did the same, with icons. From there, A against the original shows what the alignment does, and B against A shows what the icons add on top.\n\nThe test ran in Kameleoon from January 14 to 27, 2025. My colleague documented the hypothesis in our team's standard format: content that explains the product helps unsure users understand its value, with an expected 5% gain in conversion rate." },
-        { kind: "figure", hue: 340, label: "Original · Variant A · Variant B", alt: "PLACEHOLDER · the three benefit-card versions side by side: original with illustrations and centered text, variant A with illustrations and left-aligned text, variant B with icons and left-aligned text.", caption: "Fig. 2 - [PLACEHOLDER · Original (illustrations, centered), Variant A (illustrations, left-aligned), Variant B (icons, left-aligned).]" },
+        { kind: "figure", hue: 340, label: "Original · Variant A · Variant B", alt: "PLACEHOLDER · the three benefit-card versions side by side: original with illustrations and centered text, variant A with illustrations and left-aligned text, variant B with icons and left-aligned text.", caption: "Fig. 3 - [PLACEHOLDER · mockup with all three variants side by side: Original (illustrations, centered), Variant A (illustrations, left-aligned), Variant B (icons, left-aligned).]" },
         { kind: "framework", title: "Clear on mobile, a tendency on desktop", body: "Conversion rate per variant:", items: [
           { k: "Original", v: "Mobile 7.19%", effect: "Desktop 8.98%" },
           { k: "A · illustrations, left-aligned", v: "Mobile 7.39%", effect: "Desktop 8.74%" },
           { k: "B · icons, left-aligned", v: "Mobile 7.73%", effect: "Desktop 9.11%" }
         ]},
         { kind: "result", title: "Shipped, with the why still open", body: "On mobile, the icon variant lifted conversion rate by 7.54% against the original, at 98.95% significance. Left alignment alone helped a little (7.19% to 7.39%), the icons did the larger part.\n\nDesktop was quieter. The icons came out ahead again with a 1.45% lift, but at 64.02% significance that's a tendency, not a result. However, one detail stood out: the alignment-only variant did worse than the original on desktop. The icons were the one change that held up on both devices.\n\nWe rolled out the icons on February 17, 2025. Beyond the numbers, the page got calmer: less color, less to look at, more focus on the text. And it fit right into where the rebrand was going.\n\nSo was it the missing verdict? Our documented learning says users no longer had to interpret the pictures and could focus on the content. That's what I set out to test, but the icons changed more than the meaning of the picture (more on that in the limitations). I'll take the win and keep the question open.\n\n[PLACEHOLDER · was the payment-update page (the frustrated woman at her laptop) part of this, or a separate test? Add or cut.]" },
-        { kind: "figure", hue: 340, label: "Payment form · after", alt: "PLACEHOLDER · the payment form as it is live today, with three icon benefit cards below the CTA.", caption: "Fig. 3 - [PLACEHOLDER · the live payment form with icon cards, since February 2025.]" },
+        { kind: "figure", hue: 340, label: "Payment form · after", alt: "PLACEHOLDER · the payment form as it is live today, with three icon benefit cards below the CTA.", caption: "Fig. 4 - [PLACEHOLDER · the live payment form with icon cards, since February 2025.]" },
         { kind: "limitations",
           defaultFace: "opportunities",
           title: "Limitations",
@@ -266,7 +269,8 @@ window.LV_DATA = {
           opportunities: [
             { title: "Isolate the verdict", body: "A follow-up with icon against icon, one neutral and one with an evaluative cue (a crossed-out shop, a broken parcel), would test the emotional connotation on its own." },
             { title: "Test emotion on purpose", body: "The E.ON dog shows emotion can work where you want people to hesitate. A loss-framed image on the payment-update page would be the place to test that deliberately instead of by default." },
-            { title: "Calculated hypotheses", body: "Estimating the expected effect and the needed runtime up front would make it clearer when a test is done, and would have flagged early that desktop wouldn't reach significance in two weeks." }
+            { title: "Calculated hypotheses", body: "Estimating the expected effect and the needed runtime up front would make it clearer when a test is done, and would have flagged early that desktop wouldn't reach significance in two weeks." },
+            { title: "Emotional framing beyond the payment form", body: "Emotional imagery still sits on other pages of the journey. Testing it there, one surface at a time, would show whether the result holds beyond a single form or depends on the moment in the funnel." }
           ]
         }
       ]
@@ -666,14 +670,6 @@ window.LV_DATA = {
       blurb: "A lion skull in ink and gray wash, laid over a spread of warm brown watercolor."
     },
     {
-      slug: "dog-paw",
-      title: "Dog paw",
-      medium: "Ink wash",
-      thumb: "images/sketchbook/dog-paw-thumb.jpg",
-      full: "images/sketchbook/dog-paw.jpg",
-      blurb: "The bones of a dog's paw in ink on a toned page, with the dog itself keeping an eye on things."
-    },
-    {
       slug: "skeleton-foot",
       title: "Foot bones",
       medium: "Ink",
@@ -712,6 +708,14 @@ window.LV_DATA = {
       thumb: "images/sketchbook/pikachu-thumb.jpg",
       full: "images/sketchbook/pikachu.jpg",
       blurb: "A loose watercolor with a soft, blended background."
+    },
+    {
+      slug: "dog-paw",
+      title: "Dog paw",
+      medium: "Ink wash",
+      thumb: "images/sketchbook/dog-paw-thumb.jpg",
+      full: "images/sketchbook/dog-paw.jpg",
+      blurb: "The bones of a dog's paw in ink on a toned page, with the dog itself keeping an eye on things."
     },
     {
       slug: "color-tests",
