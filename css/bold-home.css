@@ -12,6 +12,9 @@
   --bt-cobalt: #1f3fbf;
   --bt-mustard: #e8c547;
   --bt-font-display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+  /* Where every hero starts (the kicker's top edge), on every Bold Type
+     page: Home chapters, About, Work, cases, blog, legal, 404. */
+  --bt-hero-top: clamp(6rem, 15vh, 8.5rem);
 }
 
 /* The chapters bring their own nav and footer line, so the global
@@ -73,12 +76,13 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   /* Every chapter is a hard stop, so a fast trackpad flick can't fly past one. */
   scroll-snap-stop: always;
   box-sizing: border-box;
-  padding: 120px 64px 64px;
+  padding: var(--bt-hero-top) 64px 64px;
   display: flex;
   flex-direction: column;
   border-top: 2px solid var(--ink);
 }
-.bt-chapter:first-child { border-top: 0; }
+.bt-chapter:first-child,
+.bt-chapter--intro { border-top: 0; } /* the nav comes first, so :first-child misses the intro */
 .bt-chapter--intro {
   /* Headline and lead hug the kicker like on the other pages; the logo band
      drops to the foot of the screen (padding-bottom moves into .bt-logos). */
@@ -444,14 +448,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt--about .bt-nav-progress, .bt--about .bt-nav-count { display: none; }
 
 /* Scrolly: room for the fixed nav on top, mast in display type. */
-.bt--about .ahs-pin { padding-top: clamp(5.5rem, 14vh, 8rem); }
-/* Desktop: the photo sets the block's height, which is well short of the
-   viewport, so a top-aligned block left a band of empty space below it.
-   Center it in the space under the fixed nav instead; `safe` falls back to
-   top-aligned when a short window can't fit the block. */
-@media (min-width: 881px) {
-  .bt--about .ahs-pin { align-items: safe center; padding-top: 80px; padding-bottom: 0; }
-}
+.bt.bt--about .ahs-pin { padding-top: var(--bt-hero-top); }
 /* Unlike the v1 About, the "Hello, I'm Lisanne." mast doesn't stay as a
    small masthead: it folds away completely as chapter 01 takes over, so
    the chapters start at the top. Desktop only; on narrow screens the
@@ -551,7 +548,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 
 @media (max-width: 900px) {
   .bt-wrap { padding: 0 22px; }
-  .bt--about .ahs-pin { padding-top: 6rem; }
+  .bt.bt--about .ahs-pin { padding-top: 6rem; }
   .bt--about .ahs-h1 { font-size: clamp(48px, 15.9vw, 62px); }
   .bt--about .ahs-images {
     transform: none; max-width: none; height: 220px; aspect-ratio: auto;
@@ -574,7 +571,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
    dress. Overrides only what differs from v1.css.
    ========================================================================== */
 .bt--work { min-height: 100vh; }
-.bt-page { padding-top: clamp(6rem, 15vh, 8.5rem); padding-bottom: 36px; }
+.bt-page { padding-top: var(--bt-hero-top); padding-bottom: 36px; }
 .bt-page-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
 /* Proximity: the filters belong to the list they control, so the big gap
    sits between the intro and the filters, and the filters hug the list. */
@@ -1379,7 +1376,7 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
    ========================================================================== */
 .bt--404 { min-height: 100vh; }
 .bt--404 .bt-nav-progress, .bt--404 .bt-nav-count { display: none; }
-.bt-chapter--404 { padding-top: 140px; }
+.bt-chapter--404 { padding-top: var(--bt-hero-top); }
 .bt-chapter--404 .bt-display {
   margin-top: 22px;
   font-size: clamp(56px, 10vw, 136px); line-height: 0.98;
@@ -1397,7 +1394,7 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
 .bt-chapter--404 .bt-contact-grid { margin-top: 14px; }
 
 @media (max-width: 900px) {
-  .bt-chapter--404 { padding-top: 110px; }
+  .bt-chapter--404 { padding-top: 6rem; }
   .bt-chapter--404 .bt-display { margin-top: 0; font-size: clamp(42px, 14vw, 64px); line-height: 1.04; letter-spacing: -0.045em; }
   .bt-404-lead { margin-top: 0; }
   .bt-404-note { padding-top: 24px; font-size: 22px; align-self: flex-start; }
