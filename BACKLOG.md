@@ -288,6 +288,13 @@ Mal bei null anzufangen.
       Testwahl, ddof, reproduzierbarer Output). Knüpft an den
       Quant-vs-Qual-Blogpost an.
 
+## About: CV
+
+- [ ] Web-CV aktuell halten: `CV_Lisanne_Visser.pdf` im Repo-Root kommt
+      aus `~/claude/cv-linkedin` (`node build.mjs cv-web.json`, ohne
+      Telefonnummer). Nach jedem CV-Update neu kopieren und den
+      `?v=`-Parameter an beiden Links in `index.html` hochzählen.
+
 ## Case Study: Conversion tests (`#/work/ai-workflow`)
 
 Fig. 1 und Fig. 2 sind seit PR #218 generierte FigJam-Diagramme
