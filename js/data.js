@@ -82,7 +82,7 @@ window.LV_DATA = {
       ],
       tags: ["Research design", "Pricing", "Behavioral Science"],
       coverPaletteHue: 22,
-      coverImage: "images/pricing/cover.jpg",
+      coverImage: "images/pricing/cover-mockup.jpg",
       hideHero: true,
       tldr: "A price nobody had touched since launch, sitting on one of the company's biggest revenue drivers. 9,90 € for buyer protection, and it had quietly carried the product through years of growth. The product had grown up a lot since then, so I took the opportunity to put the price on firmer footing. I ran two rounds of A/B tests, seven variants in total, each built on a different principle from pricing psychology. 15,99 € won round one on revenue per user. Then 12,00 € took round two once we added customer-lifetime-value forecasting, and that became the new price.",
       story: [
