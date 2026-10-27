@@ -525,86 +525,39 @@ window.LV_DATA = {
   // #/sketchbook — photos of hand-drawn work. Personal drawing practice,
   // kept separate from #/visuals (which is digital work). Each entry:
   // { slug, title, medium, thumb (grid), full (lightbox), blurb? }.
+  // Newest first, so reading bottom to top shows how the drawing evolved.
   sketchbook: [
     {
-      slug: "lighthouse-watercolor",
-      title: "Lighthouse",
-      medium: "Watercolor and ink",
-      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
-      full: "images/sketchbook/lighthouse-watercolor.jpg",
-      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
+      slug: "seascape-painting",
+      title: "Seascape",
+      medium: "Acrylic on canvas",
+      thumb: "images/sketchbook/seascape-painting-thumb.jpg",
+      full: "images/sketchbook/seascape-painting.jpg",
+      blurb: "A small painting of a bay at dusk, built up in short, thick strokes."
     },
     {
-      slug: "eye-anatomy-studies",
-      title: "Eye studies",
-      medium: "Graphite and ink",
-      thumb: "images/sketchbook/eye-anatomy-studies-thumb.jpg",
-      full: "images/sketchbook/eye-anatomy-studies.jpg",
-      blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
+      slug: "lion-skull",
+      title: "Lion skull",
+      medium: "Ink and watercolor",
+      thumb: "images/sketchbook/lion-skull-thumb.jpg",
+      full: "images/sketchbook/lion-skull.jpg",
+      blurb: "A lion skull in ink and gray wash, laid over a spread of warm brown watercolor."
     },
     {
-      slug: "life-drawing-seated",
-      title: "Life drawing",
+      slug: "dog-paw",
+      title: "Dog paw",
       medium: "Ink wash",
-      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
-      full: "images/sketchbook/life-drawing-seated.jpg",
-      blurb: "A seated figure worked in ink wash, building the form from light to dark."
+      thumb: "images/sketchbook/dog-paw-thumb.jpg",
+      full: "images/sketchbook/dog-paw.jpg",
+      blurb: "The bones of a dog's paw in ink on a toned page, with the dog itself keeping an eye on things."
     },
     {
-      slug: "hand-figure-studies",
-      title: "Hands and figures",
-      medium: "Ink wash",
-      thumb: "images/sketchbook/hand-figure-studies-thumb.jpg",
-      full: "images/sketchbook/hand-figure-studies.jpg",
-      blurb: "Hand and figure studies in ink, testing how far a wash can carry a form."
-    },
-    {
-      slug: "seagull-berlin",
-      title: "Seagull",
-      medium: "Watercolor and ink",
-      thumb: "images/sketchbook/seagull-berlin-thumb.jpg",
-      full: "images/sketchbook/seagull-berlin.jpg",
-      blurb: "A seagull in watercolor and ink, next to some hand-lettering practice."
-    },
-    {
-      slug: "pikachu",
-      title: "Pikachu",
-      medium: "Watercolor and ink",
-      thumb: "images/sketchbook/pikachu-thumb.jpg",
-      full: "images/sketchbook/pikachu.jpg",
-      blurb: "A loose watercolor with a soft, blended background."
-    },
-    {
-      slug: "color-tests",
-      title: "Color tests",
-      medium: "Watercolor",
-      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
-      full: "images/sketchbook/color-tests-portrait.jpg",
-      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
-    },
-    {
-      slug: "character-doodles",
-      title: "Character doodles",
-      medium: "Graphite",
-      thumb: "images/sketchbook/character-doodles-thumb.jpg",
-      full: "images/sketchbook/character-doodles.jpg",
-      blurb: "A couple of loose creature doodles."
-    },
-    {
-      slug: "koi-plate",
-      title: "Koi plate",
-      medium: "Ceramic painting",
-      thumb: "images/sketchbook/koi-plate-thumb.jpg",
-      full: "images/sketchbook/koi-plate.jpg",
-      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
-    },
-    {
-      slug: "lego-gandalf",
-      title: "Lego Gandalf",
-      medium: "Digital line art",
-      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
-      full: "images/sketchbook/lego-gandalf.jpg",
-      blurb: "A clean line drawing done on the iPad."
+      slug: "skeleton-foot",
+      title: "Foot bones",
+      medium: "Ink",
+      thumb: "images/sketchbook/skeleton-foot-thumb.jpg?v=2",
+      full: "images/sketchbook/skeleton-foot.jpg",
+      blurb: "An anatomy study of the lower leg and foot in black ink, next to a page of loose watercolor washes."
     },
     {
       slug: "facely-doodles",
@@ -615,36 +568,68 @@ window.LV_DATA = {
       blurb: "A notebook page of logo and face ideation, drawn small and fast."
     },
     {
-      slug: "skeleton-foot",
-      title: "Foot bones",
-      medium: "Ink",
-      thumb: "images/sketchbook/skeleton-foot-thumb.jpg",
-      full: "images/sketchbook/skeleton-foot.jpg",
-      blurb: "An anatomy study of the lower leg and foot in black ink, next to a page of loose watercolor washes."
+      slug: "lego-gandalf",
+      title: "Lego Gandalf",
+      medium: "Digital line art",
+      thumb: "images/sketchbook/lego-gandalf-thumb.jpg",
+      full: "images/sketchbook/lego-gandalf.jpg",
+      blurb: "A clean line drawing done on the iPad."
     },
     {
-      slug: "skeleton-hand",
-      title: "Hand bones",
+      slug: "koi-plate",
+      title: "Koi plate",
+      medium: "Ceramic painting",
+      thumb: "images/sketchbook/koi-plate-thumb.jpg",
+      full: "images/sketchbook/koi-plate.jpg",
+      blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
+    },
+    {
+      slug: "character-doodles",
+      title: "Character doodles",
+      medium: "Graphite",
+      thumb: "images/sketchbook/character-doodles-thumb.jpg",
+      full: "images/sketchbook/character-doodles.jpg",
+      blurb: "A couple of loose creature doodles."
+    },
+    {
+      slug: "color-tests",
+      title: "Color tests",
+      medium: "Watercolor",
+      thumb: "images/sketchbook/color-tests-portrait-thumb.jpg",
+      full: "images/sketchbook/color-tests-portrait.jpg",
+      blurb: "A page of swatches and a small portrait, learning a new set of pigments."
+    },
+    {
+      slug: "pikachu",
+      title: "Pikachu",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/pikachu-thumb.jpg",
+      full: "images/sketchbook/pikachu.jpg",
+      blurb: "A loose watercolor with a soft, blended background."
+    },
+    {
+      slug: "life-drawing-seated",
+      title: "Life drawing",
       medium: "Ink wash",
-      thumb: "images/sketchbook/skeleton-hand-thumb.jpg",
-      full: "images/sketchbook/skeleton-hand.jpg",
-      blurb: "The bones of a hand in ink on a toned page, with the dog keeping an eye on things."
+      thumb: "images/sketchbook/life-drawing-seated-thumb.jpg",
+      full: "images/sketchbook/life-drawing-seated.jpg",
+      blurb: "A seated figure worked in ink wash, building the form from light to dark."
     },
     {
-      slug: "skull-ink",
-      title: "Skull",
-      medium: "Ink and watercolor",
-      thumb: "images/sketchbook/skull-ink-thumb.jpg",
-      full: "images/sketchbook/skull-ink.jpg",
-      blurb: "An animal skull in ink and gray wash, laid over a spread of warm brown watercolor."
+      slug: "eye-anatomy-studies",
+      title: "Eye studies",
+      medium: "Graphite and ink",
+      thumb: "images/sketchbook/eye-anatomy-studies-thumb.jpg",
+      full: "images/sketchbook/eye-anatomy-studies.jpg",
+      blurb: "Anatomy notes on eyes and noses, drawn along with a tutorial, next to a page of pen tests."
     },
     {
-      slug: "seascape-painting",
-      title: "Seascape",
-      medium: "Acrylic on canvas",
-      thumb: "images/sketchbook/seascape-painting-thumb.jpg",
-      full: "images/sketchbook/seascape-painting.jpg",
-      blurb: "A small painting of a bay at dusk, built up in short, thick strokes."
+      slug: "lighthouse-watercolor",
+      title: "Lighthouse",
+      medium: "Watercolor and ink",
+      thumb: "images/sketchbook/lighthouse-watercolor-thumb.jpg",
+      full: "images/sketchbook/lighthouse-watercolor.jpg",
+      blurb: "A lighthouse drawn with a fountain pen, then washed in with a small travel palette."
     }
   ],
 
