@@ -799,6 +799,12 @@
   background: repeating-linear-gradient(135deg, transparent 0 8px, var(--ink-a05) 8px 9px);
 }
 [data-variation="v1"] .v1-work-row:hover .v1-work-thumb { transform: scale(1.04); }
+/* A case with its own coverImage drops the hatch and lets the picture fill. */
+[data-variation="v1"] .v1-work-thumb.has-image::after { content: none; }
+[data-variation="v1"] .v1-work-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
 
 [data-variation="v1"] .v1-work-empty {
   padding: 3rem 0; text-align: center;
