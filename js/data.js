@@ -119,7 +119,7 @@ window.LV_DATA = {
     },
     {
       slug: "ai-workflow",
-      title: "Conversion tests, 2 weeks to 2 days",
+      title: "Speeding Up Test Prep Cycles: 2 Weeks to 2 Days",
       subtitle: "Rebuilding the conversion-test workflow around AI design tools",
       company: "Trusted Shops",
       year: "2025",
