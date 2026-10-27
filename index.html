@@ -55,7 +55,7 @@
        faces are declared in wall-of-fame.css and only fetched on that route. -->
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/shared.css?v=2026-10-27-3" />
-  <link rel="stylesheet" href="css/v1.css?v=2026-10-27-6" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-10-27-7" />
   <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
   <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
@@ -519,16 +519,20 @@
         </div>
 
         <!-- Detail overlay -->
-        <div class="lv-book-overlay v1-visual-overlay v1-sketch-overlay" aria-hidden="true">
+        <div class="lv-book-overlay v1-sketch-overlay" aria-hidden="true">
           <div class="lv-book-backdrop v1-sketch-backdrop"></div>
-          <div class="v1-visual-detail v1-sketch-detail" role="dialog" aria-modal="true" aria-label="Sketch">
-            <button class="lv-book-close v1-sketch-close" type="button" aria-label="Close">×</button>
-            <div class="v1-sketch-stage"></div>
-            <div class="v1-visual-detail-body">
-              <div class="bt-kicker v1-sketch-eyebrow"><span></span></div>
-              <h2 class="v1-visual-detail-title v1-sketch-title"></h2>
-              <p class="v1-visual-detail-blurb v1-sketch-blurb"></p>
-            </div>
+          <div class="v1-sketch-dialog" role="dialog" aria-modal="true" aria-label="Sketch">
+            <figure class="v1-sketch-photo">
+              <span class="v1-sketch-medium"></span>
+              <div class="v1-sketch-stage"></div>
+              <figcaption class="v1-sketch-cap">
+                <h2 class="v1-sketch-title"></h2>
+                <p class="v1-sketch-blurb"></p>
+              </figcaption>
+            </figure>
+            <button class="v1-sketch-btn v1-sketch-close" type="button" aria-label="Close">×</button>
+            <button class="v1-sketch-btn v1-sketch-prev" type="button" aria-label="Previous sketch">←</button>
+            <button class="v1-sketch-btn v1-sketch-next" type="button" aria-label="Next sketch">→</button>
           </div>
         </div>
       </div>
@@ -1248,16 +1252,20 @@
       </div>
 
       <!-- Detail overlay -->
-      <div class="lv-book-overlay v1-visual-overlay v1-sketch-overlay" aria-hidden="true">
+      <div class="lv-book-overlay v1-sketch-overlay" aria-hidden="true">
         <div class="lv-book-backdrop v1-sketch-backdrop"></div>
-        <div class="v1-visual-detail v1-sketch-detail" role="dialog" aria-modal="true" aria-label="Sketch">
-          <button class="lv-book-close v1-sketch-close" type="button" aria-label="Close">×</button>
-          <div class="v1-sketch-stage"></div>
-          <div class="v1-visual-detail-body">
-            <div class="lv-eyebrow v1-sketch-eyebrow"></div>
-            <h2 class="v1-visual-detail-title v1-sketch-title"></h2>
-            <p class="v1-visual-detail-blurb v1-sketch-blurb"></p>
-          </div>
+        <div class="v1-sketch-dialog" role="dialog" aria-modal="true" aria-label="Sketch">
+          <figure class="v1-sketch-photo">
+            <span class="v1-sketch-medium"></span>
+            <div class="v1-sketch-stage"></div>
+            <figcaption class="v1-sketch-cap">
+              <h2 class="v1-sketch-title"></h2>
+              <p class="v1-sketch-blurb"></p>
+            </figcaption>
+          </figure>
+          <button class="v1-sketch-btn v1-sketch-close" type="button" aria-label="Close">×</button>
+          <button class="v1-sketch-btn v1-sketch-prev" type="button" aria-label="Previous sketch">←</button>
+          <button class="v1-sketch-btn v1-sketch-next" type="button" aria-label="Next sketch">→</button>
         </div>
       </div>
     </section>
@@ -1757,7 +1765,7 @@
   </aside>
 
   <script src="js/data.js?v=2026-10-27-46"></script>
-  <script src="js/app.js?v=2026-10-27-16"></script>
+  <script src="js/app.js?v=2026-10-27-17"></script>
   <script src="js/wip.js?v=2026-06-12-3"></script>
   <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
   <script src="js/styleguide.js?v=2026-08-01-1"></script>
