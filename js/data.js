@@ -276,7 +276,7 @@ window.LV_DATA = {
     },
     {
       slug: "design-system",
-      title: "Cargoboard's rebrand and first design system",
+      title: "Building a Scale-Up's First Design System",
       subtitle: "Brand discovery, visual system, and the company's first design language",
       company: "Cargoboard",
       year: "2021 - 2022",
