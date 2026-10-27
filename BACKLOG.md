@@ -287,6 +287,28 @@ aber die Vorlagen liegen alle bereit.
       Credit (Seite + Imprint), Desktop-Lift Runde 1 (rechnerisch ~8,2%),
       Payment-Update-Seite (eigener Test?), Name des Maturity-Modells.
 
+- [ ] Aqora-Case-Study (Quantum-Schicht fürs Portfolio, Stand
+      2026-10-27). Hintergrund: Lisanne überlegt eine PhD-Bewerbung im
+      Umfeld Quantum Computing (realistische Richtung: HCI für Quantum-
+      Software oder Quantum Education, nicht Physik). Das Portfolio soll
+      Quantum als Domäne sichtbar machen, ohne die Research-Positionierung
+      zu verschieben. NDA ist kein Thema, alles von Aqora darf gezeigt
+      werden. Erledigt: ein Quantum-Absatz im About ("02 — Practice") und
+      "quantum computing tools" in der longBio.
+  - [ ] Separat brainstormen, welches Aqora-Projekt die Case trägt. Die
+        beiden Event-Sites (Bradford Hackathon, Quantinuum SG Grand
+        Challenge) stehen schon unter Visuals; die Case braucht
+        Plattform-Arbeit: Nutzer (Forschende, Studierende,
+        Challenge-Teilnehmende), mentale Modelle, Entscheidungen, was
+        schwer war. Kandidaten erst sammeln, dann entscheiden.
+  - [ ] Alternative oder Ergänzung: Gazette-Post "Design für Quantum-
+        Nutzer" aus soziologischem Blick auf eine technische Community.
+        Trägt das Research-Interesse in Prosa, auch wenn die Case klein
+        ausfällt.
+  - Begriffshinweis: "Quantum UX" in Bewerbungen meiden (wird in Blogs
+    metaphorisch verwendet). Besser "HCI for quantum computing", "usable
+    quantum software" oder "quantum education".
+
 ## Cargoboard Split - Follow-ups (nach PR #154)
 
 - [ ] Case 04 (Design System) Story-Body aufräumen: Section "Approach",
