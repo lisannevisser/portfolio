@@ -68,7 +68,7 @@ window.LV_DATA = {
   cases: [
     {
       slug: "pricing",
-      title: "Repricing buyer protection on psychology",
+      title: "Designing Product Prices with Psychology",
       subtitle: "Two rounds of pricing experiments on a core revenue driver",
       company: "Trusted Shops",
       year: "2024",
