@@ -2,8 +2,8 @@
    Bold Type home — #/home-bold
    A second, full-bleed take on the homepage: four snap-scrolled chapters
    (Intro, Work, About, Contact), Bricolage Grotesque display type,
-   hand-cut highlight blobs in rose / cobalt / mustard, and a chapter rail
-   on the right. Lives next to the v1 home; nothing here touches it.
+   hand-cut highlight blobs in rose / cobalt / mustard.
+   Lives next to the v1 home; nothing here touches it.
    Source: Claude Design "Portfolio Bold Type" (3a desktop, 3b mobile).
    ========================================================================== */
 
@@ -14,7 +14,7 @@
   --bt-font-display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
 }
 
-/* The chapters bring their own nav, rail, and footer line, so the global
+/* The chapters bring their own nav and footer line, so the global
    chrome steps aside while this route is active. */
 html[data-route="home-bold"] .lv-nav,
 html[data-route="home-bold"] .lv-footer,
@@ -70,8 +70,10 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   min-height: 100vh;
   min-height: 100dvh;
   scroll-snap-align: start;
+  /* Every chapter is a hard stop, so a fast trackpad flick can't fly past one. */
+  scroll-snap-stop: always;
   box-sizing: border-box;
-  padding: 120px 120px 64px 64px;
+  padding: 120px 64px 64px;
   display: flex;
   flex-direction: column;
   border-top: 2px solid var(--ink);
@@ -130,10 +132,16 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 
 /* -------- Logo marquee (foot of the intro) -------- */
 .bt-logos {
-  margin-top: 40px; padding-top: 22px; border-top: 2px solid var(--ink);
+  /* Full bleed: the rule runs edge to edge like the chapter dividers. */
+  margin: 40px -64px 0; padding-top: 22px; border-top: 2px solid var(--ink);
   display: flex; align-items: center; overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  /* Two mask layers: the first keeps the 2px rule solid across the full
+     width, the second fades only the logos in and out at the edges. */
+  --bt-logos-mask:
+    linear-gradient(black, black) top / 100% 2px no-repeat,
+    linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask: var(--bt-logos-mask);
+  -webkit-mask: var(--bt-logos-mask);
 }
 [data-variation="v1"] .bt-logo-track { gap: 56px; padding-right: 56px; }
 [data-variation="v1"] .bt-logo-track img { height: calc(26px * var(--logo-scale, 1)); filter: grayscale(1) opacity(0.85); }
@@ -233,8 +241,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt-about-rows .bt-xp-role { font-size: 19px; }
 .bt-about-rows .bt-xp-when { text-transform: uppercase; }
 .bt-about-portrait {
-  /* Right margin keeps the portrait clear of the fixed chapter rail. */
-  position: relative; justify-self: end; width: 100%; max-width: 360px; margin-right: 72px;
+  position: relative; justify-self: end; width: 100%; max-width: 360px;
   aspect-ratio: 4 / 5; border: 2px solid var(--ink); border-radius: 12px;
   background: var(--paper-2); transform: rotate(1.2deg);
 }
@@ -320,32 +327,6 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt-nav-progress { display: none; }
 .bt-nav-right { display: none; }
 
-/* -------- Chapter rail (desktop) -------- */
-.bt-rail {
-  position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 60;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
-  background: var(--bt-bg); border: 2px solid var(--bt-ink); border-radius: 16px;
-  padding: 12px; transition: all 0.3s ease;
-}
-.bt-rail-btn {
-  display: flex; align-items: center; gap: 8px;
-  background: none; border: 0; padding: 4px 2px; cursor: pointer;
-  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--bt-ink); opacity: 0.4; transition: opacity 0.2s ease;
-}
-.bt-rail-btn.is-active { opacity: 1; }
-.bt-rail-btn .bar {
-  display: block; height: 4px; width: 12px; border-radius: 2px;
-  background: var(--bt-ink); transition: width 0.25s ease, background 0.25s ease;
-}
-.bt-rail-btn.is-active .bar { width: 34px; background: var(--chapter-color); }
-.bt-rail-count {
-  margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--bt-rule);
-  width: 100%; text-align: right;
-  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em;
-  color: var(--bt-ink); font-variant-numeric: tabular-nums;
-}
-
 /* ==========================================================================
    Mobile (3b): same chapters, progress bar on top instead of the rail.
    ========================================================================== */
@@ -358,7 +339,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-kicker { font-size: 11px; }
   .bt-lead { font-size: 16px; }
   .bt-intro-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .bt-logos { margin-top: 24px; padding-top: 16px; }
+  .bt-logos { margin: 24px -22px 0; padding-top: 16px; }
   [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
   [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
   .bt-swipe {
@@ -427,7 +408,6 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
     background: none; border: 0; padding: 0; cursor: pointer; color: var(--bt-ink); transition: color 0.3s ease;
   }
   .bt-nav-menu svg { width: 26px; height: 26px; fill: currentColor; }
-  .bt-rail { display: none; }
 }
 @media (min-width: 901px) {
   .bt-tile-arrow { display: none; }
@@ -435,7 +415,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bt-card, .bt-card-cover, .bt-card-title, .bt-tile, .bt-rail-btn .bar { transition: none; }
+  .bt-card, .bt-card-cover, .bt-card-title, .bt-tile { transition: none; }
 }
 
 /* ==========================================================================
