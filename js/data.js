@@ -268,6 +268,9 @@ window.LV_DATA = {
       ],
       tags: ["Website relaunch", "Brand", "Design system", "IA"],
       coverPaletteHue: 330,
+      // Cover image above the impact grid on the case page.
+      cover: "images/website-relaunch/cover.jpg",
+      coverAlt: "The relaunched cargoboard.com in a browser: the hero with the booking form, the digital-freight section, and the company video.",
       tldr: "Cargoboard, a B2B logistics startup, needed a new brand and 140+ pages relaunched in under a year. I treated the design system as the lever for everything else, so every brand decision compounded into the rest of the work. Three streams ran in parallel (brand, illustration, IA); final pages came last. Live since January 2023; the system has been the default for all internal and external work since.",
       story: [
         { kind: "section", title: "Introduction", body: "Cargoboard is a German B2B logistics provider, founded in 2019. After three years of growth, the founders wanted a site that matched the company they had become: modern, dynamic, trustworthy. That meant a rebrand, a new IA, and 140+ pages relaunched in under a year. Underneath all of it, the deeper problem: there was no system. Every new page or asset restarted the design from zero." },
@@ -414,6 +417,18 @@ window.LV_DATA = {
       link: "https://quantinuum-sg-grand-challenge-2026.aqora.io/"
     },
     {
+      slug: "ferienwohnungen-visser",
+      title: "Holiday apartments website",
+      context: "Family business",
+      type: "Web design",
+      year: "2020",
+      hue: 140,
+      thumb: "images/visuals/ferienwohnungen.jpg",
+      blurb: "The website for my family's holiday apartments in Norden on the North Sea coast, built to win direct bookings in a market dominated by travel platforms.",
+      embed: "",
+      link: ""
+    },
+    {
       slug: "cargoboard-api-page",
       title: "Cargoboard API use case",
       context: "Cargoboard",
@@ -500,6 +515,18 @@ window.LV_DATA = {
       blurb: "My first design project ever: a face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
       embed: "",
       link: "https://www.instagram.com/facely_u/"
+    },
+    {
+      slug: "facelyu-screens",
+      title: "FacelyU app screens",
+      context: "Side project",
+      type: "App · iOS",
+      year: "2020",
+      hue: 20,
+      thumb: "images/visuals/facelyu-screens.jpg",
+      blurb: "Screens from the FacelyU iOS app: choosing a workout, music, and focus area, the session player, and the daily reminder. Soft peach gradients with a serif display face to keep a calm, self-care feel.",
+      embed: "",
+      link: ""
     },
     // Second to last on purpose: the 9:16 story is the tallest card in the
     // grid, so far up it dominates the page (and on mobile, where the grid
