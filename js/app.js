@@ -33,6 +33,15 @@
   // wanted). Wall of Fame is parked until the board has real content.
   const DISABLED_ROUTES = new Set(["wall-of-fame"]);
 
+  // Posts parked out of sight: the entry stays in js/data.js untouched, but
+  // it drops out of the Gazette index, the lead slot, and the "Read next"
+  // link, and its own URL lands on 404 like any unknown slug. To publish
+  // one, delete its slug from this set and restore its credits block in
+  // index.html. design-trends-2027 is parked pending the source checks
+  // listed in BACKLOG.md.
+  const DRAFT_POSTS = new Set(["design-trends-2027"]);
+  const livePosts = () => (D.posts || []).filter((p) => !DRAFT_POSTS.has(p.slug));
+
   // Bold Type is the default dress. The plain slugs (#/, #/work,
   // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
   // the original v1 dress stays reachable as a backup at "<name>-classic"
@@ -40,7 +49,7 @@
   // (chinese, playground, styleguide) keep their plain slug. Old
   // "-bold" links still resolve and get rewritten to the plain slug.
   const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
-  const DYNAMIC = { work: ["case", D.cases], blog: ["post", D.posts || []] };
+  const DYNAMIC = { work: ["case", D.cases], blog: ["post", livePosts()] };
 
   // Anything that isn't a route section, a known case slug, or a known post
   // slug lands on the 404 page (the Bold Type one at #/404-bold).
@@ -90,7 +99,8 @@
 
     // Blog post: render the selected post into the v1 or the Bold Type article.
     if (route.page === "post" || route.page === "post-bold") {
-      const p = (D.posts || []).find((x) => x.slug === route.slug) || (D.posts || [])[0];
+      const live = livePosts();
+      const p = live.find((x) => x.slug === route.slug) || live[0];
       if (p) {
         renderV1Post(p, route.page === "post-bold" ? "bold" : "v1");
       }
@@ -728,7 +738,7 @@
   // Type blog (#bt-blog-list, links to #/blog/<slug>). Both dresses share
   // the .lv-gz-* markup; the Bold Type one restyles it in bold-home.css.
   function renderBlogLists() {
-    const posts = D.posts || [];
+    const posts = livePosts();
     if (!posts.length) return;
     const lead = posts[0];
 
@@ -964,8 +974,13 @@
     if (!root) return;
     const base = bold ? "#/blog" : "#/blog-classic";
     const posts = D.posts || [];
+    // idx stays the js/data.js index: the editAttr paths below write back
+    // through it. "Read next" walks the live list instead, so it never
+    // points at a parked post.
     const idx = posts.findIndex((x) => x.slug === p.slug);
-    const next = posts[(idx + 1) % posts.length];
+    const live = livePosts();
+    const liveIdx = live.findIndex((x) => x.slug === p.slug);
+    const next = live.length ? live[(liveIdx + 1) % live.length] : null;
 
     // Drop cap on the first prose paragraph (the lead stays italic display).
     const bodyHtml = renderPostBody(p.body, idx >= 0 ? `posts.${idx}.body` : "")

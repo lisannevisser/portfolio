@@ -256,6 +256,51 @@ aber die Vorlagen liegen alle bereit.
       Story-Sections schreiben (Audit, IA-Ansatz, Marketer-Kollab,
       Dev-Hiring, Outcome).
 
+## Gazette: "The design trends I'm betting on for 2027" (geparkt)
+
+Der Post ist seit 2026-10-27 **ausgeblendet**. Er steht unverändert in
+`js/data.js`, ist aber über `DRAFT_POSTS` in `js/app.js` aus Index,
+Aufmacher-Slot und "Read next" raus; `#/blog/design-trends-2027` läuft
+auf 404. Die beiden Credits-Absätze auf `#/imprint` sind in `index.html`
+auskommentiert (beide Dressen, Bold Type und classic).
+
+Zum Wiederveröffentlichen: Slug aus `DRAFT_POSTS` löschen, beide
+Credits-Blöcke wieder einkommentieren, Cache-Bust für `js/app.js`
+hochzählen. Das gehört in **eine** Änderung, damit die Quellenangabe
+nicht fehlt, solange der Post live ist (Regel "Credit what isn't ours"
+in `CLAUDE.md`).
+
+Vorher zu klären, alles aus der Recherche-Notiz
+`docs/research/2026-08-19-design-trends-2027-quellen.md`:
+
+- [ ] Instagram-Rebrand gegenlesen: Schriftnamen *Instagram Pen* und
+      *Instagram Mono* und die Aussage "erste Wortmarken-Änderung seit
+      ~10 Jahren" stehen nur über Sekundärberichterstattung. Die
+      Primärquellen (Instagram-Newsroom, Forbes, urdesignmag) waren beim
+      Schreiben durch den Egress-Proxy blockiert. Steht so im Live-Text
+      von Trend 1.
+- [ ] "The Human Made Mark": Start im April 2026 ebenfalls nur über eine
+      Sekundärquelle belegt. Datum prüfen oder die Monatsangabe streichen.
+- [ ] "Places" als zweites Beispiel neben Instagram: von Lisanne genannt,
+      in der Recherche nicht auffindbar. Link oder Screenshot liefern,
+      dann kann Trend 1 den Absatz bekommen. Aktuell bewusst nicht im Text.
+- [ ] Effort-Heuristik (Kruger et al. 2004) hat eine Replikationsdelle.
+      Der Vorbehalt steht im Callout-Kasten. Entscheiden, ob das reicht
+      oder ob die Heuristik durch die stabileren Quellen 2.1/2.2 ersetzt
+      wird.
+- [ ] Optional, inhaltlich der stärkste Hebel: der Widerspruch zwischen
+      Trend 2 (kindliche Entlastung) und Trend 3 (anstrengende
+      Hässlichkeit) ist nur angedeutet. Ein Absatz, der beides
+      gegeneinanderstellt, macht aus der Liste eine These.
+- [ ] Optional: Quelle 4.3 (Neuheit zählt in überfüllten Kategorien
+      stärker) ist nur ein Nebensatz, trägt aber genau die AI-Flut-These.
+- [ ] Optional: ein eigenes Beispiel aus Lisannes Arbeit für Trend 3
+      schlägt jede Studie. Screenshot oder bewusst hässlicher Gegenentwurf.
+
+Nicht im Text und bewusst nicht zitierfähig (Recherche-Notiz §7):
+Harris-Poll-Zahlen, Canva-Report, die kursierende Zahl "67 % höheres
+Engagement für handgemachte Elemente" (keine auffindbare Quelle).
+
 ## Blog (Gazette)
 
 - [ ] Post: "Warum ich AI bei Quant traue, aber nicht bei Qual."
