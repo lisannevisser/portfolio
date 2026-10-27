@@ -34,6 +34,47 @@ nicht mehr unter "Work in progress".
       Zeichenpraxis zeigen. Einträge in `js/data.js` (`sketchbook`) löschen
       und die zugehörigen Dateien in `images/sketchbook/` mit entfernen.
 
+## Chinese Library (`#/chinese`)
+
+Stand 2026-10-27: 19 Einträge live in einer flachen Liste, Filter hinter
+einem Akkordeon (Type, Skill, Level, HSK, Cost) mit zweisprachigen Labels
+("Reading / 阅读"), Karten ohne Tags. Alle 19 Links am 2026-10-27 von Hand
+geprüft (alle 200). Die Recherche-Basis mit allen geprüften Kandidaten und
+Taxonomie-Vorschlägen liegt bewusst nicht im Repo (öffentlich), sondern
+privat in der Claude-Memory (`reference_chinese_resources_research.md`).
+
+- [ ] Weitere Kandidaten aus der Recherche übernehmen, sobald sie
+      angeschaut sind (Eintrag pro Ressource in `chineseResources`, Notes
+      auf Englisch im Stil der bestehenden):
+  - Lesen: Du Chinese, The Chairman's Bao, Mandarin Bean.
+  - Bücher: Chinese Breeze (Pinyin und Englisch in Fußnoten).
+  - Apps und SRS: Skritter, Anki.
+  - Kurse im eigenen Tempo: Chinese Zero to Hero, ChineseFor.Us, Domino
+    Chinese, Mandarin Blueprint, Yoyo Chinese, Outlier Character
+    Masterclass.
+  - Video: Grace Mandarin Chinese, Comprehensible Chinese.
+  - Indie und Referenz: Chinese Grammar Wiki, Dong Chinese, Hacking
+    Chinese.
+- [ ] Eine neue Recherche-Runde mit Schwerpunkt auf dem, was am besten
+      gefällt: zweisprachige Bücher und Parallel-Texte mit realen Titeln,
+      Selbstlern-Kurse, Indie-Projekte wie Let's Read Chinese.
+- [ ] Zhongwen, Language Reactor und HelloChinese selbst ausprobieren und
+      danach die Notes ehrlich nachschärfen (heute beschreiben sie nur das
+      Versprechen der Tools).
+- [ ] HSK-Version (alt 2.0 / neu 3.0) an den Einträgen pflegen, wo sie
+      relevant ist. Bisher trägt nur der Peking-University-Eintrag
+      `hsk: "hsk2"`; Zero to Hero, Mandarin Bean und Co. beim Übernehmen
+      gleich mit einordnen.
+- [ ] Hack Chinese: in der Note ergänzen, dass es nur als Web-App läuft
+      (kein natives iOS, per "Zum Home-Bildschirm" nutzbar).
+- [ ] Link-Check erweitern: die CI prüft nur `index.html`, nicht die URLs
+      in `js/data.js`. Neue Chinese-Einträge werden also nicht automatisch
+      auf tote Links geprüft. Idee: URLs aus `chineseResources` im Workflow
+      extrahieren und mit lychee prüfen.
+- [ ] Recherche-Notizen entweder dauerhaft privat lassen oder bewusst nach
+      `docs/` holen. Das Repo ist öffentlich, die Datei enthält nichts
+      Persönliches, wäre aber für alle lesbar.
+
 ## Research-Positionierung (Portfolio gesamt)
 
 Das Portfolio liest sich heute als "Designerin mit Research-Rückgrat",
