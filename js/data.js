@@ -276,6 +276,7 @@ window.LV_DATA = {
         { kind: "figure", hue: 330, label: "Brand system · color and illustration", caption: "Fig. 1 - Signature red extended into tints, tones, and shades, with blue and green as secondaries. Illustration system built for accessibility across multiple backgrounds." },
         { kind: "section", title: "Information architecture", body: "The original navigation hid most of the site. Even Cargoboard's own employees used Google to find their own pages, and operative pages like optional insurance were the hardest to reach. I drew on Nielsen Norman patterns and Information Architecture for the Web and Beyond (Rosenfeld, Morville, Arango, O'Reilly 2015), then worked with the SEO team on a link structure that served both users and search. We tested with a card sort workshop and tree-tested in UXtweak with users recruited from the live site. Both confirmed our direction and surfaced a few wording fixes that shipped into the final IA." },
         { kind: "section", title: "Design and handoff", body: "Design started desktop-first, since roughly 95% of Cargoboard's customers are desktop users. Every desktop wireframe was sketched alongside its mobile equivalent, so mobile shipped on time, on the new system. The product owner wanted to stay on Wordpress and Elementor. I handed off Figma components with usage documentation; our frontend engineer published them as custom Elementor templates so non-designers could self-serve. That pushed the system to be more disciplined: every component had to be reproducible by someone who could not open Figma. Throughout the project I used the customer service team as a proxy for user knowledge I could not generate myself, treating their input as hypothesis rather than evidence so we did not confuse operations opinion with user need." },
+        { kind: "figure", hue: 330, src: "images/website-relaunch/homepage.jpg", alt: "The relaunched cargoboard.com homepage in a browser: the hero with the booking form, the digital-freight section, and the company video.", caption: "Fig. 2 - The relaunched homepage: booking form up front, then the digital freight forwarder pitch and the company video." },
         { kind: "result", title: "Outcome", body: "Live since January 2023. The design system is in daily use across web, print, and internal docs, and new pages now ship on top of it without a designer in the loop on every one. Treating the system as the lever, not the deliverable, was the bet that paid off: every page since launch has compounded on it, and the brand still feels coherent across surfaces I never touched. Tracking (Hotjar, GA, recordings) went live with the relaunch, and the hypotheses (reduced support tickets about finding pages, internal teams self-serving from the system) became measurable once analytics had a few months of data." },
         { kind: "limitations",
           title: "Limitations",
@@ -415,6 +416,18 @@ window.LV_DATA = {
       link: "https://quantinuum-sg-grand-challenge-2026.aqora.io/"
     },
     {
+      slug: "ferienwohnungen-visser",
+      title: "Holiday apartments website",
+      context: "Family business",
+      type: "Web design",
+      year: "2020",
+      hue: 140,
+      thumb: "images/visuals/ferienwohnungen.jpg",
+      blurb: "The website for my family's holiday apartments in Norden on the North Sea coast, built to win direct bookings in a market dominated by travel platforms.",
+      embed: "",
+      link: ""
+    },
+    {
       slug: "cargoboard-api-page",
       title: "Cargoboard API use case",
       context: "Cargoboard",
@@ -501,6 +514,18 @@ window.LV_DATA = {
       blurb: "My first design project ever: a face yoga app, built with a developer as a side project on the bet that face yoga would take off during the pandemic (it did). I designed the app and ran the social media, growing the Instagram account to 750+ followers within months.",
       embed: "",
       link: "https://www.instagram.com/facely_u/"
+    },
+    {
+      slug: "facelyu-screens",
+      title: "FacelyU app screens",
+      context: "Side project",
+      type: "App · iOS",
+      year: "2020",
+      hue: 20,
+      thumb: "images/visuals/facelyu-screens.jpg",
+      blurb: "Screens from the FacelyU iOS app: choosing a workout, music, and focus area, the session player, and the daily reminder. Soft peach gradients with a serif display face to keep a calm, self-care feel.",
+      embed: "",
+      link: ""
     },
     // Second to last on purpose: the 9:16 story is the tallest card in the
     // grid, so far up it dominates the page (and on mobile, where the grid
@@ -678,7 +703,7 @@ window.LV_DATA = {
     { title: "Artemis Fowl", author: "Eoin Colfer", cover: "https://covers.openlibrary.org/b/isbn/9780141339092-L.jpg", rating: 5, tags: ["Fiction", "Sci-Fi"], color: "#059669", review: `My favourite book as a kid — and still one that shaped me in ways I can trace back clearly. The intelligence, high-tech world-building, and sheer creativity of Colfer's universe fascinated me and laid an early foundation for my interest in innovation and clever thinking. It's also a brilliant case study in character development: Artemis starts as an outright villain and evolves in ways that feel earned. The world-building is extraordinarily inventive. My Harry Potter — except the magic is technology. :)` },
     { title: "Atomic Habits", author: "James Clear", cover: "https://covers.openlibrary.org/b/isbn/0735211299-L.jpg", rating: 4, tags: ["Productivity", "Psychology"], color: "#F59E0B", finished: "2023-08", review: `Clear's framework for building habits translates directly to product design — how do we make the desired user behavior easy, obvious, and rewarding? Great for thinking about onboarding and retention.` },
     { title: "Creative Confidence", author: "Tom & David Kelley", cover: "https://covers.openlibrary.org/b/isbn/038534936X-L.jpg", rating: 4, tags: ["Creativity", "Design Thinking"], color: "#EC4899", finished: "2024-01", review: `The Kelley brothers from IDEO show that creativity isn't a gift — it's a muscle. This book gave me the confidence to push back on "we've always done it this way" and propose bolder solutions.` },
-    { title: "Design for Impact", author: "Erin Weigel", cover: "https://covers.openlibrary.org/b/isbn/9780137519620-L.jpg", rating: 3, tags: ["Design", "UX"], color: "#7C3AED", review: `Weigel reframes design as a discipline that has to prove its value — not just aesthetically, but in measurable outcomes. The book is part manifesto, part methodology, and it pushes designers to think like product owners. Refreshingly honest about the gap between beautiful design and effective design. A good read for anyone who wants to advocate for their work more confidently in cross-functional teams.` },
+    { title: "Design for Impact", author: "Erin Weigel", cover: "https://covers.openlibrary.org/b/isbn/9780137519620-L.jpg", rating: 3, tags: ["Design", "UX", "A/B Testing"], color: "#7C3AED", review: `Weigel reframes design as a discipline that has to prove its value — not just aesthetically, but in measurable outcomes. The book is part manifesto, part methodology, and it pushes designers to think like product owners. Refreshingly honest about the gap between beautiful design and effective design. A good read for anyone who wants to advocate for their work more confidently in cross-functional teams.` },
     { title: "Design is Storytelling", author: "Ellen Lupton", cover: "https://covers.openlibrary.org/b/isbn/9781942303992-L.jpg", rating: 3, tags: ["Design", "Creativity"], color: "#DB2777", review: `Ellen Lupton makes a compelling argument that design and narrative are fundamentally the same thing — both are about guiding someone through an experience with intention. The book draws on screenwriting, visual theory, and cognitive psychology to show how designers can create more emotionally resonant work. Short and beautifully produced, it's the kind of book you return to for a quick dose of creative thinking.` },
     { title: "Don't Make Me Think", author: "Steve Krug", cover: "https://covers.openlibrary.org/b/isbn/0321965515-L.jpg", rating: 5, tags: ["UX", "Usability"], color: "#1a1a1a", finished: "2022-03", review: `The book that started it all for me. Krug's approach to usability is refreshingly simple — the best interfaces are the ones you don't have to think about. I come back to this whenever I catch myself overcomplicating a design.` },
     { title: "Emojis", author: "Greta Rebane", cover: "https://covers.openlibrary.org/b/isbn/9783406773761-L.jpg", rating: 3, tags: ["Culture", "Communication"], color: "#F59E0B", review: `A surprisingly rich cultural analysis of something we use every day without much thought. Rebane traces the history, semiotics, and social dynamics of emoji — how they've shifted communication norms, created new ambiguities, and become a genuine visual language. As a designer who thinks about communication and interface, it was a fascinating lens on how small visual decisions carry enormous cultural weight.` },
