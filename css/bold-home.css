@@ -767,14 +767,47 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   color: var(--ink); background: var(--paper); border: 2px solid var(--ink); border-radius: 999px;
 }
 
-/* Limitations card: ink frame, paper faces, pill flip button. Both faces
-   share one grid cell, so the card is as tall as the longer face and the
-   back can't run past the frame. */
-[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 0 8px; }
-[data-variation="v1"] .bt--case .v1-limitations-card-inner { display: grid; }
+/* Limitations card: a small stack of two index cards. Both faces share one
+   grid cell, so the stack is as tall as the longer face. The card on top
+   tilts a little and casts a hard ink shadow; the other one peeks out
+   behind it in its marker color (mustard = limitations, rose =
+   opportunities), content hidden. Flipping swaps the two instead of
+   turning the card in 3D. */
+[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 18px 24px 0; perspective: none; }
+[data-variation="v1"] .bt--case .v1-limitations-card .v1-limitations-card-inner { display: grid; transform: none; transition: none; }
 [data-variation="v1"] .bt--case .v1-limitations-face { grid-area: 1 / 1; }
 [data-variation="v1"] .bt--case .v1-limitations-face.is-back { position: relative; inset: auto; }
-[data-variation="v1"] .bt--case .v1-limitations-face { background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px; }
+[data-variation="v1"] .bt--case .v1-limitations-face {
+  --face-color: var(--bt-mustard);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px;
+  backface-visibility: visible; -webkit-backface-visibility: visible;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s, background-color 0.45s;
+}
+[data-variation="v1"] .bt--case .v1-limitations-face.is-opp { --face-color: var(--bt-rose); }
+/* On top: front face by default, back face once flipped. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back {
+  z-index: 2; transform: rotate(-0.6deg); box-shadow: 6px 6px 0 var(--ink);
+}
+/* Underneath: offset, tilted the other way, filled with its marker color. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front {
+  z-index: 1; transform: rotate(1.6deg) translate(14px, 10px); box-shadow: none;
+  background-color: var(--face-color);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back > *,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front > * { visibility: hidden; }
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-back {
+  transform: rotate(-1deg) translateY(-3px); box-shadow: 9px 9px 0 var(--ink);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-front {
+  transform: rotate(2.4deg) translate(18px, 12px);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-variation="v1"] .bt--case .v1-limitations-face { transition: none; }
+}
 [data-variation="v1"] .bt--case .v1-limitations-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
 [data-variation="v1"] .bt--case .v1-limitations-flip {
   border: 2px solid var(--ink); color: var(--ink); font-size: 11px; letter-spacing: 0.12em; padding: 7px 12px;
@@ -790,8 +823,12 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 [data-variation="v1"] .bt--case .v1-limitation-row h4 {
   font-family: var(--bt-font-display); font-style: normal; font-weight: 700;
   font-size: 20px; letter-spacing: -0.02em; line-height: 1.2;
+  display: inline; padding: 0 2px;
+  background-image: linear-gradient(var(--face-color), var(--face-color));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.3em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; }
+[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; margin-top: 8px; }
 
 /* TOC fab + next case. */
 .bt--case .lv-toc-fab { border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
@@ -823,6 +860,11 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   [data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 17px; }
   [data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 16px; }
   [data-variation="v1"] .bt--case .v1-limitations-face { padding: 22px 20px 24px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card { margin-right: 10px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back { transform: none; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front { transform: translate(8px, 8px); }
   .bt--case .bt-colophon--light span:last-child { display: none; }
 }
 
