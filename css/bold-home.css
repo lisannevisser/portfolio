@@ -221,6 +221,8 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   font-size: 21px; letter-spacing: -0.02em;
 }
 .bt-xp-role small { font-weight: 400; font-size: inherit; color: var(--ink-3); }
+/* DRAFT marker for placeholder rows (internal talks without real titles yet). */
+.bt-xp-row--draft { outline: 2px dashed var(--bt-rose); outline-offset: 4px; }
 
 /* -------- About: short version of #/about, rows reuse .bt-xp-row -------- */
 .bt-about {
