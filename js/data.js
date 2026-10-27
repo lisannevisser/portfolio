@@ -729,8 +729,8 @@ window.LV_DATA = {
       slug: "koi-plate",
       title: "Koi plate",
       medium: "Ceramic painting",
-      thumb: "images/sketchbook/koi-plate-thumb.jpg",
-      full: "images/sketchbook/koi-plate.jpg",
+      thumb: "images/sketchbook/koi-plate-2-thumb.jpg",
+      full: "images/sketchbook/koi-plate-2.jpg",
       blurb: "A koi drawn onto a ceramic plate at a pottery-painting session."
     },
     {
