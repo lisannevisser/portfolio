@@ -171,6 +171,13 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   content: ""; position: absolute; inset: 0;
   background: repeating-linear-gradient(135deg, transparent 0 8px, var(--ink-a05) 8px 9px);
 }
+/* Real cover image (coverSrc in data.js) replaces the hue gradient and stripes. */
+.bt-card-cover.has-image { background: var(--paper); }
+.bt-card-cover.has-image::after { content: none; }
+.bt-card-cover img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: top left;
+}
 .bt-card:hover .bt-card-cover { transform: scale(1.03); }
 .bt-card-title {
   align-self: flex-start;
