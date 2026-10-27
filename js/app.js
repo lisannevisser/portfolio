@@ -1109,7 +1109,7 @@
           const p = WORK_PREVIEW[c.slug] || {};
           const stat = c.impact && c.impact[0];
           const visual = p.kind === "image"
-            ? `<span class="v1-work-thumb" style="--case-hue:${c.coverPaletteHue};"></span>`
+            ? `<span class="v1-work-thumb${c.coverImage ? " has-image" : ""}" style="--case-hue:${c.coverPaletteHue};">${c.coverImage ? `<img src="${esc(c.coverImage)}" alt="" />` : ""}</span>`
             : `<span class="v1-work-stamp" style="--tilt:${p.tilt != null ? p.tilt : -4}deg;">
                  <span class="v">${esc(stat ? stat.value : "")}</span>
                  <span class="k">${esc(p.label || (stat ? stat.label : ""))}</span>
