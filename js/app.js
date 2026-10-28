@@ -1043,37 +1043,37 @@
     "pricing": {
       kind: "stat", label: "in revenue", tilt: -6,
       categories: ["research", "experimentation"],
-      intro: "Research lead · with PM, data, and finance"
+      role: "Research lead"
     },
     "ai-workflow": {
       kind: "stat", label: "less cycle time", tilt: 5,
       categories: ["ops", "experimentation"],
-      intro: "End-to-end owner · cross-functional rollout"
+      role: "End-to-end owner"
     },
     "research-culture": {
       kind: "stat", label: "of target hit", tilt: -3,
       categories: ["research", "ops"],
-      intro: "Research lead · org-wide practice"
+      role: "Research lead"
     },
     "illustrations-vs-icons": {
       kind: "stat", label: "mobile conversion", tilt: 4,
       categories: ["experimentation", "brand"],
-      intro: "Hypothesis & design · with 1 conversion manager"
+      role: "Hypothesis & design"
     },
     "design-system": {
       kind: "image",
       categories: ["systems", "brand"],
-      intro: "System lead · with 1 designer, 2 engineers"
+      role: "System lead"
     },
     "website-relaunch": {
       kind: "stat", label: "pages relaunched", tilt: 7,
       categories: ["systems", "brand"],
-      intro: "Lead designer · brand, IA & 140+ pages"
+      role: "Lead designer"
     },
     "alright-app": {
       kind: "stat", label: "spec to TestFlight", tilt: -5,
       categories: ["brand", "ops"],
-      intro: "Solo build · design, dev, brand & business model"
+      role: "Solo build"
     }
   };
 
@@ -1143,7 +1143,8 @@
               <span class="n">${String(i + 1).padStart(2, "0")}</span>
               <span class="body">
                 <span class="title">${esc(c.title)}</span>
-                <span class="intro">${esc(p.intro || c.role)} · ${esc(c.company)} · ${esc(c.year)}</span>
+                ${c.subtitle ? `<span class="sub">${esc(c.subtitle)}</span>` : ""}
+                <span class="intro">${esc(p.role || String(c.role || "").split(" · ")[0])} · ${esc(c.company)} · ${esc(c.year)}</span>
               </span>
               <span class="visual">${visual}</span>
             </a>
