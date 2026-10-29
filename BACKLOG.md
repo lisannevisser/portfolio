@@ -265,12 +265,9 @@ aber die Vorlagen liegen alle bereit.
   - [ ] Offen: konkrete Findings nennen oder auf Methode + Ansatz fokussieren?
   - Update 2026-10-27: **Vorerst zurückgestellt.** Das Limbic-Modell
     (Häusel / Gruppe Nymphenburg) ist wissenschaftlich umstritten, als
-    alleinige Case wäre das eine Angriffsfläche. Lisanne baut gerade neue
-    Käuferprofile, diesmal ohne limbische Typen: alle vorhandenen
-    Research-Informationen plus Marktdaten zusammentragen, in den
-    kommenden Wochen validieren, daraus Profile ableiten. Idee: mit der
-    Case warten, bis die validierten Profile stehen, und dann die
-    Lernkurve erzählen (Limbic als erster Proxy → Grenzen erkannt →
+    alleinige Case wäre das eine Angriffsfläche. Idee: mit der Case
+    warten, bis validierte Profile ohne limbische Typen stehen, und dann
+    die Lernkurve erzählen (Limbic als erster Proxy → Grenzen erkannt →
     datenbasierte, validierte Profile). Die Limbic-Kritik wird so zum
     Reifeschritt statt zur Schwachstelle.
 - [ ] Research-Culture-Case: Limbic nur kurz erwähnen und auf die
@@ -288,12 +285,9 @@ aber die Vorlagen liegen alle bereit.
       Payment-Update-Seite (eigener Test?), Name des Maturity-Modells.
 
 - [ ] Aqora-Case-Study (Quantum-Schicht fürs Portfolio, Stand
-      2026-10-27). Hintergrund: Lisanne überlegt eine PhD-Bewerbung im
-      Umfeld Quantum Computing (realistische Richtung: HCI für Quantum-
-      Software oder Quantum Education, nicht Physik). Das Portfolio soll
-      Quantum als Domäne sichtbar machen, ohne die Research-Positionierung
-      zu verschieben. NDA ist kein Thema, alles von Aqora darf gezeigt
-      werden. Erledigt: ein Quantum-Absatz im About ("02 — Practice") und
+      2026-10-27). Das Portfolio soll Quantum als Domäne sichtbar machen,
+      ohne die Research-Positionierung zu verschieben. NDA ist kein
+      Thema, alles von Aqora darf gezeigt werden. Erledigt: ein Quantum-Absatz im About ("02 — Practice") und
       "quantum computing tools" in der longBio.
   - [ ] Kandidat 1 (Favorit): Field Research auf der IASQA 2026
         (International Autumn School in Quantum Algorithms for many-body
@@ -326,7 +320,7 @@ aber die Vorlagen liegen alle bereit.
         Nutzer" aus soziologischem Blick auf eine technische Community.
         Trägt das Research-Interesse in Prosa, auch wenn die Case klein
         ausfällt.
-  - Begriffshinweis: "Quantum UX" in Bewerbungen meiden (wird in Blogs
+  - Begriffshinweis: "Quantum UX" als Begriff meiden (wird in Blogs
     metaphorisch verwendet). Besser "HCI for quantum computing", "usable
     quantum software" oder "quantum education".
 
