@@ -45,9 +45,12 @@
   // Cases parked the same way: the entry stays in js/data.js, but it drops
   // out of the home ledger, the work list, the "Next case" link, and its
   // URL lands on 404. To publish one, delete its slug from this set and
-  // restore its typeface credit in the imprint (index.html). alright-app is
-  // parked until the app ships; without a launch there is no outcome to show.
-  const DRAFT_CASES = new Set(["alright-app"]);
+  // restore its credit in the imprint (index.html). alright-app is parked
+  // until the app ships; without a launch there is no outcome to show.
+  // iasqa-field-research is parked for now (taken offline 2026-10-29, the
+  // write-up is not meant to be public yet); its CECAM screenshot credit is
+  // commented out in the imprint and comes back with the case.
+  const DRAFT_CASES = new Set(["alright-app", "iasqa-field-research"]);
   const liveCases = () => (D.cases || []).filter((c) => !DRAFT_CASES.has(c.slug));
 
   // Bold Type is the default dress. The plain slugs (#/, #/work,
