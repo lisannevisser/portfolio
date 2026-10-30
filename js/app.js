@@ -38,7 +38,7 @@
   // link, and its own URL lands on 404 like any unknown slug. To publish
   // one, delete its slug from this set and restore its credits block in
   // index.html. design-trends-2027 is parked pending the source checks
-  // listed in BACKLOG.md.
+  // listed in BACKLOG.md in the private notes repo (portfolio-notes).
   const DRAFT_POSTS = new Set(["design-trends-2027"]);
   const livePosts = () => (D.posts || []).filter((p) => !DRAFT_POSTS.has(p.slug));
 

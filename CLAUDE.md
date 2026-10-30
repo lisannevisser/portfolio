@@ -324,6 +324,43 @@ Two firm rules follow from this (details below):
 2. **Keep the rollback command at the ready**, in case something does
    break.
 
+## Private notes live outside this repo
+
+This repo is public, and GitHub Pages serves **every file in `main`**
+on the live site, not just `index.html`. A `BACKLOG.md` in the root is
+readable at `lisannevisser.github.io/portfolio/BACKLOG.md`. Making the
+repo private would not change that, and the git history stays either
+way.
+
+So the rule: **this repo only holds what may be live.** Site code,
+images, the CV that the site links to. Nothing else.
+
+Everything else goes to the private notes repo:
+
+```
+/Users/lisannevisser/claude/2026-portfolio-notes   ← github.com/lisannevisser/portfolio-notes (private)
+```
+
+That is where `BACKLOG.md`, `LAUNCH.md`, `docs/research/` and
+`docs/superpowers/specs/` moved on 2026-10-30, and where new material
+of that kind goes:
+
+- backlog items, todos, open questions
+- brainstorming, raw thoughts, voice-to-text dumps
+- research notes, source collections, reading lists
+- specs and plans before they turn into code
+- anything about career, applications, PhD plans, or people
+
+A `notes/` folder in this repo is gitignored as a parachute for files
+that get created here by accident. Move them over, don't commit them.
+
+Claude's own memory and plan files already live outside the repo
+(`~/.claude/projects/...`), so those are local by default.
+
+When a case study or blog post is drafted in `js/data.js` on a branch,
+that is fine: it is site content on its way to being live. The
+distinction is "will this be on the site" vs. "this is about the site".
+
 ## Core Idea
 
 - **Branch** = a parallel line of development in Git (just an entry, no
