@@ -712,8 +712,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 /* One frame only: the card carries the ink border, the image and the hover
    scrim sit inside it with the inner radius (outer 10px minus 2px border). */
 .bt--work .bt-teaser-grid .v1-visual-card { border: 2px solid var(--ink); border-radius: 10px; box-shadow: none; overflow: hidden; }
-.bt--work .bt-teaser-grid .v1-visual-thumb,
-.bt--work .bt-teaser-grid .v1-visual-hover { border: none; border-radius: 8px; }
+.bt--work .bt-teaser-grid .v1-visual-thumb { border: none; border-radius: 8px; }
 /* The grid stretches all three cards to the tallest one, so a thumb at its
    natural ratio came up a pixel short and the page showed through as a pale
    line along the bottom. Fill the card instead (cropping a hair). */
@@ -1079,19 +1078,25 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt--visuals .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
 .bt--visuals .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
 .bt--visuals .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); }
 [data-variation="v1"] .bt--visuals .v1-visual-thumb { border: 0; border-radius: 0; }
 [data-variation="v1"] .bt--visuals .v1-visual-card:hover .v1-visual-thumb { box-shadow: none; }
 [data-variation="v1"] .bt--visuals .v1-visual-kind {
   color: var(--ink); font-size: 11px; letter-spacing: 0.14em;
 }
 /* Title label: a colored block in the tile's bottom-left corner that
-   slides in on hover, Bricolage instead of the italic scrim. */
-[data-variation="v1"] .bt--visuals .v1-visual-hover {
+   slides in on hover, Bricolage instead of the italic scrim. Shared with
+   the visuals teaser at the foot of Work so both read the same. */
+[data-variation="v1"] .bt--visuals .v1-visual-hover,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover {
   background: none; padding: 0; border-radius: 0;
   align-items: flex-end; justify-content: flex-start;
   opacity: 1;
 }
-[data-variation="v1"] .bt--visuals .v1-visual-hover > span {
+[data-variation="v1"] .bt--visuals .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover > span {
   display: inline-block; max-width: 100%;
   font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
   font-size: 20px; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
@@ -1101,9 +1106,12 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   transform: translateY(110%);
   transition: transform 0.3s var(--ease-out);
 }
-[data-variation="v1"] .bt--visuals .v1-visual-card:nth-child(3n + 2) .v1-visual-hover > span { color: var(--paper); }
+[data-variation="v1"] .bt--visuals .v1-visual-card:nth-child(3n + 2) .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 2) .v1-visual-hover > span { color: var(--paper); }
 [data-variation="v1"] .bt--visuals .v1-visual-card:hover .v1-visual-hover > span,
-[data-variation="v1"] .bt--visuals .v1-visual-card:focus-visible .v1-visual-hover > span { transform: none; }
+[data-variation="v1"] .bt--visuals .v1-visual-card:focus-visible .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:hover .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:focus-visible .v1-visual-hover > span { transform: none; }
 .bt--visuals .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
 
 /* Detail overlay in the Bold Type dress: ink frame, Bricolage title, the
@@ -1135,14 +1143,16 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   [data-variation="v1"] .bt-visuals-grid .v1-visual-card,
   [data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in,
   [data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in:hover { --tilt: 0deg; }
-  [data-variation="v1"] .bt--visuals .v1-visual-hover > span { font-size: 16px; padding: 6px 10px 7px; }
+  [data-variation="v1"] .bt--visuals .v1-visual-hover > span,
+  [data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover > span { font-size: 16px; padding: 6px 10px 7px; }
   .bt--visuals .bt-colophon--light span:last-child { display: none; }
 }
 @media (max-width: 560px) {
   [data-variation="v1"] .bt-visuals-grid { columns: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bt--visuals .v1-visual-card, .bt--visuals .v1-visual-hover > span { transition: none; }
+  .bt--visuals .v1-visual-card, .bt--visuals .v1-visual-hover > span,
+  .bt--work .bt-teaser-grid .v1-visual-hover > span { transition: none; }
 }
 
 /* ==========================================================================
