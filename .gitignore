@@ -22,3 +22,7 @@ yarn-debug.log*
 # Env
 .env
 .env.local
+
+# Private notes never go in this repo (see CLAUDE.md, "Private notes").
+# Real home: ~/claude/2026-portfolio-notes (private repo portfolio-notes).
+notes/
