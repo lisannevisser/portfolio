@@ -1,0 +1,1913 @@
+/* =========================================================================
+   App — vanilla JS: router, cursor, magnetic, tweaks, easter egg,
+   case-study renderer, mobile nav.
+   Depends on: window.LV_DATA (loaded by js/data.js before this file).
+   ========================================================================= */
+
+(function () {
+  "use strict";
+  const D = window.LV_DATA;
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+  // -------- Early bootstrap: re-apply persisted tweaks in case the inline
+  // head script didn't ----------
+  function bootstrapVars() {
+    const hue = localStorage.getItem("lv-hue");
+    if (hue !== null && hue !== "") {
+      document.documentElement.style.setProperty("--accent-hue", hue);
+    }
+    const ts = localStorage.getItem("lv-ts");
+    if (ts) document.documentElement.style.setProperty("--type-scale", ts);
+    const density = localStorage.getItem("lv-density");
+    if (density) document.documentElement.style.setProperty("--scribble-density", density);
+  }
+  bootstrapVars();
+
+  // ========================================================================
+  // HASH ROUTER
+  // ========================================================================
+  // Routes parked out of sight: the section, JS, and CSS all still exist,
+  // but the route is not reachable and falls back to home. To bring one
+  // back, just delete its name from this set (and re-add a footer link if
+  // wanted). Wall of Fame is parked until the board has real content.
+  const DISABLED_ROUTES = new Set(["wall-of-fame"]);
+
+  // Posts parked out of sight: the entry stays in js/data.js untouched, but
+  // it drops out of the Gazette index, the lead slot, and the "Read next"
+  // link, and its own URL lands on 404 like any unknown slug. To publish
+  // one, delete its slug from this set and restore its credits block in
+  // index.html. design-trends-2027 is parked pending the source checks
+  // listed in BACKLOG.md in the private notes repo (portfolio-notes).
+  const DRAFT_POSTS = new Set(["design-trends-2027"]);
+  const livePosts = () => (D.posts || []).filter((p) => !DRAFT_POSTS.has(p.slug));
+
+  // Cases parked the same way: the entry stays in js/data.js, but it drops
+  // out of the home ledger, the work list, the "Next case" link, and its
+  // URL lands on 404. To publish one, delete its slug from this set and
+  // restore its credit in the imprint (index.html). alright-app is parked
+  // until the app ships; without a launch there is no outcome to show.
+  // trust-card-redesign is parked until the sprint results are live or
+  // cleared for publication. The IASQA case moved to the private notes repo.
+  const DRAFT_CASES = new Set(["alright-app", "trust-card-redesign"]);
+  const liveCases = () => (D.cases || []).filter((c) => !DRAFT_CASES.has(c.slug));
+
+  // Bold Type is the default dress. The plain slugs (#/, #/work,
+  // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
+  // the original v1 dress stays reachable as a backup at "<name>-classic"
+  // (#/home-classic, #/work-classic/<slug>, ...). Pages that only exist in v1
+  // (chinese, playground, styleguide) keep their plain slug. Old
+  // "-bold" links still resolve and get rewritten to the plain slug.
+  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
+  const DYNAMIC = { work: ["case", liveCases()], blog: ["post", livePosts()] };
+
+  // Anything that isn't a route section, a known case slug, or a known post
+  // slug lands on the 404 page (the Bold Type one at #/404-bold).
+  const NOT_FOUND = { page: "404-bold" };
+  const hasSection = (page) => !!$(`.lv-route[data-page="${page}"]`);
+
+  function parseHash(h) {
+    const clean = (h || "").replace(/^#\/?/, "");
+    const parts = clean.split("/");
+    const m = (parts[0] || "home").match(/^(.+?)(-classic|-bold)?$/);
+    const name = m[1];
+    const dress = m[2] === "-classic" ? "classic" : "bold";
+
+    // Legacy Bold Type URL: show the same page under its plain slug.
+    if (m[2] === "-bold" && DRESSED.has(name)) {
+      const rest = parts.slice(1).join("/");
+      history.replaceState(null, "", name === "home" && !rest ? "#/" : "#/" + name + (rest ? "/" + rest : ""));
+    }
+
+    if (DYNAMIC[name] && parts[1]) {
+      const [page, list] = DYNAMIC[name];
+      if (!list.some((x) => x.slug === parts[1])) return NOT_FOUND;
+      return { page: dress === "bold" ? page + "-bold" : page, slug: parts[1] };
+    }
+    if (DISABLED_ROUTES.has(name)) return { page: "home-bold" };
+    if (DRESSED.has(name)) return { page: dress === "bold" ? name + "-bold" : name };
+    if (m[2]) return NOT_FOUND;
+    return hasSection(name) ? { page: name } : NOT_FOUND;
+  }
+
+  function renderRoute() {
+    const route = parseHash(location.hash);
+    document.documentElement.setAttribute("data-route", route.page);
+
+    // Hide every route section, show the active one.
+    $$(".lv-route").forEach((el) => {
+      const name = el.getAttribute("data-page");
+      el.hidden = name !== route.page;
+    });
+
+    // Case study: fill the v1 or the Bold Type template with the selected slug.
+    flushTocFabCleanups();
+    if (route.page === "case" || route.page === "case-bold") {
+      const c = liveCases().find((x) => x.slug === route.slug) || liveCases()[0];
+      renderV1Case(c, route.page === "case-bold" ? "bold" : "v1");
+    }
+
+    // Blog post: render the selected post into the v1 or the Bold Type article.
+    if (route.page === "post" || route.page === "post-bold") {
+      const live = livePosts();
+      const p = live.find((x) => x.slug === route.slug) || live[0];
+      if (p) {
+        renderV1Post(p, route.page === "post-bold" ? "bold" : "v1");
+      }
+    }
+
+    // Nav active state
+    $$(".lv-nav-link").forEach((a) => {
+      const target = a.getAttribute("data-route");
+      const active =
+        target === route.page || (target === "work" && (route.page === "case" || route.page === "case-bold"));
+      a.classList.toggle("is-active", active);
+    });
+
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Lets js/edit-mode.js (?edit=1) re-arm its fields after every route render.
+    document.dispatchEvent(new CustomEvent("lv:rendered", { detail: route }));
+  }
+
+  window.addEventListener("hashchange", renderRoute);
+
+  // ========================================================================
+  // CUSTOM CURSOR + MAGNETIC
+  // ========================================================================
+  function initCursor() {
+    if (window.matchMedia("(hover: none)").matches) return;
+    if (window.innerWidth < 900) return;
+
+    const dot = $(".lv-cursor");
+    const ring = $(".lv-cursor-ring");
+    if (!dot || !ring) return;
+
+    let x = 0, y = 0, rx = 0, ry = 0;
+    window.addEventListener("mousemove", (e) => {
+      x = e.clientX; y = e.clientY;
+      dot.style.transform = `translate(${x - 5}px, ${y - 5}px)`;
+    });
+    (function loop() {
+      rx += (x - rx) * 0.15;
+      ry += (y - ry) * 0.15;
+      ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+      requestAnimationFrame(loop);
+    })();
+
+    document.addEventListener("mouseover", (e) => {
+      const target = e.target.closest("[data-cursor-label], a, button, .lv-magnetic");
+      if (!target) return;
+      ring.classList.add("is-hovering");
+      const label = target.getAttribute && target.getAttribute("data-cursor-label");
+      if (label) {
+        ring.setAttribute("data-label", label);
+        ring.classList.add("is-labelled");
+      }
+    });
+    document.addEventListener("mouseout", (e) => {
+      const target = e.target.closest("[data-cursor-label], a, button, .lv-magnetic");
+      if (!target) return;
+      ring.classList.remove("is-hovering", "is-labelled");
+    });
+  }
+
+  function initMagnetic() {
+    if (window.matchMedia("(hover: none)").matches) return;
+    $$(".lv-magnetic").forEach((el) => {
+      const strength = parseFloat(el.getAttribute("data-strength") || "0.25");
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "";
+      });
+    });
+  }
+
+  // ========================================================================
+  // TWEAKS PANEL
+  // ========================================================================
+  function initTweaks() {
+    const panel = $(".lv-tweaks");
+    const toggle = $(".lv-tweaks-toggle");
+    if (!panel || !toggle) return;
+
+    toggle.addEventListener("click", () => panel.classList.toggle("is-open"));
+
+    // Accent-hue swatches (each has data-hue)
+    $$(".lv-hue-row button", panel).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const hue = btn.getAttribute("data-hue");
+        document.documentElement.style.setProperty("--accent-hue", hue);
+        localStorage.setItem("lv-hue", hue);
+        $$(".lv-hue-row button", panel).forEach((b) =>
+          b.classList.toggle("is-active", b === btn)
+        );
+      });
+      const savedHue = localStorage.getItem("lv-hue");
+      if (savedHue && btn.getAttribute("data-hue") === savedHue) {
+        btn.classList.add("is-active");
+      }
+    });
+
+    // Type scale
+    const tsInput = $('input[data-tweak="type-scale"]', panel);
+    const tsLabel = $('[data-tweak-label="type-scale"]', panel);
+    if (tsInput) {
+      const saved = localStorage.getItem("lv-ts") || "1";
+      tsInput.value = saved;
+      if (tsLabel) tsLabel.textContent = saved + "x";
+      tsInput.addEventListener("input", () => {
+        const v = tsInput.value;
+        document.documentElement.style.setProperty("--type-scale", v);
+        localStorage.setItem("lv-ts", v);
+        if (tsLabel) tsLabel.textContent = v + "x";
+      });
+    }
+
+    // Scribble density
+    const dInput = $('input[data-tweak="density"]', panel);
+    const dLabel = $('[data-tweak-label="density"]', panel);
+    if (dInput) {
+      const saved = localStorage.getItem("lv-density") || "2";
+      dInput.value = saved;
+      if (dLabel) dLabel.textContent = saved;
+      dInput.addEventListener("input", () => {
+        const v = dInput.value;
+        document.documentElement.style.setProperty("--scribble-density", v);
+        localStorage.setItem("lv-density", v);
+        if (dLabel) dLabel.textContent = v;
+      });
+    }
+  }
+
+  // ========================================================================
+  // EASTER EGG — Konami + 'yyy' → rotate 180°
+  // ========================================================================
+  function initEasterEgg() {
+    let buf = [];
+    const seq = [
+      "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
+      "b", "a"
+    ];
+    function trigger() {
+      document.body.classList.add("lv-upside-down");
+      const toast = document.createElement("div");
+      toast.className = "lv-toast";
+      toast.textContent = "upside down. like aerial yoga.";
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        document.body.classList.remove("lv-upside-down");
+        toast.remove();
+      }, 4500);
+    }
+    window.addEventListener("keydown", (e) => {
+      buf.push(e.key);
+      if (buf.length > seq.length) buf = buf.slice(-seq.length);
+      if (buf.length === seq.length && buf.every((k, i) => k === seq[i])) trigger();
+      if (e.key === "y" && buf.slice(-3).join("").toLowerCase() === "yyy") trigger();
+    });
+    window.LV_easterEgg = trigger;
+  }
+
+  // ========================================================================
+  // MOBILE NAV
+  // ========================================================================
+  function initMobileNav() {
+    const toggle = $(".lv-nav-toggle");
+    const sheet = $(".lv-nav-sheet");
+    const scrim = $(".lv-nav-scrim");
+    const closeBtn = $(".lv-nav-sheet-close");
+    if (!toggle || !sheet || !scrim) return;
+    function open() {
+      sheet.classList.add("is-open");
+      scrim.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      sheet.classList.remove("is-open");
+      scrim.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+    toggle.addEventListener("click", open);
+    scrim.addEventListener("click", close);
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    $$("a", sheet).forEach((a) => a.addEventListener("click", close));
+    window.addEventListener("hashchange", close);
+  }
+
+  // ========================================================================
+  // SCRIBBLE helpers (rendered to inline SVG via data-scribble attr)
+  // ========================================================================
+  const SCRIBBLE_PATHS = {
+    underline: { d: "M 4 18 C 40 8, 80 26, 120 14 S 190 22, 240 10", vb: "0 0 250 30" },
+    circle:    { d: "M 140 20 C 90 10 20 25 20 60 C 20 95 80 110 140 100 C 200 92 220 70 210 40 C 200 15 160 10 140 20 Z", vb: "0 0 230 120" },
+    arrow:     { d: "M 6 30 C 40 10, 90 50, 140 20 L 130 10 M 140 20 L 128 30", vb: "0 0 150 40" },
+    "arrow-long": { d: "M 4 22 C 90 6, 180 36, 280 18 S 460 8, 588 22 L 572 12 M 588 22 L 570 30", vb: "0 0 600 40" },
+    squiggle:  { d: "M 0 10 C 20 0, 40 20, 60 10 S 100 0, 120 10 S 160 20, 180 10", vb: "0 0 180 20" },
+    wave:      { d: "M 0 10 Q 15 0, 30 10 T 60 10 T 90 10 T 120 10", vb: "0 0 120 20" },
+    asterisk:  { d: "M 20 4 L 20 36 M 6 12 L 34 28 M 6 28 L 34 12 M 4 20 L 36 20", vb: "0 0 40 40" }
+  };
+
+  function renderScribbles() {
+    $$("[data-scribble]").forEach((el) => {
+      if (el.dataset.rendered) return;
+      const kind = el.getAttribute("data-scribble");
+      const cfg = SCRIBBLE_PATHS[kind];
+      if (!cfg) return;
+      const delay = el.getAttribute("data-delay") || "0.3";
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("class", "lv-scribble");
+      svg.setAttribute("viewBox", cfg.vb);
+      svg.setAttribute("stroke-width", "2.2");
+      if (kind === "underline" || kind === "squiggle" || kind === "wave" || kind === "arrow-long") {
+        svg.setAttribute("preserveAspectRatio", "none");
+      }
+      svg.style.setProperty("--delay", delay + "s");
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", cfg.d);
+      svg.appendChild(path);
+      el.appendChild(svg);
+      el.dataset.rendered = "true";
+    });
+  }
+
+  // ========================================================================
+  // CLIENT LOGO STRIP (V1) — swap in real PNGs when available
+  // ========================================================================
+  // Client logo marquee. One track on the v1 home, one on #/home-bold.
+  function renderClientStrip() {
+    const items = [];
+    // Render the list three times for smooth marquee continuity
+    for (let pass = 0; pass < 3; pass++) {
+      D.clients.forEach((c) => {
+        const logo = D.clientLogos[c];
+        if (logo) {
+          const scale = (D.clientLogoScale || {})[c] || 1;
+          items.push(`<img src="${logo}" alt="${c}" style="--logo-scale:${scale}" onerror="this.outerHTML='<span>— ${c}</span>'">`);
+        } else {
+          items.push(`<span>— ${c}</span>`);
+        }
+      });
+    }
+    $$(".v1-logo-track").forEach((track) => {
+      if (track.dataset.rendered === "true") return;
+      track.innerHTML = items.join("");
+      track.dataset.rendered = "true";
+    });
+  }
+
+  // ========================================================================
+  // CASE STUDY RENDERERS
+  // ========================================================================
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Stable id from a section title. Used as the scroll target for TOC entries.
+  function sectionId(prefix, title, i) {
+    const base = String(title || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 40);
+    return `${prefix}-${base || "section"}-${i}`;
+  }
+
+  // Build the list of TOC entries for a case. Figures don't get a row.
+  // Limitations gets a special row marked with the lim flag.
+  function buildTocEntries(c, prefix) {
+    const entries = [];
+    let n = 0;
+    c.story.forEach((s, i) => {
+      if (s.kind === "figure") return;
+      if (s.kind === "limitations") {
+        entries.push({
+          id: sectionId(prefix, s.title || "limitations", i),
+          num: "↳",
+          title: s.title || "Limitations",
+          lim: true
+        });
+        return;
+      }
+      n += 1;
+      entries.push({
+        id: sectionId(prefix, s.title, i),
+        num: String(n).padStart(2, "0"),
+        title: s.title || "",
+        lim: false
+      });
+    });
+    return entries;
+  }
+
+  // FAB markup. The popover ol is filled by wireTocFab() once the case body
+  // has been injected, since we need to know which entries actually rendered.
+  function tocFabHtml() {
+    return `
+      <div class="lv-toc-fab" tabindex="0" role="button" aria-label="Contents" aria-haspopup="menu" aria-expanded="false">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line x1="5" y1="6" x2="15" y2="6"></line>
+          <line x1="5" y1="10" x2="15" y2="10"></line>
+          <line x1="5" y1="14" x2="11" y2="14"></line>
+        </svg>
+        <div class="lv-toc-popover" role="menu">
+          <span class="eyebrow">Contents</span>
+          <ol></ol>
+        </div>
+      </div>`;
+  }
+
+  // Wire up the FAB. The case renderer runs per route change, so we
+  // track cleanup per render-pass and flush stale listeners before binding new ones.
+  const __tocFabCleanups = [];
+  function flushTocFabCleanups() {
+    while (__tocFabCleanups.length) {
+      const fn = __tocFabCleanups.pop();
+      try { fn(); } catch (_) { /* no-op */ }
+    }
+  }
+  function wireTocFab(root, entries) {
+    const fab = root.querySelector(".lv-toc-fab");
+    if (!fab) return;
+    const list = fab.querySelector("ol");
+    if (!list) return;
+
+    // Render the list. Only include entries whose target section actually
+    // exists in the DOM (defensive: some kinds may be filtered out later).
+    list.innerHTML = entries
+      .filter((e) => document.getElementById(e.id))
+      .map((e) => `
+        <li data-target="${esc(e.id)}"${e.lim ? ' class="is-lim"' : ""}>
+          <span class="n">${esc(e.num)}</span>
+          <span class="t">${esc(e.title)}</span>
+        </li>`)
+      .join("");
+
+    const close = () => {
+      fab.classList.remove("is-open");
+      fab.setAttribute("aria-expanded", "false");
+    };
+    const open = () => {
+      fab.classList.add("is-open");
+      fab.setAttribute("aria-expanded", "true");
+    };
+
+    const onFabClick = (e) => {
+      // Don't toggle when clicking inside the popover (list items handle their own).
+      if (e.target.closest(".lv-toc-popover")) return;
+      fab.classList.contains("is-open") ? close() : open();
+    };
+    const onFabKey = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        fab.classList.contains("is-open") ? close() : open();
+      }
+      if (e.key === "Escape") close();
+    };
+    const onListClick = (e) => {
+      const li = e.target.closest("li[data-target]");
+      if (!li) return;
+      const target = document.getElementById(li.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(close, 60);
+    };
+    const onOutside = (e) => {
+      if (!fab.contains(e.target)) close();
+    };
+    const onDocKey = (e) => {
+      if (e.key === "Escape") close();
+    };
+
+    fab.addEventListener("click", onFabClick);
+    fab.addEventListener("keydown", onFabKey);
+    list.addEventListener("click", onListClick);
+    document.addEventListener("click", onOutside);
+    document.addEventListener("keydown", onDocKey);
+
+    // Active-section highlight: the section closest to the upper-middle of
+    // the viewport wins.
+    const io = new IntersectionObserver(
+      (records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          list.querySelectorAll("li").forEach((li) => li.classList.remove("is-active"));
+          const li = list.querySelector(`li[data-target="${r.target.id}"]`);
+          if (li) li.classList.add("is-active");
+        });
+      },
+      { rootMargin: "-30% 0px -55% 0px" }
+    );
+    entries.forEach((e) => {
+      const el = document.getElementById(e.id);
+      if (el) io.observe(el);
+    });
+
+    // Expanded at the top of the page so readers see the structure next to
+    // the headline; shrinks into the button as soon as they start scrolling.
+    // CSS only honours .is-expanded on screens wide enough to hold the card.
+    let raf = 0;
+    const syncExpanded = () => {
+      raf = 0;
+      fab.classList.toggle("is-expanded", window.scrollY < 120);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(syncExpanded); };
+    syncExpanded();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    __tocFabCleanups.push(() => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+      fab.removeEventListener("click", onFabClick);
+      fab.removeEventListener("keydown", onFabKey);
+      list.removeEventListener("click", onListClick);
+      document.removeEventListener("click", onOutside);
+      document.removeEventListener("keydown", onDocKey);
+      io.disconnect();
+    });
+  }
+
+  // Impact cells display a label, a prominent value, and a short note.
+  // The big value must either contain a digit or stay short (<= 10 chars).
+  // If any cell violates that, the whole impact section is hidden so the
+  // hero block does not turn into a wall of prose.
+  function isImpactValueValid(v) {
+    if (typeof v !== "string" || !v) return false;
+    if (/\d/.test(v)) return true;
+    return v.length <= 10;
+  }
+  function shouldShowImpact(impact) {
+    return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
+  }
+
+  // One case, two dresses: "v1" fills #v1-case-body (#/work-classic/<slug>), "bold"
+  // fills #bt-case-body (#/work/<slug>). Story blocks, impact grid,
+  // limitations card and TOC are the same markup; the section ids carry the
+  // dress as prefix so both roots can hold a case without clashing.
+  function renderV1Case(c, dress) {
+    const bold = dress === "bold";
+    const root = $(bold ? "#bt-case-body" : "#v1-case-body");
+    if (!root) return;
+    const base = bold ? "#/work" : "#/work-classic";
+    const idPrefix = bold ? "bt" : "v1";
+    const idx = liveCases().findIndex((x) => x.slug === c.slug);
+    const next = liveCases()[(idx + 1) % liveCases().length];
+
+    const tocEntries = buildTocEntries(c, idPrefix);
+
+    // Path of this case in LV_DATA, for the edit-mode anchors below.
+    const cpath = idx >= 0 ? `cases.${idx}` : "";
+
+    let narrativeIdx = 0;
+    const storyHtml = c.story.map((s, storyI) => {
+      const bp = cpath ? `${cpath}.story.${storyI}` : "";
+      if (s.kind === "figure") {
+        const hue = Number.isFinite(s.hue) ? s.hue : c.coverPaletteHue;
+        const label = s.label ? `<span class="label"${editAttr(bp, "label")}>${esc(s.label)}</span>` : "";
+        const caption = s.caption ? `<figcaption${editAttr(bp, "caption")}>${esc(s.caption)}</figcaption>` : "";
+        // With a src it's a real image, without it the placeholder frame.
+        // srcNarrow swaps in a portrait layout on phones (wide diagrams).
+        const img = s.src
+          ? `<img class="shot" src="${esc(s.src)}" alt="${esc(s.alt || s.caption || "")}" loading="lazy" decoding="async" />`
+          : "";
+        const visual = s.src
+          ? (s.srcNarrow ? `<picture style="display:block"><source media="(max-width: 640px)" srcset="${esc(s.srcNarrow)}" />${img}</picture>` : img)
+          : `<div class="frame" role="img" aria-label="${esc(s.alt || s.caption || "Figure placeholder")}">${label}</div>`;
+        return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};margin:2.5rem 0;">${visual}${caption}</figure>`;
+      }
+      if (s.kind === "limitations" && s.items) {
+        const sid = sectionId(idPrefix, s.title || "limitations", storyI);
+        const renderItems = (arr, base) => arr.map((it, j) => {
+          const ip = base ? `${base}.${j}` : "";
+          return `
+          <div class="v1-limitation-row">
+            <h4${editAttr(ip, "title")}>${esc(it.title)}</h4>
+            <p${editAttr(ip, "body")}>${esc(it.body)}</p>
+          </div>`;
+        }).join("");
+        const hasOpp = Array.isArray(s.opportunities) && s.opportunities.length;
+        const oppFirst = s.defaultFace === "opportunities" && hasOpp;
+        // Only anchor a face's title/subtitle when the key really exists in
+        // data.js — the labels below fall back to hardcoded strings.
+        const facePath = (field) => (bp && s[field] != null ? `${bp}.${field}` : "");
+        const limFace = { kind: "lim", title: s.title || "Limitations", items: s.items, subtitle: s.subtitle, flipLabel: "↻ Opportunities",
+          base: bp ? `${bp}.items` : "", titlePath: facePath("title"), subtitlePath: facePath("subtitle") };
+        const oppFace = { kind: "opp", title: s.oppositeTitle || "Opportunities", items: s.opportunities, subtitle: s.oppositeSubtitle, flipLabel: "↻ Limitations",
+          base: bp ? `${bp}.opportunities` : "", titlePath: facePath("oppositeTitle"), subtitlePath: facePath("oppositeSubtitle") };
+        const front = oppFirst ? oppFace : limFace;
+        const back = oppFirst ? limFace : oppFace;
+        const renderHeader = (face, idSuffix, pressed) => {
+          const pid = `${sid}-info-${idSuffix}`;
+          const info = face.subtitle ? `
+              <button class="v1-limitations-info-btn" type="button" aria-expanded="false" aria-controls="${esc(pid)}" aria-label="About this card">i</button>
+              <div class="v1-limitations-info-popover" id="${esc(pid)}" role="tooltip" hidden${editAttr(face.subtitlePath)}>${esc(face.subtitle)}</div>` : "";
+          const flip = hasOpp ? `<button class="v1-limitations-flip" type="button" aria-pressed="${pressed}">${face.flipLabel}</button>` : "";
+          return `
+            <div class="v1-limitations-header">
+              <div class="v1-limitations-info-group">
+                <span class="v1-limitations-label"${editAttr(face.titlePath)}>${esc(face.title)}</span>${info}
+              </div>
+              ${flip}
+            </div>`;
+        };
+        const frontFace = `
+          <div class="v1-limitations-face is-front is-${front.kind}">
+            ${renderHeader(front, "front", "false")}
+            <div class="v1-limitations-grid">${renderItems(front.items, front.base)}</div>
+          </div>`;
+        const backFace = hasOpp ? `
+          <div class="v1-limitations-face is-back is-${back.kind}" aria-hidden="true">
+            ${renderHeader(back, "back", "true")}
+            <div class="v1-limitations-grid">${renderItems(back.items, back.base)}</div>
+          </div>` : "";
+        return `
+          <section id="${esc(sid)}" class="v1-limitations-card lv-case-section ${hasOpp ? "is-flippable" : ""} lv-reveal">
+            <div class="v1-limitations-card-inner">${frontFace}${backFace}</div>
+          </section>`;
+      }
+      const i = narrativeIdx++;
+      const sid = sectionId(idPrefix, s.title, storyI);
+      let body = s.body
+        ? s.body.split(/\n\n+/).map((p, pi) => `<p${editAttr(bp, "body", 1, pi)}>${inlineMarks(p)}</p>`).join("")
+        : "";
+      let extra = "";
+      if (s.kind === "framework" && s.items) {
+        extra = `<div class="v1-framework">${s.items.map((it, j) => {
+          const ip = bp ? `${bp}.items.${j}` : "";
+          return `
+          <div class="v1-framework-row">
+            <span${editAttr(ip, "k")}>${esc(it.k)}</span>
+            <span${editAttr(ip, "v")}>${esc(it.v)}</span>
+            <span${editAttr(ip, "effect")}>${esc(it.effect)}</span>
+          </div>`;
+        }).join("")}</div>`;
+      } else if (s.kind === "flow" && s.items) {
+        const chips = s.items.map((it, j) => {
+          const arrow = `<svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M 2 5 L 16 5 M 12 2 L 16 5 L 12 8"/></svg>`;
+          const ip = bp ? `${bp}.items.${j}` : "";
+          const last = j === s.items.length - 1
+            ? `<span class="v1-chip" style="background:var(--accent);color:var(--paper);border-color:var(--accent);padding:0.6rem 1rem;"${editAttr(ip, "to")}>${esc(it.to)}</span>`
+            : "";
+          return `<span class="v1-chip" style="padding:0.6rem 1rem;"${editAttr(ip, "from")}>${esc(it.from)}</span>${arrow}${last}`;
+        }).join("");
+        extra = `<div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1rem;">${chips}</div>`;
+      }
+      return `
+        <section id="${esc(sid)}" class="v1-story-block lv-case-section lv-reveal">
+          <span class="lv-section-num">${String(i + 1).padStart(2, "0")}</span>
+          <h2 class="lv-section-title"${editAttr(bp, "title")}>${esc(s.title)}</h2>
+          ${body}${extra}
+        </section>`;
+    }).join("");
+
+    const header = bold ? `
+      <a href="${base}" class="bt-back" data-cursor-label="← Back">← All work</a>
+
+      <header class="bt-case-head">
+        <div class="bt-kicker lv-reveal"><span>${esc(c.company)} — ${esc(c.year)}</span></div>
+        <h1 class="bt-display bt-case-title lv-reveal"${editAttr(cpath, "title")}>${esc(c.title)}</h1>
+        ${c.subtitle ? `<p class="bt-lead bt-case-sub lv-reveal"${editAttr(cpath, "subtitle")}>${esc(c.subtitle)}</p>` : ""}
+      </header>` : `
+      <a href="${base}" class="lv-nav-link" data-cursor-label="← Back">← All work</a>
+
+      <header style="margin-top:2rem;">
+        <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
+          <em${editAttr(cpath, "title")}>${esc(c.title)}</em>
+        </h1>
+      </header>`;
+
+    root.innerHTML = `
+      ${header}
+
+      ${shouldShowImpact(c.impact) ? `
+      <div class="v1-impact-grid lv-reveal" style="margin-bottom:${c.nda ? "16px" : "4rem"};">
+        <div class="v1-impact-cell">
+          <div class="v1-impact-cell-label"${editAttr(cpath && `${cpath}.impact.0`, "label")}>${esc(c.impact[0].label)}</div>
+          <div class="lv-body" style="font-size:var(--text-md);margin-bottom:0.75rem;"${editAttr(cpath && `${cpath}.impact.0`, "note")}>${esc(c.impact[0].note)}</div>
+          <div class="v1-impact-num"${editAttr(cpath && `${cpath}.impact.0`, "value")}>${esc(c.impact[0].value)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Role</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "role")}>${esc(c.role)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Team</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "team")}>${esc(c.team)}</div>
+        </div>
+        <div class="v1-impact-cell v1-impact-cell--meta">
+          <div class="v1-impact-cell-label">Year</div>
+          <div class="v1-impact-meta"${editAttr(cpath, "year")}>${esc(c.year)}</div>
+        </div>
+      </div>` : ""}
+
+      ${c.nda ? `
+      <aside class="v1-nda-note lv-reveal">
+        <p class="v1-nda-text">Some figures in this case study are under NDA. I'm happy to walk you through the full case in a conversation.</p>
+        <a href="mailto:mail@lisannevisser.com?subject=${esc(encodeURIComponent("Your case study: " + c.title))}" class="lv-btn v1-nda-cta" data-cursor-label="Email">Let's talk →</a>
+      </aside>` : ""}
+
+      <div>${storyHtml}</div>
+
+      ${tocFabHtml()}
+
+      <a href="${base}/${esc(next.slug)}" class="lv-next-case lv-reveal">
+        <span class="lv-next-label">Next</span>
+        <span class="lv-next-title-wrap">
+          <span class="lv-next-title">${esc(next.title)}</span>
+        </span>
+      </a>
+    `;
+    wireTocFab(root, tocEntries);
+    renderScribbles();
+  }
+
+  // ========================================================================
+  // BLOG RENDERERS (list + post detail)
+  // ========================================================================
+  // Pull the first few prose blocks (lead/paragraph/string) out of a post body
+  // as plain text, for the gazette front-page aufmacher columns.
+  function gazetteLeadParagraphs(post, max) {
+    const out = [];
+    for (const b of (post.body || [])) {
+      let t = null;
+      if (typeof b === "string") t = b;
+      else if (b && (b.kind === "lead" || b.kind === "paragraph")) t = b.text;
+      if (t) out.push(t);
+      if (out.length >= max) break;
+    }
+    return out;
+  }
+
+  // The Gazette front page. Rendered twice from the same posts: into the
+  // v1 blog (#v1-blog-list, links to #/blog-classic/<slug>) and into the Bold
+  // Type blog (#bt-blog-list, links to #/blog/<slug>). Both dresses share
+  // the .lv-gz-* markup; the Bold Type one restyles it in bold-home.css.
+  function renderBlogLists() {
+    const posts = livePosts();
+    if (!posts.length) return;
+    const lead = posts[0];
+
+    // Inject the current month (without the year) into the masthead datelines
+    $$(".lv-gz-dateline-tags").forEach((el) => {
+      el.textContent = lead.dateLabel.replace(/\s*\d{4}$/, "");
+    });
+
+    function gazetteFront(base) {
+      const leadParas = gazetteLeadParagraphs(lead, 2);
+      const featured = `
+        <a href="${base}/${esc(lead.slug)}" class="lv-gz-lead lv-reveal">
+          <h2 class="lv-gz-lead-head">${esc(lead.title)}</h2>
+          <p class="lv-gz-deck">${esc(lead.excerpt)}</p>
+          <div class="lv-gz-byline">${esc(lead.dateLabel)} · ${esc(lead.readingTime)} read · ${lead.tags.map(esc).join(" · ")}</div>
+          <div class="lv-gz-lead-cols">
+            ${leadParas.map((t) => `<p>${inlineMarks(t)}</p>`).join("")}
+            <p class="lv-gz-continue">Continue reading →</p>
+          </div>
+        </a>`;
+
+      // Split remaining posts by year
+      const currentYear = lead.date.slice(0, 4);
+      const sameYear = posts.slice(1).filter(p => p.date.startsWith(currentYear));
+      const olderPosts = posts.slice(1).filter(p => !p.date.startsWith(currentYear));
+
+      function renderEntryGrid(items) {
+        const isOdd = items.length % 2 !== 0;
+        return `<div class="lv-gz-index">
+          ${items.map((p, i) => `
+            <a href="${base}/${esc(p.slug)}" class="lv-gz-entry lv-reveal${isOdd && i === items.length - 1 ? " lv-gz-entry--full" : ""}">
+              <div class="kicker">${p.tags.map(esc).join(" · ")}</div>
+              <h3 class="hl">${esc(p.title)}</h3>
+              <p class="exc">${esc(p.excerpt)}</p>
+              <div class="meta">${esc(p.dateLabel)} · ${esc(p.readingTime)}</div>
+            </a>`).join("")}
+        </div>`;
+      }
+
+      const sameYearSection = sameYear.length ? `
+        <div class="lv-gz-section-heading lv-reveal"><span>More in this edition</span></div>
+        ${renderEntryGrid(sameYear)}` : "";
+
+      // Group older posts by year
+      const olderByYear = {};
+      olderPosts.forEach(p => {
+        const yr = p.date.slice(0, 4);
+        if (!olderByYear[yr]) olderByYear[yr] = [];
+        olderByYear[yr].push(p);
+      });
+      const olderSections = Object.keys(olderByYear).sort((a, b) => b - a).map(yr => `
+        <div class="lv-gz-section-heading lv-gz-section-heading--archive lv-reveal"><span>${yr} Edition</span></div>
+        ${renderEntryGrid(olderByYear[yr])}`).join("");
+
+      return featured + sameYearSection + olderSections;
+    }
+
+    const v1List = $("#v1-blog-list");
+    if (v1List) v1List.innerHTML = gazetteFront("#/blog-classic");
+    const btList = $("#bt-blog-list");
+    if (btList) btList.innerHTML = gazetteFront("#/blog");
+  }
+
+  // Inline marks: [text](url) links, **bold** and *italic*. Applied AFTER esc(),
+  // so we re-introduce a tightly-scoped set of tags. Keep this conservative.
+  function inlineMarks(text) {
+    return esc(text)
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,
+        '<a class="lv-post-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[\s(])\*([^*]+)\*/g, "$1<em>$2</em>");
+  }
+
+  // Edit-mode anchors. Each attribute names the value in LV_DATA that produced
+  // the node, so js/edit-mode.js can write a change back to the right key.
+  // `marks` flags fields that go through inlineMarks rather than plain esc.
+  // `part` is the paragraph index when one source string renders as several
+  // <p> (case-study bodies split on blank lines).
+  // Inert on normal page loads — only js/edit-mode.js reads them.
+  function editAttr(path, field, marks, part) {
+    if (!path) return "";
+    return ` data-lv-edit="${field ? path + "." + field : path}"` +
+      (marks ? " data-lv-marks" : "") +
+      (part == null ? "" : ` data-lv-part="${part}"`);
+  }
+
+  // Render one post-body block. Strings are paragraphs (backward-compat).
+  // Objects dispatch on .kind. `path` locates the block in LV_DATA
+  // (e.g. "posts.0.body.3"); empty when the caller doesn't track one.
+  function renderPostBlock(b, path) {
+    if (typeof b === "string") {
+      return `<p class="lv-post-p lv-reveal"${editAttr(path, "", 1)}>${inlineMarks(b)}</p>`;
+    }
+    const kind = b.kind;
+    if (kind === "paragraph") {
+      return `<p class="lv-post-p lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
+    }
+    if (kind === "lead") {
+      return `<p class="lv-post-lead lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
+    }
+    if (kind === "h2") {
+      return `<h2 class="lv-post-h2 lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</h2>`;
+    }
+    if (kind === "h3") {
+      return `<h3 class="lv-post-h3 lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</h3>`;
+    }
+    if (kind === "quote") {
+      const cite = b.attribution
+        ? `<cite${editAttr(path, "attribution")}>${esc(b.attribution)}</cite>` : "";
+      return `<blockquote class="lv-post-quote lv-reveal"><p${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>${cite}</blockquote>`;
+    }
+    if (kind === "list") {
+      const tag = b.style === "numbered" ? "ol" : "ul";
+      const items = (b.items || []).map((it, i) => {
+        const ip = path ? `${path}.items.${i}` : "";
+        if (typeof it === "string") return `<li${editAttr(ip, "", 1)}>${inlineMarks(it)}</li>`;
+        if (it && it.title) {
+          return `<li><strong${editAttr(ip, "title", 1)}>${inlineMarks(it.title)}</strong> <span${editAttr(ip, "text", 1)}>${inlineMarks(it.text || "")}</span></li>`;
+        }
+        return `<li${editAttr(ip, "text", 1)}>${inlineMarks((it && it.text) || "")}</li>`;
+      }).join("");
+      return `<${tag} class="lv-post-list lv-reveal">${items}</${tag}>`;
+    }
+    if (kind === "figure") {
+      const hue = Number.isFinite(b.hue) ? b.hue : 200;
+      const label = b.label ? `<span class="label"${editAttr(path, "label")}>${esc(b.label)}</span>` : "";
+      const caption = b.caption ? `<figcaption${editAttr(path, "caption")}>${esc(b.caption)}</figcaption>` : "";
+      // With a src it's a real image, without it the placeholder frame.
+      const visual = b.src
+        ? `<img class="shot" src="${esc(b.src)}" alt="${esc(b.alt || b.caption || "")}" loading="lazy" decoding="async" />`
+        : `<div class="frame" role="img" aria-label="${esc(b.alt || b.caption || "Figure placeholder")}">${label}</div>`;
+      return `<figure class="lv-post-figure lv-reveal" style="--post-figure-hue:${hue};">${visual}${caption}</figure>`;
+    }
+    if (kind === "callout") {
+      const label = b.label ? `<div class="lv-post-callout-label"${editAttr(path, "label")}>${esc(b.label)}</div>` : "";
+      return `<aside class="lv-post-callout lv-reveal">${label}<p${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p></aside>`;
+    }
+    if (kind === "divider") {
+      if (b.symbol) {
+        return `<div class="lv-post-divider has-symbol lv-reveal" role="separator" aria-hidden="true">${esc(b.symbol)}</div>`;
+      }
+      return `<hr class="lv-post-divider lv-reveal" />`;
+    }
+    if (kind === "code") {
+      const lang = b.lang ? `<span class="lang">${esc(b.lang)}</span>` : "";
+      return `<pre class="lv-post-code lv-reveal">${lang}<code>${esc(b.code || "")}</code></pre>`;
+    }
+    if (kind === "chat") {
+      const groups = (b.messages || []).map((m) => {
+        const bubbles = (m.bubbles || []).map((bb) => {
+          const link = bb.link ? `<span class="lv-chat-link">${esc(bb.link)}</span>` : "";
+          return `<div class="lv-chat-msg" data-chat-step>
+            <span class="lv-chat-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="lv-chat-bubble"><p>${esc(bb.text || "")}</p>${link}</div>
+          </div>`;
+        }).join("");
+        const reaction = m.reaction
+          ? `<span class="lv-chat-reaction" data-chat-reaction>${esc(m.reaction)}</span>` : "";
+        return `<div class="lv-chat-group">
+          <div class="lv-chat-avatar" aria-hidden="true">${esc(m.initial || (m.author || "?").charAt(0))}</div>
+          <div class="lv-chat-rows">
+            <div class="lv-chat-meta"><strong>${esc(m.author || "")}</strong><span class="time">${esc(m.time || "")}</span></div>
+            ${bubbles}${reaction}
+          </div>
+        </div>`;
+      }).join("");
+      const caption = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : "";
+      return `<figure class="lv-post-chat lv-reveal" data-chat>
+        <div class="lv-chat-window" role="log" aria-label="${esc(b.aria || "Chat conversation")}">${groups}</div>
+        ${caption}
+      </figure>`;
+    }
+    // Unknown block: render as paragraph fallback.
+    return `<p class="lv-post-p lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
+  }
+
+  // `base` is the blocks array's path in LV_DATA (e.g. "posts.0.body").
+  function renderPostBody(blocks, base) {
+    return (blocks || [])
+      .map((b, i) => renderPostBlock(b, base ? `${base}.${i}` : ""))
+      .join("\n");
+  }
+
+  // Chat blocks replay like a live conversation: each message shows a short
+  // typing indicator, then pops in; reactions land last. Runs once per render,
+  // when the block scrolls into view. Reduced motion shows everything at once.
+  function initPostChats(root) {
+    if (!root) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $$("[data-chat]", root).forEach((chat) => {
+      const steps = $$("[data-chat-step]", chat);
+      const reactions = $$("[data-chat-reaction]", chat);
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        steps.forEach((s) => s.classList.add("is-shown"));
+        reactions.forEach((r) => r.classList.add("is-shown"));
+        return;
+      }
+      const play = () => {
+        let t = 200;
+        steps.forEach((s) => {
+          setTimeout(() => {
+            s.closest(".lv-chat-group").classList.add("is-active");
+            s.classList.add("is-typing");
+          }, t);
+          t += 850;
+          setTimeout(() => {
+            s.classList.remove("is-typing");
+            s.classList.add("is-shown");
+          }, t);
+          t += 350;
+        });
+        setTimeout(() => {
+          reactions.forEach((r) => r.classList.add("is-shown"));
+        }, t + 400);
+      };
+      const io = new IntersectionObserver((records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          io.disconnect();
+          play();
+        });
+      }, { threshold: 0.35 });
+      io.observe(chat);
+    });
+  }
+
+  // One post, two dresses: "v1" fills #v1-post-body (#/blog-classic/<slug>), "bold"
+  // fills #bt-post-body (#/blog/<slug>). The body blocks are the same;
+  // only the masthead and the back / read-next links differ.
+  function renderV1Post(p, dress) {
+    const bold = dress === "bold";
+    const root = $(bold ? "#bt-post-body" : "#v1-post-body");
+    if (!root) return;
+    const base = bold ? "#/blog" : "#/blog-classic";
+    const posts = D.posts || [];
+    // idx stays the js/data.js index: the editAttr paths below write back
+    // through it. "Read next" walks the live list instead, so it never
+    // points at a parked post.
+    const idx = posts.findIndex((x) => x.slug === p.slug);
+    const live = livePosts();
+    const liveIdx = live.findIndex((x) => x.slug === p.slug);
+    const next = live.length ? live[(liveIdx + 1) % live.length] : null;
+
+    // Drop cap on the first prose paragraph (the lead stays italic display).
+    const bodyHtml = renderPostBody(p.body, idx >= 0 ? `posts.${idx}.body` : "")
+      .replace('class="lv-post-p lv-reveal"', 'class="lv-post-p lv-reveal lv-dropcap"');
+
+    const month = p.dateLabel.replace(/\s*\d{4}$/, "");
+    const header = bold ? `
+      <header class="bt-gz-article-head">
+        <div class="bt-kicker lv-reveal"><span>The Design Gazette — ${esc(p.date.slice(0, 4))} Edition — ${esc(month)}</span></div>
+        <h1 class="bt-display bt-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
+        ${p.excerpt ? `<p class="bt-lead bt-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
+        <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
+      </header>` : `
+      <header>
+        <div class="lv-gz-article-masthead lv-reveal">
+          <div class="flag">The Design Gazette</div>
+        </div>
+        <div class="lv-gz-dateline lv-gz-dateline--article lv-reveal">
+          <span>Berlin</span>
+          <span>${esc(p.date.slice(0, 4))} Edition</span>
+          <span>${esc(month)}</span>
+        </div>
+        <h1 class="lv-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
+        ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
+        <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
+      </header>`;
+
+    root.innerHTML = `
+      <a href="${base}" class="lv-gz-back lv-nav-link" data-cursor-label="← Back">← Back to the front page</a>
+
+      ${header}
+
+      <div class="lv-post-body">${bodyHtml}</div>
+
+      ${next && next.slug !== p.slug ? `
+        <div class="lv-gz-section-heading lv-reveal" style="margin-top:6rem;"><span>Read next</span></div>
+        <a href="${base}/${esc(next.slug)}" class="lv-gz-entry lv-gz-entry--full lv-reveal" style="border-top:none;padding-top:0;">
+          <div class="kicker">${next.tags.map(esc).join(" · ")}</div>
+          <h3 class="hl">${esc(next.title)}</h3>
+          <p class="exc">${esc(next.excerpt)}</p>
+          <div class="meta">${esc(next.dateLabel)} · ${esc(next.readingTime)}</div>
+        </a>` : ""}
+    `;
+    renderScribbles();
+    initPostChats(root);
+  }
+
+  // ========================================================================
+  // V1 WORK LEDGER — filter chips + impact-stamp rows + per-row mini-intro
+  // ========================================================================
+  const WORK_PREVIEW = {
+    "pricing": {
+      kind: "stat", label: "in revenue", tilt: -6,
+      categories: ["research", "experimentation"],
+      role: "Research lead"
+    },
+    "ai-workflow": {
+      kind: "stat", label: "less cycle time", tilt: 5,
+      categories: ["ops", "experimentation"],
+      role: "End-to-end owner"
+    },
+    "research-culture": {
+      kind: "stat", label: "of target hit", tilt: -3,
+      categories: ["research", "ops"],
+      role: "Research lead"
+    },
+    "illustrations-vs-icons": {
+      kind: "stat", label: "mobile conversion", tilt: 4,
+      categories: ["experimentation", "brand"],
+      role: "Hypothesis & design"
+    },
+    "design-system": {
+      kind: "image",
+      categories: ["systems", "brand"],
+      role: "System lead"
+    },
+    "website-relaunch": {
+      kind: "stat", label: "pages relaunched", tilt: 7,
+      categories: ["systems", "brand"],
+      role: "Lead designer"
+    },
+    "alright-app": {
+      kind: "stat", label: "spec to TestFlight", tilt: -5,
+      categories: ["brand", "ops"],
+      role: "Solo build"
+    }
+  };
+
+  const WORK_FILTERS = [
+    { id: "all",             label: "All work" },
+    { id: "research",        label: "Research" },
+    { id: "experimentation", label: "Experimentation" },
+    { id: "systems",         label: "Design systems" },
+    { id: "ops",             label: "Design ops" },
+    { id: "brand",           label: "Brand" }
+  ];
+
+  let v1WorkFilter = "all";
+
+  function inCategory(c, filter) {
+    if (filter === "all") return true;
+    const cats = (WORK_PREVIEW[c.slug] && WORK_PREVIEW[c.slug].categories) || [];
+    return cats.includes(filter);
+  }
+
+  // The v1 Work page and the Bold Type Work page (#/work-bold) share the
+  // ledger, the chips, and the active filter; only the dress differs.
+  const WORK_LEDGERS = [
+    ["#v1-work-filters", "#v1-work-cases", "#/work-classic"],
+    ["#bt-work-filters", "#bt-work-cases", "#/work"]
+  ];
+  function renderV1WorkLedger() {
+    WORK_LEDGERS.forEach(([f, r, base]) => renderWorkLedgerInto($(f), $(r), base));
+  }
+  function renderWorkLedgerInto(filtersEl, rowsEl, base) {
+    if (!filtersEl || !rowsEl) return;
+
+    // Filter chips (with counts)
+    const counts = {};
+    WORK_FILTERS.forEach((f) => {
+      counts[f.id] = liveCases().filter((c) => inCategory(c, f.id)).length;
+    });
+    filtersEl.innerHTML = WORK_FILTERS.map((f) => {
+      const active = v1WorkFilter === f.id;
+      const disabled = counts[f.id] === 0;
+      return `
+        <button type="button" class="v1-work-chip${active ? " is-active" : ""}"
+                data-filter="${esc(f.id)}"${disabled ? " disabled" : ""}
+                aria-pressed="${active ? "true" : "false"}">
+          <span>${esc(f.label)}</span>
+          <span class="v1-work-chip-count">${counts[f.id]}</span>
+        </button>
+      `;
+    }).join("");
+
+    // Ledger rows
+    const visible = liveCases().filter((c) => inCategory(c, v1WorkFilter));
+    rowsEl.innerHTML = visible.length === 0
+      ? `<div class="v1-work-empty">Nothing in this category yet — try another filter.</div>`
+      : visible.map((c, i) => {
+          const p = WORK_PREVIEW[c.slug] || {};
+          const stat = c.impact && c.impact[0];
+          const visual = p.kind === "image"
+            ? `<span class="v1-work-thumb${c.coverImage ? " has-image" : ""}" style="--case-hue:${c.coverPaletteHue};">${c.coverImage ? `<img src="${esc(c.coverImage)}" alt="" />` : ""}</span>`
+            : `<span class="v1-work-stamp" style="--tilt:${p.tilt != null ? p.tilt : -4}deg;">
+                 <span class="v">${esc(stat ? stat.value : "")}</span>
+                 <span class="k">${esc(p.label || (stat ? stat.label : ""))}</span>
+               </span>`;
+          return `
+            <a href="${base}/${esc(c.slug)}" class="v1-work-row lv-reveal"
+               style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
+              <span class="n">${String(i + 1).padStart(2, "0")}</span>
+              <span class="body">
+                <span class="title">${esc(c.title)}</span>
+                ${c.subtitle ? `<span class="sub">${esc(c.subtitle)}</span>` : ""}
+                <span class="intro">${esc(p.role || String(c.role || "").split(" · ")[0])} · ${esc(c.company)} · ${esc(c.year)}</span>
+              </span>
+              <span class="visual">${visual}</span>
+            </a>
+          `;
+        }).join("");
+  }
+
+  function initV1WorkFilters() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-work-chip");
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
+      const next = btn.getAttribute("data-filter");
+      if (!next || next === v1WorkFilter) return;
+      v1WorkFilter = next;
+      renderV1WorkLedger();
+    });
+  }
+
+  // ========================================================================
+  // DYNAMIC HOME + WORK CASE LISTS (injected so data is one source of truth)
+  // ========================================================================
+  function renderCaseLists() {
+    // V1 — Home selected work: minimal ledger with cursor-following preview
+    const v1HomeList = $("#v1-home-cases");
+    if (v1HomeList) {
+      const PREVIEW = {
+        "pricing":          { label: "in revenue",       tilt: -6 },
+        "ai-workflow":      { label: "less cycle time",  tilt:  5 },
+        "research-culture": { label: "of target hit",    tilt: -3 },
+        "design-system":    { label: "Brand identity",   tilt:  4 },
+        "website-relaunch": { label: "pages relaunched", tilt:  7 }
+      };
+
+      // The home page teases the top of the list, not the whole shelf.
+      // Order comes from data.js; "All work →" carries the rest.
+      const HOME_CASE_COUNT = 3;
+
+      const rowsHtml = liveCases().slice(0, HOME_CASE_COUNT).map((c, i) => {
+        const p = PREVIEW[c.slug] || { label: c.impact[0].label, tilt: -4 };
+        return `
+          <a href="#/work-classic/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
+             data-preview-value="${esc(c.impact[0].value)}"
+             data-preview-label="${esc(p.label || c.impact[0].label)}"
+             data-preview-tilt="${p.tilt == null ? -4 : p.tilt}">
+            <span class="n">${String(i + 1).padStart(2, "0")}</span>
+            <span class="title">${esc(c.title)}</span>
+            <span class="thumb" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true"></span>
+          </a>
+        `;
+      }).join("");
+
+      v1HomeList.innerHTML = `
+        <div class="v1-ledger-root">
+          <div class="v1-ledger">${rowsHtml}</div>
+          <div class="v1-ledger-stat-floater" aria-hidden="true">
+            <div class="v"></div>
+            <div class="k"></div>
+          </div>
+        </div>
+      `;
+
+      const ledgerRoot = v1HomeList.querySelector(".v1-ledger-root");
+      const statFloater = ledgerRoot.querySelector(".v1-ledger-stat-floater");
+      const statV = statFloater.querySelector(".v");
+      const statK = statFloater.querySelector(".k");
+      let active = null;
+
+      ledgerRoot.addEventListener("mousemove", (e) => {
+        if (!active) return;
+        statFloater.style.left = e.clientX + "px";
+        statFloater.style.top = e.clientY + "px";
+      });
+
+      ledgerRoot.querySelectorAll(".v1-ledger-row").forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          active = row;
+          statV.textContent = row.dataset.previewValue;
+          statK.textContent = row.dataset.previewLabel;
+          statFloater.style.setProperty("--tilt", row.dataset.previewTilt + "deg");
+          statFloater.classList.add("is-visible");
+        });
+        row.addEventListener("mouseleave", () => {
+          active = null;
+          statFloater.classList.remove("is-visible");
+        });
+      });
+    }
+
+    // V1 — Work ledger (filter chips + impact-stamp rows + mini-intro)
+    renderV1WorkLedger();
+  }
+
+  // ========================================================================
+  // BOOT
+  // ========================================================================
+  function closeAllInfoPopovers(except) {
+    document.querySelectorAll(".v1-limitations-info-btn").forEach((b) => {
+      if (b === except) return;
+      if (b.getAttribute("aria-expanded") !== "true") return;
+      b.setAttribute("aria-expanded", "false");
+      const pid = b.getAttribute("aria-controls");
+      const pop = pid && document.getElementById(pid);
+      if (pop) pop.hidden = true;
+    });
+  }
+
+  function initFlipCards() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-limitations-flip");
+      if (!btn) return;
+      const card = btn.closest(".v1-limitations-card");
+      if (!card) return;
+      closeAllInfoPopovers();
+      const flipped = card.classList.toggle("is-flipped");
+      card.querySelectorAll(".is-front, .is-back").forEach((face) => {
+        const isBack = face.classList.contains("is-back");
+        face.setAttribute("aria-hidden", String(isBack !== flipped));
+      });
+      card.querySelectorAll(".v1-limitations-flip").forEach((b) => {
+        const onBack = b.closest(".is-back");
+        b.setAttribute("aria-pressed", String(onBack ? !flipped : flipped));
+      });
+    });
+  }
+
+  function initInfoPopovers() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".v1-limitations-info-btn");
+      if (btn) {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        closeAllInfoPopovers(btn);
+        const pid = btn.getAttribute("aria-controls");
+        const pop = pid && document.getElementById(pid);
+        btn.setAttribute("aria-expanded", String(!expanded));
+        if (pop) pop.hidden = expanded;
+        return;
+      }
+      if (!e.target.closest(".v1-limitations-info-popover")) {
+        closeAllInfoPopovers();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllInfoPopovers();
+    });
+  }
+
+
+  function initFooterEmoji() {
+    const el = document.querySelector(".lv-footer-emoji");
+    if (!el) return;
+    const emojis = ["🩶", "🐶", "🍵", "🎨", "🤸", "🧘"];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % emojis.length;
+      el.textContent = emojis[i];
+    }, 2500);
+  }
+
+  // ---- About page: merged hero + pinned scrollytelling -------------------
+  // .ahs section pins for ~5.65 viewports. First ~20% of scroll collapses
+  // the headline into a masthead and cross-fades the lead out / chapters in;
+  // the remainder steps through the four chapters and swaps the right-hand
+  // image accordingly.
+  // One scrolly per .ahs section: the v1 About and the Bold Type About
+  // (#/about-bold) each carry their own. A hidden section measures as
+  // zero height, so its update() bails out early and costs nothing.
+  function initHeroScrolly() {
+    $$(".ahs").forEach(initHeroScrollyFor);
+  }
+  function initHeroScrollyFor(sec) {
+    const pin = sec.querySelector(".ahs-pin");
+    const imgs = $$(".ahs-img", sec);
+    const portrait = sec.querySelector(".ahs-img[data-hero]");
+    const stepImgs = $$(".ahs-img[data-step]", sec);
+    const steps = $$(".ahs-step", sec);
+    const dots = $$(".ahs-rail button", sec);
+    const counter = sec.querySelector(".ahs-progress [data-current]");
+    const total = steps.length;
+    if (!total) return;
+    const HERO_SEG = 0.2;
+    let activeChap = -1;
+    let lastImg = null;
+    const isNarrow = () => window.matchMedia("(max-width: 880px)").matches;
+
+    function setImg(el) {
+      if (el === lastImg) return;
+      imgs.forEach((i) => i.classList.toggle("is-active", i === el));
+      lastImg = el;
+    }
+    function setChap(n) {
+      if (n === activeChap) return;
+      activeChap = n;
+      steps.forEach((s, i) => s.classList.toggle("is-active", i === n));
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === n));
+      if (counter) counter.textContent = String(n + 1).padStart(2, "0");
+    }
+
+    function update() {
+      if (isNarrow()) {
+        pin.style.setProperty("--collapse", "1");
+        setChap(0);
+        setImg(portrait);
+        return;
+      }
+      const rect = sec.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const scrollable = sec.offsetHeight - vh;
+      if (scrollable <= 0) {
+        pin.style.setProperty("--collapse", "0");
+        return;
+      }
+      const p = Math.min(1, Math.max(0, -rect.top / scrollable));
+      const collapse = Math.min(1, p / HERO_SEG);
+      pin.style.setProperty("--collapse", collapse.toFixed(3));
+
+      const chapP = Math.min(1, Math.max(0, (p - HERO_SEG) / (1 - HERO_SEG)));
+      const idx = Math.min(total - 1, Math.floor(chapP * total * 0.999));
+      setChap(idx);
+
+      if (collapse < 0.5) setImg(portrait);
+      else setImg(stepImgs[idx]);
+    }
+
+    dots.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = parseInt(btn.getAttribute("data-step-jump") || "0", 10);
+        const vh = window.innerHeight;
+        const scrollable = sec.offsetHeight - vh;
+        const frac = HERO_SEG + (1 - HERO_SEG) * (i + 0.15) / total;
+        window.scrollTo({ top: sec.offsetTop + scrollable * frac, behavior: "smooth" });
+      });
+    });
+
+    let raf = 0;
+    function onScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; update(); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("hashchange", () => requestAnimationFrame(update));
+    update();
+  }
+
+  // ========================================================================
+  // BOOKSHELF (cover grid + stats + detail overlay)
+  // ========================================================================
+  function bookStars(rating, cls) {
+    let out = "";
+    for (let s = 1; s <= 5; s++) {
+      out += `<span class="lv-book-star${s <= rating ? " is-on" : ""} ${cls || ""}">&#9733;</span>`;
+    }
+    return out;
+  }
+
+  function reviewToHtml(review) {
+    // Escape first, then turn [text](url) markdown links into anchors.
+    return esc(String(review || "").trim()).replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+  }
+
+  // Every container with data-books="grid" gets the covers (#/books in the
+  // Bold Type dress, #/books-classic). Both open the one review overlay,
+  // which sits after <main>. The stats block only exists in the classic dress.
+  function renderBooks() {
+    const books = D.books || [];
+    const grids = $$('[data-books="grid"]');
+    const statsEl = $("#lv-books-stats");
+    if (!grids.length || !books.length) return;
+
+    // ---- Stats ----
+    const total = books.length;
+    const fiveStar = books.filter((b) => b.rating === 5).length;
+    const avg = (books.reduce((s, b) => s + b.rating, 0) / total).toFixed(1);
+
+    const tagCounts = {};
+    books.forEach((b) => (b.tags || []).forEach((t) => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+    const genres = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+    const topGenres = genres.slice(0, 6);
+    const maxGenre = (topGenres[0] && topGenres[0][1]) || 1;
+
+    const byYear = {};
+    books.forEach((b) => {
+      if (b.finished) {
+        const y = b.finished.split("-")[0];
+        byYear[y] = (byYear[y] || 0) + 1;
+      }
+    });
+    const years = Object.entries(byYear).sort((a, b) => a[0].localeCompare(b[0]));
+    const maxYear = Math.max.apply(null, Object.values(byYear).concat([1]));
+    const withDates = books.filter((b) => b.finished).length;
+    const avgPerYear = years.length ? (withDates / years.length).toFixed(1) : "0";
+
+    const ratingDist = [5, 4, 3, 2, 1].map((r) => ({ stars: r, count: books.filter((b) => b.rating === r).length }));
+
+    const bar = (label, count, max, accent) =>
+      `<div class="lv-book-bar">
+        <span class="lv-book-bar-label">${esc(label)}</span>
+        <span class="lv-book-bar-track"><span class="lv-book-bar-fill${accent ? " is-accent" : ""}" style="width:${(count / max) * 100}%"></span></span>
+        <span class="lv-book-bar-num">${count}</span>
+      </div>`;
+
+    if (statsEl) {
+      statsEl.innerHTML = `
+        <div class="lv-book-ribbon">
+          <div><strong>${total}</strong><span>books</span></div>
+          <div><strong>${fiveStar}</strong><span>five-star reads</span></div>
+          <div><strong>${avg}</strong><span>avg rating</span></div>
+        </div>
+        <div class="lv-book-cards">
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Books per year</div>
+            <div class="lv-book-statcard-big">${avgPerYear} <span>avg / year</span></div>
+            ${years.map(([y, c]) => bar(y, c, maxYear, false)).join("")}
+          </div>
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Genres</div>
+            <div class="lv-book-statcard-big">${genres.length} <span>categories</span></div>
+            ${topGenres.map(([t, c]) => bar(t, c, maxGenre, false)).join("")}
+          </div>
+          <div class="lv-book-statcard">
+            <div class="lv-eyebrow">Ratings</div>
+            <div class="lv-book-statcard-big">${avg} <span>avg stars</span></div>
+            ${ratingDist.map((r) => bar(r.stars + "★", r.count, total, true)).join("")}
+          </div>
+        </div>`;
+    }
+
+    // ---- Cover grid ----
+    const cards = books
+      .map((b, i) => `
+        <button class="lv-book-card" data-index="${i}" data-cursor-label="Read" aria-label="Open review of ${esc(b.title)}">
+          <span class="lv-book-cover" style="--spine:${esc(b.color)}">
+            <span class="lv-book-fallback">${esc(b.title)}</span>
+            <img class="lv-book-img" src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy" onerror="this.style.display='none'" />
+            <span class="lv-book-spine" style="background:${esc(b.color)}"></span>
+          </span>
+          <span class="lv-book-meta">
+            <span class="lv-book-title">${esc(b.title)}</span>
+            <span class="lv-book-author">${esc(b.author)}</span>
+            <span class="lv-book-stars">${bookStars(b.rating)}</span>
+          </span>
+        </button>`)
+      .join("");
+    grids.forEach((grid) => { grid.innerHTML = cards; });
+
+    // ---- Detail overlay ----
+    const overlay = $("#lv-book-overlay");
+    const detail = $("#lv-book-detail");
+    const backdrop = $("#lv-book-backdrop");
+    const closeBtn = $("#lv-book-close");
+    if (!overlay) return;
+
+    function openBook(b) {
+      $("#lv-book-detail-cover").src = b.cover;
+      $("#lv-book-detail-cover").alt = b.title;
+      const dfb = $("#lv-book-detail-fallback");
+      dfb.textContent = b.title;
+      $("#lv-book-detail-title").textContent = b.title;
+      $("#lv-book-detail-author").textContent = "by " + b.author;
+      $("#lv-book-detail-stars").innerHTML = bookStars(b.rating, "is-lg");
+      $("#lv-book-detail-tags").innerHTML = (b.tags || [])
+        .map((t) => `<span class="lv-book-tag">${esc(t)}</span>`)
+        .join("");
+      $("#lv-book-detail-review").innerHTML = reviewToHtml(b.review);
+      detail.style.setProperty("--spine", b.color);
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeBook() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    grids.forEach((grid) => grid.addEventListener("click", (e) => {
+      const card = e.target.closest(".lv-book-card");
+      if (!card) return;
+      const b = books[parseInt(card.getAttribute("data-index"), 10)];
+      if (b) openBook(b);
+    }));
+    closeBtn.addEventListener("click", closeBook);
+    backdrop.addEventListener("click", closeBook);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeBook();
+    });
+  }
+
+  // Visuals: a gallery of small visual work. Every container with
+  // data-visuals gets the cards: "grid" takes the whole list (#/visuals,
+  // #/visuals-bold), "teaser" the first three (foot of Work, Work bold).
+  // Clicking a card opens the overlay of the container's data-dress ("v1"
+  // or "bt"). The overlays sit after <main>, outside the route sections,
+  // so a teaser can open one while the gallery route itself is hidden.
+  // An `embed` loads inline (Canva iframe), otherwise a thumbnail /
+  // gradient preview shows, with an external link as fallback.
+  function renderVisuals() {
+    const items = D.visuals || [];
+    const grids = $$("[data-visuals]");
+    const overlays = {};
+    $$(".v1-visual-overlay[data-dress]").forEach((o) => { overlays[o.getAttribute("data-dress")] = o; });
+    if (!grids.length) return;
+
+    function card(v, i) {
+      // Real <img> at natural aspect ratio so the full artwork is visible,
+      // no 4:3 crop. The fallback tile (no thumb) stays a gradient span.
+      const thumb = v.thumb
+        ? `<img class="v1-visual-thumb" src="${esc(v.thumb)}" alt="" loading="lazy" />`
+        : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span class="v1-visual-kind">${esc(v.type || "")}</span></span>`;
+      // Image-only card: the title only appears in the hover scrim and as
+      // the accessible label; everything else lives in the modal.
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open" aria-label="${esc(v.title)}" style="--card-i:${i % 3};">
+        ${thumb}
+        <span class="v1-visual-hover" aria-hidden="true"><span>${esc(v.title)}</span></span>
+      </button>`;
+    }
+
+    grids.forEach((grid) => {
+      const list = grid.getAttribute("data-visuals") === "teaser" ? items.slice(0, 3) : items;
+      grid.innerHTML = list.map(card).join("");
+    });
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let openOverlay = null;
+
+    function openVisual(v, fromEl, overlay) {
+      const stage = $(".v1-visual-stage", overlay);
+      const detail = $(".v1-visual-detail", overlay);
+      const eyebrow = $(".v1-visual-eyebrow", overlay);
+      // The Bold Type eyebrow wraps its text in a span (kicker markup).
+      ($("span", eyebrow) || eyebrow).textContent = [v.context, v.year].filter(Boolean).join(" · ");
+      $(".v1-visual-detail-title", overlay).textContent = v.title;
+      $(".v1-visual-detail-blurb", overlay).textContent = v.blurb || "";
+      if (v.embed) {
+        stage.innerHTML = `<iframe class="v1-visual-frame" src="${esc(v.embed)}" loading="lazy" allowfullscreen title="${esc(v.title)}"></iframe>`;
+      } else if (v.thumb) {
+        // Landscape thumbs fill the stage; `fit: "contain"` keeps a portrait
+        // piece whole instead of cropping into the middle of it.
+        const fit = v.fit === "contain" ? " is-contain" : "";
+        stage.innerHTML = `<span class="v1-visual-stage-img${fit}" style="background-image:url('${esc(v.thumb)}');"></span>`;
+      } else {
+        stage.innerHTML = `<span class="v1-visual-stage-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"><span>${esc(v.type || v.title)}</span></span>`;
+      }
+      const link = $(".v1-visual-open", overlay);
+      if (v.link) {
+        link.href = v.link;
+        link.hidden = false;
+        const host = (v.link || v.embed || "").includes("behance.net") ? "Behance"
+          : (v.link || v.embed || "").includes("canva.com") ? "Canva"
+          : (v.link || v.embed || "").includes("figma.com") ? "Figma" : "";
+        link.textContent = (v.embed && host ? "Open in " + host : /\.pdf$/i.test(v.link) ? "Open slides (PDF)" : "Open project") + " ↗";
+      } else {
+        link.hidden = true;
+        link.removeAttribute("href");
+      }
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      openOverlay = overlay;
+      // Zoom the panel out of the clicked card: start at the card's
+      // position/size, then let the stylesheet transition float it home.
+      if (fromEl && detail && !reduceMotion) {
+        const from = fromEl.getBoundingClientRect();
+        const to = detail.getBoundingClientRect();
+        if (to.width && to.height) {
+          const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+          const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+          const s = Math.min(1, Math.max(from.width / to.width, 0.25));
+          detail.style.transition = "none";
+          detail.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+          void detail.offsetWidth; // flush so the next frame transitions
+          detail.style.transition = "";
+          detail.style.transform = "";
+        }
+      }
+      $(".lv-book-close", overlay).focus();
+    }
+
+    function closeVisual() {
+      const overlay = openOverlay;
+      if (!overlay) return;
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      $(".v1-visual-stage", overlay).innerHTML = ""; // unload the iframe so it stops playing
+      openOverlay = null;
+    }
+
+    grids.forEach((grid) => {
+      const overlay = overlays[grid.getAttribute("data-dress")] || overlays.v1;
+      if (!overlay) return;
+      grid.addEventListener("click", (e) => {
+        const card = e.target.closest(".v1-visual-card");
+        if (!card) return;
+        const v = items[parseInt(card.getAttribute("data-index"), 10)];
+        if (v) openVisual(v, card, overlay);
+      });
+    });
+
+    // Stagger the gallery cards in as they scroll into view (full grids only).
+    const gridCards = $$('[data-visuals="grid"] .v1-visual-card');
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      gridCards.forEach((c) => c.classList.add("is-in"));
+    } else {
+      const io = new IntersectionObserver((records) => {
+        records.forEach((r) => {
+          if (!r.isIntersecting) return;
+          r.target.classList.add("is-in");
+          io.unobserve(r.target);
+        });
+      }, { threshold: 0.15 });
+      gridCards.forEach((c) => io.observe(c));
+    }
+
+    Object.values(overlays).forEach((overlay) => {
+      $(".lv-book-close", overlay).addEventListener("click", closeVisual);
+      $(".lv-book-backdrop", overlay).addEventListener("click", closeVisual);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && openOverlay) closeVisual();
+    });
+  }
+
+  // #/chinese — the Mandarin learning library. Cards are rendered from
+  // D.chineseResources; chips come from D.chineseTaxonomy so the cards and
+  // the filter UI share one vocabulary. Unknown ids render as-is instead
+  // of breaking the card.
+  //
+  // Filtering: one facet per taxonomy group, single-select with an "All"
+  // default, groups combine with AND. Filter chips are bilingual
+  // ("Reading / 阅读"); the card chips stay English to keep them scannable.
+  const CN_FILTER_GROUPS = [
+    { key: "type",  group: "types",       label: "Type",  zh: "类型",
+      match: (r, id) => r.type === id },
+    { key: "skill", group: "skills",      label: "Skill", zh: "技能",
+      match: (r, id) => (r.skills || []).includes(id) },
+    { key: "level", group: "levels",      label: "Level", zh: "水平",
+      match: (r, id) => (r.levels || []).includes(id) },
+    { key: "hsk",   group: "hskVersions", label: "HSK",   zh: null,
+      match: (r, id) => r.hsk === id },
+    { key: "cost",  group: "costs",       label: "Cost",  zh: "费用",
+      match: (r, id) => r.cost === id }
+  ];
+  const cnFilter = { type: "all", skill: "all", level: "all", hsk: "all", cost: "all" };
+
+  function cnMatches(r, except) {
+    return CN_FILTER_GROUPS.every((g) => {
+      if (g.key === except) return true;
+      const sel = cnFilter[g.key];
+      return sel === "all" || g.match(r, sel);
+    });
+  }
+
+  function renderChineseResources() {
+    const list = $("#v1-chinese-list");
+    if (!list) return;
+    const tax = D.chineseTaxonomy || {};
+    const items = D.chineseResources || [];
+
+    // Active-facet badge on the accordion summary, so applied filters
+    // stay visible while the accordion is closed.
+    const countEl = $("#v1-chinese-filter-count");
+    if (countEl) {
+      const active = CN_FILTER_GROUPS.filter((g) => cnFilter[g.key] !== "all").length;
+      countEl.textContent = active;
+      countEl.hidden = active === 0;
+    }
+
+    // Filter rows: chips carry "English / 中文" labels. Counts are computed
+    // against the other groups' current selections; chips that would empty
+    // the list are disabled instead of hidden. Only this inner container is
+    // re-rendered, so the accordion's open state survives filter clicks.
+    const filtersEl = $("#v1-chinese-filters");
+    if (filtersEl) {
+      filtersEl.innerHTML = CN_FILTER_GROUPS.map((g) => {
+        const options = [{ id: "all", label: "All", zh: "全部" }].concat(tax[g.group] || []);
+        const chips = options.map((o) => {
+          const count = items.filter((r) =>
+            cnMatches(r, g.key) && (o.id === "all" || g.match(r, o.id))).length;
+          const active = cnFilter[g.key] === o.id;
+          const text = o.zh ? `${o.label} / ${o.zh}` : o.label;
+          return `
+            <button type="button" class="v1-work-chip${active ? " is-active" : ""}"
+                    data-cn-group="${esc(g.key)}" data-cn-id="${esc(o.id)}"
+                    ${count === 0 && !active ? " disabled" : ""}
+                    aria-pressed="${active ? "true" : "false"}">
+              <span>${esc(text)}</span>
+              <span class="v1-work-chip-count">${count}</span>
+            </button>`;
+        }).join("");
+        const gLabel = g.zh ? `${g.label} / ${g.zh}` : g.label;
+        return `
+          <div class="v1-res-filter-row">
+            <span class="v1-res-filter-label">${esc(gLabel)}</span>
+            <span class="v1-res-filter-chips">${chips}</span>
+          </div>`;
+      }).join("");
+    }
+
+    // Cards stay chip-free on purpose: the taxonomy is fully visible in
+    // the filter accordion, so the card carries only content and link.
+    const card = (r) => {
+      let host = "";
+      try { host = new URL(r.url).hostname.replace(/^www\./, ""); } catch (_) { /* keep empty */ }
+      return `
+        <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" class="v1-res-row lv-reveal" data-cursor-label="Visit ↗">
+          <span class="v1-res-head">
+            <span class="v1-res-title">${esc(r.title)}</span>
+            <span class="v1-res-host">${esc(host)} ↗</span>
+          </span>
+          ${r.note ? `<span class="v1-res-note">${esc(r.note)}</span>` : ""}
+        </a>`;
+    };
+
+    const visible = items.filter((r) => cnMatches(r, null));
+    list.innerHTML = visible.length === 0
+      ? `<div class="v1-res-empty">Nothing matches this combination yet: the library is still growing.</div>`
+      : visible.map(card).join("");
+  }
+
+  function initChineseFilters() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-cn-group]");
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
+      const key = btn.getAttribute("data-cn-group");
+      const id = btn.getAttribute("data-cn-id");
+      if (!key || !id || cnFilter[key] === id) return;
+      cnFilter[key] = id;
+      renderChineseResources();
+    });
+  }
+
+  // #/sketchbook and #/sketchbook-classic — photos of hand-drawn work. Same
+  // cards as Visuals, but the lightbox has no card: the whole sketch sits on
+  // the page with its title and blurb, sized to fit without scrolling, and
+  // arrows / arrow keys flip through the set. Each route section carries its
+  // own grid and overlay (found by class), so one init serves both dresses.
+  function renderSketchbook() {
+    const items = D.sketchbook || [];
+
+    function card(v, i) {
+      const thumb = v.thumb
+        ? `<span class="v1-visual-thumb" style="background-image:url('${esc(v.thumb)}');"></span>`
+        : `<span class="v1-visual-thumb is-fallback" style="--tile-hue:${parseInt(v.hue, 10) || 200};"></span>`;
+      return `<button type="button" class="v1-visual-card lv-reveal" data-index="${i}" data-cursor-label="Open">
+        ${thumb}
+        <span class="v1-visual-info">
+          <span class="v1-visual-title">${esc(v.title)}</span>
+          <span class="v1-visual-sub">${esc(v.medium || "")}</span>
+        </span>
+      </button>`;
+    }
+
+    $$(".v1-sketch-grid").forEach((grid) => {
+      grid.innerHTML = items.map(card).join("");
+
+      const section = grid.closest(".lv-route");
+      const overlay = section && $(".v1-sketch-overlay", section);
+      if (!overlay) return;
+      const backdrop = $(".v1-sketch-backdrop", overlay);
+      const photo = $(".v1-sketch-photo", overlay);
+      const stage = $(".v1-sketch-stage", overlay);
+      const closeBtn = $(".v1-sketch-close", overlay);
+      let current = -1;
+      let returnFocus = null;
+
+      // Fill the lightbox for item i. data-pos (0-2) mirrors the grid's
+      // 3n+1 / 3n+2 / 3n+3 rhythm, so the CSS can give the open sketch the
+      // same tilt and marker color as the card it came from.
+      function show(i) {
+        current = (i + items.length) % items.length;
+        const v = items[current];
+        photo.setAttribute("data-pos", String(current % 3));
+        $(".v1-sketch-medium", overlay).textContent = v.medium || "";
+        $(".v1-sketch-title", overlay).textContent = v.title;
+        $(".v1-sketch-blurb", overlay).textContent = v.blurb || "";
+        const src = v.full || v.thumb;
+        stage.innerHTML = src
+          ? `<img class="v1-sketch-img" src="${esc(src)}" alt="${esc(v.title)}" />`
+          : "";
+      }
+
+      function openSketch(i, fromEl) {
+        returnFocus = fromEl || null;
+        show(i);
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      }
+
+      function closeSketch() {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        stage.innerHTML = "";
+        current = -1;
+        if (returnFocus) returnFocus.focus();
+      }
+
+      grid.addEventListener("click", (e) => {
+        const card = e.target.closest(".v1-visual-card");
+        if (!card) return;
+        const i = parseInt(card.getAttribute("data-index"), 10);
+        if (items[i]) openSketch(i, card);
+      });
+      closeBtn.addEventListener("click", closeSketch);
+      backdrop.addEventListener("click", closeSketch);
+      $(".v1-sketch-prev", overlay).addEventListener("click", () => show(current - 1));
+      $(".v1-sketch-next", overlay).addEventListener("click", () => show(current + 1));
+      document.addEventListener("keydown", (e) => {
+        if (!overlay.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeSketch();
+        else if (e.key === "ArrowLeft") show(current - 1);
+        else if (e.key === "ArrowRight") show(current + 1);
+      });
+    });
+  }
+
+  // Shared with js/edit-mode.js so an edited field re-renders exactly the way
+  // it was rendered in the first place.
+  window.LV_RENDER = { inlineMarks, esc };
+
+  function boot() {
+    renderCaseLists();
+    renderBlogLists();
+    renderBooks();
+    renderVisuals();
+    renderSketchbook();
+    renderChineseResources();
+    renderClientStrip();
+    renderScribbles();
+    initCursor();
+    initMagnetic();
+    initTweaks();
+    initEasterEgg();
+    initMobileNav();
+    initFlipCards();
+    initInfoPopovers();
+    initV1WorkFilters();
+    initChineseFilters();
+    initFooterEmoji();
+    initHeroScrolly();
+    renderRoute();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();

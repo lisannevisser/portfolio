@@ -1,0 +1,233 @@
+/* =========================================================================
+   Styleguide — layout for the #/styleguide live CSS audit.
+   Excluded from the audit scan itself (see EXCLUDE_FILES in styleguide.js),
+   so values here may be hard-coded without polluting the inventory.
+   ========================================================================= */
+
+/* -------- Stats strip -------- */
+.lv-sg-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 3rem 0 0;
+}
+.lv-sg-stat {
+  background: var(--paper);
+  padding: 1.25rem 1.25rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.lv-sg-stat .v {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+.lv-sg-stat .k {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+
+/* -------- Sections -------- */
+.lv-sg-section { margin-top: 5rem; }
+.lv-sg-section-head { max-width: 62ch; }
+.lv-sg-section-head .lv-eyebrow { display: block; }
+.lv-sg-section-head .lv-h2 { margin: 0.5rem 0 0; }
+.lv-sg-section-head .lv-body { margin: 1rem 0 0; }
+
+/* -------- Shared bits -------- */
+.lv-sg-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 0.1rem 0.35rem;
+}
+.lv-sg-swatch {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule);
+  flex: none;
+}
+.lv-sg-swatch.is-empty {
+  background:
+    linear-gradient(45deg, var(--rule) 25%, transparent 25%, transparent 75%, var(--rule) 75%),
+    linear-gradient(45deg, var(--rule) 25%, transparent 25%, transparent 75%, var(--rule) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+.lv-sg-swatch.is-large {
+  width: 100%;
+  height: 3.5rem;
+  border-radius: var(--radius-sm);
+}
+.lv-sg-match {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+}
+[data-page="styleguide"] code.value,
+[data-page="styleguide"] code.name,
+[data-page="styleguide"] code.cls {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  word-break: break-word;
+}
+.lv-sg-section .meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.lv-sg-section .count {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+}
+
+/* -------- Tokens -------- */
+.lv-sg-token-list {
+  margin-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.lv-sg-token-row {
+  display: grid;
+  grid-template-columns: auto minmax(10rem, 16rem) 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lv-sg-token-row .name { color: var(--ink); }
+@media (max-width: 640px) {
+  .lv-sg-token-row {
+    grid-template-columns: auto 1fr auto;
+  }
+  .lv-sg-token-row .value { grid-column: 2 / -1; grid-row: 2; }
+}
+
+/* -------- Colors -------- */
+.lv-sg-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.lv-sg-color-cell {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--paper);
+}
+
+/* -------- Type sizes -------- */
+.lv-sg-type-list {
+  margin-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.lv-sg-type-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lv-sg-type-row .sample {
+  font-family: var(--font-display);
+  line-height: 1;
+  color: var(--ink);
+  flex: none;
+  min-width: 5.5rem;
+}
+.lv-sg-type-row .body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.lv-sg-type-row .px {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+}
+.lv-sg-type-row .sel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  word-break: break-word;
+}
+
+/* -------- Plain lists (radii, shadows) -------- */
+.lv-sg-plain-list {
+  margin-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.lv-sg-plain-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lv-sg-radius-box {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--ink-3);
+  background: var(--paper-2);
+  flex: none;
+}
+.lv-sg-shadow-box {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  flex: none;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+/* -------- Specimens -------- */
+.lv-sg-specimen-group { margin-top: 3rem; }
+.lv-sg-specimen-group > .lv-eyebrow {
+  margin-bottom: 0.5rem;
+}
+.lv-sg-specimen {
+  display: grid;
+  grid-template-columns: minmax(12rem, 18rem) 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+.lv-sg-specimen-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.lv-sg-specimen-meta .label {
+  font-weight: 500;
+  color: var(--ink);
+}
+.lv-sg-specimen-meta .note {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.lv-sg-specimen-stage { min-width: 0; align-self: center; }
+@media (max-width: 720px) {
+  .lv-sg-specimen { grid-template-columns: 1fr; gap: 0.75rem; }
+}

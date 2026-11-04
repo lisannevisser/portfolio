@@ -1,0 +1,1812 @@
+<!doctype html>
+<html lang="en" data-variation="v1" data-route="home-bold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lisanne Visser — Senior Product Designer</title>
+  <meta name="description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin." />
+  <meta name="theme-color" content="#faf7f1" />
+
+  <!-- Canonical and sharing. These five absolute URLs are the only place the
+       host name is hard-coded; when the site moves to its own domain, this
+       block is the whole change. -->
+  <link rel="canonical" href="https://lisannevisser.github.io/portfolio/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lisannevisser.github.io/portfolio/" />
+  <meta property="og:site_name" content="Lisanne Visser" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Lisanne Visser — Senior Product Designer" />
+  <meta property="og:description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin." />
+  <meta property="og:image" content="https://lisannevisser.github.io/portfolio/images/og-card.png?v=2026-10-28-2" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Design that earns its pixels. A hand-drawn pink highlight marks the word earns. Lisanne Visser, Senior Product Designer, with the tags Research, Experimentation and Design." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lisanne Visser — Senior Product Designer" />
+  <meta name="twitter:description" content="Generalist product designer with a research &amp; experimentation spine. Based in Berlin." />
+  <meta name="twitter:image" content="https://lisannevisser.github.io/portfolio/images/og-card.png?v=2026-10-28-2" />
+  <meta name="twitter:image:alt" content="Design that earns its pixels. A hand-drawn pink highlight marks the word earns. Lisanne Visser, Senior Product Designer, with the tags Research, Experimentation and Design." />
+
+  <!-- Provisional favicon: "li" set in JetBrains Mono, the same mono as the
+       top nav, converted to outlines. Variant B ("l." with the dot) sits next
+       to it at images/logos/favicon-b-l-dot.svg; swapping is a one-line change.
+       Real branding is a separate project, see BACKLOG.md in the private notes repo (portfolio-notes). -->
+  <link rel="icon" href="images/logos/favicon-a-li.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- Flash-free preferences bootstrap -->
+  <script>
+    (function () {
+      try {
+        var hue = localStorage.getItem("lv-hue");
+        if (hue) document.documentElement.style.setProperty("--accent-hue", hue);
+        var ts = localStorage.getItem("lv-ts");
+        if (ts) document.documentElement.style.setProperty("--type-scale", ts);
+        var wip = localStorage.getItem("lv-wip");
+        document.documentElement.setAttribute("data-wip", wip || "note");
+      } catch (e) {
+        document.documentElement.setAttribute("data-wip", "note");
+      }
+    })();
+  </script>
+
+  <!-- Every font is self-hosted from /fonts/. No request leaves for a font,
+       which keeps visitor IPs off third-party servers. Wall of Fame board
+       faces are declared in wall-of-fame.css and only fetched on that route. -->
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/shared.css?v=2026-11-02-1" />
+  <link rel="stylesheet" href="css/v1.css?v=2026-10-27-8" />
+  <link rel="stylesheet" href="css/wip.css?v=2026-08-02-1" />
+  <link rel="stylesheet" href="css/wall-of-fame.css?v=2026-08-02-1" />
+  <link rel="stylesheet" href="css/styleguide.css?v=2026-08-01-1" />
+  <link rel="stylesheet" href="css/bold-home.css?v=2026-11-02-1" />
+</head>
+<body>
+
+  <!-- Paper grain overlay -->
+  <div class="lv-grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="lv-cursor" aria-hidden="true"></div>
+  <div class="lv-cursor-ring" aria-hidden="true"></div>
+
+  <!-- Top nav -->
+  <nav class="lv-nav">
+    <div class="lv-nav-inner">
+      <a href="#/home-classic" class="lv-logo">lisanne.design</a>
+      <div class="lv-nav-links">
+        <a href="#/work-classic" class="lv-nav-link" data-route="work">Work</a>
+        <a href="#/about-classic" class="lv-nav-link" data-route="about">About</a>
+        <a href="mailto:mail@lisannevisser.com" class="lv-btn is-ghost" data-cursor-label="Email" style="padding:0.45rem 0.9rem;font-size:var(--text-sm);">Say hi</a>
+      </div>
+      <button class="lv-nav-toggle" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav sheet -->
+  <div class="lv-nav-scrim" aria-hidden="true"></div>
+  <aside class="lv-nav-sheet" aria-label="Mobile navigation">
+    <button class="lv-nav-sheet-close" type="button" aria-label="Close menu">Close ×</button>
+    <a href="#/work-classic">Work</a>
+    <a href="#/about-classic">About</a>
+    <a href="mailto:mail@lisannevisser.com" class="lv-btn" style="display:inline-flex;">Say hi</a>
+  </aside>
+
+  <main>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: HOME, CLASSIC (#/home-classic)                       -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="home" hidden>
+
+      <!-- V1 HOME ------------------------------------------------- -->
+      <div class="v1-only">
+        <!-- Hero -->
+        <section class="v1-hero lv-wrap">
+          <div style="position:relative;">
+            <h1 class="v1-hero-display lv-reveal">
+              <span style="position:relative;display:inline-block;">Design that</span>
+              <br/>
+              <em style="position:relative;display:inline-block;">earns<span style="color:var(--ink);font-style:italic;"> its pixels.</span><span data-scribble="circle" data-delay="1.8" style="position:absolute;top:-15%;left:-5%;width:42%;height:130%;opacity:0.9;"></span></em>
+            </h1>
+          </div>
+
+          <div class="v1-hero-below" style="display:grid;grid-template-columns:1fr auto;gap:3rem;margin-top:clamp(2rem,5vw,4rem);align-items:end;">
+            <p class="lv-lead lv-reveal" style="max-width:52ch;margin:0;">
+              I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine — but I ship end-to-end, from discovery to implementation to post-launch metrics.
+            </p>
+            <div class="lv-reveal" style="position:relative;">
+              <span class="lv-magnetic" data-strength="0.2" style="display:inline-block;">
+                <a href="#/work-classic" class="lv-btn" data-cursor-label="See →">
+                  See the work
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Client strip -->
+        <section class="v1-section lv-wrap" style="padding-block:0;">
+          <div class="v1-logo-strip lv-reveal">
+            <div class="v1-logo-track"><!-- filled by app.js --></div>
+          </div>
+        </section>
+
+        <!-- Selected work -->
+        <section class="v1-section lv-wrap">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.5rem;gap:1.5rem;flex-wrap:wrap;" class="lv-reveal">
+            <div>
+              <div class="lv-eyebrow">./work</div>
+              <h2 class="lv-h1" style="margin-top:0.75rem;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+                Selected <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--accent);position:relative;display:inline-block;">work<span data-scribble="underline" data-delay="0.6" style="position:absolute;bottom:-0.15em;left:0;width:100%;height:0.3em;"></span></em>.
+              </h2>
+            </div>
+            <a href="#/work-classic" class="lv-nav-link" data-cursor-label="All →">All work →</a>
+          </div>
+          <div id="v1-home-cases"><!-- filled by app.js --></div>
+        </section>
+
+        <!-- CTA -->
+        <section class="v1-section lv-wrap" style="text-align:center;padding-block:clamp(4rem,10vw,8rem);">
+          <div class="lv-reveal" style="position:relative;display:inline-block;">
+            <h2 class="lv-display" style="font-family:var(--font-body);font-weight:600;letter-spacing:-0.04em;">
+              Let's make<br/>something <em style="color:var(--accent);position:relative;font-family:var(--font-display);font-style:italic;font-weight:400;">measurable.<span data-scribble="underline" data-delay="0.8" style="position:absolute;bottom:-0.2em;left:0;width:100%;height:0.4em;"></span></em>
+            </h2>
+          </div>
+          <div style="margin-top:2.5rem;" class="lv-reveal">
+            <span class="lv-magnetic" data-strength="0.25" style="display:inline-block;">
+              <a href="mailto:mail@lisannevisser.com" class="lv-btn" data-cursor-label="✉ Write" style="font-size:var(--text-base);padding:1rem 1.75rem;">
+                mail@lisannevisser.com
+              </a>
+            </span>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: HOME, BOLD TYPE (#/, default)                        -->
+    <!-- Second take on the homepage. Four snap-scrolled chapters,   -->
+    <!-- own nav; cards, progress and counter come from               -->
+    <!-- js/bold-home.js, styles from css/bold-home.css.              -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="home-bold">
+      <div class="bt v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type home">
+          <div class="bt-nav-progress" aria-hidden="true"></div>
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link" data-chapter="work">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <span class="bt-nav-count" aria-live="polite"></span>
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <!-- 00 Intro -->
+        <div class="bt-chapter bt-chapter--intro" data-chapter-id="intro">
+          <div class="bt-kicker"><span>00 — Hi, I'm Lisanne</span></div>
+          <h1 class="bt-display">Design that<br> <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 340 130" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22 C 70 6, 210 16, 330 10 C 336 44, 334 88, 328 116 C 232 124, 96 118, 12 122 C 6 92, 4 52, 8 22 Z"/></svg><span>earns</span></span> its pixels.</h1>
+          <div class="bt-intro-bottom">
+            <div class="bt-intro-foot">
+              <p class="bt-lead">I turn messy product problems into evidence-backed design. Research, experimentation and systems thinking are the spine, but I ship end-to-end, from discovery to implementation to post-launch metrics.</p>
+              <div class="bt-swipe" aria-hidden="true">swipe up<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+            </div>
+            <!-- Logo marquee, same clients list as the v1 home (renderClientStrip in app.js). -->
+            <div class="bt-logos" aria-label="Companies I have worked with">
+              <div class="v1-logo-track bt-logo-track"><!-- filled by app.js --></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 01 Work -->
+        <div class="bt-chapter bt-chapter--work" data-chapter-id="work">
+          <div class="bt-kicker"><span>01 — Selected work</span></div>
+          <div class="bt-work-head">
+          <h2 class="bt-display">Selected <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 60 4, 140 14, 194 8 C 196 34, 194 62, 190 80 C 134 86, 56 82, 10 84 C 6 62, 4 36, 6 16 Z"/></svg><span>work.</span></span></h2>
+          <a href="#/work" class="bt-xp-cv bt-work-all" data-cursor-label="All →">All case studies</a>
+          </div>
+          <div class="bt-work-grid"><!-- filled by js/bold-home.js --></div>
+        </div>
+
+        <!-- 02 About (short version of #/about) -->
+        <div class="bt-chapter bt-chapter--about" data-chapter-id="about">
+          <div class="bt-kicker"><span>02 — About</span></div>
+          <div class="bt-about">
+            <div class="bt-about-text">
+              <h2 class="bt-display">Sociologist turned product <span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>designer.</span></span></h2>
+              <p class="bt-lead">An Economic and Intercultural Sociologist by education, I found my way into product design, where I focus on data-driven design solutions that combine user-centricity with business performance.</p>
+              <div class="bt-xp-rows bt-about-rows">
+                <div class="bt-xp-row"><span class="bt-xp-when">Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">Background</span><span class="bt-xp-role">Sociology &amp; Modern China studies <small>research in Beijing, Shanghai, Singapore</small></span></div>
+                <div class="bt-xp-row"><span class="bt-xp-when">Off-screen</span><span class="bt-xp-role">Aerial acrobatics <small>and teaching Aerial Yoga</small></span></div>
+              </div>
+              <a href="#/about" class="bt-xp-cv" data-cursor-label="About →">More about me</a>
+            </div>
+            <div class="bt-about-portrait">
+              <video src="images/about/portrait.mp4?v=2026-10-27-1" autoplay loop muted playsinline preload="metadata" aria-label="Lisanne"></video>
+              <span class="bt-about-label">that's me</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Contact -->
+        <div class="bt-chapter bt-chapter--contact" data-chapter-id="contact">
+          <div class="bt-kicker"><span>03 — Contact</span></div>
+          <h2 class="bt-display">Let's make something <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>measurable.</span></span></h2>
+          <div class="bt-contact-grid">
+            <a href="mailto:mail@lisannevisser.com" class="bt-tile bt-tile--rose" data-cursor-label="✉ Write"><span class="bt-tile-k">Write me</span><span class="bt-tile-v">mail@lisannevisser.com</span></a>
+            <a href="#/about" class="bt-tile bt-tile--cobalt" data-cursor-label="CV →"><span class="bt-tile-k">Background</span><span class="bt-tile-v">View CV</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+            <a href="#/work" class="bt-tile bt-tile--mustard" data-cursor-label="All →"><span class="bt-tile-k">More</span><span class="bt-tile-v">All work</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="bt-colophon">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: ABOUT, BOLD TYPE (#/about)                           -->
+    <!-- Bold Type styling on the v1 About structure: the pinned      -->
+    <!-- scrolly (.ahs, driven by initHeroScrolly in app.js) carries  -->
+    <!-- the four chapters, then the inspiration video and colophon.  -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="about-bold" hidden>
+      <div class="bt bt--about v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type about">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link is-current">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap">
+          <section class="ahs ahs--bt">
+            <div class="ahs-pin">
+              <div class="ahs-grid">
+
+                <div class="ahs-text">
+                  <div class="ahs-mast">
+                    <div class="bt-kicker ahs-eyebrow"><span>00 — About</span></div>
+                    <h1 class="bt-display ahs-h1">Hello,<br>I'm <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>Lisanne.</span></span></h1>
+                  </div>
+
+                  <div class="ahs-body">
+                    <p class="bt-lead ahs-lead">An Economic and Intercultural Sociologist by education, I found my way into product design, where I focus on data-driven design solutions that combine user-centricity with business performance.</p>
+
+                    <div class="ahs-steps">
+                      <div class="ahs-step is-active" data-step="0">
+                        <div class="bt-kicker ahs-num"><span>01 — Origin</span></div>
+                        <h2 class="ahs-step-h">I started in <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>research</span></span></h2>
+                        <p class="ahs-step-p">During my master's in Sociology, my focus on Economic Sociology in China created an urge to combine perspectives from all three disciplines. So I decided to do another bachelor's in Ethnography and Modern China studies in parallel. In 2020, I graduated from both programs with distinction. My interdisciplinary studies led me to do research in China, and several scholarships from the German and Chinese governments let me study at Asia's top universities, namely the National University of Singapore, Fudan University in Shanghai, and Beijing University.</p>
+                      </div>
+
+                      <div class="ahs-step" data-step="1">
+                        <div class="bt-kicker ahs-num"><span>02 — Practice</span></div>
+                        <h2 class="ahs-step-h">Where product meets <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>business</span></span></h2>
+                        <p class="ahs-step-p">My work as a product designer often takes place at the intersection between product and marketing teams, enabling me to help brands navigate between user needs and business KPIs. Thanks to my training in social research, I bring strong qualitative and quantitative user research to the table. Through my professional journey, I've partnered with top brands such as TikTok and Canva. With Aqora, a platform for quantum competitions and hackathons, I also design for quantum computing: product work, event sites for partners like Quantinuum, and field research with the researchers and students who use quantum tools. A niche user group, and a fascinating one. Right now, this is my passion project. I thrive in collaborative environments defined by curiosity, empathy, and radical candor, which I believe are crucial factors to successful digital solutions with happy teams behind them.</p>
+                      </div>
+
+                      <div class="ahs-step ahs-step--long" data-step="2">
+                        <div class="bt-kicker ahs-num"><span>03 — Off-screen</span></div>
+                        <h2 class="ahs-step-h">In my <span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>free time</span></span></h2>
+                        <p class="ahs-step-p">In my spare time, I love spending time with friends just as much as I enjoy reading, <a href="#/sketchbook" class="bt-inline-link">drawing</a>, and practicing yoga. I love Rocket Yoga and Ashtanga, and I have over 200h yoga teacher training.</p>
+                        <p class="ahs-step-p" style="margin-top:0.6em;">Over the past two years I've been teaching <a href="https://aerial-yoga.framer.ai/" target="_blank" rel="noopener noreferrer" class="bt-inline-link" data-cursor-label="visit">Aerial Yoga classes</a> on the weekends. My own practice slowly shifted from yoga towards acrobatics. Today, I'm at the aerial studio several times a week to practice aerial hammock, hoop or silks.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ahs-rail" role="tablist" aria-label="Chapters">
+                    <button type="button" class="is-active" data-step-jump="0">01 Origin</button>
+                    <button type="button" data-step-jump="1">02 Practice</button>
+                    <button type="button" data-step-jump="2">03 Off-screen</button>
+                    <span class="ahs-progress" aria-hidden="true"><span data-current>01</span> / <span>03</span></span>
+                  </div>
+                </div>
+
+                <div class="ahs-images">
+                  <div class="ahs-img ahs-portrait is-active" data-hero>
+                    <video class="ahs-video" src="images/about/portrait.mp4?v=2026-10-27-1" autoplay loop muted playsinline preload="auto" aria-label="Lisanne"></video>
+                    <span class="ahs-img-label">that's me</span>
+                  </div>
+                  <div class="ahs-img" data-step="0">
+                    <span class="ahs-img-label">in beijing</span>
+                  </div>
+                  <div class="ahs-img" data-step="1">
+                    <span class="ahs-img-label">with Don Norman</span>
+                  </div>
+                  <div class="ahs-img" data-step="2">
+                    <span class="ahs-img-label">at aerial class</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- 04 Experience (moved here from the home) -->
+          <section class="bt-xp-section">
+            <div class="bt-kicker"><span>04 — Experience</span></div>
+            <div class="bt-xp">
+              <div>
+                <h2 class="bt-xp-headline"><span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 120 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 40 4, 84 12, 116 7 C 118 30, 116 56, 112 72 C 78 78, 34 74, 8 76 C 5 56, 4 32, 6 14 Z"/></svg><span>5+</span></span> years<br>experience</h2>
+                <a href="CV_Lisanne_Visser.pdf?v=2026-11-02" target="_blank" rel="noopener" class="bt-xp-cv" data-cursor-label="PDF →">Download CV (PDF)</a>
+              </div>
+              <div>
+                <p class="bt-xp-copy">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
+                <div class="bt-xp-rows">
+                  <div class="bt-xp-row"><span class="bt-xp-when">2025 — Now</span><span class="bt-xp-role">Senior Product Designer <small>Trusted Shops</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2023 — 2025</span><span class="bt-xp-role">Product Designer <small>Trusted Shops</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2023 — Now</span><span class="bt-xp-role">Product Designer <small>Aqora</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2020 — Now</span><span class="bt-xp-role">Product Designer, freelance <small>Canva, Funke and more</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2022 — 2023</span><span class="bt-xp-role">Product Designer <small>Cargoboard</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2020 — 2022</span><span class="bt-xp-role">Quality Assurance Analyst <small>TikTok</small></span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05 Speaking (same row pattern as Experience) -->
+          <section class="bt-xp-section">
+            <div class="bt-kicker"><span>05 — Speaking</span></div>
+            <div class="bt-xp">
+              <div>
+                <h2 class="bt-xp-headline">Talks &amp; <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 72 C 200 78, 90 74, 8 76 C 5 56, 4 32, 6 14 Z"/></svg><span>lectures</span></span></h2>
+              </div>
+              <div>
+                <p class="bt-xp-copy">Every now and then I get to talk about my work in front of an audience.</p>
+                <div class="bt-xp-rows">
+                  <div class="bt-xp-row"><span class="bt-xp-when">2026</span><span class="bt-xp-role"><a href="talks/ai-prototyping-figma-make.pdf" target="_blank" rel="noopener" class="bt-inline-link">AI-powered prototyping with Figma Make</a> <small>Internal tech talk at Trusted Shops</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2025</span><span class="bt-xp-role"><a href="https://www.figma.com/deck/alZHbAaFOxhgAfXdBMLC5s" target="_blank" rel="noopener noreferrer" class="bt-inline-link">From sociology to product design</a> <small>Guest lecture, University of Göttingen</small></span></div>
+                  <div class="bt-xp-row"><span class="bt-xp-when">2018</span><span class="bt-xp-role"><a href="https://www.uni-goettingen.de/de/document/download/efc5851b6fe5acfba9ad5f325ad674cd.pdf/Vortrag%20Visser.pdf" target="_blank" rel="noopener noreferrer" class="bt-inline-link">Self-employed dentists between entrepreneurship and the ideal of healing</a> <small>Bachelor thesis talk, spring conference &ldquo;<a href="https://www.uni-goettingen.de/de/document/download/2523a4e1d037e6c503bbd132334597f6.pdf/Programm_Fr%C3%BChjahrstagung_M%C3%BCnchen_2018.pdf" target="_blank" rel="noopener noreferrer" class="bt-inline-link">Selbstständigkeiten</a>&rdquo;, LMU Munich</small></span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 06 Inspiration -->
+          <section class="bt-inspire">
+            <div class="bt-kicker"><span>06 — Inspiration</span></div>
+            <h2 class="bt-display bt-inspire-h">A video that keeps <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>inspiring</span></span> me over and over again.</h2>
+            <div class="lv-video bt-video">
+              <iframe src="https://www.youtube-nocookie.com/embed/WRS9Gek4V5Q" title="A video that keeps inspiring me" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="bt-colophon bt-colophon--light">
+              <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+              <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: WORK, BOLD TYPE (#/work)                             -->
+    <!-- The v1 Work structure (chips, ledger, visuals teaser, all  -->
+    <!-- rendered by app.js) in the Bold Type dress.                 -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="work-bold" hidden>
+      <div class="bt bt--work v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type work">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link is-current">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Work</span></div>
+            <h1 class="bt-display bt-page-h1">My work,<br>the <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>full record.</span></span></h1>
+            <p class="bt-lead">Each project here passed the same bar: it shipped, it moved a number, and I'd build it the same way again. Click any row for the long version.</p>
+          </header>
+
+          <div id="bt-work-filters" class="v1-work-filters bt-work-filters"><!-- filled by app.js --></div>
+          <div id="bt-work-cases" class="v1-work-ledger bt-work-ledger"><!-- filled by app.js --></div>
+
+          <!-- 01 Visuals teaser -->
+          <section class="bt-teaser">
+            <div class="bt-teaser-head">
+              <div>
+                <div class="bt-kicker"><span>01 — Visuals</span></div>
+                <h2 class="bt-display bt-teaser-h">Too good to <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>delete.</span></span></h2>
+                <p class="bt-lead bt-teaser-lead">Brand guides, identities, and studies from freelance and side work. Collected here so they don't get lost.</p>
+              </div>
+              <a href="#/visuals" class="bt-xp-cv bt-teaser-link" data-cursor-label="All →">All visuals →</a>
+            </div>
+            <div class="v1-visuals-teaser-grid bt-teaser-grid" id="bt-visuals-teaser" data-visuals="teaser" data-dress="bt"><!-- filled by app.js --></div>
+          </section>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: CASE, BOLD TYPE (#/work/<slug>, dynamic)             -->
+    <!-- One case study (renderV1Case in app.js, dress "bold") in    -->
+    <!-- the Bold Type dress: same story blocks, impact grid,         -->
+    <!-- limitations card and TOC as #/work/<slug>, a display mast.   -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="case-bold" hidden>
+      <div class="bt bt--case v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type case study">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link is-current">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <article class="bt-case" id="bt-case-body"><!-- filled by app.js --></article>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: SKETCHBOOK, BOLD TYPE (#/sketchbook)                 -->
+    <!-- The v1 Sketchbook gallery (cards + lightbox rendered by     -->
+    <!-- renderSketchbook in app.js) in the Bold Type dress.         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="sketchbook-bold" hidden>
+      <div class="bt bt--sketch v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type sketchbook">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Sketchbook</span></div>
+            <h1 class="bt-display bt-page-h1">Not everything needs a <span class="bt-mark bt-mark--mustard"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>KPI.</span></span></h1>
+            <p class="bt-lead">The drawing practice behind the scribbles you see all over this site. Life drawing, ink washes, watercolor studies, and the odd bit of fun. No briefs, no roadmap, nothing to measure.</p>
+          </header>
+
+          <div class="v1-visuals-grid v1-sketch-grid bt-sketch-grid"><!-- filled by app.js --></div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+
+        <!-- Detail overlay -->
+        <div class="lv-book-overlay v1-sketch-overlay" aria-hidden="true">
+          <div class="lv-book-backdrop v1-sketch-backdrop"></div>
+          <div class="v1-sketch-dialog" role="dialog" aria-modal="true" aria-label="Sketch">
+            <figure class="v1-sketch-photo">
+              <span class="v1-sketch-medium"></span>
+              <div class="v1-sketch-stage"></div>
+              <figcaption class="v1-sketch-cap">
+                <h2 class="v1-sketch-title"></h2>
+                <p class="v1-sketch-blurb"></p>
+              </figcaption>
+            </figure>
+            <button class="v1-sketch-btn v1-sketch-close" type="button" aria-label="Close">×</button>
+            <button class="v1-sketch-btn v1-sketch-prev" type="button" aria-label="Previous sketch">←</button>
+            <button class="v1-sketch-btn v1-sketch-next" type="button" aria-label="Next sketch">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: VISUALS, BOLD TYPE (#/visuals)                       -->
+    <!-- The v1 Visuals gallery (masonry cards from renderVisuals in  -->
+    <!-- app.js; the detail overlay sits after <main>) in the Bold    -->
+    <!-- Type dress.                                                  -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="visuals-bold" hidden>
+      <div class="bt bt--visuals v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type visuals">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Visuals</span></div>
+            <h1 class="bt-display bt-page-h1">Too good to <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>delete.</span></span></h1>
+            <p class="bt-lead">Brand guides, identities, templates, and studies from freelance jobs and side projects. None of it big enough for a case study. Collected here so it doesn't get lost. Click any piece to open it.</p>
+          </header>
+
+          <div class="v1-visuals-grid bt-visuals-grid" data-visuals="grid" data-dress="bt"><!-- filled by app.js --></div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: BLOG, BOLD TYPE (#/blog)                             -->
+    <!-- The Gazette front page (rendered by renderBlogLists in       -->
+    <!-- app.js into the shared .lv-gz-* markup, links to             -->
+    <!-- #/blog-bold/<slug>) in the Bold Type dress.                  -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="blog-bold" hidden>
+      <div class="bt bt--blog v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type blog">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head bt-gz-masthead">
+            <div class="bt-kicker"><span>00 — The Gazette</span></div>
+            <h1 class="bt-display bt-page-h1">The Design <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>Gazette.</span></span></h1>
+            <p class="bt-lead">Thinking out loud on craft, research, and the decisions that don't make it into the case study.</p>
+            <div class="bt-gz-dateline">
+              <span>Berlin</span>
+              <span>2026 Edition</span>
+              <span class="lv-gz-dateline-tags"></span>
+            </div>
+          </header>
+
+          <div id="bt-blog-list" class="bt-gz"><!-- filled by app.js --></div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: POST, BOLD TYPE (#/blog/<slug>, dynamic)             -->
+    <!-- One Gazette article (renderV1Post in app.js, dress "bold")  -->
+    <!-- in the Bold Type dress: same body blocks as #/blog/<slug>,  -->
+    <!-- a display-type masthead instead of the newspaper flag.      -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="post-bold" hidden>
+      <div class="bt bt--post v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type article">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <article class="bt-gz-article" id="bt-post-body"><!-- filled by app.js --></article>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: 404, BOLD TYPE (#/404)                               -->
+    <!-- One dark chapter in the dress of the home's Contact one:    -->
+    <!-- headline, three tiles back into the site, colophon.         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="404-bold" hidden>
+      <div class="bt bt--404 v1-only" data-chapter="contact">
+
+        <nav class="bt-nav" aria-label="Bold Type not found">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-chapter bt-chapter--contact bt-chapter--404">
+          <div class="bt-kicker"><span>404 — Page not found</span></div>
+          <h1 class="bt-display">This page <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 C 120 4, 340 16, 512 8 C 516 44, 514 84, 508 108 C 340 116, 130 110, 14 114 C 8 84, 5 48, 8 20 Z"/></svg><span>wandered off.</span></span></h1>
+          <p class="bt-lead bt-404-lead">Nothing lives at this address. A typo in the link, an old bookmark, or a page I've since retired. Either way, the rest of the site is still where it was.</p>
+          <div class="bt-404-note" aria-hidden="true">these ones do exist<svg viewBox="0 0 40 60"><path d="M20 4 C 14 20, 26 34, 20 54"/><path d="M20 54 L 11 43"/><path d="M20 54 L 29 44"/></svg></div>
+          <div class="bt-contact-grid">
+            <a href="#/" class="bt-tile bt-tile--rose" data-cursor-label="Home →"><span class="bt-tile-k">Start over</span><span class="bt-tile-v">Home</span></a>
+            <a href="#/work" class="bt-tile bt-tile--cobalt" data-cursor-label="Work →"><span class="bt-tile-k">Browse</span><span class="bt-tile-v">All work</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+            <a href="mailto:mail@lisannevisser.com?subject=Broken%20link%20on%20lisanne.design" class="bt-tile bt-tile--mustard" data-cursor-label="✉ Write"><span class="bt-tile-k">Found a dead link?</span><span class="bt-tile-v">Tell me</span><span class="bt-tile-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="bt-colophon">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: IMPRINT, BOLD TYPE (#/imprint)                       -->
+    <!-- The v1 imprint (same text, block for block) in the Bold Type    -->
+    <!-- dress: numbered mono kickers, ink rules, address in display type. -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="imprint-bold" hidden>
+      <div class="bt bt--legal v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type imprint">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Imprint</span></div>
+            <h1 class="bt-display bt-page-h1">The <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>fine print.</span></span></h1>
+            <p class="bt-lead">Who runs this site, what you may do with what's on it, and who made the parts I didn't.</p>
+          </header>
+
+          <div class="lv-legal-grid bt-legal">
+            <div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>01 — Service provider</span></div>
+                <p class="bt-legal-p bt-legal-p--big">Lisanne Visser<br>George-Stephenson-Str. 2<br>10557 Berlin<br>Germany</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>02 — Contact</span></div>
+                <p class="bt-legal-p bt-legal-p--big">Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a></p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>03 — Responsible for content</span></div>
+                <p class="bt-legal-p bt-legal-p--big">Lisanne Visser (address as above)</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>04 — VAT ID</span></div>
+                <p class="bt-legal-p bt-legal-p--big">VAT identification number pursuant to §27a UStG:<br>DE365220341</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>05 — Liability for content</span></div>
+                <p class="bt-legal-p">As a service provider I am responsible for my own content on these pages under the general laws. I accept no liability for the content of external links - responsibility for those lies solely with their respective operators.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>06 — Copyright</span></div>
+                <p class="bt-legal-p">The work, text, and images shown on this site are protected under German copyright law. Any use beyond the narrow limits of copyright requires written permission.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>07 — Credits</span></div>
+                <p class="bt-legal-p">Other people made things I get to build on. They belong here by name.</p>
+                <p class="bt-legal-p"><strong>Typefaces</strong>, all self-hosted under the SIL Open Font License: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> (Undercase Type), <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a> (Instrument), <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (JetBrains), <a href="https://fonts.google.com/specimen/Caveat" target="_blank" rel="noopener">Caveat</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Bricolage+Grotesque" target="_blank" rel="noopener">Bricolage Grotesque</a> (Mathieu Triay) on the Bold Type home. The Wall of Fame board adds <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> (Omnibus-Type), <a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener">Libre Caslon Text</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Space+Mono" target="_blank" rel="noopener">Space Mono</a> (Colophon Foundry).</p>
+                <p class="bt-legal-p"><strong>Icon.</strong> The burger in the mobile menu is the "lunch_dining" glyph from <a href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Material Symbols</a>, inlined as SVG, Apache License 2.0.</p>
+                <p class="bt-legal-p"><strong>Logos.</strong> The company logos in the home page marquee belong to their owners and only name who I have worked with. The <a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a>, <a href="https://www.autarc.energy/" target="_blank" rel="noopener">autarc</a>, <a href="https://www.hale-now.com/" target="_blank" rel="noopener">HALE.NOW</a>, <a href="https://drvivienkarl.com/" target="_blank" rel="noopener">Dr. Vivien Karl</a>, and <a href="https://www.quantinuum.com/" target="_blank" rel="noopener">Quantinuum</a> wordmarks are taken from their websites.</p>
+                <p class="bt-legal-p"><strong>Images.</strong> All photos, illustrations, and scribbles on this site are my own. If that ever changes (stock photography in a blog header, someone else's diagram in a case study), the source and the creator get named at the image and listed here. One exception: the &ldquo;before&rdquo; screenshots of the old cargoboard.de in the <a href="#/work/website-relaunch">website relaunch case study</a> come from the <a href="https://web.archive.org/web/20210507003231/https://cargoboard.de/" target="_blank" rel="noopener">Internet Archive's Wayback Machine</a> (snapshot of May 2021). That site and its photos belong to Cargoboard. The screenshot of the <a href="https://www.eon.de/de/pk/service/vertrag/kuendigung.html" target="_blank" rel="noopener">E.ON cancellation page</a> in the <a href="#/work/illustrations-vs-icons">illustrations vs. icons case study</a> shows E.ON's page and photo (taken October 2026). The dark map in the old homepage screenshot is re-rendered with <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a> tiles, map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.</p>
+                <p class="bt-legal-p"><strong>Book covers.</strong> The covers on the <a href="#/books">Bookshelf</a> belong to their publishers and only show which book I mean. Most load from <a href="https://openlibrary.org/" target="_blank" rel="noopener">Open Library</a>. The few Open Library doesn't have are stored on this site, taken from the books' retail listings.</p>
+                <p class="bt-legal-p"><strong>Talks.</strong> The slides and the program of my 2018 talk are hosted by the University of Göttingen (Institut für Diversitätsforschung). The spring conference &ldquo;Selbstständigkeiten&rdquo; was organized by the Arbeitskreis &ldquo;Die Arbeit der Selbstständigen&rdquo; at LMU Munich. The slides of my 2026 tech talk on Figma Make carry the Trusted Shops logo and the Figma logo shapes, which belong to their owners. They also show two screenshots of other people's work: the <a href="https://www.figma.com/make/" target="_blank" rel="noopener">Figma Make</a> start screen (Figma, with community examples by Joshua Guo, vikas kumar and sailesh.tripathy) and the <a href="https://www.kameleoon.com/" target="_blank" rel="noopener">Kameleoon</a> website (Kameleoon).</p>
+                <!-- PARKED with the design-trends-2027 post (DRAFT_POSTS in js/app.js).
+           Restore this block in the same change that publishes the post. See BACKLOG.md in the private notes repo (portfolio-notes).
+                <p class="bt-legal-p"><strong>Research.</strong> The Gazette post <a href="#/blog/design-trends-2027">The design trends I'm betting on for 2027</a> argues from published work by other people. Named in the post and again here: Doshi &amp; Hauser, <a href="https://doi.org/10.1126/sciadv.adn5290" target="_blank" rel="noopener">Science Advances</a> (2024); <a href="https://arxiv.org/abs/2402.01536" target="_blank" rel="noopener">Anderson, Shah &amp; Kreminski</a>, Creativity and Cognition (2024); &ldquo;Autonomous language-image generation loops converge to generic visual motifs&rdquo;, Patterns (2025); Fuchs, Schreier &amp; van Osselaer, <a href="https://doi.org/10.1509/jm.14.0018" target="_blank" rel="noopener">Journal of Marketing</a> (2015); <a href="https://www.dhruvgrewal.com/wp-content/uploads/2018/05/2018-JCR-Font-2.pdf" target="_blank" rel="noopener">Schroll, Schnurr &amp; Grewal</a>, Journal of Consumer Research (2018).</p>
+                <p class="bt-legal-p">Continued: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022103103000659" target="_blank" rel="noopener">Kruger, Wirtz, Van Boven &amp; Altermatt</a>, Journal of Experimental Social Psychology (2004), with the replication caveat from Collabra: Psychology (2023); Nittono, Fukushima, Yano &amp; Moriya, <a href="https://doi.org/10.1371/journal.pone.0046362" target="_blank" rel="noopener">PLoS ONE</a> (2012); the pleasure-interest model from Graf &amp; Landwehr, discussed in <a href="https://doi.org/10.3389/fpsyg.2017.00015" target="_blank" rel="noopener">Frontiers in Psychology</a> (2017); Hekkert, Snelders &amp; van Wieringen, British Journal of Psychology (2003); <a href="https://doi.org/10.1177/02762374251371282" target="_blank" rel="noopener">Chen and colleagues</a> (2025); Bellaiche and colleagues, <a href="https://doi.org/10.1186/s41235-023-00499-6" target="_blank" rel="noopener">Cognitive Research: Principles and Implications</a> (2023); <a href="https://www.tate.org.uk/whats-on/tate-britain/aftermath/nine-ways-artists-responded-first-world-war" target="_blank" rel="noopener">Tate</a> on artists after the First World War; and <a href="https://en.wikipedia.org/wiki/Content_Credentials" target="_blank" rel="noopener">Content Credentials</a> for the provenance layer.</p>
+                -->
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>08 — Last updated</span></div>
+                <p class="bt-legal-p">August 2026</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: PRIVACY, BOLD TYPE (#/privacy)                       -->
+    <!-- The v1 privacy notice (same text, block for block) in the Bold  -->
+    <!-- Type dress. Cross-links go to the bold imprint.                  -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="privacy-bold" hidden>
+      <div class="bt bt--legal v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type privacy">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Privacy</span></div>
+            <h1 class="bt-display bt-page-h1">What I <span class="bt-mark bt-mark--cobalt"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>don't</span></span><br>know about you.</h1>
+            <p class="bt-lead">This site is a portfolio, not a product. No tracking, no analytics, no ads. Below is an honest list of what still happens technically when you visit.</p>
+          </header>
+
+          <div class="lv-legal-grid bt-legal">
+            <div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>01 — Controller</span></div>
+                <p class="bt-legal-p">Lisanne Visser, George-Stephenson-Str. 2, 10557 Berlin, Germany. Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a>. Full details in the <a href="#/imprint">imprint</a>.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>02 — Server logs (GitHub Pages)</span></div>
+                <p class="bt-legal-p">This site is hosted on GitHub Pages (GitHub Inc., USA). When you open it, your browser transmits technically necessary data: IP address, date and time, requested URL, referrer, browser, and operating system. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in stable operation). Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>03 — YouTube embeds</span></div>
+                <p class="bt-legal-p">Some case studies embed videos from YouTube (Google Ireland Ltd.). I use the privacy-enhanced mode (youtube-nocookie.com), which means YouTube does not set cookies until you press play. Once you start a video, your IP address and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent through clicking play) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>04 — Canva and Behance embeds</span></div>
+                <p class="bt-legal-p">The Visuals page shows some pieces inline through embeds from Canva (Canva Pty Ltd, Australia) and Behance (Adobe Inc., USA). Nothing is requested while you browse the grid: an embed is only loaded once you open the card it belongs to, and it is removed again when you close it. From the moment it loads, your IP address and browser data go to that provider, and it may set cookies. Legal basis: Art. 6(1)(a) GDPR (consent through opening the card) and Art. 6(1)(f) GDPR. Details: <a href="https://www.canva.com/policies/privacy-policy/" target="_blank" rel="noopener">Canva Privacy Policy</a>, <a href="https://www.adobe.com/privacy/policy.html" target="_blank" rel="noopener">Adobe Privacy Policy</a>.</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>05 — Fonts</span></div>
+                <p class="bt-legal-p">Every typeface on this site is served from this site. There is no Google Fonts request and no font CDN, so loading a page does not hand your IP address to a font provider. The typefaces are credited in the <a href="#/imprint">imprint</a>.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>06 — Local storage</span></div>
+                <p class="bt-legal-p">The browser's localStorage remembers your design preferences (accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>07 — Getting in touch</span></div>
+                <p class="bt-legal-p">If you email me, I process the information you send in order to respond to your enquiry. Legal basis: Art. 6(1)(b) or (f) GDPR. Emails are deleted once the purpose no longer applies.</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>08 — Your rights</span></div>
+                <p class="bt-legal-p">You have the right to access, rectification, erasure, restriction, data portability, and objection at any time (Art. 15 - 21 GDPR). A short email is enough. You also have the right to lodge a complaint with the competent supervisory authority (for Berlin: Berliner Beauftragte für Datenschutz und Informationsfreiheit).</p>
+              </div>
+              <div class="bt-legal-block">
+                <div class="bt-kicker"><span>09 — Last updated</span></div>
+                <p class="bt-legal-p">August 2026</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: WORK, CLASSIC (#/work-classic)                       -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="work" hidden>
+
+      <!-- V1 WORK -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <div class="lv-eyebrow lv-reveal" style="margin-top:2rem;">./work</div>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:0.75rem;margin-bottom:1.5rem;">
+          <span style="position:relative;display:inline-block;">My work,<span data-scribble="squiggle" style="position:absolute;bottom:-0.15em;left:0;width:80%;height:0.25em;"></span></span>
+          <br/><em>the full record</em>
+        </h1>
+        <p class="lv-lead lv-reveal" style="max-width:54ch;margin-bottom:clamp(2.5rem,5vw,4rem);">
+          Each project here passed the same bar: it shipped, it moved a number, and I'd build it the same way again. Click any row for the long version.
+        </p>
+        <div id="v1-work-filters" class="v1-work-filters lv-reveal"></div>
+        <div id="v1-work-cases" class="v1-work-ledger"><!-- filled by app.js --></div>
+
+        <!-- Teaser into the Visuals gallery -->
+        <section class="v1-visuals-teaser-block lv-reveal">
+          <div class="v1-visuals-teaser-head">
+            <div>
+              <div class="lv-eyebrow">./visuals</div>
+              <h2 class="v1-visuals-teaser-title">Too good to delete.</h2>
+              <p class="v1-visuals-teaser-lead">Brand guides, identities, and studies from freelance and side work. Collected here so they don't get lost.</p>
+            </div>
+            <a href="#/visuals-classic" class="v1-visuals-teaser-link" data-cursor-label="All →">All visuals →</a>
+          </div>
+          <div class="v1-visuals-teaser-grid" id="v1-visuals-teaser" data-visuals="teaser" data-dress="v1"><!-- filled by app.js --></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: CASE, CLASSIC (#/work-classic/<slug>, dynamic)      -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="case" hidden>
+      <article class="v1-only lv-wrap" id="v1-case-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: ABOUT, CLASSIC (#/about-classic)                     -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="about" hidden>
+
+      <!-- V1 ABOUT -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <!-- Merged hero + pinned scrollytelling. The big headline collapses
+             into a compact masthead as you scroll; the lead fades out and
+             the four story chapters fade in beneath it; the images on the
+             right cross-fade from portrait to each chapter. -->
+        <section class="ahs">
+          <div class="ahs-pin">
+            <div class="ahs-grid">
+
+              <div class="ahs-text">
+                <div class="ahs-mast">
+                  <div class="lv-eyebrow ahs-eyebrow">./about</div>
+                  <h1 class="v1-hero-display ahs-h1">
+                    Hello,<br/>I'm
+                    <span class="ahs-name">
+                      <em>Lisanne.</em>
+                      <span data-scribble="underline" data-delay="1.2" style="position:absolute;bottom:-0.1em;left:0;width:100%;height:0.3em;"></span>
+                    </span>
+                  </h1>
+                </div>
+
+                <div class="ahs-body">
+                  <p class="lv-lead ahs-lead">
+                    An Economic and Intercultural Sociologist by education, I found my way into product design, where I focus on data-driven design solutions that combine user-centricity with business performance.
+                  </p>
+
+                  <div class="ahs-steps">
+                    <div class="ahs-step is-active" data-step="0">
+                      <div class="ahs-num">01 · Origin</div>
+                      <h2 class="ahs-step-h">I started in <em>research</em></h2>
+                      <p class="ahs-step-p">During my master's in Sociology, my focus on Economic Sociology in China created an urge to combine perspectives from all three disciplines. So I decided to do another bachelor's in Ethnography and Modern China studies in parallel. In 2020, I graduated from both programs with distinction. My interdisciplinary studies led me to do research in China, and several scholarships from the German and Chinese governments let me study at Asia's top universities, namely the National University of Singapore, Fudan University in Shanghai, and Beijing University.</p>
+                    </div>
+
+                    <div class="ahs-step" data-step="1">
+                      <div class="ahs-num">02 · Practice</div>
+                      <h2 class="ahs-step-h">Where product meets <em>business</em></h2>
+                      <p class="ahs-step-p">My work as a product designer often takes place at the intersection between product and marketing teams, enabling me to help brands navigate between user needs and business KPIs. Thanks to my training in social research, I bring strong qualitative and quantitative user research to the table. Through my professional journey, I've partnered with top brands such as TikTok and Canva. With Aqora, a platform for quantum competitions and hackathons, I also design for quantum computing: product work, event sites for partners like Quantinuum, and field research with the researchers and students who use quantum tools. A niche user group, and a fascinating one. Right now, this is my passion project. I thrive in collaborative environments defined by curiosity, empathy, and radical candor, which I believe are crucial factors to successful digital solutions with happy teams behind them.</p>
+                    </div>
+
+                    <div class="ahs-step ahs-step--long" data-step="2">
+                      <div class="ahs-num">03 · Off-screen</div>
+                      <h2 class="ahs-step-h">In my <em>free time</em></h2>
+                      <p class="ahs-step-p">In my spare time, I love spending time with friends just as much as I enjoy reading, <a href="#/sketchbook-classic">drawing</a>, and practicing yoga. I love Rocket Yoga and Ashtanga, and I have over 200h yoga teacher training.</p>
+                      <p class="ahs-step-p" style="margin-top:0.6em;">Over the past two years I've been teaching <a href="https://aerial-yoga.framer.ai/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);border-bottom:1px dashed var(--accent);text-decoration:none;" data-cursor-label="visit">Aerial Yoga classes</a> on the weekends. My own practice slowly shifted from yoga towards acrobatics. Today, I'm at the aerial studio several times a week to practice aerial hammock, hoop or silks.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ahs-rail" role="tablist" aria-label="Chapters">
+                  <button type="button" class="is-active" data-step-jump="0">Origin</button>
+                  <button type="button" data-step-jump="1">Practice</button>
+                  <button type="button" data-step-jump="2">Off-screen</button>
+                  <span class="ahs-progress" aria-hidden="true"><span data-current>01</span> / <span>03</span></span>
+                </div>
+              </div>
+
+              <div class="ahs-images">
+                <div class="ahs-img ahs-portrait is-active" data-hero>
+                  <video class="ahs-video" src="images/about/portrait.mp4?v=2026-10-27-1" autoplay loop muted playsinline preload="auto" aria-label="Lisanne"></video>
+                </div>
+                <div class="ahs-img" data-step="0">
+                  <span class="ahs-img-label">in beijing</span>
+                </div>
+                <div class="ahs-img" data-step="1">
+                  <span class="ahs-img-label">with Don Norman</span>
+                </div>
+                <div class="ahs-img" data-step="2">
+                  <span class="ahs-img-label">at aerial class</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Career -->
+        <section class="v1-section">
+          <div class="v1-career-layout">
+            <div class="v1-career-aside lv-reveal">
+              <h2 class="lv-h1" style="margin-top:0;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+                <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">5+</em> years experience
+              </h2>
+              <p class="lv-body" style="margin-top:1rem;">I have worked with companies in several industries; including e-commerce, quantum computing, travel, climate tech, medical care, marketing, and logistics.</p>
+              <a class="lv-btn v1-career-cv" href="CV_Lisanne_Visser.pdf?v=2026-11-02" target="_blank" rel="noopener" data-cursor-label="PDF →">Download CV (PDF)</a>
+            </div>
+            <div class="v1-career-list">
+
+            <details class="lv-reveal v1-career-row" open>
+              <summary>
+                <span class="period">2025 — Now</span>
+                <span class="v1-career-headline">
+                  <span class="role">Senior Product Designer</span>
+                  <span class="org">Trusted Shops</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>Supporting two product teams across design and research, building a mobile app and the membership product, with a strong focus on holistic UX, UX strategy, and consumer experience.</li>
+                  <li>Orchestrating team needs with AI, and establishing AI-based workflows for a range of design and research tasks.</li>
+                  <li>Responsible for ResearchOps: democratizing research and running consumer-domain research.</li>
+                  <li>A key player in driving UX and growth maturity, setting the standards for experimentation and user research.</li>
+                  <li>One of 15 AI ambassadors for the whole company.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="lv-reveal v1-career-row">
+              <summary>
+                <span class="period">2023 — 2025</span>
+                <span class="v1-career-headline">
+                  <span class="role">Product Designer</span>
+                  <span class="org">Trusted Shops</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>Drove product growth through data-driven design and A/B testing.</li>
+                  <li>Worked closely with performance marketing to align design strategy with business goals.</li>
+                  <li>Used rigorous testing and analytics to make data-based design decisions, optimizing for revenue and user experience.</li>
+                  <li>Introduced and ran continuous research (qualitative and quantitative) for consumer-facing products, and coached colleagues on experimentation and research culture.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="lv-reveal v1-career-row">
+              <summary>
+                <span class="period">2023 — Now</span>
+                <span class="v1-career-headline">
+                  <span class="role">Product Designer</span>
+                  <span class="org">Aqora</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>Product design for Aqora, a quantum computing hub for datasets, workspaces, competitions and hackathons.</li>
+                  <li>Design system components, interactive workspace flows, website and blog redesign, newsletter and social assets, shipped in AI-assisted front-end code.</li>
+                  <li>Event sites and assets for partners such as Quantinuum, the University of Bradford and Singapore's National Quantum Office.</li>
+                  <li>Hired Aqora's first in-house product designer.</li>
+                  <li>Leading a research project on how quantum researchers experience teaching and research, and where Aqora fits as a community hub.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="lv-reveal v1-career-row">
+              <summary>
+                <span class="period">2020 — Now</span>
+                <span class="v1-career-headline">
+                  <span class="role">Product Designer, freelance</span>
+                  <span class="org">Canva, Funke and more</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>UX research, strategy and UX/UI design for B2B and B2C clients across industries, from discovery to shipped product.</li>
+                  <li>Clients include Canva, Funke, Autarc, HALE.NOW and Dr. Vivien Karl.</li>
+                  <li>Accepted early into the Canva Creators program.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="lv-reveal v1-career-row">
+              <summary>
+                <span class="period">2022 — 2023</span>
+                <span class="v1-career-headline">
+                  <span class="role">Product Designer</span>
+                  <span class="org">Cargoboard</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>Owned concept and design for a 140+ page website relaunch as the one-person design team, working closely with front-end.</li>
+                  <li>Built pixel-perfect designs and interactive prototypes in Figma for desktop, tablet and mobile.</li>
+                  <li>Restructured the site's information architecture together with marketing.</li>
+                  <li>Rebranded the visual identity across digital and print with graphic design.</li>
+                  <li>Built an atomic design system for the website and web app in Figma and zeroheight, for one unified product experience.</li>
+                  <li>Created new illustrations and icons, and set up an asset library in Figma and Adobe Illustrator with graphic design.</li>
+                  <li>Introduced product testing and user research: interviews, surveys, recordings, heatmaps.</li>
+                  <li>Managed and mentored a UX working student.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="lv-reveal v1-career-row">
+              <summary>
+                <span class="period">2020 — 2022</span>
+                <span class="v1-career-headline">
+                  <span class="role">Quality Assurance Analyst</span>
+                  <span class="org">TikTok</span>
+                </span>
+                <span class="v1-career-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div class="v1-career-body">
+                <ul>
+                  <li>Ran the team's weekly operational performance analysis.</li>
+                  <li>Tracked UX quality through quantitative analysis, data visualization and business reports.</li>
+                  <li>Became the team's first onboarding manager and onboarded 9 new joiners remotely with structured trainings.</li>
+                  <li>Ran hiring interviews for HR.</li>
+                  <li>Built an eLearning program for 250+ international colleagues, curating role-specific content on EdCast.</li>
+                  <li>Cross-functional point of contact for the User Growth project.</li>
+                  <li>Won the Special Contribution Award (Jan - Feb 2021) and a Team Award (Nov - Dec 2020).</li>
+                </ul>
+              </div>
+            </details>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- A video that stays with me -->
+        <section class="v1-section">
+          <div class="lv-reveal">
+            <h2 class="lv-h1" style="margin-top:0;font-family:var(--font-body);font-weight:600;letter-spacing:-0.03em;">
+              A video that keeps <em style="color:var(--accent);font-family:var(--font-display);font-style:italic;font-weight:400;">inspiring</em> me over and over again.
+            </h2>
+          </div>
+          <div class="lv-video lv-reveal" style="margin-top:2rem;">
+            <iframe src="https://www.youtube-nocookie.com/embed/WRS9Gek4V5Q" title="A video that keeps inspiring me" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: PLAYGROUND                                           -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="playground" hidden>
+
+      <!-- V1 PLAYGROUND -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <div class="lv-eyebrow lv-reveal" style="margin-top:2rem;">./playground</div>
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:0.75rem;">
+          Not <em style="color:var(--accent);">everything</em><br/>needs a KPI.
+        </h1>
+        <p class="lv-lead lv-reveal" style="max-width:48ch;margin-top:2rem;">
+          Sketchbook spreads, brand one-offs, the aerial-yoga microsite, and a slowly-growing shelf of read-and-underlined books. No outcomes. No roadmap.
+        </p>
+
+        <div class="v1-playground-grid">
+          <div class="v1-playground-tile lv-reveal" style="--tile-hue:50;" data-cursor-label="Peek"><div class="kind">drawings</div><div class="title">Sketchbook 2025</div></div>
+          <div class="v1-playground-tile lv-reveal" style="--tile-hue:330;" data-cursor-label="Peek"><div class="kind">brand</div><div class="title">Aerial Yoga site</div></div>
+          <div class="v1-playground-tile lv-reveal" style="--tile-hue:190;" data-cursor-label="Peek"><div class="kind">visual</div><div class="title">Canva kits</div></div>
+          <a href="#/books" class="v1-playground-tile lv-reveal" style="--tile-hue:100;text-decoration:none;" data-cursor-label="Open shelf"><div class="kind">reading</div><div class="title">Reading shelf</div></a>
+          <div class="v1-playground-tile lv-reveal" style="--tile-hue:20;" data-cursor-label="Peek"><div class="kind">type</div><div class="title">Type pairings file</div></div>
+          <div class="v1-playground-tile lv-reveal" style="--tile-hue:270;" data-cursor-label="Peek"><div class="kind">palette</div><div class="title">Colour studies</div></div>
+        </div>
+
+        <div style="margin-top:5rem;padding:3rem;background:var(--paper-2);border-radius:var(--radius-lg);text-align:center;border:1px solid var(--rule);">
+          <div class="v1-hand" style="font-size:var(--text-3xl);">ask me about any of these ↑</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: BOOKSHELF, BOLD TYPE (#/books)                       -->
+    <!-- The cover grid (renderBooks in app.js, shared .lv-book-*    -->
+    <!-- classes) in the Bold Type dress, without the stats block.   -->
+    <!-- The review overlay sits after <main>, outside this route.   -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="books-bold" hidden>
+      <div class="bt bt--books v1-only" data-chapter="intro">
+
+        <nav class="bt-nav" aria-label="Bold Type bookshelf">
+          <div class="bt-nav-row">
+            <a href="#/" class="bt-logo">lisanne.design</a>
+            <div class="bt-nav-links">
+              <a href="#/work" class="bt-nav-link">Work</a>
+              <a href="#/about" class="bt-nav-link">About</a>
+              <a href="mailto:mail@lisannevisser.com" class="bt-nav-cta" data-cursor-label="Email">Say hi</a>
+            </div>
+            <div class="bt-nav-right">
+              <button class="bt-nav-menu" type="button" aria-label="Open menu"><svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-120q-33 0-56.5-23.5T80-200v-120h800v120q0 33-23.5 56.5T800-120H160Zm0-120v40h640v-40H160Zm320-180q-36 0-57 20t-77 20q-56 0-76-20t-56-20q-36 0-57 20t-77 20v-80q36 0 57-20t77-20q56 0 76 20t56 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 56-20t76-20q56 0 79 20t55 20v80q-56 0-75-20t-55-20q-36 0-58 20t-78 20q-56 0-77-20t-57-20ZM80-560v-40q0-115 108.5-177.5T480-840q183 0 291.5 62.5T880-600v40H80Zm400-200q-124 0-207.5 31T166-640h628q-23-58-106.5-89T480-760Z"/></svg></button>
+            </div>
+          </div>
+        </nav>
+
+        <div class="bt-wrap bt-page">
+          <header class="bt-page-head">
+            <div class="bt-kicker"><span>00 — Bookshelf</span></div>
+            <h1 class="bt-display bt-page-h1">What's on the <span class="bt-mark bt-mark--rose"><svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M6 14 C 80 4, 210 12, 294 7 C 296 30, 294 56, 290 70 C 206 78, 80 74, 10 76 C 6 56, 4 32, 6 14 Z"/></svg><span>shelf.</span></span></h1>
+            <p class="bt-lead">Books that shaped how I think about design, products, life and people. Click any cover for the short version of why.</p>
+          </header>
+
+          <div class="lv-books-grid bt-books-grid" data-books="grid"><!-- filled by app.js --></div>
+
+          <div class="bt-colophon bt-colophon--light">
+            <span>© 2026 Lisanne Visser · <a href="#/imprint">Imprint</a> · <a href="#/privacy">Privacy</a></span>
+            <span><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a> · <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="#/sketchbook">Sketchbook</a> · <a href="#/books" data-cursor-label="Open shelf">Bookshelf</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: BOOKS, CLASSIC (#/books-classic)                  -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="books" hidden>
+      <div class="lv-wrap lv-books" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="lv-books-head lv-reveal">
+          <div class="lv-eyebrow">./bookshelf</div>
+          <h1 class="lv-h1" style="margin-top:0.75rem;">What's on the <em>shelf</em>.</h1>
+          <p class="lv-lead" style="max-width:54ch;margin-top:1.25rem;">
+            Books that shaped how I think about design, products, life and people. Click any cover for the short version of why.
+          </p>
+        </header>
+
+        <!-- Stats (filled by app.js) -->
+        <div class="lv-books-stats lv-reveal" id="lv-books-stats"></div>
+
+        <!-- Cover grid (filled by app.js) -->
+        <div class="lv-books-grid" id="lv-books-grid" data-books="grid"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: VISUALS, CLASSIC (#/visuals-classic)                -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="visuals" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./visuals</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            Too good to <em>delete</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            Brand guides, identities, templates, and studies from freelance jobs and side projects. None of it big enough for a case study. Collected here so it doesn't get lost. Click any piece to open it.
+          </p>
+        </header>
+
+        <div class="v1-visuals-grid" id="v1-visuals-grid" data-visuals="grid" data-dress="v1"><!-- filled by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: SKETCHBOOK, CLASSIC (#/sketchbook-classic)          -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="sketchbook" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./sketchbook</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            Not everything needs a <em>KPI</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            The drawing practice behind the scribbles you see all over this site. Life drawing, ink washes, watercolor studies, and the odd bit of fun. No briefs, no roadmap, nothing to measure.
+          </p>
+        </header>
+
+        <div class="v1-visuals-grid v1-sketch-grid"><!-- filled by app.js --></div>
+      </div>
+
+      <!-- Detail overlay -->
+      <div class="lv-book-overlay v1-sketch-overlay" aria-hidden="true">
+        <div class="lv-book-backdrop v1-sketch-backdrop"></div>
+        <div class="v1-sketch-dialog" role="dialog" aria-modal="true" aria-label="Sketch">
+          <figure class="v1-sketch-photo">
+            <span class="v1-sketch-medium"></span>
+            <div class="v1-sketch-stage"></div>
+            <figcaption class="v1-sketch-cap">
+              <h2 class="v1-sketch-title"></h2>
+              <p class="v1-sketch-blurb"></p>
+            </figcaption>
+          </figure>
+          <button class="v1-sketch-btn v1-sketch-close" type="button" aria-label="Close">×</button>
+          <button class="v1-sketch-btn v1-sketch-prev" type="button" aria-label="Previous sketch">←</button>
+          <button class="v1-sketch-btn v1-sketch-next" type="button" aria-label="Next sketch">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: CHINESE (Mandarin learning library)                 -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="chinese" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head lv-reveal">
+          <div class="lv-eyebrow">./中文</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            My Chinese <em>library</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:58ch;margin-top:1.25rem;">
+            I studied Chinese at university a few years ago. Between the switch to the new HSK system and too little practice since, I'm working my way back in. This page is my own library of Mandarin resources worth keeping: good material isn't widely accessible in the West, and a lot of what you do find is outdated or clunky to use. Only things I find valuable myself go on this list.
+          </p>
+        </header>
+
+        <details class="v1-res-filter-acc lv-reveal" id="v1-chinese-filter-acc">
+          <summary>
+            <span class="v1-res-filter-acc-icon" aria-hidden="true">+</span>
+            Filter / 筛选
+            <span class="v1-work-chip-count" id="v1-chinese-filter-count" hidden>0</span>
+          </summary>
+          <div class="v1-res-filters" id="v1-chinese-filters"><!-- filled by app.js --></div>
+        </details>
+
+        <div class="v1-res-list" id="v1-chinese-list"><!-- filled by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: BLOG, CLASSIC (#/blog-classic)                       -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="blog" hidden>
+
+      <!-- V1 BLOG — "The Design Gazette" front page -->
+      <div class="v1-only lv-wrap lv-gazette" style="padding-top:clamp(2.5rem,5vw,4rem);padding-bottom:6rem;">
+        <header class="lv-gz-masthead lv-reveal">
+          <div class="lv-gz-flag">The Design Gazette</div>
+          <p class="lv-gz-subflag">Thinking out loud on craft, research, and the decisions that don't make it into the case study.</p>
+          <div class="lv-gz-dateline">
+            <span>Berlin</span>
+            <span>2026 Edition</span>
+            <span class="lv-gz-dateline-tags"></span>
+          </div>
+        </header>
+        <div id="v1-blog-list"><!-- filled by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: POST, CLASSIC (#/blog-classic/<slug>, dynamic)       -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="post" hidden>
+      <article class="v1-only lv-wrap lv-gazette lv-gazette-article" id="v1-post-body" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;"></article>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: IMPRINT, CLASSIC (#/imprint-classic)                 -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="imprint" hidden>
+
+      <!-- V1 IMPRESSUM -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:3rem;">
+          The <em>fine print.</em>
+        </h1>
+
+        <div class="lv-legal-grid">
+          <div>
+            <div class="lv-eyebrow lv-reveal">Service provider</div>
+            <p class="lv-lead lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;">
+              Lisanne Visser<br/>
+              George-Stephenson-Str. 2<br/>
+              10557 Berlin<br/>
+              Germany
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Contact</div>
+            <p class="lv-lead lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;">
+              Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a>
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Responsible for content</div>
+            <p class="lv-lead lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;">
+              Lisanne Visser (address as above)
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">VAT ID</div>
+            <p class="lv-lead lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;">
+              VAT identification number pursuant to §27a UStG:<br/>
+              DE365220341
+            </p>
+          </div>
+
+          <div>
+            <div class="lv-eyebrow lv-reveal">Liability for content</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:1.5rem;max-width:52ch;">
+              As a service provider I am responsible for my own content on these pages under the general laws. I accept no liability for the content of external links - responsibility for those lies solely with their respective operators.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Copyright</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:1.5rem;max-width:52ch;">
+              The work, text, and images shown on this site are protected under German copyright law. Any use beyond the narrow limits of copyright requires written permission.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Credits</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:1rem;max-width:52ch;">
+              Other people made things I get to build on. They belong here by name.
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Typefaces</strong>, all self-hosted under the SIL Open Font License: <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a> (Undercase Type), <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a> (Instrument), <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a> (JetBrains), <a href="https://fonts.google.com/specimen/Caveat" target="_blank" rel="noopener">Caveat</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Bricolage+Grotesque" target="_blank" rel="noopener">Bricolage Grotesque</a> (Mathieu Triay) on the Bold Type home. The Wall of Fame board adds <a href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> (Omnibus-Type), <a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener">Libre Caslon Text</a> (Impallari Type), and <a href="https://fonts.google.com/specimen/Space+Mono" target="_blank" rel="noopener">Space Mono</a> (Colophon Foundry).
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Icon.</strong> The burger in the mobile menu is the "lunch_dining" glyph from <a href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Material Symbols</a>, inlined as SVG, Apache License 2.0.
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Logos.</strong> The company logos in the home page marquee belong to their owners and only name who I have worked with. The <a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a>, <a href="https://www.autarc.energy/" target="_blank" rel="noopener">autarc</a>, <a href="https://www.hale-now.com/" target="_blank" rel="noopener">HALE.NOW</a>, <a href="https://drvivienkarl.com/" target="_blank" rel="noopener">Dr. Vivien Karl</a>, and <a href="https://www.quantinuum.com/" target="_blank" rel="noopener">Quantinuum</a> wordmarks are taken from their websites.
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1.5rem;max-width:52ch;">
+              <strong>Images.</strong> All photos, illustrations, and scribbles on this site are my own. If that ever changes (stock photography in a blog header, someone else's diagram in a case study), the source and the creator get named at the image and listed here. One exception: the &ldquo;before&rdquo; screenshots of the old cargoboard.de in the <a href="#/work-classic/website-relaunch">website relaunch case study</a> come from the <a href="https://web.archive.org/web/20210507003231/https://cargoboard.de/" target="_blank" rel="noopener">Internet Archive's Wayback Machine</a> (snapshot of May 2021). That site and its photos belong to Cargoboard. The screenshot of the <a href="https://www.eon.de/de/pk/service/vertrag/kuendigung.html" target="_blank" rel="noopener">E.ON cancellation page</a> in the <a href="#/work-classic/illustrations-vs-icons">illustrations vs. icons case study</a> shows E.ON's page and photo (taken October 2026). The dark map in the old homepage screenshot is re-rendered with <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a> tiles, map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.
+            </p>
+
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Talks.</strong> The slides and the program of my 2018 talk are hosted by the University of Göttingen (Institut für Diversitätsforschung). The spring conference &ldquo;Selbstständigkeiten&rdquo; was organized by the Arbeitskreis &ldquo;Die Arbeit der Selbstständigen&rdquo; at LMU Munich. The slides of my 2026 tech talk on Figma Make carry the Trusted Shops logo and the Figma logo shapes, which belong to their owners. They also show two screenshots of other people's work: the <a href="https://www.figma.com/make/" target="_blank" rel="noopener">Figma Make</a> start screen (Figma, with community examples by Joshua Guo, vikas kumar and sailesh.tripathy) and the <a href="https://www.kameleoon.com/" target="_blank" rel="noopener">Kameleoon</a> website (Kameleoon).
+            </p>
+            <!-- PARKED with the design-trends-2027 post (DRAFT_POSTS in js/app.js).
+           Restore this block in the same change that publishes the post. See BACKLOG.md in the private notes repo (portfolio-notes).
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1rem;max-width:52ch;">
+              <strong>Research.</strong> The Gazette post <a href="#/blog-classic/design-trends-2027">The design trends I'm betting on for 2027</a> argues from published work by other people. Named in the post and again here: Doshi &amp; Hauser, <a href="https://doi.org/10.1126/sciadv.adn5290" target="_blank" rel="noopener">Science Advances</a> (2024); <a href="https://arxiv.org/abs/2402.01536" target="_blank" rel="noopener">Anderson, Shah &amp; Kreminski</a>, Creativity and Cognition (2024); &ldquo;Autonomous language-image generation loops converge to generic visual motifs&rdquo;, Patterns (2025); Fuchs, Schreier &amp; van Osselaer, <a href="https://doi.org/10.1509/jm.14.0018" target="_blank" rel="noopener">Journal of Marketing</a> (2015); <a href="https://www.dhruvgrewal.com/wp-content/uploads/2018/05/2018-JCR-Font-2.pdf" target="_blank" rel="noopener">Schroll, Schnurr &amp; Grewal</a>, Journal of Consumer Research (2018).
+            </p>
+            <p class="lv-body lv-reveal" style="margin-top:0;margin-bottom:1.5rem;max-width:52ch;">
+              Continued: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022103103000659" target="_blank" rel="noopener">Kruger, Wirtz, Van Boven &amp; Altermatt</a>, Journal of Experimental Social Psychology (2004), with the replication caveat from Collabra: Psychology (2023); Nittono, Fukushima, Yano &amp; Moriya, <a href="https://doi.org/10.1371/journal.pone.0046362" target="_blank" rel="noopener">PLoS ONE</a> (2012); the pleasure-interest model from Graf &amp; Landwehr, discussed in <a href="https://doi.org/10.3389/fpsyg.2017.00015" target="_blank" rel="noopener">Frontiers in Psychology</a> (2017); Hekkert, Snelders &amp; van Wieringen, British Journal of Psychology (2003); <a href="https://doi.org/10.1177/02762374251371282" target="_blank" rel="noopener">Chen and colleagues</a> (2025); Bellaiche and colleagues, <a href="https://doi.org/10.1186/s41235-023-00499-6" target="_blank" rel="noopener">Cognitive Research: Principles and Implications</a> (2023); <a href="https://www.tate.org.uk/whats-on/tate-britain/aftermath/nine-ways-artists-responded-first-world-war" target="_blank" rel="noopener">Tate</a> on artists after the First World War; and <a href="https://en.wikipedia.org/wiki/Content_Credentials" target="_blank" rel="noopener">Content Credentials</a> for the provenance layer.
+            </p>
+            -->
+
+            <div class="lv-eyebrow lv-reveal">Last updated</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;max-width:52ch;">
+              August 2026
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: PRIVACY, CLASSIC (#/privacy-classic)                 -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="privacy" hidden>
+
+      <!-- V1 DATENSCHUTZ -->
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <h1 class="v1-hero-display lv-reveal" style="margin-top:2rem;margin-bottom:2rem;">
+          What I <em>don't</em><br/>know about you.
+        </h1>
+        <p class="lv-lead lv-reveal" style="max-width:58ch;margin-bottom:4rem;">
+          This site is a portfolio, not a product. No tracking, no analytics, no ads. Below is an honest list of what still happens technically when you visit.
+        </p>
+
+        <div class="lv-legal-grid">
+          <div>
+            <div class="lv-eyebrow lv-reveal">Controller</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              Lisanne Visser, George-Stephenson-Str. 2, 10557 Berlin, Germany. Email: <a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a>. Full details in the <a href="#/imprint-classic">imprint</a>.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Server logs (GitHub Pages)</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              This site is hosted on GitHub Pages (GitHub Inc., USA). When you open it, your browser transmits technically necessary data: IP address, date and time, requested URL, referrer, browser, and operating system. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in stable operation). Details: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">YouTube embeds</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              Some case studies embed videos from YouTube (Google Ireland Ltd.). I use the privacy-enhanced mode (youtube-nocookie.com), which means YouTube does not set cookies until you press play. Once you start a video, your IP address and interaction data are transmitted to YouTube and Google. Legal basis: Art. 6(1)(a) GDPR (consent through clicking play) and Art. 6(1)(f) GDPR. Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Canva and Behance embeds</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              The Visuals page shows some pieces inline through embeds from Canva (Canva Pty Ltd, Australia) and Behance (Adobe Inc., USA). Nothing is requested while you browse the grid: an embed is only loaded once you open the card it belongs to, and it is removed again when you close it. From the moment it loads, your IP address and browser data go to that provider, and it may set cookies. Legal basis: Art. 6(1)(a) GDPR (consent through opening the card) and Art. 6(1)(f) GDPR. Details: <a href="https://www.canva.com/policies/privacy-policy/" target="_blank" rel="noopener">Canva Privacy Policy</a>, <a href="https://www.adobe.com/privacy/policy.html" target="_blank" rel="noopener">Adobe Privacy Policy</a>.
+            </p>
+          </div>
+
+          <div>
+            <div class="lv-eyebrow lv-reveal">Fonts</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              Every typeface on this site is served from this site. There is no Google Fonts request and no font CDN, so loading a page does not hand your IP address to a font provider. The typefaces are credited in the <a href="#/imprint-classic">imprint</a>.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Local storage</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              The browser's localStorage remembers your design preferences (accent colour, type scale). This data stays on your device, is never transmitted, and can be cleared from your browser settings at any time.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Getting in touch</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              If you email me, I process the information you send in order to respond to your enquiry. Legal basis: Art. 6(1)(b) or (f) GDPR. Emails are deleted once the purpose no longer applies.
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Your rights</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;margin-bottom:2rem;max-width:52ch;">
+              You have the right to access, rectification, erasure, restriction, data portability, and objection at any time (Art. 15 - 21 GDPR). A short email is enough. You also have the right to lodge a complaint with the competent supervisory authority (for Berlin: Berliner Beauftragte für Datenschutz und Informationsfreiheit).
+            </p>
+
+            <div class="lv-eyebrow lv-reveal">Last updated</div>
+            <p class="lv-body lv-reveal" style="margin-top:0.75rem;max-width:52ch;">
+              August 2026
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: WALL OF FAME                                         -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="wall-of-fame" hidden>
+
+      <div class="lv-wrap wof-stage">
+
+        <!-- Stamp ink filter (referenced by the Design Crime stamp) -->
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <filter id="stampFx" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.05 0.07" numOctaves="2" seed="8" result="wobble" />
+              <feDisplacementMap in="SourceGraphic" in2="wobble" scale="2" result="disp" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="3" result="grain" />
+              <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -0.08" result="grainA" />
+              <feComposite in="disp" in2="grainA" operator="in" />
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="wof-board">
+
+          <!-- Pinned masthead strip -->
+          <header class="wof-masthead">
+            <span class="wof-pin wof-pin-red wof-masthead-pin-left" aria-hidden="true"></span>
+            <span class="wof-pin wof-pin-ink wof-masthead-pin-right" aria-hidden="true"></span>
+            <div class="wof-masthead-meta"><span>Dept. of Design Crimes</span><span>Case No. 404</span></div>
+            <h1 class="wof-masthead-title">
+              The Wall of
+              <span class="wof-fame">Fame<span class="wof-strike" aria-hidden="true"></span><span class="wof-shame" aria-hidden="true">shame</span></span>
+            </h1>
+            <div class="wof-stamp" aria-hidden="true">
+              <div class="wof-stamp-inner">
+                <div class="wof-stamp-main">Design<br>Crime</div>
+                <div class="wof-stamp-sub">&#10033; Verified &#10033;</div>
+              </div>
+            </div>
+          </header>
+
+          <!-- Pinned exhibits -->
+          <div class="wof-wall">
+
+            <article class="wof-card wof-exhibit" style="--w:270px; --r:-2.5deg">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">01</span><span class="wof-card-tag">Exhibit A</span></div>
+              <div class="wof-slot" style="height:230px" data-slot="exhibit-a" data-placeholder="Drop your worst offender here" data-default="images/wall-of-fame/traffic-light.jpg" data-alt="A pedestrian traffic light taped to a pole, its green walking figure mounted upside down"></div>
+              <p class="wof-caption">Taped on, upside down, still official.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:252px; --r:2deg; --mt:30px">
+              <span class="wof-tape wof-tape-red" style="--tr:-4deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">02</span><span class="wof-card-tag">Exhibit B</span></div>
+              <div class="wof-slot" style="height:252px" data-slot="exhibit-b" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The elevator panel of doom.</p>
+            </article>
+
+            <aside class="wof-card wof-sticky" style="--w:210px; --r:-3.5deg; --rh:-1deg; --mt:70px">
+              A lovingly curated collection of catastrophic user experiences.
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:282px; --r:-1.4deg">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">03</span><span class="wof-card-tag">Exhibit C</span></div>
+              <div class="wof-slot" style="height:198px" data-slot="exhibit-c" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Are you sure you're sure you're sure?</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:246px; --r:3deg; --mt:44px">
+              <span class="wof-pin wof-pin-paper wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">04</span><span class="wof-card-tag">Exhibit D</span></div>
+              <div class="wof-slot" style="height:238px" data-slot="exhibit-d" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Shower controls - PhD required.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:264px; --r:-2.2deg; --mt:12px">
+              <span class="wof-tape wof-tape-ink" style="--tr:3deg" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">05</span><span class="wof-card-tag">Exhibit E</span></div>
+              <div class="wof-slot" style="height:216px" data-slot="exhibit-e" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">On? Off? Nobody knows.</p>
+            </article>
+
+            <aside class="wof-card wof-rule" style="--w:218px; --r:2.8deg; --rh:1deg; --mt:86px">
+              <div class="wof-rule-label">Rule No. 1</div>
+              <div class="wof-rule-text">If it needs a sign taped to it, it's bad design.</div>
+            </aside>
+
+            <article class="wof-card wof-exhibit" style="--w:258px; --r:1.6deg; --mt:36px">
+              <span class="wof-pin wof-pin-red wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">06</span><span class="wof-card-tag">Exhibit F</span></div>
+              <div class="wof-slot" style="height:246px" data-slot="exhibit-f" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">The form that resets when you blink.</p>
+            </article>
+
+            <article class="wof-card wof-exhibit" style="--w:276px; --r:-3deg; --mt:8px">
+              <span class="wof-pin wof-pin-ink wof-card-pin" aria-hidden="true"></span>
+              <div class="wof-card-head"><span class="wof-card-no">07</span><span class="wof-card-tag">Exhibit G</span></div>
+              <div class="wof-slot" style="height:202px" data-slot="exhibit-g" data-placeholder="Drop bad UX photo"></div>
+              <p class="wof-caption">Hotel light switch bingo.</p>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ROUTE: STYLEGUIDE (live CSS audit, filled by styleguide.js) -->
+    <!-- ========================================================= -->
+    <section class="lv-route lv-page" data-page="styleguide" hidden>
+      <div class="v1-only lv-wrap" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:6rem;">
+        <header class="v1-visuals-head">
+          <div class="lv-eyebrow">./styleguide</div>
+          <h1 class="v1-hero-display" style="margin-top:0.75rem;">
+            Taking <em>stock</em>.
+          </h1>
+          <p class="lv-lead" style="max-width:56ch;margin-top:1.25rem;">
+            A live audit of this site's CSS, read straight from the stylesheets in your browser. Every token, color, and type size, counted and lined up. This is the status quo before consolidating: see what exists, spot what drifted.
+          </p>
+        </header>
+
+        <div id="lv-sg-root"><!-- filled by styleguide.js --></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Visuals detail overlays, one per dress. They live outside the route
+       sections so the Work-page teasers can open them while #/visuals or
+       #/visuals-bold is hidden. Wired up by renderVisuals in js/app.js. -->
+  <div class="lv-book-overlay v1-visual-overlay" data-dress="v1" aria-hidden="true">
+    <div class="lv-book-backdrop"></div>
+    <div class="v1-visual-detail" role="dialog" aria-modal="true" aria-label="Visual project">
+      <button class="lv-book-close" type="button" aria-label="Close">×</button>
+      <div class="v1-visual-stage"></div>
+      <div class="v1-visual-detail-body">
+        <div class="lv-eyebrow v1-visual-eyebrow"></div>
+        <h2 class="v1-visual-detail-title"></h2>
+        <p class="v1-visual-detail-blurb"></p>
+        <a class="v1-visual-open" href="#" target="_blank" rel="noopener noreferrer" hidden>Open ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookshelf review overlay: shared by #/books and #/books-classic,
+       outside the route sections so either grid can open it. -->
+  <div class="lv-book-overlay" id="lv-book-overlay" aria-hidden="true">
+    <div class="lv-book-backdrop" id="lv-book-backdrop"></div>
+    <div class="lv-book-detail" id="lv-book-detail" role="dialog" aria-modal="true" aria-label="Book review">
+      <button class="lv-book-close" id="lv-book-close" type="button" aria-label="Close review">×</button>
+      <div class="lv-book-detail-inner">
+        <div class="lv-book-detail-cover">
+          <span class="lv-book-detail-fallback" id="lv-book-detail-fallback"></span>
+          <img id="lv-book-detail-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" />
+        </div>
+        <div class="lv-book-detail-body">
+          <div class="lv-book-detail-tags" id="lv-book-detail-tags"></div>
+          <h2 class="lv-book-detail-title" id="lv-book-detail-title"></h2>
+          <p class="lv-book-detail-author" id="lv-book-detail-author"></p>
+          <div class="lv-book-detail-stars" id="lv-book-detail-stars"></div>
+          <div class="lv-book-detail-review-wrap">
+            <div class="lv-eyebrow">My thoughts</div>
+            <p class="lv-book-detail-review" id="lv-book-detail-review"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lv-book-overlay v1-visual-overlay bt-overlay" data-dress="bt" aria-hidden="true">
+    <div class="lv-book-backdrop"></div>
+    <div class="v1-visual-detail" role="dialog" aria-modal="true" aria-label="Visual project">
+      <button class="lv-book-close" type="button" aria-label="Close">×</button>
+      <div class="v1-visual-stage"></div>
+      <div class="v1-visual-detail-body">
+        <div class="bt-kicker v1-visual-eyebrow"><span></span></div>
+        <h2 class="v1-visual-detail-title"></h2>
+        <p class="v1-visual-detail-blurb"></p>
+        <a class="v1-visual-open" href="#" target="_blank" rel="noopener noreferrer" hidden>Open ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="lv-footer">
+    <div class="lv-footer-grid">
+      <div>
+        <a href="#/home-classic" class="lv-logo">lisanne.design</a>
+        <ul style="list-style:none;padding:0;margin:1.25rem 0 0;display:flex;flex-direction:column;gap:0.5rem;">
+          <li><a href="mailto:mail@lisannevisser.com">mail@lisannevisser.com</a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/lisanne-visser/" target="_blank" rel="noopener noreferrer" class="lv-social-link" aria-label="LinkedIn profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lisannevisser" target="_blank" rel="noopener noreferrer" class="lv-social-link" aria-label="GitHub profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="lv-footer-site">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="#/work-classic">Work</a></li>
+          <li><a href="#/about-classic">About</a></li>
+          <!-- Blog is unlinked until it goes live. To bring it back, re-add:
+               <li><a href="#/blog-classic" data-cursor-label="Read">Blog</a></li> -->
+          <li><a href="#/visuals-classic" data-cursor-label="Look">Visuals</a></li>
+          <li><a href="#/sketchbook-classic" data-cursor-label="By hand">Sketchbook</a></li>
+        </ul>
+      </div>
+      <div class="lv-footer-site">
+        <h4>Work in progress</h4>
+        <ul>
+          <li><a href="#/books" data-cursor-label="Open shelf">Reading</a></li>
+          <li><a href="#/chinese" data-cursor-label="学习">Chinese library</a></li>
+          <!-- Wall of Fame (#/wall-of-fame) is parked until the board has real
+               content. The route is disabled via DISABLED_ROUTES in js/app.js
+               (falls back to home) and unlinked here. To bring it back, remove
+               it from that set and re-add a link. See BACKLOG.md in the private notes repo (portfolio-notes). -->
+          <li><a href="#/playground">Playground</a></li>
+          <li><a href="#/styleguide" data-cursor-label="Audit">Styleguide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="lv-footer-bottom">
+      <span>© 2026 Lisanne Visser</span>
+      <span><a href="#/imprint-classic">Imprint</a> · <a href="#/privacy-classic">Privacy</a></span>
+      <span>Built with <span class="lv-footer-emoji" aria-hidden="true">🩶</span> · <a href="https://github.com/lisannevisser/portfolio" target="_blank" rel="noopener noreferrer">Source on GitHub</a></span>
+    </div>
+  </footer>
+
+  <!-- Tweaks toggle + panel -->
+  <button class="lv-tweaks-toggle" type="button" aria-label="Open tweaks" hidden style="display:none;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.63.85 1.05 1.51 1.05H21a2 2 0 1 1 0 4h-.09c-.66 0-1.25.42-1.51 1.05Z"/>
+    </svg>
+  </button>
+  <div class="lv-tweaks">
+    <h3>Tweaks</h3>
+    <div class="lv-tweak-row">
+      <label>Accent hue</label>
+      <div class="lv-hue-row">
+        <button type="button" data-hue="22"  title="Warm"></button>
+        <button type="button" data-hue="88"  title="Citrine"></button>
+        <button type="button" data-hue="150" title="Jade"></button>
+        <button type="button" data-hue="200" title="Sea"></button>
+        <button type="button" data-hue="265" title="Violet"></button>
+        <button type="button" data-hue="310" title="Pastel"></button>
+        <button type="button" data-hue="340" title="Rose"></button>
+      </div>
+    </div>
+    <div class="lv-tweak-row">
+      <label>Scribble density: <span data-tweak-label="density">2</span></label>
+      <input type="range" min="0" max="3" step="1" value="2" data-tweak="density" />
+    </div>
+    <div class="lv-tweak-row">
+      <label>Display size: <span data-tweak-label="type-scale">1x</span></label>
+      <input type="range" min="0.8" max="1.3" step="0.05" value="1" data-tweak="type-scale" />
+    </div>
+    <div class="lv-tweak-row" style="margin-bottom:0;">
+      <label style="color:var(--ink-3);font-size:var(--text-xs);">Press <code>yyy</code> for a surprise.</label>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- WIP indicator — "site under construction" sticky note        -->
+  <!-- ============================================================ -->
+  <aside class="wip-el wip-note" role="note" aria-label="Site notice">
+    <button type="button" class="wip-note-close" data-wip-dismiss aria-label="Dismiss notice">×</button>
+    <p class="wip-note-body">Hi! This site is being rebuilt in the open.
+      Mind the wet paint, a few pages aren't quite dry yet.</p>
+    <p class="wip-note-sign">Lisanne :)</p>
+  </aside>
+
+  <script src="js/data.js?v=2026-11-02-2"></script>
+  <script src="js/app.js?v=2026-11-02-3"></script>
+  <script src="js/wip.js?v=2026-06-12-3"></script>
+  <script src="js/wall-of-fame.js?v=2026-08-02-1"></script>
+  <script src="js/styleguide.js?v=2026-08-01-1"></script>
+  <script src="js/bold-home.js?v=2026-10-28-2"></script>
+
+  <!-- Edit mode. Visit ?edit=wet-paint once and the browser remembers it;
+       ?edit=off or the "Done" button switch it back off. Without the flag,
+       js/edit-mode.js never loads. See that file for the whole story. -->
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get("edit");
+        if (p === "wet-paint") localStorage.setItem("lv-edit", "on");
+        if (p === "off") localStorage.removeItem("lv-edit");
+        if (localStorage.getItem("lv-edit") !== "on") return;
+        var s = document.createElement("script");
+        s.src = "js/edit-mode.js?v=2026-08-02-3";
+        document.head.appendChild(s);
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1548 @@
+/* ==========================================================================
+   Bold Type home — #/home-bold
+   A second, full-bleed take on the homepage: four snap-scrolled chapters
+   (Intro, Work, About, Contact), Bricolage Grotesque display type,
+   hand-cut highlight blobs in rose / cobalt / mustard.
+   Lives next to the v1 home; nothing here touches it.
+   Source: Claude Design "Portfolio Bold Type" (3a desktop, 3b mobile).
+   ========================================================================== */
+
+[data-variation="v1"] {
+  --bt-rose: #f4a3b8;
+  --bt-cobalt: #1f3fbf;
+  --bt-mustard: #e8c547;
+  --bt-font-display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+  /* Where every hero starts (the kicker's top edge), on every Bold Type
+     page: Home chapters, About, Work, cases, blog, legal, 404. */
+  --bt-hero-top: clamp(6rem, 15vh, 8.5rem);
+}
+
+/* The chapters bring their own nav and footer line, so the global
+   chrome steps aside while this route is active. */
+html[data-route="home-bold"] .lv-nav,
+html[data-route="home-bold"] .lv-footer,
+html[data-route="about-bold"] .lv-nav,
+html[data-route="about-bold"] .lv-footer,
+html[data-route="work-bold"] .lv-nav,
+html[data-route="work-bold"] .lv-footer,
+html[data-route="case-bold"] .lv-nav,
+html[data-route="case-bold"] .lv-footer,
+html[data-route="sketchbook-bold"] .lv-nav,
+html[data-route="sketchbook-bold"] .lv-footer,
+html[data-route="visuals-bold"] .lv-nav,
+html[data-route="visuals-bold"] .lv-footer,
+html[data-route="books-bold"] .lv-nav,
+html[data-route="books-bold"] .lv-footer,
+html[data-route="blog-bold"] .lv-nav,
+html[data-route="blog-bold"] .lv-footer,
+html[data-route="post-bold"] .lv-nav,
+html[data-route="post-bold"] .lv-footer,
+html[data-route="404-bold"] .lv-nav,
+html[data-route="404-bold"] .lv-footer,
+html[data-route="imprint-bold"] .lv-nav,
+html[data-route="imprint-bold"] .lv-footer,
+html[data-route="privacy-bold"] .lv-nav,
+html[data-route="privacy-bold"] .lv-footer { display: none; }
+html[data-route="home-bold"] { scroll-snap-type: y proximity; }
+@media (min-width: 900px) and (min-height: 700px) {
+  html[data-route="home-bold"] { scroll-snap-type: y mandatory; }
+}
+
+.bt {
+  /* Flip to the dark palette while the Contact chapter is in view. */
+  --bt-ink: var(--ink);
+  --bt-bg: var(--paper);
+  --bt-muted: var(--ink-3);
+  --bt-rule: rgba(26, 24, 20, 0.2);
+  --bt-fade: linear-gradient(rgba(244, 239, 230, 0.96), rgba(244, 239, 230, 0.7) 75%, rgba(244, 239, 230, 0));
+  position: relative;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-body);
+}
+.bt[data-chapter="contact"] {
+  --bt-ink: var(--paper);
+  --bt-bg: var(--ink);
+  --bt-muted: rgba(244, 239, 230, 0.6);
+  --bt-rule: rgba(244, 239, 230, 0.25);
+  --bt-fade: linear-gradient(rgba(26, 24, 20, 0.96), rgba(26, 24, 20, 0.7) 75%, rgba(26, 24, 20, 0));
+}
+
+/* -------- Chapters -------- */
+.bt-chapter {
+  min-height: 100vh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  /* Every chapter is a hard stop, so a fast trackpad flick can't fly past one. */
+  scroll-snap-stop: always;
+  box-sizing: border-box;
+  padding: var(--bt-hero-top) 64px 64px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+/* Chapter dividers stop at the content edge, like the rules on every other
+   Bold Type page (and the footer), instead of running edge to edge. Intro
+   has nothing above it; Contact changes background instead. */
+.bt-chapter:not(.bt-chapter--intro):not(.bt-chapter--contact)::before {
+  content: ""; position: absolute; top: 0; left: 64px; right: 64px;
+  height: 2px; background: var(--ink);
+}
+.bt-chapter--intro {
+  /* Headline and lead hug the kicker like on the other pages; the logo band
+     drops to the foot of the screen (padding-bottom moves into .bt-logos). */
+  padding-bottom: 0;
+}
+.bt-chapter--contact {
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 0;
+  padding-bottom: 36px;
+}
+
+.bt-kicker {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+}
+
+.bt-display {
+  margin: 0;
+  font-family: var(--bt-font-display);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+}
+.bt-chapter--intro .bt-display { margin-top: 22px; font-size: clamp(64px, 12.2vw, 156px); }
+.bt-chapter--work .bt-display { margin-top: 22px; font-size: clamp(52px, 9.4vw, 120px); line-height: 1.05; }
+.bt-chapter--contact .bt-display { margin-top: 22px; font-size: clamp(50px, 8.75vw, 112px); line-height: 1.02; }
+
+/* Highlight blob behind a word. The SVG stretches to the word's box. */
+.bt-mark {
+  position: relative; display: inline-block; padding: 0 0.04em;
+}
+.bt-mark svg {
+  position: absolute; z-index: 0;
+  left: -0.06em; top: 0.03em;
+  width: calc(100% + 0.12em); height: 92%;
+}
+.bt-mark > span { position: relative; z-index: 1; }
+.bt-mark--rose svg path { fill: var(--bt-rose); }
+.bt-mark--cobalt svg path { fill: var(--bt-cobalt); }
+.bt-mark--cobalt > span { color: var(--paper); }
+.bt-mark--mustard svg path { fill: var(--bt-mustard); }
+.bt-chapter--contact .bt-mark--rose > span { color: var(--ink); }
+
+.bt-lead {
+  margin: 0; max-width: 54ch;
+  font-size: 19px; line-height: 1.6; color: var(--ink-2);
+}
+.bt-intro-foot {
+  margin-top: 32px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 48px;
+}
+.bt-swipe { display: none; }
+.bt-intro-bottom { flex: 1; display: flex; flex-direction: column; }
+
+/* -------- Logo marquee (foot of the intro) -------- */
+.bt-logos {
+  /* Content width, like the chapter dividers: the rule stops at the content
+     edge and the logos fade out there too. margin-top: auto pins the band
+     to the bottom; equal padding above and below keeps the logos centered
+     between the rule and the screen edge. */
+  margin: auto 0 0; padding: 40px 0; border-top: 2px solid var(--ink);
+  display: flex; align-items: center; overflow: hidden;
+  /* Two mask layers: the first keeps the 2px rule solid across the full
+     width, the second fades only the logos in and out at the edges. */
+  --bt-logos-mask:
+    linear-gradient(black, black) top / 100% 2px no-repeat,
+    linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask: var(--bt-logos-mask);
+  -webkit-mask: var(--bt-logos-mask);
+}
+[data-variation="v1"] .bt-logo-track { gap: 56px; padding-right: 56px; }
+[data-variation="v1"] .bt-logo-track img { height: calc(26px * var(--logo-scale, 1)); filter: grayscale(1) opacity(0.85); }
+[data-variation="v1"] .bt-logo-track img:hover { filter: none; }
+[data-variation="v1"] .bt-logo-track span {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 20px; letter-spacing: -0.02em; color: var(--ink);
+}
+
+/* -------- Work cards -------- */
+.bt-work-grid {
+  margin-top: auto;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px;
+}
+.bt-card {
+  display: flex; flex-direction: column; gap: 14px;
+  color: var(--ink); text-decoration: none;
+  transform: rotate(var(--tilt, 0deg)) translateY(var(--lift, 0));
+}
+.bt-card-cover {
+  --hue: var(--case-hue, 200);
+  /* Re-declared here so the tints resolve against this card's hue, not the
+     root fallback (same pattern as .v1-ledger-row .thumb in shared.css). */
+  --tint-soft: oklch(0.88 0.1 var(--hue));
+  --tint-mid: oklch(0.82 0.1 var(--hue));
+  --tint-deep: oklch(0.72 0.12 calc(var(--hue) + 30));
+  aspect-ratio: 340 / 220; border-radius: 8px; position: relative; overflow: hidden;
+  background:
+    radial-gradient(80% 60% at 30% 30%, var(--tint-soft), transparent 60%),
+    linear-gradient(135deg, var(--tint-mid), var(--tint-deep));
+  box-shadow: inset 0 0 0 1px var(--glint);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.bt-card-cover::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, transparent 0 8px, var(--ink-a05) 8px 9px);
+}
+.bt-card:hover .bt-card-cover { transform: scale(1.03); }
+.bt-card-title {
+  align-self: flex-start;
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 32px; letter-spacing: -0.03em; line-height: 1.1;
+  padding: 0 6px;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease;
+}
+.bt-card:hover .bt-card-title { background-size: 100% 0.9em; }
+.bt-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1.2deg; }
+.bt-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.8deg; --lift: -20px; }
+.bt-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.6deg; }
+.bt-card:nth-child(3n + 2):hover .bt-card-title { color: var(--paper); }
+.bt-card-sub { font-size: 15px; color: var(--ink-3); padding: 0 6px; }
+/* "All N case studies" sits on the headline's baseline at the right, so it
+   adds no height to a chapter that has to fit one screen. Same mustard
+   underline as "More about me" in the About chapter (.bt-xp-cv). */
+.bt-work-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.bt-work-all { flex-shrink: 0; margin: 0 -8px 0.5em 0; position: relative; padding-right: 26px; }
+/* The mustard underline runs on past the text and ends in an arrowhead.
+   `top` repeats the underline's own geometry (0.16em bar at 88% of the
+   padding box), so the head is centered on the line at any font size; the
+   mask's stroke is 0.16em too, so head and line are equally thick. */
+.bt-work-all::after {
+  content: ""; position: absolute; right: 0;
+  top: calc((100% - 0.16em) * 0.88 + 0.08em);
+  width: 0.5em; height: 0.7em; transform: translateY(-50%);
+  background: var(--bt-mustard);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14'><path d='M1.6 1.6 L7.4 7 L1.6 12.4' fill='none' stroke='black' stroke-width='3.2'/></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14'><path d='M1.6 1.6 L7.4 7 L1.6 12.4' fill='none' stroke='black' stroke-width='3.2'/></svg>") center / 100% 100% no-repeat;
+}
+
+/* -------- Experience (the block lives on #/about-bold, see .bt-xp-section) -------- */
+.bt-xp {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.bt-xp-headline {
+  margin: 0;
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: clamp(44px, 5.6vw, 72px); line-height: 1.1; letter-spacing: -0.04em;
+}
+.bt-xp-cv {
+  display: inline-block; margin-top: 24px;
+  font-family: var(--bt-font-display); font-weight: 700; font-size: 18px;
+  color: var(--ink); text-decoration: none; padding: 4px 8px;
+  background-image: linear-gradient(var(--bt-mustard), var(--bt-mustard));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease;
+}
+.bt-xp-cv:hover { background-size: 100% 1em; }
+.bt-xp-copy { margin: 0 0 28px; font-size: 18px; line-height: 1.6; color: var(--ink-2); }
+.bt-xp-row {
+  padding: 16px 0; border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: baseline;
+}
+.bt-xp-row:last-child { border-bottom: 1px solid var(--rule); }
+.bt-xp-when {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  color: rgba(26, 24, 20, 0.5); white-space: nowrap;
+}
+.bt-xp-role {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 21px; letter-spacing: -0.02em;
+}
+.bt-xp-role small { font-weight: 400; font-size: inherit; color: var(--ink-3); }
+
+/* -------- About: short version of #/about, rows reuse .bt-xp-row -------- */
+.bt-about {
+  flex: 1; margin-top: 22px;
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: center;
+}
+.bt-chapter--about .bt-display { font-size: clamp(44px, 6.4vw, 88px); line-height: 1.05; }
+.bt-about-text .bt-lead { margin-top: 28px; }
+.bt-about-rows { margin-top: 28px; max-width: 640px; }
+.bt-about-rows .bt-xp-role { font-size: 19px; }
+.bt-about-rows .bt-xp-when { text-transform: uppercase; }
+.bt-about-portrait {
+  position: relative; justify-self: end; width: 100%; max-width: 360px;
+  aspect-ratio: 4 / 5; border: 2px solid var(--ink); border-radius: 12px;
+  background: var(--paper-2); transform: rotate(1.2deg);
+}
+.bt-about-portrait video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; border-radius: 10px; display: block; }
+.bt-about-label {
+  position: absolute; left: 14px; bottom: -16px;
+  font-family: var(--font-hand); font-size: 22px; line-height: 1.1;
+  color: var(--ink); background: var(--paper);
+  padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px;
+}
+
+/* -------- Contact -------- */
+.bt-contact-grid {
+  margin-top: auto;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+}
+.bt-tile {
+  display: flex; flex-direction: column; gap: 30px; padding: 24px;
+  border: 2px solid var(--paper); border-radius: 14px;
+  color: var(--paper); text-decoration: none;
+  background-image: linear-gradient(var(--bt-tile-color), var(--bt-tile-color));
+  background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 0;
+  transition: background-size 0.25s ease, color 0.25s ease;
+}
+.bt-tile:hover { background-size: 100% 100%; }
+.bt-tile--rose { --bt-tile-color: var(--bt-rose); }
+.bt-tile--cobalt { --bt-tile-color: var(--bt-cobalt); }
+.bt-tile--mustard { --bt-tile-color: var(--bt-mustard); }
+.bt-tile--rose:hover, .bt-tile--mustard:hover { color: var(--ink); }
+.bt-tile-k {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.bt-tile-v {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 23px; letter-spacing: -0.02em; overflow-wrap: anywhere;
+}
+.bt-colophon {
+  margin-top: 36px; padding-top: 16px;
+  border-top: 1px solid rgba(244, 239, 230, 0.2);
+  display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 12px; color: rgba(244, 239, 230, 0.6);
+}
+.bt-colophon a { color: inherit; text-decoration: none; }
+.bt-colophon a:hover { color: var(--paper); }
+
+/* -------- Route nav (fixed) -------- */
+.bt-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 64px;
+  background: var(--bt-fade);
+  transition: background 0.3s ease;
+}
+.bt-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; font-weight: 600;
+  background: var(--bt-bg); color: var(--bt-ink);
+  padding: 8px 14px; border: 2px solid var(--bt-ink); border-radius: 999px;
+  text-decoration: none; transition: all 0.3s ease;
+}
+.bt-logo::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--bt-cobalt);
+}
+.bt-nav-links { display: flex; align-items: center; gap: 26px; }
+.bt-nav-link {
+  font-family: var(--font-body); font-size: 15px; font-weight: 500;
+  color: var(--bt-muted); text-decoration: none;
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-color 0.2s ease;
+}
+.bt-nav-link:hover { border-bottom-color: var(--bt-rose); }
+.bt-nav-link.is-current { color: var(--bt-ink); border-bottom-color: var(--bt-cobalt); }
+.bt-nav-cta {
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  color: var(--bt-ink); text-decoration: none;
+  padding: 8px 15px; border: 1.5px solid var(--bt-ink); border-radius: 999px;
+  transition: all 0.3s ease;
+}
+.bt-nav-cta:hover { background: var(--bt-rose); color: var(--ink); border-color: var(--bt-rose); }
+
+/* Chapter progress: four segments, filled up to the current chapter
+   (driven by js/bold-home.js). Along the top on mobile, a vertical rail in
+   the left gutter on desktop, where the nav already has enough going on.
+   Only the home nav has the element, so other Bold Type pages are untouched. */
+.bt-nav-progress { display: flex; gap: 4px; }
+.bt-nav-progress span {
+  flex: 1; height: 4px; border-radius: 2px;
+  background: var(--bt-rule); transition: background 0.25s ease;
+}
+.bt-nav-progress span.is-done { background: var(--chapter-color); }
+@media (min-width: 901px) {
+  /* Runs the full height of the screen, like the mobile bar runs the full
+     width: four long, calm segments instead of a small cluster. */
+  .bt-nav-progress {
+    position: fixed; left: 28px; top: 22px; bottom: 22px;
+    flex-direction: column; gap: 6px;
+  }
+  .bt-nav-progress span { flex: 1; width: 4px; height: auto; }
+}
+/* Mobile-only nav bits: counter, menu button. */
+.bt-nav-right { display: none; }
+
+/* ==========================================================================
+   Mobile (3b): same chapters, progress bar on top instead of the rail.
+   ========================================================================== */
+@media (max-width: 900px) {
+  .bt-chapter { padding: 96px 22px 36px; gap: 18px; }
+  .bt-chapter--contact { padding-bottom: 26px; gap: 16px; }
+  .bt-chapter--intro { padding-bottom: 0; }
+  .bt-chapter--intro .bt-display { margin-top: 0; font-size: clamp(48px, 16.4vw, 72px); line-height: 1.02; }
+  .bt-chapter--work .bt-display { margin-top: 0; font-size: clamp(40px, 13.3vw, 58px); line-height: 1.1; letter-spacing: -0.045em; }
+  .bt-work-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .bt-work-all { margin: 0 0 0 -8px; font-size: 16px; }
+  .bt-chapter--contact .bt-display { margin-top: 0; font-size: clamp(38px, 12.8vw, 56px); line-height: 1.08; letter-spacing: -0.045em; }
+  .bt-kicker { font-size: 11px; }
+  .bt-lead { font-size: 16px; }
+  .bt-intro-foot { margin-top: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .bt-logos { margin: auto 0 0; padding: 26px 0; }
+  .bt-chapter:not(.bt-chapter--intro):not(.bt-chapter--contact)::before { left: 22px; right: 22px; }
+  [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
+  [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
+  .bt-swipe {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--font-hand); font-size: 23px;
+  }
+  .bt-swipe svg { width: 22px; height: 34px; color: var(--ink); }
+  .bt-swipe svg path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  .bt-work-grid { grid-template-columns: 1fr; gap: 14px; }
+  .bt-card {
+    display: grid; grid-template-columns: 110px 1fr; gap: 14px; align-items: center;
+    transform: none;
+  }
+  .bt-card-cover { width: 110px; aspect-ratio: 110 / 76; border-radius: 6px; }
+  .bt-card-title { font-size: 23px; padding: 0; background-image: none; }
+  .bt-card-sub { font-size: 13px; padding: 0; }
+  .bt-card-text { display: flex; flex-direction: column; gap: 2px; }
+
+  .bt-xp { grid-template-columns: 1fr; gap: 18px; align-items: start; }
+  .bt-xp-headline { margin-top: 10px; font-size: 44px; line-height: 1.12; letter-spacing: -0.035em; }
+  .bt-xp-cv { margin-top: 12px; }
+  .bt-xp-copy { font-size: 15px; margin-bottom: 0; }
+  .bt-xp-rows { margin-top: auto; }
+  .bt-xp-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+  .bt-xp-when { display: none; }
+  .bt-xp-role { font-size: 17px; }
+
+  .bt-about { margin-top: 0; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  .bt-chapter--about .bt-display { font-size: clamp(36px, 11vw, 52px); line-height: 1.1; letter-spacing: -0.045em; }
+  .bt-about-text .bt-lead, .bt-about-rows { margin-top: 18px; }
+  .bt-about-rows .bt-xp-when { display: block; }
+  .bt-about-rows .bt-xp-role { font-size: 16px; }
+  .bt-about-portrait { order: -1; justify-self: start; max-width: 150px; margin-right: 0; transform: rotate(-1.5deg); }
+  .bt-about-label { left: 8px; bottom: -12px; font-size: 17px; padding: 2px 10px; }
+
+  .bt-contact-grid { grid-template-columns: 1fr; gap: 10px; }
+  .bt-tile { flex-direction: row; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 12px; min-height: 24px; }
+  .bt-tile--rose { background-size: 100% 100%; color: var(--ink); }
+  .bt-tile--rose .bt-tile-k { order: -1; }
+  .bt-tile--rose { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .bt-tile-k { font-size: 10px; }
+  .bt-tile-v { font-size: 19px; }
+  .bt-tile--cobalt .bt-tile-k, .bt-tile--mustard .bt-tile-k { display: none; }
+  .bt-tile--cobalt .bt-tile-v::after, .bt-tile--mustard .bt-tile-v::after { content: none; }
+  .bt-tile-arrow { display: inline; }
+  .bt-colophon { margin-top: 0; padding-top: 12px; font-size: 11px; }
+  .bt-colophon span:last-child { display: none; }
+
+  .bt-nav { padding: 14px 22px; flex-direction: column; align-items: stretch; gap: 12px; pointer-events: none; }
+  .bt-nav > * { pointer-events: auto; }
+  .bt-nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .bt-logo { font-size: 11px; padding: 8px 12px; gap: 8px; }
+  .bt-logo::before { width: 8px; height: 8px; }
+  .bt-nav-links { display: none; }
+  .bt-nav-right { display: flex; align-items: center; gap: 12px; }
+  .bt-nav-count {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--bt-ink);
+    font-variant-numeric: tabular-nums; min-width: 52px; text-align: right; transition: color 0.3s ease;
+  }
+  .bt-nav-menu {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    background: none; border: 0; padding: 0; cursor: pointer; color: var(--bt-ink); transition: color 0.3s ease;
+  }
+  .bt-nav-menu svg { width: 26px; height: 26px; fill: currentColor; }
+}
+@media (min-width: 901px) {
+  .bt-tile-arrow { display: none; }
+  .bt-nav-row { display: contents; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt-card, .bt-card-cover, .bt-card-title, .bt-tile { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type about — #/about-bold
+   The v1 About structure (pinned scrolly .ahs from v1.css + app.js) in the
+   Bold Type dress: Bricolage headlines, highlight blobs, framed photos with
+   handwritten pill captions, mono chapter rail. Overrides only what differs.
+   ========================================================================== */
+.bt--about { min-height: 100vh; }
+.bt-wrap { padding: 0 64px; }
+.bt-inline-link {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt);
+}
+.bt-inline-link:hover { background: var(--bt-rose); }
+
+/* Nav: no chapter rail on this page, so the mobile bar is just logo + menu. */
+.bt--about .bt-nav-progress, .bt--about .bt-nav-count { display: none; }
+
+/* Scrolly: room for the fixed nav on top, mast in display type. */
+.bt.bt--about .ahs-pin { padding-top: var(--bt-hero-top); }
+/* Unlike the v1 About, the "Hello, I'm Lisanne." mast doesn't stay as a
+   small masthead: it folds away completely as chapter 01 takes over, so
+   the chapters start at the top. Desktop only; on narrow screens the
+   scrolly is a plain stacked page and --collapse is pinned to 1. */
+@media (min-width: 881px) {
+  .bt--about .ahs-mast {
+    transform: none;
+    margin-bottom: 0;
+    max-height: calc((1 - var(--collapse)) * 70vh);
+    overflow: hidden;
+    opacity: calc(1 - var(--collapse) * 1.6);
+    transition: max-height 120ms linear, opacity 120ms linear;
+  }
+}
+.bt--about .ahs-eyebrow { margin-bottom: 1.25rem; }
+.bt--about .ahs-h1 { font-size: clamp(56px, 8.6vw, 132px); line-height: 1; letter-spacing: -0.05em; }
+.bt--about .ahs-lead { top: clamp(1.5rem, 4vh, 2.5rem); }
+.bt--about .ahs-num { color: var(--ink); margin-bottom: 1.1rem; }
+.bt--about .ahs-step-h {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(36px, 4.4vw, 68px); line-height: 1.08; letter-spacing: -0.045em;
+  margin: 0 0 1.25rem;
+}
+.bt--about .ahs-step-h .bt-mark { padding: 0 0.08em; }
+.bt--about .ahs-step-p { font-size: 16px; line-height: 1.6; }
+/* v1.css shrinks the long free-time chapter on short or narrow windows; the
+   taller photo frame leaves room for it, so all three chapters match. */
+@media (min-width: 901px) {
+  .bt.bt--about .ahs-step--long .ahs-step-p { font-size: 16px; line-height: 1.6; }
+}
+
+/* Chapter rail under the text, in the rail's mono voice. */
+.bt--about .ahs-rail { border-top: 2px solid var(--ink); }
+.bt--about .ahs-rail button { color: rgba(26, 24, 20, 0.45); letter-spacing: 0.12em; border-top-width: 3px; }
+.bt--about .ahs-rail button:hover { color: var(--ink); }
+.bt--about .ahs-rail button.is-active { color: var(--ink); border-top-color: var(--bt-cobalt); }
+.bt--about .ahs-progress { color: var(--ink); font-variant-numeric: tabular-nums; }
+.bt--about .ahs-progress [data-current] { color: var(--ink); }
+
+/* Photos: hard ink frame, slight tilt, and the design's handwritten pill
+   hanging off the bottom-left corner. Chapter photos fade in black-and-white
+   and bloom into color once their step is active (scroll-driven, so it works
+   without hover). The portrait video is already active on load, so it blooms
+   with a keyframe animation instead, which replays whenever it turns active
+   again on scroll-up. */
+.bt--about .ahs-images {
+  border: 2px solid var(--ink); border-radius: 10px; background: var(--paper-2);
+  overflow: visible; max-width: 360px; transform: rotate(1.5deg);
+}
+/* Desktop: a taller 9:16 frame (same 360px width) so the block fills more of
+   the screen under the shared hero top. Capped to the space left below that
+   top and above the pin's bottom padding, so short windows never overflow. */
+@media (min-width: 881px) {
+  .bt.bt--about .ahs-images {
+    aspect-ratio: 9 / 16;
+    max-height: calc(100svh - var(--bt-hero-top) - clamp(1.5rem, 4vh, 3rem) - 1.5rem);
+  }
+}
+/* Radius clips the photo (it's a background), so overflow stays visible and
+   the caption pill can hang past the frame edge. */
+.bt--about .ahs-img { border-radius: 8px; padding: 0; }
+.bt--about .ahs-video { border-radius: 8px; }
+.bt--about .ahs-img[data-step] { filter: grayscale(1); }
+.bt--about .ahs-img[data-step].is-active { filter: grayscale(0); transition-delay: 0ms, 0ms, 450ms; }
+.bt--about .ahs-portrait .ahs-video { filter: grayscale(1); }
+.bt--about .ahs-portrait.is-active .ahs-video { filter: grayscale(0); animation: bt-bloom 1600ms var(--ease-out) 500ms both; }
+@keyframes bt-bloom { from { filter: grayscale(1); } to { filter: grayscale(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .bt--about .ahs-portrait.is-active .ahs-video { animation: none; }
+}
+.bt--about .ahs-img-label {
+  position: absolute; left: 14px; bottom: -16px;
+  font-family: var(--font-hand); font-size: 22px; line-height: 1.1; letter-spacing: 0; text-transform: none;
+  color: var(--ink); background: var(--paper);
+  padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px;
+  backdrop-filter: none;
+}
+.bt--about .ahs-portrait { background: var(--paper-2); }
+
+/* Experience: chapter 04, full width under the scrolly. The block itself
+   (.bt-xp and friends) keeps the styles from the home section above. */
+.bt-xp-section {
+  display: flex; flex-direction: column; gap: 28px;
+  padding: 0 0 clamp(3rem, 8vw, 5rem); margin-bottom: clamp(3rem, 8vw, 5rem);
+  border-bottom: 2px solid var(--ink);
+}
+.bt-xp-section .bt-xp { flex: none; align-items: start; }
+
+/* Inspiration: the sixth chapter, full width under Experience. */
+.bt-inspire { display: flex; flex-direction: column; gap: 28px; padding: 0 0 36px; scroll-margin-top: 96px; }
+.bt-inspire-h { font-size: clamp(34px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; max-width: 22ch; }
+/* Hovering "inspiring" turns the blob dark and runs a rainbow through the word. */
+.bt-inspire-h .bt-mark svg path { transition: fill 0.25s ease; }
+.bt-inspire-h .bt-mark:hover svg path { fill: var(--ink); }
+.bt-inspire-h .bt-mark:hover > span {
+  background: linear-gradient(90deg, #ff5f6d, #ffb347, #ffe066, #6ee7a8, #5ac8fa, #8f7cff, #ff7ad9, #ff5f6d);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  animation: bt-rainbow 2.4s linear infinite;
+}
+@keyframes bt-rainbow { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .bt-inspire-h .bt-mark:hover > span { animation: none; }
+}
+.bt-video { border: 2px solid var(--ink); border-radius: 12px; }
+.bt-colophon--light {
+  margin-top: 8px; border-top-color: var(--rule); color: var(--ink-3);
+}
+.bt-colophon--light a:hover { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .bt-wrap { padding: 0 22px; }
+  .bt.bt--about .ahs-pin { padding-top: 6rem; }
+  .bt--about .ahs-h1 { font-size: clamp(48px, 15.9vw, 62px); }
+  .bt--about .ahs-images {
+    transform: none; max-width: none; height: 220px; aspect-ratio: auto;
+    margin-bottom: 12px;
+  }
+  .bt--about .ahs-img-label { left: 10px; bottom: -12px; font-size: 18px; padding: 2px 10px; }
+  .bt--about .ahs-step { border-top: 2px solid var(--ink); padding: 1.6rem 0; }
+  .bt--about .ahs-step-h { font-size: 34px; line-height: 1.12; letter-spacing: -0.04em; }
+  .bt--about .ahs-step-p { font-size: 13.5px; line-height: 1.5; }
+  .bt-inspire { padding-top: 1rem; gap: 22px; }
+  .bt-inspire-h { font-size: 38px; line-height: 1.15; }
+  .bt-video { border-radius: 10px; }
+  .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type work — #/work-bold
+   The v1 Work structure (filter chips, case ledger, visuals teaser; all
+   rendered by app.js into the shared .v1-work-* classes) in the Bold Type
+   dress. Overrides only what differs from v1.css.
+   ========================================================================== */
+.bt--work { min-height: 100vh; }
+.bt-page { padding-top: var(--bt-hero-top); padding-bottom: 36px; }
+.bt-page-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+/* Proximity: the filters belong to the list they control, so the big gap
+   sits between the intro and the filters, and the filters hug the list. */
+.bt--work .bt-page-head { margin-bottom: clamp(3.5rem, 9vw, 6.5rem); }
+.bt-page-h1 { margin: 22px 0 0; font-size: clamp(56px, 8.6vw, 120px); line-height: 1; }
+.bt-page-head .bt-lead { margin-top: 32px; }
+
+/* Filters: a quiet mono text row, no pills. The active filter is ink with
+   a rose underline; counts sit as small superscripts. */
+.bt--work .bt-work-filters {
+  border-bottom: 2px solid var(--ink); margin-bottom: 0; padding-bottom: 10px;
+  gap: 6px 28px;
+}
+.bt--work .v1-work-chip {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); border: none; border-radius: 0; background: none;
+  padding: 4px 0; gap: 3px; align-items: flex-start;
+  transition: color 0.18s ease, box-shadow 0.18s ease;
+}
+.bt--work .v1-work-chip:hover:not(:disabled) { color: var(--ink); background: none; }
+.bt--work .v1-work-chip.is-active { color: var(--ink); background: none; box-shadow: inset 0 -2px 0 var(--bt-rose); }
+.bt--work .v1-work-chip-count,
+.bt--work .v1-work-chip.is-active .v1-work-chip-count {
+  background: none; padding: 0; min-width: 0; font-size: 9px; line-height: 1;
+  color: var(--ink-3); transform: translateY(-1px);
+}
+
+/* Ledger rows: quiet at rest, loud on hover. Mono index, Bricolage title
+   whose rose marker only appears on hover. */
+.bt--work .v1-work-row { border-bottom: 2px solid var(--ink); padding: 28px 0; gap: 28px; }
+.bt--work .v1-work-row:last-child { border-bottom: 2px solid var(--ink); }
+.bt--work .v1-work-row:hover { color: var(--ink); padding-left: 0; }
+.bt--work .v1-work-row .n { color: var(--ink-3); font-size: 11px; letter-spacing: 0.14em; }
+.bt--work .v1-work-row .body { gap: 10px; justify-items: start; }
+.bt--work .v1-work-row .title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(24px, 2.8vw, 36px); line-height: 1.1; letter-spacing: -0.03em;
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-rose), var(--bt-rose));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0;
+  transition: background-size 0.22s ease;
+}
+.bt--work .v1-work-row:hover .title { background-size: 100% 0.9em; }
+.bt--work .v1-work-row .sub {
+  max-width: 58ch; font-size: 17px; line-height: 1.5; color: var(--ink-2);
+}
+.bt--work .v1-work-row .intro { color: var(--ink-3); }
+.bt--work .v1-work-row:hover .intro { color: var(--ink); }
+
+/* The stat stamp: an ink outline at rest, filled ink with the mustard
+   number on hover, straightening up as it fills. The cover thumb follows
+   the same tilt. */
+.bt--work .v1-work-stamp {
+  border-radius: 14px; box-shadow: none; border: 2px solid var(--ink);
+  background: transparent; color: var(--ink); padding: 12px 18px 14px;
+  transition: transform 0.22s ease, background-color 0.22s ease;
+}
+.bt--work .v1-work-stamp .v {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 28px; letter-spacing: -0.03em; color: var(--ink);
+  transition: color 0.22s ease;
+}
+.bt--work .v1-work-stamp .k { color: var(--ink-3); font-size: 10px; letter-spacing: 0.14em; transition: color 0.22s ease; }
+.bt--work .v1-work-row:hover .v1-work-stamp { background: var(--ink); transform: rotate(0deg) scale(1.04); box-shadow: none; }
+.bt--work .v1-work-row:hover .v1-work-stamp .v { color: var(--bt-mustard); }
+.bt--work .v1-work-row:hover .v1-work-stamp .k { color: rgba(244, 239, 230, 0.7); }
+.bt--work .v1-work-thumb {
+  border-radius: 8px; box-shadow: none; border: 2px solid var(--ink);
+  transform: rotate(-3deg); transition: transform 0.22s ease;
+}
+.bt--work .v1-work-row:hover .v1-work-thumb { transform: rotate(0deg) scale(1.04); }
+.bt--work .v1-work-empty { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2rem 0; }
+
+/* Visuals teaser. */
+.bt-teaser { margin-top: clamp(4rem, 10vw, 7rem); }
+.bt-teaser-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 32px;
+}
+.bt-teaser-h { margin: 22px 0 0; font-size: clamp(38px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; }
+.bt-teaser-lead { margin-top: 20px; font-size: 17px; max-width: 48ch; }
+.bt-teaser-link { flex-shrink: 0; margin-top: 0; }
+/* One frame only: the card carries the ink border, the image and the hover
+   scrim sit inside it with the inner radius (outer 10px minus 2px border). */
+.bt--work .bt-teaser-grid .v1-visual-card { border: 2px solid var(--ink); border-radius: 10px; box-shadow: none; overflow: hidden; }
+.bt--work .bt-teaser-grid .v1-visual-thumb { border: none; border-radius: 8px; }
+/* The grid stretches all three cards to the tallest one, so a thumb at its
+   natural ratio came up a pixel short and the page showed through as a pale
+   line along the bottom. Fill the card instead (cropping a hair). */
+.bt--work .bt-teaser-grid img.v1-visual-thumb { flex: 1; min-height: 0; object-fit: cover; }
+.bt--work .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  .bt-page { padding-top: 6rem; }
+  .bt-page-h1 { font-size: clamp(44px, 14.4vw, 56px); }
+  .bt-page-head .bt-lead { margin-top: 20px; }
+  .bt--work .v1-work-row { padding: 20px 0; gap: 14px; }
+  .bt--work .v1-work-row .title { font-size: 23px; }
+  .bt--work .v1-work-row .sub { font-size: 15px; }
+  .bt-teaser-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .bt-teaser-h { font-size: 34px; }
+  .bt--work .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type case study — #/work-bold/<slug>
+   The v1 case (renderV1Case in app.js: impact grid, story blocks,
+   framework table, flow chips, limitations card, TOC fab, next case) in
+   the Bold Type dress. The site accent flips to cobalt inside this root,
+   which recolors the section numbers, chips, arrows and hover states that
+   the shared markup paints with var(--accent); the rest is ink frames and
+   Bricolage headlines. Overrides only what differs from v1.css.
+   ========================================================================== */
+.bt--case { min-height: 100vh; --accent: var(--bt-cobalt); }
+.bt--case .bt-nav-progress, .bt--case .bt-nav-count { display: none; }
+.bt-back {
+  display: inline-block; margin: 0 0 40px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+  transition: background 0.2s ease;
+}
+.bt-back:hover { background: var(--bt-rose); }
+.bt-case-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.bt-case-title { margin: 22px 0 0; max-width: 16ch; font-size: clamp(44px, 6.4vw, 88px); line-height: 1; }
+.bt-case-sub { margin-top: 28px; }
+
+/* Impact grid: four ink-framed tiles, the metric on rose. */
+[data-variation="v1"] .bt--case .v1-impact-grid {
+  gap: 16px; border: 0; border-radius: 0; overflow: visible; background: none;
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+[data-variation="v1"] .bt--case .v1-impact-cell {
+  padding: 22px 24px; border: 2px solid var(--ink); border-radius: 14px; background: var(--paper);
+  display: flex; flex-direction: column;
+}
+[data-variation="v1"] .bt--case .v1-impact-cell:first-child { background: var(--bt-rose); }
+[data-variation="v1"] .bt--case .v1-impact-cell-label {
+  font-size: 11px; letter-spacing: 0.16em; color: var(--ink); margin-bottom: 14px;
+}
+[data-variation="v1"] .bt--case .v1-impact-cell .lv-body { color: var(--ink); font-size: 14px; order: 3; margin: 10px 0 0; }
+[data-variation="v1"] .bt--case .v1-impact-num {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(40px, 4.6vw, 60px); line-height: 1; letter-spacing: -0.04em; color: var(--ink);
+  margin-top: auto;
+}
+[data-variation="v1"] .bt--case .v1-impact-meta {
+  font-family: var(--bt-font-display); font-weight: 700;
+  font-size: 20px; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin-top: auto;
+}
+
+/* NDA note: one ink-framed strip under the impact grid, with the contact CTA. */
+[data-variation="v1"] .bt--case .v1-nda-note {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 18px 24px; border: 2px solid var(--ink); border-radius: 14px; background: var(--paper);
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+[data-variation="v1"] .bt--case .v1-nda-text { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink); }
+[data-variation="v1"] .bt--case .v1-nda-cta { flex: 0 0 auto; white-space: nowrap; }
+@media (max-width: 720px) {
+  [data-variation="v1"] .bt--case .v1-nda-note { flex-direction: column; align-items: flex-start; padding: 16px 18px; }
+  [data-variation="v1"] .bt--case .v1-nda-cta { width: 100%; justify-content: center; }
+}
+
+/* Story: 2px rules between sections, numbered pills cycling the three colors. */
+.bt-case > div { max-width: 820px; }
+[data-variation="v1"] .bt--case .v1-story-block { padding: 40px 0; border-top: 2px solid var(--ink); }
+[data-variation="v1"] .bt--case .v1-story-block:first-child { border-top: 0; padding-top: 0; }
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-num {
+  display: inline-block; margin: 0 0 18px;
+  font-size: 11px; letter-spacing: 0.16em; color: var(--ink);
+  background: var(--bt-num, var(--bt-rose)); padding: 5px 10px;
+  border: 2px solid var(--ink); border-radius: 999px;
+}
+.bt--case section:nth-of-type(3n + 2) { --bt-num: var(--bt-cobalt); }
+.bt--case section:nth-of-type(3n + 3) { --bt-num: var(--bt-mustard); }
+[data-variation="v1"] .bt--case section:nth-of-type(3n + 2) .lv-section-num { color: var(--paper); }
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(30px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.04em;
+  margin: 0 0 22px;
+}
+[data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 19px; line-height: 1.6; max-width: none; }
+[data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 17px; line-height: 1.68; max-width: none; }
+[data-variation="v1"] .bt--case .v1-story-block p a,
+[data-variation="v1"] .bt--case .lv-post-link {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt); transition: background 0.2s ease;
+}
+[data-variation="v1"] .bt--case .v1-story-block p a:hover,
+[data-variation="v1"] .bt--case .lv-post-link:hover { background: var(--bt-rose); }
+[data-variation="v1"] .bt--case .lv-post-figure .frame,
+[data-variation="v1"] .bt--case .lv-post-figure .shot { border: 2px solid var(--ink); border-radius: 10px; }
+[data-variation="v1"] .bt--case .lv-post-figure figcaption { color: var(--ink); }
+
+/* Framework table + flow chips. */
+[data-variation="v1"] .bt--case .v1-framework { background: var(--paper); border: 2px solid var(--ink); border-radius: 12px; margin-top: 24px; }
+[data-variation="v1"] .bt--case .v1-framework-row { border-top: 2px solid var(--ink); padding: 16px 20px; }
+[data-variation="v1"] .bt--case .v1-framework-row:first-child { border-top: 0; }
+[data-variation="v1"] .bt--case .v1-framework-row > *:first-child {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 700; font-size: 19px; letter-spacing: -0.02em;
+}
+[data-variation="v1"] .bt--case .v1-framework-row > *:nth-child(2) { font-size: 12px; letter-spacing: 0.08em; }
+[data-variation="v1"] .bt--case .v1-framework-row > *:nth-child(3) { font-size: 16px; }
+[data-variation="v1"] .bt--case .v1-chip {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); background: var(--paper); border: 2px solid var(--ink); border-radius: 999px;
+}
+
+/* Limitations card: a small stack of two index cards. Both faces share one
+   grid cell, so the stack is as tall as the longer face. The card on top
+   tilts a little and casts a hard ink shadow; the other one peeks out
+   behind it in its marker color (mustard = limitations, rose =
+   opportunities), content hidden. Flipping swaps the two instead of
+   turning the card in 3D. */
+[data-variation="v1"] .bt--case .v1-limitations-card { margin: 48px 18px 24px 0; perspective: none; }
+[data-variation="v1"] .bt--case .v1-limitations-card .v1-limitations-card-inner { display: grid; transform: none; transition: none; }
+[data-variation="v1"] .bt--case .v1-limitations-face { grid-area: 1 / 1; }
+[data-variation="v1"] .bt--case .v1-limitations-face.is-back { position: relative; inset: auto; }
+[data-variation="v1"] .bt--case .v1-limitations-face {
+  --face-color: var(--bt-mustard);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 28px 32px;
+  backface-visibility: visible; -webkit-backface-visibility: visible;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s, background-color 0.45s;
+}
+[data-variation="v1"] .bt--case .v1-limitations-face.is-opp { --face-color: var(--bt-rose); }
+/* On top: front face by default, back face once flipped. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back {
+  z-index: 2; transform: rotate(-0.6deg); box-shadow: 6px 6px 0 var(--ink);
+}
+/* Underneath: offset, tilted the other way, filled with its marker color. */
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front {
+  z-index: 1; transform: rotate(1.6deg) translate(14px, 10px); box-shadow: none;
+  background-color: var(--face-color);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back > *,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front > * { visibility: hidden; }
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-front,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-back {
+  transform: rotate(-1deg) translateY(-3px); box-shadow: 9px 9px 0 var(--ink);
+}
+[data-variation="v1"] .bt--case .v1-limitations-card:hover:not(.is-flipped) .is-back,
+[data-variation="v1"] .bt--case .v1-limitations-card.is-flipped:hover .is-front {
+  transform: rotate(2.4deg) translate(18px, 12px);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-variation="v1"] .bt--case .v1-limitations-face { transition: none; }
+}
+[data-variation="v1"] .bt--case .v1-limitations-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
+[data-variation="v1"] .bt--case .v1-limitations-flip {
+  border: 2px solid var(--ink); color: var(--ink); font-size: 11px; letter-spacing: 0.12em; padding: 7px 12px;
+}
+[data-variation="v1"] .bt--case .v1-limitations-flip:hover { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); }
+[data-variation="v1"] .bt--case .v1-limitations-info-btn { border: 2px solid var(--ink); color: var(--ink); font-family: var(--font-mono); font-style: normal; font-size: 11px; }
+[data-variation="v1"] .bt--case .v1-limitations-info-btn:hover,
+[data-variation="v1"] .bt--case .v1-limitations-info-btn[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+[data-variation="v1"] .bt--case .v1-limitations-info-popover {
+  border: 2px solid var(--ink); border-radius: 10px; box-shadow: none;
+  font-family: var(--font-body); font-style: normal; font-size: 15px; color: var(--ink);
+}
+[data-variation="v1"] .bt--case .v1-limitation-row h4 {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 700;
+  font-size: 20px; letter-spacing: -0.02em; line-height: 1.2;
+  display: inline; padding: 0 2px;
+  background-image: linear-gradient(var(--face-color), var(--face-color));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.3em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+[data-variation="v1"] .bt--case .v1-limitation-row p { font-size: 15px; line-height: 1.6; margin-top: 8px; }
+
+/* TOC fab + next case. */
+.bt--case .lv-toc-fab { border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
+.bt--case .lv-toc-fab:hover, .bt--case .lv-toc-fab:focus-visible, .bt--case .lv-toc-fab.is-open { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); box-shadow: none; }
+.bt--case .lv-toc-popover { border: 2px solid var(--ink); border-radius: 12px; box-shadow: none; }
+.bt--case .lv-toc-popover::before { border-color: var(--ink); border-width: 2px; }
+.bt--case .lv-toc-popover .eyebrow { color: var(--ink); }
+.bt--case .lv-toc-popover li.is-lim { border-top: 2px solid var(--ink); }
+.bt--case .lv-next-case { margin-top: 64px; padding: 32px 0 0; border-top: 2px solid var(--ink); }
+.bt--case .lv-next-label { color: var(--ink); font-size: 11px; letter-spacing: 0.16em; }
+/* Same link logic as the Work list titles: rose underline grows into a marker. */
+[data-variation="v1"] .bt--case .lv-next-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(24px, 2.8vw, 36px); line-height: 1.15; letter-spacing: -0.03em;
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-rose), var(--bt-rose));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease;
+}
+.bt--case .lv-next-case:hover .lv-next-title,
+.bt--case .lv-next-case:focus-visible .lv-next-title { background-size: 100% 0.9em; }
+.bt--case .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Line the button and the expanded card up with the page's right edge. */
+@media (min-width: 1101px) {
+  .bt--case .lv-toc-fab { right: 64px; }
+}
+@media (min-width: 1320px) {
+  .bt--case .lv-toc-fab.is-expanded,
+  .bt--case .lv-toc-fab.is-expanded:hover,
+  .bt--case .lv-toc-fab.is-expanded:focus-visible { background: transparent; border-color: transparent; color: transparent; }
+}
+@media (max-width: 900px) {
+  .bt-back { margin-bottom: 28px; }
+  .bt-case-title { font-size: clamp(34px, 10vw, 44px); line-height: 1.04; letter-spacing: -0.045em; }
+  .bt-case-sub { margin-top: 18px; }
+  [data-variation="v1"] .bt--case .v1-impact-grid { gap: 10px; }
+  [data-variation="v1"] .bt--case .v1-impact-cell { border: 2px solid var(--ink); padding: 16px 18px; }
+  [data-variation="v1"] .bt--case .v1-impact-num { font-size: 40px; margin-top: 8px; }
+  [data-variation="v1"] .bt--case .v1-story-block { padding: 28px 0; }
+  [data-variation="v1"] .bt--case .v1-story-block .lv-section-title { font-size: 28px; }
+  [data-variation="v1"] .bt--case .v1-story-block .lv-section-title + p { font-size: 17px; }
+  [data-variation="v1"] .bt--case .v1-story-block p + p { font-size: 16px; }
+  [data-variation="v1"] .bt--case .v1-limitations-face { padding: 22px 20px 24px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card { margin-right: 10px; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-front,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-back { transform: none; }
+  [data-variation="v1"] .bt--case .v1-limitations-card:not(.is-flipped) .is-back,
+  [data-variation="v1"] .bt--case .v1-limitations-card.is-flipped .is-front { transform: translate(8px, 8px); }
+  .bt--case .bt-colophon--light span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type sketchbook — #/sketchbook-bold
+   The v1 Sketchbook gallery (cards + lightbox from app.js, shared
+   .v1-visual-* classes) in the Bold Type dress: ink-framed thumbs with a
+   slight tilt, the medium as a handwritten pill hanging off the frame,
+   Bricolage titles with the growing underline from the home cards.
+   ========================================================================== */
+.bt--sketch { min-height: 100vh; }
+.bt--sketch .bt-nav-progress, .bt--sketch .bt-nav-count { display: none; }
+.bt--sketch .bt-page-head .bt-lead { max-width: 56ch; }
+
+[data-variation="v1"] .bt-sketch-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+  padding-top: 8px;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.4s var(--ease-out);
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover,
+[data-variation="v1"] .bt--sketch .v1-visual-card:focus-visible {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+.bt--sketch .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--sketch .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--sketch .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+
+[data-variation="v1"] .bt--sketch .v1-visual-thumb {
+  border: 2px solid var(--ink); border-radius: 10px;
+  background-color: var(--paper-2); transition: none;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover .v1-visual-thumb { box-shadow: none; }
+[data-variation="v1"] .bt--sketch .v1-visual-info { margin-top: 14px; gap: 0; align-items: flex-start; }
+[data-variation="v1"] .bt--sketch .v1-visual-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 26px; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+[data-variation="v1"] .bt--sketch .v1-visual-card:hover .v1-visual-title { background-size: 100% 0.9em; }
+[data-variation="v1"] .bt--sketch .v1-visual-card:nth-child(3n + 2):hover .v1-visual-title { color: var(--paper); }
+/* The medium becomes a handwritten pill hanging off the frame's top-left
+   corner, like the photo captions on #/about-bold. */
+[data-variation="v1"] .bt--sketch .v1-visual-sub {
+  position: absolute; top: -14px; left: 12px; z-index: 1;
+  font-family: var(--font-hand); font-size: 21px; line-height: 1.1;
+  letter-spacing: 0; text-transform: none; color: var(--ink);
+  background: var(--paper); padding: 3px 12px;
+  border: 2px solid var(--ink); border-radius: 999px;
+  transform: rotate(-2deg);
+}
+[data-variation="v1"] .bt--sketch .v1-visual-sub:empty { display: none; }
+
+/* Lightbox (variant "on the table"): the sketch lies on the page with the
+   same ink frame, tilt and marker color as the card it was opened from.
+   A light paper scrim keeps the grid visible behind it. */
+.bt--sketch .v1-sketch-backdrop {
+  background: color-mix(in srgb, var(--paper) 62%, transparent);
+  backdrop-filter: blur(3px);
+}
+.bt--sketch .v1-sketch-photo[data-pos="0"] { --tilt: -1deg; --bt-card-color: var(--bt-rose); }
+.bt--sketch .v1-sketch-photo[data-pos="1"] { --tilt: 0.7deg; --bt-card-color: var(--bt-cobalt); }
+.bt--sketch .v1-sketch-photo[data-pos="2"] { --tilt: -0.5deg; --bt-card-color: var(--bt-mustard); }
+.bt--sketch .v1-sketch-img {
+  border: 2px solid var(--ink); border-radius: 10px; box-shadow: 8px 8px 0 var(--ink);
+}
+.bt--sketch .v1-sketch-medium {
+  position: absolute; top: -16px; left: 14px; z-index: 1;
+  font-family: var(--font-hand); font-size: 22px; line-height: 1.1; color: var(--ink);
+  background: var(--paper); padding: 3px 14px;
+  border: 2px solid var(--ink); border-radius: 999px; white-space: nowrap;
+  transform: rotate(-2deg);
+}
+.bt--sketch .v1-sketch-title {
+  display: inline; font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 28px; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 6px; margin-left: -6px;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+}
+.bt--sketch .v1-sketch-btn { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+.bt--sketch .v1-sketch-btn:hover { background: var(--bt-rose); }
+@media (max-width: 640px) {
+  .bt--sketch .v1-sketch-img { box-shadow: 5px 5px 0 var(--ink); }
+  .bt--sketch .v1-sketch-medium { font-size: 18px; padding: 2px 10px; top: -13px; left: 10px; }
+  .bt--sketch .v1-sketch-title { font-size: 23px; }
+}
+.bt--sketch .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  [data-variation="v1"] .bt-sketch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 16px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-card { transform: none; }
+  [data-variation="v1"] .bt--sketch .v1-visual-card:hover,
+  [data-variation="v1"] .bt--sketch .v1-visual-card:focus-visible { transform: none; }
+  [data-variation="v1"] .bt--sketch .v1-visual-thumb { border-radius: 8px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-title { font-size: 20px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-sub { top: -12px; left: 8px; font-size: 17px; padding: 2px 9px; }
+  .bt--sketch .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  [data-variation="v1"] .bt-sketch-grid { grid-template-columns: 1fr; gap: 28px; }
+  [data-variation="v1"] .bt--sketch .v1-visual-title { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--sketch .v1-visual-card, .bt--sketch .v1-visual-title { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type visuals — #/visuals-bold
+   The v1 Visuals masonry (cards from renderVisuals in app.js, shared
+   .v1-visual-* classes) in the Bold Type dress: ink-framed tiles with a
+   slight tilt, the title as a colored label that slides in on hover.
+   The detail overlay (.bt-overlay) sits after <main>, outside this route.
+   ========================================================================== */
+.bt--visuals { min-height: 100vh; }
+.bt--visuals .bt-nav-progress, .bt--visuals .bt-nav-count { display: none; }
+.bt--visuals .bt-page-head .bt-lead { max-width: 56ch; }
+
+[data-variation="v1"] .bt-visuals-grid {
+  display: block;
+  columns: 3; column-gap: 28px;
+  padding-top: 8px;
+}
+[data-variation="v1"] .bt-visuals-grid .v1-visual-card {
+  display: block; width: 100%;
+  break-inside: avoid; margin-bottom: 28px;
+  border: 2px solid var(--ink); border-radius: 10px; overflow: hidden;
+  background: var(--paper-2);
+  /* Scroll reveal: cards fade up as they enter the viewport, staggered
+     per column via --card-i (set inline by app.js). The tilt stays. */
+  opacity: 0; transform: rotate(var(--tilt, 0deg)) translateY(16px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+  transition-delay: calc(var(--card-i, 0) * 70ms);
+}
+[data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in {
+  opacity: 1; transform: rotate(var(--tilt, 0deg));
+}
+[data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in:hover,
+[data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in:focus-visible {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+  transition-delay: 0ms;
+}
+.bt--visuals .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--visuals .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--visuals .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); }
+.bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); }
+[data-variation="v1"] .bt--visuals .v1-visual-thumb { border: 0; border-radius: 0; }
+[data-variation="v1"] .bt--visuals .v1-visual-card:hover .v1-visual-thumb { box-shadow: none; }
+[data-variation="v1"] .bt--visuals .v1-visual-kind {
+  color: var(--ink); font-size: 11px; letter-spacing: 0.14em;
+}
+/* Title label: a colored block in the tile's bottom-left corner that
+   slides in on hover, Bricolage instead of the italic scrim. Shared with
+   the visuals teaser at the foot of Work so both read the same. */
+[data-variation="v1"] .bt--visuals .v1-visual-hover,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover {
+  background: none; padding: 0; border-radius: 0;
+  align-items: flex-end; justify-content: flex-start;
+  opacity: 1;
+}
+[data-variation="v1"] .bt--visuals .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover > span {
+  display: inline-block; max-width: 100%;
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: 20px; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
+  background: var(--bt-card-color); padding: 8px 14px 9px;
+  border-top: 2px solid var(--ink); border-right: 2px solid var(--ink);
+  border-top-right-radius: 8px;
+  transform: translateY(110%);
+  transition: transform 0.3s var(--ease-out);
+}
+[data-variation="v1"] .bt--visuals .v1-visual-card:nth-child(3n + 2) .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:nth-child(3n + 2) .v1-visual-hover > span { color: var(--paper); }
+[data-variation="v1"] .bt--visuals .v1-visual-card:hover .v1-visual-hover > span,
+[data-variation="v1"] .bt--visuals .v1-visual-card:focus-visible .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:hover .v1-visual-hover > span,
+[data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-card:focus-visible .v1-visual-hover > span { transform: none; }
+.bt--visuals .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Detail overlay in the Bold Type dress: ink frame, Bricolage title, the
+   external link as a pill. Outside any .bt root, so the tokens it needs
+   are set here. */
+.bt-overlay { --bt-ink: var(--ink); --bt-bg: var(--paper); --bt-muted: var(--ink-3); }
+.bt-overlay .v1-visual-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+.bt-overlay .v1-visual-stage { border: 2px solid var(--ink); border-radius: 10px; }
+.bt-overlay .v1-visual-eyebrow { color: var(--ink); }
+.bt-overlay .v1-visual-eyebrow span:empty { display: none; }
+.bt-overlay .v1-visual-detail-title {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
+  margin-top: 14px;
+}
+.bt-overlay .v1-visual-detail-blurb { font-size: 16px; line-height: 1.6; }
+.bt-overlay .v1-visual-open {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+  transition: background 0.2s ease;
+}
+.bt-overlay .v1-visual-open:hover { background: var(--bt-rose); color: var(--ink); border-color: var(--ink); }
+.bt-overlay .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+.bt-overlay .lv-book-close:hover { background: var(--bt-rose); }
+
+@media (max-width: 900px) {
+  [data-variation="v1"] .bt-visuals-grid { columns: 2; column-gap: 16px; }
+  [data-variation="v1"] .bt-visuals-grid .v1-visual-card { margin-bottom: 16px; border-radius: 8px; }
+  [data-variation="v1"] .bt-visuals-grid .v1-visual-card,
+  [data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in,
+  [data-variation="v1"] .bt-visuals-grid .v1-visual-card.is-in:hover { --tilt: 0deg; }
+  [data-variation="v1"] .bt--visuals .v1-visual-hover > span,
+  [data-variation="v1"] .bt--work .bt-teaser-grid .v1-visual-hover > span { font-size: 16px; padding: 6px 10px 7px; }
+  .bt--visuals .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  [data-variation="v1"] .bt-visuals-grid { columns: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--visuals .v1-visual-card, .bt--visuals .v1-visual-hover > span,
+  .bt--work .bt-teaser-grid .v1-visual-hover > span { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type bookshelf — #/books
+   The cover grid (cards from renderBooks in app.js, shared .lv-book-*
+   classes) in the Bold Type dress: flat ink-framed covers with a slight
+   tilt instead of the 3D spine, Bricolage titles with the growing
+   underline from the sketchbook. No stats block here.
+   The review overlay (#lv-book-overlay) sits after <main> and is shared
+   with #/books-classic, so its Bold dress keys off the route.
+   ========================================================================== */
+.bt--books { min-height: 100vh; }
+.bt--books .bt-nav-progress, .bt--books .bt-nav-count { display: none; }
+.bt--books .bt-page-head .bt-lead { max-width: 56ch; }
+
+.bt-books-grid.lv-books-grid {
+  margin-top: 0; padding-top: 8px;
+  align-items: start;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 48px 28px;
+}
+.bt--books .lv-book-card { perspective: none; }
+.bt--books .lv-book-card:nth-child(3n + 1) { --bt-card-color: var(--bt-rose); --tilt: -1deg; }
+.bt--books .lv-book-card:nth-child(3n + 2) { --bt-card-color: var(--bt-cobalt); --tilt: 0.7deg; }
+.bt--books .lv-book-card:nth-child(3n + 3) { --bt-card-color: var(--bt-mustard); --tilt: -0.5deg; }
+.bt--books .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.4s var(--ease-out);
+}
+.bt--books .lv-book-card:hover .lv-book-cover,
+.bt--books .lv-book-card:focus-visible .lv-book-cover {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+.bt--books .lv-book-img,
+.bt--books .lv-book-fallback {
+  border: 2px solid var(--ink); border-radius: 8px; box-shadow: none;
+}
+.bt--books .lv-book-fallback { font-family: var(--bt-font-display); font-weight: 800; letter-spacing: -0.02em; }
+.bt--books .lv-book-spine { display: none; }
+
+.bt--books .lv-book-meta { margin-top: 16px; }
+.bt--books .lv-book-title {
+  display: inline; -webkit-line-clamp: unset;
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 19px; line-height: 1.15; letter-spacing: -0.03em; color: var(--ink);
+  padding: 0 4px; margin-left: -4px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background-image: linear-gradient(var(--bt-card-color), var(--bt-card-color));
+  background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0.16em;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+.bt--books .lv-book-card:hover .lv-book-title,
+.bt--books .lv-book-card:focus-visible .lv-book-title { color: var(--ink); background-size: 100% 0.9em; }
+.bt--books .lv-book-card:nth-child(3n + 2):hover .lv-book-title,
+.bt--books .lv-book-card:nth-child(3n + 2):focus-visible .lv-book-title { color: var(--paper); }
+.bt--books .lv-book-author {
+  margin-top: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.bt--books .lv-book-stars { margin-top: 6px; }
+.bt--books .lv-book-star { color: var(--bt-rule); }
+.bt--books .lv-book-star.is-on { color: var(--ink); }
+
+.bt--books .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Review overlay in the Bold Type dress: ink frame, Bricolage title, tags
+   as ink pills, ink stars. Outside any .bt root, so it keys off the route. */
+html[data-route="books-bold"] .lv-book-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-cover img,
+html[data-route="books-bold"] .lv-book-detail-fallback { border: 2px solid var(--ink); border-radius: 8px; box-shadow: none; }
+html[data-route="books-bold"] .lv-book-detail-fallback { font-family: var(--bt-font-display); font-weight: 800; }
+html[data-route="books-bold"] .lv-book-tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); background: none; border: 2px solid var(--ink); padding: 4px 10px;
+}
+html[data-route="books-bold"] .lv-book-tag:first-child { background: var(--bt-rose); }
+html[data-route="books-bold"] .lv-book-detail-title {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
+}
+html[data-route="books-bold"] .lv-book-detail-author {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+html[data-route="books-bold"] .lv-book-star { color: rgba(26, 24, 20, 0.2); }
+html[data-route="books-bold"] .lv-book-star.is-on { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap { border-top: 2px solid var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review-wrap .lv-eyebrow { color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review { font-size: 16px; line-height: 1.6; color: var(--ink); }
+html[data-route="books-bold"] .lv-book-detail-review a { color: var(--ink); border-bottom: 2px solid var(--bt-mustard); }
+html[data-route="books-bold"] .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose); }
+
+@media (max-width: 1100px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 18px; }
+  .bt--books .lv-book-card:nth-child(n) { --tilt: 0deg; }
+  .bt--books .lv-book-title { font-size: 17px; }
+  .bt--books .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  .bt-books-grid.lv-books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--books .lv-book-cover, .bt--books .lv-book-title { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type blog — #/blog-bold and #/blog-bold/<slug>
+   The Gazette (front page from renderBlogLists, article from renderV1Post
+   in app.js, shared .lv-gz-* and .lv-post-* markup) in the Bold Type
+   dress: display masthead instead of the newspaper flag, left-aligned,
+   2px ink rules, Bricolage headlines with the growing underline.
+   ========================================================================== */
+.bt--blog, .bt--post { min-height: 100vh; }
+.bt--blog .bt-nav-progress, .bt--blog .bt-nav-count,
+.bt--post .bt-nav-progress, .bt--post .bt-nav-count { display: none; }
+.bt--blog .bt-page-head { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+.bt-gz-dateline {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem;
+  margin-top: 36px; padding: 12px 0;
+  border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink);
+}
+.bt-gz-dateline > span:last-child { text-align: right; }
+
+/* Front page: everything flush left, headlines in Bricolage. */
+[data-variation="v1"] .bt--blog .lv-gz-lead { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+[data-variation="v1"] .bt--blog .lv-gz-lead-head {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: clamp(38px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -0.045em;
+  text-align: left; max-width: 18ch; margin: 0;
+  color: var(--ink);
+}
+[data-variation="v1"] .bt--blog .lv-gz-lead-head,
+[data-variation="v1"] .bt--blog .lv-gz-entry .hl {
+  display: inline; padding: 0 0.08em; margin-left: -0.08em;
+  background-image: linear-gradient(var(--bt-gz-color, var(--bt-rose)), var(--bt-gz-color, var(--bt-rose)));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.14em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+[data-variation="v1"] .bt--blog .lv-gz-lead:hover .lv-gz-lead-head,
+[data-variation="v1"] .bt--blog .lv-gz-entry:hover .hl { background-size: 100% 0.92em; }
+[data-variation="v1"] .bt--blog .lv-gz-deck {
+  font-family: var(--font-body); font-style: normal; font-weight: 400;
+  font-size: 19px; line-height: 1.6; color: var(--ink-2);
+  text-align: left; max-width: 54ch; margin: 24px 0 0;
+}
+[data-variation="v1"] .bt--blog .lv-gz-byline,
+[data-variation="v1"] .bt--post .lv-gz-byline {
+  font-size: 11px; letter-spacing: 0.16em; color: var(--ink);
+  text-align: left; margin-top: 20px;
+}
+[data-variation="v1"] .bt--blog .lv-gz-lead-cols {
+  margin: 36px 0 0; max-width: none;
+  column-rule: 2px solid var(--ink); column-gap: 40px;
+  font-size: 16px; line-height: 1.65;
+}
+[data-variation="v1"] .bt--blog .lv-gz-lead-cols > p:first-child::first-letter,
+[data-variation="v1"] .bt--post .lv-dropcap::first-letter {
+  font-family: var(--bt-font-display); font-weight: 800; color: var(--ink);
+  font-size: 3.4em; line-height: 0.72; padding: 0.04em 0.12em 0 0;
+}
+[data-variation="v1"] .bt--blog .lv-gz-continue,
+[data-variation="v1"] .bt--post .lv-gz-back {
+  display: inline-block; margin-top: 4px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+  transition: background 0.2s ease, letter-spacing 0.2s ease;
+}
+[data-variation="v1"] .bt--blog .lv-gz-lead:hover .lv-gz-continue,
+[data-variation="v1"] .bt--post .lv-gz-back:hover { background: var(--bt-rose); letter-spacing: 0.14em; }
+[data-variation="v1"] .bt--post .lv-gz-back { margin: 0 0 40px; }
+
+/* Index: 2px ink rules, one highlight color per entry. */
+[data-variation="v1"] .bt--blog .lv-gz-section-heading,
+[data-variation="v1"] .bt--post .lv-gz-section-heading {
+  border-top: 2px solid var(--ink); border-bottom: 0; padding: 14px 0 0;
+  text-align: left; margin-bottom: 0;
+}
+[data-variation="v1"] .bt--blog .lv-gz-section-heading span,
+[data-variation="v1"] .bt--post .lv-gz-section-heading span {
+  font-size: 12px; letter-spacing: 0.18em; color: var(--ink);
+}
+[data-variation="v1"] .bt--blog .lv-gz-index { column-gap: 40px; }
+[data-variation="v1"] .bt--blog .lv-gz-entry,
+[data-variation="v1"] .bt--post .lv-gz-entry {
+  padding: 28px 0; border-left: 0; border-top: 2px solid var(--ink);
+}
+[data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(-n+2) { border-top: 0; padding-top: 28px; }
+[data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(3n + 1),
+[data-variation="v1"] .bt--post .lv-gz-entry { --bt-gz-color: var(--bt-rose); }
+[data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(3n + 2) { --bt-gz-color: var(--bt-cobalt); }
+[data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(3n + 3) { --bt-gz-color: var(--bt-mustard); }
+[data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(3n + 2):hover .hl { color: var(--paper); }
+[data-variation="v1"] .bt--blog .lv-gz-entry .kicker,
+[data-variation="v1"] .bt--post .lv-gz-entry .kicker { font-size: 11px; letter-spacing: 0.16em; color: var(--ink); }
+[data-variation="v1"] .bt--blog .lv-gz-entry .hl,
+[data-variation="v1"] .bt--post .lv-gz-entry .hl {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 30px; line-height: 1.1; letter-spacing: -0.035em; color: var(--ink);
+}
+[data-variation="v1"] .bt--blog .lv-gz-entry .hl { margin-top: 14px; }
+[data-variation="v1"] .bt--post .lv-gz-entry .hl { margin-top: 14px; }
+[data-variation="v1"] .bt--post .lv-gz-section-heading { margin-bottom: 24px; }
+[data-variation="v1"] .bt--post .lv-gz-entry:hover .hl { background-size: 100% 0.92em; }
+[data-variation="v1"] .bt--post .lv-gz-entry .hl {
+  display: inline; padding: 0 0.08em; margin-left: -0.08em;
+  background-image: linear-gradient(var(--bt-gz-color), var(--bt-gz-color));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.14em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  transition: background-size 0.22s ease;
+}
+[data-variation="v1"] .bt--blog .lv-gz-entry .exc,
+[data-variation="v1"] .bt--post .lv-gz-entry .exc { display: block; font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 14px; }
+[data-variation="v1"] .bt--blog .lv-gz-entry:hover .exc,
+[data-variation="v1"] .bt--post .lv-gz-entry:hover .exc { color: var(--ink-2); }
+[data-variation="v1"] .bt--blog .lv-gz-entry .meta,
+[data-variation="v1"] .bt--post .lv-gz-entry .meta { font-size: 11px; letter-spacing: 0.14em; color: var(--ink); margin-top: 16px; }
+.bt--blog .bt-colophon--light, .bt--post .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+/* Article: display masthead, the body left-aligned under it. */
+.bt-gz-article-title { margin: 22px 0 0; max-width: 16ch; font-size: clamp(44px, 6.4vw, 88px); line-height: 1; }
+.bt-gz-article-deck { margin-top: 28px; }
+[data-variation="v1"] .bt--post .lv-post-body { margin: clamp(3rem, 6vw, 4.5rem) 0 0; max-width: 66ch; }
+[data-variation="v1"] .bt--post .lv-post-lead {
+  font-family: var(--font-body); font-style: normal; font-weight: 400;
+  font-size: 19px; line-height: 1.6; color: var(--ink);
+}
+[data-variation="v1"] .bt--post .lv-post-p { font-size: 17px; line-height: 1.68; }
+[data-variation="v1"] .bt--post .lv-post-h2 {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 38px); line-height: 1.08; letter-spacing: -0.035em;
+}
+[data-variation="v1"] .bt--post .lv-post-h3 {
+  font-family: var(--bt-font-display); font-weight: 700;
+  font-size: 22px; letter-spacing: -0.02em;
+}
+[data-variation="v1"] .bt--post .lv-post-link {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt); transition: background 0.2s ease;
+}
+[data-variation="v1"] .bt--post .lv-post-link:hover { background: var(--bt-rose); }
+[data-variation="v1"] .bt--post .lv-post-quote {
+  border-left: 0; text-align: left; max-width: none; margin: 0; padding: 24px 0;
+  border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+}
+[data-variation="v1"] .bt--post .lv-post-quote p {
+  font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
+  font-size: clamp(24px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -0.03em;
+}
+[data-variation="v1"] .bt--post .lv-post-quote cite { text-align: left; color: var(--ink); }
+[data-variation="v1"] .bt--post .lv-post-callout {
+  background: var(--paper); border: 2px solid var(--ink); border-left-width: 2px; border-radius: 12px;
+}
+[data-variation="v1"] .bt--post .lv-post-callout-label { color: var(--ink); }
+[data-variation="v1"] .bt--post .lv-post-list li::marker { color: var(--bt-cobalt); }
+[data-variation="v1"] .bt--post .lv-post-figure .shot,
+[data-variation="v1"] .bt--post .lv-post-figure .frame { border: 2px solid var(--ink); border-radius: 10px; }
+[data-variation="v1"] .bt--post .lv-post-code { border: 2px solid var(--ink); border-radius: 10px; background: var(--paper); }
+[data-variation="v1"] .bt--post .lv-post-divider { background: var(--ink); height: 2px; max-width: 64px; margin-left: 0; }
+[data-variation="v1"] .bt--post .lv-post-divider.has-symbol { background: transparent; height: auto; color: var(--ink); }
+
+@media (max-width: 900px) {
+  .bt-gz-dateline { margin-top: 24px; font-size: 10px; letter-spacing: 0.1em; gap: 0.6rem; }
+  [data-variation="v1"] .bt--blog .lv-gz-lead-head { font-size: clamp(32px, 9.6vw, 44px); }
+  [data-variation="v1"] .bt--blog .lv-gz-deck { font-size: 16px; margin-top: 16px; }
+  [data-variation="v1"] .bt--blog .lv-gz-lead-cols { column-count: 1; margin-top: 24px; }
+  [data-variation="v1"] .bt--blog .lv-gz-index { grid-template-columns: 1fr; }
+  [data-variation="v1"] .bt--blog .lv-gz-entry,
+  [data-variation="v1"] .bt--blog .lv-gz-entry:nth-child(-n+2) { padding: 22px 0; border-top: 2px solid var(--ink); }
+  [data-variation="v1"] .bt--blog .lv-gz-entry:first-child { border-top: 0; }
+  [data-variation="v1"] .bt--blog .lv-gz-entry .hl,
+  [data-variation="v1"] .bt--post .lv-gz-entry .hl { font-size: 24px; }
+  .bt-gz-article-title { font-size: clamp(34px, 10vw, 44px); line-height: 1.04; letter-spacing: -0.045em; }
+  .bt-gz-article-deck { margin-top: 18px; }
+  [data-variation="v1"] .bt--post .lv-post-p { font-size: 16px; }
+  .bt--blog .bt-colophon--light span:last-child, .bt--post .bt-colophon--light span:last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--blog .lv-gz-lead-head, .bt--blog .lv-gz-entry .hl, .bt--post .lv-gz-entry .hl,
+  .bt--blog .lv-gz-continue, .bt--post .lv-gz-back { transition: none; }
+}
+
+/* ==========================================================================
+   Bold Type 404 — #/404-bold
+   One dark chapter in the dress of the home's Contact one. The root carries
+   data-chapter="contact" so the nav and logo take the dark palette.
+   ========================================================================== */
+.bt--404 { min-height: 100vh; }
+.bt--404 .bt-nav-progress, .bt--404 .bt-nav-count { display: none; }
+.bt-chapter--404 { padding-top: var(--bt-hero-top); }
+.bt-chapter--404 .bt-display {
+  margin-top: 22px;
+  font-size: clamp(56px, 10vw, 136px); line-height: 0.98;
+}
+.bt-404-lead { margin-top: 32px; color: rgba(244, 239, 230, 0.7); }
+/* Handwritten aside pointing down at the tiles. */
+.bt-404-note {
+  margin-top: auto; padding-top: 48px; align-self: center;
+  display: flex; align-items: flex-end; gap: 8px;
+  font-family: var(--font-hand); font-size: 26px; line-height: 1;
+  color: var(--bt-mustard); transform: rotate(-3deg);
+}
+.bt-404-note svg { width: 22px; height: 34px; }
+.bt-404-note svg path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.bt-chapter--404 .bt-contact-grid { margin-top: 14px; }
+
+@media (max-width: 900px) {
+  .bt-chapter--404 { padding-top: 6rem; }
+  .bt-chapter--404 .bt-display { margin-top: 0; font-size: clamp(42px, 14vw, 64px); line-height: 1.04; letter-spacing: -0.045em; }
+  .bt-404-lead { margin-top: 0; }
+  .bt-404-note { padding-top: 24px; font-size: 22px; align-self: flex-start; }
+  .bt-chapter--404 .bt-contact-grid { margin-top: 0; }
+  .bt-chapter--404 .bt-colophon span:last-child { display: none; }
+}
+
+/* ==========================================================================
+   Bold Type imprint + privacy — #/imprint-bold, #/privacy-bold
+   The v1 legal pages, text for text, in the Bold Type dress: display
+   headline with a blob, then the two-column .lv-legal-grid where every
+   block gets a numbered mono kicker and an ink rule. The imprint's
+   address block sits in display type; everything else stays body text.
+   ========================================================================== */
+.bt--legal { min-height: 100vh; }
+.bt--legal .bt-nav-progress, .bt--legal .bt-nav-count { display: none; }
+.bt--legal .bt-page-head .bt-lead { max-width: 56ch; }
+.bt-legal { border-top: 2px solid var(--ink); }
+.bt-legal-block { padding: 26px 0 30px; border-bottom: 2px solid var(--ink); }
+.bt-legal-block .bt-kicker { color: var(--ink); }
+.bt-legal-p {
+  margin: 14px 0 0; max-width: 52ch;
+  font-size: 16px; line-height: 1.6; color: var(--ink-2);
+}
+.bt-legal-p + .bt-legal-p { margin-top: 12px; }
+.bt-legal-p strong { color: var(--ink); font-weight: 600; }
+.bt-legal-p--big {
+  font-family: var(--bt-font-display); font-weight: 800;
+  font-size: 23px; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink);
+}
+.bt-legal-p a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 2px solid var(--bt-cobalt);
+  transition: background 0.18s ease;
+}
+.bt-legal-p a:hover { background: var(--bt-rose); }
+.bt-legal-p--big a { border-bottom-width: 3px; }
+.bt--legal .bt-colophon--light { margin-top: clamp(3rem, 8vw, 5rem); }
+
+@media (max-width: 900px) {
+  .bt--legal .bt-page-h1 { font-size: clamp(40px, 12.5vw, 56px); }
+  .bt-legal-block { padding: 20px 0 22px; }
+  .bt-legal-p { font-size: 14.5px; line-height: 1.55; }
+  .bt-legal-p--big { font-size: 20px; }
+  .bt--legal .bt-colophon--light span:last-child { display: none; }
+}
+@media (max-width: 720px) {
+  /* One column: no grid gap, so the seam between the two former columns
+     is one rule like every other block boundary. */
+  .bt-legal { gap: 0; }
+}
+
+/* A case with its own coverImage drops the hatch and lets the picture fill. */
+.bt-card-cover.has-image::after { content: none; }
+.bt-card-cover img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
