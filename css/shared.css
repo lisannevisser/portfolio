@@ -606,6 +606,8 @@ html { cursor: none; }
 .lv-post-body > .lv-post-figure + *,
 .lv-post-body > .lv-post-quote + *,
 .lv-post-body > .lv-post-callout + * { margin-top: 2.5rem; }
+.lv-post-body > * + .lv-post-qa { margin-top: 2.5rem; }
+.lv-post-body > .lv-post-qa + .lv-post-qa { margin-top: 3rem; }
 
 /* Paragraph + lead */
 .lv-post-p { font-size: var(--text-base); line-height: 1.7; color: var(--ink-2); }
@@ -859,6 +861,38 @@ html { cursor: none; }
   color: var(--accent); margin: 0 0 0.5rem;
 }
 .lv-post-callout p { margin: 0; font-size: var(--text-base); line-height: 1.6; color: var(--ink-2); }
+
+/* Interview: one question-and-answer turn, set like a magazine interview.
+   From 640px the speaker sits in a narrow column to the left of the text,
+   below that it stacks on top. Questions in the display italic, answers
+   as body text, the answerer's name in the accent. */
+.lv-post-qa-who {
+  display: block; margin-bottom: 0.4rem;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+  white-space: nowrap;
+}
+.lv-post-qa-q p {
+  margin: 0; font-size: var(--text-lg); line-height: 1.45; color: var(--ink);
+}
+[data-variation="v1"] .lv-post-qa-q p {
+  font-family: var(--font-display); font-style: italic; font-weight: 300;
+  font-size: var(--fs-lead); line-height: 1.4; letter-spacing: -0.005em;
+}
+.lv-post-qa-a { margin-top: 1.1rem; }
+.lv-post-qa-a .lv-post-qa-who { color: var(--accent); }
+.lv-post-qa-a p { margin: 0; font-size: var(--text-base); line-height: 1.7; color: var(--ink-2); }
+.lv-post-qa-a p + p { margin-top: 1rem; }
+.lv-post-qa-a p strong { color: var(--ink); font-weight: 600; }
+@media (min-width: 640px) {
+  .lv-post-qa-q, .lv-post-qa-a {
+    display: grid; grid-template-columns: 6.5rem minmax(0, 1fr);
+    column-gap: 1.25rem; align-items: start;
+  }
+  .lv-post-qa-who { margin-bottom: 0; padding-top: 0.45em; }
+  .lv-post-qa-a .lv-post-qa-who { padding-top: 0.5em; }
+  .lv-post-qa-a p + p { grid-column: 2; }
+}
 
 /* Divider */
 .lv-post-divider {

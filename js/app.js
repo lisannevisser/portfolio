@@ -926,6 +926,26 @@
         ${caption}
       </figure>`;
     }
+    if (kind === "interview") {
+      // One turn of a Q&A: the interviewer's question, then the answer as one
+      // or more paragraphs. `answer` is a string or an array of strings; a
+      // turn without an answer renders the question alone (host intros,
+      // hand-overs to the audience).
+      const list = Array.isArray(b.answer) ? b.answer : (b.answer ? [b.answer] : []);
+      const aHtml = list.map((t, i) => {
+        const ap = !path ? "" : Array.isArray(b.answer) ? `${path}.answer.${i}` : `${path}.answer`;
+        return `<p${editAttr(ap, "", 1)}>${inlineMarks(t || "")}</p>`;
+      }).join("");
+      const q = `<div class="lv-post-qa-q">
+          <span class="lv-post-qa-who"${editAttr(path, "who")}>${esc(b.who || "Q")}</span>
+          <p${editAttr(path, "question", 1)}>${inlineMarks(b.question || "")}</p>
+        </div>`;
+      const a = list.length ? `<div class="lv-post-qa-a">
+          <span class="lv-post-qa-who"${editAttr(path, "answerer")}>${esc(b.answerer || "Lisanne")}</span>
+          ${aHtml}
+        </div>` : "";
+      return `<section class="lv-post-qa lv-reveal">${q}${a}</section>`;
+    }
     // Unknown block: render as paragraph fallback.
     return `<p class="lv-post-p lv-reveal"${editAttr(path, "text", 1)}>${inlineMarks(b.text || "")}</p>`;
   }
