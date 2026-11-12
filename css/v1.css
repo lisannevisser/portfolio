@@ -1597,10 +1597,6 @@
 @media (prefers-reduced-motion: reduce) {
   .v1-sketch-photo { transition: none; }
 }
-/* The "rebuilt in the open" sticky note sits above every overlay; while a
-   sketch is open it would cover the caption, so it steps aside. */
-body:has(.v1-sketch-overlay.is-open) .wip-note { visibility: hidden; }
-
 @media (max-width: 640px) {
   .v1-visual-stage { aspect-ratio: 4 / 3; }
   [data-variation="v1"] .v1-visuals-teaser-head { flex-direction: column; align-items: flex-start; gap: 1.25rem; }

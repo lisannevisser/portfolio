@@ -267,15 +267,18 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 /* -------- About: short version of #/about, rows reuse .bt-xp-row -------- */
 .bt-about {
   flex: 1; margin-top: 22px;
-  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 64px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 64px; align-items: center;
 }
 .bt-chapter--about .bt-display { font-size: clamp(44px, 6.4vw, 88px); line-height: 1.05; }
 .bt-about-text .bt-lead { margin-top: 28px; }
 .bt-about-rows { margin-top: 28px; max-width: 640px; }
 .bt-about-rows .bt-xp-role { font-size: 19px; }
 .bt-about-rows .bt-xp-when { text-transform: uppercase; }
+/* 440px wide, capped by the height left under the kicker so the chapter
+   still fits one screen on short windows (4:5 frame, so 0.8 × height). */
 .bt-about-portrait {
-  position: relative; justify-self: end; width: 100%; max-width: 360px;
+  position: relative; justify-self: end; width: 100%;
+  max-width: min(440px, calc((100svh - var(--bt-hero-top) - 10rem) * 0.8));
   aspect-ratio: 4 / 5; border: 2px solid var(--ink); border-radius: 12px;
   background: var(--paper-2); transform: rotate(1.2deg);
 }
@@ -430,7 +433,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-about-text .bt-lead, .bt-about-rows { margin-top: 18px; }
   .bt-about-rows .bt-xp-when { display: block; }
   .bt-about-rows .bt-xp-role { font-size: 16px; }
-  .bt-about-portrait { order: -1; justify-self: start; max-width: 150px; margin-right: 0; transform: rotate(-1.5deg); }
+  .bt-about-portrait { order: -1; justify-self: start; max-width: 180px; margin-right: 0; transform: rotate(-1.5deg); }
   .bt-about-label { left: 8px; bottom: -12px; font-size: 17px; padding: 2px 10px; }
 
   .bt-contact-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -586,27 +589,32 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt--about .ahs-grid { transform: none; transition: none; }
 }
 
-/* Experience snaps into place as a chapter of its own, the way the home
-   chapters do: kicker on the shared hero top, a full viewport tall. It is
-   pulled up by one viewport so it rises as a sheet over the fading chapter
-   during the outro instead of trailing a screen of empty paper, and its top
-   edge lands exactly where the pin lets go, which is also the snap point.
-   Proximity, not mandatory, so the pinned scrolly above scrolls freely and
-   nobody gets stuck on the way back up. Speaking and Inspiration below
-   scroll as before. */
+/* Experience, Speaking and Inspiration (.bt-snap) snap into place as
+   chapters of their own, the way the home chapters do: kicker on the shared
+   hero top, a full viewport tall, the divider rule between them. Experience
+   is also pulled up by one viewport so it rises as a sheet over the fading
+   chapter during the outro instead of trailing a screen of empty paper, and
+   its top edge lands exactly where the pin lets go, which is also the snap
+   point. Proximity, not mandatory, so the pinned scrolly above scrolls
+   freely and nobody gets stuck on the way back up. Narrow screens stack
+   the sections as before. */
 html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 @media (min-width: 881px) {
   .bt.bt--about .ahs { margin-bottom: 0; }
-  .bt--about .bt-xp-section--snap {
+  .bt--about .bt-snap {
     position: relative;
     z-index: 1;
     background: var(--paper);
-    margin-top: -100svh;
     scroll-snap-align: start;
+    scroll-margin-top: 0;
     box-sizing: border-box;
     min-height: 100svh;
     padding-top: var(--bt-hero-top);
+    padding-bottom: 64px;
+    margin-bottom: 0;
   }
+  .bt--about .bt-xp-section--snap { margin-top: -100svh; }
+  .bt--about .bt-inspire .bt-colophon--light { margin-top: auto; }
 }
 
 /* Experience: chapter 04, full width under the scrolly. The block itself
@@ -618,8 +626,43 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 }
 .bt-xp-section .bt-xp { flex: none; align-items: start; }
 
-/* Inspiration: the sixth chapter, full width under Experience. */
+/* Inspiration: the sixth chapter, full width under Speaking. The video is
+   the big tile (two thirds), Sketchbook and Bookshelf stack beside it. The
+   grid's width is capped from the viewport height so the 16:9 video, and
+   with it the whole chapter, fits one screen on desktop: 30rem is roughly
+   the hero top, headline, gaps and colophon around it. */
 .bt-inspire { display: flex; flex-direction: column; gap: 28px; padding: 0 0 36px; scroll-margin-top: 96px; }
+.bt-inspire-grid {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-rows: 1fr 1fr;
+  gap: 20px; max-width: calc((100svh - 30rem) * 16 / 9 * 1.5 + 20px);
+}
+.bt-inspire-grid .bt-video { grid-row: 1 / 3; min-width: 0; }
+.bt-inspire-tile {
+  position: relative; display: block; min-height: 0;
+  border: 2px solid var(--ink); border-radius: 12px; background: var(--paper-2);
+  color: var(--ink); text-decoration: none;
+}
+/* Both tiles fade in black-and-white and bloom into color on hover, like
+   the chapter photos above. */
+.bt-inspire-tile > img,
+.bt-inspire-covers {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border-radius: 10px; overflow: hidden;
+  filter: grayscale(1); transition: filter 0.4s ease;
+}
+.bt-inspire-tile > img { object-fit: cover; object-position: 50% 30%; }
+.bt-inspire-tile:hover > img,
+.bt-inspire-tile:hover .bt-inspire-covers { filter: grayscale(0); }
+/* Bookshelf: three covers fanned on the tile, standing on its lower edge. */
+.bt-inspire-covers { display: flex; align-items: flex-end; justify-content: center; }
+.bt-inspire-covers img {
+  height: 84%; width: auto; margin: 0 -7%; border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(26, 24, 20, 0.28);
+  transform: rotate(-7deg) translateY(10%);
+}
+.bt-inspire-covers img:nth-child(2) { position: relative; z-index: 1; transform: translateY(3%); }
+.bt-inspire-covers img:nth-child(3) { transform: rotate(7deg) translateY(10%); }
+.bt-inspire-tile .bt-about-label { left: 14px; bottom: -16px; }
 .bt-inspire-h { font-size: clamp(34px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.04em; max-width: 22ch; }
 /* Hovering "inspiring" turns the blob dark and runs a rainbow through the word. */
 .bt-inspire-h .bt-mark svg path { transition: fill 0.25s ease; }
@@ -656,6 +699,12 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
   .bt-inspire { padding-top: 1rem; gap: 22px; }
   .bt-inspire-h { font-size: 38px; line-height: 1.15; }
   .bt-video { border-radius: 10px; }
+  /* Video full width, the two tiles side by side underneath. */
+  .bt-inspire-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 14px; max-width: none; margin-bottom: 10px; }
+  .bt-inspire-grid .bt-video { grid-column: 1 / -1; grid-row: auto; }
+  .bt-inspire-tile { aspect-ratio: 4 / 3; border-radius: 10px; }
+  .bt-inspire-tile > img, .bt-inspire-covers { border-radius: 8px; }
+  .bt-inspire-tile .bt-about-label { left: 8px; bottom: -12px; font-size: 17px; padding: 2px 10px; }
   .bt-colophon--light span:last-child { display: none; }
 }
 

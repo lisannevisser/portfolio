@@ -85,7 +85,9 @@
       return { page: dress === "bold" ? page + "-bold" : page, slug: parts[1] };
     }
     if (DISABLED_ROUTES.has(name)) return { page: "home-bold" };
-    if (DRESSED.has(name)) return { page: dress === "bold" ? name + "-bold" : name };
+    // A second segment on a static page names a block to land on
+    // (#/about/experience → [data-anchor="experience"] on that page).
+    if (DRESSED.has(name)) return { page: dress === "bold" ? name + "-bold" : name, anchor: parts[1] || "" };
     if (m[2]) return NOT_FOUND;
     return hasSection(name) ? { page: name } : NOT_FOUND;
   }
@@ -125,6 +127,10 @@
     });
 
     window.scrollTo({ top: 0, behavior: "instant" });
+    if (route.anchor) {
+      const target = $(`.lv-route[data-page="${route.page}"] [data-anchor="${route.anchor}"]`);
+      if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+    }
 
     // Lets js/edit-mode.js (?edit=1) re-arm its fields after every route render.
     document.dispatchEvent(new CustomEvent("lv:rendered", { detail: route }));
