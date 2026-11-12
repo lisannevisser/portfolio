@@ -621,6 +621,23 @@ html[data-route="about"] { scroll-snap-type: y proximity; }
   border-bottom: 2px solid var(--ink);
 }
 .bt-xp-section .bt-xp { flex: none; align-items: start; }
+/* The rows in the two full-height chapters are scaled up so the table fills
+   the viewport instead of leaving half of it empty: more padding per row,
+   bigger role line, the year column a touch wider, and the table column gets
+   more of the grid. Padding and type scale with the viewport height (svh) so
+   the six Experience rows plus the tools band still fit one screen on flat
+   laptop windows (~780px). Narrow screens keep the compact sizes. */
+@media (min-width: 881px) {
+  .bt--about .bt-xp-section .bt-xp { grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); }
+  .bt--about .bt-xp-section .bt-xp-row {
+    padding: clamp(16px, 2.7svh, 24px) 0; grid-template-columns: 136px 1fr; gap: 20px;
+  }
+  .bt--about .bt-xp-section[data-anchor="speaking"] .bt-xp-row { grid-template-columns: auto 1fr; gap: 24px; }
+  .bt--about .bt-xp-section .bt-xp-when { font-size: 12px; }
+  .bt--about .bt-xp-section .bt-xp-role { font-size: clamp(21px, 3svh, 27px); line-height: 1.25; }
+  .bt--about .bt-tools { padding: clamp(32px, 4.9svh, 44px) 0 clamp(24px, 3.6svh, 32px); }
+  .bt--about .bt-tool img { width: clamp(36px, 5.4svh, 48px); height: clamp(36px, 5.4svh, 48px); }
+}
 /* Experience: the industries line sits under the headline, before the CTA. */
 .bt-xp-copy--lead { margin: 20px 0 0; max-width: 42ch; }
 .bt-xp-copy--lead + .bt-xp-cv { margin-top: 28px; }
@@ -631,7 +648,7 @@ html[data-route="about"] { scroll-snap-type: y proximity; }
    the tooltip, since the band clips. The rule stays solid while the icons
    fade out at the edges (two mask layers). */
 .bt-tools {
-  margin: auto 0 0; padding: 40px 0 28px; border-top: 2px solid var(--ink);
+  margin: auto 0 0; padding: 44px 0 32px; border-top: 2px solid var(--ink);
   display: flex; align-items: center; overflow: hidden;
   --bt-tools-mask:
     linear-gradient(black, black) top / 100% 2px no-repeat,
@@ -640,7 +657,7 @@ html[data-route="about"] { scroll-snap-type: y proximity; }
   -webkit-mask: var(--bt-tools-mask);
 }
 .bt-tools-track {
-  display: flex; align-items: center; gap: 40px; padding-right: 40px;
+  display: flex; align-items: center; gap: 52px; padding-right: 52px;
   white-space: nowrap; will-change: transform;
   animation: bt-tools-marquee 60s linear infinite;
 }
@@ -651,8 +668,8 @@ html[data-route="about"] { scroll-snap-type: y proximity; }
   font-size: 20px; letter-spacing: -0.02em; color: var(--ink);
 }
 .bt-tool img {
-  width: 34px; height: 34px; flex: none; object-fit: contain;
-  border-radius: 8px; transition: transform 160ms ease;
+  width: 48px; height: 48px; flex: none; object-fit: contain;
+  border-radius: 10px; transition: transform 160ms ease;
 }
 .bt-tool:hover img { transform: translateY(-2px); }
 /* Tooltip: the name as a small ink label above the icon. */
