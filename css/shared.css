@@ -386,15 +386,24 @@ a { color: inherit; }
   transition: transform 320ms var(--ease-out);
 }
 .lv-nav-sheet.is-open { transform: translateX(0); display: flex; }
+/* Same type as the Bold Type nav (.bt-nav-link / .bt-nav-cta in
+   css/bold-home.css), sized up for touch. */
 .lv-nav-sheet a {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-family: var(--font-body);
+  font-size: 22px; font-weight: 500;
   color: var(--ink);
   text-decoration: none;
-  padding: 0.75rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--rule);
 }
-.lv-nav-sheet .lv-btn { margin-top: 1.5rem; justify-content: center; color: var(--paper); border-bottom: none; }
+.lv-nav-sheet-cta,
+.lv-nav-sheet a.lv-nav-sheet-cta {
+  align-self: flex-start; margin-top: 1.5rem;
+  font-size: 15px; font-weight: 600;
+  padding: 10px 18px; border: 1.5px solid var(--ink); border-radius: var(--radius-pill);
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+.lv-nav-sheet a.lv-nav-sheet-cta:hover { background: #f4a3b8; border-color: #f4a3b8; }
 .lv-nav-sheet-close {
   position: absolute; top: 1.25rem; right: 1.25rem;
   background: transparent; border: none;

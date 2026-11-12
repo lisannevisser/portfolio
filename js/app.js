@@ -52,18 +52,15 @@
   const DRAFT_CASES = new Set(["alright-app", "trust-card-redesign"]);
   const liveCases = () => (D.cases || []).filter((c) => !DRAFT_CASES.has(c.slug));
 
-  // Bold Type is the default dress. The plain slugs (#/, #/work,
-  // #/work/<slug>, ...) show the Bold Type sections (data-page "<name>-bold");
-  // the original v1 dress stays reachable as a backup at "<name>-classic"
-  // (#/home-classic, #/work-classic/<slug>, ...). Pages that only exist in v1
-  // (chinese, playground, styleguide) keep their plain slug. Old
-  // "-bold" links still resolve and get rewritten to the plain slug.
-  const DRESSED = new Set(["home", "about", "work", "blog", "visuals", "sketchbook", "books", "imprint", "privacy"]);
+  // Routes are the plain slugs (#/, #/work, #/work/<slug>, #/about, ...),
+  // one section each (data-page "<name>"). The old dress suffixes from the
+  // v1 / Bold Type years ("-classic", "-bold") still resolve: they get
+  // rewritten to the plain slug.
   const DYNAMIC = { work: ["case", liveCases()], blog: ["post", livePosts()] };
 
   // Anything that isn't a route section, a known case slug, or a known post
-  // slug lands on the 404 page (the Bold Type one at #/404-bold).
-  const NOT_FOUND = { page: "404-bold" };
+  // slug lands on the 404 page.
+  const NOT_FOUND = { page: "404" };
   const hasSection = (page) => !!$(`.lv-route[data-page="${page}"]`);
 
   function parseHash(h) {
@@ -71,10 +68,8 @@
     const parts = clean.split("/");
     const m = (parts[0] || "home").match(/^(.+?)(-classic|-bold)?$/);
     const name = m[1];
-    const dress = m[2] === "-classic" ? "classic" : "bold";
 
-    // Legacy Bold Type URL: show the same page under its plain slug.
-    if (m[2] === "-bold" && DRESSED.has(name)) {
+    if (m[2]) {
       const rest = parts.slice(1).join("/");
       history.replaceState(null, "", name === "home" && !rest ? "#/" : "#/" + name + (rest ? "/" + rest : ""));
     }
@@ -82,14 +77,14 @@
     if (DYNAMIC[name] && parts[1]) {
       const [page, list] = DYNAMIC[name];
       if (!list.some((x) => x.slug === parts[1])) return NOT_FOUND;
-      return { page: dress === "bold" ? page + "-bold" : page, slug: parts[1] };
+      return { page, slug: parts[1] };
     }
-    if (DISABLED_ROUTES.has(name)) return { page: "home-bold" };
+    if (DISABLED_ROUTES.has(name)) return { page: "home" };
+    // The case and post templates only render with a slug.
+    if (name === "case" || name === "post") return NOT_FOUND;
     // A second segment on a static page names a block to land on
     // (#/about/experience → [data-anchor="experience"] on that page).
-    if (DRESSED.has(name)) return { page: dress === "bold" ? name + "-bold" : name, anchor: parts[1] || "" };
-    if (m[2]) return NOT_FOUND;
-    return hasSection(name) ? { page: name } : NOT_FOUND;
+    return hasSection(name) ? { page: name, anchor: parts[1] || "" } : NOT_FOUND;
   }
 
   function renderRoute() {
@@ -102,27 +97,25 @@
       el.hidden = name !== route.page;
     });
 
-    // Case study: fill the v1 or the Bold Type template with the selected slug.
+    // Case study: fill the template with the selected slug.
     flushTocFabCleanups();
-    if (route.page === "case" || route.page === "case-bold") {
+    if (route.page === "case") {
       const c = liveCases().find((x) => x.slug === route.slug) || liveCases()[0];
-      renderV1Case(c, route.page === "case-bold" ? "bold" : "v1");
+      renderCase(c);
     }
 
-    // Blog post: render the selected post into the v1 or the Bold Type article.
-    if (route.page === "post" || route.page === "post-bold") {
+    // Blog post: render the selected post into the article.
+    if (route.page === "post") {
       const live = livePosts();
       const p = live.find((x) => x.slug === route.slug) || live[0];
-      if (p) {
-        renderV1Post(p, route.page === "post-bold" ? "bold" : "v1");
-      }
+      if (p) renderPost(p);
     }
 
     // Nav active state
     $$(".lv-nav-link").forEach((a) => {
       const target = a.getAttribute("data-route");
       const active =
-        target === route.page || (target === "work" && (route.page === "case" || route.page === "case-bold"));
+        target === route.page || (target === "work" && route.page === "case");
       a.classList.toggle("is-active", active);
     });
 
@@ -346,7 +339,7 @@
   // ========================================================================
   // CLIENT LOGO STRIP (V1) — swap in real PNGs when available
   // ========================================================================
-  // Client logo marquee. One track on the v1 home, one on #/home-bold.
+  // Client logo marquee on the home page.
   function renderClientStrip() {
     const items = [];
     // Render the list three times for smooth marquee continuity
@@ -577,16 +570,13 @@
     return Array.isArray(impact) && impact.length > 0 && impact.every((i) => isImpactValueValid(i.value));
   }
 
-  // One case, two dresses: "v1" fills #v1-case-body (#/work-classic/<slug>), "bold"
-  // fills #bt-case-body (#/work/<slug>). Story blocks, impact grid,
-  // limitations card and TOC are the same markup; the section ids carry the
-  // dress as prefix so both roots can hold a case without clashing.
-  function renderV1Case(c, dress) {
-    const bold = dress === "bold";
-    const root = $(bold ? "#bt-case-body" : "#v1-case-body");
+  // Fills #bt-case-body (#/work/<slug>): header, impact grid, story blocks,
+  // limitations card and TOC. Section ids carry the "bt" prefix.
+  function renderCase(c) {
+    const root = $("#bt-case-body");
     if (!root) return;
-    const base = bold ? "#/work" : "#/work-classic";
-    const idPrefix = bold ? "bt" : "v1";
+    const base = "#/work";
+    const idPrefix = "bt";
     const idx = liveCases().findIndex((x) => x.slug === c.slug);
     const next = liveCases()[(idx + 1) % liveCases().length];
 
@@ -697,20 +687,13 @@
         </section>`;
     }).join("");
 
-    const header = bold ? `
+    const header = `
       <a href="${base}" class="bt-back" data-cursor-label="← Back">← All work</a>
 
       <header class="bt-case-head">
         <div class="bt-kicker lv-reveal"><span>${esc(c.company)} — ${esc(c.year)}</span></div>
         <h1 class="bt-display bt-case-title lv-reveal"${editAttr(cpath, "title")}>${esc(c.title)}</h1>
         ${c.subtitle ? `<p class="bt-lead bt-case-sub lv-reveal"${editAttr(cpath, "subtitle")}>${esc(c.subtitle)}</p>` : ""}
-      </header>` : `
-      <a href="${base}" class="lv-nav-link" data-cursor-label="← Back">← All work</a>
-
-      <header style="margin-top:2rem;">
-        <h1 class="v1-hero-display lv-reveal" style="margin:2rem 0 1.5rem;font-size:clamp(2.25rem,6vw,4.8rem);">
-          <em${editAttr(cpath, "title")}>${esc(c.title)}</em>
-        </h1>
       </header>`;
 
     root.innerHTML = `
@@ -775,10 +758,8 @@
     return out;
   }
 
-  // The Gazette front page. Rendered twice from the same posts: into the
-  // v1 blog (#v1-blog-list, links to #/blog-classic/<slug>) and into the Bold
-  // Type blog (#bt-blog-list, links to #/blog/<slug>). Both dresses share
-  // the .lv-gz-* markup; the Bold Type one restyles it in bold-home.css.
+  // The Gazette front page, rendered into #bt-blog-list (links to
+  // #/blog/<slug>). The .lv-gz-* markup is styled in bold-home.css.
   function renderBlogLists() {
     const posts = livePosts();
     if (!posts.length) return;
@@ -838,8 +819,6 @@
       return featured + sameYearSection + olderSections;
     }
 
-    const v1List = $("#v1-blog-list");
-    if (v1List) v1List.innerHTML = gazetteFront("#/blog-classic");
     const btList = $("#bt-blog-list");
     if (btList) btList.innerHTML = gazetteFront("#/blog");
   }
@@ -1027,14 +1006,11 @@
     });
   }
 
-  // One post, two dresses: "v1" fills #v1-post-body (#/blog-classic/<slug>), "bold"
-  // fills #bt-post-body (#/blog/<slug>). The body blocks are the same;
-  // only the masthead and the back / read-next links differ.
-  function renderV1Post(p, dress) {
-    const bold = dress === "bold";
-    const root = $(bold ? "#bt-post-body" : "#v1-post-body");
+  // Fills #bt-post-body (#/blog/<slug>): masthead, body blocks, read next.
+  function renderPost(p) {
+    const root = $("#bt-post-body");
     if (!root) return;
-    const base = bold ? "#/blog" : "#/blog-classic";
+    const base = "#/blog";
     const posts = D.posts || [];
     // idx stays the js/data.js index: the editAttr paths below write back
     // through it. "Read next" walks the live list instead, so it never
@@ -1096,93 +1072,40 @@
   const WORK_PREVIEW = {
     "pricing": {
       kind: "stat", label: "in revenue", tilt: -6,
-      categories: ["research", "experimentation"],
       role: "Research lead"
     },
     "ai-workflow": {
       kind: "stat", label: "less cycle time", tilt: 5,
-      categories: ["ops", "experimentation"],
       role: "End-to-end owner"
     },
     "research-culture": {
       kind: "stat", label: "of target hit", tilt: -3,
-      categories: ["research", "ops"],
       role: "Research lead"
     },
     "illustrations-vs-icons": {
       kind: "stat", label: "mobile conversion", tilt: 4,
-      categories: ["experimentation", "brand"],
       role: "Hypothesis & design"
     },
     "design-system": {
       kind: "image",
-      categories: ["systems", "brand"],
       role: "System lead"
     },
     "website-relaunch": {
       kind: "stat", label: "pages relaunched", tilt: 7,
-      categories: ["systems", "brand"],
       role: "Lead designer"
     },
     "alright-app": {
       kind: "stat", label: "spec to TestFlight", tilt: -5,
-      categories: ["brand", "ops"],
       role: "Solo build"
     }
   };
 
-  const WORK_FILTERS = [
-    { id: "all",             label: "All work" },
-    { id: "research",        label: "Research" },
-    { id: "experimentation", label: "Experimentation" },
-    { id: "systems",         label: "Design systems" },
-    { id: "ops",             label: "Design ops" },
-    { id: "brand",           label: "Brand" }
-  ];
-
-  let v1WorkFilter = "all";
-
-  function inCategory(c, filter) {
-    if (filter === "all") return true;
-    const cats = (WORK_PREVIEW[c.slug] && WORK_PREVIEW[c.slug].categories) || [];
-    return cats.includes(filter);
-  }
-
-  // The v1 Work page and the Bold Type Work page (#/work-bold) share the
-  // ledger, the chips, and the active filter; only the dress differs.
-  const WORK_LEDGERS = [
-    ["#v1-work-filters", "#v1-work-cases", "#/work-classic"],
-    ["#bt-work-filters", "#bt-work-cases", "#/work"]
-  ];
-  function renderV1WorkLedger() {
-    WORK_LEDGERS.forEach(([f, r, base]) => renderWorkLedgerInto($(f), $(r), base));
-  }
-  function renderWorkLedgerInto(filtersEl, rowsEl, base) {
-    if (!filtersEl || !rowsEl) return;
-
-    // Filter chips (with counts)
-    const counts = {};
-    WORK_FILTERS.forEach((f) => {
-      counts[f.id] = liveCases().filter((c) => inCategory(c, f.id)).length;
-    });
-    filtersEl.innerHTML = WORK_FILTERS.map((f) => {
-      const active = v1WorkFilter === f.id;
-      const disabled = counts[f.id] === 0;
-      return `
-        <button type="button" class="v1-work-chip${active ? " is-active" : ""}"
-                data-filter="${esc(f.id)}"${disabled ? " disabled" : ""}
-                aria-pressed="${active ? "true" : "false"}">
-          <span>${esc(f.label)}</span>
-          <span class="v1-work-chip-count">${counts[f.id]}</span>
-        </button>
-      `;
-    }).join("");
-
-    // Ledger rows
-    const visible = liveCases().filter((c) => inCategory(c, v1WorkFilter));
-    rowsEl.innerHTML = visible.length === 0
-      ? `<div class="v1-work-empty">Nothing in this category yet — try another filter.</div>`
-      : visible.map((c, i) => {
+  // The Work page ledger: one row per live case.
+  function renderWorkLedger() {
+    const rowsEl = $("#bt-work-cases");
+    if (!rowsEl) return;
+    const base = "#/work";
+    rowsEl.innerHTML = liveCases().map((c, i) => {
           const p = WORK_PREVIEW[c.slug] || {};
           const stat = c.impact && c.impact[0];
           const visual = p.kind === "image"
@@ -1196,7 +1119,7 @@
                style="--case-hue:${c.coverPaletteHue};" data-cursor-label="Open">
               <span class="n">${String(i + 1).padStart(2, "0")}</span>
               <span class="body">
-                <span class="title">${esc(c.title)}</span>
+                <span class="title"><span>${esc(c.title)}</span></span>
                 ${c.subtitle ? `<span class="sub">${esc(c.subtitle)}</span>` : ""}
                 <span class="intro">${esc(p.role || String(c.role || "").split(" · ")[0])} · ${esc(c.company)} · ${esc(c.year)}</span>
               </span>
@@ -1204,92 +1127,6 @@
             </a>
           `;
         }).join("");
-  }
-
-  function initV1WorkFilters() {
-    document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".v1-work-chip");
-      if (!btn || btn.disabled) return;
-      e.preventDefault();
-      const next = btn.getAttribute("data-filter");
-      if (!next || next === v1WorkFilter) return;
-      v1WorkFilter = next;
-      renderV1WorkLedger();
-    });
-  }
-
-  // ========================================================================
-  // DYNAMIC HOME + WORK CASE LISTS (injected so data is one source of truth)
-  // ========================================================================
-  function renderCaseLists() {
-    // V1 — Home selected work: minimal ledger with cursor-following preview
-    const v1HomeList = $("#v1-home-cases");
-    if (v1HomeList) {
-      const PREVIEW = {
-        "pricing":          { label: "in revenue",       tilt: -6 },
-        "ai-workflow":      { label: "less cycle time",  tilt:  5 },
-        "research-culture": { label: "of target hit",    tilt: -3 },
-        "design-system":    { label: "Brand identity",   tilt:  4 },
-        "website-relaunch": { label: "pages relaunched", tilt:  7 }
-      };
-
-      // The home page teases the top of the list, not the whole shelf.
-      // Order comes from data.js; "All work →" carries the rest.
-      const HOME_CASE_COUNT = 3;
-
-      const rowsHtml = liveCases().slice(0, HOME_CASE_COUNT).map((c, i) => {
-        const p = PREVIEW[c.slug] || { label: c.impact[0].label, tilt: -4 };
-        return `
-          <a href="#/work-classic/${esc(c.slug)}" class="v1-ledger-row lv-reveal"
-             data-preview-value="${esc(c.impact[0].value)}"
-             data-preview-label="${esc(p.label || c.impact[0].label)}"
-             data-preview-tilt="${p.tilt == null ? -4 : p.tilt}">
-            <span class="n">${String(i + 1).padStart(2, "0")}</span>
-            <span class="title">${esc(c.title)}</span>
-            <span class="thumb" style="--case-hue:${c.coverPaletteHue};" aria-hidden="true"></span>
-          </a>
-        `;
-      }).join("");
-
-      v1HomeList.innerHTML = `
-        <div class="v1-ledger-root">
-          <div class="v1-ledger">${rowsHtml}</div>
-          <div class="v1-ledger-stat-floater" aria-hidden="true">
-            <div class="v"></div>
-            <div class="k"></div>
-          </div>
-        </div>
-      `;
-
-      const ledgerRoot = v1HomeList.querySelector(".v1-ledger-root");
-      const statFloater = ledgerRoot.querySelector(".v1-ledger-stat-floater");
-      const statV = statFloater.querySelector(".v");
-      const statK = statFloater.querySelector(".k");
-      let active = null;
-
-      ledgerRoot.addEventListener("mousemove", (e) => {
-        if (!active) return;
-        statFloater.style.left = e.clientX + "px";
-        statFloater.style.top = e.clientY + "px";
-      });
-
-      ledgerRoot.querySelectorAll(".v1-ledger-row").forEach((row) => {
-        row.addEventListener("mouseenter", () => {
-          active = row;
-          statV.textContent = row.dataset.previewValue;
-          statK.textContent = row.dataset.previewLabel;
-          statFloater.style.setProperty("--tilt", row.dataset.previewTilt + "deg");
-          statFloater.classList.add("is-visible");
-        });
-        row.addEventListener("mouseleave", () => {
-          active = null;
-          statFloater.classList.remove("is-visible");
-        });
-      });
-    }
-
-    // V1 — Work ledger (filter chips + impact-stamp rows + mini-intro)
-    renderV1WorkLedger();
   }
 
   // ========================================================================
@@ -1361,13 +1198,14 @@
   // ---- About page: merged hero + pinned scrollytelling -------------------
   // .ahs section pins for ~5.65 viewports. First ~20% of scroll collapses
   // the headline into a masthead and cross-fades the lead out / chapters in;
-  // the remainder steps through the four chapters and swaps the right-hand
-  // image accordingly. A section can reserve a tail of the pin as an outro
+  // the remainder steps through the chapters and swaps the photo
+  // accordingly. Same on every width: narrow screens stack the frame above
+  // the text (css/bold-home.css) but pin and fade the same way. A section can reserve a tail of the pin as an outro
   // (--outro-seg in CSS, 0 when unset): the last chapter holds while
   // --outro runs 0..1, so the stylesheet can fold the chapter away before
   // the pin lets go and the next section follows.
   // One scrolly per .ahs section: the v1 About and the Bold Type About
-  // (#/about-bold) each carry their own. A hidden section measures as
+  // (#/about) each carry their own. A hidden section measures as
   // zero height, so its update() bails out early and costs nothing.
   function initHeroScrolly() {
     $$(".ahs").forEach(initHeroScrollyFor);
@@ -1388,8 +1226,6 @@
     const CHAP_SEG = 1 - HERO_SEG - OUTRO_SEG;
     let activeChap = -1;
     let lastImg = null;
-    const isNarrow = () => window.matchMedia("(max-width: 880px)").matches;
-
     function setImg(el) {
       if (el === lastImg) return;
       imgs.forEach((i) => i.classList.toggle("is-active", i === el));
@@ -1404,13 +1240,6 @@
     }
 
     function update() {
-      if (isNarrow()) {
-        pin.style.setProperty("--collapse", "1");
-        pin.style.setProperty("--outro", "0");
-        setChap(0);
-        setImg(portrait);
-        return;
-      }
       const rect = sec.getBoundingClientRect();
       const vh = window.innerHeight;
       const scrollable = sec.offsetHeight - vh;
@@ -1452,6 +1281,8 @@
     window.addEventListener("resize", onScroll);
     window.addEventListener("hashchange", () => requestAnimationFrame(update));
     update();
+    // boot() renders the route after this init; measure once more then.
+    requestAnimationFrame(update);
   }
 
   // ========================================================================
@@ -1473,72 +1304,12 @@
     );
   }
 
-  // Every container with data-books="grid" gets the covers (#/books in the
-  // Bold Type dress, #/books-classic). Both open the one review overlay,
-  // which sits after <main>. The stats block only exists in the classic dress.
+  // Every container with data-books="grid" gets the covers (#/books). They
+  // open the one review overlay, which sits after <main>.
   function renderBooks() {
     const books = D.books || [];
     const grids = $$('[data-books="grid"]');
-    const statsEl = $("#lv-books-stats");
     if (!grids.length || !books.length) return;
-
-    // ---- Stats ----
-    const total = books.length;
-    const fiveStar = books.filter((b) => b.rating === 5).length;
-    const avg = (books.reduce((s, b) => s + b.rating, 0) / total).toFixed(1);
-
-    const tagCounts = {};
-    books.forEach((b) => (b.tags || []).forEach((t) => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
-    const genres = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
-    const topGenres = genres.slice(0, 6);
-    const maxGenre = (topGenres[0] && topGenres[0][1]) || 1;
-
-    const byYear = {};
-    books.forEach((b) => {
-      if (b.finished) {
-        const y = b.finished.split("-")[0];
-        byYear[y] = (byYear[y] || 0) + 1;
-      }
-    });
-    const years = Object.entries(byYear).sort((a, b) => a[0].localeCompare(b[0]));
-    const maxYear = Math.max.apply(null, Object.values(byYear).concat([1]));
-    const withDates = books.filter((b) => b.finished).length;
-    const avgPerYear = years.length ? (withDates / years.length).toFixed(1) : "0";
-
-    const ratingDist = [5, 4, 3, 2, 1].map((r) => ({ stars: r, count: books.filter((b) => b.rating === r).length }));
-
-    const bar = (label, count, max, accent) =>
-      `<div class="lv-book-bar">
-        <span class="lv-book-bar-label">${esc(label)}</span>
-        <span class="lv-book-bar-track"><span class="lv-book-bar-fill${accent ? " is-accent" : ""}" style="width:${(count / max) * 100}%"></span></span>
-        <span class="lv-book-bar-num">${count}</span>
-      </div>`;
-
-    if (statsEl) {
-      statsEl.innerHTML = `
-        <div class="lv-book-ribbon">
-          <div><strong>${total}</strong><span>books</span></div>
-          <div><strong>${fiveStar}</strong><span>five-star reads</span></div>
-          <div><strong>${avg}</strong><span>avg rating</span></div>
-        </div>
-        <div class="lv-book-cards">
-          <div class="lv-book-statcard">
-            <div class="lv-eyebrow">Books per year</div>
-            <div class="lv-book-statcard-big">${avgPerYear} <span>avg / year</span></div>
-            ${years.map(([y, c]) => bar(y, c, maxYear, false)).join("")}
-          </div>
-          <div class="lv-book-statcard">
-            <div class="lv-eyebrow">Genres</div>
-            <div class="lv-book-statcard-big">${genres.length} <span>categories</span></div>
-            ${topGenres.map(([t, c]) => bar(t, c, maxGenre, false)).join("")}
-          </div>
-          <div class="lv-book-statcard">
-            <div class="lv-eyebrow">Ratings</div>
-            <div class="lv-book-statcard-big">${avg} <span>avg stars</span></div>
-            ${ratingDist.map((r) => bar(r.stars + "★", r.count, total, true)).join("")}
-          </div>
-        </div>`;
-    }
 
     // ---- Cover grid ----
     const cards = books
@@ -1604,19 +1375,17 @@
   }
 
   // Visuals: a gallery of small visual work. Every container with
-  // data-visuals gets the cards: "grid" takes the whole list (#/visuals,
-  // #/visuals-bold), "teaser" the first three (foot of Work, Work bold).
-  // Clicking a card opens the overlay of the container's data-dress ("v1"
-  // or "bt"). The overlays sit after <main>, outside the route sections,
-  // so a teaser can open one while the gallery route itself is hidden.
+  // data-visuals gets the cards: "grid" takes the whole list (#/visuals),
+  // "teaser" the first three (foot of Work). Clicking a card opens the
+  // overlay, which sits after <main>, outside the route sections, so the
+  // teaser can open it while the gallery route itself is hidden.
   // An `embed` loads inline (Canva iframe), otherwise a thumbnail /
   // gradient preview shows, with an external link as fallback.
   function renderVisuals() {
     const items = D.visuals || [];
     const grids = $$("[data-visuals]");
-    const overlays = {};
-    $$(".v1-visual-overlay[data-dress]").forEach((o) => { overlays[o.getAttribute("data-dress")] = o; });
-    if (!grids.length) return;
+    const overlay = $(".v1-visual-overlay");
+    if (!grids.length || !overlay) return;
 
     function card(v, i) {
       // Real <img> at natural aspect ratio so the full artwork is visible,
@@ -1704,8 +1473,6 @@
     }
 
     grids.forEach((grid) => {
-      const overlay = overlays[grid.getAttribute("data-dress")] || overlays.v1;
-      if (!overlay) return;
       grid.addEventListener("click", (e) => {
         const card = e.target.closest(".v1-visual-card");
         if (!card) return;
@@ -1729,10 +1496,8 @@
       gridCards.forEach((c) => io.observe(c));
     }
 
-    Object.values(overlays).forEach((overlay) => {
-      $(".lv-book-close", overlay).addEventListener("click", closeVisual);
-      $(".lv-book-backdrop", overlay).addEventListener("click", closeVisual);
-    });
+    $(".lv-book-close", overlay).addEventListener("click", closeVisual);
+    $(".lv-book-backdrop", overlay).addEventListener("click", closeVisual);
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && openOverlay) closeVisual();
     });
@@ -1848,11 +1613,11 @@
     });
   }
 
-  // #/sketchbook and #/sketchbook-classic — photos of hand-drawn work. Same
-  // cards as Visuals, but the lightbox has no card: the whole sketch sits on
-  // the page with its title and blurb, sized to fit without scrolling, and
-  // arrows / arrow keys flip through the set. Each route section carries its
-  // own grid and overlay (found by class), so one init serves both dresses.
+  // #/sketchbook — photos of hand-drawn work. Same cards as Visuals, but
+  // the lightbox has no card: the whole sketch sits on the page with its
+  // title and blurb, sized to fit without scrolling, and arrows / arrow
+  // keys flip through the set. The route section carries its own grid and
+  // overlay (found by class).
   function renderSketchbook() {
     const items = D.sketchbook || [];
 
@@ -1940,7 +1705,7 @@
   window.LV_RENDER = { inlineMarks, esc };
 
   function boot() {
-    renderCaseLists();
+    renderWorkLedger();
     renderBlogLists();
     renderBooks();
     renderVisuals();
@@ -1956,7 +1721,6 @@
     initMobileNav();
     initFlipCards();
     initInfoPopovers();
-    initV1WorkFilters();
     initChineseFilters();
     initFooterEmoji();
     initHeroScrolly();

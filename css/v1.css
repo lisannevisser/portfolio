@@ -1098,53 +1098,6 @@
   max-width: 60%;
 }
 
-@media (max-width: 880px) {
-  [data-variation="v1"] .ahs { height: auto; }
-  [data-variation="v1"] .ahs-pin {
-    position: relative;
-    height: auto;
-    top: auto;
-    padding: 1.5rem 0 0;
-  }
-  [data-variation="v1"] .ahs-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  [data-variation="v1"] .ahs-images {
-    height: 260px;
-    order: -1;
-  }
-  [data-variation="v1"] .ahs-mast {
-    transform: none !important;
-    margin-bottom: 1.75rem !important;
-  }
-  [data-variation="v1"] .ahs-eyebrow { opacity: 1 !important; }
-  [data-variation="v1"] .ahs-body { position: static; }
-  [data-variation="v1"] .ahs-lead {
-    position: static;
-    opacity: 1 !important;
-    transform: none !important;
-    margin: 0 0 2rem;
-  }
-  [data-variation="v1"] .ahs-steps {
-    position: static;
-    opacity: 1 !important;
-  }
-  [data-variation="v1"] .ahs-step {
-    position: static;
-    inset: auto;
-    opacity: 1 !important;
-    transform: none !important;
-    pointer-events: auto;
-    padding: 1.4rem 0;
-    border-top: 1px dashed var(--rule);
-  }
-  [data-variation="v1"] .ahs-img { display: none; }
-  [data-variation="v1"] .ahs-img.is-active { display: flex; }
-  [data-variation="v1"] .ahs-rail,
-  [data-variation="v1"] .ahs-progress { display: none; }
-}
-
 /* Tighten the pinned chapter on shorter heights AND narrower widths, so the
    longer bios still fit between the collapsed masthead and the chapter rail.
    Narrow columns wrap text taller while the portrait image gets shorter, so

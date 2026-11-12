@@ -1,5 +1,5 @@
 /* =========================================================================
-   Bold Type home (#/home-bold): work cards from data.js, chapter
+   Bold Type home (#/): work cards from data.js, chapter
    progress segments, and the light/dark nav flip on the Contact chapter.
    Depends on: window.LV_DATA and window.LV_RENDER (set by js/app.js).
    ========================================================================= */
@@ -19,7 +19,6 @@
     { id: "about", label: "About", color: "var(--bt-mustard)" },
     { id: "contact", label: "Contact", color: "var(--bt-rose)" },
   ];
-  const pad = (n) => String(n).padStart(2, "0");
 
   // -------- Work cards: the top three cases, same order as data.js --------
   function renderCards() {
@@ -53,8 +52,6 @@
       // Every filled segment takes the current chapter's color, as in the design.
       if (i <= index) s.style.setProperty("--chapter-color", ch.color);
     });
-    const count = `${pad(index)} / ${pad(CHAPTERS.length - 1)}`;
-    $$(".bt-nav-count", root).forEach((el) => (el.textContent = count));
     $$(".bt-nav-link", root).forEach((a) => {
       a.classList.toggle("is-current", a.getAttribute("data-chapter") === ch.id);
     });
@@ -94,7 +91,7 @@
     });
     // The mobile menu button reuses the site's nav sheet; the global toggle
     // is hidden on these routes, so trigger it by hand. Bound on document
-    // because #/about-bold has its own .bt-nav outside this root.
+    // because #/about has its own .bt-nav outside this root.
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".bt-nav-menu")) return;
       const toggle = $(".lv-nav-toggle");

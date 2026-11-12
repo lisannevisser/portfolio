@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Bold Type home — #/home-bold
+   Bold Type home — #/
    A second, full-bleed take on the homepage: four snap-scrolled chapters
    (Intro, Work, About, Contact), Bricolage Grotesque display type,
    hand-cut highlight blobs in rose / cobalt / mustard.
@@ -19,33 +19,33 @@
 
 /* The chapters bring their own nav and footer line, so the global
    chrome steps aside while this route is active. */
-html[data-route="home-bold"] .lv-nav,
-html[data-route="home-bold"] .lv-footer,
-html[data-route="about-bold"] .lv-nav,
-html[data-route="about-bold"] .lv-footer,
-html[data-route="work-bold"] .lv-nav,
-html[data-route="work-bold"] .lv-footer,
-html[data-route="case-bold"] .lv-nav,
-html[data-route="case-bold"] .lv-footer,
-html[data-route="sketchbook-bold"] .lv-nav,
-html[data-route="sketchbook-bold"] .lv-footer,
-html[data-route="visuals-bold"] .lv-nav,
-html[data-route="visuals-bold"] .lv-footer,
-html[data-route="books-bold"] .lv-nav,
-html[data-route="books-bold"] .lv-footer,
-html[data-route="blog-bold"] .lv-nav,
-html[data-route="blog-bold"] .lv-footer,
-html[data-route="post-bold"] .lv-nav,
-html[data-route="post-bold"] .lv-footer,
-html[data-route="404-bold"] .lv-nav,
-html[data-route="404-bold"] .lv-footer,
-html[data-route="imprint-bold"] .lv-nav,
-html[data-route="imprint-bold"] .lv-footer,
-html[data-route="privacy-bold"] .lv-nav,
-html[data-route="privacy-bold"] .lv-footer { display: none; }
-html[data-route="home-bold"] { scroll-snap-type: y proximity; }
+html[data-route="home"] .lv-nav,
+html[data-route="home"] .lv-footer,
+html[data-route="about"] .lv-nav,
+html[data-route="about"] .lv-footer,
+html[data-route="work"] .lv-nav,
+html[data-route="work"] .lv-footer,
+html[data-route="case"] .lv-nav,
+html[data-route="case"] .lv-footer,
+html[data-route="sketchbook"] .lv-nav,
+html[data-route="sketchbook"] .lv-footer,
+html[data-route="visuals"] .lv-nav,
+html[data-route="visuals"] .lv-footer,
+html[data-route="books"] .lv-nav,
+html[data-route="books"] .lv-footer,
+html[data-route="blog"] .lv-nav,
+html[data-route="blog"] .lv-footer,
+html[data-route="post"] .lv-nav,
+html[data-route="post"] .lv-footer,
+html[data-route="404"] .lv-nav,
+html[data-route="404"] .lv-footer,
+html[data-route="imprint"] .lv-nav,
+html[data-route="imprint"] .lv-footer,
+html[data-route="privacy"] .lv-nav,
+html[data-route="privacy"] .lv-footer { display: none; }
+html[data-route="home"] { scroll-snap-type: y proximity; }
 @media (min-width: 900px) and (min-height: 700px) {
-  html[data-route="home-bold"] { scroll-snap-type: y mandatory; }
+  html[data-route="home"] { scroll-snap-type: y mandatory; }
 }
 
 .bt {
@@ -141,7 +141,6 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   margin-top: 32px;
   display: flex; align-items: flex-end; justify-content: space-between; gap: 48px;
 }
-.bt-swipe { display: none; }
 .bt-intro-bottom { flex: 1; display: flex; flex-direction: column; }
 
 /* -------- Logo marquee (foot of the intro) -------- */
@@ -230,7 +229,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 14'><path d='M1.6 1.6 L7.4 7 L1.6 12.4' fill='none' stroke='black' stroke-width='3.2'/></svg>") center / 100% 100% no-repeat;
 }
 
-/* -------- Experience (the block lives on #/about-bold, see .bt-xp-section) -------- */
+/* -------- Experience (the block lives on #/about, see .bt-xp-section) -------- */
 .bt-xp {
   flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
 }
@@ -383,7 +382,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   }
   .bt-nav-progress span { flex: 1; width: 4px; height: auto; }
 }
-/* Mobile-only nav bits: counter, menu button. */
+/* Mobile-only nav bits: the menu button. */
 .bt-nav-right { display: none; }
 
 /* ==========================================================================
@@ -405,12 +404,6 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-chapter:not(.bt-chapter--intro):not(.bt-chapter--contact)::before { left: 22px; right: 22px; }
   [data-variation="v1"] .bt-logo-track { gap: 36px; padding-right: 36px; }
   [data-variation="v1"] .bt-logo-track img { height: calc(20px * var(--logo-scale, 1)); }
-  .bt-swipe {
-    display: flex; align-items: center; gap: 6px;
-    font-family: var(--font-hand); font-size: 23px;
-  }
-  .bt-swipe svg { width: 22px; height: 34px; color: var(--ink); }
-  .bt-swipe svg path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
   .bt-work-grid { grid-template-columns: 1fr; gap: 14px; }
   .bt-card {
@@ -422,11 +415,17 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-card-sub { font-size: 13px; padding: 0; }
   .bt-card-text { display: flex; flex-direction: column; gap: 2px; }
 
-  .bt-xp { grid-template-columns: 1fr; gap: 18px; align-items: start; }
-  .bt-xp-headline { margin-top: 10px; font-size: 44px; line-height: 1.12; letter-spacing: -0.035em; }
-  .bt-xp-cv { margin-top: 12px; }
+  .bt-xp { grid-template-columns: 1fr; gap: 20px; align-items: start; }
+  .bt-xp-headline { margin-top: 0; font-size: 44px; line-height: 1.12; letter-spacing: -0.035em; }
   .bt-xp-copy { font-size: 15px; margin-bottom: 0; }
-  .bt-xp-rows { margin-top: auto; }
+  .bt-xp-rows { margin-top: 0; }
+  /* One column reads top-down: headline, intro, the rows, and the CV link
+     closes the block instead of sitting between headline and intro. */
+  .bt-xp-section .bt-xp > div { display: contents; }
+  .bt-xp-section .bt-xp-headline { order: 1; }
+  .bt-xp-section .bt-xp-copy { order: 2; }
+  .bt-xp-section .bt-xp-rows { order: 3; }
+  .bt-xp-section .bt-xp-cv { order: 4; margin: 4px 0 0; padding-left: 0; justify-self: start; }
   .bt-xp-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
   .bt-xp-when { display: none; }
   .bt-xp-role { font-size: 17px; }
@@ -459,10 +458,6 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
   .bt-logo::before { width: 8px; height: 8px; }
   .bt-nav-links { display: none; }
   .bt-nav-right { display: flex; align-items: center; gap: 12px; }
-  .bt-nav-count {
-    font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--bt-ink);
-    font-variant-numeric: tabular-nums; min-width: 52px; text-align: right; transition: color 0.3s ease;
-  }
   .bt-nav-menu {
     width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
     background: none; border: 0; padding: 0; cursor: pointer; color: var(--bt-ink); transition: color 0.3s ease;
@@ -479,7 +474,7 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 
 /* ==========================================================================
-   Bold Type about — #/about-bold
+   Bold Type about — #/about
    The v1 About structure (pinned scrolly .ahs from v1.css + app.js) in the
    Bold Type dress: Bricolage headlines, highlight blobs, framed photos with
    handwritten pill captions, mono chapter rail. Overrides only what differs.
@@ -493,23 +488,20 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 .bt-inline-link:hover { background: var(--bt-rose); }
 
 /* Nav: no chapter rail on this page, so the mobile bar is just logo + menu. */
-.bt--about .bt-nav-progress, .bt--about .bt-nav-count { display: none; }
+.bt--about .bt-nav-progress { display: none; }
 
 /* Scrolly: room for the fixed nav on top, mast in display type. */
 .bt.bt--about .ahs-pin { padding-top: var(--bt-hero-top); }
 /* Unlike the v1 About, the "Hello, I'm Lisanne." mast doesn't stay as a
    small masthead: it folds away completely as chapter 01 takes over, so
-   the chapters start at the top. Desktop only; on narrow screens the
-   scrolly is a plain stacked page and --collapse is pinned to 1. */
-@media (min-width: 881px) {
-  .bt--about .ahs-mast {
-    transform: none;
-    margin-bottom: 0;
-    max-height: calc((1 - var(--collapse)) * 70vh);
-    overflow: hidden;
-    opacity: calc(1 - var(--collapse) * 1.6);
-    transition: max-height 120ms linear, opacity 120ms linear;
-  }
+   the chapters start at the top. */
+.bt--about .ahs-mast {
+  transform: none;
+  margin-bottom: 0;
+  max-height: calc((1 - var(--collapse)) * 70vh);
+  overflow: hidden;
+  opacity: calc(1 - var(--collapse) * 1.6);
+  transition: max-height 120ms linear, opacity 120ms linear;
 }
 .bt--about .ahs-eyebrow { margin-bottom: 1.25rem; }
 .bt--about .ahs-h1 { font-size: clamp(56px, 8.6vw, 132px); line-height: 1; letter-spacing: -0.05em; }
@@ -579,14 +571,12 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 /* Outro: the last stretch of the pin (--outro-seg of its scroll, which
    app.js turns into --outro 0..1) folds chapter 03 and its photo away, so
    the section lets go over empty paper instead of dragging the chapter
-   off-screen. Desktop only; narrow screens stack the chapters. */
+   off-screen. */
 .ahs--bt { --outro-seg: 0.12; --outro: 0; }
-@media (min-width: 881px) {
-  .bt--about .ahs-grid {
-    opacity: calc(1 - var(--outro) * 1.3);
-    transform: translateY(calc(var(--outro) * -2.5rem));
-    transition: opacity 120ms linear, transform 120ms linear;
-  }
+.bt--about .ahs-grid {
+  opacity: calc(1 - var(--outro) * 1.3);
+  transform: translateY(calc(var(--outro) * -2.5rem));
+  transition: opacity 120ms linear, transform 120ms linear;
 }
 @media (prefers-reduced-motion: reduce) {
   .bt--about .ahs-grid { transform: none; transition: none; }
@@ -600,9 +590,9 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
    go, which is also the snap point. Proximity, not mandatory, so the pinned
    scrolly above scrolls freely and nobody gets stuck on the way back up.
    Speaking snaps the same way as the next chapter; Inspiration flows
-   underneath at its natural height; narrow screens stack everything as
-   before. */
-html[data-route="about-bold"] { scroll-snap-type: y proximity; }
+   underneath at its natural height. Narrow screens do the same with their
+   own hero top (mobile block below). */
+html[data-route="about"] { scroll-snap-type: y proximity; }
 @media (min-width: 881px) {
   .bt.bt--about .ahs { margin-bottom: 0; }
   .bt--about .bt-snap {
@@ -740,16 +730,45 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 
 @media (max-width: 900px) {
   .bt-wrap { padding: 0 22px; }
-  .bt.bt--about .ahs-pin { padding-top: 6rem; }
-  .bt--about .ahs-h1 { font-size: clamp(48px, 15.9vw, 62px); }
-  .bt--about .ahs-images {
-    transform: none; max-width: none; height: 220px; aspect-ratio: auto;
-    margin-bottom: 12px;
+  /* The desktop scrolly, stacked: the pin fills the screen under the nav,
+     the frame sits on top (landscape, cropped to the faces: the video and
+     all three photos are upright), the text column takes the rest and the
+     chapters cross-fade in place exactly as on desktop. The chapter rail
+     stays hidden; the kicker names the chapter. */
+  .bt.bt--about .ahs-pin { padding: 5rem 0 1rem; align-items: stretch; }
+  .bt--about .ahs-grid {
+    grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr);
+    gap: 14px; height: 100%;
   }
+  .bt--about .ahs-images {
+    order: -1; transform: none; max-width: none; aspect-ratio: auto;
+    justify-self: stretch; height: clamp(120px, 20svh, 170px); max-height: none; margin: 0;
+  }
+  .bt--about .ahs-video { object-position: 50% 10%; }
+  .bt--about .ahs-img[data-step="0"] { background-position: 50% 15%; }
+  .bt--about .ahs-img[data-step="1"] { background-position: 50% 20%; }
+  .bt--about .ahs-img[data-step="2"] { background-position: 50% 60%; }
   .bt--about .ahs-img-label { left: 10px; bottom: -12px; font-size: 18px; padding: 2px 10px; }
-  .bt--about .ahs-step { border-top: 2px solid var(--ink); padding: 1.6rem 0; }
-  .bt--about .ahs-step-h { font-size: 34px; line-height: 1.12; letter-spacing: -0.04em; }
+  .bt--about .ahs-text { min-height: 0; }
+  .bt--about .ahs-h1 { font-size: clamp(48px, 15.9vw, 62px); }
+  .bt--about .ahs-eyebrow { margin-bottom: 0.75rem; }
+  .bt--about .ahs-lead { top: 0.75rem; }
+  .bt--about .ahs-step { padding-top: 0.25rem; max-width: none; }
+  .bt--about .ahs-num { margin-bottom: 0.6rem; }
+  .bt--about .ahs-step-h { font-size: 30px; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 0.7rem; }
   .bt--about .ahs-step-p { font-size: 13.5px; line-height: 1.5; }
+  .bt--about .ahs-rail { display: none; }
+  /* Experience rises over the fading chapter and snaps under the nav, as
+     on desktop; Speaking follows the same way, Inspiration flows under it. */
+  .bt.bt--about .ahs { margin-bottom: 0; }
+  .bt--about .bt-snap {
+    position: relative; z-index: 1; background: var(--paper);
+    scroll-snap-align: start; scroll-margin-top: 0;
+    box-sizing: border-box; min-height: 100svh;
+    padding-top: 6rem; padding-bottom: 0; margin-bottom: 0;
+  }
+  .bt--about .bt-xp-section--snap { margin-top: -100svh; }
+  .bt--about .bt-snap + .bt-inspire { padding-top: 3rem; }
   .bt-inspire { padding-top: 1rem; gap: 22px; }
   .bt-inspire-h { font-size: 38px; line-height: 1.15; }
   .bt-video { border-radius: 10px; }
@@ -767,45 +786,28 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
   .bt-inspire-tile .bt-about-label { left: 8px; bottom: -12px; font-size: 17px; padding: 2px 10px; }
   .bt-colophon--light span:last-child { display: none; }
 }
+@media (max-width: 900px) and (max-height: 700px) {
+  .bt--about .ahs-images { height: clamp(100px, 16svh, 140px); }
+  .bt--about .ahs-step-h { font-size: 27px; }
+  .bt--about .ahs-step-p { font-size: 12.5px; line-height: 1.42; }
+}
 
 /* ==========================================================================
-   Bold Type work — #/work-bold
-   The v1 Work structure (filter chips, case ledger, visuals teaser; all
-   rendered by app.js into the shared .v1-work-* classes) in the Bold Type
-   dress. Overrides only what differs from v1.css.
+   Bold Type work — #/work
+   The v1 Work structure (case ledger, visuals teaser; rendered by app.js
+   into the shared .v1-work-* classes) in the Bold Type dress. Overrides only what differs from v1.css.
    ========================================================================== */
 .bt--work { min-height: 100vh; }
 .bt-page { padding-top: var(--bt-hero-top); padding-bottom: 36px; }
 .bt-page-head { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
-/* Proximity: the filters belong to the list they control, so the big gap
-   sits between the intro and the filters, and the filters hug the list. */
 .bt--work .bt-page-head { margin-bottom: clamp(3.5rem, 9vw, 6.5rem); }
 .bt-page-h1 { margin: 22px 0 0; font-size: clamp(56px, 8.6vw, 120px); line-height: 1; }
 .bt-page-head .bt-lead { margin-top: 32px; }
 
-/* Filters: a quiet mono text row, no pills. The active filter is ink with
-   a rose underline; counts sit as small superscripts. */
-.bt--work .bt-work-filters {
-  border-bottom: 2px solid var(--ink); margin-bottom: 0; padding-bottom: 10px;
-  gap: 6px 28px;
-}
-.bt--work .v1-work-chip {
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink-3); border: none; border-radius: 0; background: none;
-  padding: 4px 0; gap: 3px; align-items: flex-start;
-  transition: color 0.18s ease, box-shadow 0.18s ease;
-}
-.bt--work .v1-work-chip:hover:not(:disabled) { color: var(--ink); background: none; }
-.bt--work .v1-work-chip.is-active { color: var(--ink); background: none; box-shadow: inset 0 -2px 0 var(--bt-rose); }
-.bt--work .v1-work-chip-count,
-.bt--work .v1-work-chip.is-active .v1-work-chip-count {
-  background: none; padding: 0; min-width: 0; font-size: 9px; line-height: 1;
-  color: var(--ink-3); transform: translateY(-1px);
-}
-
 /* Ledger rows: quiet at rest, loud on hover. Mono index, Bricolage title
-   whose rose marker only appears on hover. */
+   whose rose marker only appears on hover. Ink rules above and below. */
 .bt--work .v1-work-row { border-bottom: 2px solid var(--ink); padding: 28px 0; gap: 28px; }
+.bt--work .v1-work-row:first-child { border-top: 2px solid var(--ink); }
 .bt--work .v1-work-row:last-child { border-bottom: 2px solid var(--ink); }
 .bt--work .v1-work-row:hover { color: var(--ink); padding-left: 0; }
 .bt--work .v1-work-row .n { color: var(--ink-3); font-size: 11px; letter-spacing: 0.14em; }
@@ -813,12 +815,18 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 .bt--work .v1-work-row .title {
   font-family: var(--bt-font-display); font-style: normal; font-weight: 800;
   font-size: clamp(24px, 2.8vw, 36px); line-height: 1.1; letter-spacing: -0.03em;
+}
+/* The marker sits on an inline span inside the title, so on a title that
+   wraps it follows the text line by line instead of running the full
+   width under the last line. */
+.bt--work .v1-work-row .title > span {
   padding: 0 6px; margin-left: -6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
   background-image: linear-gradient(var(--bt-rose), var(--bt-rose));
   background-repeat: no-repeat; background-position: 0 85%; background-size: 100% 0;
   transition: background-size 0.22s ease;
 }
-.bt--work .v1-work-row:hover .title { background-size: 100% 0.9em; }
+.bt--work .v1-work-row:hover .title > span { background-size: 100% 0.9em; }
 .bt--work .v1-work-row .sub {
   max-width: 58ch; font-size: 17px; line-height: 1.5; color: var(--ink-2);
 }
@@ -847,7 +855,16 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
   transform: rotate(-3deg); transition: transform 0.22s ease;
 }
 .bt--work .v1-work-row:hover .v1-work-thumb { transform: rotate(0deg) scale(1.04); }
-.bt--work .v1-work-empty { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2rem 0; }
+/* Touch screens keep :hover stuck on the last tapped row, so the row
+   stays at rest there. */
+@media (hover: none) {
+  .bt--work .v1-work-row:hover .title > span { background-size: 100% 0; }
+  .bt--work .v1-work-row:hover .intro { color: var(--ink-3); }
+  .bt--work .v1-work-row:hover .v1-work-stamp { background: transparent; transform: rotate(var(--tilt, -4deg)); }
+  .bt--work .v1-work-row:hover .v1-work-stamp .v { color: var(--ink); }
+  .bt--work .v1-work-row:hover .v1-work-stamp .k { color: var(--ink-3); }
+  .bt--work .v1-work-row:hover .v1-work-thumb { transform: rotate(-3deg); }
+}
 
 /* Visuals teaser. */
 .bt-teaser { margin-top: clamp(4rem, 10vw, 7rem); }
@@ -872,16 +889,30 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
   .bt-page { padding-top: 6rem; }
   .bt-page-h1 { font-size: clamp(44px, 14.4vw, 56px); }
   .bt-page-head .bt-lead { margin-top: 20px; }
-  .bt--work .v1-work-row { padding: 20px 0; gap: 14px; }
-  .bt--work .v1-work-row .title { font-size: 23px; }
-  .bt--work .v1-work-row .sub { font-size: 15px; }
+  .bt--work .bt-page-head { margin-bottom: 2.75rem; }
+  /* No index column: the text and the stamp share the row, as on desktop,
+     instead of the stamp dropping under the text. */
+  .bt--work .v1-work-row {
+    grid-template-columns: minmax(0, 1fr) auto; gap: 16px;
+    padding: 22px 0; align-items: center;
+  }
+  .bt--work .v1-work-row .n { display: none; }
+  .bt--work .v1-work-row .visual { grid-column: auto; justify-self: end; margin-top: 0; }
+  .bt--work .v1-work-row .body { gap: 8px; }
+  .bt--work .v1-work-row .title { font-size: 22px; }
+  .bt--work .v1-work-row .sub { font-size: 14px; }
+  .bt--work .v1-work-row .intro { font-size: 10px; }
+  .bt--work .v1-work-stamp { padding: 9px 12px 10px; border-radius: 12px; }
+  .bt--work .v1-work-stamp .v { font-size: 22px; }
+  .bt--work .v1-work-stamp .k { font-size: 9px; letter-spacing: 0.1em; }
+  .bt--work .v1-work-thumb { width: 92px; height: 64px; }
   .bt-teaser-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bt-teaser-h { font-size: 34px; }
   .bt--work .bt-colophon--light span:last-child { display: none; }
 }
 
 /* ==========================================================================
-   Bold Type case study — #/work-bold/<slug>
+   Bold Type case study — #/work/<slug>
    The v1 case (renderV1Case in app.js: impact grid, story blocks,
    framework table, flow chips, limitations card, TOC fab, next case) in
    the Bold Type dress. The site accent flips to cobalt inside this root,
@@ -890,7 +921,7 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
    Bricolage headlines. Overrides only what differs from v1.css.
    ========================================================================== */
 .bt--case { min-height: 100vh; --accent: var(--bt-cobalt); }
-.bt--case .bt-nav-progress, .bt--case .bt-nav-count { display: none; }
+.bt--case .bt-nav-progress { display: none; }
 .bt-back {
   display: inline-block; margin: 0 0 40px;
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
@@ -1100,14 +1131,14 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 }
 
 /* ==========================================================================
-   Bold Type sketchbook — #/sketchbook-bold
+   Bold Type sketchbook — #/sketchbook
    The v1 Sketchbook gallery (cards + lightbox from app.js, shared
    .v1-visual-* classes) in the Bold Type dress: ink-framed thumbs with a
    slight tilt, the medium as a handwritten pill hanging off the frame,
    Bricolage titles with the growing underline from the home cards.
    ========================================================================== */
 .bt--sketch { min-height: 100vh; }
-.bt--sketch .bt-nav-progress, .bt--sketch .bt-nav-count { display: none; }
+.bt--sketch .bt-nav-progress { display: none; }
 .bt--sketch .bt-page-head .bt-lead { max-width: 56ch; }
 
 [data-variation="v1"] .bt-sketch-grid {
@@ -1144,7 +1175,7 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 [data-variation="v1"] .bt--sketch .v1-visual-card:hover .v1-visual-title { background-size: 100% 0.9em; }
 [data-variation="v1"] .bt--sketch .v1-visual-card:nth-child(3n + 2):hover .v1-visual-title { color: var(--paper); }
 /* The medium becomes a handwritten pill hanging off the frame's top-left
-   corner, like the photo captions on #/about-bold. */
+   corner, like the photo captions on #/about. */
 [data-variation="v1"] .bt--sketch .v1-visual-sub {
   position: absolute; top: -14px; left: 12px; z-index: 1;
   font-family: var(--font-hand); font-size: 21px; line-height: 1.1;
@@ -1210,14 +1241,14 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 }
 
 /* ==========================================================================
-   Bold Type visuals — #/visuals-bold
+   Bold Type visuals — #/visuals
    The v1 Visuals masonry (cards from renderVisuals in app.js, shared
    .v1-visual-* classes) in the Bold Type dress: ink-framed tiles with a
    slight tilt, the title as a colored label that slides in on hover.
    The detail overlay (.bt-overlay) sits after <main>, outside this route.
    ========================================================================== */
 .bt--visuals { min-height: 100vh; }
-.bt--visuals .bt-nav-progress, .bt--visuals .bt-nav-count { display: none; }
+.bt--visuals .bt-nav-progress { display: none; }
 .bt--visuals .bt-page-head .bt-lead { max-width: 56ch; }
 
 [data-variation="v1"] .bt-visuals-grid {
@@ -1331,10 +1362,10 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
    tilt instead of the 3D spine, Bricolage titles with the growing
    underline from the sketchbook. No stats block here.
    The review overlay (#lv-book-overlay) sits after <main> and is shared
-   with #/books-classic, so its Bold dress keys off the route.
+   with the old classic bookshelf, so its Bold dress keys off the route.
    ========================================================================== */
 .bt--books { min-height: 100vh; }
-.bt--books .bt-nav-progress, .bt--books .bt-nav-count { display: none; }
+.bt--books .bt-nav-progress { display: none; }
 .bt--books .bt-page-head .bt-lead { max-width: 56ch; }
 
 .bt-books-grid.lv-books-grid {
@@ -1390,30 +1421,30 @@ html[data-route="about-bold"] { scroll-snap-type: y proximity; }
 
 /* Review overlay in the Bold Type dress: ink frame, Bricolage title, tags
    as ink pills, ink stars. Outside any .bt root, so it keys off the route. */
-html[data-route="books-bold"] .lv-book-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
-html[data-route="books-bold"] .lv-book-detail-cover img,
-html[data-route="books-bold"] .lv-book-detail-fallback { border: 2px solid var(--ink); border-radius: 8px; box-shadow: none; }
-html[data-route="books-bold"] .lv-book-detail-fallback { font-family: var(--bt-font-display); font-weight: 800; }
-html[data-route="books-bold"] .lv-book-tag {
+html[data-route="books"] .lv-book-detail { border: 2px solid var(--ink); border-radius: 14px; box-shadow: none; }
+html[data-route="books"] .lv-book-detail-cover img,
+html[data-route="books"] .lv-book-detail-fallback { border: 2px solid var(--ink); border-radius: 8px; box-shadow: none; }
+html[data-route="books"] .lv-book-detail-fallback { font-family: var(--bt-font-display); font-weight: 800; }
+html[data-route="books"] .lv-book-tag {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--ink); background: none; border: 2px solid var(--ink); padding: 4px 10px;
 }
-html[data-route="books-bold"] .lv-book-tag:first-child { background: var(--bt-rose); }
-html[data-route="books-bold"] .lv-book-detail-title {
+html[data-route="books"] .lv-book-tag:first-child { background: var(--bt-rose); }
+html[data-route="books"] .lv-book-detail-title {
   font-family: var(--bt-font-display); font-weight: 800;
   font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -0.035em;
 }
-html[data-route="books-bold"] .lv-book-detail-author {
+html[data-route="books"] .lv-book-detail-author {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
 }
-html[data-route="books-bold"] .lv-book-star { color: rgba(26, 24, 20, 0.2); }
-html[data-route="books-bold"] .lv-book-star.is-on { color: var(--ink); }
-html[data-route="books-bold"] .lv-book-detail-review-wrap { border-top: 2px solid var(--ink); }
-html[data-route="books-bold"] .lv-book-detail-review-wrap .lv-eyebrow { color: var(--ink); }
-html[data-route="books-bold"] .lv-book-detail-review { font-size: 16px; line-height: 1.6; color: var(--ink); }
-html[data-route="books-bold"] .lv-book-detail-review a { color: var(--ink); border-bottom: 2px solid var(--bt-mustard); }
-html[data-route="books-bold"] .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
-html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose); }
+html[data-route="books"] .lv-book-star { color: rgba(26, 24, 20, 0.2); }
+html[data-route="books"] .lv-book-star.is-on { color: var(--ink); }
+html[data-route="books"] .lv-book-detail-review-wrap { border-top: 2px solid var(--ink); }
+html[data-route="books"] .lv-book-detail-review-wrap .lv-eyebrow { color: var(--ink); }
+html[data-route="books"] .lv-book-detail-review { font-size: 16px; line-height: 1.6; color: var(--ink); }
+html[data-route="books"] .lv-book-detail-review a { color: var(--ink); border-bottom: 2px solid var(--bt-mustard); }
+html[data-route="books"] .lv-book-close { border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+html[data-route="books"] .lv-book-close:hover { background: var(--bt-rose); }
 
 @media (max-width: 1100px) {
   .bt-books-grid.lv-books-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -1432,15 +1463,15 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
 }
 
 /* ==========================================================================
-   Bold Type blog — #/blog-bold and #/blog-bold/<slug>
+   Bold Type blog — #/blog and #/blog/<slug>
    The Gazette (front page from renderBlogLists, article from renderV1Post
    in app.js, shared .lv-gz-* and .lv-post-* markup) in the Bold Type
    dress: display masthead instead of the newspaper flag, left-aligned,
    2px ink rules, Bricolage headlines with the growing underline.
    ========================================================================== */
 .bt--blog, .bt--post { min-height: 100vh; }
-.bt--blog .bt-nav-progress, .bt--blog .bt-nav-count,
-.bt--post .bt-nav-progress, .bt--post .bt-nav-count { display: none; }
+.bt--blog .bt-nav-progress,
+.bt--post .bt-nav-progress { display: none; }
 .bt--blog .bt-page-head { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
 .bt-gz-dateline {
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem;
@@ -1612,12 +1643,12 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
 }
 
 /* ==========================================================================
-   Bold Type 404 — #/404-bold
+   Bold Type 404 — #/404
    One dark chapter in the dress of the home's Contact one. The root carries
    data-chapter="contact" so the nav and logo take the dark palette.
    ========================================================================== */
 .bt--404 { min-height: 100vh; }
-.bt--404 .bt-nav-progress, .bt--404 .bt-nav-count { display: none; }
+.bt--404 .bt-nav-progress { display: none; }
 .bt-chapter--404 { padding-top: var(--bt-hero-top); }
 .bt-chapter--404 .bt-display {
   margin-top: 22px;
@@ -1645,14 +1676,14 @@ html[data-route="books-bold"] .lv-book-close:hover { background: var(--bt-rose);
 }
 
 /* ==========================================================================
-   Bold Type imprint + privacy — #/imprint-bold, #/privacy-bold
+   Bold Type imprint + privacy — #/imprint, #/privacy
    The v1 legal pages, text for text, in the Bold Type dress: display
    headline with a blob, then the two-column .lv-legal-grid where every
    block gets a numbered mono kicker and an ink rule. The imprint's
    address block sits in display type; everything else stays body text.
    ========================================================================== */
 .bt--legal { min-height: 100vh; }
-.bt--legal .bt-nav-progress, .bt--legal .bt-nav-count { display: none; }
+.bt--legal .bt-nav-progress { display: none; }
 .bt--legal .bt-page-head .bt-lead { max-width: 56ch; }
 .bt-legal { border-top: 2px solid var(--ink); }
 .bt-legal-block { padding: 26px 0 30px; border-bottom: 2px solid var(--ink); }
