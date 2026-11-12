@@ -1025,24 +1025,11 @@
       .replace('class="lv-post-p lv-reveal"', 'class="lv-post-p lv-reveal lv-dropcap"');
 
     const month = p.dateLabel.replace(/\s*\d{4}$/, "");
-    const header = bold ? `
+    const header = `
       <header class="bt-gz-article-head">
         <div class="bt-kicker lv-reveal"><span>The Design Gazette — ${esc(p.date.slice(0, 4))} Edition — ${esc(month)}</span></div>
         <h1 class="bt-display bt-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
         ${p.excerpt ? `<p class="bt-lead bt-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
-        <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
-      </header>` : `
-      <header>
-        <div class="lv-gz-article-masthead lv-reveal">
-          <div class="flag">The Design Gazette</div>
-        </div>
-        <div class="lv-gz-dateline lv-gz-dateline--article lv-reveal">
-          <span>Berlin</span>
-          <span>${esc(p.date.slice(0, 4))} Edition</span>
-          <span>${esc(month)}</span>
-        </div>
-        <h1 class="lv-gz-article-title lv-reveal"${editAttr(`posts.${idx}`, "title")}>${esc(p.title)}</h1>
-        ${p.excerpt ? `<p class="lv-gz-article-deck lv-reveal"${editAttr(`posts.${idx}`, "excerpt")}>${esc(p.excerpt)}</p>` : ""}
         <div class="lv-gz-byline lv-reveal">${esc(p.dateLabel)} · ${esc(p.readingTime)} read · ${p.tags.map(esc).join(" · ")}</div>
       </header>`;
 
