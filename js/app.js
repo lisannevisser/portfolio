@@ -1335,7 +1335,10 @@
   // .ahs section pins for ~5.65 viewports. First ~20% of scroll collapses
   // the headline into a masthead and cross-fades the lead out / chapters in;
   // the remainder steps through the four chapters and swaps the right-hand
-  // image accordingly.
+  // image accordingly. A section can reserve a tail of the pin as an outro
+  // (--outro-seg in CSS, 0 when unset): the last chapter holds while
+  // --outro runs 0..1, so the stylesheet can fold the chapter away before
+  // the pin lets go and the next section follows.
   // One scrolly per .ahs section: the v1 About and the Bold Type About
   // (#/about-bold) each carry their own. A hidden section measures as
   // zero height, so its update() bails out early and costs nothing.
@@ -1353,6 +1356,9 @@
     const total = steps.length;
     if (!total) return;
     const HERO_SEG = 0.2;
+    const OUTRO_SEG = Math.min(0.5, Math.max(0,
+      parseFloat(getComputedStyle(sec).getPropertyValue("--outro-seg")) || 0));
+    const CHAP_SEG = 1 - HERO_SEG - OUTRO_SEG;
     let activeChap = -1;
     let lastImg = null;
     const isNarrow = () => window.matchMedia("(max-width: 880px)").matches;
@@ -1373,6 +1379,7 @@
     function update() {
       if (isNarrow()) {
         pin.style.setProperty("--collapse", "1");
+        pin.style.setProperty("--outro", "0");
         setChap(0);
         setImg(portrait);
         return;
@@ -1382,13 +1389,16 @@
       const scrollable = sec.offsetHeight - vh;
       if (scrollable <= 0) {
         pin.style.setProperty("--collapse", "0");
+        pin.style.setProperty("--outro", "0");
         return;
       }
       const p = Math.min(1, Math.max(0, -rect.top / scrollable));
       const collapse = Math.min(1, p / HERO_SEG);
       pin.style.setProperty("--collapse", collapse.toFixed(3));
+      const outro = OUTRO_SEG ? Math.min(1, Math.max(0, (p - 1 + OUTRO_SEG) / OUTRO_SEG)) : 0;
+      pin.style.setProperty("--outro", outro.toFixed(3));
 
-      const chapP = Math.min(1, Math.max(0, (p - HERO_SEG) / (1 - HERO_SEG)));
+      const chapP = Math.min(1, Math.max(0, (p - HERO_SEG) / CHAP_SEG));
       const idx = Math.min(total - 1, Math.floor(chapP * total * 0.999));
       setChap(idx);
 
@@ -1401,7 +1411,7 @@
         const i = parseInt(btn.getAttribute("data-step-jump") || "0", 10);
         const vh = window.innerHeight;
         const scrollable = sec.offsetHeight - vh;
-        const frac = HERO_SEG + (1 - HERO_SEG) * (i + 0.15) / total;
+        const frac = HERO_SEG + CHAP_SEG * (i + 0.15) / total;
         window.scrollTo({ top: sec.offsetTop + scrollable * frac, behavior: "smooth" });
       });
     });

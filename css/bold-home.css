@@ -569,6 +569,45 @@ html[data-route="home-bold"] { scroll-snap-type: y proximity; }
 }
 .bt--about .ahs-portrait { background: var(--paper-2); }
 
+/* Outro: the last stretch of the pin (--outro-seg of its scroll, which
+   app.js turns into --outro 0..1) folds chapter 03 and its photo away, so
+   the section lets go over empty paper instead of dragging the chapter
+   off-screen. Desktop only; narrow screens stack the chapters. */
+.ahs--bt { --outro-seg: 0.12; --outro: 0; }
+@media (min-width: 881px) {
+  .bt--about .ahs-grid {
+    opacity: calc(1 - var(--outro) * 1.3);
+    transform: translateY(calc(var(--outro) * -2.5rem));
+    transition: opacity 120ms linear, transform 120ms linear;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt--about .ahs-grid { transform: none; transition: none; }
+}
+
+/* Experience snaps into place as a chapter of its own, the way the home
+   chapters do: kicker on the shared hero top, a full viewport tall. It is
+   pulled up by one viewport so it rises as a sheet over the fading chapter
+   during the outro instead of trailing a screen of empty paper, and its top
+   edge lands exactly where the pin lets go, which is also the snap point.
+   Proximity, not mandatory, so the pinned scrolly above scrolls freely and
+   nobody gets stuck on the way back up. Speaking and Inspiration below
+   scroll as before. */
+html[data-route="about-bold"] { scroll-snap-type: y proximity; }
+@media (min-width: 881px) {
+  .bt.bt--about .ahs { margin-bottom: 0; }
+  .bt--about .bt-xp-section--snap {
+    position: relative;
+    z-index: 1;
+    background: var(--paper);
+    margin-top: -100svh;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    min-height: 100svh;
+    padding-top: var(--bt-hero-top);
+  }
+}
+
 /* Experience: chapter 04, full width under the scrolly. The block itself
    (.bt-xp and friends) keeps the styles from the home section above. */
 .bt-xp-section {
