@@ -368,6 +368,27 @@
     });
   }
 
+  // Tools marquee on #/about (foot of the Experience chapter). Same
+  // three-pass trick as the client strip; an entry is a name or { name, icon }.
+  function renderToolStrip() {
+    const tools = D.tools || [];
+    const track = $(".bt-tools-track");
+    if (!track || !tools.length || track.dataset.rendered === "true") return;
+    const items = [];
+    for (let pass = 0; pass < 3; pass++) {
+      tools.forEach((t) => {
+        const name = typeof t === "string" ? t : t.name;
+        const icon = typeof t === "string" ? "" : t.icon || "";
+        // Icon only; the name is the alt text and the hover tooltip (CSS).
+        items.push(icon
+          ? `<span class="bt-tool" data-name="${esc(name)}"><img src="${esc(icon)}" alt="${esc(name)}" /></span>`
+          : `<span class="bt-tool bt-tool--text">${esc(name)}</span>`);
+      });
+    }
+    track.innerHTML = items.join("");
+    track.dataset.rendered = "true";
+  }
+
   // ========================================================================
   // CASE STUDY RENDERERS
   // ========================================================================
@@ -1926,6 +1947,7 @@
     renderSketchbook();
     renderChineseResources();
     renderClientStrip();
+    renderToolStrip();
     renderScribbles();
     initCursor();
     initMagnetic();

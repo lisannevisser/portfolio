@@ -35,6 +35,39 @@ window.LV_DATA = {
 
   clients: ["Trusted Shops", "Cargoboard", "Funke", "TikTok", "Canva", "Aqora", "Quantinuum", "Autarc", "HALE.NOW", "Dr. Vivien Karl"],
 
+  // Tools marquee at the foot of the Experience chapter on #/about
+  // (renderToolStrip in app.js). Each entry is { name, icon }; the icons
+  // live in images/tools and are credited on the imprint page.
+  tools: [
+    { name: "Figma", icon: "images/tools/figma.svg" },
+    { name: "FigJam", icon: "images/tools/figjam.svg" },
+    { name: "Figma Make", icon: "images/tools/figma-make.svg" },
+    { name: "Miro", icon: "images/tools/miro.png" },
+    { name: "Zeroheight", icon: "images/tools/zeroheight.svg" },
+    { name: "Whimsical", icon: "images/tools/whimsical.svg" },
+    { name: "UXtweak", icon: "images/tools/uxtweak.png" },
+    { name: "Hotjar", icon: "images/tools/hotjar.svg" },
+    { name: "Heurio", icon: "images/tools/heurio.png" },
+    { name: "Kameleoon", icon: "images/tools/kameleoon.svg" },
+    { name: "Claude Code", icon: "images/tools/claude.svg" },
+    { name: "Claude Design", icon: "images/tools/claude.svg" },
+    { name: "Framer", icon: "images/tools/framer.svg" },
+    { name: "Canva", icon: "images/tools/canva.png" },
+    { name: "Adobe Illustrator", icon: "images/tools/illustrator.svg" },
+    { name: "Elementor", icon: "images/tools/elementor.svg" },
+    { name: "Notion", icon: "images/tools/notion.png" },
+    { name: "Jira", icon: "images/tools/jira.svg" },
+    { name: "GitHub", icon: "images/tools/github.svg" },
+    { name: "Webflow", icon: "images/tools/webflow.svg" },
+    { name: "Confluence", icon: "images/tools/confluence.svg" },
+    { name: "Lark", icon: "images/tools/lark.png" },
+    { name: "Condens", icon: "images/tools/condens.png" },
+    { name: "Dovetail", icon: "images/tools/dovetail.svg" },
+    { name: "VS Code", icon: "images/tools/vscode.png" },
+    { name: "Google Analytics", icon: "images/tools/google-analytics.svg" },
+    { name: "Metabase", icon: "images/tools/metabase.svg" }
+  ],
+
   // Brand files from each company. Credited on the imprint page (Logos).
   clientLogos: {
     "Trusted Shops": "images/logos/trusted-shops-wordmark.svg",
