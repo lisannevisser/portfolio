@@ -4,8 +4,6 @@ Senior product designer. This repository holds the published state of my portfol
 
 **Live: [lisannevisser.github.io/portfolio](https://lisannevisser.github.io/portfolio/)**
 
-A static, hand-built site with no framework and no build step: just HTML, CSS and vanilla JavaScript. Each commit here is one published snapshot of the site; the work in progress lives in a private repository.
-
 ## Run locally
 
 ```bash
